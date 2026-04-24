@@ -5,14 +5,14 @@ Node mobile app. Zero framework, zero build step.
 
 ## Files
 
-| File                            | Purpose                                                    |
-| ------------------------------- | ---------------------------------------------------------- |
-| `index.html`                    | Landing page — HTML, CSS, and inline SVG in one file.      |
-| `app.js`                        | Platform detection, CTA handler, waitlist modal.           |
-| `functions/api/waitlist.js`     | Cloudflare Pages Function: `POST /api/waitlist`.           |
-| `_headers`                      | Cloudflare Pages security + cache headers.                 |
-| `robots.txt`                    | Allow all crawlers.                                        |
-| `sitemap.xml`                   | Single-URL sitemap.                                        |
+| File                              | Purpose                                                    |
+| --------------------------------- | ---------------------------------------------------------- |
+| `landing/index.html`              | Landing page — HTML, CSS, and inline SVG in one file.      |
+| `landing/app.js`                  | Platform detection, CTA handler, waitlist modal.           |
+| `landing/_headers`                | Cloudflare Pages security + cache headers.                 |
+| `landing/robots.txt`              | Allow all crawlers.                                        |
+| `landing/sitemap.xml`             | Single-URL sitemap.                                        |
+| `functions/api/waitlist.js`       | Cloudflare Pages Function: `POST /api/waitlist`. **Lives at the repo root**, not inside `landing/`, per Cloudflare Pages convention. |
 
 ## MINT YOUR NODE — how the CTA behaves
 
