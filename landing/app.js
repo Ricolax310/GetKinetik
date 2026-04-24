@@ -10,9 +10,10 @@
 (function () {
   "use strict";
 
-  /* Set to the public APK URL when the preview build is hosted.
-     While null, every platform falls through to the waitlist modal. */
-  var ANDROID_APK_URL = null;
+  /* Public APK URL. Android taps go straight to download.
+     iOS and desktop still fall through to the waitlist modal. */
+  var ANDROID_APK_URL =
+    "https://expo.dev/artifacts/eas/fVz67xqMNmTKrxRFQMP4AG.apk";
 
   var ua = (typeof navigator !== "undefined" && navigator.userAgent) || "";
   var isAndroid = /Android/i.test(ua);
