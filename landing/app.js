@@ -120,9 +120,18 @@
         body: JSON.stringify({ email: email, platform: platform })
       })
         .then(function (res) {
-          return res.json().then(function (json) {
-            return { status: res.status, json: json };
-          });
+          var status = res.status;
+          return res
+            .text()
+            .then(function (text) {
+              var parsed = null;
+              try {
+                parsed = text ? JSON.parse(text) : null;
+              } catch (_) {
+                parsed = null;
+              }
+              return { status: status, json: parsed, text: text };
+            });
         })
         .then(function (result) {
           if (result.status >= 200 && result.status < 300) {
@@ -140,21 +149,35 @@
                 primary.textContent = msg;
               }
             }
+            return;
+          }
+
+          var errMsg;
+          if (result.json && result.json.error) {
+            errMsg = result.json.error;
+          } else if (result.status === 405) {
+            errMsg = "Server not ready yet (405). Try again in a minute.";
+          } else if (result.status === 404) {
+            errMsg = "Endpoint not found (404). Deployment in progress.";
+          } else if (result.status >= 500) {
+            errMsg = "Server error (" + result.status + "). Try again shortly.";
           } else {
-            if (errorEl) {
-              errorEl.textContent =
-                (result.json && result.json.error) || "Something went wrong. Try again.";
-              errorEl.setAttribute("data-visible", "true");
-            }
-            if (submitBtn) {
-              submitBtn.disabled = false;
-              submitBtn.textContent = "RESERVE MY NODE";
-            }
+            errMsg = "Request failed (" + result.status + ").";
+          }
+
+          if (errorEl) {
+            errorEl.textContent = errMsg;
+            errorEl.setAttribute("data-visible", "true");
+          }
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = "RESERVE MY NODE";
           }
         })
-        .catch(function () {
+        .catch(function (err) {
           if (errorEl) {
-            errorEl.textContent = "Network error. Try again.";
+            errorEl.textContent =
+              "Connection failed. Check signal and try again.";
             errorEl.setAttribute("data-visible", "true");
           }
           if (submitBtn) {
