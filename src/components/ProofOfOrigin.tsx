@@ -56,6 +56,12 @@ import {
   PROOF_ATTRIBUTION,
   type SignedProofOfOrigin,
 } from '../lib/proof';
+import {
+  buildVerifierUrl,
+  shareProof,
+  VERIFIER_ORIGIN,
+} from '../lib/proofShare';
+import { ProofQr } from './ProofQr';
 
 // ----------------------------------------------------------------------------
 // Props — controlled component; VaultPanel owns the open flag and passes in
@@ -180,6 +186,28 @@ export function ProofOfOrigin({
   const issuedLabel = proof ? fmtIsoDateTime(proof.payload.issuedAt) : '—';
   const hashLabel = proof ? proof.hash.toUpperCase() : '—';
 
+  // --------------------------------------------------------------------------
+  // Verifier URL + share handler. Both are recomputed whenever `proof`
+  // materializes (i.e. right after the async sign completes). We DO NOT
+  // memoize — signing already gates re-work, and base64url-encoding ~500
+  // bytes of JSON is ~microsecond-cheap.
+  // --------------------------------------------------------------------------
+  const verifyUrl = proof ? buildVerifierUrl(proof) : VERIFIER_ORIGIN;
+
+  const handleShare = async () => {
+    if (!proof) return;
+    try {
+      await Haptics.selectionAsync();
+    } catch {
+      /* haptics unavailable — silent no-op */
+    }
+    try {
+      await shareProof(proof);
+    } catch (err) {
+      console.warn('[ProofOfOrigin] share failed:', err);
+    }
+  };
+
   const pubkeyBlock = proof
     ? chunkHex(pubkey, 16)
     : PLACEHOLDER + '\n' + PLACEHOLDER;
@@ -236,6 +264,40 @@ export function ProofOfOrigin({
           <Text style={styles.hexBlockMuted} selectable>
             {signatureBlock}
           </Text>
+
+          <View style={styles.divider} />
+
+          {/*
+            Verify section — the QR carries a compact-form {payload, signature}
+            wrapped in a #proof=<base64url> fragment pointing at the canonical
+            verifier. A scanner opens verify page → verifier auto-decodes,
+            re-derives the message via stableStringify, and shows a green seal.
+            The URL beneath is selectable on the card for manual paste. The
+            SHARE button uses the native share sheet to hand off the FULL
+            JSON artifact (including message + hash) into any messenger.
+          */}
+          {proof ? (
+            <View style={styles.verifySection}>
+              <Text style={styles.fieldHeader}>VERIFY AT</Text>
+              <View style={styles.qrWrap}>
+                <ProofQr value={verifyUrl} size={208} quietZone={4} />
+              </View>
+              <Text style={styles.verifyUrl} selectable numberOfLines={2}>
+                {VERIFIER_ORIGIN}
+              </Text>
+              <Pressable
+                onPress={handleShare}
+                accessibilityRole="button"
+                accessibilityLabel="Share signed Proof of Origin"
+                style={({ pressed }) => [
+                  styles.shareButton,
+                  pressed && styles.shareButtonPressed,
+                ]}
+              >
+                <Text style={styles.shareButtonLabel}>SHARE SIGNED JSON</Text>
+              </Pressable>
+            </View>
+          ) : null}
 
           <View style={styles.divider} />
 
@@ -397,6 +459,45 @@ const styles = StyleSheet.create({
     fontSize: 10,
     letterSpacing: 1.2,
     lineHeight: 18,
+    textAlign: 'center',
+  },
+  verifySection: {
+    alignItems: 'center',
+    gap: 14,
+  },
+  qrWrap: {
+    padding: 10,
+    backgroundColor: '#ffffff',
+    borderRadius: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  verifyUrl: {
+    color: palette.sapphire.glow,
+    fontFamily: typography.mono,
+    fontSize: 10,
+    letterSpacing: 1.4,
+    textAlign: 'center',
+    paddingHorizontal: 4,
+  },
+  shareButton: {
+    marginTop: 4,
+    paddingHorizontal: 20,
+    paddingVertical: 11,
+    borderRadius: 12,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: palette.sapphire.glow,
+    backgroundColor: 'rgba(0, 123, 255, 0.14)',
+  },
+  shareButtonPressed: {
+    opacity: 0.7,
+  },
+  shareButtonLabel: {
+    color: palette.sapphire.glow,
+    fontFamily: typography.mono,
+    fontSize: 10,
+    letterSpacing: 2.8,
+    fontWeight: '600',
     textAlign: 'center',
   },
   attribution: {
