@@ -665,6 +665,268 @@
           animation: none;
         }
       }
+
+      /* ------------------------------------------------------------
+         Waitlist modal.
+         ------------------------------------------------------------ */
+      .waitlist {
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+      }
+
+      .waitlist[data-open="true"] {
+        display: flex;
+        animation: waitlist-in 0.28s ease-out;
+      }
+
+      @keyframes waitlist-in {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+
+      .waitlist-backdrop {
+        position: absolute;
+        inset: 0;
+        background: rgba(4, 4, 6, 0.82);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+
+      .waitlist-card {
+        position: relative;
+        width: 100%;
+        max-width: 460px;
+        padding: 44px 34px 38px;
+        border: 1px solid rgba(255, 20, 48, 0.25);
+        border-radius: 22px;
+        background: linear-gradient(180deg, var(--obsidian-soft) 0%, var(--obsidian) 100%);
+        box-shadow:
+          0 32px 80px rgba(255, 20, 48, 0.12),
+          0 8px 24px rgba(0, 0, 0, 0.7);
+        animation: waitlist-card-in 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+
+      @keyframes waitlist-card-in {
+        from { transform: translateY(16px) scale(0.98); opacity: 0; }
+        to { transform: translateY(0) scale(1); opacity: 1; }
+      }
+
+      .waitlist-close {
+        position: absolute;
+        top: 14px;
+        right: 14px;
+        width: 32px;
+        height: 32px;
+        border: 1px solid var(--hairline);
+        border-radius: 50%;
+        background: transparent;
+        color: var(--graphite);
+        font-family: var(--mono);
+        font-size: 14px;
+        line-height: 1;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+      }
+
+      .waitlist-close:hover {
+        color: var(--platinum);
+        border-color: rgba(255, 20, 48, 0.4);
+        transform: rotate(90deg);
+      }
+
+      .waitlist-eyebrow {
+        display: block;
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 4px;
+        color: var(--ruby-core);
+        text-transform: uppercase;
+        text-align: center;
+        margin-bottom: 14px;
+        font-weight: 500;
+      }
+
+      .waitlist-rule {
+        width: 32px;
+        height: 1px;
+        background: var(--ruby-core);
+        opacity: 0.6;
+        margin: 0 auto 22px;
+      }
+
+      .waitlist-title {
+        font-family: var(--serif);
+        font-size: 22px;
+        font-weight: 300;
+        line-height: 1.4;
+        letter-spacing: 0.2px;
+        color: var(--platinum);
+        text-align: center;
+        margin: 0 0 10px;
+      }
+
+      .waitlist-sub {
+        font-family: var(--sans);
+        font-size: 13px;
+        line-height: 1.6;
+        color: var(--graphite);
+        text-align: center;
+        max-width: 340px;
+        margin: 0 auto 28px;
+        font-weight: 300;
+      }
+
+      .waitlist-body[data-hidden="true"] {
+        display: none;
+      }
+
+      .waitlist-field {
+        display: block;
+        margin-bottom: 14px;
+      }
+
+      .waitlist-input {
+        width: 100%;
+        padding: 14px 18px;
+        border-radius: 12px;
+        background: rgba(10, 10, 10, 0.65);
+        border: 1px solid var(--hairline);
+        color: var(--platinum);
+        font-family: var(--mono);
+        font-size: 13px;
+        letter-spacing: 1.5px;
+        transition: border-color 0.2s ease, background 0.2s ease;
+        -webkit-appearance: none;
+        appearance: none;
+        outline: none;
+      }
+
+      .waitlist-input::placeholder {
+        color: var(--graphite);
+        letter-spacing: 2px;
+      }
+
+      .waitlist-input:focus {
+        border-color: rgba(255, 20, 48, 0.5);
+        background: rgba(10, 10, 10, 0.85);
+      }
+
+      .waitlist-submit {
+        width: 100%;
+        padding: 14px 24px;
+        margin-top: 6px;
+        border: none;
+        border-radius: 12px;
+        background: var(--ruby-core);
+        color: var(--platinum);
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 3px;
+        font-weight: 500;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: transform 0.15s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+        box-shadow: 0 10px 28px rgba(255, 20, 48, 0.25);
+      }
+
+      .waitlist-submit:hover:not(:disabled) {
+        transform: translateY(-1px);
+        box-shadow: 0 14px 36px rgba(255, 20, 48, 0.35);
+      }
+
+      .waitlist-submit:disabled {
+        opacity: 0.5;
+        cursor: wait;
+      }
+
+      .waitlist-error {
+        display: none;
+        margin-top: 12px;
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 1.5px;
+        color: var(--ruby-ember);
+        text-align: center;
+      }
+
+      .waitlist-error[data-visible="true"] {
+        display: block;
+      }
+
+      .waitlist-success {
+        display: none;
+        text-align: center;
+        padding: 12px 0 4px;
+      }
+
+      .waitlist-success[data-visible="true"] {
+        display: block;
+      }
+
+      .waitlist-success-mark {
+        width: 10px;
+        height: 10px;
+        background: var(--ruby-core);
+        transform: rotate(45deg);
+        margin: 6px auto 18px;
+        box-shadow: 0 0 14px rgba(255, 20, 48, 0.6);
+      }
+
+      .waitlist-success-primary {
+        font-family: var(--serif);
+        font-size: 20px;
+        font-weight: 300;
+        color: var(--platinum);
+        line-height: 1.4;
+        margin: 0 0 10px;
+      }
+
+      .waitlist-success-secondary {
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 3px;
+        color: var(--graphite);
+        text-transform: uppercase;
+        margin: 0;
+      }
+
+      .waitlist-note {
+        margin-top: 22px;
+        padding-top: 18px;
+        border-top: 1px solid var(--hairline);
+        font-family: var(--mono);
+        font-size: 9px;
+        letter-spacing: 2.2px;
+        color: var(--graphite);
+        text-transform: uppercase;
+        text-align: center;
+        line-height: 1.7;
+      }
+
+      .waitlist-note strong {
+        color: var(--ruby-ember);
+        font-weight: 500;
+      }
+
+      @media (max-width: 480px) {
+        .waitlist {
+          padding: 16px;
+        }
+        .waitlist-card {
+          padding: 40px 24px 32px;
+        }
+        .waitlist-title {
+          font-size: 20px;
+        }
+      }
     </style>
   </head>
   <body>
@@ -745,6 +1007,7 @@
       <div class="cta-row">
         <a
           class="cta cta-primary"
+          data-cta-mint
           href="mailto:eric@outfromnothingllc.com?subject=Mint%20my%20Sovereign%20Node&body=I%20want%20to%20activate%20a%20Sovereign%20Node.%20Please%20send%20me%20the%20invitation.%0A%0ADevice%3A%20%0APlatform%3A%20%0A"
           >
           MINT YOUR NODE
@@ -916,5 +1179,95 @@
         >eric@outfromnothingllc.com</a
       >
     </footer>
+
+    <!-- ================================================== -->
+    <!-- WAITLIST MODAL                                      -->
+    <!-- ================================================== -->
+    <div
+      class="waitlist"
+      data-waitlist-modal
+      role="dialog"
+      aria-modal="true"
+      aria-hidden="true"
+      aria-labelledby="waitlist-title"
+    >
+      <div class="waitlist-backdrop" data-waitlist-backdrop></div>
+      <div class="waitlist-card">
+        <button
+          type="button"
+          class="waitlist-close"
+          data-waitlist-close
+          aria-label="Close"
+        >
+          ×
+        </button>
+
+        <span class="waitlist-eyebrow">SOVEREIGN NODE PROTOCOL</span>
+        <div class="waitlist-rule"></div>
+
+        <div class="waitlist-body" data-waitlist-body>
+          <h2 class="waitlist-title" id="waitlist-title">
+            Nodes are being minted in waves.
+          </h2>
+          <p class="waitlist-sub">
+            Reserve your place in the queue. You will be notified when an
+            invitation is ready for your device.
+          </p>
+
+          <form data-waitlist-form novalidate>
+            <input type="hidden" data-waitlist-platform name="platform" value="" />
+
+            <label class="waitlist-field">
+              <input
+                type="email"
+                class="waitlist-input"
+                data-waitlist-email
+                name="email"
+                placeholder="YOU@EXAMPLE.COM"
+                autocomplete="email"
+                autocapitalize="off"
+                autocorrect="off"
+                spellcheck="false"
+                required
+              />
+            </label>
+
+            <button
+              type="submit"
+              class="waitlist-submit"
+              data-waitlist-submit
+            >
+              RESERVE MY NODE
+            </button>
+
+            <p class="waitlist-error" data-waitlist-error aria-live="polite"></p>
+          </form>
+
+          <p class="waitlist-note">
+            ANDROID · PREVIEW WAVE COMING SOON<br />
+            IOS · AFTER ANDROID
+          </p>
+        </div>
+
+        <div
+          class="waitlist-success"
+          data-waitlist-success
+          aria-live="polite"
+        >
+          <div class="waitlist-success-mark" aria-hidden="true"></div>
+          <p
+            class="waitlist-success-primary"
+            data-waitlist-success-primary
+          >
+            Your place in the queue is reserved.
+          </p>
+          <p class="waitlist-success-secondary">
+            A SOVEREIGN NODE AWAITS YOUR DEVICE
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script src="/app.js" defer></script>
   </body>
 </html>
