@@ -15,7 +15,8 @@
     },
     "ios": {
       "supportsTablet": false,
-      "userInterfaceStyle": "dark"
+      "userInterfaceStyle": "dark",
+      "bundleIdentifier": "com.getkinetik.node"
     },
     "android": {
       "adaptiveIcon": {
@@ -23,16 +24,25 @@
         "backgroundColor": "#0A0A0A"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false,
-      "userInterfaceStyle": "dark"
+      "userInterfaceStyle": "dark",
+      "package": "com.getkinetik.node",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": [
-      "expo-sensors",
-      "expo-battery",
-      "expo-haptics"
-    ]
+    "plugins": [],
+    "extra": {
+      "eas": {
+        "projectId": "1178b553-80b7-42db-b067-4fdf547e65d4"
+      }
+    },
+    "owner": "ricolax310",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/1178b553-80b7-42db-b067-4fdf547e65d4"
+    }
   }
 }
