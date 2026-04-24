@@ -118,10 +118,27 @@ export function ProofOfOrigin({
   const [proof, setProof] = useState<SignedProofOfOrigin | null>(null);
   const signingRef = useRef(false);
 
-  // When the card becomes visible, mint a fresh signed proof. We take the
-  // identity + stats snapshot at open time; closing the card discards
-  // `proof` so the next open produces a brand new, newly-signed artifact
-  // (each screenshot is therefore a unique timestamped claim).
+  // --------------------------------------------------------------------------
+  // statsRef — VaultPanel re-renders every heartbeat tick (~1s), which
+  // creates a new `stats` object literal on every render. If `stats` were
+  // in the sign-effect's dep array, the card would re-mint a fresh proof
+  // every single tick while open — user-visible as the signature + hash +
+  // issuedAt timestamp flashing. We instead latch `stats` into a ref and
+  // read the LATEST value once, at open time. Updates after open are
+  // ignored by design: a Proof of Origin is meant to be a stable,
+  // screenshottable artifact, not a live telemetry readout.
+  // --------------------------------------------------------------------------
+  const statsRef = useRef(stats);
+  useEffect(() => {
+    statsRef.current = stats;
+  }, [stats]);
+
+  // When the card becomes visible, mint a fresh signed proof exactly ONCE.
+  // We take the identity + stats snapshot at open time; closing the card
+  // discards `proof` so the next open produces a brand new, newly-signed
+  // artifact (each screenshot is therefore a unique timestamped claim).
+  //
+  // The dep array intentionally excludes `stats` — see statsRef above.
   useEffect(() => {
     if (!visible) {
       setProof(null);
@@ -131,7 +148,7 @@ export function ProofOfOrigin({
     signingRef.current = true;
     (async () => {
       try {
-        const p = await createProofOfOrigin(identity, stats);
+        const p = await createProofOfOrigin(identity, statsRef.current);
         setProof(p);
       } catch (err) {
         console.warn('[ProofOfOrigin] sign failed:', err);
@@ -140,7 +157,7 @@ export function ProofOfOrigin({
         signingRef.current = false;
       }
     })();
-  }, [visible, identity, stats]);
+  }, [visible, identity]);
 
   // Presentation — same 360ms inOut(cubic) curve as the Manifesto so the
   // two hidden surfaces share a visual grammar on open/dismiss.
