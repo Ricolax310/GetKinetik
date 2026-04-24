@@ -552,6 +552,37 @@ export function VaultPanel() {
         >
           <Text style={styles.subBrand}>{nodeId}</Text>
         </Pressable>
+        {/*
+          PROOF chip — visible mirror of DIAG on the opposite side of the
+          crest. The long-press on the NODE ID below remains as the power-
+          user ritual gesture; this is the discoverable door for every
+          other user. Ruby-toned so it reads as a distinct surface (identity
+          / ownership) rather than a duplicate of the sapphire DIAG chip
+          (telemetry / diagnostics). A success-notification haptic fires on
+          open, matching the long-press feel so both entry points land on
+          the same emotional beat.
+        */}
+        <Pressable
+          onPress={async () => {
+            try {
+              await Haptics.notificationAsync(
+                Haptics.NotificationFeedbackType.Success,
+              );
+            } catch {
+              /* haptics unavailable — silent no-op */
+            }
+            setProofOpen(true);
+          }}
+          hitSlop={10}
+          accessibilityRole="button"
+          accessibilityLabel="Open Proof of Origin card"
+          style={({ pressed }) => [
+            styles.proofChip,
+            pressed && styles.proofChipPressed,
+          ]}
+        >
+          <Text style={styles.proofChipLabel}>PROOF</Text>
+        </Pressable>
         <Pressable
           onPress={async () => {
             try {
@@ -700,6 +731,27 @@ const styles = StyleSheet.create({
   subBrand: {
     color: palette.graphite,
     ...typography.label,
+  },
+  proofChip: {
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    borderRadius: 12,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: palette.ruby.core,
+    backgroundColor: 'rgba(160, 20, 40, 0.18)',
+  },
+  proofChipPressed: {
+    opacity: 0.7,
+  },
+  proofChipLabel: {
+    color: palette.ruby.ember,
+    fontFamily: typography.mono,
+    fontSize: 9,
+    letterSpacing: 2.4,
+    fontWeight: '600',
   },
   diagChip: {
     position: 'absolute',
