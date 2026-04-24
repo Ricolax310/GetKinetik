@@ -1,0 +1,920 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0A0A0A" />
+    <meta name="color-scheme" content="dark" />
+
+    <title>GETKINETIK — Sovereign Node Protocol</title>
+    <meta
+      name="description"
+      content="Your device is not a terminal. It is a sovereign node. A cryptographically sealed, hardware-backed DePIN node that proves its own uptime."
+    />
+
+    <!-- Open Graph / Twitter -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="GETKINETIK — Sovereign Node Protocol" />
+    <meta
+      property="og:description"
+      content="Your device is not a terminal. It is a sovereign node."
+    />
+    <meta property="og:url" content="https://getkinetik.app" />
+    <meta property="og:site_name" content="GETKINETIK" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="GETKINETIK — Sovereign Node Protocol" />
+    <meta
+      name="twitter:description"
+      content="Your device is not a terminal. It is a sovereign node."
+    />
+
+    <link rel="canonical" href="https://getkinetik.app/" />
+
+    <!-- Inline SVG favicon: a ruby diamond on obsidian -->
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230A0A0A'/%3E%3Cpolygon points='16,6 24,16 16,26 8,16' fill='%23FF1430'/%3E%3Cpolygon points='16,6 24,16 16,14 8,16' fill='%23FFB199' opacity='0.6'/%3E%3C/svg%3E"
+    />
+
+    <style>
+      /* ============================================================
+         GETKINETIK landing — single file, zero dependencies.
+         Palette and typography match the mobile Sovereign Node app.
+         ============================================================ */
+
+      :root {
+        --obsidian: #0a0a0a;
+        --obsidian-soft: #111113;
+        --obsidian-edge: #1a1a1d;
+
+        --ruby-core: #ff1430;
+        --ruby-mid: #b00820;
+        --ruby-deep: #3a0209;
+        --ruby-ember: #ffb199;
+        --ruby-shadow: #120000;
+
+        --sapphire-core: #007bff;
+        --sapphire-glow: #3a9bff;
+        --sapphire-deep: #002a66;
+
+        --platinum: #e6e8ec;
+        --graphite: #6a6c72;
+        --hairline: rgba(230, 232, 236, 0.08);
+
+        --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+        --serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+        --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, system-ui, sans-serif;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: var(--obsidian);
+        color: var(--platinum);
+        font-family: var(--sans);
+        font-weight: 300;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+      }
+
+      ::selection {
+        background: rgba(255, 20, 48, 0.35);
+        color: var(--platinum);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      /* ------------------------------------------------------------
+         Top bar — tiny, unobtrusive, matches the crest in the app.
+         ------------------------------------------------------------ */
+      .topbar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 22px 28px;
+        z-index: 10;
+      }
+
+      .topbar-brand {
+        font-family: var(--sans);
+        font-size: 12px;
+        letter-spacing: 5px;
+        font-weight: 500;
+        color: var(--platinum);
+      }
+
+      .topbar-status {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-family: var(--mono);
+        font-size: 9px;
+        letter-spacing: 2.2px;
+        color: var(--graphite);
+        text-transform: uppercase;
+      }
+
+      .topbar-status::before {
+        content: "";
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--ruby-core);
+        box-shadow: 0 0 8px rgba(255, 20, 48, 0.8);
+        animation: pulse 2.6s ease-in-out infinite;
+      }
+
+      @keyframes pulse {
+        0%, 100% { opacity: 0.5; transform: scale(0.9); }
+        50% { opacity: 1; transform: scale(1.1); }
+      }
+
+      /* ------------------------------------------------------------
+         Hero.
+         ------------------------------------------------------------ */
+      .hero {
+        min-height: 100vh;
+        min-height: 100dvh;
+        padding: 96px 24px 80px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* Subtle ruby glow behind the gem */
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 35%;
+        left: 50%;
+        width: 520px;
+        height: 520px;
+        transform: translate(-50%, -50%);
+        background: radial-gradient(
+          circle,
+          rgba(255, 20, 48, 0.18) 0%,
+          rgba(255, 20, 48, 0.05) 35%,
+          transparent 65%
+        );
+        filter: blur(20px);
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      .gem {
+        width: 128px;
+        height: 154px;
+        margin-bottom: 36px;
+        position: relative;
+        z-index: 1;
+        animation: gem-breathe 6s ease-in-out infinite;
+      }
+
+      @keyframes gem-breathe {
+        0%, 100% { transform: translateY(0) scale(1); filter: drop-shadow(0 0 24px rgba(255, 20, 48, 0.4)); }
+        50% { transform: translateY(-4px) scale(1.02); filter: drop-shadow(0 0 36px rgba(255, 20, 48, 0.6)); }
+      }
+
+      .brand {
+        font-size: clamp(32px, 6.5vw, 56px);
+        font-weight: 400;
+        letter-spacing: clamp(6px, 1.4vw, 12px);
+        margin: 0 0 18px;
+        color: var(--platinum);
+        position: relative;
+        z-index: 1;
+      }
+
+      .brand-rule {
+        width: 40px;
+        height: 1px;
+        background: var(--ruby-core);
+        opacity: 0.75;
+        margin: 0 auto 32px;
+        box-shadow: 0 0 8px rgba(255, 20, 48, 0.4);
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero-line {
+        font-family: var(--serif);
+        font-size: clamp(22px, 3.6vw, 32px);
+        font-weight: 300;
+        line-height: 1.4;
+        letter-spacing: 0.2px;
+        margin: 0 auto 48px;
+        max-width: 560px;
+        color: var(--platinum);
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero-line em {
+        font-style: italic;
+        color: var(--ruby-ember);
+      }
+
+      .cta-row {
+        display: inline-flex;
+        gap: 14px;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 56px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 28px;
+        border-radius: 999px;
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 3px;
+        font-weight: 500;
+        text-transform: uppercase;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        border: 1px solid transparent;
+        cursor: pointer;
+        user-select: none;
+      }
+
+      .cta-primary {
+        background: var(--ruby-core);
+        color: var(--platinum);
+        box-shadow: 0 0 0 0 rgba(255, 20, 48, 0.5), 0 8px 28px rgba(255, 20, 48, 0.25);
+      }
+
+      .cta-primary:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 0 0 6px rgba(255, 20, 48, 0.15), 0 12px 36px rgba(255, 20, 48, 0.4);
+      }
+
+      .cta-primary .arrow {
+        transition: transform 0.2s ease;
+      }
+
+      .cta-primary:hover .arrow {
+        transform: translateX(3px);
+      }
+
+      .cta-secondary {
+        border-color: var(--hairline);
+        color: var(--platinum);
+        background: rgba(230, 232, 236, 0.03);
+      }
+
+      .cta-secondary:hover {
+        border-color: var(--sapphire-deep);
+        background: rgba(0, 42, 102, 0.2);
+        color: var(--sapphire-glow);
+      }
+
+      .hero-meta {
+        font-family: var(--mono);
+        font-size: 9px;
+        letter-spacing: 3px;
+        color: var(--graphite);
+        text-transform: uppercase;
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero-meta .dot {
+        color: var(--ruby-core);
+        margin: 0 8px;
+      }
+
+      /* ------------------------------------------------------------
+         Section rhythm.
+         ------------------------------------------------------------ */
+      section {
+        padding: 80px 24px;
+        max-width: 1080px;
+        margin: 0 auto;
+      }
+
+      .section-eyebrow {
+        display: block;
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 4px;
+        color: var(--ruby-core);
+        text-transform: uppercase;
+        text-align: center;
+        margin-bottom: 16px;
+        font-weight: 500;
+      }
+
+      .section-title {
+        font-family: var(--serif);
+        font-size: clamp(26px, 4vw, 36px);
+        font-weight: 300;
+        line-height: 1.3;
+        letter-spacing: 0.2px;
+        margin: 0 auto 72px;
+        max-width: 720px;
+        text-align: center;
+        color: var(--platinum);
+      }
+
+      /* ------------------------------------------------------------
+         Three claims.
+         ------------------------------------------------------------ */
+      .claims {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 20px;
+      }
+
+      .claim {
+        padding: 32px 26px;
+        border: 1px solid var(--hairline);
+        border-radius: 18px;
+        background: linear-gradient(180deg, var(--obsidian-soft) 0%, var(--obsidian) 100%);
+        position: relative;
+        overflow: hidden;
+        transition: border-color 0.3s ease, transform 0.3s ease;
+      }
+
+      .claim:hover {
+        border-color: rgba(255, 20, 48, 0.3);
+        transform: translateY(-2px);
+      }
+
+      .claim::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 28px;
+        width: 32px;
+        height: 1px;
+        background: var(--ruby-core);
+        opacity: 0.8;
+      }
+
+      .claim-index {
+        display: block;
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 2px;
+        color: var(--ruby-core);
+        margin-bottom: 14px;
+        padding-top: 4px;
+      }
+
+      .claim-title {
+        font-family: var(--mono);
+        font-size: 12px;
+        letter-spacing: 3.5px;
+        font-weight: 600;
+        color: var(--platinum);
+        text-transform: uppercase;
+        margin: 0 0 18px;
+      }
+
+      .claim-body {
+        font-family: var(--sans);
+        font-size: 15px;
+        line-height: 1.7;
+        color: var(--platinum);
+        opacity: 0.85;
+        margin: 0;
+        font-weight: 300;
+      }
+
+      /* ------------------------------------------------------------
+         Proof of Origin showcase.
+         ------------------------------------------------------------ */
+      .proof-stage {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 16px;
+      }
+
+      .poo-card {
+        width: 100%;
+        max-width: 420px;
+        padding: 36px 30px;
+        border: 1px solid rgba(255, 20, 48, 0.22);
+        border-radius: 20px;
+        background: var(--obsidian-soft);
+        box-shadow:
+          0 24px 60px rgba(255, 20, 48, 0.08),
+          0 6px 18px rgba(0, 0, 0, 0.6);
+        position: relative;
+      }
+
+      .poo-eyebrow {
+        display: block;
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 4.2px;
+        color: var(--sapphire-glow);
+        text-align: center;
+        font-weight: 500;
+      }
+
+      .poo-rule {
+        width: 32px;
+        height: 1px;
+        background: var(--ruby-core);
+        opacity: 0.7;
+        margin: 12px auto 22px;
+      }
+
+      .poo-brand {
+        font-size: 22px;
+        letter-spacing: 7px;
+        font-weight: 400;
+        text-align: center;
+        margin: 0;
+        color: var(--platinum);
+      }
+
+      .poo-subbrand {
+        font-family: var(--mono);
+        font-size: 9px;
+        letter-spacing: 3px;
+        color: var(--graphite);
+        text-align: center;
+        margin-top: 8px;
+        text-transform: uppercase;
+      }
+
+      .poo-divider {
+        height: 1px;
+        background: var(--hairline);
+        margin: 22px 0;
+      }
+
+      .poo-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 4px 0;
+      }
+
+      .poo-label {
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 2.4px;
+        color: var(--graphite);
+        font-weight: 500;
+      }
+
+      .poo-value {
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 1.5px;
+        color: var(--sapphire-glow);
+        font-weight: 500;
+      }
+
+      .poo-field {
+        font-family: var(--mono);
+        font-size: 9px;
+        letter-spacing: 3px;
+        color: var(--sapphire-glow);
+        margin-bottom: 10px;
+      }
+
+      .poo-hex {
+        font-family: var(--mono);
+        font-size: 11px;
+        line-height: 20px;
+        letter-spacing: 1.4px;
+        color: var(--platinum);
+        text-align: center;
+        word-break: break-all;
+      }
+
+      .poo-hex.muted {
+        color: var(--graphite);
+        font-size: 10px;
+        line-height: 18px;
+      }
+
+      .poo-attribution {
+        font-size: 11px;
+        letter-spacing: 2.2px;
+        text-align: center;
+        color: var(--platinum);
+        font-weight: 500;
+        margin: 0;
+      }
+
+      .poo-attribution-sub {
+        font-family: var(--mono);
+        font-size: 8px;
+        letter-spacing: 2px;
+        text-align: center;
+        color: var(--graphite);
+        margin-top: 8px;
+        text-transform: uppercase;
+      }
+
+      .proof-caption {
+        font-family: var(--sans);
+        font-size: 14px;
+        line-height: 1.6;
+        color: var(--graphite);
+        max-width: 480px;
+        text-align: center;
+        margin: 36px auto 0;
+        font-weight: 300;
+      }
+
+      /* ------------------------------------------------------------
+         Manifesto excerpt.
+         ------------------------------------------------------------ */
+      .manifesto {
+        padding: 120px 24px;
+        text-align: center;
+        background: linear-gradient(
+          180deg,
+          transparent 0%,
+          rgba(255, 20, 48, 0.03) 50%,
+          transparent 100%
+        );
+      }
+
+      .manifesto-body {
+        font-family: var(--serif);
+        font-size: clamp(22px, 3.2vw, 30px);
+        line-height: 1.6;
+        font-weight: 300;
+        color: var(--platinum);
+        max-width: 680px;
+        margin: 0 auto 32px;
+      }
+
+      .manifesto-body span {
+        display: block;
+      }
+
+      .manifesto-attribution {
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 3px;
+        color: var(--ruby-core);
+        text-transform: uppercase;
+      }
+
+      /* ------------------------------------------------------------
+         Footer.
+         ------------------------------------------------------------ */
+      footer {
+        border-top: 1px solid var(--hairline);
+        padding: 48px 24px 64px;
+        text-align: center;
+      }
+
+      .footer-diamond {
+        width: 6px;
+        height: 6px;
+        background: var(--ruby-core);
+        transform: rotate(45deg);
+        margin: 0 auto 20px;
+        opacity: 0.8;
+      }
+
+      .footer-line {
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 2.6px;
+        color: var(--platinum);
+        text-transform: uppercase;
+        margin: 0 0 8px;
+        font-weight: 500;
+      }
+
+      .footer-sub {
+        font-family: var(--mono);
+        font-size: 9px;
+        letter-spacing: 2px;
+        color: var(--graphite);
+        text-transform: uppercase;
+        margin: 0 0 20px;
+      }
+
+      .footer-mail {
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 2.2px;
+        color: var(--graphite);
+        text-transform: uppercase;
+        transition: color 0.2s ease;
+      }
+
+      .footer-mail:hover {
+        color: var(--sapphire-glow);
+      }
+
+      /* ------------------------------------------------------------
+         Responsive.
+         ------------------------------------------------------------ */
+      @media (max-width: 640px) {
+        .topbar {
+          padding: 18px 20px;
+        }
+        .hero {
+          padding: 80px 20px 64px;
+        }
+        section {
+          padding: 64px 20px;
+        }
+        .manifesto {
+          padding: 80px 20px;
+        }
+        .claims {
+          gap: 16px;
+        }
+        .poo-card {
+          padding: 28px 22px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .topbar-status::before,
+        .gem {
+          animation: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ================================================== -->
+    <!-- TOP BAR                                             -->
+    <!-- ================================================== -->
+    <div class="topbar">
+      <span class="topbar-brand">GETKINETIK</span>
+      <span class="topbar-status">NODE NETWORK · FORMING</span>
+    </div>
+
+    <!-- ================================================== -->
+    <!-- HERO                                                -->
+    <!-- ================================================== -->
+    <section class="hero">
+      <!-- Ruby gem SVG — faceted, obsidian+ruby, static sibling of the
+           mobile app's animated Skia gemstone. -->
+      <svg
+        class="gem"
+        viewBox="0 0 200 240"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+      >
+        <defs>
+          <radialGradient id="rubyCore" cx="50%" cy="45%" r="55%">
+            <stop offset="0%" stop-color="#FF1430" />
+            <stop offset="55%" stop-color="#B00820" />
+            <stop offset="100%" stop-color="#3A0209" />
+          </radialGradient>
+          <linearGradient id="rubyTop" x1="50%" y1="0%" x2="50%" y2="100%">
+            <stop offset="0%" stop-color="#FFB199" stop-opacity="0.85" />
+            <stop offset="100%" stop-color="#FF1430" stop-opacity="0" />
+          </linearGradient>
+          <linearGradient id="rubyShine" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.55" />
+            <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+          </linearGradient>
+          <linearGradient id="rubyDeep" x1="50%" y1="0%" x2="50%" y2="100%">
+            <stop offset="0%" stop-color="#3A0209" stop-opacity="0" />
+            <stop offset="100%" stop-color="#120000" stop-opacity="0.9" />
+          </linearGradient>
+        </defs>
+
+        <polygon points="100,0 200,60 200,180 100,240 0,180 0,60" fill="url(#rubyCore)" />
+        <polygon points="100,0 200,60 100,120 0,60" fill="url(#rubyTop)" />
+        <polygon points="0,180 100,240 200,180 100,120" fill="url(#rubyDeep)" />
+        <polygon points="100,14 180,58 100,100 20,58" fill="url(#rubyShine)" opacity="0.6" />
+        <polyline
+          points="100,0 100,240"
+          stroke="#FFB199"
+          stroke-width="0.4"
+          stroke-opacity="0.4"
+          fill="none"
+        />
+        <polyline
+          points="0,60 200,60"
+          stroke="#FFB199"
+          stroke-width="0.3"
+          stroke-opacity="0.3"
+          fill="none"
+        />
+        <polyline
+          points="0,180 200,180"
+          stroke="#120000"
+          stroke-width="0.4"
+          stroke-opacity="0.7"
+          fill="none"
+        />
+      </svg>
+
+      <h1 class="brand">GETKINETIK</h1>
+      <div class="brand-rule"></div>
+      <p class="hero-line">
+        Your device is not a terminal.<br />
+        It is a <em>sovereign node</em>.
+      </p>
+
+      <div class="cta-row">
+        <a
+          class="cta cta-primary"
+          href="mailto:eric@outfromnothingllc.com?subject=Mint%20my%20Sovereign%20Node&body=I%20want%20to%20activate%20a%20Sovereign%20Node.%20Please%20send%20me%20the%20invitation.%0A%0ADevice%3A%20%0APlatform%3A%20%0A"
+          >
+          MINT YOUR NODE
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="cta cta-secondary" href="#manifesto">READ THE MANIFESTO</a>
+      </div>
+
+      <p class="hero-meta">
+        SOVEREIGN NODE PROTOCOL
+        <span class="dot">·</span>
+        v1
+        <span class="dot">·</span>
+        INVITATION ONLY
+      </p>
+    </section>
+
+    <!-- ================================================== -->
+    <!-- THREE CLAIMS                                        -->
+    <!-- ================================================== -->
+    <section>
+      <span class="section-eyebrow">THE THREE CLAIMS</span>
+      <h2 class="section-title">
+        A sovereign node is defined by what it can prove — not by what it
+        claims.
+      </h2>
+
+      <div class="claims">
+        <article class="claim">
+          <span class="claim-index">01</span>
+          <h3 class="claim-title">SEALED IN HARDWARE</h3>
+          <p class="claim-body">
+            A private Ed25519 key is minted inside your device the first time
+            you activate the node. It is sealed in silicon and cannot leave.
+            No server holds it. No company holds it. You hold it.
+          </p>
+        </article>
+
+        <article class="claim">
+          <span class="claim-index">02</span>
+          <h3 class="claim-title">UPTIME IS MATHEMATICS</h3>
+          <p class="claim-body">
+            Every thirty seconds, your node signs a statement. Each statement
+            is cryptographically chained to the one before. Bending one
+            breaks them all. The record of your node's existence becomes a
+            mathematical fact, not a database entry.
+          </p>
+        </article>
+
+        <article class="claim">
+          <span class="claim-index">03</span>
+          <h3 class="claim-title">PROOF IS THE ONLY COIN</h3>
+          <p class="claim-body">
+            Every reward a sovereign node will ever earn traces back to an
+            Ed25519 signature your device alone can produce. Real tokens from
+            real proof. Until then, every unit accrued is a vow kept.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ================================================== -->
+    <!-- PROOF OF ORIGIN SHOWCASE                            -->
+    <!-- ================================================== -->
+    <section>
+      <span class="section-eyebrow">THE ARTIFACT</span>
+      <h2 class="section-title">
+        Every active node produces a signed certificate of its own origin.
+      </h2>
+
+      <div class="proof-stage">
+        <!-- Static representation of the in-app Proof of Origin card.
+             Data is intentionally anonymized ("SAMPLE") so this is clearly
+             not a real node's credentials. -->
+        <div class="poo-card" aria-label="Sample Proof of Origin certificate">
+          <span class="poo-eyebrow">PROOF OF ORIGIN</span>
+          <div class="poo-rule"></div>
+
+          <p class="poo-brand">GETKINETIK</p>
+          <p class="poo-subbrand">SOVEREIGN NODE · v1</p>
+
+          <div class="poo-divider"></div>
+
+          <div class="poo-row">
+            <span class="poo-label">NODE</span>
+            <span class="poo-value">KINETIK-NODE-SAMPLE0</span>
+          </div>
+          <div class="poo-row">
+            <span class="poo-label">MINTED</span>
+            <span class="poo-value">2026-04-24</span>
+          </div>
+          <div class="poo-row">
+            <span class="poo-label">BEATS</span>
+            <span class="poo-value">2,880</span>
+          </div>
+          <div class="poo-row">
+            <span class="poo-label">SINCE</span>
+            <span class="poo-value">2026-04-24</span>
+          </div>
+          <div class="poo-row">
+            <span class="poo-label">CHAIN TIP</span>
+            <span class="poo-value">A3F2B71955EC4D80</span>
+          </div>
+          <div class="poo-row">
+            <span class="poo-label">ISSUED</span>
+            <span class="poo-value">2026-04-24 12:00:00Z</span>
+          </div>
+          <div class="poo-row">
+            <span class="poo-label">HASH</span>
+            <span class="poo-value">7E2A8F1C43B9D5E0</span>
+          </div>
+
+          <div class="poo-divider"></div>
+
+          <p class="poo-field">PUBLIC KEY</p>
+          <p class="poo-hex">
+            SAMPLE7E2A8F1C43B9D5E0<br />
+            SAMPLE1A4F6C9D8E2B3704
+          </p>
+
+          <p class="poo-field" style="margin-top: 22px">SIGNATURE</p>
+          <p class="poo-hex muted">
+            · · · · · · · · · · · · · · · ·<br />
+            · · · · · · · · · · · · · · · ·<br />
+            · · · · · · · · · · · · · · · ·<br />
+            · · · · · · · · · · · · · · · ·
+          </p>
+
+          <div class="poo-divider"></div>
+
+          <p class="poo-attribution">GETKINETIK by OutFromNothing LLC</p>
+          <p class="poo-attribution-sub">
+            A Sovereign Node artifact · not transferable
+          </p>
+        </div>
+
+        <p class="proof-caption">
+          Self-auditing. Timestamped. Signed with a key that never leaves your
+          device. A screenshot of this card is a cryptographic claim that
+          anyone can verify.
+        </p>
+      </div>
+    </section>
+
+    <!-- ================================================== -->
+    <!-- MANIFESTO EXCERPT                                   -->
+    <!-- ================================================== -->
+    <section class="manifesto" id="manifesto">
+      <span class="section-eyebrow">THE COMPACT</span>
+      <p class="manifesto-body">
+        <span>You own this node.</span>
+        <span>The node owes nothing to anyone.</span>
+        <span>It does not seek permission.</span>
+        <span>It does not ask to be watched.</span>
+        <span>It simply persists —</span>
+        <span>and that, in this age, is a kind of defiance.</span>
+      </p>
+      <p class="manifesto-attribution">— FROM THE SOVEREIGN MANIFESTO</p>
+    </section>
+
+    <!-- ================================================== -->
+    <!-- FOOTER                                              -->
+    <!-- ================================================== -->
+    <footer>
+      <div class="footer-diamond" aria-hidden="true"></div>
+      <p class="footer-line">GETKINETIK by OutFromNothing LLC</p>
+      <p class="footer-sub">Sovereign Node protocol · v1 · © 2026</p>
+      <a class="footer-mail" href="mailto:eric@outfromnothingllc.com"
+        >eric@outfromnothingllc.com</a
+      >
+    </footer>
+  </body>
+</html>
