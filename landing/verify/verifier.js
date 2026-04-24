@@ -16,18 +16,23 @@
 // stamped at the bottom — bump it on any serialization change and
 // include a migration note in CHANGELOG.
 //
-// Runtime dependencies are loaded as ES modules from esm.sh, pinned to the
-// same versions the app ships (@noble/ed25519@3.1.0, @noble/hashes@2.2.0).
-// A paranoid operator who wants *zero* external fetches at verify time
-// can vendor those two modules into this folder — see README.md.
+// Runtime dependencies are VENDORED in ./vendor/. These are the exact
+// ES-module bundles published by @noble/ed25519@3.1.0 and @noble/hashes@2.2.0
+// — the same pinned versions the mobile app ships — fetched once from
+// esm.sh and committed to this repo. The verifier therefore performs ZERO
+// external network fetches at verify time:
+//
+//   · deploys cleanly under the landing site's strict CSP (`script-src 'self'`)
+//   · verifies offline if the page is loaded from a saved bundle
+//   · cannot be silently rotated by a third-party CDN
+//
+// To refresh the vendored crypto, re-run the fetch commands documented in
+// README.md. After any refresh, run `node landing/verify/smoketest.mjs` to
+// confirm byte-for-byte contract parity with the app's signing pipeline.
 // ============================================================================
 
-// The `/sha2.js` subpath suffix matches what @noble/hashes@2.x exposes in its
-// package.json exports map — the no-suffix form (`/sha2`) is NOT exported and
-// esm.sh will 404 on it. Keep the `.js` suffix in lockstep with the app's
-// `@noble/hashes/sha2.js` import in src/lib/identity.ts.
-import * as ed from "https://esm.sh/@noble/ed25519@3.1.0";
-import { sha256, sha512 } from "https://esm.sh/@noble/hashes@2.2.0/sha2.js";
+import * as ed from "./vendor/ed25519.js";
+import { sha256, sha512 } from "./vendor/sha2.js";
 
 // ----------------------------------------------------------------------------
 // @noble/ed25519 v3 freezes `ed.hashes`, but the fields themselves are
