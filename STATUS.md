@@ -1,19 +1,61 @@
 # GETKINETIK — Project Status Handoff
 
 > Living document. Update whenever the state of the project materially changes.
-> Last updated: **2026-04-24** — commit `06d97ab` on `main`.
+> Last updated: **2026-04-24** — mission statement formalized.
 
 ---
 
-## What this project is
+## THE MISSION (read this first, before any architecture decision)
 
-**GETKINETIK** is a React Native / Expo app that turns a phone into a *Sovereign Node* — a cryptographic identity device with on-chain-style semantics but zero servers, zero accounts, zero custodians. Every claim the app makes about itself is mathematically verifiable by any human with a browser.
+**GETKINETIK is a DePIN aggregator that turns every phone into a sovereign earning device.**
+
+Tech companies currently extract data from phones worth hundreds of billions of dollars per year. Users are paid zero. GetKinetik puts a cryptographic wall between the phone's sensors and the extractive apps — then routes the phone's sensor attestations into whichever DePIN network is currently paying the most, converts the earnings to the user's chosen denomination (USD / BTC / native token), and takes a 1% protocol fee on every conversion.
+
+**The unique wedge:** every DePIN on the market today fails at one thing — proving nodes are real. Helium bled revenue to fake hotspots. Hivemapper wrestles GPS spoofers. WeatherXM shipped dedicated hardware to dodge the problem. GetKinetik's sovereign identity layer (Ed25519 key + hash-chained uptime proof + public verifier) is the Sybil-resistance primitive every DePIN wishes they had. That's the moat.
+
+**The business:**
+- 1% protocol fee on all DePIN earnings converted through the app (Uniswap-style)
+- $5/mo premium tier for priority routing to highest-paying DePIN slots
+- Opt-in aggregated data licensing to corporations (user gets a cut, we take a cut)
+- Exit value: attractive acquisition target for any major DePIN project, data broker, or crypto exchange once we have 100K+ authenticated active nodes
+
+### The four-layer aggregator architecture
+
+```
+L4 — WALLET / EARNINGS / FEE          NOT BUILT (~1 mo after L3)
+L3 — DEPIN ROUTING / OPTIMIZER        NOT BUILT (~2-3 mo, hardest work)
+L2 — SENSOR CAPTURE + SIGNING         HALF BUILT (~2 weeks to finish)
+L1 — SOVEREIGN IDENTITY + TRUST       ✅ BUILT, SHIPPED, WITNESSED
+```
+
+We built L1 first, intentionally. L1 is the moat. Every competitor can build L2/L3/L4; nobody else has L1.
+
+### The MVP integration targets for L3 (phone-viable DePINs)
+
+- Nodle (easiest integration, already Bluetooth-based and phone-native)
+- Hivemapper (dashcam mode — big earner when user is driving)
+- DIMO (vehicle telemetry — targets connected cars)
+- WeatherXM (phone-viable limited readings)
+- Helium Mobile (where coverage allows)
+- IoTeX / Peaq (generic sensor marketplaces)
+
+Not viable from phone alone: Helium Hotspots (LoRa radio), any DePIN requiring specialized hardware. Those are out of scope.
+
+### Why we are Android-first
+
+iOS is increasingly hostile to background sensor collection and data-monetization apps. Android allows the architecture; iOS restricts it. Android-first, iOS sideload-only as a secondary.
+
+---
+
+## What's shipping right now (L1 — the trust layer)
+
+**GETKINETIK** is a React Native / Expo app that turns a phone into a *Sovereign Node* — a cryptographic identity device with on-chain-style semantics but zero servers, zero accounts, zero custodians. Every claim the app makes about itself is mathematically verifiable by any human with a browser. This is L1 of the four-layer aggregator.
 
 - **Legal entity:** OutFromNothing LLC
 - **Brand / domain:** `getkinetik.app` (Cloudflare Pages)
 - **Public verifier:** `https://getkinetik.app/verify/` (live, deployed, CSP-locked)
 - **Repo:** `github.com/Ricolax310/GetKinetik`, branch `main`
-- **Current HEAD:** `06d97ab` — "proof: stop re-minting on every parent render"
+- **Current HEAD:** `0a0b9b6` — "status: rung 3 confirmed — first external witness of a signed proof"
 
 ---
 
@@ -136,15 +178,19 @@ The verifier runs entirely client-side, no server, no backend. Fragments never h
 
 ## The realness ladder (roadmap)
 
-Captured here so the next agent picks up with the same framing.
+Captured here so the next agent picks up with the same framing. Rungs 1–3 are the trust-layer milestones we already landed. Rungs 4+ advance the aggregator mission.
 
 1. ✅ **Code runs on device.**
 2. ✅ **Cryptographic artifacts exist.** Signed proofs, hash-chained heartbeats, live verifier.
-3. ✅ **A second human witnessed a proof.** Completed 2026-04-24. A QR minted on the user's Android device was scanned by a separate iPhone, routed through `getkinetik.app/verify/`, and returned a `PROOF VERIFIED — Signed by KINETIK-NODE-F3C3035B` seal. This is the first time the system was tested in the wild against hardware it does not own. The math held.
-4. ⏳ **App is installable by strangers.** NEXT. Run `eas build --platform ios --profile preview` → TestFlight, or `eas build --platform android --profile preview` → internal track. `eas.json` exists untracked in the tree; review + stage before first build. Requires Apple Developer ($99/yr) or Play Console ($25 one-time).
-5. ⏳ **Brand key anchored on the internet.** Publish `.well-known/getkinetik-attestor.json` at `getkinetik.app` listing the expected nodeId format + any brand-level co-signing key. Lets verifiers distinguish "real GetKinetik device" from "someone else generating the same JSON shape."
-6. ⏳ **Multi-device / witnessing network.** Two devices co-sign each other's heartbeats. Network effect.
-7. ⏳ **External anchor.** First chain tip notarized into Bitcoin / CT log / IPFS. Immutable genesis.
+3. ✅ **A second human witnessed a proof.** Completed 2026-04-24. A QR minted on the user's Android device was scanned by a separate iPhone, routed through `getkinetik.app/verify/`, and returned a `PROOF VERIFIED — Signed by KINETIK-NODE-F3C3035B` seal. First wild-hardware validation.
+4. ⏳ **App is installable by strangers.** NOW. `eas build --platform android --profile preview` → APK for sideload + Play internal track. Every day the identity layer ships is a day user chains grow longer — chain length is the competitive moat.
+5. ⏳ **L2 (sensor capture + signing) finished.** Sign every available sensor reading into the heartbeat payload: accelerometer motion score, GPS (opt-in), barometer, WiFi SSID presence, cell tower IDs, ambient light, mic amplitude aggregate. Bump payload version `v: 1 → v: 2`, update verifier to accept both. Rename `stabilityPct` to something accurate (it's currently just battery %). Never sign raw mic/GPS content — only aggregates.
+6. ⏳ **First DePIN integration.** Nodle first (easiest). Then DIMO, Hivemapper, WeatherXM. Each integration = one more earning path. Build the routing optimizer (L3) in parallel as integrations come online.
+7. ⏳ **Wallet / earnings layer (L4).** Collect payouts from each DePIN into the sovereign node's address. Auto-convert to user's chosen denom. 1% protocol fee on conversions. $5/mo premium tier for priority routing.
+8. ⏳ **Brand key anchored on the internet.** Publish `.well-known/getkinetik-attestor.json` at `getkinetik.app` so third-party DePINs can verify "this is a real GetKinetik node" at the brand level, not just the device level.
+9. ⏳ **Witnessing network.** Nodes co-sign each other's attestations. Network effect begins.
+10. ⏳ **External anchor.** First chain tip notarized into Bitcoin / CT log / IPFS. Immutable genesis of the network.
+11. ⏳ **Acquisition conversations.** At 100K+ active authenticated nodes, the network becomes an attractive acquisition target for major DePIN projects, data brokers, or crypto exchanges.
 
 ---
 
