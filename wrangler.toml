@@ -1,0 +1,20 @@
+# Cloudflare Pages configuration for getkinetik.app
+#
+# This file is picked up automatically by Cloudflare Pages on every
+# deploy. It declares the static build output directory and the KV
+# namespace binding that the waitlist function (functions/api/waitlist.js)
+# relies on via env.WAITLIST.
+#
+# The KV namespace itself was created once in the Cloudflare dashboard
+# (Workers & Pages -> KV -> GETKINETIK_WAITLIST). Its ID is referenced
+# below and is safe to commit because it is an opaque identifier that
+# grants no access on its own - access is granted by the account's
+# credentials, not by the ID.
+
+name = "getkinetik"
+pages_build_output_dir = "landing"
+compatibility_date = "2026-04-24"
+
+[[kv_namespaces]]
+binding = "WAITLIST"
+id = "d17e44508afb46dda5fb3f4de650697b"
