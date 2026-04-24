@@ -458,7 +458,7 @@ async function runSelfTest() {
 
 // ----------------------------------------------------------------------------
 // URL fragment bootstrap — a QR code can point at
-// https://verify.getkinetik.com/#proof=<base64url(JSON)> and the page will
+// https://getkinetik.app/verify/#proof=<base64url(JSON)> and the page will
 // decode, populate the textarea, and verify on load. Base64url is chosen
 // over plain base64 so the fragment is URL-safe without encoding.
 // ----------------------------------------------------------------------------
