@@ -13,7 +13,7 @@
   /* Public APK URL. Android taps go straight to download.
      iOS and desktop still fall through to the waitlist modal. */
   var ANDROID_APK_URL =
-    "https://expo.dev/artifacts/eas/fVz67xqMNmTKrxRFQMP4AG.apk";
+    "https://expo.dev/artifacts/eas/rszFT4DYVrAHdhv15e8Naz.apk";
 
   var ua = (typeof navigator !== "undefined" && navigator.userAgent) || "";
   var isAndroid = /Android/i.test(ua);
