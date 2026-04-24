@@ -103,16 +103,19 @@ The verifier runs entirely client-side, no server, no backend. Fragments never h
 ## UX architecture
 
 **Two visible entry points on the crest, perfectly mirrored:**
+
 - **PROOF** (ruby-toned, left) → opens Proof of Origin card
 - **DIAG** (sapphire-toned, right) → toggles diagnostic telemetry panel
 
 **Two hidden doors (long-press rituals):**
+
 - Long-press `GETKINETIK` wordmark → Sovereign Manifesto screen
 - Long-press node ID (`KINETIK-NODE-XXXXXXXX`) → Proof of Origin card (same target as PROOF chip)
 
 **Design intent:** power users find hidden doors. Everyone else gets visible chips. Both produce the same Success haptic so the activation feels identical regardless of entry point.
 
 **Palette (`src/theme/palette.ts`):**
+
 - `obsidian` — vault shell / background
 - `ruby` — identity, ownership, core-of-gem signaling
 - `sapphire` — telemetry, diagnostics, live signal
@@ -137,8 +140,8 @@ Captured here so the next agent picks up with the same framing.
 
 1. ✅ **Code runs on device.**
 2. ✅ **Cryptographic artifacts exist.** Signed proofs, hash-chained heartbeats, live verifier.
-3. ⏳ **A second human witnesses a proof.** IN PROGRESS — user was told to text a QR screenshot to anyone and have them scan. This is the legitimacy upgrade from "toy" to "witnessed claim." Not yet confirmed completed.
-4. ⏳ **App is installable by strangers.** Next step: `eas build --platform ios --profile preview` → TestFlight. Or Android internal track. `eas.json` exists untracked in the tree — likely scaffolded, needs review.
+3. ✅ **A second human witnessed a proof.** Completed 2026-04-24. A QR minted on the user's Android device was scanned by a separate iPhone, routed through `getkinetik.app/verify/`, and returned a `PROOF VERIFIED — Signed by KINETIK-NODE-F3C3035B` seal. This is the first time the system was tested in the wild against hardware it does not own. The math held.
+4. ⏳ **App is installable by strangers.** NEXT. Run `eas build --platform ios --profile preview` → TestFlight, or `eas build --platform android --profile preview` → internal track. `eas.json` exists untracked in the tree; review + stage before first build. Requires Apple Developer ($99/yr) or Play Console ($25 one-time).
 5. ⏳ **Brand key anchored on the internet.** Publish `.well-known/getkinetik-attestor.json` at `getkinetik.app` listing the expected nodeId format + any brand-level co-signing key. Lets verifiers distinguish "real GetKinetik device" from "someone else generating the same JSON shape."
 6. ⏳ **Multi-device / witnessing network.** Two devices co-sign each other's heartbeats. Network effect.
 7. ⏳ **External anchor.** First chain tip notarized into Bitcoin / CT log / IPFS. Immutable genesis.
@@ -147,8 +150,8 @@ Captured here so the next agent picks up with the same framing.
 
 ## Key conventions (DO NOT BREAK)
 
-- **`stableStringify` is the contract.** App-side signing and verifier-side verification BOTH use lexicographic key sort. Any change to serialization breaks every proof ever minted. Change it only with a versioned `v` field bump.
-- **`PROOF_ATTRIBUTION` is signed.** It is inside the payload. Altering or removing the attribution invalidates the signature. This is intentional — it's a legal ownership watermark baked into the cryptography.
+- `**stableStringify` is the contract.** App-side signing and verifier-side verification BOTH use lexicographic key sort. Any change to serialization breaks every proof ever minted. Change it only with a versioned `v` field bump.
+- `**PROOF_ATTRIBUTION` is signed.** It is inside the payload. Altering or removing the attribution invalidates the signature. This is intentional — it's a legal ownership watermark baked into the cryptography.
 - **Secret key never leaves device.** `expo-secure-store` only. Never log it. Never send it over the network. Never expose it to props. `signMessage` is the only path that touches it.
 - **CSP is strict.** `landing/_headers` sets `script-src 'self'`. No CDN scripts, no inline scripts, no `eval`. If you add a new JS file to the verifier, vendor it locally into `landing/verify/vendor/`.
 - **Hidden doors use long-press + Success haptic.** Visible chips use tap + Success haptic. Consistency of ritual matters.
