@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0A0A0A" />
+    <title>GETKINETIK · Sovereign Verifier</title>
+    <meta
+      name="description"
+      content="Independent Ed25519 verifier for GETKINETIK Sovereign Node Proof of Origin cards and signed heartbeats."
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <!--
+      The verifier is intentionally one page, no routing, no framework. Every
+      byte here is auditable by hand. Cryptography comes from esm.sh at the
+      same pinned versions the app ships (@noble/ed25519@3.1.0, @noble/hashes@2.2.0).
+      A user who wants true zero-external-trust can vendor those two modules
+      into this folder and rewrite the imports in verifier.js — see README.md.
+    -->
+    <main class="page">
+      <header class="crest">
+        <p class="eyebrow">SOVEREIGN VERIFIER</p>
+        <div class="rule"></div>
+        <h1 class="brand">GETKINETIK</h1>
+        <p class="sub-brand">INDEPENDENT · STATIC · ED25519</p>
+      </header>
+
+      <section class="input-block" aria-labelledby="input-heading">
+        <h2 id="input-heading" class="field-header">SIGNED PROOF</h2>
+        <p class="hint">
+          Paste the full JSON artifact from a Sovereign Node — either a
+          <code>Proof of Origin</code> card or a signed heartbeat. Or open
+          <code>verify.getkinetik.com/#proof=&lt;base64url&gt;</code> from a QR.
+        </p>
+        <textarea
+          id="input"
+          spellcheck="false"
+          autocomplete="off"
+          autocapitalize="off"
+          autocorrect="off"
+          placeholder='{"payload":{...},"message":"...","signature":"...","hash":"..."}'
+        ></textarea>
+        <div class="actions">
+          <button id="verify-btn" class="primary" type="button">VERIFY</button>
+          <button id="clear-btn" class="ghost" type="button">CLEAR</button>
+          <button id="selftest-btn" class="ghost" type="button" title="Mint a throwaway keypair, sign a sample proof, verify it end-to-end in this browser. Proves the verifier pipeline works.">
+            SELF-TEST
+          </button>
+        </div>
+      </section>
+
+      <section
+        id="result"
+        class="result hidden"
+        aria-live="polite"
+        aria-atomic="true"
+      ></section>
+
+      <details class="explainer">
+        <summary>How verification works</summary>
+        <ol>
+          <li>
+            The <code>payload</code> is re-serialized with the same stable
+            JSON rule the app uses (keys sorted lexicographically, no
+            whitespace). That byte sequence must equal <code>message</code>
+            exactly — catches any edit to payload fields.
+          </li>
+          <li>
+            <code>sha256(message)</code> truncated to 16 hex chars must equal
+            the embedded <code>hash</code>.
+          </li>
+          <li>
+            For Proof of Origin artifacts, the attribution field must still
+            read
+            <code>GETKINETIK by OutFromNothing LLC</code> — it was signed as
+            part of the message, so stripping it breaks verification.
+          </li>
+          <li>
+            <code>Ed25519.verify(signature, message, payload.pubkey)</code>
+            must return <code>true</code>.
+          </li>
+        </ol>
+        <p class="explainer-foot">
+          If all four checks pass, the device that owns the secret key
+          matching <code>payload.pubkey</code> signed this exact artifact.
+          The verifier does not call home, does not log, does not persist —
+          once the page closes, nothing remains.
+        </p>
+      </details>
+
+      <footer class="foot">
+        <p>
+          A GETKINETIK artifact · verifier source is this page · OutFromNothing LLC
+        </p>
+      </footer>
+    </main>
+
+    <script type="module" src="./verifier.js"></script>
+  </body>
+</html>
