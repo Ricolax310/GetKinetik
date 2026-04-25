@@ -10,13 +10,14 @@
 (function () {
   "use strict";
 
-  /* Public install URL. Android taps land on the EAS public install
-     page for the latest signed build, where the user taps Install
-     once to receive the signed APK. The raw artifact URL is gated
-     behind Expo auth and cannot be linked directly.
+  /* Public APK download URL hosted on GitHub Releases.
+     This is a permanent, CDN-backed URL we control: anyone hitting
+     it gets the signed Sovereign Node APK directly, no account or
+     extra clicks required. SHA256 is recorded in the release notes
+     so the binary can be verified against the source.
      iOS and desktop still fall through to the waitlist modal. */
   var ANDROID_APK_URL =
-    "https://expo.dev/accounts/ricolax310/projects/getkinetik/builds/ce2a90b3-5841-46a4-a651-6adbcdd6b28b";
+    "https://github.com/Ricolax310/GetKinetik/releases/download/v1.0.0/getkinetik-v1.0.0.apk";
 
   var ua = (typeof navigator !== "undefined" && navigator.userAgent) || "";
   var isAndroid = /Android/i.test(ua);
