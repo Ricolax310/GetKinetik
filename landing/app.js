@@ -10,10 +10,13 @@
 (function () {
   "use strict";
 
-  /* Public APK URL. Android taps go straight to download.
+  /* Public install URL. Android taps land on the EAS public install
+     page for the latest signed build, where the user taps Install
+     once to receive the signed APK. The raw artifact URL is gated
+     behind Expo auth and cannot be linked directly.
      iOS and desktop still fall through to the waitlist modal. */
   var ANDROID_APK_URL =
-    "https://expo.dev/artifacts/eas/rszFT4DYVrAHdhv15e8Naz.apk";
+    "https://expo.dev/accounts/ricolax310/projects/getkinetik/builds/ce2a90b3-5841-46a4-a651-6adbcdd6b28b";
 
   var ua = (typeof navigator !== "undefined" && navigator.userAgent) || "";
   var isAndroid = /Android/i.test(ua);
