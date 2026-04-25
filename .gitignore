@@ -39,3 +39,6 @@ yarn-error.*
 # generated native folders
 /ios
 /android
+
+# Local APK builds (downloaded from EAS, not tracked)
+*.apk
