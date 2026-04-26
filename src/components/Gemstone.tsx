@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Pressable, View } from 'react-native';
 import {
   Canvas,
@@ -223,11 +223,19 @@ const pulseDurationFor = (battery: number, charging: boolean): number => {
 export function Gemstone({ active, locked, batteryLevel, isCharging, onToggle }: Props) {
   const tiltX = useSharedValue(0);
   const tiltY = useSharedValue(0);
-  // blade2Lag tracks tiltY with a ~90ms delay. Feeds Blade 2 (the secondary
-  // reflection) so its beam lags the primary blade slightly — the eye reads
-  // that temporal offset as internal refraction delay, i.e. light bouncing
-  // around inside the stone before emerging on a second facet plane.
+  // blade2Lag follows the same gravity vector as tiltY but on a slower EMA
+  // (see accelerometer effect) so Blade 2 trails Blade 1 — reads as internal
+  // refraction delay, not a fighting animation.
   const blade2Lag = useSharedValue(0);
+  // Exponential smoothing refs — accelerometer fires ~16–40ms apart, but
+  // `withTiming` on *every* sample restarts a fixed-duration tween to a
+  // moving target. That reads as input lag (always 120ms behind) + visible
+  // step/jump when a new event cancels the previous run. EMA is cheap,
+  // frame-stable, and never “restarts” — it chases the sample continuously.
+  const emaX = useRef(0);
+  const emaY = useRef(0);
+  const emaB2Y = useRef(0);
+  const tiltInited = useRef(false);
   const pulse = useSharedValue(0);
   const beamSweep = useSharedValue(0);
   const activeAnim = useSharedValue(active ? 1 : 0);
@@ -311,16 +319,29 @@ export function Gemstone({ active, locked, batteryLevel, isCharging, onToggle }:
           console.warn('[Gemstone] accelerometer unavailable — auto-sweep only');
           return;
         }
-        Accelerometer.setUpdateInterval(40);
+        // ~60Hz — more samples per second so EMA can react quickly with less
+        // inter-sample jump than the old 25Hz + withTiming stack.
+        Accelerometer.setUpdateInterval(16);
+        // Primary: snappy. Secondary blade: same axis but slower EMA = natural
+        // lag vs Blade 1 (replaces 210ms withTiming that fought every tick).
+        const aPrimary = 0.5;
+        const aBlade2 = 0.12;
         sub = Accelerometer.addListener(({ x, y }) => {
           const cx = Math.max(-1, Math.min(1, x));
           const cy = Math.max(-1, Math.min(1, -y));
-          tiltX.value = withTiming(cx, { duration: 120 });
-          tiltY.value = withTiming(cy, { duration: 120 });
-          // Blade 2 lag — a ~90ms catch-up ease. Purposely longer than the
-          // primary tilt smoothing (120ms) so Blade 2 consistently trails
-          // Blade 1 rather than arriving in phase with it.
-          blade2Lag.value = withTiming(cy, { duration: 210 });
+          if (!tiltInited.current) {
+            emaX.current = cx;
+            emaY.current = cy;
+            emaB2Y.current = cy;
+            tiltInited.current = true;
+          } else {
+            emaX.current = emaX.current * (1 - aPrimary) + cx * aPrimary;
+            emaY.current = emaY.current * (1 - aPrimary) + cy * aPrimary;
+            emaB2Y.current = emaB2Y.current * (1 - aBlade2) + cy * aBlade2;
+          }
+          tiltX.value = emaX.current;
+          tiltY.value = emaY.current;
+          blade2Lag.value = emaB2Y.current;
         });
       } catch (err) {
         console.warn('[Gemstone] accelerometer init failed:', err);
@@ -329,6 +350,7 @@ export function Gemstone({ active, locked, batteryLevel, isCharging, onToggle }:
     return () => {
       cancelled = true;
       if (sub) sub.remove();
+      tiltInited.current = false;
     };
   }, [tiltX, tiltY, blade2Lag]);
 
@@ -514,7 +536,7 @@ export function Gemstone({ active, locked, batteryLevel, isCharging, onToggle }:
   // ========================================================================
   // BLADE 2 — Secondary Reflection (lagged, lower-intensity).
   // ------------------------------------------------------------------------
-  // Blade 2 runs on its own beam axis derived from `blade2Lag` (the lagged
+  // Blade 2 runs on its own beam axis derived from `blade2Lag` (slower-smoothed
   // tiltY) and tiltX inverted. The lag + the sign flip makes Blade 2 sweep
   // along a slightly different axis and phase from Blade 1, which is what
   // produces the "two separate surfaces catching light simultaneously"
@@ -733,7 +755,7 @@ export function Gemstone({ active, locked, batteryLevel, isCharging, onToggle }:
                     Blade 2 — SECONDARY reflection. Intensity 0.45. Stops
                       offset +0.02 to [0.47, 0.52, 0.57]. Driven by the
                       lagged tiltY (blade2Lag) on its own axis (see
-                      BLADE2_ANGLE_OFFSET). The 90ms lag reads as internal
+                      BLADE2_ANGLE_OFFSET). The slower EMA reads as internal
                       refraction delay.
 
                     Blade 3 — MICRO-GLINT. Intensity 0.12. Stops offset
