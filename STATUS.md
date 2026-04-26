@@ -1,7 +1,7 @@
 # GETKINETIK — Project Status Handoff
 
 > Living document. Update whenever the state of the project materially changes.
-> Last updated: **2026-04-25** — Rung 5 in progress, L2 schema bumped to v:2 with first three signed sensor aggregates. Proof of Origin also bumped to v:2 so every shareable QR carries the same on-chain sensor block as the heartbeats. **L1 trust-layer extracted into `packages/kinetik-core/` as an internal package** — the architectural boundary the future public SDK will be published from. App now consumes the primitive through a single `index.ts` front door instead of reaching into individual files; both smoketests still pass byte-for-byte.
+> Last updated: **2026-04-25 (late)** — **Aggregator track opened.** Trust-spine work (L1 + first slice of L2) is shipped, witnessed, and stable. Tonight the project pivot is from "polish the trust spine" to "build the money pipe." Active execution doc: **`AGGREGATOR.md`** at repo root — wallet primitive (sovereign earnings ledger derived from existing Ed25519 keypair, never custodied), `DepinAdapter` interface (Plaid pattern for DePIN networks), and **Nodle as locked-in first integration** pending a research pass on their developer surface. Rungs 6 + 7 both flipped to `IN PROGRESS`. Trust-spine polish backlog (gyro, PoO null-row rendering, EAS auto-increment, Reanimated warning) is parked in `AGGREGATOR.md` as filler work, not critical path. Cache-bust query strings (`?v=1.2.0`) were added to `landing/verify/index.html` after Meg's phone showed sensor rows from a fresh load while the user's phone hid them from a cached verifier.js — a real first-day-launch lesson, recorded as squashed bug #7.
 
 ---
 
@@ -23,11 +23,13 @@ Tech companies currently extract data from phones worth hundreds of billions of 
 ### The four-layer aggregator architecture
 
 ```
-L4 — WALLET / EARNINGS / FEE          NOT BUILT (~1 mo after L3)
-L3 — DEPIN ROUTING / OPTIMIZER        NOT BUILT (~2-3 mo, hardest work)
-L2 — SENSOR CAPTURE + SIGNING         IN PROGRESS (3 of 7 sensors signing into chain; ~1 week to full sensor set)
+L4 — WALLET / EARNINGS / FEE          ⏳ ACTIVE TRACK (see AGGREGATOR.md)
+L3 — DEPIN ROUTING / OPTIMIZER        NOT BUILT (cannot start until 2+ adapters live)
+L2 — SENSOR CAPTURE + SIGNING         IN PROGRESS (3 of 7 sensors signing into chain; backlog parked in AGGREGATOR.md)
 L1 — SOVEREIGN IDENTITY + TRUST       ✅ BUILT, SHIPPED, WITNESSED
 ```
+
+L4 starts BEFORE L2 finishes because polishing L2 does not generate revenue and the trust spine is already sufficient to prove a real node to a real DePIN. **The current critical path runs through `AGGREGATOR.md`, not through the L2 sensor backlog.**
 
 We built L1 first, intentionally. L1 is the moat. Every competitor can build L2/L3/L4; nobody else has L1.
 
@@ -221,8 +223,8 @@ Captured here so the next agent picks up with the same framing. Rungs 1–3 are 
 3. ✅ **A second human witnessed a proof.** Completed 2026-04-24. A QR minted on the user's Android device was scanned by a separate iPhone, routed through `getkinetik.app/verify/`, and returned a `PROOF VERIFIED — Signed by KINETIK-NODE-F3C3035B` seal. First wild-hardware validation.
 4. ✅ **App is installable by strangers.** Completed 2026-04-24. First signed Android APK shipped via EAS. Build ID `ce2a90b3-5841-46a4-a651-6adbcdd6b28b`, artifact at `https://expo.dev/artifacts/eas/rszFT4DYVrAHdhv15e8Naz.apk`. App is now installable on any Android device via direct sideload — no Play Store gating required. Every fresh install mints a brand-new sovereign identity with its own chain.
 5. ⏳ **L2 (sensor capture + signing) finished.** _IN PROGRESS as of 2026-04-25._ First slice landed: accelerometer motion RMS + barometer pressure + ambient light, all signed into the chain via the v:1 → v:2 schema bump. Verifier accepts both versions. Still to do: GPS (opt-in), WiFi SSID presence, cell tower IDs, mic amplitude aggregate — each requires a permissions-UX pass first. Rename `stabilityPct` to something accurate (it's currently just battery %). Never sign raw mic/GPS content — only aggregates. The "aggregates only" rule is now codified in `packages/kinetik-core/src/sensors.ts` and applied across the board.
-6. ⏳ **First DePIN integration.** Nodle first (easiest). Then DIMO, Hivemapper, WeatherXM. Each integration = one more earning path. Build the routing optimizer (L3) in parallel as integrations come online.
-7. ⏳ **Wallet / earnings layer (L4).** Collect payouts from each DePIN into the sovereign node's address. Auto-convert to user's chosen denom. 1% protocol fee on conversions. $5/mo premium tier for priority routing.
+6. ⏳ **First DePIN integration.** _IN PROGRESS as of 2026-04-25 (late)._ **Nodle locked in as first target** — phone-only, BLE/connectivity contribution, real NODL token, no second device required. Active spec lives in `AGGREGATOR.md`. Next step is a research pass on Nodle's developer surface (SDK vs deep-link vs API-only) before any adapter code gets written. Subsequent integrations (DIMO, Hivemapper, WeatherXM, Helium Mobile) follow the same `DepinAdapter` interface — drop-in, not fork-and-modify.
+7. ⏳ **Wallet / earnings layer (L4).** _IN PROGRESS as of 2026-04-25 (late)._ Wallet primitive is being built in parallel with the first adapter (it has to exist for the adapter to record receipts into a signed earnings ledger). Sovereign address derived from the existing Ed25519 keypair — `walletAddress = "kn1" + base32(sha256("kinetik-wallet-v1" || publicKey))[:32]` — so there is no second secret to lose. **No custody, ever**: GETKINETIK signs earnings receipts, adapters move tokens on their own networks. 1% protocol fee is signed INTO each entry (same pattern as `PROOF_ATTRIBUTION`), making it cryptographically un-renegotiable after the fact. Auto-conversion to user-chosen denom and the $5/mo premium tier are deferred — both belong to a later track once real earnings exist. Full spec in `AGGREGATOR.md`.
 8. ⏳ **Brand key anchored on the internet.** Publish `.well-known/getkinetik-attestor.json` at `getkinetik.app` so third-party DePINs can verify "this is a real GetKinetik node" at the brand level, not just the device level.
 9. ⏳ **Witnessing network.** Nodes co-sign each other's attestations. Network effect begins.
 10. ⏳ **External anchor.** First chain tip notarized into Bitcoin / CT log / IPFS. Immutable genesis of the network.
