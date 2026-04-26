@@ -546,6 +546,14 @@ if (tryLoadFromHash()) {
 // ----------------------------------------------------------------------------
 // Version stamp. Bump on any change to stableStringify, PROOF_ATTRIBUTION,
 // or the artifact shape. Exposed on window for debugging / ops probes.
+//
+// IMPORTANT: this value MUST stay in lockstep with the `?v=…` cache-bust
+// query strings in landing/verify/index.html. The query strings force
+// every browser (especially mobile Chrome on phones that visited the old
+// verifier) to fetch the new bytes on the next deploy. Bumping here without
+// also bumping the index.html query string means returning testers will
+// silently keep running the old verifier — which is exactly the bug that
+// hid PoO sensor rows from the v1.2.0 first-day cohort.
 // ----------------------------------------------------------------------------
 window.__kinetikVerifier = {
   version: "1.2.0",

@@ -10,7 +10,14 @@
       name="description"
       content="Independent Ed25519 verifier for GETKINETIK Sovereign Node Proof of Origin cards and signed heartbeats."
     />
-    <link rel="stylesheet" href="./styles.css" />
+    <!--
+      Cache-bust query strings on styles.css and verifier.js force browsers
+      to fetch the new asset on every deploy, even when intermediate caches
+      hold a 200 OK response from a previous version. Bump the `?v=` value
+      whenever you bump window.__kinetikVerifier.version at the bottom of
+      verifier.js — the two MUST stay in lockstep.
+    -->
+    <link rel="stylesheet" href="./styles.css?v=1.2.0" />
   </head>
   <body>
     <!--
@@ -98,6 +105,6 @@
       </footer>
     </main>
 
-    <script type="module" src="./verifier.js"></script>
+    <script type="module" src="./verifier.js?v=1.2.0"></script>
   </body>
 </html>
