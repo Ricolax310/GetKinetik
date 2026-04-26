@@ -179,7 +179,115 @@ async function run() {
     const hash = toHex(sha256(utf8(message))).slice(0, 16);
     const r = await verifyArtifact({ payload, message, signature, hash });
     assert("attributionOk is null (N/A for heartbeat)", r.attributionOk === null);
-    assert("heartbeat verifies", r.valid);
+    assert("v:1 heartbeat verifies", r.valid);
+  }
+
+  // --------------------------------------------------------------------------
+  // [7] v:2 heartbeat with sensors — the L2 schema bump.
+  //
+  // The `sensors` block is constructed in lexicographic key order (lux,
+  // motionRms, pressureHpa) so JSON.stringify emits a reproducible byte
+  // sequence regardless of where the readout originated. That ordering is
+  // the contract enforced in src/lib/sensors.ts canonicalSensorBlock().
+  // --------------------------------------------------------------------------
+  console.log("\n[7] v:2 heartbeat with sensors — schema bump verifies");
+  {
+    const sk = ed.utils.randomSecretKey();
+    const pk = await ed.getPublicKeyAsync(sk);
+    const pubkey = toHex(pk);
+    const nodeId = `KINETIK-NODE-${toHex(sha256(pk)).slice(0, 8).toUpperCase()}`;
+    const payload = {
+      v: 2,
+      kind: "heartbeat",
+      nodeId,
+      pubkey,
+      seq: 1,
+      ts: Date.now(),
+      stabilityPct: 92,
+      online: true,
+      charging: false,
+      prevHash: "0000000000000000",
+      sensors: { lux: 348, motionRms: 0.07, pressureHpa: 1013.21 },
+    };
+    const message = stableStringify(payload);
+    const signature = toHex(await ed.signAsync(utf8(message), sk));
+    const hash = toHex(sha256(utf8(message))).slice(0, 16);
+    const r = await verifyArtifact({ payload, message, signature, hash });
+    assert("v:2 heartbeat verifies", r.valid);
+    assert("v:2 canonicalMatches", r.canonicalMatches);
+    assert("v:2 hash matches", r.hashMatches);
+    assert("v:2 signature verifies", r.signatureOk);
+  }
+
+  // --------------------------------------------------------------------------
+  // [8] v:2 heartbeat with NULL sensor fields — graceful degradation.
+  //
+  // A device missing a barometer (common on budget Androids and on iOS for
+  // light) signs a payload with explicit nulls. The verifier MUST accept
+  // null values without choking; the schema is what's signed, not the
+  // nullability of any one field.
+  // --------------------------------------------------------------------------
+  console.log("\n[8] v:2 heartbeat with null sensor fields — still verifies");
+  {
+    const sk = ed.utils.randomSecretKey();
+    const pk = await ed.getPublicKeyAsync(sk);
+    const pubkey = toHex(pk);
+    const nodeId = `KINETIK-NODE-${toHex(sha256(pk)).slice(0, 8).toUpperCase()}`;
+    const payload = {
+      v: 2,
+      kind: "heartbeat",
+      nodeId,
+      pubkey,
+      seq: 2,
+      ts: Date.now(),
+      stabilityPct: 88,
+      online: true,
+      charging: true,
+      prevHash: "abcdef0123456789",
+      sensors: { lux: null, motionRms: 0.02, pressureHpa: null },
+    };
+    const message = stableStringify(payload);
+    const signature = toHex(await ed.signAsync(utf8(message), sk));
+    const hash = toHex(sha256(utf8(message))).slice(0, 16);
+    const r = await verifyArtifact({ payload, message, signature, hash });
+    assert("v:2 with null sensors verifies", r.valid);
+  }
+
+  // --------------------------------------------------------------------------
+  // [9] v:2 sensors tampered after signing — must fail signature check.
+  //
+  // Demonstrates the chain protects sensor readings the same way it
+  // protects every other field. A spoofer swapping in fake high-motion
+  // numbers to make a node "look more active" gets rejected.
+  // --------------------------------------------------------------------------
+  console.log("\n[9] Tampered v:2 sensors — must fail");
+  {
+    const sk = ed.utils.randomSecretKey();
+    const pk = await ed.getPublicKeyAsync(sk);
+    const pubkey = toHex(pk);
+    const nodeId = `KINETIK-NODE-${toHex(sha256(pk)).slice(0, 8).toUpperCase()}`;
+    const payload = {
+      v: 2,
+      kind: "heartbeat",
+      nodeId,
+      pubkey,
+      seq: 3,
+      ts: Date.now(),
+      stabilityPct: 95,
+      online: true,
+      charging: false,
+      prevHash: "1111222233334444",
+      sensors: { lux: 200, motionRms: 0.05, pressureHpa: 1012.5 },
+    };
+    const message = stableStringify(payload);
+    const signature = toHex(await ed.signAsync(utf8(message), sk));
+    const hash = toHex(sha256(utf8(message))).slice(0, 16);
+    const tampered = JSON.parse(JSON.stringify({ payload, message, signature, hash }));
+    tampered.payload.sensors.motionRms = 9.99;
+    const r = await verifyArtifact(tampered);
+    assert("tampered v:2 sensors fail canonicalMatches", !r.canonicalMatches);
+    assert("tampered v:2 sensors fail signature", !r.signatureOk);
+    assert("tampered v:2 overall invalid", !r.valid);
   }
 
   console.log("\n" + "-".repeat(56));

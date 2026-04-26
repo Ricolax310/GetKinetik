@@ -127,7 +127,51 @@ async function run() {
     canonical === message,
   );
 
-  console.log("\n[2] Unicode + emoji payload encodes safely");
+  console.log("\n[2] v:2 heartbeat round-trips through the URL pipeline");
+  {
+    const skH = ed.utils.randomSecretKey();
+    const pkH = await ed.getPublicKeyAsync(skH);
+    const pubH = toHex(pkH);
+    const idH = `KINETIK-NODE-${toHex(sha256(pkH)).slice(0, 8).toUpperCase()}`;
+    const beat = {
+      v: 2,
+      kind: "heartbeat",
+      nodeId: idH,
+      pubkey: pubH,
+      seq: 1,
+      ts: Date.now(),
+      stabilityPct: 90,
+      online: true,
+      charging: false,
+      prevHash: "0000000000000000",
+      // lexicographic key order — see canonicalSensorBlock in src/lib/sensors.ts
+      sensors: { lux: 412, motionRms: 0.06, pressureHpa: 1014.07 },
+    };
+    const beatMsg = stableStringify(beat);
+    const beatSig = toHex(await ed.signAsync(utf8(beatMsg), skH));
+    const beatUrl = `${VERIFIER_ORIGIN}#proof=${base64UrlEncode(JSON.stringify({ payload: beat, signature: beatSig }))}`;
+    const beatDecoded = JSON.parse(fromBase64Url(beatUrl.split("#proof=")[1]));
+    assert(
+      "v:2 sensors round-trip preserves shape",
+      beatDecoded.payload.sensors &&
+        beatDecoded.payload.sensors.motionRms === 0.06 &&
+        beatDecoded.payload.sensors.pressureHpa === 1014.07 &&
+        beatDecoded.payload.sensors.lux === 412,
+    );
+    const beatCanonical = stableStringify(beatDecoded.payload);
+    assert(
+      "v:2 canonical message survives JSON round-trip byte-for-byte",
+      beatCanonical === beatMsg,
+    );
+    const beatSigOk = await ed.verifyAsync(
+      fromHex(beatDecoded.signature),
+      utf8(beatCanonical),
+      fromHex(beatDecoded.payload.pubkey),
+    );
+    assert("v:2 heartbeat signature verifies after URL round-trip", beatSigOk);
+  }
+
+  console.log("\n[3] Unicode + emoji payload encodes safely");
   const weird = {
     v: 1,
     kind: "proof-of-origin",

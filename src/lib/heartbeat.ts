@@ -6,7 +6,7 @@
 // heartbeat JSON payload:
 //
 //   {
-//     v: 1,
+//     v: 2,                       // bumped from 1 in the L2 schema bump
 //     kind: "heartbeat",
 //     nodeId: "KINETIK-NODE-A3F2B719",
 //     pubkey: <64-char hex>,
@@ -15,8 +15,20 @@
 //     stabilityPct: 97,
 //     online: true,
 //     charging: false,
-//     prevHash: <16-char hex>    // tip of previous heartbeat's message hash
+//     prevHash: <16-char hex>,   // tip of previous heartbeat's message hash
+//     sensors: {                  // L2 — three permission-free aggregates
+//       lux: 348 | null,          // ambient light, integer lux
+//       motionRms: 0.07 | null,   // RMS accel deviation over the window, g
+//       pressureHpa: 1013.21 | null, // barometer point read, hPa
+//     }
 //   }
+//
+// SCHEMA HISTORY:
+//   v:1 — identity, seq, prevHash, stability + online + charging telemetry.
+//         Every heartbeat ever signed before 2026-04-25 is v:1.
+//   v:2 — adds the `sensors` block above. Verifier accepts both v:1 and
+//         v:2; existing v:1 chains remain valid forever. New chains start
+//         at v:2 from the next reboot.
 //
 // The JSON is stably stringified (sorted keys) and signed with the node's
 // Ed25519 secret key. `prevHash` chains each beat to the one before, which
@@ -46,6 +58,10 @@ import { sha256 } from '@noble/hashes/sha2.js';
 import * as SecureStore from 'expo-secure-store';
 
 import { type NodeIdentity, signMessage } from './identity';
+import {
+  canonicalSensorBlock,
+  type SensorReadout,
+} from './sensors';
 import { stableStringify } from './stableJson';
 
 // ----------------------------------------------------------------------------
@@ -66,7 +82,7 @@ export const HEARTBEAT_KEYS = {
 // Types.
 // ----------------------------------------------------------------------------
 export type HeartbeatPayload = {
-  v: 1;
+  v: 2;
   kind: 'heartbeat';
   nodeId: string;
   pubkey: string;
@@ -76,6 +92,15 @@ export type HeartbeatPayload = {
   online: boolean;
   charging: boolean;
   prevHash: string;
+  /**
+   * L2 sensor block — three permission-free, privacy-neutral aggregates.
+   * Constructed via canonicalSensorBlock() so keys insert in lexicographic
+   * order; that's what makes the byte sequence reproducible across the app
+   * and the verifier without needing recursive sorting in stableStringify.
+   * Any field may be null on devices missing that sensor (common: iOS has
+   * no light sensor; budget Androids have no barometer).
+   */
+  sensors: SensorReadout;
 };
 
 export type SignedHeartbeat = {
@@ -109,6 +134,11 @@ export type HeartbeatSummary = {
   lastSignature: string | null;
   /** last heartbeat timestamp this session */
   lastTs: number | null;
+  /** sensor block from the most recent SIGNED beat, in-memory only. Surfaces
+   *  the same numbers that were committed to the chain so the diagnostic
+   *  panel shows what the verifier would see, not what the live sensors
+   *  read between beats. */
+  lastSensors: SensorReadout | null;
 };
 
 const EMPTY_SUMMARY: HeartbeatSummary = {
@@ -119,6 +149,7 @@ const EMPTY_SUMMARY: HeartbeatSummary = {
   lastHash: null,
   lastSignature: null,
   lastTs: null,
+  lastSensors: null,
 };
 
 // ----------------------------------------------------------------------------
@@ -200,6 +231,7 @@ export function useHeartbeat(
   identity: NodeIdentity | null,
   active: boolean,
   getSnapshot: () => HeartbeatSnapshot,
+  getSensors?: () => Promise<SensorReadout>,
 ) {
   const [summary, setSummary] = useState<HeartbeatSummary>(EMPTY_SUMMARY);
   const summaryRef = useRef<HeartbeatSummary>(EMPTY_SUMMARY);
@@ -207,12 +239,17 @@ export function useHeartbeat(
   const hydratedRef = useRef(false);
   const inFlightRef = useRef(false);
   const snapshotRef = useRef(getSnapshot);
+  const sensorsRef = useRef<typeof getSensors>(getSensors);
 
-  // Keep the latest getSnapshot closure in a ref so the interval body always
-  // sees current telemetry without re-binding the interval on every prop change.
+  // Keep the latest getSnapshot / getSensors closures in refs so the interval
+  // body always sees current accessors without re-binding the interval on
+  // every prop change. Avoids ping-pong subscriptions.
   useEffect(() => {
     snapshotRef.current = getSnapshot;
   }, [getSnapshot]);
+  useEffect(() => {
+    sensorsRef.current = getSensors;
+  }, [getSensors]);
 
   // Commit summary updates to both state (for UI) and ref (for async reads).
   const commitSummary = useCallback((next: HeartbeatSummary) => {
@@ -245,6 +282,10 @@ export function useHeartbeat(
         lastHash: validHash,
         lastSignature: null,
         lastTs: null,
+        // Sensor block is in-memory only — first beat after boot will
+        // populate it. Persisting last-known sensors would mislead the
+        // verifier into thinking they're current; "—" is the honest value.
+        lastSensors: null,
       });
       hydratedRef.current = true;
     })();
@@ -258,12 +299,20 @@ export function useHeartbeat(
     inFlightRef.current = true;
     try {
       const snap = snapshotRef.current();
+      // Sensors are optional — a hook caller without a sampler still gets
+      // valid v:2 beats, just with all sensor fields null. Schema stability
+      // matters more than always having data: the verifier renders nulls as
+      // "—" and the chain stays consistent.
+      const rawSensors: SensorReadout = sensorsRef.current
+        ? await sensorsRef.current()
+        : { motionRms: null, pressureHpa: null, lux: null };
+      const sensors = canonicalSensorBlock(rawSensors);
       const prev = summaryRef.current;
       const nextSeq = prev.seq + 1;
       const now = Date.now();
 
       const payload: HeartbeatPayload = {
-        v: 1,
+        v: 2,
         kind: 'heartbeat',
         nodeId: identity.nodeId,
         pubkey: identity.publicKeyHex,
@@ -273,6 +322,7 @@ export function useHeartbeat(
         online: snap.online,
         charging: snap.charging,
         prevHash: prev.lastHash ?? '0000000000000000',
+        sensors,
       };
 
       const message = stableStringify(payload as unknown as Record<string, unknown>);
@@ -294,6 +344,7 @@ export function useHeartbeat(
         lastHash: hash,
         lastSignature: signature,
         lastTs: now,
+        lastSensors: sensors,
       };
       commitSummary(nextSummary);
 

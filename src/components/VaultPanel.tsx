@@ -23,6 +23,11 @@ import {
   type HeartbeatSnapshot,
   useHeartbeat,
 } from '../lib/heartbeat';
+import {
+  readSensorAggregate,
+  startSensorSampler,
+  stopSensorSampler,
+} from '../lib/sensors';
 import { Gemstone } from './Gemstone';
 import { Manifesto } from './Manifesto';
 import { PinPad } from './PinPad';
@@ -127,7 +132,10 @@ export function VaultPanel() {
   }, [diagOpen, diagAnim]);
   const diagStyle = useAnimatedStyle(() => ({
     opacity: diagAnim.value,
-    maxHeight: interpolate(diagAnim.value, [0, 1], [0, 460]),
+    // Sized for 15 rows (12 base + 3 L2 sensor rows). Each row is ~22px
+    // tall (padding 4 + ~14px text); plus 28px of card padding. Bump on
+    // any new row addition or this clips the bottom rows silently.
+    maxHeight: interpolate(diagAnim.value, [0, 1], [0, 580]),
     transform: [
       { translateY: interpolate(diagAnim.value, [0, 1], [-6, 0]) },
     ],
@@ -155,6 +163,20 @@ export function VaultPanel() {
         console.warn('[VaultPanel] identity init failed:', err);
       }
     })();
+  }, []);
+
+  // --------------------------------------------------------------------------
+  // L2 sensor sampler — accelerometer (motion RMS) + barometer + light at
+  // app boot, torn down on unmount. The sampler is a process-wide singleton
+  // (see src/lib/sensors.ts), so multiple mounts are idempotent. Hooking it
+  // up at this layer means heartbeats automatically carry sensor aggregates
+  // without VaultPanel having to construct them per beat.
+  // --------------------------------------------------------------------------
+  useEffect(() => {
+    void startSensorSampler();
+    return () => {
+      stopSensorSampler();
+    };
   }, []);
 
   // --------------------------------------------------------------------------
@@ -446,6 +468,7 @@ export function VaultPanel() {
     identity,
     !isLocked && online,
     heartbeatSnapshot,
+    readSensorAggregate,
   );
 
   // --------------------------------------------------------------------------
@@ -485,6 +508,24 @@ export function VaultPanel() {
     ? `${heartbeat.lastSignature.slice(0, 16).toUpperCase()}…`
     : '—';
 
+  // L2 sensor readouts — surface the EXACT numbers that were committed to
+  // the chain in the most recent signed beat, not the live sensor stream
+  // between beats. That keeps the DIAG card and the verifier showing the
+  // same bytes. See src/lib/sensors.ts for unit + rounding conventions.
+  const sensors = heartbeat?.lastSensors ?? null;
+  const motionLabel =
+    sensors && typeof sensors.motionRms === 'number'
+      ? `${sensors.motionRms.toFixed(2)} G`
+      : '—';
+  const pressureLabel =
+    sensors && typeof sensors.pressureHpa === 'number'
+      ? `${sensors.pressureHpa.toFixed(2)} HPA`
+      : '—';
+  const lightLabel =
+    sensors && typeof sensors.lux === 'number'
+      ? `${Math.round(sensors.lux)} LX`
+      : '—';
+
   const diagRows: Array<{ label: string; value: string }> = [
     { label: 'NPU', value: 'PASS' },
     { label: 'TEE', value: 'LOCKED' },
@@ -498,6 +539,9 @@ export function VaultPanel() {
     { label: 'SINCE', value: sinceLabel },
     { label: 'CHAIN', value: chainLabel },
     { label: 'LAST SIG', value: lastSigLabel },
+    { label: 'MOTION', value: motionLabel },
+    { label: 'PRESSURE', value: pressureLabel },
+    { label: 'LIGHT', value: lightLabel },
   ];
 
   return (

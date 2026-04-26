@@ -296,6 +296,28 @@ function renderReport(report) {
       "PREV HASH",
       payload.prevHash ? String(payload.prevHash).toUpperCase() : "—",
     ]);
+    // ----------------------------------------------------------------------
+    // v:2 heartbeats carry a `sensors` block with three permission-free
+    // privacy-neutral aggregates. Rendering is intentionally tolerant —
+    // the signature has already proven the entire payload byte-for-byte,
+    // so any missing field just renders as "—" instead of failing the
+    // schema. Forward-compatible by default. See src/lib/sensors.ts for
+    // the canonical SensorReadout shape and rounding rules.
+    // ----------------------------------------------------------------------
+    if (payload.sensors && typeof payload.sensors === "object") {
+      const s = payload.sensors;
+      const motionLabel =
+        typeof s.motionRms === "number" ? `${s.motionRms.toFixed(2)} g` : "—";
+      const pressureLabel =
+        typeof s.pressureHpa === "number"
+          ? `${s.pressureHpa.toFixed(2)} hPa`
+          : "—";
+      const luxLabel =
+        typeof s.lux === "number" ? `${Math.round(s.lux)} lx` : "—";
+      rows.push(["MOTION", motionLabel]);
+      rows.push(["PRESSURE", pressureLabel]);
+      rows.push(["LIGHT", luxLabel]);
+    }
   }
   rows.push(["HASH", report.canonicalHash.toUpperCase()]);
 
@@ -504,7 +526,7 @@ if (tryLoadFromHash()) {
 // or the artifact shape. Exposed on window for debugging / ops probes.
 // ----------------------------------------------------------------------------
 window.__kinetikVerifier = {
-  version: "1.0.0",
+  version: "1.1.0",
   verifyArtifact,
   stableStringify,
   PROOF_ATTRIBUTION,
