@@ -61,6 +61,7 @@ import {
   shareProof,
   VERIFIER_ORIGIN,
 } from '../lib/proofShare';
+import { type SensorReadout } from '../lib/sensors';
 import { ProofQr } from './ProofQr';
 
 // ----------------------------------------------------------------------------
@@ -75,6 +76,13 @@ type ProofOfOriginProps = {
     lifetimeBeats: number;
     firstBeatTs: number | null;
     chainTip: string | null;
+    /**
+     * SensorReadout from the most recent SIGNED heartbeat (read straight
+     * from HeartbeatSummary.lastSensors). Null if no beat has emitted yet
+     * on this device. Embedded into the v:2 PoO payload so each minted
+     * card carries the same sensor numbers as the corresponding chain tip.
+     */
+    lastSensors: SensorReadout | null;
   };
 };
 
@@ -203,6 +211,25 @@ export function ProofOfOrigin({
   const issuedLabel = proof ? fmtIsoDateTime(proof.payload.issuedAt) : '—';
   const hashLabel = proof ? proof.hash.toUpperCase() : '—';
 
+  // Sensor labels are derived from the SIGNED payload — not from the live
+  // prop or from a side-read of the sensors module — so what the card
+  // displays is byte-identical to what the verifier will render. Until the
+  // proof materializes (~5-10ms), or for legacy nodes that haven't emitted
+  // a heartbeat yet, every sensor row reads "—".
+  const proofSensors = proof?.payload.sensors ?? null;
+  const motionLabel =
+    proofSensors && typeof proofSensors.motionRms === 'number'
+      ? `${proofSensors.motionRms.toFixed(2)} G`
+      : '—';
+  const pressureLabel =
+    proofSensors && typeof proofSensors.pressureHpa === 'number'
+      ? `${proofSensors.pressureHpa.toFixed(2)} hPa`
+      : '—';
+  const lightLabel =
+    proofSensors && typeof proofSensors.lux === 'number'
+      ? `${Math.round(proofSensors.lux)} lx`
+      : '—';
+
   // --------------------------------------------------------------------------
   // Verifier URL + share handler. Both are recomputed whenever `proof`
   // materializes (i.e. right after the async sign completes). We DO NOT
@@ -254,7 +281,7 @@ export function ProofOfOrigin({
           <View style={styles.rule} />
 
           <Text style={styles.brand}>GETKINETIK</Text>
-          <Text style={styles.subBrand}>SOVEREIGN NODE · v1</Text>
+          <Text style={styles.subBrand}>SOVEREIGN NODE · v2</Text>
 
           <View style={styles.divider} />
 
@@ -265,6 +292,9 @@ export function ProofOfOrigin({
             <Row label="SINCE" value={sinceLabel} />
             <Row label="CHAIN TIP" value={chainTipLabel} />
             <Row label="ISSUED" value={issuedLabel} />
+            <Row label="MOTION" value={motionLabel} />
+            <Row label="PRESSURE" value={pressureLabel} />
+            <Row label="LIGHT" value={lightLabel} />
             <Row label="HASH" value={hashLabel} />
           </View>
 

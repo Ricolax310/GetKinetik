@@ -728,6 +728,7 @@ export function VaultPanel() {
           lifetimeBeats: heartbeat?.lifetimeCount ?? 0,
           firstBeatTs: heartbeat?.firstTs ?? null,
           chainTip: heartbeat?.lastHash ?? null,
+          lastSensors: heartbeat?.lastSensors ?? null,
         }}
       />
     </View>

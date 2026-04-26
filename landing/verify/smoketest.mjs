@@ -290,6 +290,130 @@ async function run() {
     assert("tampered v:2 overall invalid", !r.valid);
   }
 
+  // --------------------------------------------------------------------------
+  // [10] v:2 PROOF-OF-ORIGIN with sensors block — the L2-on-PoO bump.
+  //
+  // PoO v:2 carries a `sensors` block sourced from the most recent signed
+  // heartbeat (HeartbeatSummary.lastSensors). The verifier must accept the
+  // new schema, the attribution check must still pass, and the rendering
+  // surface gets sensor rows in the same canonical order as heartbeat v:2.
+  // --------------------------------------------------------------------------
+  console.log("\n[10] v:2 proof-of-origin with sensors — schema bump verifies");
+  {
+    const sk = ed.utils.randomSecretKey();
+    const pk = await ed.getPublicKeyAsync(sk);
+    const pubkey = toHex(pk);
+    const nodeId = `KINETIK-NODE-${toHex(sha256(pk)).slice(0, 8).toUpperCase()}`;
+    const payload = {
+      v: 2,
+      kind: "proof-of-origin",
+      nodeId,
+      pubkey,
+      mintedAt: Date.now() - 86400000,
+      issuedAt: Date.now(),
+      lifetimeBeats: 314,
+      firstBeatTs: Date.now() - 60000,
+      chainTip: toHex(sha256(utf8("smoketest-v2-poo"))).slice(0, 16),
+      attribution: PROOF_ATTRIBUTION,
+      sensors: { lux: 412, motionRms: 0.04, pressureHpa: 1013.78 },
+    };
+    const message = stableStringify(payload);
+    const signature = toHex(await ed.signAsync(utf8(message), sk));
+    const hash = toHex(sha256(utf8(message))).slice(0, 16);
+    const r = await verifyArtifact({ payload, message, signature, hash });
+    assert("v:2 PoO verifies", r.valid);
+    assert("v:2 PoO canonicalMatches", r.canonicalMatches);
+    assert("v:2 PoO hash matches", r.hashMatches);
+    assert("v:2 PoO attribution intact", r.attributionOk === true);
+    assert("v:2 PoO signature verifies", r.signatureOk);
+  }
+
+  // --------------------------------------------------------------------------
+  // [11] v:2 PoO with sensors=null — first-boot case.
+  //
+  // A node that has never emitted a heartbeat (zero accrued, lastSensors
+  // null) still mints a valid PoO. The `sensors` field is signed as JSON
+  // null; verifier renders all three rows as "—". Schema stays consistent.
+  // --------------------------------------------------------------------------
+  console.log("\n[11] v:2 proof-of-origin with sensors=null — still verifies");
+  {
+    const sk = ed.utils.randomSecretKey();
+    const pk = await ed.getPublicKeyAsync(sk);
+    const pubkey = toHex(pk);
+    const nodeId = `KINETIK-NODE-${toHex(sha256(pk)).slice(0, 8).toUpperCase()}`;
+    const payload = {
+      v: 2,
+      kind: "proof-of-origin",
+      nodeId,
+      pubkey,
+      mintedAt: Date.now(),
+      issuedAt: Date.now(),
+      lifetimeBeats: 0,
+      firstBeatTs: null,
+      chainTip: null,
+      attribution: PROOF_ATTRIBUTION,
+      sensors: null,
+    };
+    const message = stableStringify(payload);
+    const signature = toHex(await ed.signAsync(utf8(message), sk));
+    const hash = toHex(sha256(utf8(message))).slice(0, 16);
+    const r = await verifyArtifact({ payload, message, signature, hash });
+    assert("v:2 PoO with null sensors verifies", r.valid);
+    assert("v:2 PoO with null sensors attribution intact", r.attributionOk === true);
+  }
+
+  // --------------------------------------------------------------------------
+  // [12] v:1 legacy PoO — backward compat. Every PoO minted before
+  // 2026-04-25 has no `sensors` field at all. The verifier must still
+  // accept these forever — failing here would invalidate every screenshot
+  // and every QR ever shared from the old build.
+  // --------------------------------------------------------------------------
+  console.log("\n[12] v:1 legacy proof-of-origin (no sensors field) — still verifies");
+  {
+    const { artifact } = await mintProof(); // mintProof() is the v:1 generator
+    const r = await verifyArtifact(artifact);
+    assert("v:1 legacy PoO still verifies", r.valid);
+    assert("v:1 legacy PoO attribution intact", r.attributionOk === true);
+  }
+
+  // --------------------------------------------------------------------------
+  // [13] Tampered v:2 PoO sensors — must fail signature.
+  //
+  // Same threat model as the heartbeat tamper test: a spoofer flipping
+  // motion/light/pressure to misrepresent the node's environment must be
+  // rejected by the chain. Sensors are part of the signed payload — they
+  // get the same protection as nodeId or pubkey.
+  // --------------------------------------------------------------------------
+  console.log("\n[13] Tampered v:2 PoO sensors — must fail");
+  {
+    const sk = ed.utils.randomSecretKey();
+    const pk = await ed.getPublicKeyAsync(sk);
+    const pubkey = toHex(pk);
+    const nodeId = `KINETIK-NODE-${toHex(sha256(pk)).slice(0, 8).toUpperCase()}`;
+    const payload = {
+      v: 2,
+      kind: "proof-of-origin",
+      nodeId,
+      pubkey,
+      mintedAt: Date.now(),
+      issuedAt: Date.now(),
+      lifetimeBeats: 42,
+      firstBeatTs: Date.now() - 60000,
+      chainTip: toHex(sha256(utf8("smoketest-tamper"))).slice(0, 16),
+      attribution: PROOF_ATTRIBUTION,
+      sensors: { lux: 100, motionRms: 0.03, pressureHpa: 1014.2 },
+    };
+    const message = stableStringify(payload);
+    const signature = toHex(await ed.signAsync(utf8(message), sk));
+    const hash = toHex(sha256(utf8(message))).slice(0, 16);
+    const tampered = JSON.parse(JSON.stringify({ payload, message, signature, hash }));
+    tampered.payload.sensors.motionRms = 9.99;
+    const r = await verifyArtifact(tampered);
+    assert("tampered v:2 PoO sensors fail canonicalMatches", !r.canonicalMatches);
+    assert("tampered v:2 PoO sensors fail signature", !r.signatureOk);
+    assert("tampered v:2 PoO overall invalid", !r.valid);
+  }
+
   console.log("\n" + "-".repeat(56));
   if (failures === 0) {
     console.log("ALL CHECKS PASSED — verifier and app agree on the contract.");

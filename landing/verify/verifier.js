@@ -286,6 +286,28 @@ function renderReport(report) {
       payload.chainTip ? String(payload.chainTip).toUpperCase() : "—",
     ]);
     rows.push(["ISSUED", fmtIsoDateTime(payload.issuedAt)]);
+    // ----------------------------------------------------------------------
+    // v:2 PoOs carry a `sensors` block sourced from the most recent SIGNED
+    // heartbeat (see src/lib/proof.ts). Render with the same labels and
+    // units as the heartbeat sensor rows so the user reads ONE consistent
+    // set of values everywhere. Same forward-compat policy: missing or
+    // null fields just render as "—" — the signature has already proven
+    // the entire payload byte-for-byte by the time we get here.
+    // ----------------------------------------------------------------------
+    if (payload.sensors && typeof payload.sensors === "object") {
+      const s = payload.sensors;
+      const motionLabel =
+        typeof s.motionRms === "number" ? `${s.motionRms.toFixed(2)} g` : "—";
+      const pressureLabel =
+        typeof s.pressureHpa === "number"
+          ? `${s.pressureHpa.toFixed(2)} hPa`
+          : "—";
+      const luxLabel =
+        typeof s.lux === "number" ? `${Math.round(s.lux)} lx` : "—";
+      rows.push(["MOTION", motionLabel]);
+      rows.push(["PRESSURE", pressureLabel]);
+      rows.push(["LIGHT", luxLabel]);
+    }
   } else if (kind === "heartbeat") {
     rows.push(["SEQ", String(payload.seq ?? "—")]);
     rows.push(["WHEN", fmtIsoDateTime(payload.ts)]);
@@ -526,7 +548,7 @@ if (tryLoadFromHash()) {
 // or the artifact shape. Exposed on window for debugging / ops probes.
 // ----------------------------------------------------------------------------
 window.__kinetikVerifier = {
-  version: "1.1.0",
+  version: "1.2.0",
   verifyArtifact,
   stableStringify,
   PROOF_ATTRIBUTION,

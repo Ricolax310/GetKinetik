@@ -33,6 +33,10 @@ import {
   signMessage,
   verifyMessage,
 } from './identity';
+import {
+  canonicalSensorBlock,
+  type SensorReadout,
+} from './sensors';
 import { stableStringify } from './stableJson';
 
 // ----------------------------------------------------------------------------
@@ -61,8 +65,22 @@ const encodeUtf8 = (s: string): Uint8Array =>
 // ----------------------------------------------------------------------------
 // Types — versioned so we can add fields without breaking verifiers.
 // ----------------------------------------------------------------------------
+// SCHEMA HISTORY:
+//   v:1 — identity + uptime fields only (nodeId, pubkey, mintedAt, issuedAt,
+//         lifetimeBeats, firstBeatTs, chainTip, attribution). Every Proof of
+//         Origin minted before 2026-04-25 is v:1.
+//   v:2 — adds the `sensors` block carrying the same SensorReadout shape as
+//         the heartbeat v:2 payload. Sourced from the most recent SIGNED
+//         heartbeat (caller passes lastSensors via stats), so the PoO is
+//         anchored to a real on-chain reading instead of side-reading the
+//         live sensor stream and stealing samples from the next heartbeat
+//         window. May be null if no heartbeats have been emitted yet on
+//         this device, OR if no sensor sampler is wired in (legacy app
+//         versions). Verifier accepts both v:1 and v:2; existing v:1
+//         artifacts remain valid forever.
+// ----------------------------------------------------------------------------
 export type ProofOfOriginPayload = {
-  v: 1;
+  v: 2;
   kind: 'proof-of-origin';
   nodeId: string;
   pubkey: string;
@@ -72,6 +90,15 @@ export type ProofOfOriginPayload = {
   firstBeatTs: number | null;
   chainTip: string | null;
   attribution: typeof PROOF_ATTRIBUTION;
+  /**
+   * L2 — sensor block from the most recent SIGNED heartbeat. Same shape
+   * and same canonical ordering (lux, motionRms, pressureHpa) as the
+   * heartbeat v:2 payload's sensors field. Null if no heartbeat has been
+   * emitted yet on this device. Never side-read from the live sensors at
+   * mint time: doing so would drain the accel ring and starve the next
+   * heartbeat. Anchoring to lastSensors keeps PoO and chain in lock-step.
+   */
+  sensors: SensorReadout | null;
 };
 
 export type SignedProofOfOrigin = {
@@ -88,11 +115,17 @@ export type SignedProofOfOrigin = {
 // Stats the caller passes in. Caller is responsible for reading these
 // from the heartbeat summary (or passing nulls if the node has never
 // proven uptime on this device yet).
+//
+// `lastSensors` is the SensorReadout from the most recently SIGNED
+// heartbeat — pull straight from `HeartbeatSummary.lastSensors`. Pass
+// `null` if the node has never emitted a beat on this device or if the
+// caller has no sensor sampler wired in.
 // ----------------------------------------------------------------------------
 export type ProofOfOriginStats = {
   lifetimeBeats: number;
   firstBeatTs: number | null;
   chainTip: string | null;
+  lastSensors: SensorReadout | null;
 };
 
 // ----------------------------------------------------------------------------
@@ -101,13 +134,19 @@ export type ProofOfOriginStats = {
 // Async because Ed25519 signing is async (SHA-512 is the bottleneck). On a
 // modern device this returns in ~5-10ms, but the UI should still show a
 // brief "signing" state for the first open.
+//
+// The `sensors` block is constructed via canonicalSensorBlock() so the
+// nested object's JSON.stringify output is reproducible byte-for-byte
+// across the app and the verifier — the same contract used by the
+// heartbeat v:2 emit path. If lastSensors is null, the field is signed
+// as JSON null, which the verifier renders as "—" without breaking.
 // ----------------------------------------------------------------------------
 export async function createProofOfOrigin(
   identity: NodeIdentity,
   stats: ProofOfOriginStats,
 ): Promise<SignedProofOfOrigin> {
   const payload: ProofOfOriginPayload = {
-    v: 1,
+    v: 2,
     kind: 'proof-of-origin',
     nodeId: identity.nodeId,
     pubkey: identity.publicKeyHex,
@@ -117,6 +156,9 @@ export async function createProofOfOrigin(
     firstBeatTs: stats.firstBeatTs,
     chainTip: stats.chainTip,
     attribution: PROOF_ATTRIBUTION,
+    sensors: stats.lastSensors
+      ? canonicalSensorBlock(stats.lastSensors)
+      : null,
   };
 
   const message = stableStringify(

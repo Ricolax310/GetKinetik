@@ -1,7 +1,7 @@
 # GETKINETIK — Project Status Handoff
 
 > Living document. Update whenever the state of the project materially changes.
-> Last updated: **2026-04-25** — Rung 5 in progress, L2 schema bumped to v:2 with first three signed sensor aggregates.
+> Last updated: **2026-04-25** — Rung 5 in progress, L2 schema bumped to v:2 with first three signed sensor aggregates. Proof of Origin also bumped to v:2 so every shareable QR carries the same on-chain sensor block as the heartbeats.
 
 ---
 
@@ -92,12 +92,13 @@ The entire app is built on three cryptographic primitives. If these are sound, t
 ### 3. Proof of Origin card — `src/lib/proof.ts`
 
 - Signed artifact: `{ payload, message, signature, hash }` where:
-  - `payload` = `{ v, kind, nodeId, pubkey, mintedAt, issuedAt, lifetimeBeats, firstBeatTs, chainTip, attribution }`
+  - `payload` = `{ v, kind, nodeId, pubkey, mintedAt, issuedAt, lifetimeBeats, firstBeatTs, chainTip, attribution, sensors }`
   - `message` = `stableStringify(payload)` (lexicographic key sort, byte-for-byte deterministic)
   - `signature` = Ed25519 sig over `message`
   - `hash` = sha256 of `message`
 - `PROOF_ATTRIBUTION` constant is baked INTO the signed message — stripping or changing the "GETKINETIK by OutFromNothing LLC" line invalidates the signature
 - Canonical serialization lives in `src/lib/stableJson.ts`
+- **Schema v:2 (since 2026-04-25):** every PoO now also carries a `sensors` block sourced from `HeartbeatSummary.lastSensors` (the most recent SIGNED heartbeat). Each shareable PoO QR therefore proves identity + uptime + chain freshness + the on-chain sensor reading at the time the chain tip was minted — all in one scan. PoO never side-reads the live sensor stream itself; doing so would drain the accel ring and starve the next heartbeat. Schema is `v:1 → v:2`; verifier accepts both forever.
 
 ---
 
@@ -145,10 +146,11 @@ landing/                 # Cloudflare Pages output root for getkinetik.app
 - Hash-chained heartbeats persist across launches
 - Tap **PROOF** chip on crest (top-left of `GETKINETIK` wordmark) → Proof of Origin card opens
 - Card mints a fresh signed artifact exactly once per open, holds it stable until close
-- Card displays: NODE, MINTED, BEATS, SINCE, CHAIN TIP, ISSUED, HASH, PUBLIC KEY, SIGNATURE
+- Card displays: NODE, MINTED, BEATS, SINCE, CHAIN TIP, ISSUED, MOTION, PRESSURE, LIGHT, HASH, PUBLIC KEY, SIGNATURE
 - DIAG panel (since 2026-04-25) adds three signed sensor rows: MOTION (g), PRESSURE (hPa), LIGHT (lx) — values shown are the EXACT numbers committed to the chain in the most recent signed beat, not live sensor reads
+- PoO card (since 2026-04-25, v:2 schema) renders the same MOTION / PRESSURE / LIGHT trio derived from `payload.sensors` — so a single QR scan proves identity + uptime + chain freshness + the on-chain sensor reading at chain tip, all in one go
 - **VERIFY AT** section: QR code + `https://getkinetik.app/verify/` URL + SHARE SIGNED JSON button
-- QR encodes compact form `{payload, signature}` as base64url in `#proof=` fragment (~670 chars)
+- QR encodes compact form `{payload, signature}` as base64url in `#proof=` fragment (~750 chars for v:2 PoO; ~670 for v:1)
 - Scanning QR with any phone camera → verifier auto-decodes → VALID seal
 - SHARE button hands off full signed JSON (incl. message + hash) to native share sheet
 
@@ -188,6 +190,7 @@ The verifier runs entirely client-side, no server, no backend. Fragments never h
 2. **Verifier hint URL pointed at `.com` instead of `.app`.** Fixed in `79a2f71`.
 3. **Vendored crypto bundles were just redirect stubs.** `esm.sh?bundle-deps` returns a 200 but the body is a redirect HTML; real bundles live at specific `.bundle.mjs` paths. Transitive deps (`_md.mjs`, `_u64.mjs`, `utils.mjs`) had to be fetched individually. Fixed in `9e09527`.
 4. **Heartbeat schema bumped v:1 → v:2 (2026-04-25).** First field added since the chain was minted: a `sensors: { lux, motionRms, pressureHpa }` block. Stable insertion order enforced via `canonicalSensorBlock()` in `src/lib/sensors.ts` so JSON.stringify on the nested object is byte-reproducible without changing `stableStringify` (which still shallow-sorts top-level keys only). Verifier (`landing/verify/verifier.js`) bumped to v1.1.0 — accepts both v:1 and v:2, renders new MOTION / PRESSURE / LIGHT rows when present. Smoketests gained 4 new cases covering v:2 happy path, null-field tolerance, tampered-sensor rejection, and URL round-trip.
+5. **Proof of Origin schema bumped v:1 → v:2 (2026-04-25).** Closes the L2 visibility gap: the PoO QR was previously the only shareable artifact and it carried no sensor data, so users could prove L1 (identity) but not L2 (sensors) end-to-end through the verifier UI. v:2 PoOs now carry a `sensors` block sourced from `HeartbeatSummary.lastSensors` — the same numbers that were committed to the chain in the most recent heartbeat. NOT side-read from the live sensors at mint time (that would drain the accel ring and starve the next heartbeat). Verifier bumped to **v1.2.0** — renders MOTION / PRESSURE / LIGHT rows for both heartbeats and PoOs when `payload.sensors` is present. Backward compat preserved: every v:1 PoO ever screenshotted, shared, or QR-scanned still verifies identically against the new verifier. Smoketests gained 4 new cases (v:2 PoO happy path, sensors=null first-boot case, v:1 legacy backward compat, v:2 PoO sensor tamper rejection) plus 2 URL-pipeline cases. Visible card subbrand bumped from `SOVEREIGN NODE · v1` to `SOVEREIGN NODE · v2`.
 
 ---
 

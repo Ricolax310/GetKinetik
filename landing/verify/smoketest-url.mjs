@@ -171,7 +171,91 @@ async function run() {
     assert("v:2 heartbeat signature verifies after URL round-trip", beatSigOk);
   }
 
-  console.log("\n[3] Unicode + emoji payload encodes safely");
+  console.log("\n[3] v:2 proof-of-origin with sensors round-trips through URL");
+  {
+    const skP = ed.utils.randomSecretKey();
+    const pkP = await ed.getPublicKeyAsync(skP);
+    const pubP = toHex(pkP);
+    const idP = `KINETIK-NODE-${toHex(sha256(pkP)).slice(0, 8).toUpperCase()}`;
+    const poo = {
+      v: 2,
+      kind: "proof-of-origin",
+      nodeId: idP,
+      pubkey: pubP,
+      mintedAt: Date.now() - 86400000,
+      issuedAt: Date.now(),
+      lifetimeBeats: 314,
+      firstBeatTs: Date.now() - 60000,
+      chainTip: toHex(sha256(utf8("v2-poo-url"))).slice(0, 16),
+      attribution: PROOF_ATTRIBUTION,
+      // lexicographic key order — see canonicalSensorBlock in src/lib/sensors.ts
+      sensors: { lux: 287, motionRms: 0.05, pressureHpa: 1012.43 },
+    };
+    const pooMsg = stableStringify(poo);
+    const pooSig = toHex(await ed.signAsync(utf8(pooMsg), skP));
+    const pooUrl = `${VERIFIER_ORIGIN}#proof=${base64UrlEncode(JSON.stringify({ payload: poo, signature: pooSig }))}`;
+    console.log(`  v:2 PoO URL length: ${pooUrl.length} chars`);
+    const pooDecoded = JSON.parse(fromBase64Url(pooUrl.split("#proof=")[1]));
+    assert(
+      "v:2 PoO sensors round-trip preserves shape",
+      pooDecoded.payload.sensors &&
+        pooDecoded.payload.sensors.motionRms === 0.05 &&
+        pooDecoded.payload.sensors.pressureHpa === 1012.43 &&
+        pooDecoded.payload.sensors.lux === 287,
+    );
+    const pooCanonical = stableStringify(pooDecoded.payload);
+    assert(
+      "v:2 PoO canonical message survives JSON round-trip byte-for-byte",
+      pooCanonical === pooMsg,
+    );
+    const pooSigOk = await ed.verifyAsync(
+      fromHex(pooDecoded.signature),
+      utf8(pooCanonical),
+      fromHex(pooDecoded.payload.pubkey),
+    );
+    assert("v:2 PoO signature verifies after URL round-trip", pooSigOk);
+    assert(
+      "v:2 PoO attribution survives URL round-trip",
+      pooDecoded.payload.attribution === PROOF_ATTRIBUTION,
+    );
+  }
+
+  console.log("\n[4] v:2 proof-of-origin with sensors=null round-trips through URL");
+  {
+    const skP = ed.utils.randomSecretKey();
+    const pkP = await ed.getPublicKeyAsync(skP);
+    const pubP = toHex(pkP);
+    const idP = `KINETIK-NODE-${toHex(sha256(pkP)).slice(0, 8).toUpperCase()}`;
+    const poo = {
+      v: 2,
+      kind: "proof-of-origin",
+      nodeId: idP,
+      pubkey: pubP,
+      mintedAt: Date.now(),
+      issuedAt: Date.now(),
+      lifetimeBeats: 0,
+      firstBeatTs: null,
+      chainTip: null,
+      attribution: PROOF_ATTRIBUTION,
+      sensors: null,
+    };
+    const pooMsg = stableStringify(poo);
+    const pooSig = toHex(await ed.signAsync(utf8(pooMsg), skP));
+    const pooUrl = `${VERIFIER_ORIGIN}#proof=${base64UrlEncode(JSON.stringify({ payload: poo, signature: pooSig }))}`;
+    const pooDecoded = JSON.parse(fromBase64Url(pooUrl.split("#proof=")[1]));
+    assert(
+      "v:2 PoO with null sensors survives round-trip",
+      pooDecoded.payload.sensors === null,
+    );
+    const pooSigOk = await ed.verifyAsync(
+      fromHex(pooDecoded.signature),
+      utf8(stableStringify(pooDecoded.payload)),
+      fromHex(pooDecoded.payload.pubkey),
+    );
+    assert("v:2 PoO with null sensors verifies after URL round-trip", pooSigOk);
+  }
+
+  console.log("\n[5] Unicode + emoji payload encodes safely");
   const weird = {
     v: 1,
     kind: "proof-of-origin",
