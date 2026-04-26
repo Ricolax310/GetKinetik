@@ -29,6 +29,11 @@ import { Manifesto } from './Manifesto';
 import { PinPad } from './PinPad';
 import { ProofOfOrigin } from './ProofOfOrigin';
 import { Readouts } from './Readouts';
+import { AggregatorPanel, AGGREGATOR_ENABLED } from './AggregatorPanel';
+import { nodleAdapter } from '../../packages/adapter-nodle/src';
+
+/** Adapter registry — append new DePIN adapters here. Nothing else changes. */
+const ADAPTERS = AGGREGATOR_ENABLED ? [nodleAdapter] : [];
 
 const COINBASE_SPOT_URL = 'https://api.coinbase.com/v2/prices/BTC-USD/spot';
 const PRICE_REFRESH_MS = 60_000;
@@ -701,6 +706,8 @@ export function VaultPanel() {
         nodeValuationUsd={btcPrice}
         isCharging={isCharging}
       />
+
+      <AggregatorPanel adapters={ADAPTERS} identity={identity} />
 
       {pinPadMode ? (
         <PinPad

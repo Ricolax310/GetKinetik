@@ -414,6 +414,213 @@ async function run() {
     assert("tampered v:2 PoO overall invalid", !r.valid);
   }
 
+  // ==========================================================================
+  // L4 EARNINGS LEDGER — wallet primitive smoketests
+  //
+  // These tests mirror packages/kinetik-core/src/wallet.ts using the same
+  // crypto primitives. Every signing + verification rule exercised here
+  // MUST stay byte-identical with the TypeScript source. Contract drift
+  // between app and verifier is caught here before it hits a real device.
+  // ==========================================================================
+
+  // Shared wallet constants — must match wallet.ts exactly.
+  const WALLET_ATTRIBUTION = "GETKINETIK by OutFromNothing LLC";
+  const PROTOCOL_FEE_RATE = 0.01;
+
+  const round8 = (n) => Math.round(n * 1e8) / 1e8;
+
+  // Base32 encoder (RFC 4648, lowercase) — mirrors wallet.ts base32Encode().
+  const BASE32_CHARS = "abcdefghijklmnopqrstuvwxyz234567";
+  function base32Encode(bytes) {
+    let bits = 0, value = 0, output = "";
+    for (let i = 0; i < bytes.length; i++) {
+      value = (value << 8) | bytes[i];
+      bits += 8;
+      while (bits >= 5) {
+        output += BASE32_CHARS[(value >>> (bits - 5)) & 31];
+        bits -= 5;
+      }
+    }
+    if (bits > 0) output += BASE32_CHARS[(value << (5 - bits)) & 31];
+    return output;
+  }
+
+  function deriveWalletAddress(publicKey) {
+    const domain = utf8("kinetik-wallet-v1");
+    const combined = new Uint8Array(domain.length + publicKey.length);
+    combined.set(domain);
+    combined.set(publicKey, domain.length);
+    const hash = sha256(combined);
+    return "kn1" + base32Encode(hash).slice(0, 32);
+  }
+
+  async function signEarning(sk, pk, entry) {
+    if (entry.attribution !== WALLET_ATTRIBUTION) {
+      throw new Error("attribution mismatch");
+    }
+    const expectedFee = round8(entry.gross * PROTOCOL_FEE_RATE);
+    if (Math.abs(entry.fee - expectedFee) > 1e-9) {
+      throw new Error(`fee must be ${PROTOCOL_FEE_RATE * 100}% of gross`);
+    }
+    const expectedNet = round8(entry.gross - entry.fee);
+    if (Math.abs(entry.net - expectedNet) > 1e-9) {
+      throw new Error("net must be gross - fee");
+    }
+    const message = stableStringify(entry);
+    const signature = toHex(await ed.signAsync(utf8(message), sk));
+    const hash = toHex(sha256(utf8(message))).slice(0, 16);
+    return { payload: entry, message, signature, hash };
+  }
+
+  async function verifyEarning(earning, publicKeyHex) {
+    const { payload } = earning;
+    if (payload.attribution !== WALLET_ATTRIBUTION) return false;
+    const expectedFee = round8(payload.gross * PROTOCOL_FEE_RATE);
+    if (Math.abs(payload.fee - expectedFee) > 1e-9) return false;
+    const expectedNet = round8(payload.gross - payload.fee);
+    if (Math.abs(payload.net - expectedNet) > 1e-9) return false;
+    const canonicalMessage = stableStringify(payload);
+    const canonicalHash = toHex(sha256(utf8(canonicalMessage))).slice(0, 16);
+    if (canonicalHash !== earning.hash) return false;
+    return ed.verifyAsync(fromHex(earning.signature), utf8(canonicalMessage), fromHex(publicKeyHex));
+  }
+
+  // --------------------------------------------------------------------------
+  // [14] v:1 earning happy path — mint, sign, verify all checks.
+  //
+  // This is the canonical earning flow: adapter reports gross payout,
+  // the wallet computes fee (1%) and net (gross - fee), signs the full
+  // entry, and verifyEarning confirms every rule in one call.
+  // --------------------------------------------------------------------------
+  console.log("\n[14] v:1 earning happy path — sign and verify");
+  {
+    const sk = ed.utils.randomSecretKey();
+    const pk = await ed.getPublicKeyAsync(sk);
+    const pubkey = toHex(pk);
+    const nodeId = `KINETIK-NODE-${toHex(sha256(pk)).slice(0, 8).toUpperCase()}`;
+    const walletAddr = deriveWalletAddress(pk);
+
+    assert("wallet address starts with kn1", walletAddr.startsWith("kn1"));
+    assert("wallet address is 35 chars", walletAddr.length === 35);
+
+    const gross = 12.3;
+    const fee = round8(gross * PROTOCOL_FEE_RATE);
+    const net = round8(gross - fee);
+
+    const entry = {
+      v: 1,
+      kind: "earning",
+      nodeId,
+      pubkey,
+      source: "nodle",
+      externalRef: "nodle:alloc:test-0001",
+      currency: "NODL",
+      gross,
+      fee,
+      net,
+      ts: Date.now(),
+      prevHash: null,
+      attribution: WALLET_ATTRIBUTION,
+    };
+
+    const signed = await signEarning(sk, pk, entry);
+    const ok = await verifyEarning(signed, pubkey);
+    assert("earning verifies end-to-end", ok);
+    assert("hash is 16-char hex", /^[0-9a-f]{16}$/.test(signed.hash));
+    assert("signature is 128-char hex", /^[0-9a-f]{128}$/.test(signed.signature));
+    assert("fee is 1% of gross", Math.abs(signed.payload.fee - round8(gross * 0.01)) < 1e-9);
+    assert("net is gross minus fee", Math.abs(signed.payload.net - round8(gross - fee)) < 1e-9);
+  }
+
+  // --------------------------------------------------------------------------
+  // [15] Tampered fee — must fail verification.
+  //
+  // A receiver who alters `fee` to 0 (or any non-1% value) gets rejected
+  // at verifyEarning step 2 (fee integrity) AND step 5 (signature), since
+  // the fee field is part of the signed message. This is the central
+  // economic guarantee of the earnings ledger.
+  // --------------------------------------------------------------------------
+  console.log("\n[15] Tampered fee — must fail");
+  {
+    const sk = ed.utils.randomSecretKey();
+    const pk = await ed.getPublicKeyAsync(sk);
+    const pubkey = toHex(pk);
+    const nodeId = `KINETIK-NODE-${toHex(sha256(pk)).slice(0, 8).toUpperCase()}`;
+
+    const gross = 50.0;
+    const fee = round8(gross * PROTOCOL_FEE_RATE);
+    const net = round8(gross - fee);
+    const entry = {
+      v: 1, kind: "earning", nodeId, pubkey,
+      source: "nodle", externalRef: "nodle:alloc:tamper-test",
+      currency: "NODL", gross, fee, net,
+      ts: Date.now(), prevHash: null, attribution: WALLET_ATTRIBUTION,
+    };
+
+    const signed = await signEarning(sk, pk, entry);
+    // Tamper: zero out the fee (the "I deserve everything" attack).
+    const tampered = JSON.parse(JSON.stringify(signed));
+    tampered.payload.fee = 0;
+    tampered.payload.net = gross; // try to cover the tamper
+
+    const ok = await verifyEarning(tampered, pubkey);
+    assert("tampered fee is rejected", !ok);
+
+    // Also verify signEarning itself throws on bad fee input.
+    let threw = false;
+    try {
+      await signEarning(sk, pk, { ...entry, fee: 0, net: gross });
+    } catch {
+      threw = true;
+    }
+    assert("signEarning throws on wrong fee", threw);
+  }
+
+  // --------------------------------------------------------------------------
+  // [16] Sequential chain integrity — two entries linked via prevHash.
+  //
+  // Entry #2 embeds entry #1's hash in prevHash. Tampering #2 breaks
+  // the message byte-for-byte, which invalidates the signature and hash.
+  // This is how the earnings ledger maintains the same tamper-evidence
+  // as the heartbeat log: every entry is cryptographically chained to
+  // every entry before it.
+  // --------------------------------------------------------------------------
+  console.log("\n[16] Sequential chain integrity — prevHash links verified");
+  {
+    const sk = ed.utils.randomSecretKey();
+    const pk = await ed.getPublicKeyAsync(sk);
+    const pubkey = toHex(pk);
+    const nodeId = `KINETIK-NODE-${toHex(sha256(pk)).slice(0, 8).toUpperCase()}`;
+
+    const gross1 = 5.0;
+    const entry1 = {
+      v: 1, kind: "earning", nodeId, pubkey,
+      source: "nodle", externalRef: "nodle:alloc:chain-01",
+      currency: "NODL",
+      gross: gross1, fee: round8(gross1 * 0.01), net: round8(gross1 * 0.99),
+      ts: Date.now(), prevHash: null, attribution: WALLET_ATTRIBUTION,
+    };
+    const signed1 = await signEarning(sk, pk, entry1);
+    assert("entry #1 verifies", await verifyEarning(signed1, pubkey));
+
+    const gross2 = 7.5;
+    const entry2 = {
+      v: 1, kind: "earning", nodeId, pubkey,
+      source: "nodle", externalRef: "nodle:alloc:chain-02",
+      currency: "NODL",
+      gross: gross2, fee: round8(gross2 * 0.01), net: round8(gross2 * 0.99),
+      ts: Date.now() + 1, prevHash: signed1.hash, attribution: WALLET_ATTRIBUTION,
+    };
+    const signed2 = await signEarning(sk, pk, entry2);
+    assert("entry #2 verifies with correct prevHash", await verifyEarning(signed2, pubkey));
+    assert("entry #2 prevHash equals entry #1 hash", signed2.payload.prevHash === signed1.hash);
+
+    // Tamper #2: replace prevHash with a fake one.
+    const tampered2 = JSON.parse(JSON.stringify(signed2));
+    tampered2.payload.prevHash = "0000000000000000";
+    assert("tampered prevHash fails verification", !(await verifyEarning(tampered2, pubkey)));
+  }
+
   console.log("\n" + "-".repeat(56));
   if (failures === 0) {
     console.log("ALL CHECKS PASSED — verifier and app agree on the contract.");

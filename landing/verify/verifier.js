@@ -148,11 +148,31 @@ async function verifyArtifact(raw) {
   // ---- Check 2: sha256(message)[:16] === claimed hash. --------------------
   const hashMatches = claimedHash === canonicalHash;
 
-  // ---- Check 3: attribution intact (only applies to proof-of-origin). -----
+  // ---- Check 3: attribution intact (proof-of-origin and earning). ----------
+  // Earnings carry the same attribution stamp as PoOs. Heartbeats carry none.
   const isProofOfOrigin = payload.kind === "proof-of-origin";
-  const attributionOk = isProofOfOrigin
-    ? payload.attribution === PROOF_ATTRIBUTION
-    : null; // N/A for heartbeats
+  const isEarning = payload.kind === "earning";
+  const attributionOk =
+    isProofOfOrigin || isEarning
+      ? payload.attribution === PROOF_ATTRIBUTION
+      : null; // N/A for heartbeats
+
+  // ---- Check 3b: fee integrity (earning only). ----------------------------
+  // The 1% protocol fee is baked into the signed payload. verifyArtifact
+  // confirms the fee and net math to detect any retroactive tampering.
+  // feeIntegrityOk is null for non-earning kinds (rendered as "skipped").
+  const PROTOCOL_FEE_RATE = 0.01;
+  const round8 = (n) => Math.round(n * 1e8) / 1e8;
+  let feeIntegrityOk = null;
+  if (isEarning) {
+    const expectedFee = round8((payload.gross ?? 0) * PROTOCOL_FEE_RATE);
+    const expectedNet = round8((payload.gross ?? 0) - expectedFee);
+    feeIntegrityOk =
+      typeof payload.fee === "number" &&
+      typeof payload.net === "number" &&
+      Math.abs(payload.fee - expectedFee) < 1e-9 &&
+      Math.abs(payload.net - expectedNet) < 1e-9;
+  }
 
   // ---- Check 4: Ed25519 signature verifies against message + pubkey. ------
   // We verify against the CANONICAL message, not the claimed one. If the
@@ -175,6 +195,7 @@ async function verifyArtifact(raw) {
     canonicalMatches &&
     hashMatches &&
     (attributionOk === true || attributionOk === null) &&
+    (feeIntegrityOk === true || feeIntegrityOk === null) &&
     signatureOk;
 
   return {
@@ -191,6 +212,7 @@ async function verifyArtifact(raw) {
       canonicalMatches,
       hashMatches,
       attributionOk,
+      feeIntegrityOk,
       signatureOk,
       signatureError,
     },
@@ -265,7 +287,9 @@ function renderReport(report) {
       ? "PROOF VERIFIED"
       : kind === "heartbeat"
         ? "HEARTBEAT VERIFIED"
-        : "SIGNATURE VERIFIED"
+        : kind === "earning"
+          ? "EARNING VERIFIED"
+          : "SIGNATURE VERIFIED"
     : "VERIFICATION FAILED";
 
   const sealSub = valid
@@ -308,6 +332,21 @@ function renderReport(report) {
       rows.push(["PRESSURE", pressureLabel]);
       rows.push(["LIGHT", luxLabel]);
     }
+  } else if (kind === "earning") {
+    const currency = payload.currency ?? "";
+    const fmtAmt = (n) =>
+      typeof n === "number" ? `${n} ${currency}`.trim() : "—";
+    rows.push(["SOURCE", payload.source ?? "—"]);
+    rows.push(["CURRENCY", currency || "—"]);
+    rows.push(["GROSS", fmtAmt(payload.gross)]);
+    rows.push(["FEE (1%)", fmtAmt(payload.fee)]);
+    rows.push(["NET", fmtAmt(payload.net)]);
+    rows.push(["WHEN", fmtIsoDateTime(payload.ts)]);
+    rows.push(["REF", payload.externalRef ?? "—"]);
+    rows.push([
+      "PREV HASH",
+      payload.prevHash ? String(payload.prevHash).toUpperCase() : "—",
+    ]);
   } else if (kind === "heartbeat") {
     rows.push(["SEQ", String(payload.seq ?? "—")]);
     rows.push(["WHEN", fmtIsoDateTime(payload.ts)]);
@@ -375,6 +414,11 @@ function renderReport(report) {
       checks.attributionOk === null,
     ),
     mkCheck(
+      checks.feeIntegrityOk === true,
+      "Fee is exactly 1% of gross — net = gross − fee (earning only)",
+      checks.feeIntegrityOk === null,
+    ),
+    mkCheck(
       checks.signatureOk,
       checks.signatureError
         ? `Ed25519 signature — error: ${checks.signatureError}`
@@ -383,12 +427,12 @@ function renderReport(report) {
   ].join("");
 
   const attributionBlock =
-    kind === "proof-of-origin" && payload.attribution
+    (kind === "proof-of-origin" || kind === "earning") && payload.attribution
       ? `
         <div class="divider"></div>
         <div class="attribution-block">
           <p class="attribution">${esc(payload.attribution)}</p>
-          <p class="attribution-sub">A Sovereign Node artifact · not transferable</p>
+          <p class="attribution-sub">${kind === "earning" ? "A Sovereign Earning receipt · 1% protocol fee signed in" : "A Sovereign Node artifact · not transferable"}</p>
         </div>`
       : "";
 
@@ -556,7 +600,7 @@ if (tryLoadFromHash()) {
 // hid PoO sensor rows from the v1.2.0 first-day cohort.
 // ----------------------------------------------------------------------------
 window.__kinetikVerifier = {
-  version: "1.2.0",
+  version: "1.3.0",
   verifyArtifact,
   stableStringify,
   PROOF_ATTRIBUTION,

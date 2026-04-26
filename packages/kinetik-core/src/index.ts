@@ -69,3 +69,27 @@ export {
   buildVerifierUrl,
   shareProof,
 } from './proofShare';
+
+// ----- L3: DePIN adapter contract -------------------------------------------
+export {
+  type AdapterStatus,
+  type EarningSnapshot,
+  type DepinAdapter,
+} from './adapter';
+
+// ----- L4: sovereign earnings wallet ----------------------------------------
+export {
+  WALLET_ATTRIBUTION,
+  PROTOCOL_FEE_RATE,
+  WALLET_KEYS,
+  type EarningEntry,
+  type SignedEarning,
+  type WalletSummary,
+  type AppendEarningParams,
+  deriveWalletAddress,
+  signEarning,
+  verifyEarning,
+  loadWalletSummary,
+  appendEarningLog,
+  eraseEarningLog,
+} from './wallet';
