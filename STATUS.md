@@ -267,6 +267,7 @@ No native modules were added beyond what was already linked. All recent features
 - **Bundle identifier / app name at submission time?** `app.json` currently has placeholder values — verify before first EAS build.
 - **Does the user want heartbeat interval user-configurable?** Currently hardcoded at 30s.
 - **Brand attestor key.** Do we introduce a second "brand-level" key that co-signs releases? Related to realness ladder step 5.
+- **Brand-name collision: AZ "GET KINETIK, LLC" exists.** A separate Arizona LLC named "GET KINETIK, LLC" surfaced in `seethemoney.az.gov` (campaign-finance) records as of Sep 2024. Our legal entity is OutFromNothing LLC (DBA GETKINETIK as a brand). To resolve: (1) look up that LLC on `https://ecorp.azcc.gov/EntitySearch` to see industry / status; (2) search USPTO TESS at `https://tmsearch.uspto.gov/` for "GETKINETIK" / "GET KINETIK" / "KINETIK" in Class 9 (mobile apps) and Class 42 (SaaS / cryptographic services); (3) regardless of outcome, consider filing our own USPTO trademark in Class 9 + 42 (~$250/class, federal, beats state-level LLC namespacing). Domain `getkinetik.app`, GitHub org, Cloudflare deployment, and signed-proof attribution string are all unaffected — this is purely a commercial branding question.
 
 ---
 
