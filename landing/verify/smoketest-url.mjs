@@ -16,7 +16,7 @@ ed.hashes.sha512Async = async (msg) => sha512(msg);
 const PROOF_ATTRIBUTION = "GETKINETIK by OutFromNothing LLC";
 const VERIFIER_ORIGIN = "https://getkinetik.app/verify/";
 
-// ---- App-side encoder (copied from src/lib/proofShare.ts verbatim) ----
+// ---- App-side encoder (copied from packages/kinetik-core/src/proofShare.ts verbatim) ----
 const B64URL_CHARS =
   "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
 
@@ -144,7 +144,7 @@ async function run() {
       online: true,
       charging: false,
       prevHash: "0000000000000000",
-      // lexicographic key order — see canonicalSensorBlock in src/lib/sensors.ts
+      // lexicographic key order — see canonicalSensorBlock in packages/kinetik-core/src/sensors.ts
       sensors: { lux: 412, motionRms: 0.06, pressureHpa: 1014.07 },
     };
     const beatMsg = stableStringify(beat);
@@ -188,7 +188,7 @@ async function run() {
       firstBeatTs: Date.now() - 60000,
       chainTip: toHex(sha256(utf8("v2-poo-url"))).slice(0, 16),
       attribution: PROOF_ATTRIBUTION,
-      // lexicographic key order — see canonicalSensorBlock in src/lib/sensors.ts
+      // lexicographic key order — see canonicalSensorBlock in packages/kinetik-core/src/sensors.ts
       sensors: { lux: 287, motionRms: 0.05, pressureHpa: 1012.43 },
     };
     const pooMsg = stableStringify(poo);

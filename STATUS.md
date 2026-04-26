@@ -1,7 +1,7 @@
 # GETKINETIK — Project Status Handoff
 
 > Living document. Update whenever the state of the project materially changes.
-> Last updated: **2026-04-25** — Rung 5 in progress, L2 schema bumped to v:2 with first three signed sensor aggregates. Proof of Origin also bumped to v:2 so every shareable QR carries the same on-chain sensor block as the heartbeats.
+> Last updated: **2026-04-25** — Rung 5 in progress, L2 schema bumped to v:2 with first three signed sensor aggregates. Proof of Origin also bumped to v:2 so every shareable QR carries the same on-chain sensor block as the heartbeats. **L1 trust-layer extracted into `packages/kinetik-core/` as an internal package** — the architectural boundary the future public SDK will be published from. App now consumes the primitive through a single `index.ts` front door instead of reaching into individual files; both smoketests still pass byte-for-byte.
 
 ---
 
@@ -66,14 +66,14 @@ As of 2026-04-25, every signed heartbeat also carries three permission-free priv
 
 The entire app is built on three cryptographic primitives. If these are sound, the product is sound.
 
-### 1. Identity — `src/lib/identity.ts`
+### 1. Identity — `packages/kinetik-core/src/identity.ts`
 
 - Ed25519 keypair, generated once on first launch, sealed in `expo-secure-store`
 - Secret key never leaves the device (hardware-backed keystore where available)
 - Node ID = first 4 bytes of `sha256(publicKey)`, rendered as `KINETIK-NODE-XXXXXXXX`
 - **Verified externally:** `KINETIK-NODE-F3C3035B` was independently derived from its public key using this same formula on a separate machine — cryptographic tie confirmed
 
-### 2. Hash-chained heartbeat log — `src/lib/heartbeat.ts`
+### 2. Hash-chained heartbeat log — `packages/kinetik-core/src/heartbeat.ts`
 
 - While the app is LIVE, a heartbeat fires every 30s (gated behind unlock, like yield accrual)
 - Each heartbeat is signed Ed25519 and hash-chained to the previous via sha256 of the canonical payload
@@ -81,7 +81,7 @@ The entire app is built on three cryptographic primitives. If these are sound, t
 - Current test node has **289+ heartbeats** on chain — the chain works in practice, not just theory
 - **Schema v:2 (since 2026-04-25):** every beat now also carries a `sensors: { lux, motionRms, pressureHpa }` block. Verifier accepts both v:1 (legacy) and v:2 — every previously signed beat remains valid forever.
 
-### 2b. Sensor sampler — `src/lib/sensors.ts`
+### 2b. Sensor sampler — `packages/kinetik-core/src/sensors.ts`
 
 - Process-wide singleton: `startSensorSampler()` at app boot, `stopSensorSampler()` on teardown
 - Three permission-free sensors via `expo-sensors`: Accelerometer (1Hz), Barometer (0.2Hz), LightSensor (Android-only, 0.2Hz)
@@ -89,7 +89,7 @@ The entire app is built on three cryptographic primitives. If these are sound, t
 - All fields default to `null` on devices missing the sensor (iOS has no light, budget Androids have no barometer); the schema stays consistent regardless
 - `canonicalSensorBlock()` enforces lexicographic insertion order so the nested object's JSON.stringify output is reproducible byte-for-byte across the app and the verifier
 
-### 3. Proof of Origin card — `src/lib/proof.ts`
+### 3. Proof of Origin card — `packages/kinetik-core/src/proof.ts`
 
 - Signed artifact: `{ payload, message, signature, hash }` where:
   - `payload` = `{ v, kind, nodeId, pubkey, mintedAt, issuedAt, lifetimeBeats, firstBeatTs, chainTip, attribution, sensors }`
@@ -97,7 +97,7 @@ The entire app is built on three cryptographic primitives. If these are sound, t
   - `signature` = Ed25519 sig over `message`
   - `hash` = sha256 of `message`
 - `PROOF_ATTRIBUTION` constant is baked INTO the signed message — stripping or changing the "GETKINETIK by OutFromNothing LLC" line invalidates the signature
-- Canonical serialization lives in `src/lib/stableJson.ts`
+- Canonical serialization lives in `packages/kinetik-core/src/stableJson.ts`
 - **Schema v:2 (since 2026-04-25):** every PoO now also carries a `sensors` block sourced from `HeartbeatSummary.lastSensors` (the most recent SIGNED heartbeat). Each shareable PoO QR therefore proves identity + uptime + chain freshness + the on-chain sensor reading at the time the chain tip was minted — all in one scan. PoO never side-reads the live sensor stream itself; doing so would drain the accel ring and starve the next heartbeat. Schema is `v:1 → v:2`; verifier accepts both forever.
 
 ---
@@ -105,14 +105,20 @@ The entire app is built on three cryptographic primitives. If these are sound, t
 ## File map
 
 ```
+packages/
+└── kinetik-core/        # L1 trust-layer primitive (the future public SDK)
+    ├── package.json     # @kinetik/core, internal-only (private: true), v0.1.0
+    ├── README.md        # What's inside, status, contract rules
+    └── src/
+        ├── index.ts     # THE FRONT DOOR — only file the app is allowed to import from
+        ├── identity.ts      # Ed25519 keypair, SecureStore, signMessage/verifyMessage
+        ├── heartbeat.ts     # useHeartbeat hook, hash-chained signed beats (schema v:2 since 2026-04-25)
+        ├── sensors.ts       # L2 sensor sampler — accel motionRms + baro pressureHpa + light lux
+        ├── proof.ts         # createProofOfOrigin, verifyProofOfOrigin, PROOF_ATTRIBUTION
+        ├── proofShare.ts    # buildVerifierUrl, shareProof, base64UrlEncode, VERIFIER_ORIGIN
+        └── stableJson.ts    # stableStringify — canonical JSON for signing
+
 src/
-├── lib/
-│   ├── identity.ts      # Ed25519 keypair, SecureStore, signMessage/verifyMessage
-│   ├── heartbeat.ts     # useHeartbeat hook, hash-chained signed beats (schema v:2 since 2026-04-25)
-│   ├── sensors.ts       # L2 sensor sampler — accel motionRms + baro pressureHpa + light lux
-│   ├── proof.ts         # createProofOfOrigin, verifyProofOfOrigin, PROOF_ATTRIBUTION
-│   ├── proofShare.ts    # buildVerifierUrl, shareProof, base64UrlEncode, VERIFIER_ORIGIN
-│   └── stableJson.ts    # stableStringify — canonical JSON for signing
 ├── components/
 │   ├── VaultPanel.tsx   # Main screen: biometric/PIN unlock, yield UI, DIAG + PROOF chips
 │   ├── ProofOfOrigin.tsx# Card that mints + displays a fresh signed proof, with QR + SHARE
@@ -192,6 +198,8 @@ The verifier runs entirely client-side, no server, no backend. Fragments never h
 4. **Heartbeat schema bumped v:1 → v:2 (2026-04-25).** First field added since the chain was minted: a `sensors: { lux, motionRms, pressureHpa }` block. Stable insertion order enforced via `canonicalSensorBlock()` in `src/lib/sensors.ts` so JSON.stringify on the nested object is byte-reproducible without changing `stableStringify` (which still shallow-sorts top-level keys only). Verifier (`landing/verify/verifier.js`) bumped to v1.1.0 — accepts both v:1 and v:2, renders new MOTION / PRESSURE / LIGHT rows when present. Smoketests gained 4 new cases covering v:2 happy path, null-field tolerance, tampered-sensor rejection, and URL round-trip.
 5. **Proof of Origin schema bumped v:1 → v:2 (2026-04-25).** Closes the L2 visibility gap: the PoO QR was previously the only shareable artifact and it carried no sensor data, so users could prove L1 (identity) but not L2 (sensors) end-to-end through the verifier UI. v:2 PoOs now carry a `sensors` block sourced from `HeartbeatSummary.lastSensors` — the same numbers that were committed to the chain in the most recent heartbeat. NOT side-read from the live sensors at mint time (that would drain the accel ring and starve the next heartbeat). Verifier bumped to **v1.2.0** — renders MOTION / PRESSURE / LIGHT rows for both heartbeats and PoOs when `payload.sensors` is present. Backward compat preserved: every v:1 PoO ever screenshotted, shared, or QR-scanned still verifies identically against the new verifier. Smoketests gained 4 new cases (v:2 PoO happy path, sensors=null first-boot case, v:1 legacy backward compat, v:2 PoO sensor tamper rejection) plus 2 URL-pipeline cases. Visible card subbrand bumped from `SOVEREIGN NODE · v1` to `SOVEREIGN NODE · v2`.
 
+6. **L1 trust-layer extracted into `packages/kinetik-core/` (2026-04-25).** Six files (identity, heartbeat, proof, proofShare, sensors, stableJson) moved out of `src/lib/` into a self-contained internal package with its own `package.json`, README, and a single public `src/index.ts` front door. App components (`VaultPanel.tsx`, `ProofOfOrigin.tsx`) now import exclusively through that front door instead of reaching into individual modules. **Zero behavioral change**: `tsc --noEmit` clean, both signing-contract smoketests (`smoketest.mjs` + `smoketest-url.mjs`) pass byte-for-byte against the relocated code. Purpose: the boundary is the deliverable. This is the package the eventual public SDK gets published from once L4 (wallet + 1% fee path) ships and the brand attestor key (rung 8) is anchored. Until then, `private: true` and internal-only — the boundary exists for hygiene, not for distribution.
+
 ---
 
 ## Known dev-mode noise (defer, not blocking)
@@ -210,7 +218,7 @@ Captured here so the next agent picks up with the same framing. Rungs 1–3 are 
 2. ✅ **Cryptographic artifacts exist.** Signed proofs, hash-chained heartbeats, live verifier.
 3. ✅ **A second human witnessed a proof.** Completed 2026-04-24. A QR minted on the user's Android device was scanned by a separate iPhone, routed through `getkinetik.app/verify/`, and returned a `PROOF VERIFIED — Signed by KINETIK-NODE-F3C3035B` seal. First wild-hardware validation.
 4. ✅ **App is installable by strangers.** Completed 2026-04-24. First signed Android APK shipped via EAS. Build ID `ce2a90b3-5841-46a4-a651-6adbcdd6b28b`, artifact at `https://expo.dev/artifacts/eas/rszFT4DYVrAHdhv15e8Naz.apk`. App is now installable on any Android device via direct sideload — no Play Store gating required. Every fresh install mints a brand-new sovereign identity with its own chain.
-5. ⏳ **L2 (sensor capture + signing) finished.** _IN PROGRESS as of 2026-04-25._ First slice landed: accelerometer motion RMS + barometer pressure + ambient light, all signed into the chain via the v:1 → v:2 schema bump. Verifier accepts both versions. Still to do: GPS (opt-in), WiFi SSID presence, cell tower IDs, mic amplitude aggregate — each requires a permissions-UX pass first. Rename `stabilityPct` to something accurate (it's currently just battery %). Never sign raw mic/GPS content — only aggregates. The "aggregates only" rule is now codified in `src/lib/sensors.ts` and applied across the board.
+5. ⏳ **L2 (sensor capture + signing) finished.** _IN PROGRESS as of 2026-04-25._ First slice landed: accelerometer motion RMS + barometer pressure + ambient light, all signed into the chain via the v:1 → v:2 schema bump. Verifier accepts both versions. Still to do: GPS (opt-in), WiFi SSID presence, cell tower IDs, mic amplitude aggregate — each requires a permissions-UX pass first. Rename `stabilityPct` to something accurate (it's currently just battery %). Never sign raw mic/GPS content — only aggregates. The "aggregates only" rule is now codified in `packages/kinetik-core/src/sensors.ts` and applied across the board.
 6. ⏳ **First DePIN integration.** Nodle first (easiest). Then DIMO, Hivemapper, WeatherXM. Each integration = one more earning path. Build the routing optimizer (L3) in parallel as integrations come online.
 7. ⏳ **Wallet / earnings layer (L4).** Collect payouts from each DePIN into the sovereign node's address. Auto-convert to user's chosen denom. 1% protocol fee on conversions. $5/mo premium tier for priority routing.
 8. ⏳ **Brand key anchored on the internet.** Publish `.well-known/getkinetik-attestor.json` at `getkinetik.app` so third-party DePINs can verify "this is a real GetKinetik node" at the brand level, not just the device level.
@@ -228,6 +236,7 @@ Captured here so the next agent picks up with the same framing. Rungs 1–3 are 
 - **CSP is strict.** `landing/_headers` sets `script-src 'self'`. No CDN scripts, no inline scripts, no `eval`. If you add a new JS file to the verifier, vendor it locally into `landing/verify/vendor/`.
 - **Hidden doors use long-press + Success haptic.** Visible chips use tap + Success haptic. Consistency of ritual matters.
 - **No emojis in code, commits, or UI text** unless the user explicitly asks.
+- **`packages/kinetik-core/` is the SDK boundary.** App code imports trust-layer primitives ONLY through `packages/kinetik-core/src/index.ts` — never reach past the front door into individual modules. Adding a new export to `index.ts` is non-breaking; removing or renaming an export is a breaking change. When the package goes public as the SDK, this front door is the contract every external integrator depends on.
 
 ---
 
@@ -276,10 +285,10 @@ No native modules were added beyond what was already linked. All recent features
 
 ## How to cite code in conversations with the user
 
-- File references use backticks: `src/lib/proof.ts`
+- File references use backticks: `packages/kinetik-core/src/proof.ts`
 - Inline code references use backticks: `createProofOfOrigin`
 - Never invent palette keys. The palette is: `obsidian`, `ruby.{core, mid, deep, ember, shadow}`, `sapphire.{core, glow, deep}`, `platinum`, `graphite`, `hairline`. There is NO `ruby.glow` (common mistake — use `ruby.ember`).
-- Never invent new canonical-serialization logic. Always import `stableStringify` from `src/lib/stableJson.ts`.
+- Never invent new canonical-serialization logic. Always import `stableStringify` from the `packages/kinetik-core` front door (`packages/kinetik-core/src/index.ts`), never reach past the barrel into individual modules.
 - Match the user's voice: concise, direct, slightly poetic, zero fluff. They prefer decisive recommendations over option menus.
 
 ---

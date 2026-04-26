@@ -38,8 +38,8 @@ For any artifact, all four of these must pass:
    `"GETKINETIK by OutFromNothing LLC"`.
 4. `Ed25519.verify(signature, message, payload.pubkey)` returns `true`.
 
-These checks mirror `src/lib/proof.ts::verifyProofOfOrigin` and
-`src/lib/heartbeat.ts::verifyHeartbeat` in the app. If either side
+These checks mirror `packages/kinetik-core/src/proof.ts::verifyProofOfOrigin` and
+`packages/kinetik-core/src/heartbeat.ts::verifyHeartbeat` in the app. If either side
 changes its canonical serialization or attribution constant, bump
 `__kinetikVerifier.version` in `verifier.js` and the corresponding
 version field in the app payload.
@@ -161,4 +161,4 @@ also works for quick offline audits.
 Part of the GETKINETIK Sovereign Node project by OutFromNothing LLC.
 The attribution string is cryptographically bound into every Proof of
 Origin payload — see `PROOF_ATTRIBUTION` in `verifier.js` and
-`src/lib/proof.ts`.
+`packages/kinetik-core/src/proof.ts`.

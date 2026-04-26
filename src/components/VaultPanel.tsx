@@ -14,20 +14,16 @@ import Animated, {
 
 import { palette, typography } from '../theme/palette';
 import {
+  eraseHeartbeatLog,
   eraseNodeIdentity,
   getOrCreateNodeIdentity,
-  type NodeIdentity,
-} from '../lib/identity';
-import {
-  eraseHeartbeatLog,
   type HeartbeatSnapshot,
-  useHeartbeat,
-} from '../lib/heartbeat';
-import {
+  type NodeIdentity,
   readSensorAggregate,
   startSensorSampler,
   stopSensorSampler,
-} from '../lib/sensors';
+  useHeartbeat,
+} from '../../packages/kinetik-core/src';
 import { Gemstone } from './Gemstone';
 import { Manifesto } from './Manifesto';
 import { PinPad } from './PinPad';
@@ -151,7 +147,7 @@ export function VaultPanel() {
   // Sovereign identity — Ed25519 keypair lives in keystore-backed SecureStore.
   // The NODE ID is the first 8 hex chars of SHA-256(publicKey); it is
   // deterministic from a secret that never leaves the device. See
-  // src/lib/identity.ts for the full rationale.
+  // packages/kinetik-core/src/identity.ts for the full rationale.
   // --------------------------------------------------------------------------
   useEffect(() => {
     (async () => {
@@ -168,7 +164,7 @@ export function VaultPanel() {
   // --------------------------------------------------------------------------
   // L2 sensor sampler — accelerometer (motion RMS) + barometer + light at
   // app boot, torn down on unmount. The sampler is a process-wide singleton
-  // (see src/lib/sensors.ts), so multiple mounts are idempotent. Hooking it
+  // (see packages/kinetik-core/src/sensors.ts), so multiple mounts are idempotent. Hooking it
   // up at this layer means heartbeats automatically carry sensor aggregates
   // without VaultPanel having to construct them per beat.
   // --------------------------------------------------------------------------
@@ -454,7 +450,7 @@ export function VaultPanel() {
   // Signed heartbeat log — emits an Ed25519-signed, hash-chained uptime
   // proof every 30s while the node is LIVE. The same gate as yield accrual:
   // the node only proves presence while it is actually working. See
-  // src/lib/heartbeat.ts for the full rationale + storage shape.
+  // packages/kinetik-core/src/heartbeat.ts for the full rationale + storage shape.
   // --------------------------------------------------------------------------
   const heartbeatSnapshot = useCallback(
     (): HeartbeatSnapshot => ({
@@ -511,7 +507,7 @@ export function VaultPanel() {
   // L2 sensor readouts — surface the EXACT numbers that were committed to
   // the chain in the most recent signed beat, not the live sensor stream
   // between beats. That keeps the DIAG card and the verifier showing the
-  // same bytes. See src/lib/sensors.ts for unit + rounding conventions.
+  // same bytes. See packages/kinetik-core/src/sensors.ts for unit + rounding conventions.
   const sensors = heartbeat?.lastSensors ?? null;
   const motionLabel =
     sensors && typeof sensors.motionRms === 'number'
@@ -577,7 +573,7 @@ export function VaultPanel() {
           the NODE ID opens the Proof of Origin card. Same "hidden door"
           pattern, different door — identity instead of philosophy. A
           Success haptic marks the reveal; the card itself mints a fresh
-          Ed25519 signature on every open (see src/lib/proof.ts).
+          Ed25519 signature on every open (see packages/kinetik-core/src/proof.ts).
         */}
         <Pressable
           onLongPress={async () => {

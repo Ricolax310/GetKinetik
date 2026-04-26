@@ -26,7 +26,7 @@
 //     hex IS the proof — it can be typed or OCR'd by a verifier.
 //
 // Ownership / attribution is stamped twice: once in the signed payload
-// (via PROOF_ATTRIBUTION baked in by src/lib/proof.ts), and once as
+// (via PROOF_ATTRIBUTION baked in by packages/kinetik-core/src/proof.ts), and once as
 // visible text on the card. The visible text IS part of the signed
 // message, so it cannot be altered without breaking verification.
 // ============================================================================
@@ -50,18 +50,16 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as Haptics from 'expo-haptics';
 
 import { palette, typography } from '../theme/palette';
-import { type NodeIdentity } from '../lib/identity';
-import {
-  createProofOfOrigin,
-  PROOF_ATTRIBUTION,
-  type SignedProofOfOrigin,
-} from '../lib/proof';
 import {
   buildVerifierUrl,
+  createProofOfOrigin,
+  type NodeIdentity,
+  PROOF_ATTRIBUTION,
+  type SensorReadout,
   shareProof,
+  type SignedProofOfOrigin,
   VERIFIER_ORIGIN,
-} from '../lib/proofShare';
-import { type SensorReadout } from '../lib/sensors';
+} from '../../packages/kinetik-core/src';
 import { ProofQr } from './ProofQr';
 
 // ----------------------------------------------------------------------------
@@ -351,7 +349,7 @@ export function ProofOfOrigin({
           {/*
             Attribution is rendered twice by design: once visibly here so a
             screenshot is self-describing, and once inside the signed
-            payload (via PROOF_ATTRIBUTION in src/lib/proof.ts). Any attempt
+            payload (via PROOF_ATTRIBUTION in packages/kinetik-core/src/proof.ts). Any attempt
             to strip or alter the attribution invalidates the signature,
             because the exact string was part of the signed message.
           */}

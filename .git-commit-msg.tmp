@@ -1,0 +1,27 @@
+refactor(core): extract L1 trust-layer into packages/kinetik-core
+
+Move identity, heartbeat, proof, proofShare, sensors, and stableJson
+out of src/lib/ into a self-contained internal package with its own
+package.json, README, and a single public src/index.ts barrel.
+
+App components (VaultPanel, ProofOfOrigin) now import exclusively
+through the barrel front door instead of reaching into individual
+modules. The barrel is the contract every future external integrator
+will depend on.
+
+Also update doc/comment references throughout the repo to point at
+the new location. Historical narrative in STATUS.md "Bugs recently
+squashed" entries is preserved verbatim (rewriting it would erase
+the move's own provenance).
+
+Zero behavioral change:
+- tsc --noEmit clean
+- landing/verify/smoketest.mjs: ALL CHECKS PASSED
+- landing/verify/smoketest-url.mjs: URL ROUND-TRIP PASSES
+- Signed APK already shipped (v1.2.0 was built before this refactor)
+
+Purpose: the boundary is the deliverable. This is the package the
+eventual public SDK gets published from once L4 (wallet + 1% fee
+path) ships and the brand attestor key (rung 8) is anchored. Until
+then, private: true and internal-only — the boundary exists for
+hygiene, not for distribution.

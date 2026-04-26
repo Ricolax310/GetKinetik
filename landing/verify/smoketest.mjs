@@ -38,7 +38,7 @@ const fromHex = (hex) => {
 };
 const utf8 = (s) => new TextEncoder().encode(s);
 
-// Mint a proof-of-origin exactly the way src/lib/proof.ts does.
+// Mint a proof-of-origin exactly the way packages/kinetik-core/src/proof.ts does.
 async function mintProof() {
   const sk = ed.utils.randomSecretKey();
   const pk = await ed.getPublicKeyAsync(sk);
@@ -188,7 +188,7 @@ async function run() {
   // The `sensors` block is constructed in lexicographic key order (lux,
   // motionRms, pressureHpa) so JSON.stringify emits a reproducible byte
   // sequence regardless of where the readout originated. That ordering is
-  // the contract enforced in src/lib/sensors.ts canonicalSensorBlock().
+  // the contract enforced in packages/kinetik-core/src/sensors.ts canonicalSensorBlock().
   // --------------------------------------------------------------------------
   console.log("\n[7] v:2 heartbeat with sensors — schema bump verifies");
   {

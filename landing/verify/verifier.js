@@ -2,7 +2,7 @@
 // GETKINETIK Sovereign Verifier — browser-side Ed25519 proof auditor.
 // ----------------------------------------------------------------------------
 // This file is the single source of verification truth outside the app.
-// It intentionally mirrors src/lib/proof.ts and src/lib/heartbeat.ts from
+// It intentionally mirrors packages/kinetik-core/src/proof.ts and packages/kinetik-core/src/heartbeat.ts from
 // the mobile codebase at the byte level:
 //
 //   · stableStringify()    — identical shallow lex-sorted serializer
@@ -39,7 +39,7 @@ import { sha256, sha512 } from "./vendor/sha2.js";
 // writable properties. The library's default sha512Async tries crypto.subtle
 // first, which works in modern browsers but we wire the pure-JS path too so
 // the verifier works over file:// and inside older WebViews — the exact
-// same override the mobile app uses in src/lib/identity.ts.
+// same override the mobile app uses in packages/kinetik-core/src/identity.ts.
 // ----------------------------------------------------------------------------
 ed.hashes.sha512 = sha512;
 ed.hashes.sha512Async = async (msg) => sha512(msg);
@@ -54,7 +54,7 @@ ed.hashes.sha512Async = async (msg) => sha512(msg);
 const PROOF_ATTRIBUTION = "GETKINETIK by OutFromNothing LLC";
 
 // ----------------------------------------------------------------------------
-// stableStringify — byte-for-byte equivalent of src/lib/stableJson.ts. It
+// stableStringify — byte-for-byte equivalent of packages/kinetik-core/src/stableJson.ts. It
 // sorts the top-level keys lexicographically and delegates value
 // serialization to JSON.stringify, which is spec-stable across engines for
 // the primitive types used in our payloads (string, number, boolean, null).
@@ -108,8 +108,8 @@ const fromBase64Url = (s) => {
 // verbose: each check's pass/fail + observed/expected values are exposed
 // so a user can trace EXACTLY why an invalid proof was rejected.
 //
-// Input shape: the artifact minted by src/lib/proof.ts createProofOfOrigin
-// (or src/lib/heartbeat.ts emit). Two forms are accepted:
+// Input shape: the artifact minted by packages/kinetik-core/src/proof.ts createProofOfOrigin
+// (or packages/kinetik-core/src/heartbeat.ts emit). Two forms are accepted:
 //
 //   FULL:    { payload, message, signature, hash }   — as minted
 //   COMPACT: { payload, signature }                  — QR/URL friendly;
@@ -288,7 +288,7 @@ function renderReport(report) {
     rows.push(["ISSUED", fmtIsoDateTime(payload.issuedAt)]);
     // ----------------------------------------------------------------------
     // v:2 PoOs carry a `sensors` block sourced from the most recent SIGNED
-    // heartbeat (see src/lib/proof.ts). Render with the same labels and
+    // heartbeat (see packages/kinetik-core/src/proof.ts). Render with the same labels and
     // units as the heartbeat sensor rows so the user reads ONE consistent
     // set of values everywhere. Same forward-compat policy: missing or
     // null fields just render as "—" — the signature has already proven
@@ -323,7 +323,7 @@ function renderReport(report) {
     // privacy-neutral aggregates. Rendering is intentionally tolerant —
     // the signature has already proven the entire payload byte-for-byte,
     // so any missing field just renders as "—" instead of failing the
-    // schema. Forward-compatible by default. See src/lib/sensors.ts for
+    // schema. Forward-compatible by default. See packages/kinetik-core/src/sensors.ts for
     // the canonical SensorReadout shape and rounding rules.
     // ----------------------------------------------------------------------
     if (payload.sensors && typeof payload.sensors === "object") {
