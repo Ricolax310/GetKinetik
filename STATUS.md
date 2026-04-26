@@ -191,6 +191,14 @@ The verifier runs entirely client-side, no server, no backend. Fragments never h
 
 ---
 
+## Known dev-mode noise (defer, not blocking)
+
+Things that show up in the Metro/dev console but do NOT affect production builds, signing, verification, or end users. Address only when there's downtime between feature pushes.
+
+1. **Reanimated strict-mode warning: `Reading from 'value' during component render`.** Surfaced by `react-native-reanimated` v4.x strict mode. Some component is reading a `useSharedValue().value` (or calling `.get()`) on the JS render thread during a render pass instead of inside an animated style/callback or via `useDerivedValue` / `useAnimatedReaction`. Likely culprits: `VaultPanel.tsx` (heartbeat-driven animated diagnostic rows), `Gemstone.tsx` (Skia gem driven by accelerometer shared values), or one of the chip animations. Fix path: locate the offending `.value` read, wrap the consuming computation in `useDerivedValue` so the read happens on the UI thread. Until then: cosmetic dev-console noise only. Production APK is unaffected. Linked Reanimated doc: `https://docs.swmansion.com/react-native-reanimated/docs/debugging/logger-configuration`.
+
+---
+
 ## The realness ladder (roadmap)
 
 Captured here so the next agent picks up with the same framing. Rungs 1–3 are the trust-layer milestones we already landed. Rungs 4+ advance the aggregator mission.
