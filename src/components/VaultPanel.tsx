@@ -14,6 +14,7 @@ import Animated, {
 
 import { palette, typography } from '../theme/palette';
 import {
+  eraseEarningLog,
   eraseHeartbeatLog,
   eraseNodeIdentity,
   getOrCreateNodeIdentity,
@@ -749,6 +750,7 @@ export const __kinetikResetSecureStore = async () => {
   await secureDelete(KEY_YIELD_TS);
   await eraseNodeIdentity();
   await eraseHeartbeatLog();
+  await eraseEarningLog();
 };
 
 const styles = StyleSheet.create({

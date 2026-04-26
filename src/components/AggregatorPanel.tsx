@@ -17,10 +17,16 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Pressable, StyleSheet, Text, View, ActivityIndicator } from 'react-native';
 import * as Haptics from 'expo-haptics';
+import * as SecureStore from 'expo-secure-store';
 
 import { palette, typography } from '../theme/palette';
 import type { DepinAdapter, EarningSnapshot, AdapterStatus } from '../../packages/kinetik-core/src/adapter';
 import type { NodeIdentity } from '../../packages/kinetik-core/src/identity';
+import {
+  appendEarningLog,
+  loadWalletSummary,
+  type WalletSummary,
+} from '../../packages/kinetik-core/src';
 
 // ----------------------------------------------------------------------------
 // Feature flag. Flip to true to show the aggregator panel in VaultPanel.
@@ -42,6 +48,8 @@ const POLL_INTERVAL_MS = 60_000;
 type AdapterCardProps = {
   adapter: DepinAdapter;
   identity: NodeIdentity | null;
+  /** Fired after an earning is signed + appended to the ledger. Lets the parent refresh wallet summary. */
+  onLedgerAppend?: () => void;
 };
 
 type CardState = {
@@ -97,9 +105,77 @@ function stateColor(status: AdapterStatus): string {
 }
 
 // ----------------------------------------------------------------------------
+// Per-adapter "lifetime watermark" — the highest balance we've ever observed
+// and recorded as a signed earning. SecureStore key:
+//   kinetik.adapter.<id>.recordedLifetime.v1
+//
+// INVARIANT (v0, balance-based recording):
+//   · When current lifetimeGross > watermark, the delta is treated as a real
+//     earning event: signEarning + appendEarningLog, watermark ratchets up.
+//   · When current lifetimeGross < watermark (user withdrew on the underlying
+//     network), we DO NOT record a negative entry. We DO reset the watermark
+//     down to the new balance so subsequent earnings get caught.
+//   · When equal — no-op.
+//
+// LIMITATION: this can under-count if a user withdraws between polls. The
+// correct fix (Session E or later) is to query SubQuery for true lifetime
+// inbound transfers, not current balance. For v0, under-count > over-count —
+// we never want to mint a false earning.
+// ----------------------------------------------------------------------------
+const RECORDED_LIFETIME_KEY = (adapterId: string) =>
+  `kinetik.adapter.${adapterId}.recordedLifetime.v1`;
+
+/** Smallest delta we bother recording. Suppresses dust noise from polling jitter. */
+const MIN_RECORDABLE_DELTA = 1e-8;
+
+async function recordEarningDelta(
+  adapter: DepinAdapter,
+  snapshot: EarningSnapshot,
+  identity: NodeIdentity,
+): Promise<boolean> {
+  if (!Number.isFinite(snapshot.lifetimeGross) || snapshot.lifetimeGross <= 0) {
+    return false;
+  }
+
+  const key = RECORDED_LIFETIME_KEY(adapter.id);
+  const prevRaw = await SecureStore.getItemAsync(key).catch(() => null);
+  const prevLifetime = prevRaw ? parseFloat(prevRaw) : 0;
+  const safePrev = Number.isFinite(prevLifetime) && prevLifetime >= 0 ? prevLifetime : 0;
+  const curr = snapshot.lifetimeGross;
+  const delta = curr - safePrev;
+
+  // Down-ratchet on withdrawal — silently track the new floor, no entry.
+  if (delta < 0) {
+    await SecureStore.setItemAsync(key, String(curr)).catch(() => {});
+    return false;
+  }
+
+  if (delta < MIN_RECORDABLE_DELTA) return false;
+
+  // externalRef is auditable + dedup-friendly: anyone replaying the chain can
+  // confirm the watermark sequence is monotonically increasing for this source.
+  const ts = Date.now();
+  const externalRef = `${adapter.id}:lifetime:${curr.toFixed(8)}:${ts}`;
+
+  try {
+    await appendEarningLog(identity, {
+      source: adapter.id,
+      externalRef,
+      currency: adapter.currency,
+      gross: delta,
+    });
+    await SecureStore.setItemAsync(key, String(curr)).catch(() => {});
+    return true;
+  } catch (err) {
+    console.warn('[aggregator] failed to record earning delta:', err);
+    return false;
+  }
+}
+
+// ----------------------------------------------------------------------------
 // AdapterCard — renders one adapter's status + earnings, with opt-in button.
 // ----------------------------------------------------------------------------
-function AdapterCard({ adapter, identity }: AdapterCardProps) {
+function AdapterCard({ adapter, identity, onLedgerAppend }: AdapterCardProps) {
   const [state, setState] = useState<CardState>(INITIAL_STATE);
   const pollTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
@@ -110,10 +186,18 @@ function AdapterCard({ adapter, identity }: AdapterCardProps) {
         adapter.pollEarnings().catch(() => null),
       ]);
       setState((prev) => ({ ...prev, status, snapshot, loading: false }));
+
+      // Close the loop: if a positive delta exists, sign it into the ledger.
+      // Adapter is just a data source — the wallet layer (which holds the
+      // private key) does the signing. Plaid pattern.
+      if (snapshot && identity) {
+        const recorded = await recordEarningDelta(adapter, snapshot, identity);
+        if (recorded && onLedgerAppend) onLedgerAppend();
+      }
     } catch {
       setState((prev) => ({ ...prev, loading: false }));
     }
-  }, [adapter]);
+  }, [adapter, identity, onLedgerAppend]);
 
   // Initial load + polling when registered.
   useEffect(() => {
@@ -154,6 +238,11 @@ function AdapterCard({ adapter, identity }: AdapterCardProps) {
     setState((prev) => ({ ...prev, registering: true }));
     try {
       await adapter.unregister();
+      // Reset the recording watermark — if the user re-registers later, any
+      // accrued balance is treated as a fresh starting point, not a missed
+      // earning. The signed ledger entries already on chain are untouched.
+      await SecureStore.deleteItemAsync(RECORDED_LIFETIME_KEY(adapter.id))
+        .catch(() => {});
       setState((prev) => ({
         ...prev,
         status: { state: 'unregistered' },
@@ -261,13 +350,41 @@ type AggregatorPanelProps = {
 };
 
 export function AggregatorPanel({ adapters, identity }: AggregatorPanelProps) {
+  const [summary, setSummary] = useState<WalletSummary | null>(null);
+
+  const refreshSummary = useCallback(async () => {
+    if (!identity) return;
+    try {
+      const s = await loadWalletSummary(identity);
+      setSummary(s);
+    } catch {
+      // ignore — summary stays stale rather than crashing the panel
+    }
+  }, [identity]);
+
+  useEffect(() => {
+    void refreshSummary();
+  }, [refreshSummary]);
+
   if (!AGGREGATOR_ENABLED || adapters.length === 0) return null;
 
   return (
     <View style={styles.panel}>
-      <Text style={styles.panelHeader}>EARNINGS</Text>
+      <View style={styles.headerRow}>
+        <Text style={styles.panelHeader}>EARNINGS</Text>
+        {summary && summary.count > 0 && (
+          <Text style={styles.ledgerStat}>
+            {summary.count} {summary.count === 1 ? 'ENTRY' : 'ENTRIES'} · {summary.lastHash?.slice(0, 8) ?? '—'}
+          </Text>
+        )}
+      </View>
       {adapters.map((adapter) => (
-        <AdapterCard key={adapter.id} adapter={adapter} identity={identity} />
+        <AdapterCard
+          key={adapter.id}
+          adapter={adapter}
+          identity={identity}
+          onLedgerAppend={refreshSummary}
+        />
       ))}
     </View>
   );
@@ -281,6 +398,11 @@ const styles = StyleSheet.create({
     gap: 10,
     paddingTop: 4,
   },
+  headerRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
   panelHeader: {
     color: palette.graphite,
     fontFamily: typography.mono,
@@ -288,6 +410,13 @@ const styles = StyleSheet.create({
     letterSpacing: 2.4,
     fontWeight: '500',
     textTransform: 'uppercase',
+  },
+  ledgerStat: {
+    color: palette.sapphire.glow,
+    fontFamily: typography.mono,
+    fontSize: 9,
+    letterSpacing: 1.6,
+    fontWeight: '500',
   },
   card: {
     backgroundColor: palette.obsidianSoft,

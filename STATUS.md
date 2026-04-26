@@ -1,7 +1,7 @@
 # GETKINETIK — Project Status Handoff
 
 > Living document. Update whenever the state of the project materially changes.
-> Last updated: **2026-04-26 (afternoon)** — **Sessions A + B + C complete.** Nodle research written (`packages/adapter-nodle/RESEARCH.md`). Wallet primitive shipped (`packages/kinetik-core/src/wallet.ts`). Verifier v1.3.0. Session C: adapter contract + Nodle adapter + aggregator UI shipped stub-first — no EAS build required, no partnership confirmation required, real on-device NODL earning activates when `AGGREGATOR_ENABLED = true` in `src/components/AggregatorPanel.tsx`. `tsc --noEmit` clean, zero linter errors.
+> Last updated: **2026-04-26 (afternoon)** — **Sessions A + B + C + D-1 complete.** Nodle research written (`packages/adapter-nodle/RESEARCH.md`). Wallet primitive shipped (`packages/kinetik-core/src/wallet.ts`). Verifier v1.3.0. Adapter contract + Nodle adapter + aggregator UI shipped stub-first. **Earnings ledger now wired:** `AggregatorPanel` watches each adapter's `pollEarnings()` snapshot; positive lifetime deltas are signed via `appendEarningLog` with a per-adapter watermark in SecureStore (`kinetik.adapter.<id>.recordedLifetime.v1`). Withdrawals down-ratchet the watermark without minting negative entries. `__kinetikResetSecureStore` now also wipes the earning log. Wallet summary (`N entries · <chain-tip>`) renders at the top of the aggregator panel. The second a real NODL balance shows up, the ledger starts signing — zero additional code needed at activation. `tsc --noEmit` clean, zero linter errors.
 
 ---
 
