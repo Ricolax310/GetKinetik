@@ -42,3 +42,6 @@ yarn-error.*
 
 # Local APK builds (downloaded from EAS, not tracked)
 *.apk
+
+# Scratch commit-message tempfiles (used to side-step PowerShell heredoc limits)
+.git-commit-msg.tmp
