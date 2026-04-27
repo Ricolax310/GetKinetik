@@ -29,7 +29,7 @@ Public verifier (what every earning entry looks like after signing): getkinetik.
 Happy to share the adapter code — it's clean, ~200 lines, TypeScript.
 
 Eric
-GETKINETIK / OutFromNothing LLC
+getkinetik.app
 
 ---
 
@@ -51,7 +51,7 @@ What I'd like to understand: is there an official developer program or any restr
 Public verifier showing what our signed receipts look like: getkinetik.app/verify
 
 Eric
-GETKINETIK / OutFromNothing LLC
+getkinetik.app
 
 ---
 
@@ -73,7 +73,7 @@ I'm reaching out because: (1) I want to make sure there's no policy issue with a
 See the public verifier at getkinetik.app/verify — that's what a signed earning receipt looks like.
 
 Eric
-GETKINETIK / OutFromNothing LLC
+getkinetik.app
 
 ---
 
@@ -95,7 +95,7 @@ Questions: Does Geodnet have an API for querying node rewards by address or node
 getkinetik.app/verify — public verifier, shows what our signed receipts look like.
 
 Eric
-GETKINETIK / OutFromNothing LLC
+getkinetik.app
 
 ---
 
