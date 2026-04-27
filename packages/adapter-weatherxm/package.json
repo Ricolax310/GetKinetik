@@ -1,0 +1,10 @@
+{
+  "name": "@kinetik/adapter-weatherxm",
+  "version": "0.1.0",
+  "private": true,
+  "description": "WeatherXM WXM adapter for GETKINETIK aggregator",
+  "main": "src/index.ts",
+  "dependencies": {
+    "@kinetik/core": "*"
+  }
+}
