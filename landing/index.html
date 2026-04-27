@@ -6,26 +6,26 @@
     <meta name="theme-color" content="#0A0A0A" />
     <meta name="color-scheme" content="dark" />
 
-    <title>GETKINETIK — Sovereign Node Protocol</title>
+    <title>GETKINETIK — DePIN Earnings Aggregator. One Signed Ledger.</title>
     <meta
       name="description"
-      content="Your device is not a terminal. It is a sovereign node. A cryptographically sealed, hardware-backed DePIN node that proves its own uptime."
+      content="Aggregate every DePIN earning into one cryptographically signed ledger. Nodle, DIMO, Hivemapper, WeatherXM, Geodnet — all in one app, hardware-signed, zero custody. Your phone becomes a sovereign node."
     />
 
     <!-- Open Graph / Twitter -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="GETKINETIK — Sovereign Node Protocol" />
+    <meta property="og:title" content="GETKINETIK — DePIN Earnings Aggregator" />
     <meta
       property="og:description"
-      content="Your device is not a terminal. It is a sovereign node."
+      content="One signed ledger for every DePIN you run. Hardware-signed. Zero custody. Your phone is the sovereign node."
     />
     <meta property="og:url" content="https://getkinetik.app" />
     <meta property="og:site_name" content="GETKINETIK" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="GETKINETIK — Sovereign Node Protocol" />
+    <meta name="twitter:title" content="GETKINETIK — DePIN Earnings Aggregator" />
     <meta
       name="twitter:description"
-      content="Your device is not a terminal. It is a sovereign node."
+      content="One signed ledger for every DePIN you run. Hardware-signed. Zero custody."
     />
 
     <link rel="canonical" href="https://getkinetik.app/" />
@@ -196,6 +196,19 @@
         50% { transform: translateY(-4px) scale(1.02); filter: drop-shadow(0 0 36px rgba(255, 20, 48, 0.6)); }
       }
 
+      .hero-eyebrow {
+        display: block;
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 4.4px;
+        color: var(--ruby-core);
+        text-transform: uppercase;
+        font-weight: 500;
+        margin-bottom: 14px;
+        position: relative;
+        z-index: 1;
+      }
+
       .brand {
         font-size: clamp(32px, 6.5vw, 56px);
         font-weight: 400;
@@ -223,8 +236,8 @@
         font-weight: 300;
         line-height: 1.4;
         letter-spacing: 0.2px;
-        margin: 0 auto 48px;
-        max-width: 560px;
+        margin: 0 auto 22px;
+        max-width: 620px;
         color: var(--platinum);
         position: relative;
         z-index: 1;
@@ -233,6 +246,19 @@
       .hero-line em {
         font-style: italic;
         color: var(--ruby-ember);
+      }
+
+      .hero-sub {
+        font-family: var(--sans);
+        font-size: clamp(15px, 1.7vw, 17px);
+        line-height: 1.7;
+        font-weight: 300;
+        max-width: 580px;
+        margin: 0 auto 44px;
+        color: var(--platinum);
+        opacity: 0.78;
+        position: relative;
+        z-index: 1;
       }
 
       .cta-row {
@@ -335,14 +361,173 @@
         font-weight: 300;
         line-height: 1.3;
         letter-spacing: 0.2px;
-        margin: 0 auto 72px;
+        margin: 0 auto 22px;
         max-width: 720px;
         text-align: center;
         color: var(--platinum);
       }
 
+      .section-sub {
+        font-family: var(--sans);
+        font-size: 15px;
+        line-height: 1.7;
+        color: var(--platinum);
+        opacity: 0.7;
+        max-width: 620px;
+        margin: 0 auto 64px;
+        text-align: center;
+        font-weight: 300;
+      }
+
       /* ------------------------------------------------------------
-         Three claims.
+         How it works — three numbered steps describing the flow.
+         ------------------------------------------------------------ */
+      .steps {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 20px;
+      }
+
+      .step {
+        position: relative;
+        padding: 36px 28px 32px;
+        border: 1px solid var(--hairline);
+        border-radius: 18px;
+        background: linear-gradient(180deg, var(--obsidian-soft) 0%, var(--obsidian) 100%);
+        transition: border-color 0.3s ease, transform 0.3s ease;
+      }
+
+      .step:hover {
+        border-color: rgba(255, 20, 48, 0.3);
+        transform: translateY(-2px);
+      }
+
+      .step-num {
+        position: absolute;
+        top: 22px;
+        right: 26px;
+        font-family: var(--serif);
+        font-size: 38px;
+        font-weight: 300;
+        line-height: 1;
+        color: var(--ruby-deep);
+        opacity: 0.85;
+      }
+
+      .step-title {
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 3.4px;
+        font-weight: 600;
+        color: var(--ruby-core);
+        text-transform: uppercase;
+        margin: 0 0 14px;
+      }
+
+      .step-headline {
+        font-family: var(--serif);
+        font-size: 19px;
+        line-height: 1.4;
+        font-weight: 300;
+        color: var(--platinum);
+        margin: 0 0 14px;
+      }
+
+      .step-body {
+        font-family: var(--sans);
+        font-size: 14px;
+        line-height: 1.7;
+        color: var(--platinum);
+        opacity: 0.78;
+        margin: 0;
+        font-weight: 300;
+      }
+
+      /* ------------------------------------------------------------
+         DePIN networks — five integration tiles.
+         ------------------------------------------------------------ */
+      .networks {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 14px;
+      }
+
+      .network {
+        padding: 26px 22px;
+        border: 1px solid var(--hairline);
+        border-radius: 16px;
+        background: var(--obsidian-soft);
+        text-align: left;
+        transition: border-color 0.25s ease, transform 0.25s ease;
+      }
+
+      .network:hover {
+        border-color: rgba(58, 155, 255, 0.3);
+        transform: translateY(-2px);
+      }
+
+      .network-name {
+        font-family: var(--mono);
+        font-size: 13px;
+        letter-spacing: 3px;
+        font-weight: 600;
+        color: var(--platinum);
+        text-transform: uppercase;
+        margin: 0 0 8px;
+      }
+
+      .network-meta {
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 1.6px;
+        color: var(--graphite);
+        text-transform: uppercase;
+        margin: 0 0 16px;
+      }
+
+      .network-status {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-family: var(--mono);
+        font-size: 9px;
+        letter-spacing: 2.4px;
+        color: var(--sapphire-glow);
+        text-transform: uppercase;
+        font-weight: 500;
+      }
+
+      .network-status::before {
+        content: "";
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--sapphire-glow);
+        box-shadow: 0 0 6px rgba(58, 155, 255, 0.7);
+      }
+
+      .network-status.outreach {
+        color: var(--graphite);
+      }
+
+      .network-status.outreach::before {
+        background: var(--graphite);
+        box-shadow: none;
+      }
+
+      .networks-foot {
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 2.6px;
+        color: var(--graphite);
+        text-transform: uppercase;
+        text-align: center;
+        margin: 36px auto 0;
+        max-width: 620px;
+      }
+
+      /* ------------------------------------------------------------
+         Three claims (the moat — what competitors can't copy).
          ------------------------------------------------------------ */
       .claims {
         display: grid;
@@ -550,6 +735,52 @@
       }
 
       /* ------------------------------------------------------------
+         Receipts — concrete traction tiles.
+         ------------------------------------------------------------ */
+      .receipts {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 14px;
+      }
+
+      .receipt {
+        padding: 28px 24px;
+        border: 1px solid var(--hairline);
+        border-radius: 16px;
+        background: var(--obsidian-soft);
+        text-align: center;
+      }
+
+      .receipt-num {
+        font-family: var(--serif);
+        font-size: 42px;
+        font-weight: 300;
+        line-height: 1;
+        color: var(--ruby-ember);
+        margin: 0 0 14px;
+      }
+
+      .receipt-label {
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 2.6px;
+        color: var(--platinum);
+        text-transform: uppercase;
+        font-weight: 500;
+        margin: 0 0 8px;
+      }
+
+      .receipt-sub {
+        font-family: var(--mono);
+        font-size: 9px;
+        letter-spacing: 1.8px;
+        color: var(--graphite);
+        text-transform: uppercase;
+        margin: 0;
+        line-height: 1.6;
+      }
+
+      /* ------------------------------------------------------------
          Manifesto excerpt.
          ------------------------------------------------------------ */
       .manifesto {
@@ -635,6 +866,25 @@
         color: var(--sapphire-glow);
       }
 
+      .footer-links {
+        display: inline-flex;
+        gap: 18px;
+        margin-top: 14px;
+      }
+
+      .footer-links a {
+        font-family: var(--mono);
+        font-size: 9px;
+        letter-spacing: 2.4px;
+        color: var(--graphite);
+        text-transform: uppercase;
+        transition: color 0.2s ease;
+      }
+
+      .footer-links a:hover {
+        color: var(--sapphire-glow);
+      }
+
       /* ------------------------------------------------------------
          Responsive.
          ------------------------------------------------------------ */
@@ -651,8 +901,13 @@
         .manifesto {
           padding: 80px 20px;
         }
-        .claims {
+        .claims,
+        .steps,
+        .receipts {
           gap: 16px;
+        }
+        .networks {
+          gap: 12px;
         }
         .poo-card {
           padding: 28px 22px;
@@ -935,7 +1190,7 @@
     <!-- ================================================== -->
     <div class="topbar">
       <span class="topbar-brand">GETKINETIK</span>
-      <span class="topbar-status">NODE NETWORK · FORMING</span>
+      <span class="topbar-status">ANDROID PREVIEW · LIVE</span>
     </div>
 
     <!-- ================================================== -->
@@ -997,11 +1252,18 @@
         />
       </svg>
 
+      <span class="hero-eyebrow">DEPIN EARNINGS AGGREGATOR</span>
       <h1 class="brand">GETKINETIK</h1>
       <div class="brand-rule"></div>
       <p class="hero-line">
         Your device is not a terminal.<br />
-        It is a <em>sovereign node</em>.
+        It is a <em>sovereign node</em> — and it earns.
+      </p>
+      <p class="hero-sub">
+        Aggregate every DePIN earning into one signed ledger.
+        Nodle, DIMO, Hivemapper, WeatherXM, Geodnet — all read on-chain,
+        all signed by a key sealed in your phone, all auditable by anyone.
+        No custody. No middleman. Just receipts.
       </p>
 
       <div class="cta-row">
@@ -1013,26 +1275,131 @@
           MINT YOUR NODE
           <span class="arrow" aria-hidden="true">→</span>
         </a>
-        <a class="cta cta-secondary" href="#manifesto">READ THE MANIFESTO</a>
+        <a class="cta cta-secondary" href="/verify/">SEE A SIGNED PROOF</a>
       </div>
 
       <p class="hero-meta">
         SOVEREIGN NODE PROTOCOL
         <span class="dot">·</span>
-        v1
+        v2
         <span class="dot">·</span>
-        INVITATION ONLY
+        ANDROID PREVIEW
       </p>
     </section>
 
     <!-- ================================================== -->
-    <!-- THREE CLAIMS                                        -->
+    <!-- HOW IT WORKS                                        -->
     <!-- ================================================== -->
     <section>
-      <span class="section-eyebrow">THE THREE CLAIMS</span>
+      <span class="section-eyebrow">HOW IT WORKS</span>
       <h2 class="section-title">
-        A sovereign node is defined by what it can prove — not by what it
-        claims.
+        One sovereign node. Many DePIN networks. One signed ledger.
+      </h2>
+      <p class="section-sub">
+        DePIN earnings are scattered across half a dozen apps and chains.
+        GETKINETIK aggregates them under a single hardware-signed identity
+        — no custody, no token movement, only verifiable receipts.
+      </p>
+
+      <div class="steps">
+        <article class="step">
+          <span class="step-num">1</span>
+          <p class="step-title">MINT</p>
+          <h3 class="step-headline">A sovereign Ed25519 key is sealed inside your device.</h3>
+          <p class="step-body">
+            On first activation, the app generates a hardware-backed
+            Ed25519 keypair in your phone's secure enclave. The secret
+            never leaves the device. The public key becomes your sovereign
+            node ID — a permanent, Sybil-resistant identity that no
+            company controls.
+          </p>
+        </article>
+
+        <article class="step">
+          <span class="step-num">2</span>
+          <p class="step-title">AGGREGATE</p>
+          <h3 class="step-headline">Earnings are read from every DePIN you run.</h3>
+          <p class="step-body">
+            Plug in your wallet addresses. The app queries each DePIN
+            network's public chain — Polygon, Solana, Arbitrum, Polkadot —
+            and reads your token balance directly. We never custody funds.
+            We never touch your tokens. We only observe and record.
+          </p>
+        </article>
+
+        <article class="step">
+          <span class="step-num">3</span>
+          <p class="step-title">SIGN</p>
+          <h3 class="step-headline">Every earning becomes a signed, hash-chained receipt.</h3>
+          <p class="step-body">
+            Each delta-earning is recorded as a Ed25519-signed entry on a
+            tamper-evident local ledger. The 1% protocol fee is baked
+            into every signature so it's publicly auditable. Anyone can
+            verify your earnings at <strong>getkinetik.app/verify</strong>
+            with nothing but your public key.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ================================================== -->
+    <!-- DEPIN NETWORKS                                      -->
+    <!-- ================================================== -->
+    <section>
+      <span class="section-eyebrow">DEPIN NETWORKS</span>
+      <h2 class="section-title">Five DePIN integrations. All adapters built.</h2>
+      <p class="section-sub">
+        Every network adapter is a standalone TypeScript package
+        (<code style="font-family:var(--mono);font-size:13px;color:var(--ruby-ember);">@kinetik/adapter-*</code>)
+        that consumes the same sovereign signing primitive. Production-ready
+        on day one of partner approval.
+      </p>
+
+      <div class="networks">
+        <article class="network">
+          <p class="network-name">NODLE</p>
+          <p class="network-meta">NODL · Polkadot</p>
+          <span class="network-status">ADAPTER · BUILT</span>
+        </article>
+
+        <article class="network">
+          <p class="network-name">DIMO</p>
+          <p class="network-meta">$DIMO · Polygon</p>
+          <span class="network-status">ADAPTER · BUILT</span>
+        </article>
+
+        <article class="network">
+          <p class="network-name">HIVEMAPPER</p>
+          <p class="network-meta">HONEY · Solana</p>
+          <span class="network-status">ADAPTER · BUILT</span>
+        </article>
+
+        <article class="network">
+          <p class="network-name">WEATHERXM</p>
+          <p class="network-meta">WXM · Arbitrum</p>
+          <span class="network-status">ADAPTER · BUILT</span>
+        </article>
+
+        <article class="network">
+          <p class="network-name">GEODNET</p>
+          <p class="network-meta">GEOD · Polygon</p>
+          <span class="network-status">ADAPTER · BUILT</span>
+        </article>
+      </div>
+
+      <p class="networks-foot">
+        MORE NETWORKS UNDER EVALUATION ·
+        IF YOU RUN A DEPIN AND WANT IN, EMAIL ERIC
+      </p>
+    </section>
+
+    <!-- ================================================== -->
+    <!-- THREE CLAIMS — THE MOAT                             -->
+    <!-- ================================================== -->
+    <section>
+      <span class="section-eyebrow">THE MOAT</span>
+      <h2 class="section-title">
+        Anyone can build an aggregator. Nobody else can prove the nodes are real.
       </h2>
 
       <div class="claims">
@@ -1040,9 +1407,11 @@
           <span class="claim-index">01</span>
           <h3 class="claim-title">SEALED IN HARDWARE</h3>
           <p class="claim-body">
-            A private Ed25519 key is minted inside your device the first time
-            you activate the node. It is sealed in silicon and cannot leave.
-            No server holds it. No company holds it. You hold it.
+            The Ed25519 key is minted inside your device the first time
+            you activate the node. It is sealed in silicon and cannot
+            leave. No server holds it. No company holds it. You hold it.
+            Every aggregator on the market routes through a custodial
+            backend. We don't.
           </p>
         </article>
 
@@ -1050,10 +1419,11 @@
           <span class="claim-index">02</span>
           <h3 class="claim-title">UPTIME IS MATHEMATICS</h3>
           <p class="claim-body">
-            Every thirty seconds, your node signs a statement. Each statement
-            is cryptographically chained to the one before. Bending one
-            breaks them all. The record of your node's existence becomes a
-            mathematical fact, not a database entry.
+            Every thirty seconds, your node signs a statement. Each
+            statement is hash-chained to the one before. Bending one
+            breaks them all. Helium bled revenue to fake hotspots.
+            Hivemapper wrestles GPS spoofers. Our chain is the
+            Sybil-resistance primitive every DePIN wishes they had.
           </p>
         </article>
 
@@ -1061,9 +1431,11 @@
           <span class="claim-index">03</span>
           <h3 class="claim-title">PROOF IS THE ONLY COIN</h3>
           <p class="claim-body">
-            Every reward a sovereign node will ever earn traces back to an
-            Ed25519 signature your device alone can produce. Real tokens from
-            real proof. Until then, every unit accrued is a vow kept.
+            Every earning aggregated in GETKINETIK traces back to an
+            Ed25519 signature your device alone can produce. The 1%
+            protocol fee is baked into the same signature, so the fee
+            is publicly auditable forever. No off-chain accounting.
+            No trust required.
           </p>
         </article>
       </div>
@@ -1080,6 +1452,7 @@
 
       <div class="proof-stage">
         <!-- Static representation of the in-app Proof of Origin card.
+             v:2 schema includes the L2 sensor block (motion, pressure, light).
              Data is intentionally anonymized ("SAMPLE") so this is clearly
              not a real node's credentials. -->
         <div class="poo-card" aria-label="Sample Proof of Origin certificate">
@@ -1087,7 +1460,7 @@
           <div class="poo-rule"></div>
 
           <p class="poo-brand">GETKINETIK</p>
-          <p class="poo-subbrand">SOVEREIGN NODE · v1</p>
+          <p class="poo-subbrand">SOVEREIGN NODE · v2</p>
 
           <div class="poo-divider"></div>
 
@@ -1113,7 +1486,19 @@
           </div>
           <div class="poo-row">
             <span class="poo-label">ISSUED</span>
-            <span class="poo-value">2026-04-24 12:00:00Z</span>
+            <span class="poo-value">2026-04-25 18:30:00Z</span>
+          </div>
+          <div class="poo-row">
+            <span class="poo-label">MOTION</span>
+            <span class="poo-value">0.07 g</span>
+          </div>
+          <div class="poo-row">
+            <span class="poo-label">PRESSURE</span>
+            <span class="poo-value">1013.21 hPa</span>
+          </div>
+          <div class="poo-row">
+            <span class="poo-label">LIGHT</span>
+            <span class="poo-value">348 lx</span>
           </div>
           <div class="poo-row">
             <span class="poo-label">HASH</span>
@@ -1145,10 +1530,58 @@
         </div>
 
         <p class="proof-caption">
-          Self-auditing. Timestamped. Signed with a key that never leaves your
-          device. A screenshot of this card is a cryptographic claim that
-          anyone can verify.
+          Self-auditing. Timestamped. Signed with a key that never leaves
+          your device. The card now also carries the on-chain sensor
+          reading at the time it was minted — motion, pressure, light —
+          all hash-chained to the heartbeat log. A screenshot of this
+          card is a cryptographic claim that anyone can verify at
+          <strong>getkinetik.app/verify</strong>.
         </p>
+      </div>
+    </section>
+
+    <!-- ================================================== -->
+    <!-- RECEIPTS — TRACTION TILES                           -->
+    <!-- ================================================== -->
+    <section>
+      <span class="section-eyebrow">RECEIPTS</span>
+      <h2 class="section-title">Not vapor. Already signed.</h2>
+      <p class="section-sub">
+        Every claim above is backed by an artifact you can scan or download today.
+      </p>
+
+      <div class="receipts">
+        <article class="receipt">
+          <p class="receipt-num">289+</p>
+          <p class="receipt-label">HEARTBEATS · ON CHAIN</p>
+          <p class="receipt-sub">
+            Hash-chained, signed, persistent across reboots
+          </p>
+        </article>
+
+        <article class="receipt">
+          <p class="receipt-num">5</p>
+          <p class="receipt-label">DEPIN ADAPTERS · BUILT</p>
+          <p class="receipt-sub">
+            Nodle · DIMO · Hivemapper · WeatherXM · Geodnet
+          </p>
+        </article>
+
+        <article class="receipt">
+          <p class="receipt-num">1</p>
+          <p class="receipt-label">EXTERNAL WITNESS</p>
+          <p class="receipt-sub">
+            iPhone-scanned QR returned <strong style="color:var(--ruby-ember)">VALID</strong>
+          </p>
+        </article>
+
+        <article class="receipt">
+          <p class="receipt-num">v2</p>
+          <p class="receipt-label">SCHEMA · L2 SENSORS</p>
+          <p class="receipt-sub">
+            Motion, pressure, light all signed into the chain
+          </p>
+        </article>
       </div>
     </section>
 
@@ -1174,10 +1607,14 @@
     <footer>
       <div class="footer-diamond" aria-hidden="true"></div>
       <p class="footer-line">GETKINETIK by OutFromNothing LLC</p>
-      <p class="footer-sub">Sovereign Node protocol · v1 · © 2026</p>
+      <p class="footer-sub">DePIN Earnings Aggregator · Sovereign Node Protocol v2 · © 2026</p>
       <a class="footer-mail" href="mailto:eric@outfromnothingllc.com"
         >eric@outfromnothingllc.com</a
       >
+      <div class="footer-links">
+        <a href="/verify/">VERIFY A PROOF</a>
+        <a href="#manifesto">MANIFESTO</a>
+      </div>
     </footer>
 
     <!-- ================================================== -->
@@ -1244,7 +1681,7 @@
           </form>
 
           <p class="waitlist-note">
-            ANDROID · PREVIEW WAVE COMING SOON<br />
+            ANDROID · PREVIEW WAVE LIVE<br />
             IOS · AFTER ANDROID
           </p>
         </div>
