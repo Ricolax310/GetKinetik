@@ -17,7 +17,7 @@
       whenever you bump window.__kinetikVerifier.version at the bottom of
       verifier.js — the two MUST stay in lockstep.
     -->
-    <link rel="stylesheet" href="./styles.css?v=1.3.0" />
+    <link rel="stylesheet" href="./styles.css?v=1.3.1" />
   </head>
   <body>
     <!--
@@ -80,7 +80,7 @@
             the embedded <code>hash</code>.
           </li>
           <li>
-            For Proof of Origin artifacts, the attribution field must still
+            For Proof of Origin and earning artifacts, the attribution field must still
             read
             <code>GETKINETIK by OutFromNothing LLC</code> — it was signed as
             part of the message, so stripping it breaks verification.
@@ -98,13 +98,55 @@
         </p>
       </details>
 
+      <details class="explainer">
+        <summary>What is GETKINETIK?</summary>
+        <p>
+          GETKINETIK turns any smartphone into a sovereign earning node.
+          Every device generates a hardware-backed Ed25519 identity keypair —
+          one that never leaves the device — and uses it to sign a
+          hash-chained uptime log, Proof of Origin cards, and earnings
+          receipts from DePIN networks.
+        </p>
+        <p>
+          The three artifact types this verifier recognizes:
+        </p>
+        <ul>
+          <li>
+            <strong>Signed heartbeat</strong> — a timestamped sensor snapshot
+            chained to every previous beat. Proves the device was online,
+            what it sensed, and in what order.
+          </li>
+          <li>
+            <strong>Proof of Origin</strong> — a shareable QR-code artifact
+            minted on demand. Contains the node's full sensor state, signed
+            by its Ed25519 key. Paste the JSON here to verify.
+          </li>
+          <li>
+            <strong>Signed earning</strong> — a receipt for a DePIN payout.
+            Records the source network (e.g., Nodle, DIMO), the currency,
+            gross amount, 1% protocol fee, and net — all signed in so none
+            can be altered after the fact.
+          </li>
+        </ul>
+        <p>
+          GETKINETIK is the identity and earnings layer that every DePIN
+          network needs but none builds for itself. One app, many networks,
+          one sovereign ledger.
+        </p>
+        <p class="explainer-foot">
+          Built by OutFromNothing LLC · The app is not yet publicly available
+          — if you received this link from a tester, the JSON artifact they
+          shared was minted by their device and signed with their private key.
+        </p>
+      </details>
+
       <footer class="foot">
         <p>
-          A GETKINETIK artifact · verifier source is this page · OutFromNothing LLC
+          GETKINETIK · Sovereign Node · OutFromNothing LLC
         </p>
       </footer>
     </main>
 
-    <script type="module" src="./verifier.js?v=1.3.0"></script>
+    <script type="module" src="./verifier.js?v=1.3.1"></script>
   </body>
 </html>
