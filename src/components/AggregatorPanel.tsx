@@ -32,7 +32,7 @@ import {
 // Feature flag. Flip to true to show the aggregator panel in VaultPanel.
 // Keep false until the Nodle native bridge is active and producing real data.
 // ----------------------------------------------------------------------------
-export const AGGREGATOR_ENABLED = false;
+export const AGGREGATOR_ENABLED = true;
 
 // ----------------------------------------------------------------------------
 // Poll interval — how often each adapter's pollEarnings() is called when the

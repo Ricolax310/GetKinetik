@@ -453,6 +453,24 @@ button.ghost:hover {
   font-family: var(--mono);
 }
 
+.explainer ul {
+  padding-left: 18px;
+  margin: 10px 0;
+}
+
+.explainer li {
+  margin-bottom: 8px;
+}
+
+.explainer li strong {
+  color: var(--platinum);
+  font-weight: 600;
+}
+
+.explainer p {
+  margin: 10px 0 0;
+}
+
 .explainer-foot {
   margin-top: 14px;
   color: var(--graphite);
