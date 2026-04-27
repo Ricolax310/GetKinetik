@@ -34,9 +34,10 @@ import { AggregatorPanel, AGGREGATOR_ENABLED } from './AggregatorPanel';
 import { nodleAdapter } from '../../packages/adapter-nodle/src';
 import { dimoAdapter } from '../../packages/adapter-dimo/src';
 import { hivemapperAdapter } from '../../packages/adapter-hivemapper/src';
+import { weatherxmAdapter } from '../../packages/adapter-weatherxm/src';
 
 /** Adapter registry — append new DePIN adapters here. Nothing else changes. */
-const ADAPTERS = AGGREGATOR_ENABLED ? [nodleAdapter, dimoAdapter, hivemapperAdapter] : [];
+const ADAPTERS = AGGREGATOR_ENABLED ? [nodleAdapter, dimoAdapter, hivemapperAdapter, weatherxmAdapter] : [];
 
 const COINBASE_SPOT_URL = 'https://api.coinbase.com/v2/prices/BTC-USD/spot';
 const PRICE_REFRESH_MS = 60_000;
