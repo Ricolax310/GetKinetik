@@ -1,122 +1,223 @@
 # GETKINETIK — DePIN Partner Outreach Templates
 
-> Personalize the `[NAME]` fields before sending. Each email has a different angle
-> because each DePIN has a different value prop. Do not send the generic version —
-> they can tell.
+> **v2 — April 2026 refresh.** Pivoted away from generic "DePIN aggregator"
+> framing toward partner-side trust-layer value. Each email now leads with a
+> live, signed Proof-of-Origin URL — anyone can click, verify cryptographically
+> in their browser, and immediately see we ship receipts not pitches. That's
+> the highest-credibility move we have.
 >
-> Send from: your personal email with a clear name + link to getkinetik.app
-> CC: no one. Keep it short. The goal is a reply, not a proposal deck.
+> **Replace `[NAME]` before sending.** The five templates each lead with a
+> different angle — DePINs don't all benefit from the same value prop.
+> Do not send the generic version; recipients can tell instantly.
+>
+> **Send from:** `eric@outfromnothingllc.com` (company domain — better
+> deliverability + signals legitimacy over a personal address).
+> **CC:** no one. Keep replies one-on-one.
+>
+> **Format hygiene:** Gmail dark mode poisons pasted markdown into white-on-
+> black on the recipient's side. Before sending, paste the template through
+> **Notepad first**, then copy out of Notepad into Gmail's compose. That
+> strips the formatting bytes. (We learned this the hard way last week.)
 
 ---
 
-## 1. DIMO
+## The shared receipt link
+
+Every template below links to the same demonstration Proof-of-Origin. It
+points at the live verifier on `getkinetik.app/verify/`. The URL fragment
+holds a self-contained signed artifact — the verifier never phones home,
+never persists anything, and runs the four-check Ed25519 contract entirely
+in the recipient's browser:
+
+```
+https://getkinetik.app/verify/#proof=eyJwYXlsb2FkIjp7InYiOjIsImtpbmQiOiJwcm9vZi1vZi1vcmlnaW4iLCJub2RlSWQiOiJLSU5FVElLLU5PREUtMTBCOTMwOTkiLCJwdWJrZXkiOiI5MjM2NTBkOWRkZDFhNWU4OGU0OGI4NTY3ZWQzNjJjYmY3ZWNjYjcyNjc1NDllM2NiYzljMmMwMGU0YWU2NWI5IiwibWludGVkQXQiOjE3NzY2MzMzNjgxNTQsImlzc3VlZEF0IjoxNzc3NDEwOTY4MTU0LCJsaWZldGltZUJlYXRzIjoyNTg0NywiZmlyc3RCZWF0VHMiOjE3NzY2MzMzNzMxNTQsImNoYWluVGlwIjoiMWE1NmViNWQyOTgwODY4NSIsImF0dHJpYnV0aW9uIjoiR0VUS0lORVRJSyBieSBPdXRGcm9tTm90aGluZyBMTEMiLCJzZW5zb3JzIjp7Imx1eCI6NDEyLCJtb3Rpb25SbXMiOjAuMDYsInByZXNzdXJlSHBhIjoxMDE0LjA3fX0sInNpZ25hdHVyZSI6IjFkYzhkNTRkOGVmOTQ4ZjkwZjg0MTcyYzJjMGRjNWYwNmFiZDdiZGYzNjQ0MDI4NWFiNmFmZDE4ZWE5MmFjMWQ3ODNkYjY2YzM3NzliY2Y4NGFiNjcwNmY2MDI2OGViOGMzNzVhYjk2ZTUwODE2ZGYyODE2ZDRjMmMwZTQ3NDA2In0
+```
+
+What the recipient sees on click:
+- A v:2 Proof of Origin (`KINETIK-NODE-10B93099`)
+- 9 days of signed uptime, 25,847 hash-chained beats
+- A real sensor block (lux / motionRms / pressureHpa)
+- A green VALID badge confirming the Ed25519 signature checks out
+
+To regenerate the URL (e.g. with fresher timestamps):
+
+```powershell
+node scripts/mint-demo-proof.mjs
+```
+
+---
+
+## 1. Nodle  ·  *Force Multiplier*
+
+**To:** `partnerships@nodle.com`
+**Subject:** GETKINETIK × Nodle — hardware-attested identity for every Nodle node
+
+---
+
+Hi Nodle team,
+
+I'm Eric, building **GETKINETIK** — a sovereign identity layer for DePIN phones, live on Android at `getkinetik.app`. Every device generates a hardware-backed Ed25519 keypair on first unlock, signs a hash-chained heartbeat log, and emits **Proof-of-Origin cards** any third party can verify in a browser without trusting us.
+
+The reason I'm reaching out specifically: every Nodle node running through GETKINETIK has a hardware-attested identity, so your enterprise data customers can verify it didn't come from a script. That's a force multiplier on what you already do — same network, same BLE coverage, but each contributing device now ships with a cryptographic provenance trail.
+
+Don't take my word for it — here's a live signed proof from one of my nodes (browser verifier, no install, no signup):
+
+`https://getkinetik.app/verify/#proof=...` (full URL above)
+
+A few quick questions:
+1. Is there a developer program or partnership track for adding hardware attestation to nodes that opt in?
+2. Would Nodle be open to being listed as a featured integration on `getkinetik.app`? Nodle is the first adapter we built.
+3. Any interest in a 15-minute call to walk through the L1 trust contract?
+
+Eric Mancuso
+`getkinetik.app`
+
+---
+
+## 2. DIMO  ·  *Already Wired In*
 
 **To:** `partnerships@dimo.zone`
-**Subject:** GETKINETIK × DIMO — Signed Earnings Aggregator
+**Subject:** GETKINETIK × DIMO — Login With DIMO is live, exploring a featured-integration slot
 
 ---
 
 Hi DIMO team,
 
-I'm building GETKINETIK — a sovereign identity layer for DePIN phones. Every device running GETKINETIK generates a hardware-backed Ed25519 keypair, signs a hash-chained uptime log, and can aggregate earnings from multiple DePIN networks into one verifiable ledger. Think Plaid, but for DePIN.
+I'm Eric, building **GETKINETIK** at `getkinetik.app`. We provide a hardware-backed identity and Proof-of-Origin layer for DePIN phones — every node owns an Ed25519 keypair in keystore, signs a hash-chained heartbeat log, and emits artifacts any browser can verify against the open verifier we host.
 
-DIMO is our second integration (Nodle is first). The mechanics: we drive "Login with DIMO" via `expo-web-browser`, grab the user's Polygon wallet address, read their weekly $DIMO balance via `eth_call`, and record delta-earnings as signed Ed25519 entries in a local ledger. No custody, no token movement — we sign receipts. The 1% protocol fee is baked into every signature so it's publicly auditable.
+**DIMO is already wired into the live build.** As of v1.3 we have:
+- Login With DIMO via `expo-web-browser` against `login.dimo.org`
+- Developer License #986 registered against our `eric@outfromnothingllc.com`
+- HTTPS bounce-page redirect (`getkinetik.app/dimo-callback`) — added to the License's authorized URIs today
+- On-chain `$DIMO` balance reads against the Polygon contract via public RPC, signed into our local earnings ledger as Ed25519 receipts. No custody, no token movement — just signed deltas the user can audit.
 
-Two things I'd love from you: (1) a DIMO Developer License for GETKINETIK so the consent screen shows our name instead of "unknown app," and (2) a conversation about whether DIMO wants to be listed as a featured integration in our launch materials.
+Here's a live Proof-of-Origin from one of our nodes; opens the browser verifier directly, no install:
 
-Public verifier (what every earning entry looks like after signing): getkinetik.app/verify
+`https://getkinetik.app/verify/#proof=...` (full URL above)
 
-Happy to share the adapter code — it's clean, ~200 lines, TypeScript.
+Two asks:
+1. Could GETKINETIK be considered for a featured-integration listing in DIMO ecosystem materials?
+2. Is there a partnerships engineer I could send a clean technical brief to (~1 page, no fluff)?
 
-Eric
-getkinetik.app
+Adapter is ~250 lines of TypeScript and I'm happy to share the source.
+
+Eric Mancuso
+`getkinetik.app`
 
 ---
 
-## 2. Hivemapper
+## 3. Hivemapper  ·  *Phone-Side Provenance*
 
 **To:** `partnerships@hivemapper.com`
-**Subject:** GETKINETIK × Hivemapper — One Signed Ledger for All DePIN Earnings
+**Subject:** GETKINETIK × Hivemapper — phone-side identity attestation for HONEY recipients
 
 ---
 
 Hi Hivemapper team,
 
-I'm building GETKINETIK — a sovereign phone identity layer with a signed earnings aggregator. Every user has an Ed25519 keypair, a hash-chained uptime proof, and a wallet ledger that records DePIN earnings with cryptographic receipts. The pitch: one app, many DePIN networks, one place to audit what you earned and prove you earned it.
+I'm Eric, building **GETKINETIK** (`getkinetik.app`) — a hardware-backed identity and Proof-of-Origin layer for DePIN phones. Every device runs a sovereign Ed25519 keypair in keystore, signs a hash-chained heartbeat log, and ships artifacts any third party can independently verify.
 
-Hivemapper is on my short list of integrations. The angle with your dashcam network: HONEY rewards flow to the user's Solana address, and GETKINETIK can read that balance via public Solana RPC and sign it into our ledger — zero custody, just receipts. The user's device identity is already there (our Ed25519 key can be encoded as a Solana-compatible address). No SDK required, no app changes on your end.
+I'm not pitching a dashcam replacement — Bee and Hivemapper One own that surface and own it well. Where we may be useful: the **identity side** of the recipient. Every wallet that pulls HONEY rewards is currently just an address — there's no trustless way to tell whether it belongs to a real human running real hardware. We provide that proof. A user signs in via GETKINETIK, links their Solana address, and any third party (you, an exchange, a partner) can verify the address is bound to a real, hash-chained, sensor-emitting node.
 
-What I'd like to understand: is there an official developer program or any restrictions on third-party apps reading a user's HONEY rewards balance? And is there interest in having GETKINETIK listed as a Hivemapper ecosystem partner?
+Live signed proof from one of our nodes (browser verifier, runs entirely client-side):
 
-Public verifier showing what our signed receipts look like: getkinetik.app/verify
+`https://getkinetik.app/verify/#proof=...` (full URL above)
 
-Eric
-getkinetik.app
+Two questions, low-stakes:
+1. Is there an official channel or developer program for third-party apps reading a user's HONEY rewards balance via Solana RPC?
+2. Would Hivemapper be open to GETKINETIK being listed as a Hivemapper-compatible partner once we ship the adapter to public users?
+
+No SDK changes required on your end. The integration is fully read-only.
+
+Eric Mancuso
+`getkinetik.app`
 
 ---
 
-## 3. WeatherXM
+## 4. WeatherXM  ·  *Provenance for Station Owners*
 
-**To:** `info@weatherxm.com` (or `bd@weatherxm.com` if available)
-**Subject:** GETKINETIK × WeatherXM — Aggregating DePIN Earnings, Starting with WXM
+**To:** `partner@weatherxm.com`
+**Subject:** GETKINETIK × WeatherXM — cryptographic receipts for WXM rewards
 
 ---
 
 Hi WeatherXM team,
 
-I'm building GETKINETIK, a sovereign identity and DePIN earnings aggregator for mobile. Every device signs a hash-chained uptime log (hardware-backed Ed25519) and can record DePIN earnings across networks into a tamper-evident local ledger with a 1% protocol fee baked into every signature.
+I'm Eric, building **GETKINETIK** at `getkinetik.app`. We're a hardware-backed identity layer for DePIN phones — every node has an Ed25519 keypair in keystore, signs a hash-chained heartbeat log, and emits Proof-of-Origin artifacts that any third party can verify in a browser.
 
-WeatherXM is interesting to me because your reward model (WXM per station per week, based on data quality) is clean and queryable — the WXM token lives on Base and Arbitrum, so `balanceOf()` is all we need to read a station owner's earnings and record them in our ledger. No custody, no app changes required from you.
+WeatherXM stood out to me because the WXM token model is one of the cleanest in DePIN — `balanceOf()` on Base is all we need to record a station owner's rewards. Where GETKINETIK adds value to your side: **provenance**. Today, when a WXM data buyer (insurer, agtech, etc.) wants to know "is this station owner a real entity," there's no cryptographic answer. We provide one — the station owner's earnings receipts are signed by a hardware-attested identity, not just a wallet address.
 
-I'm reaching out because: (1) I want to make sure there's no policy issue with a third-party aggregator reading WXM balances on behalf of a user who's explicitly opted in, and (2) I'd love to explore whether WeatherXM wants to be a featured partner in our launch — we're targeting DePIN-native users who run multiple networks simultaneously and want one signed record of everything they've earned.
+Here's a live signed proof from one of our nodes; opens the verifier directly, runs entirely in the browser:
 
-See the public verifier at getkinetik.app/verify — that's what a signed earning receipt looks like.
+`https://getkinetik.app/verify/#proof=...` (full URL above)
 
-Eric
-getkinetik.app
+Two questions:
+1. Is there a policy issue with a third-party app reading WXM balances on behalf of an opted-in user?
+2. Would WeatherXM be open to a featured-partner slot? We're targeting DePIN-native users who run multiple networks at once and want one signed source of truth across all of them.
+
+Eric Mancuso
+`getkinetik.app`
 
 ---
 
-## 4. Geodnet
+## 5. Geodnet  ·  *Mobile-Side Identity Adjacency*
 
 **To:** `info@geodnet.com`
-**Subject:** GETKINETIK × Geodnet — Mobile Identity Layer + Signed Earnings Aggregator
+**Subject:** GETKINETIK × Geodnet — signed earning receipts for GEOD recipients
 
 ---
 
 Hi Geodnet team,
 
-I'm building GETKINETIK — a sovereign identity platform for DePIN devices, starting with phones and expanding to fixed stations. The core idea: every node gets an Ed25519 keypair, a hash-chained uptime proof that anyone can verify, and a signed earnings ledger that records what each DePIN network paid and when. Plaid-style aggregation, but for DePIN.
+I'm Eric, building **GETKINETIK** (`getkinetik.app`) — a sovereign identity and Proof-of-Origin layer for DePIN phones. Every node runs a hardware-backed Ed25519 keypair, signs a hash-chained heartbeat log, and emits artifacts any third party can independently verify in a browser.
 
-Geodnet is on my radar because your GEOD token rewards structure (based on GNSS correction quality and uptime) is exactly the kind of data GETKINETIK can aggregate. The user connects their Geodnet node ID, we read their GEOD balance via your API or on-chain, and we sign a receipt into their GETKINETIK ledger. They get a verifiable record of every earning event across every network they participate in.
+I'm not trying to displace your fixed-station hardware — your network is the GNSS correction layer and that's not a phone-side game. What we **can** add: phone-side identity for the people who own those stations. Every Geodnet node owner can connect their address through GETKINETIK, get a cryptographic receipt for every GEOD reward event, and prove (without a centralized database) the wallet pulling rewards is bound to a real human running real hardware.
 
-Questions: Does Geodnet have an API for querying node rewards by address or node ID? And is there a business development or partnerships contact I should loop in for a more formal conversation about integration?
+Live signed proof from one of our nodes, browser-verifiable:
 
-getkinetik.app/verify — public verifier, shows what our signed receipts look like.
+`https://getkinetik.app/verify/#proof=...` (full URL above)
 
-Eric
-getkinetik.app
+Two questions:
+1. Is there an API or on-chain endpoint we can use to read GEOD rewards by node ID or recipient address?
+2. Is there a business-development contact for ecosystem-partnership conversations?
 
----
-
-## Sending Order
-
-Send these in this sequence (most partner-friendly first):
-
-1. **DIMO** — today. They have a developer program, a developer console, and are actively recruiting integrations. The ask is concrete (Developer License). Fastest path to "yes."
-2. **Nodle** — already sent. Awaiting reply.
-3. **Hivemapper** — this week. No hard dependency on their reply to ship the adapter.
-4. **WeatherXM** — this week. Clean token model, easy integration.
-5. **Geodnet** — this week. More niche, good for demonstrating breadth.
+Eric Mancuso
+`getkinetik.app`
 
 ---
 
-## Follow-up template (if no reply after 5 business days)
+## Sending order (April 2026)
 
-**Subject:** Re: GETKINETIK × [Name] — Quick follow-up
+1. **Nodle** — refresh follow-up. Earlier outreach went out before the verify-URL pattern existed; this version lands with a clickable receipt.
+2. **DIMO** — refresh follow-up to `partnerships@dimo.zone` plus the public `#build-on-dimo` thread. We now have v1.3.1 + the redirect URI fix shipped, so the integration story is fully clean.
+3. **Hivemapper** — first or follow-up depending on whether the earliest send landed in a junk folder. The phone-side-provenance angle is fresh and partner-respectful.
+4. **WeatherXM** — partner intake form already filled. This email goes to `partner@weatherxm.com` as the inbox follow-up so the form submission and inbox thread reinforce each other.
+5. **Geodnet** — fresh send. Discord verification + builder post is already out; this is the inbox follow-up.
+
+---
+
+## Follow-up template (5 business days, no reply)
+
+**Subject:** Re: GETKINETIK × [Name] — quick bump
+
+---
 
 Hi [Name],
 
-Bumping this in case it got buried. Happy to share the adapter code directly — it's ~200 lines of TypeScript, public repo. The ask is just a conversation about being listed as a featured integration.
+Bumping in case the original thread got buried. The fastest way to evaluate what we're doing is to click the verifier link below — it's a live signed Proof of Origin from one of our nodes, runs entirely in your browser, and takes about three seconds:
 
-Eric
+`https://getkinetik.app/verify/#proof=...` (full URL above)
+
+If a 15-minute call makes sense, I'm easy to find at `eric@outfromnothingllc.com`. If it doesn't, no offense taken — just point me to the right person if you can.
+
+Eric Mancuso
+`getkinetik.app`
+
+---
+
+## Things this template set deliberately does NOT do
+
+- **No fabricated metrics** ("20%+ fraud reduction" etc.). If we don't have data, we don't quote a number. Partner technical leads notice instantly when a number isn't backed by a study.
+- **No vaporware features** ("Brand Attestor anchoring", token mechanics, etc.). The Brand Attestor is on the L1 roadmap but not built — pitching it as live would unravel in 30 seconds of follow-up.
+- **No raw `STATUS.md` attachments**. That document is internal — has private TODOs, brand decisions, and roadmap trade-offs not meant for partners. If a partner asks for technical depth, we write a fresh one-pager for them.
+- **No deck**. The verifier URL replaces the deck. If they want one after they click, we'll write one.
