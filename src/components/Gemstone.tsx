@@ -315,23 +315,54 @@ export function Gemstone({ active, locked, batteryLevel, isCharging, onToggle }:
   // useFrameCallback runs the EMA every UI frame in a worklet — no bridge
   // crossings, no JS-thread dependency. Result: glass-smooth tilt response
   // even when the rest of the app is busy.
+  //
+  // Tuning history (read this before changing the constants below):
+  //   v1.3.1 first pass set A_PRIMARY = 0.5 and had no deadzone, on the
+  //   assumption that the old expo-sensors code's withTiming(210ms) wrap
+  //   was what damped sensor noise. Wrong: that withTiming was actually
+  //   the dominant low-pass — the EMA was just providing extra smoothing
+  //   on top. With it removed, raw accelerometer noise (~±0.02-0.05 even
+  //   when stationary) flowed straight to the visual and the gem visibly
+  //   wandered at rest. v1.3.2 fix is two-fold:
+  //     1. Drop A_PRIMARY to ~0.15 so the EMA itself acts as the low-pass
+  //        (≈230ms to 90% — snappy enough to feel responsive, slow enough
+  //        to kill sensor jitter).
+  //     2. Apply a soft-subtract deadzone on the INPUT so sub-noise
+  //        samples produce a perfectly still gem at rest. The "soft"
+  //        version (subtract DEADZONE from magnitude, clamp at 0)
+  //        avoids the visible snap a hard threshold would cause when
+  //        the user gently approaches the deadzone boundary.
   // ------------------------------------------------------------------------
   const accel = useAnimatedSensor(SensorType.ACCELEROMETER, {
     interval: 16, // request ~60Hz; Reanimated normalizes per-platform
   });
 
-  // EMA coefficients. Primary = snappy (0.5) so tiltX/tiltY chase the
-  // sensor closely. Blade 2 = slower (0.12) so it lags Blade 1, which is
-  // what creates the "internal refraction delay" effect in the gem walls.
-  const A_PRIMARY = 0.5;
-  const A_BLADE2 = 0.12;
+  // EMA coefficients. Primary chases the sensor; Blade 2 chases the same
+  // axis on a slower constant so it lags behind, producing the "internal
+  // refraction delay" between the two visible reflection blades.
+  // Ratio A_BLADE2 / A_PRIMARY ≈ 0.27 preserves the original lag feel.
+  const A_PRIMARY = 0.15;
+  const A_BLADE2 = 0.04;
+  // Sub-noise threshold. Sensor jitter at rest is empirically ±0.02 in
+  // the normalized [-1, 1] frame; the deadzone sits just above that so
+  // genuine tilt passes through unmodified while micro-twitches collapse
+  // to zero. Don't push above ~0.04 — the user starts to feel "dead air"
+  // at the start of a tilt before the gem responds.
+  const DEADZONE = 0.025;
 
   useFrameCallback(() => {
     'worklet';
     const sample = accel.sensor.value;
     if (!sample) return;
-    const cx = Math.max(-1, Math.min(1, sample.x));
-    const cy = Math.max(-1, Math.min(1, -sample.y));
+    // Soft-subtract deadzone: linear inside the deadzone (output = 0),
+    // linear outside with the deadzone subtracted from the magnitude.
+    // This is C0-continuous at the boundary so there's no visible step.
+    const sx = Math.max(-1, Math.min(1, sample.x));
+    const sy = Math.max(-1, Math.min(1, -sample.y));
+    const cx =
+      Math.abs(sx) < DEADZONE ? 0 : sx - Math.sign(sx) * DEADZONE;
+    const cy =
+      Math.abs(sy) < DEADZONE ? 0 : sy - Math.sign(sy) * DEADZONE;
     tiltX.value = tiltX.value * (1 - A_PRIMARY) + cx * A_PRIMARY;
     tiltY.value = tiltY.value * (1 - A_PRIMARY) + cy * A_PRIMARY;
     blade2Lag.value = blade2Lag.value * (1 - A_BLADE2) + cy * A_BLADE2;
