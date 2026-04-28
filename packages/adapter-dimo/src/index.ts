@@ -57,8 +57,16 @@ const DIMO_DIVISOR = BigInt(10 ** DIMO_DECIMALS);
 /** Public Polygon RPC — no API key required for balanceOf(). */
 const POLYGON_RPC_URL = 'https://polygon-rpc.com/';
 
-/** DIMO auth endpoint — drives the "Login with DIMO" OAuth consent flow. */
-const DIMO_AUTH_URL = 'https://accounts.dimo.org';
+/** DIMO auth endpoint — drives the "Login with DIMO" OAuth consent flow.
+ *  This is the Login With DIMO SDK endpoint, NOT the API host (accounts.dimo.org)
+ *  which only serves authenticated REST. login.dimo.org renders the consent UI
+ *  and on success redirects back to the redirectUri with `wallet=0x...` and
+ *  optional `email` query params. */
+const DIMO_AUTH_URL = 'https://login.dimo.org';
+
+/** DIMO permission template ID — controls which user data the app may read.
+ *  1 = read-only (default for the Plaid-style aggregator pattern). */
+const DIMO_PERMISSION_TEMPLATE_ID = '1';
 
 /** SecureStore keys. */
 const STORE_KEY_WALLET = 'kinetik.dimo.wallet.v1';
@@ -114,41 +122,59 @@ async function fetchDimoBalance(walletAddress: string): Promise<number | null> {
 
 // ----------------------------------------------------------------------------
 // "Login with DIMO" — OAuth redirect via expo-web-browser.
-// Opens accounts.dimo.org in a browser tab. On success, DIMO redirects to
-// getkinetik.app with the user's wallet address as a query param.
+// Opens login.dimo.org in a browser tab. On success, DIMO redirects to a
+// custom-scheme URL (getkinetik://dimo-callback?wallet=0x...) which Android
+// routes back to our app via the `expo.scheme` registered in app.json.
 //
-// In the stub phase (before deep-link handling is implemented), we open the
-// browser and extract walletAddress from the redirect URL returned by
-// WebBrowser.openAuthSessionAsync. This works in Expo Go and in production
-// builds without any additional native config.
+// PARAMS (from DIMO's Login With DIMO SDK):
+//   clientId             — Developer License client_id (registered in DIMO console)
+//   redirectUri          — must EXACTLY match an Authorized Redirect URI on the License
+//   entryState           — initial screen: 'email' | 'phone' | 'web3'
+//   permissionTemplateId — which user data scope to request ('1' = read-only)
+//
+// WHY a custom scheme instead of https://www.getkinetik.app:
+//   On Android, Chrome Custom Tabs treats any https:// URL as a normal web
+//   page — it loads the URL and stays open. There is no way to tell the
+//   browser "this URL means hand control back to my app" without either:
+//     (a) a custom-scheme deep link (this approach), OR
+//     (b) a verified Universal/App Link with .well-known/assetlinks.json
+//         hosted on the redirect domain.
+//   (a) is one app.json line + one DIMO console entry. (b) requires DNS +
+//   web hosting + signing-cert SHA-256 verification. We pick (a).
+//
+// REQUIREMENT — must be done ONCE on the DIMO console, not in code:
+//   Authorize `getkinetik://dimo-callback` as a redirect URI on License #986
+//   at https://console.dimo.org/license/986/details.
 // ----------------------------------------------------------------------------
 
 async function loginWithDimo(): Promise<string | null> {
   try {
+    // DIMO_REDIRECT_URI is already a full URL (custom scheme) — do NOT
+    // prepend https:// like we did with the bare-domain version.
+    const redirect = DIMO_REDIRECT_URI;
     const authUrl =
-      `${DIMO_AUTH_URL}?` +
-      `client_id=${DIMO_CLIENT_ID}` +
-      `&redirect_uri=${encodeURIComponent(`https://${DIMO_REDIRECT_URI}`)}` +
-      `&response_type=code` +
-      `&scope=openid+email+profile`;
+      `${DIMO_AUTH_URL}/?` +
+      `clientId=${DIMO_CLIENT_ID}` +
+      `&redirectUri=${encodeURIComponent(redirect)}` +
+      `&entryState=email` +
+      `&permissionTemplateId=${DIMO_PERMISSION_TEMPLATE_ID}`;
 
-    const result = await WebBrowser.openAuthSessionAsync(
-      authUrl,
-      `https://${DIMO_REDIRECT_URI}`,
-    );
+    const result = await WebBrowser.openAuthSessionAsync(authUrl, redirect);
 
     if (result.type !== 'success') return null;
 
-    // Extract wallet address from the redirect URL params.
-    // DIMO returns: ?wallet=0x...&code=...&email=...
-    const url = new URL(result.url);
-    const wallet = url.searchParams.get('wallet') ?? url.searchParams.get('walletAddress');
+    // Parse the wallet param from the redirect URL. The URL constructor
+    // handles custom schemes fine in Hermes, but searchParams on a non-http
+    // scheme can be flaky on some runtimes — fall back to a manual regex.
+    let wallet: string | null = null;
+    try {
+      const url = new URL(result.url);
+      wallet = url.searchParams.get('wallet') ?? url.searchParams.get('walletAddress');
+    } catch {
+      const match = result.url.match(/[?&]wallet(?:Address)?=(0x[0-9a-fA-F]{40})/);
+      if (match) wallet = match[1];
+    }
     if (wallet && /^0x[0-9a-fA-F]{40}$/.test(wallet)) return wallet;
-
-    // Fallback: if no wallet param, the user authenticated but we need to
-    // query the DIMO Identity API with the code. For v0, store null and let
-    // the user try again — the balance query path will still work if they
-    // paste their wallet address manually in a future UI flow.
     return null;
   } catch {
     return null;

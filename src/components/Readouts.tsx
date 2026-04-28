@@ -57,7 +57,6 @@ function Readout({ label, value, suffix, fill, pulse }: ReadoutProps) {
 
 type Props = {
   stabilityPct: number;
-  yieldTokens: number;
   online: boolean;
   /**
    * When the vault is locked, the sapphire data is blurred + dimmed so the
@@ -77,14 +76,12 @@ const formatUsd = (n: number): string => {
 
 export function Readouts({
   stabilityPct,
-  yieldTokens,
   online,
   locked = false,
   nodeValuationUsd,
   isCharging: _isCharging = false,
 }: Props) {
   const stabilityFill = stabilityPct / 100;
-  const yieldFill = Math.min(1, (yieldTokens % 1000) / 1000);
 
   return (
     <View style={styles.panel}>
@@ -103,14 +100,6 @@ export function Readouts({
           value={`${Math.round(stabilityPct)}`}
           suffix="%"
           fill={stabilityFill}
-          pulse={online && !locked}
-        />
-        <View style={styles.divider} />
-        <Readout
-          label="Yield"
-          value={yieldTokens.toFixed(3)}
-          suffix="KNT"
-          fill={yieldFill}
           pulse={online && !locked}
         />
       </View>

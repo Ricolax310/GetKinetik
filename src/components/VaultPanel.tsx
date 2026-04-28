@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { AppState, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import * as Battery from 'expo-battery';
 import * as Haptics from 'expo-haptics';
 import * as LocalAuthentication from 'expo-local-authentication';
@@ -48,11 +48,8 @@ const PRICE_REFRESH_MS = 60_000;
 // without clobbering older on-device data.
 // ----------------------------------------------------------------------------
 const KEY_PIN = 'kinetik.pin.v1';
-const KEY_YIELD = 'kinetik.yield.v1';
-const KEY_YIELD_TS = 'kinetik.yield.ts.v1';
 
-// Persistence cadence + charging hardening.
-const YIELD_SAVE_MS = 15_000;
+// Charging hardening.
 const CHARGING_GRACE_MS = 1_500;
 const CHARGING_DEBOUNCE_MS = 400;
 
@@ -96,16 +93,15 @@ const secureDelete = async (key: string): Promise<void> => {
  *   - Sapphire Readouts at the bottom
  *   - PIN pad overlay when biometric is unavailable
  *
- * Battery level drives NODE STABILITY. Yield accrues while the node is
- * unlocked. Tilting the device shifts the ruby's internal fire. Yield +
- * PIN are persisted via expo-secure-store.
+ * Battery level drives NODE STABILITY. Real DePIN earnings flow through the
+ * AggregatorPanel (signed entries from each adapter). Tilting the device
+ * shifts the ruby's internal fire. PIN is persisted via expo-secure-store.
  */
 export function VaultPanel() {
   const [isLocked, setIsLocked] = useState(true);
   const [online, setOnline] = useState(false);
   const [batteryLevel, setBatteryLevel] = useState(1);
   const [isCharging, setIsCharging] = useState(false);
-  const [yieldTokens, setYieldTokens] = useState(0);
   const [identity, setIdentity] = useState<NodeIdentity | null>(null);
   const [nodeId, setNodeId] = useState<string>('KINETIK-NODE-XXXXXXXX');
   const [btcPrice, setBtcPrice] = useState<number | null>(null);
@@ -117,10 +113,7 @@ export function VaultPanel() {
   const [manifestoOpen, setManifestoOpen] = useState(false);
   const [proofOpen, setProofOpen] = useState(false);
 
-  const lastTick = useRef<number>(Date.now());
   const authInFlight = useRef(false);
-  const yieldRef = useRef(0);
-  const yieldHydrated = useRef(false);
 
   // Charging hardening — boot timestamp for the UNKNOWN grace window and a
   // debounce timer so a rapid plug/unplug flicker doesn't whip the UI.
@@ -146,12 +139,6 @@ export function VaultPanel() {
       { translateY: interpolate(diagAnim.value, [0, 1], [-6, 0]) },
     ],
   }));
-
-  // Keep yieldRef in sync so background/interval persistence always sees
-  // the latest token count without re-binding the effect.
-  useEffect(() => {
-    yieldRef.current = yieldTokens;
-  }, [yieldTokens]);
 
   // --------------------------------------------------------------------------
   // Sovereign identity — Ed25519 keypair lives in keystore-backed SecureStore.
@@ -209,9 +196,7 @@ export function VaultPanel() {
   }, [refreshBiometricEnrollment]);
 
   // --------------------------------------------------------------------------
-  // SecureStore hydration — restore stored PIN and accumulated yield on mount.
-  // Values are parsed and validated with Number.isFinite so a corrupted write
-  // can never seed NaN/Infinity into the UI.
+  // SecureStore hydration — restore stored PIN on mount.
   // --------------------------------------------------------------------------
   useEffect(() => {
     (async () => {
@@ -219,12 +204,6 @@ export function VaultPanel() {
       if (pinRaw && /^\d{6}$/.test(pinRaw)) {
         setStoredPin(pinRaw);
       }
-      const yieldRaw = await secureGet(KEY_YIELD);
-      const yieldNum = yieldRaw != null ? Number(yieldRaw) : NaN;
-      if (Number.isFinite(yieldNum) && yieldNum >= 0) {
-        setYieldTokens(yieldNum);
-      }
-      yieldHydrated.current = true;
     })();
   }, []);
 
@@ -330,62 +309,6 @@ export function VaultPanel() {
       }
     };
   }, [commitCharging]);
-
-  // --------------------------------------------------------------------------
-  // Yield accrual — only when the node is BOTH unlocked AND live (online).
-  //   · LOCKED:            no interval, counter frozen
-  //   · UNLOCKED + DORMANT: no interval, counter frozen (user intent)
-  //   · UNLOCKED + LIVE:    accrues at baseRate, scaled by battery stability
-  //
-  // Rate scales with battery level (0.4 → 1.0 multiplier) so a fully charged
-  // node earns ~2.5x a 20%-battery node — a subtle reward for keeping the
-  // device healthy, which is the whole ethos of Sovereign Node hardware.
-  //
-  // lastTick is re-stamped inside the effect body so a DORMANT → LIVE
-  // transition never credits the elapsed dormant time as earned yield.
-  // --------------------------------------------------------------------------
-  useEffect(() => {
-    lastTick.current = Date.now();
-    if (isLocked || !online) return;
-    const id = setInterval(() => {
-      const now = Date.now();
-      const dt = (now - lastTick.current) / 1000;
-      lastTick.current = now;
-      const ratePerSec = 0.042 * (0.4 + batteryLevel * 0.6);
-      setYieldTokens((prev) => prev + dt * ratePerSec);
-    }, 250);
-    return () => clearInterval(id);
-  }, [isLocked, online, batteryLevel]);
-
-  // --------------------------------------------------------------------------
-  // Yield persistence — every 15s while unlocked, plus on AppState change to
-  // background/inactive. Writes are debounced behind yieldHydrated so we
-  // never clobber the stored value with 0 before the restore completes.
-  // --------------------------------------------------------------------------
-  const persistYield = useCallback(async () => {
-    if (!yieldHydrated.current) return;
-    const value = yieldRef.current;
-    if (!Number.isFinite(value) || value < 0) return;
-    await secureSet(KEY_YIELD, value);
-    await secureSet(KEY_YIELD_TS, Date.now());
-  }, []);
-
-  useEffect(() => {
-    if (isLocked) return;
-    const id = setInterval(() => {
-      void persistYield();
-    }, YIELD_SAVE_MS);
-    return () => clearInterval(id);
-  }, [isLocked, persistYield]);
-
-  useEffect(() => {
-    const sub = AppState.addEventListener('change', (next) => {
-      if (next === 'background' || next === 'inactive') {
-        void persistYield();
-      }
-    });
-    return () => sub.remove();
-  }, [persistYield]);
 
   // --------------------------------------------------------------------------
   // Gemstone press — biometric first, PIN fallback second, nothing else.
@@ -705,7 +628,6 @@ export function VaultPanel() {
 
       <Readouts
         stabilityPct={stabilityPct}
-        yieldTokens={yieldTokens}
         online={online}
         locked={isLocked}
         nodeValuationUsd={btcPrice}
@@ -744,14 +666,17 @@ export function VaultPanel() {
 }
 
 // Exposed for debugging — not wired into the UI. Lets a dev wipe the stored
-// PIN, yield, AND the sovereign Ed25519 keypair without a full reinstall.
-// Kept adjacent to the SecureStore helpers so it's obvious where the keys
-// live. Wiping the identity also detaches every previously signed heartbeat,
+// PIN AND the sovereign Ed25519 keypair without a full reinstall. Kept
+// adjacent to the SecureStore helpers so it's obvious where the keys live.
+// Wiping the identity also detaches every previously signed heartbeat,
 // which is exactly what you want during dev churn — never in production.
+//
+// Legacy yield keys ('kinetik.yield.v1' / '.ts.v1') are also cleared here so
+// re-installing devs from older builds don't carry stale yield ledgers.
 export const __kinetikResetSecureStore = async () => {
   await secureDelete(KEY_PIN);
-  await secureDelete(KEY_YIELD);
-  await secureDelete(KEY_YIELD_TS);
+  await secureDelete('kinetik.yield.v1');
+  await secureDelete('kinetik.yield.ts.v1');
   await eraseNodeIdentity();
   await eraseHeartbeatLog();
   await eraseEarningLog();
