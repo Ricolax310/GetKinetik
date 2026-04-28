@@ -12,19 +12,36 @@
     http:// or https://). We register this URL — https://getkinetik.app/dimo-callback —
     on License #986 instead.
 
-    The flow:
+    Intended (happy-path) flow:
       1. App opens login.dimo.org with redirectUri = https://getkinetik.app/dimo-callback
       2. User authenticates on DIMO
       3. DIMO 302's the browser to https://getkinetik.app/dimo-callback?wallet=0x…
-      4. expo-web-browser's openAuthSessionAsync detects the URL prefix match
-         and closes the Custom Tab, returning control to the app with the
-         full URL (including the wallet param) — typically before this HTML
-         even renders.
+      4. expo-web-browser's openAuthSessionAsync intercepts the URL prefix
+         match and closes the Custom Tab — this page never paints.
 
-    This page is the fallback the user sees if (a) the OS picked a regular
-    browser instead of a Custom Tab, or (b) the in-app session detection
-    misfired. The manual-return link bounces them back via the custom
-    scheme, which IS still registered in app.json.
+    Real-world flow (as observed on v1.3.2 testing on a real Android device,
+    Apr 28 2026):
+      Step 4 fails — the Custom Tab interception does NOT fire. Suspected
+      cause: DIMO's auth flow does multiple intermediate redirects through
+      its own services before landing here, and openAuthSessionAsync's URL
+      observer gives up at some intermediate hop. The Custom Tab stays
+      open, this HTML renders, and the user has to be bounced back to the
+      app from THIS page.
+
+      Two mechanisms to do that, both exercised here:
+        a. JavaScript window.location.replace to the custom scheme on page
+           load. Modern Android Chrome may block this without a user
+           gesture, so it's best-effort, not the primary path.
+        b. A prominently-styled "Return to App" button whose href is
+           rewritten on page load to include the full query string from
+           DIMO. THIS is what makes the wallet param survive the round-trip
+           and show up in the app's deep-link handler.
+
+      Bug fixed in this revision: the previous version of this page hard-
+      coded the button href as `getkinetik://dimo-callback` with no params,
+      so when the user tapped it, the app got a deep-link with no wallet —
+      and DIMO showed "not active" on return. Confirmed reproduction on
+      v1.3.2; one-line fix; no app rebuild required.
     ────────────────────────────────────────────────────────────────────────
   -->
   <style>
@@ -86,15 +103,20 @@
     }
     .return {
       display: inline-block;
-      padding: 12px 22px;
+      padding: 14px 26px;
       border-radius: 999px;
       background: var(--ruby-core);
       color: var(--obsidian);
-      font-size: 12px;
+      font-size: 13px;
       letter-spacing: 2px;
       font-weight: 600;
       text-decoration: none;
       text-transform: uppercase;
+      box-shadow: 0 8px 24px rgba(255, 20, 48, 0.35);
+      transition: transform 120ms ease;
+    }
+    .return:active {
+      transform: scale(0.97);
     }
     .pulse {
       display: inline-block;
@@ -117,25 +139,57 @@
     <p class="eyebrow"><span class="pulse"></span>Authenticating</p>
     <h1>Returning to GETKINETIK…</h1>
     <p>
-      Your DIMO sign-in is complete. The app should reopen automatically.
-      If it doesn't, tap below to return.
+      Your DIMO sign-in is complete. Tap below to finish connecting your
+      wallet to the app.
     </p>
-    <a class="return" href="getkinetik://dimo-callback">Return to App</a>
+    <a class="return" id="return-link" href="getkinetik://dimo-callback">Return to App</a>
   </main>
 
   <script>
-    /* If we still have a query string after openAuthSessionAsync somehow
-       didn't intercept the redirect (unusual but possible on stock Android
-       browsers that aren't Custom Tabs), forward the user back into the
-       app via the custom scheme manually, preserving any DIMO params. */
+    /*
+     * Two-pronged return-to-app strategy.
+     *
+     * (1) Best-effort silent bounce. We try to drive the browser to the
+     *     custom scheme on page load via window.location.replace. Modern
+     *     Android Chrome frequently blocks scheme launches that aren't
+     *     triggered by a user gesture, so this is a "nice if it works"
+     *     path, not the contract. We catch any failure silently.
+     *
+     * (2) The button. Its href is rewritten on page load to include the
+     *     full query string DIMO sent us, so when the user taps it the
+     *     deep-link the app receives carries `wallet=0x…` and any other
+     *     DIMO params. This is the path the user will actually take in
+     *     the v1.3.2 reality where (1) is blocked.
+     *
+     * Either path delivers identical params to the app's URL handler,
+     * which extracts the wallet via URL.searchParams.get('wallet').
+     */
     (function () {
+      var search = window.location.search || "";
+      var deeplink = "getkinetik://dimo-callback" + (search.length > 1 ? search : "");
+
+      // Step 2 first — guarantee the button works even if step 1 errors.
       try {
-        var params = window.location.search || "";
-        if (params && params.length > 1) {
-          window.location.replace("getkinetik://dimo-callback" + params);
+        var btn = document.getElementById("return-link");
+        if (btn) btn.setAttribute("href", deeplink);
+      } catch (_) {
+        /* fail-soft: button keeps its bare-scheme fallback href */
+      }
+
+      // Step 1 — best-effort silent bounce. Wrapped in try/catch and
+      // deferred one tick so the button-fix above commits to the DOM
+      // even if this throws or the navigation cancels JS execution.
+      try {
+        if (search.length > 1) {
+          // setTimeout 0 lets the page paint at least one frame so the
+          // user briefly sees "Returning to GETKINETIK…" instead of a
+          // blank flash before the scheme launch.
+          setTimeout(function () {
+            try { window.location.replace(deeplink); } catch (_) {}
+          }, 50);
         }
       } catch (_) {
-        /* fail-soft: user can still tap "Return to App" */
+        /* fail-soft: user taps the button */
       }
     })();
   </script>
