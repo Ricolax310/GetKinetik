@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { Pressable, View } from 'react-native';
 import {
   Canvas,
@@ -13,6 +13,9 @@ import {
 import Animated, {
   useSharedValue,
   useDerivedValue,
+  useAnimatedSensor,
+  useFrameCallback,
+  SensorType,
   withTiming,
   withRepeat,
   withSequence,
@@ -21,7 +24,6 @@ import Animated, {
   Easing,
   useAnimatedStyle,
 } from 'react-native-reanimated';
-import { Accelerometer } from 'expo-sensors';
 import * as Haptics from 'expo-haptics';
 
 // ============================================================================
@@ -224,18 +226,9 @@ export function Gemstone({ active, locked, batteryLevel, isCharging, onToggle }:
   const tiltX = useSharedValue(0);
   const tiltY = useSharedValue(0);
   // blade2Lag follows the same gravity vector as tiltY but on a slower EMA
-  // (see accelerometer effect) so Blade 2 trails Blade 1 — reads as internal
+  // (see frame-callback below) so Blade 2 trails Blade 1 — reads as internal
   // refraction delay, not a fighting animation.
   const blade2Lag = useSharedValue(0);
-  // Exponential smoothing refs — accelerometer fires ~16–40ms apart, but
-  // `withTiming` on *every* sample restarts a fixed-duration tween to a
-  // moving target. That reads as input lag (always 120ms behind) + visible
-  // step/jump when a new event cancels the previous run. EMA is cheap,
-  // frame-stable, and never “restarts” — it chases the sample continuously.
-  const emaX = useRef(0);
-  const emaY = useRef(0);
-  const emaB2Y = useRef(0);
-  const tiltInited = useRef(false);
   const pulse = useSharedValue(0);
   const beamSweep = useSharedValue(0);
   const activeAnim = useSharedValue(active ? 1 : 0);
@@ -309,50 +302,40 @@ export function Gemstone({ active, locked, batteryLevel, isCharging, onToggle }:
     }
   }, [locked, lockedAnim, flareAnim]);
 
-  useEffect(() => {
-    let sub: { remove: () => void } | null = null;
-    let cancelled = false;
-    (async () => {
-      try {
-        const ok = await Accelerometer.isAvailableAsync();
-        if (!ok || cancelled) {
-          console.warn('[Gemstone] accelerometer unavailable — auto-sweep only');
-          return;
-        }
-        // ~60Hz — more samples per second so EMA can react quickly with less
-        // inter-sample jump than the old 25Hz + withTiming stack.
-        Accelerometer.setUpdateInterval(16);
-        // Primary: snappy. Secondary blade: same axis but slower EMA = natural
-        // lag vs Blade 1 (replaces 210ms withTiming that fought every tick).
-        const aPrimary = 0.5;
-        const aBlade2 = 0.12;
-        sub = Accelerometer.addListener(({ x, y }) => {
-          const cx = Math.max(-1, Math.min(1, x));
-          const cy = Math.max(-1, Math.min(1, -y));
-          if (!tiltInited.current) {
-            emaX.current = cx;
-            emaY.current = cy;
-            emaB2Y.current = cy;
-            tiltInited.current = true;
-          } else {
-            emaX.current = emaX.current * (1 - aPrimary) + cx * aPrimary;
-            emaY.current = emaY.current * (1 - aPrimary) + cy * aPrimary;
-            emaB2Y.current = emaB2Y.current * (1 - aBlade2) + cy * aBlade2;
-          }
-          tiltX.value = emaX.current;
-          tiltY.value = emaY.current;
-          blade2Lag.value = emaB2Y.current;
-        });
-      } catch (err) {
-        console.warn('[Gemstone] accelerometer init failed:', err);
-      }
-    })();
-    return () => {
-      cancelled = true;
-      if (sub) sub.remove();
-      tiltInited.current = false;
-    };
-  }, [tiltX, tiltY, blade2Lag]);
+  // ------------------------------------------------------------------------
+  // Tilt physics — UI-thread accelerometer + UI-thread EMA smoothing.
+  // ------------------------------------------------------------------------
+  // The previous implementation subscribed to expo-sensors on the JS thread,
+  // ran EMA in useRef state, then wrote shared values per sample. That meant
+  // every accelerometer tick crossed the JS↔UI bridge AND depended on the
+  // JS thread being free. Under any JS load (GC, network, render), samples
+  // would coalesce and the gem would visibly stutter in chunks (~1s).
+  //
+  // useAnimatedSensor delivers samples on the UI thread directly, and
+  // useFrameCallback runs the EMA every UI frame in a worklet — no bridge
+  // crossings, no JS-thread dependency. Result: glass-smooth tilt response
+  // even when the rest of the app is busy.
+  // ------------------------------------------------------------------------
+  const accel = useAnimatedSensor(SensorType.ACCELEROMETER, {
+    interval: 16, // request ~60Hz; Reanimated normalizes per-platform
+  });
+
+  // EMA coefficients. Primary = snappy (0.5) so tiltX/tiltY chase the
+  // sensor closely. Blade 2 = slower (0.12) so it lags Blade 1, which is
+  // what creates the "internal refraction delay" effect in the gem walls.
+  const A_PRIMARY = 0.5;
+  const A_BLADE2 = 0.12;
+
+  useFrameCallback(() => {
+    'worklet';
+    const sample = accel.sensor.value;
+    if (!sample) return;
+    const cx = Math.max(-1, Math.min(1, sample.x));
+    const cy = Math.max(-1, Math.min(1, -sample.y));
+    tiltX.value = tiltX.value * (1 - A_PRIMARY) + cx * A_PRIMARY;
+    tiltY.value = tiltY.value * (1 - A_PRIMARY) + cy * A_PRIMARY;
+    blade2Lag.value = blade2Lag.value * (1 - A_BLADE2) + cy * A_BLADE2;
+  });
 
   // Wrapper breathes only when active AND unlocked; locked gem holds still.
   const wrapperStyle = useAnimatedStyle(() => {
