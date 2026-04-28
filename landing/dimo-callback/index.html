@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>Returning to GETKINETIK…</title>
+  <!--
+    OAuth bounce page for "Login with DIMO".
+    ────────────────────────────────────────────────────────────────────────
+    DIMO's developer console rejects custom-scheme redirect URIs (must be
+    http:// or https://). We register this URL — https://getkinetik.app/dimo-callback —
+    on License #986 instead.
+
+    The flow:
+      1. App opens login.dimo.org with redirectUri = https://getkinetik.app/dimo-callback
+      2. User authenticates on DIMO
+      3. DIMO 302's the browser to https://getkinetik.app/dimo-callback?wallet=0x…
+      4. expo-web-browser's openAuthSessionAsync detects the URL prefix match
+         and closes the Custom Tab, returning control to the app with the
+         full URL (including the wallet param) — typically before this HTML
+         even renders.
+
+    This page is the fallback the user sees if (a) the OS picked a regular
+    browser instead of a Custom Tab, or (b) the in-app session detection
+    misfired. The manual-return link bounces them back via the custom
+    scheme, which IS still registered in app.json.
+    ────────────────────────────────────────────────────────────────────────
+  -->
+  <style>
+    :root {
+      --obsidian: #0a0a0a;
+      --obsidian-soft: #141414;
+      --ruby-core: #ff1430;
+      --ruby-ember: #ffb199;
+      --platinum: #fff1f1;
+      --graphite: #a6a6a6;
+      --hairline: rgba(255, 255, 255, 0.08);
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--obsidian);
+      color: var(--platinum);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .card {
+      width: 100%;
+      max-width: 420px;
+      padding: 32px 28px;
+      border-radius: 18px;
+      background: var(--obsidian-soft);
+      border: 1px solid var(--hairline);
+      text-align: center;
+      box-shadow: 0 24px 64px rgba(255, 20, 48, 0.06);
+    }
+    .eyebrow {
+      font-size: 10px;
+      letter-spacing: 4px;
+      color: var(--ruby-core);
+      margin: 0 0 16px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    h1 {
+      font-size: 20px;
+      letter-spacing: 0.5px;
+      margin: 0 0 14px;
+      color: var(--platinum);
+      font-weight: 500;
+    }
+    p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--graphite);
+      margin: 0 0 20px;
+    }
+    .return {
+      display: inline-block;
+      padding: 12px 22px;
+      border-radius: 999px;
+      background: var(--ruby-core);
+      color: var(--obsidian);
+      font-size: 12px;
+      letter-spacing: 2px;
+      font-weight: 600;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+    .pulse {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--ruby-core);
+      box-shadow: 0 0 8px rgba(255, 20, 48, 0.8);
+      margin-right: 6px;
+      animation: pulse 1.4s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; transform: scale(0.85); }
+      50%      { opacity: 1;   transform: scale(1.1); }
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <p class="eyebrow"><span class="pulse"></span>Authenticating</p>
+    <h1>Returning to GETKINETIK…</h1>
+    <p>
+      Your DIMO sign-in is complete. The app should reopen automatically.
+      If it doesn't, tap below to return.
+    </p>
+    <a class="return" href="getkinetik://dimo-callback">Return to App</a>
+  </main>
+
+  <script>
+    /* If we still have a query string after openAuthSessionAsync somehow
+       didn't intercept the redirect (unusual but possible on stock Android
+       browsers that aren't Custom Tabs), forward the user back into the
+       app via the custom scheme manually, preserving any DIMO params. */
+    (function () {
+      try {
+        var params = window.location.search || "";
+        if (params && params.length > 1) {
+          window.location.replace("getkinetik://dimo-callback" + params);
+        }
+      } catch (_) {
+        /* fail-soft: user can still tap "Return to App" */
+      }
+    })();
+  </script>
+</body>
+</html>

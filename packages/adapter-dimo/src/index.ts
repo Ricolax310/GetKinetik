@@ -122,9 +122,10 @@ async function fetchDimoBalance(walletAddress: string): Promise<number | null> {
 
 // ----------------------------------------------------------------------------
 // "Login with DIMO" — OAuth redirect via expo-web-browser.
-// Opens login.dimo.org in a browser tab. On success, DIMO redirects to a
-// custom-scheme URL (getkinetik://dimo-callback?wallet=0x...) which Android
-// routes back to our app via the `expo.scheme` registered in app.json.
+// Opens login.dimo.org in a Chrome Custom Tab. On success DIMO redirects to
+// https://getkinetik.app/dimo-callback?wallet=0x… and openAuthSessionAsync
+// intercepts the URL prefix match, force-closes the tab, and hands the full
+// URL back to us so we can parse the wallet.
 //
 // PARAMS (from DIMO's Login With DIMO SDK):
 //   clientId             — Developer License client_id (registered in DIMO console)
@@ -132,25 +133,27 @@ async function fetchDimoBalance(walletAddress: string): Promise<number | null> {
 //   entryState           — initial screen: 'email' | 'phone' | 'web3'
 //   permissionTemplateId — which user data scope to request ('1' = read-only)
 //
-// WHY a custom scheme instead of https://www.getkinetik.app:
-//   On Android, Chrome Custom Tabs treats any https:// URL as a normal web
-//   page — it loads the URL and stays open. There is no way to tell the
-//   browser "this URL means hand control back to my app" without either:
-//     (a) a custom-scheme deep link (this approach), OR
-//     (b) a verified Universal/App Link with .well-known/assetlinks.json
-//         hosted on the redirect domain.
-//   (a) is one app.json line + one DIMO console entry. (b) requires DNS +
-//   web hosting + signing-cert SHA-256 verification. We pick (a).
+// WHY https:// instead of getkinetik://dimo-callback:
+//   DIMO's developer console rejects any non-http(s) scheme outright. We
+//   tried — `getkinetik://dimo-callback` returns "invalid redirect URI" on
+//   License #986. The console also won't accept the doubled form
+//   `https://getkinetik://dimo-callback`. The only path that works is to
+//   register a real HTTPS URL we control, host a real page there, and let
+//   expo-web-browser intercept the redirect via Custom Tabs URL observation.
+//
+//   The bounce page (landing/dimo-callback/index.html → Cloudflare Pages)
+//   never actually paints in the happy path — openAuthSessionAsync closes
+//   the tab the instant the URL prefix matches. The page only matters as
+//   a fallback if the Custom Tab session breaks, in which case its inline
+//   <script> bounces the user back to the app via the custom scheme.
 //
 // REQUIREMENT — must be done ONCE on the DIMO console, not in code:
-//   Authorize `getkinetik://dimo-callback` as a redirect URI on License #986
-//   at https://console.dimo.org/license/986/details.
+//   Authorize `https://getkinetik.app/dimo-callback` as a redirect URI on
+//   License #986 at https://console.dimo.org/license/986/details.
 // ----------------------------------------------------------------------------
 
 async function loginWithDimo(): Promise<string | null> {
   try {
-    // DIMO_REDIRECT_URI is already a full URL (custom scheme) — do NOT
-    // prepend https:// like we did with the bare-domain version.
     const redirect = DIMO_REDIRECT_URI;
     const authUrl =
       `${DIMO_AUTH_URL}/?` +
@@ -163,9 +166,10 @@ async function loginWithDimo(): Promise<string | null> {
 
     if (result.type !== 'success') return null;
 
-    // Parse the wallet param from the redirect URL. The URL constructor
-    // handles custom schemes fine in Hermes, but searchParams on a non-http
-    // scheme can be flaky on some runtimes — fall back to a manual regex.
+    // Parse the wallet param from the returned URL. With an https:// redirect
+    // the standard URL constructor + searchParams works cleanly on Hermes,
+    // but we keep the regex fallback in case DIMO ever encodes the address
+    // in a way the parser doesn't like.
     let wallet: string | null = null;
     try {
       const url = new URL(result.url);
