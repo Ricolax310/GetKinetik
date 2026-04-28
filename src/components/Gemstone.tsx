@@ -321,21 +321,42 @@ export function Gemstone({ active, locked, batteryLevel, isCharging, onToggle }:
   //   assumption that the old expo-sensors code's withTiming(210ms) wrap
   //   was what damped sensor noise. Wrong: that withTiming was actually
   //   the dominant low-pass — the EMA was just providing extra smoothing
-  //   on top. With it removed, raw accelerometer noise (~±0.02-0.05 even
-  //   when stationary) flowed straight to the visual and the gem visibly
-  //   wandered at rest. v1.3.2 fix is two-fold:
-  //     1. Drop A_PRIMARY to ~0.15 so the EMA itself acts as the low-pass
-  //        (≈230ms to 90% — snappy enough to feel responsive, slow enough
-  //        to kill sensor jitter).
-  //     2. Apply a soft-subtract deadzone on the INPUT so sub-noise
-  //        samples produce a perfectly still gem at rest. The "soft"
-  //        version (subtract DEADZONE from magnitude, clamp at 0)
-  //        avoids the visible snap a hard threshold would cause when
-  //        the user gently approaches the deadzone boundary.
+  //   on top. With it removed, raw accelerometer noise flowed straight
+  //   to the visual and the gem visibly wandered at rest.
+  //
+  //   v1.3.2 attempt added a 0.025 deadzone and dropped A_PRIMARY to
+  //   0.15. Did not work in real-device testing — gem still jittered.
+  //   Root cause was deeper than EMA tuning: a UNIT MISMATCH between
+  //   the sensor library and the constants below. Documented in v1.3.3:
+  //
+  //   v1.3.3 unit-conversion fix:
+  //     `useAnimatedSensor(SensorType.ACCELEROMETER)` from Reanimated
+  //     returns raw native sensor data, which on Android is in m/s²
+  //     (range ~±9.81). The code that this replaced (expo-sensors
+  //     `Accelerometer`) returned values in g (range ~±1). All the
+  //     constants below — the [-1, 1] clamp, the 0.025 deadzone, the
+  //     EMA step sizes — were tuned for g-units. With m/s² inputs:
+  //       · sensor noise ~±0.05 m/s² SLIPS PAST the 0.025 deadzone
+  //         (because 0.05 > 0.025 in raw units), so jitter leaks
+  //         straight into the EMA → erratic gem at rest;
+  //       · big tilts immediately saturate the ±1 clamp, so most of
+  //         the dynamic range is wasted.
+  //
+  //     Fix: divide the raw sample by G_MS2 (9.80665) before clamping
+  //     and deadzoning, restoring the g-unit assumption the rest of
+  //     the math was written under. Sensor noise becomes ~±0.005 g,
+  //     comfortably below the 0.025 deadzone, so rest is rock-solid.
+  //     A 0.5g tilt (≈30° from level) hits 0.5 in normalized coords
+  //     and the visual responds across the full dynamic range.
   // ------------------------------------------------------------------------
   const accel = useAnimatedSensor(SensorType.ACCELEROMETER, {
     interval: 16, // request ~60Hz; Reanimated normalizes per-platform
   });
+
+  // Standard gravity (m/s²). Used to convert Reanimated's raw m/s²
+  // accelerometer readings into g-units, which is the frame the
+  // constants below were designed for.
+  const G_MS2 = 9.80665;
 
   // EMA coefficients. Primary chases the sensor; Blade 2 chases the same
   // axis on a slower constant so it lags behind, producing the "internal
@@ -343,22 +364,23 @@ export function Gemstone({ active, locked, batteryLevel, isCharging, onToggle }:
   // Ratio A_BLADE2 / A_PRIMARY ≈ 0.27 preserves the original lag feel.
   const A_PRIMARY = 0.15;
   const A_BLADE2 = 0.04;
-  // Sub-noise threshold. Sensor jitter at rest is empirically ±0.02 in
-  // the normalized [-1, 1] frame; the deadzone sits just above that so
-  // genuine tilt passes through unmodified while micro-twitches collapse
-  // to zero. Don't push above ~0.04 — the user starts to feel "dead air"
-  // at the start of a tilt before the gem responds.
+  // Sub-noise threshold IN G-UNITS (post-conversion). Empirical Android
+  // accelerometer noise floor at rest is ~±0.005 g; the deadzone sits
+  // comfortably above that so micro-twitches collapse to zero while
+  // genuine tilt (≥ ~1.5° from level) passes through. Don't push above
+  // ~0.04 — the user starts to feel "dead air" at the start of a tilt.
   const DEADZONE = 0.025;
 
   useFrameCallback(() => {
     'worklet';
     const sample = accel.sensor.value;
     if (!sample) return;
-    // Soft-subtract deadzone: linear inside the deadzone (output = 0),
-    // linear outside with the deadzone subtracted from the magnitude.
-    // This is C0-continuous at the boundary so there's no visible step.
-    const sx = Math.max(-1, Math.min(1, sample.x));
-    const sy = Math.max(-1, Math.min(1, -sample.y));
+    // Convert m/s² → g, clamp to ±1 (any tilt ≥ 90° saturates), then
+    // apply a soft-subtract deadzone: linear inside the deadzone
+    // (output = 0), linear outside with the deadzone subtracted from
+    // the magnitude. C0-continuous at the boundary — no visible step.
+    const sx = Math.max(-1, Math.min(1, sample.x / G_MS2));
+    const sy = Math.max(-1, Math.min(1, -sample.y / G_MS2));
     const cx =
       Math.abs(sx) < DEADZONE ? 0 : sx - Math.sign(sx) * DEADZONE;
     const cy =
