@@ -40,9 +40,6 @@ import { geodnetAdapter } from '../../packages/adapter-geodnet/src';
 /** Adapter registry — append new DePIN adapters here. Nothing else changes. */
 const ADAPTERS = AGGREGATOR_ENABLED ? [nodleAdapter, dimoAdapter, hivemapperAdapter, weatherxmAdapter, geodnetAdapter] : [];
 
-const COINBASE_SPOT_URL = 'https://api.coinbase.com/v2/prices/BTC-USD/spot';
-const PRICE_REFRESH_MS = 60_000;
-
 // ----------------------------------------------------------------------------
 // SecureStore keys — v1-suffixed so we can migrate cleanly in the future
 // without clobbering older on-device data.
@@ -104,7 +101,6 @@ export function VaultPanel() {
   const [isCharging, setIsCharging] = useState(false);
   const [identity, setIdentity] = useState<NodeIdentity | null>(null);
   const [nodeId, setNodeId] = useState<string>('KINETIK-NODE-XXXXXXXX');
-  const [btcPrice, setBtcPrice] = useState<number | null>(null);
   const [biometricEnrolled, setBiometricEnrolled] = useState<boolean | null>(null);
   const [storedPin, setStoredPin] = useState<string | null>(null);
   const [pinPadMode, setPinPadMode] = useState<'set' | 'enter' | null>(null);
@@ -205,30 +201,6 @@ export function VaultPanel() {
         setStoredPin(pinRaw);
       }
     })();
-  }, []);
-
-  // --------------------------------------------------------------------------
-  // BTC spot price ticker — refreshes every 60s.
-  // --------------------------------------------------------------------------
-  useEffect(() => {
-    let cancelled = false;
-    const pull = async () => {
-      try {
-        const res = await fetch(COINBASE_SPOT_URL);
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const json = await res.json();
-        const amount = parseFloat(json?.data?.amount);
-        if (!cancelled && Number.isFinite(amount)) setBtcPrice(amount);
-      } catch (err) {
-        console.warn('[VaultPanel] coinbase spot fetch failed:', err);
-      }
-    };
-    pull();
-    const id = setInterval(pull, PRICE_REFRESH_MS);
-    return () => {
-      cancelled = true;
-      clearInterval(id);
-    };
   }, []);
 
   // --------------------------------------------------------------------------
@@ -630,7 +602,6 @@ export function VaultPanel() {
         stabilityPct={stabilityPct}
         online={online}
         locked={isLocked}
-        nodeValuationUsd={btcPrice}
         isCharging={isCharging}
       />
 
