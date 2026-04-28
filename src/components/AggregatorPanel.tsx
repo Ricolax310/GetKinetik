@@ -14,10 +14,26 @@
 // Same pattern as exchanges that show net price, not "price minus 0.1% fee".
 // ============================================================================
 
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Pressable, StyleSheet, Text, View, ActivityIndicator } from 'react-native';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import {
+  Dimensions,
+  PanResponder,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  ActivityIndicator,
+} from 'react-native';
 import * as Haptics from 'expo-haptics';
 import * as SecureStore from 'expo-secure-store';
+import Animated, {
+  Easing,
+  runOnJS,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
 
 import { palette, typography } from '../theme/palette';
 import type { DepinAdapter, EarningSnapshot, AdapterStatus } from '../../packages/kinetik-core/src/adapter';
@@ -50,6 +66,12 @@ type AdapterCardProps = {
   identity: NodeIdentity | null;
   /** Fired after an earning is signed + appended to the ledger. Lets the parent refresh wallet summary. */
   onLedgerAppend?: () => void;
+  /** Fires whenever this adapter's status transitions. Lets the parent
+   *  count active networks for the summary box. */
+  onStatusChange?: (status: AdapterStatus) => void;
+  /** Fires whenever pollEarnings() returns a fresh snapshot. Lets the
+   *  parent aggregate per-currency lifetime totals for the summary box. */
+  onSnapshotChange?: (snapshot: EarningSnapshot | null) => void;
 };
 
 type CardState = {
@@ -175,9 +197,27 @@ async function recordEarningDelta(
 // ----------------------------------------------------------------------------
 // AdapterCard — renders one adapter's status + earnings, with opt-in button.
 // ----------------------------------------------------------------------------
-function AdapterCard({ adapter, identity, onLedgerAppend }: AdapterCardProps) {
+function AdapterCard({
+  adapter,
+  identity,
+  onLedgerAppend,
+  onStatusChange,
+  onSnapshotChange,
+}: AdapterCardProps) {
   const [state, setState] = useState<CardState>(INITIAL_STATE);
   const pollTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  // Notify the parent whenever this adapter's state transitions so the
+  // summary box can recompute "N / 5 NETWORKS ACTIVE" without re-polling.
+  useEffect(() => {
+    onStatusChange?.(state.status);
+  }, [state.status, onStatusChange]);
+
+  // Mirror the latest snapshot upward so the parent can sum lifetime
+  // earnings per currency in the summary box.
+  useEffect(() => {
+    onSnapshotChange?.(state.snapshot);
+  }, [state.snapshot, onSnapshotChange]);
 
   const refresh = useCallback(async () => {
     try {
@@ -341,8 +381,19 @@ function AdapterCard({ adapter, identity, onLedgerAppend }: AdapterCardProps) {
 }
 
 // ----------------------------------------------------------------------------
-// AggregatorPanel — the list of adapter cards. Adapters[] is the registry;
-// adding a new DePIN later = append to this list, zero other changes.
+// AggregatorPanel — single summary box on the home screen, plus a slide-up
+// drawer that reveals one AdapterCard per registered DePIN.
+//
+// HOME SURFACE (always visible):
+//   ┌─────────────────────────────┐
+//   │ EARNINGS              ⌃     │
+//   │ 12 SIGNED ENTRIES · 2/5     │
+//   │ NETWORKS ACTIVE             │
+//   └─────────────────────────────┘
+//
+// The drawer is ALWAYS mounted (translated offscreen when closed) so that
+// each AdapterCard's poll interval keeps running and signed earnings keep
+// flowing into the ledger even when the user never opens the drawer.
 // ----------------------------------------------------------------------------
 type AggregatorPanelProps = {
   adapters: DepinAdapter[];
@@ -351,6 +402,9 @@ type AggregatorPanelProps = {
 
 export function AggregatorPanel({ adapters, identity }: AggregatorPanelProps) {
   const [summary, setSummary] = useState<WalletSummary | null>(null);
+  const [statuses, setStatuses] = useState<Record<string, AdapterStatus>>({});
+  const [snapshots, setSnapshots] = useState<Record<string, EarningSnapshot | null>>({});
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   const refreshSummary = useCallback(async () => {
     if (!identity) return;
@@ -366,26 +420,273 @@ export function AggregatorPanel({ adapters, identity }: AggregatorPanelProps) {
     void refreshSummary();
   }, [refreshSummary]);
 
+  // Per-adapter status + snapshot callbacks — keyed by adapter id so
+  // duplicate fires collapse cleanly. Memoised per adapter so the child's
+  // effect doesn't see a "new" callback every render.
+  const onStatusChangeFor = useMemo(() => {
+    const map: Record<string, (s: AdapterStatus) => void> = {};
+    adapters.forEach((a) => {
+      map[a.id] = (s: AdapterStatus) => {
+        setStatuses((prev) => {
+          if (prev[a.id]?.state === s.state) return prev;
+          return { ...prev, [a.id]: s };
+        });
+      };
+    });
+    return map;
+  }, [adapters]);
+
+  const onSnapshotChangeFor = useMemo(() => {
+    const map: Record<string, (s: EarningSnapshot | null) => void> = {};
+    adapters.forEach((a) => {
+      map[a.id] = (snap: EarningSnapshot | null) => {
+        setSnapshots((prev) => {
+          // Skip identical snapshots (same currency + lifetimeGross) to
+          // avoid render churn from every poll cycle when balance is flat.
+          const cur = prev[a.id];
+          if (!snap && !cur) return prev;
+          if (
+            cur &&
+            snap &&
+            cur.lifetimeGross === snap.lifetimeGross &&
+            cur.pendingGross === snap.pendingGross
+          ) {
+            return prev;
+          }
+          return { ...prev, [a.id]: snap };
+        });
+      };
+    });
+    return map;
+  }, [adapters]);
+
   if (!AGGREGATOR_ENABLED || adapters.length === 0) return null;
 
+  const activeCount = Object.values(statuses).filter(
+    (s) => s.state === 'registered' || s.state === 'earning',
+  ).length;
+  const totalCount = adapters.length;
+  const entryCount = summary?.count ?? 0;
+
+  // Aggregate lifetime earnings by currency. Adapters can share a currency
+  // (e.g. two Polygon ERC-20s could both be DIMO), so we sum into a Map and
+  // render one row per unique currency.
+  const totalsByCurrency = new Map<string, number>();
+  for (const snap of Object.values(snapshots)) {
+    if (!snap) continue;
+    if (!Number.isFinite(snap.lifetimeGross) || snap.lifetimeGross <= 0) continue;
+    totalsByCurrency.set(
+      snap.currency,
+      (totalsByCurrency.get(snap.currency) ?? 0) + snap.lifetimeGross,
+    );
+  }
+  const totalRows = Array.from(totalsByCurrency.entries());
+
+  const openDrawer = async () => {
+    try {
+      await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    } catch {
+      /* haptics unavailable */
+    }
+    setDrawerOpen(true);
+  };
+
   return (
-    <View style={styles.panel}>
-      <View style={styles.headerRow}>
-        <Text style={styles.panelHeader}>EARNINGS</Text>
-        {summary && summary.count > 0 && (
-          <Text style={styles.ledgerStat}>
-            {summary.count} {summary.count === 1 ? 'ENTRY' : 'ENTRIES'} · {summary.lastHash?.slice(0, 8) ?? '—'}
-          </Text>
+    <>
+      <Pressable
+        onPress={openDrawer}
+        accessibilityRole="button"
+        accessibilityLabel="Open earnings detail drawer"
+        style={({ pressed }) => [styles.summaryBox, pressed && styles.summaryBoxPressed]}
+      >
+        <View style={styles.summaryHeaderRow}>
+          <Text style={styles.panelHeader}>EARNINGS</Text>
+          <Text style={styles.summaryChevron}>⌃</Text>
+        </View>
+
+        {/* Hero row — total lifetime earnings per currency. Falls back to a
+            single muted "—" when no adapter has reported a positive balance
+            yet so the box never shows a confusing blank space. */}
+        {totalRows.length > 0 ? (
+          <View style={styles.totalsBlock}>
+            {totalRows.map(([currency, amount]) => (
+              <View key={currency} style={styles.totalsRow}>
+                <Text style={styles.totalsAmount}>{fmtNodl(amount)}</Text>
+                <Text style={styles.totalsCurrency}>{currency}</Text>
+              </View>
+            ))}
+          </View>
+        ) : (
+          <View style={styles.totalsBlock}>
+            <View style={styles.totalsRow}>
+              <Text style={styles.totalsAmount}>—</Text>
+              <Text style={styles.totalsCurrency}>NOTHING EARNED YET</Text>
+            </View>
+          </View>
         )}
-      </View>
-      {adapters.map((adapter) => (
-        <AdapterCard
-          key={adapter.id}
-          adapter={adapter}
-          identity={identity}
-          onLedgerAppend={refreshSummary}
+
+        <View style={styles.summaryBody}>
+          <Text style={styles.summaryStat}>
+            {entryCount} {entryCount === 1 ? 'SIGNED ENTRY' : 'SIGNED ENTRIES'}
+          </Text>
+          <Text style={styles.summaryDot}>·</Text>
+          <Text style={styles.summaryStat}>
+            {activeCount}/{totalCount} NETWORKS ACTIVE
+          </Text>
+        </View>
+        {summary?.lastHash ? (
+          <Text style={styles.summaryHash}>
+            CHAIN · {summary.lastHash.slice(0, 12).toUpperCase()}
+          </Text>
+        ) : null}
+      </Pressable>
+
+      <EarningsDrawer
+        open={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+        adapters={adapters}
+        identity={identity}
+        onLedgerAppend={refreshSummary}
+        onStatusChangeFor={onStatusChangeFor}
+        onSnapshotChangeFor={onSnapshotChangeFor}
+      />
+    </>
+  );
+}
+
+// ----------------------------------------------------------------------------
+// EarningsDrawer — bottom-sheet that owns every AdapterCard.
+//
+// Mounted unconditionally so polling never pauses; pointerEvents are gated
+// on `open` so the sheet doesn't intercept touches while hidden.
+//
+// Animation: a single sharedValue `progress` ∈ [0, 1] drives translateY
+// (offscreen → resting position) and the backdrop opacity. PanResponder
+// handles vertical drag; releases below threshold snap-close, otherwise
+// snap-open.
+// ----------------------------------------------------------------------------
+type EarningsDrawerProps = {
+  open: boolean;
+  onClose: () => void;
+  adapters: DepinAdapter[];
+  identity: NodeIdentity | null;
+  onLedgerAppend: () => void;
+  onStatusChangeFor: Record<string, (status: AdapterStatus) => void>;
+  onSnapshotChangeFor: Record<string, (snapshot: EarningSnapshot | null) => void>;
+};
+
+const SCREEN_HEIGHT = Dimensions.get('window').height;
+const DRAWER_HEIGHT = Math.round(SCREEN_HEIGHT * 0.78);
+const DRAG_DISMISS_THRESHOLD = 0.25; // 25% of drawer height
+
+function EarningsDrawer({
+  open,
+  onClose,
+  adapters,
+  identity,
+  onLedgerAppend,
+  onStatusChangeFor,
+  onSnapshotChangeFor,
+}: EarningsDrawerProps) {
+  // progress: 0 = fully closed (offscreen), 1 = fully open (resting).
+  const progress = useSharedValue(0);
+  // dragOffset: live drag delta in pixels (clamped to [0, DRAWER_HEIGHT]).
+  const dragOffset = useSharedValue(0);
+
+  // Animate progress whenever `open` flips.
+  useEffect(() => {
+    progress.value = withTiming(open ? 1 : 0, {
+      duration: 320,
+      easing: Easing.inOut(Easing.cubic),
+    });
+    if (!open) dragOffset.value = 0;
+  }, [open, progress, dragOffset]);
+
+  const sheetStyle = useAnimatedStyle(() => {
+    const closedTranslate = DRAWER_HEIGHT;
+    const openTranslate = 0;
+    const baseTranslate =
+      closedTranslate - (closedTranslate - openTranslate) * progress.value;
+    return {
+      transform: [{ translateY: baseTranslate + dragOffset.value }],
+    };
+  });
+
+  const backdropStyle = useAnimatedStyle(() => {
+    const opacity = progress.value * 0.55;
+    return { opacity };
+  });
+
+  // PanResponder for drag-to-dismiss on the drag handle area.
+  const panResponder = useMemo(
+    () =>
+      PanResponder.create({
+        onStartShouldSetPanResponder: () => true,
+        onMoveShouldSetPanResponder: (_, g) => Math.abs(g.dy) > 4,
+        onPanResponderMove: (_, g) => {
+          if (g.dy > 0) {
+            dragOffset.value = Math.min(g.dy, DRAWER_HEIGHT);
+          }
+        },
+        onPanResponderRelease: (_, g) => {
+          if (g.dy > DRAWER_HEIGHT * DRAG_DISMISS_THRESHOLD || g.vy > 1.2) {
+            // Snap closed: animate dragOffset back to 0 in parallel with the
+            // parent open→closed transition.
+            dragOffset.value = withTiming(0, { duration: 220 });
+            runOnJS(onClose)();
+          } else {
+            dragOffset.value = withTiming(0, { duration: 220 });
+          }
+        },
+      }),
+    [dragOffset, onClose],
+  );
+
+  return (
+    <View
+      style={StyleSheet.absoluteFill}
+      pointerEvents={open ? 'auto' : 'none'}
+    >
+      <Animated.View
+        style={[StyleSheet.absoluteFillObject, styles.backdrop, backdropStyle]}
+        pointerEvents={open ? 'auto' : 'none'}
+      >
+        <Pressable
+          style={StyleSheet.absoluteFillObject}
+          onPress={onClose}
+          accessibilityRole="button"
+          accessibilityLabel="Close earnings drawer"
         />
-      ))}
+      </Animated.View>
+
+      <Animated.View
+        style={[styles.sheet, sheetStyle]}
+        pointerEvents={open ? 'auto' : 'none'}
+      >
+        <View {...panResponder.panHandlers} style={styles.sheetGrip}>
+          <View style={styles.dragHandle} />
+          <Text style={styles.sheetTitle}>EARNINGS</Text>
+          <Text style={styles.sheetSubtitle}>
+            {adapters.length} NETWORKS · SWIPE DOWN TO CLOSE
+          </Text>
+        </View>
+        <ScrollView
+          style={styles.sheetScroll}
+          contentContainerStyle={styles.sheetScrollContent}
+          showsVerticalScrollIndicator={false}
+        >
+          {adapters.map((adapter) => (
+            <AdapterCard
+              key={adapter.id}
+              adapter={adapter}
+              identity={identity}
+              onLedgerAppend={onLedgerAppend}
+              onStatusChange={onStatusChangeFor[adapter.id]}
+              onSnapshotChange={onSnapshotChangeFor[adapter.id]}
+            />
+          ))}
+        </ScrollView>
+      </Animated.View>
     </View>
   );
 }
@@ -394,14 +695,81 @@ export function AggregatorPanel({ adapters, identity }: AggregatorPanelProps) {
 // Styles — palette-consistent with the rest of VaultPanel.
 // ----------------------------------------------------------------------------
 const styles = StyleSheet.create({
-  panel: {
-    gap: 10,
-    paddingTop: 4,
+  // Home-surface summary box (always visible).
+  summaryBox: {
+    backgroundColor: palette.obsidianSoft,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: palette.hairline,
+    borderRadius: 16,
+    paddingHorizontal: 18,
+    paddingVertical: 14,
+    gap: 6,
   },
-  headerRow: {
+  summaryBoxPressed: {
+    opacity: 0.7,
+  },
+  summaryHeaderRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  summaryChevron: {
+    color: palette.sapphire.glow,
+    fontFamily: typography.mono,
+    fontSize: 14,
+    letterSpacing: 0,
+    fontWeight: '600',
+    transform: [{ rotate: '0deg' }],
+  },
+  totalsBlock: {
+    paddingVertical: 8,
+    gap: 4,
+  },
+  totalsRow: {
+    flexDirection: 'row',
+    alignItems: 'baseline',
+    gap: 8,
+  },
+  totalsAmount: {
+    color: palette.platinum,
+    fontFamily: typography.mono,
+    fontSize: 22,
+    letterSpacing: 1,
+    fontWeight: '300',
+  },
+  totalsCurrency: {
+    color: palette.sapphire.glow,
+    fontFamily: typography.mono,
+    fontSize: 11,
+    letterSpacing: 2,
+    fontWeight: '500',
+  },
+  summaryBody: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    gap: 6,
+  },
+  summaryStat: {
+    color: palette.sapphire.glow,
+    fontFamily: typography.mono,
+    fontSize: 11,
+    letterSpacing: 1.6,
+    fontWeight: '500',
+  },
+  summaryDot: {
+    color: palette.graphite,
+    fontFamily: typography.mono,
+    fontSize: 11,
+    letterSpacing: 1.6,
+    fontWeight: '500',
+  },
+  summaryHash: {
+    color: palette.graphite,
+    fontFamily: typography.mono,
+    fontSize: 9,
+    letterSpacing: 1.4,
+    fontWeight: '500',
   },
   panelHeader: {
     color: palette.graphite,
@@ -411,12 +779,67 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     textTransform: 'uppercase',
   },
-  ledgerStat: {
-    color: palette.sapphire.glow,
+  // Drawer surfaces.
+  backdrop: {
+    backgroundColor: '#000000',
+  },
+  sheet: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    height: DRAWER_HEIGHT,
+    backgroundColor: palette.obsidian,
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderColor: palette.hairline,
+    overflow: 'hidden',
+    shadowColor: '#000',
+    shadowOpacity: 0.6,
+    shadowRadius: 24,
+    shadowOffset: { width: 0, height: -4 },
+    elevation: 24,
+  },
+  sheetGrip: {
+    paddingTop: 10,
+    paddingBottom: 14,
+    paddingHorizontal: 24,
+    alignItems: 'center',
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: palette.hairline,
+  },
+  dragHandle: {
+    width: 36,
+    height: 4,
+    borderRadius: 2,
+    backgroundColor: palette.graphite,
+    opacity: 0.6,
+    marginBottom: 10,
+  },
+  sheetTitle: {
+    color: palette.platinum,
+    fontFamily: typography.mono,
+    fontSize: 12,
+    letterSpacing: 3,
+    fontWeight: '600',
+  },
+  sheetSubtitle: {
+    color: palette.graphite,
     fontFamily: typography.mono,
     fontSize: 9,
     letterSpacing: 1.6,
     fontWeight: '500',
+    marginTop: 4,
+  },
+  sheetScroll: {
+    flex: 1,
+  },
+  sheetScrollContent: {
+    paddingHorizontal: 18,
+    paddingTop: 14,
+    paddingBottom: 32,
+    gap: 12,
   },
   card: {
     backgroundColor: palette.obsidianSoft,

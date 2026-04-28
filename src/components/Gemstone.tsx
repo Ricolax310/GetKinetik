@@ -627,7 +627,8 @@ export function Gemstone({ active, locked, batteryLevel, isCharging, onToggle }:
   return (
     <Pressable
       onPress={handlePress}
-      hitSlop={24}
+      hitSlop={0}
+      style={{ width: SIZE, height: SIZE }}
       accessibilityRole="button"
       accessibilityLabel="Toggle Sovereign Node"
     >
