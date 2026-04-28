@@ -63,37 +63,20 @@ type Props = {
    * figures can't be read until the user authenticates on the ruby.
    */
   locked?: boolean;
-  /** Live BTC spot price in USD. Null until the first fetch resolves. */
-  nodeValuationUsd?: number | null;
   /** True when the device is plugged in — Hyper-Charge mode indicator. */
   isCharging?: boolean;
-};
-
-const formatUsd = (n: number): string => {
-  // 0 decimals, comma thousands separator. e.g. 43261 → "43,261"
-  return n.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 };
 
 export function Readouts({
   stabilityPct,
   online,
   locked = false,
-  nodeValuationUsd,
   isCharging: _isCharging = false,
 }: Props) {
   const stabilityFill = stabilityPct / 100;
 
   return (
     <View style={styles.panel}>
-      {/* Node Valuation ticker — live BTC spot price as the node's
-          reference USD valuation. Sits above the data row. */}
-      <View style={styles.ticker}>
-        <Text style={styles.tickerLabel}>NODE · VALUATION</Text>
-        <Text style={styles.tickerValue}>
-          {nodeValuationUsd != null ? `$ ${formatUsd(nodeValuationUsd)}` : '$ —'}
-        </Text>
-      </View>
-
       <View style={styles.row}>
         <Readout
           label="Stability"
@@ -135,25 +118,6 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 10 },
     overflow: 'hidden',
     position: 'relative',
-  },
-  ticker: {
-    flexDirection: 'row',
-    alignItems: 'baseline',
-    justifyContent: 'space-between',
-    paddingBottom: 10,
-    marginBottom: 10,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: palette.hairline,
-  },
-  tickerLabel: {
-    color: palette.graphite,
-    ...typography.label,
-  },
-  tickerValue: {
-    color: palette.sapphire.glow,
-    fontSize: 16,
-    letterSpacing: 1.5,
-    fontWeight: '500',
   },
   row: {
     flexDirection: 'row',
