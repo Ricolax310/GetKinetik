@@ -26,7 +26,7 @@ Kind of, but different. Traditional crypto mining uses a lot of electricity and 
 
 **Who made this?**
 
-Eric Guthmann, building under **OutFromNothing LLC**. Solo founder, indie project, early stage. No VC funding, no hype — just building.
+Eric (Kinetik_Rick), building under **OutFromNothing LLC**. Solo founder, indie project, early stage. No VC funding, no hype — just building.
 
 ---
 

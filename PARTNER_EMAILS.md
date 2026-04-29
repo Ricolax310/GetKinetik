@@ -76,7 +76,7 @@ A few quick questions:
 2. Would Nodle be open to being listed as a featured integration on `getkinetik.app`? Nodle is the first adapter we built.
 3. Any interest in a 15-minute call to walk through the L1 trust contract?
 
-Eric Guthmann
+Eric (Kinetik_Rick)
 `getkinetik.app`
 
 ---
@@ -108,7 +108,7 @@ Two asks:
 
 Adapter is ~250 lines of TypeScript and I'm happy to share the source.
 
-Eric Guthmann
+Eric (Kinetik_Rick)
 `getkinetik.app`
 
 ---
@@ -136,7 +136,7 @@ Two questions, low-stakes:
 
 No SDK changes required on your end. The integration is fully read-only.
 
-Eric Guthmann
+Eric (Kinetik_Rick)
 `getkinetik.app`
 
 ---
@@ -162,7 +162,7 @@ Two questions:
 1. Is there a policy issue with a third-party app reading WXM balances on behalf of an opted-in user?
 2. Would WeatherXM be open to a featured-partner slot? We're targeting DePIN-native users who run multiple networks at once and want one signed source of truth across all of them.
 
-Eric Guthmann
+Eric (Kinetik_Rick)
 `getkinetik.app`
 
 ---
@@ -188,7 +188,7 @@ Two questions:
 1. Is there an API or on-chain endpoint we can use to read GEOD rewards by node ID or recipient address?
 2. Is there a business-development contact for ecosystem-partnership conversations?
 
-Eric Guthmann
+Eric (Kinetik_Rick)
 `getkinetik.app`
 
 ---
@@ -219,7 +219,7 @@ Bumping in case the original thread got buried. The fastest way to evaluate what
 
 If a 15-minute call makes sense, I'm easy to find at `eric@outfromnothingllc.com`. If it doesn't, no offense taken — just point me to the right person if you can.
 
-Eric Guthmann
+Eric (Kinetik_Rick)
 `getkinetik.app`
 
 ---
