@@ -1248,6 +1248,29 @@
         margin: 0 0 10px;
       }
 
+      /* Honest queue-position badge. Sits between the primary line
+         ("Your place in the queue is reserved.") and the secondary
+         meta line ("A SOVEREIGN NODE AWAITS YOUR DEVICE"). Hidden by
+         default — only revealed when /api/waitlist returns a real
+         position number. Mono font, ruby color, slightly larger than
+         the secondary so it reads as a real receipt artifact and
+         not a footnote. */
+      .waitlist-success-position {
+        display: none;
+        font-family: var(--mono);
+        font-size: 13px;
+        letter-spacing: 4px;
+        color: var(--ruby-core);
+        text-transform: uppercase;
+        font-weight: 600;
+        margin: 0 0 14px;
+        text-shadow: 0 0 18px rgba(255, 20, 48, 0.35);
+      }
+
+      .waitlist-success-position[data-visible="true"] {
+        display: block;
+      }
+
       .waitlist-success-secondary {
         font-family: var(--mono);
         font-size: 10px;
@@ -1850,6 +1873,11 @@
           >
             Your place in the queue is reserved.
           </p>
+          <p
+            class="waitlist-success-position"
+            data-waitlist-success-position
+            aria-live="polite"
+          ></p>
           <p class="waitlist-success-secondary">
             A SOVEREIGN NODE AWAITS YOUR DEVICE
           </p>

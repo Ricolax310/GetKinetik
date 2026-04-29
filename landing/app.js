@@ -17,7 +17,7 @@
      so the binary can be verified against the source.
      iOS and desktop still fall through to the waitlist modal. */
   var ANDROID_APK_URL =
-    "https://github.com/Ricolax310/GetKinetik/releases/download/v1.3.0/getkinetik-v1.3.0.apk";
+    "https://github.com/Ricolax310/GetKinetik/releases/download/v1.3.2/getkinetik-v1.3.2.apk";
 
   var ua = (typeof navigator !== "undefined" && navigator.userAgent) || "";
   var isAndroid = /Android/i.test(ua);
@@ -152,6 +152,25 @@
               var primary = successEl.querySelector("[data-waitlist-success-primary]");
               if (primary) {
                 primary.textContent = msg;
+              }
+
+              // Honest position badge. Surfaces the actual queue number
+              // returned by /api/waitlist — small early signups see small
+              // numbers, that's the point. Hidden entirely if the API
+              // didn't return a position (legacy entry or transport quirk).
+              var positionEl = successEl.querySelector("[data-waitlist-success-position]");
+              if (positionEl) {
+                var pos =
+                  result.json && typeof result.json.position === "number"
+                    ? result.json.position
+                    : null;
+                if (pos && pos > 0) {
+                  positionEl.textContent = "POSITION · #" + pos;
+                  positionEl.setAttribute("data-visible", "true");
+                } else {
+                  positionEl.textContent = "";
+                  positionEl.removeAttribute("data-visible");
+                }
               }
             }
             return;
