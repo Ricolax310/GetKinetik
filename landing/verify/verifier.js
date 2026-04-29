@@ -93,10 +93,51 @@ const fromHex = (hex) => {
 const utf8 = (s) => new TextEncoder().encode(s);
 
 // base64url decode, for `#proof=...` URL fragments.
+//
+// Defensive against the most common real-world failure mode: a user
+// copy-pasting a display-truncated URL where the terminal / email client
+// / chat app rendered the middle as literal "..." (or the Unicode
+// horizontal ellipsis "…"). Without this guard, atob throws
+// "InvalidCharacterError: The string to be decoded contains characters
+// outside of the Latin1 range" or similar, with no hint that the user's
+// input was actually truncated rather than corrupt.
+//
+// The fix is two layers:
+//   1. EXPLICIT ellipsis detection — fail FAST with a clear message
+//      pointing at the most likely cause. Catches the v1.3.x partner-
+//      outreach bug where a verify URL was clicked from an email that
+//      had wrapped+truncated it.
+//   2. SILENT alphabet filter — strip any character not in the
+//      base64url alphabet (A-Z, a-z, 0-9, '-', '_'). This catches stray
+//      whitespace, line breaks from word-wrap, and zero-width junk from
+//      rich-text paste pipelines. Padding ('=') is added back below.
+//
+// If either guard activates and the result still doesn't decode to a
+// valid JSON artifact, the existing JSON.parse-then-verify pipeline
+// surfaces that with its own error message — no silent corruption.
 const fromBase64Url = (s) => {
-  const pad = s.length % 4 === 0 ? "" : "=".repeat(4 - (s.length % 4));
-  const b64 = s.replace(/-/g, "+").replace(/_/g, "/") + pad;
-  const bin = atob(b64);
+  if (typeof s !== "string" || s.length === 0) {
+    throw new Error("Empty or non-string base64url payload");
+  }
+  if (s.includes("...") || s.includes("\u2026")) {
+    throw new Error(
+      "URL appears truncated — paste the full link (no '...' / '\u2026'), or scan the QR code instead"
+    );
+  }
+  const cleaned = s.replace(/[^A-Za-z0-9_\-]/g, "");
+  if (cleaned.length === 0) {
+    throw new Error("No base64url-shaped data found in fragment");
+  }
+  const pad = cleaned.length % 4 === 0 ? "" : "=".repeat(4 - (cleaned.length % 4));
+  const b64 = cleaned.replace(/-/g, "+").replace(/_/g, "/") + pad;
+  let bin;
+  try {
+    bin = atob(b64);
+  } catch (err) {
+    throw new Error(
+      `base64url decode failed: ${err && err.message ? err.message : String(err)}`
+    );
+  }
   const out = new Uint8Array(bin.length);
   for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
   return new TextDecoder().decode(out);
@@ -600,7 +641,7 @@ if (tryLoadFromHash()) {
 // hid PoO sensor rows from the v1.2.0 first-day cohort.
 // ----------------------------------------------------------------------------
 window.__kinetikVerifier = {
-  version: "1.3.0",
+  version: "1.3.2",
   verifyArtifact,
   stableStringify,
   PROOF_ATTRIBUTION,
