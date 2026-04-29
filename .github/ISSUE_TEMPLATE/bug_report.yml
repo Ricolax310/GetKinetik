@@ -1,0 +1,64 @@
+name: Bug report
+description: Something is broken in the app, the landing site, or the verifier.
+title: "[BUG] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug. A few things that help us fix things fast:
+
+        - **Cryptographic / security findings** — please don't file these here. Email `eric@outfromnothingllc.com` with subject prefix `[SECURITY]` and read [SECURITY.md](../../SECURITY.md) first.
+        - **DePIN partner network issues** — those go to the partner network, not us. We just read their APIs.
+        - **The single-key / no-recovery design** is intentional. Seed-phrase backup ships in v1.4.
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: A clear, concise description of the bug and what you expected instead.
+      placeholder: When I tap MINT MY NODE on Android, the download fails with…
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: How to reproduce
+      description: Step-by-step. Include the exact URL, button, or screen.
+      placeholder: |
+        1. Open getkinetik.app on Chrome Android
+        2. Tap I UNDERSTAND — MINT MY NODE
+        3. Observe…
+    validations:
+      required: true
+
+  - type: input
+    id: app-version
+    attributes:
+      label: App / page version
+      description: For the app — version shown on the Vault. For the site — the URL you were on. For the verifier — the version stamp at the bottom of the page (or `window.__kinetikVerifier.version` in console).
+      placeholder: "App v1.3.0 / Verifier v1.3.3 / etc."
+
+  - type: input
+    id: device
+    attributes:
+      label: Device + OS
+      placeholder: "Pixel 7 Pro, Android 14 / Chrome on macOS Sonoma / iPhone 15 Pro Safari iOS 17"
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Console / log output (if any)
+      description: Browser DevTools console, EAS build logs, or any other relevant output. Wrap in code fences.
+      render: shell
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Confirmation
+      options:
+        - label: I have searched existing issues and this bug isn't already filed.
+          required: true
+        - label: This is a bug, not a security finding (which would go to email per SECURITY.md).
+          required: true

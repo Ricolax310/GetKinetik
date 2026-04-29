@@ -1,0 +1,46 @@
+name: Feature request
+description: Suggest a feature, integration, or improvement.
+title: "[FEATURE] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to file a request. A few notes:
+
+        - **Partner integration discussions** — please use email (`eric@outfromnothingllc.com`) instead of an issue, so we can coordinate confidentially. Issues here are for already-public conversations.
+        - **Roadmap-level requests** are most useful when they're motivated — what specifically about the architecture, the trust model, or the user flow is the request trying to improve?
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem are you trying to solve?
+      description: The motivation, not the solution. What's currently impossible, painful, or confusing?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed approach (optional)
+      description: If you have a specific suggestion in mind, describe it here. Pseudocode, sketches, or links to similar features in other projects all welcome.
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered (optional)
+      description: Have you considered any alternative approaches and rejected them? Why?
+
+  - type: dropdown
+    id: layer
+    attributes:
+      label: Which layer does this touch?
+      multiple: false
+      options:
+        - L1 — sovereign identity / trust spine
+        - L2 — sensor capture / signing
+        - L3 — DePIN routing / aggregator
+        - L4 — wallet / earnings / fee
+        - Cross-cutting / multiple layers
+        - Landing site / verifier
+        - Don't know
