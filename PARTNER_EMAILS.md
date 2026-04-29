@@ -1,10 +1,17 @@
 # GETKINETIK — DePIN Partner Outreach Templates
 
-> **v2 — April 2026 refresh.** Pivoted away from generic "DePIN aggregator"
+> **v3 — April 2026.** Pivoted away from generic "DePIN aggregator"
 > framing toward partner-side trust-layer value. Each email now leads with a
 > live, signed Proof-of-Origin URL — anyone can click, verify cryptographically
 > in their browser, and immediately see we ship receipts not pitches. That's
 > the highest-credibility move we have.
+>
+> **The one-line pitch that works with crypto-native partners:**
+> "Yearn Finance optimized DeFi yields — we do the same for the physical
+> layer. Your hardware's signed attestations route to whoever's paying most
+> this hour." Use this when you have 15 seconds or a Twitter DM. Don't
+> paste it verbatim into a cold email — it's for conversations, not
+> openers.
 >
 > **Replace `[NAME]` before sending.** The five templates each lead with a
 > different angle — DePINs don't all benefit from the same value prop.
@@ -186,13 +193,15 @@ Eric Mancuso
 
 ---
 
-## Sending order (April 2026)
+## Sending order + status (April–May 2026)
 
-1. **Nodle** — refresh follow-up. Earlier outreach went out before the verify-URL pattern existed; this version lands with a clickable receipt.
-2. **DIMO** — refresh follow-up to `partnerships@dimo.zone` plus the public `#build-on-dimo` thread. We now have v1.3.1 + the redirect URI fix shipped, so the integration story is fully clean.
-3. **Hivemapper** — first or follow-up depending on whether the earliest send landed in a junk folder. The phone-side-provenance angle is fresh and partner-respectful.
-4. **WeatherXM** — partner intake form already filled. This email goes to `partner@weatherxm.com` as the inbox follow-up so the form submission and inbox thread reinforce each other.
-5. **Geodnet** — fresh send. Discord verification + builder post is already out; this is the inbox follow-up.
+| Partner | Status | Next action |
+|---|---|---|
+| **Nodle** | Sent (pre-verify-URL version) | Send v3 refresh with verify link; 5-day follow-up timer starts on send |
+| **DIMO** | Discord DM + public `#build-on-dimo` post done; email sent to `partnerships@dimo.zone` | 5-day follow-up if no reply |
+| **Hivemapper** | Auto-triage reply received ("high ticket volume, Bee hardware FAQ") — counts as acknowledged, not a real read | 5-day follow-up from auto-triage date |
+| **WeatherXM** | Partner intake form submitted + email sent to `partner@weatherxm.com` | 7-day follow-up (they said "high volume") |
+| **Geodnet** | Discord builder post + email sent to `info@geodnet.com` | 5-day follow-up if no reply |
 
 ---
 
