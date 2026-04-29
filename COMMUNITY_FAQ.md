@@ -90,19 +90,21 @@ When the app starts for the first time, it creates a secret key — like an ultr
 
 **What happens if I lose my phone?**
 
-Be honest with yourself here: **your node identity is gone.** There's no reset button, no recovery email, no support ticket that can bring it back. The key lives only on that device. If the phone is gone, the key is gone.
+Your actual money is fine. Your DIMO tokens, Nodle rewards, Hivemapper earnings — all of that lives on those networks in your own wallet. GETKINETIK never touched it. You don't lose a single dollar.
 
-Your accounts on DIMO, Hivemapper, etc. are totally fine — those live on their own networks. But your GETKINETIK node, its history, and its proofs are permanently lost.
+What you lose is your **node identity** — think of it like an anonymous username that's been quietly building up a track record behind the scenes. Your node has a unique ID and a chain of signed heartbeats proving how long it's been running. Nobody knows who you are — the network only sees the anonymous ID. But that ID has seniority. If you lose the phone, you'd start fresh with a new anonymous identity, like joining with a brand new account.
+
+Right now that's annoying more than catastrophic. But as the project grows — Genesis Credits turning into real value, node seniority mattering for how rewards get routed — the longer you've been running, the more that history is worth. You can't get that time back.
 
 **That sounds scary. Can I back it up?**
 
-Not yet — but this is coming. In the next version (v1.4) you'll be able to write down 12 words (like a recovery phrase) and restore your node on a new phone if needed. Only one phone can be active at a time.
+Not yet — but it's coming. In v1.4 you'll be able to write down 12 words (like a crypto recovery phrase) and restore your node on a new phone. Only one device active at a time.
 
-Until then: treat this phone like you'd treat a debit card with your PIN written on it. Don't lose it.
+Until then: don't factory reset without thinking about it first.
 
 **Why can't you just store it on a server so it's recoverable?**
 
-Because the moment a copy of your key exists on a server, that server can sign things on your behalf. That breaks the whole guarantee — that nobody but you can prove anything about your node. It's a trade-off we're being upfront about.
+Because the whole point is that your node identity is fully anonymous and fully yours. The moment a copy lives on a server, that server could sign things on your behalf — which breaks the guarantee that your node's proofs are actually coming from you and only you. No server = no middleman = nobody can fake or access your identity. That's the trade-off, and we'd rather be upfront about it than hide it.
 
 ---
 
