@@ -189,6 +189,6 @@ invitation to fork.
 - Project: [getkinetik.app](https://getkinetik.app)
 - Email: eric@outfromnothingllc.com
 - GitHub: [@Ricolax310](https://github.com/Ricolax310)
-- Owner: OutFromNothing LLC
+- Founder: Eric (Kinetik_Rick) · OutFromNothing LLC
 
 A Sovereign Node Protocol artifact. Not transferable.
