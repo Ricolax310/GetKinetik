@@ -337,6 +337,108 @@
       }
 
       /* ------------------------------------------------------------
+         Mint warning — sits between the hero pitch and the CTAs.
+         Ruby-bordered, dark fill, monospace eyebrow. Designed to
+         read like a contractual term sheet, not a marketing
+         flourish. v1.3.x copy: pre-seed-phrase, sets honest
+         expectations about the no-recovery design before the user
+         taps MINT. Will be re-tuned when the seed-phrase backup
+         flow ships in v1.4 and the in-app first-run gate takes
+         over the proof-of-saved-key responsibility.
+         ------------------------------------------------------------ */
+      .mint-warning {
+        display: block;
+        max-width: 620px;
+        margin: 0 auto 36px;
+        padding: 26px 30px;
+        text-align: left;
+        background: rgba(58, 2, 9, 0.22);
+        border: 1px solid rgba(255, 20, 48, 0.28);
+        border-radius: 14px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .mint-warning-eyebrow {
+        display: block;
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 4px;
+        color: var(--ruby-core);
+        text-transform: uppercase;
+        margin-bottom: 16px;
+        font-weight: 600;
+      }
+
+      .mint-warning-lead,
+      .mint-warning-body,
+      .mint-warning-keep,
+      .mint-warning-rule {
+        font-family: var(--sans);
+        font-size: clamp(13px, 1.4vw, 14px);
+        line-height: 1.65;
+        color: var(--platinum);
+        margin: 0 0 14px;
+      }
+
+      .mint-warning-lead {
+        font-weight: 400;
+        opacity: 0.95;
+      }
+
+      .mint-warning-body {
+        opacity: 0.85;
+      }
+
+      .mint-warning-list {
+        margin: 0 0 18px;
+        padding-left: 20px;
+        color: var(--platinum);
+        font-family: var(--sans);
+        font-size: clamp(13px, 1.4vw, 14px);
+        line-height: 1.65;
+        opacity: 0.85;
+      }
+
+      .mint-warning-list li {
+        margin-bottom: 8px;
+      }
+
+      .mint-warning-list li::marker {
+        color: var(--ruby-core);
+      }
+
+      .mint-warning-keep {
+        opacity: 0.72;
+        font-size: clamp(12px, 1.3vw, 13px);
+        padding-top: 14px;
+        border-top: 1px solid var(--hairline);
+      }
+
+      .mint-warning-keep strong {
+        color: var(--platinum);
+        opacity: 1;
+        font-weight: 500;
+      }
+
+      .mint-warning-rule {
+        opacity: 0.92;
+        margin-bottom: 0;
+      }
+
+      .mint-warning-rule strong {
+        color: var(--ruby-core);
+        font-weight: 600;
+      }
+
+      /* Allow the longer "I UNDERSTAND — MINT MY NODE" label to wrap
+         gracefully on narrow screens without breaking the CTA row. */
+      .cta-primary {
+        max-width: min(100%, 360px);
+        text-align: center;
+      }
+
+      /* ------------------------------------------------------------
          Section rhythm.
          ------------------------------------------------------------ */
       section {
@@ -1268,6 +1370,53 @@
         No custody. No middleman. Just receipts.
       </p>
 
+      <!-- ============================================================
+           BEFORE YOU MINT — key responsibility warning.
+           v1.3.x: pre-seed-phrase. Sets honest expectations about the
+           no-recovery design before the user taps MINT. Will be paired
+           with an in-app first-run gate (write down + verify 12 words)
+           when the seed-phrase backup ships in v1.4.
+           ============================================================ -->
+      <aside class="mint-warning" aria-labelledby="mint-warning-title">
+        <span class="mint-warning-eyebrow" id="mint-warning-title">BEFORE YOU MINT</span>
+        <p class="mint-warning-lead">
+          Your node is a cryptographic key generated on this phone, only on
+          this phone. We never see it. We never store it. We can't recover it.
+        </p>
+        <p class="mint-warning-body">
+          If you lose this phone — wipe it, factory reset it, uninstall the
+          app — the node is gone:
+        </p>
+        <ul class="mint-warning-list">
+          <li>Your unique node identity, gone.</li>
+          <li>
+            Every heartbeat ever signed, gone. Your seniority on the network
+            resets to zero.
+          </li>
+          <li>
+            Every Proof of Origin you've minted goes orphaned — still
+            cryptographically valid forever, but no longer attached to a
+            live node.
+          </li>
+          <li>
+            Every signed receipt of every DePIN payout you've collected
+            through GETKINETIK, gone.
+          </li>
+        </ul>
+        <p class="mint-warning-keep">
+          <strong>What you keep:</strong> the underlying DIMO / Hivemapper /
+          WeatherXM accounts and balances themselves. Those live in their
+          own networks, in their own keys. We only read them. You can
+          reconnect them on a new install — but you'll be starting a
+          brand-new node, from zero, with zero earned receipts.
+        </p>
+        <p class="mint-warning-rule">
+          <strong>One phone at a time.</strong> Seed-phrase backup
+          (write down 12 words, restore on a new device) ships in v1.4.
+          Until then, treat this device like a hardware wallet.
+        </p>
+      </aside>
+
       <div class="cta-row">
         <a
           class="cta cta-primary"
@@ -1275,7 +1424,7 @@
           href="https://github.com/Ricolax310/GetKinetik/releases/latest"
           rel="noopener"
           >
-          MINT YOUR NODE
+          I UNDERSTAND — MINT MY NODE
           <span class="arrow" aria-hidden="true">→</span>
         </a>
         <a class="cta cta-secondary" href="/verify/">SEE A SIGNED PROOF</a>
