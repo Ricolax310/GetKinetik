@@ -120,30 +120,29 @@ Direct contact: **eric@outfromnothingllc.com**.
 
 ## Honest disclosure
 
-GETKINETIK is built on a **single key, on a single phone, no recovery**.
-That's a deliberate design choice — no servers, no accounts, no custodians
-means there's nobody to hand your identity back to you if you lose it.
+Your node is an **anonymous cryptographic identity** — the network sees
+a unique ID, never a name, never an account. That identity lives only on
+your phone.
 
-If you uninstall the app, factory reset, or lose this phone:
+**If you lose your phone, the real picture is:**
 
-- Your unique node identity is gone
-- Every signed heartbeat ever produced is gone (your seniority resets)
-- Every Proof of Origin you've minted goes orphaned — still
-  cryptographically valid forever, but no longer attached to a live node
-- Every signed receipt of every DePIN payout you've collected through
-  GETKINETIK is gone
+- Your DePIN earnings (DIMO, Nodle, Hivemapper, etc.) are safe — they
+  live in your wallet on those networks. We only read them, never hold them.
+- Your Genesis Credits, once transferred out to your wallet, are safe.
+- What you lose is your **node's seniority** — how long it's been running,
+  its heartbeat chain, its track record. The anonymous identity itself can
+  be recreated instantly on a new device.
 
-You **don't lose** your underlying DIMO / Hivemapper / WeatherXM / etc.
-accounts. Those live in their own networks, in their own keys. We just
-read them.
+Right now that trade-off is low stakes — seniority is a clock, not cash.
+As the network matures (Genesis Credits gaining value, node age factoring
+into routing priority), the longer you've been running the more that
+history is worth. But today, losing a node and starting over is an
+inconvenience, not a disaster. Keep your credits transferred out regularly
+and there's essentially nothing to lose.
 
-Seed-phrase backup (write down 12 words, restore on a new device, only
-one device active at a time) ships in v1.4. Until then, treat the
-device like a hardware wallet.
-
-This warning is on the landing page directly above MINT MY NODE for the
-same reason it's here: the worst version of "we're trustless" is the
-one where users learn the consequences of trustlessness the hard way.
+Seed-phrase backup (write down 12 words, restore on a new device, one
+device active at a time) ships in v1.4 for users who want to preserve
+their seniority across devices.
 
 ---
 
