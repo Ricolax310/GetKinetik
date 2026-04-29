@@ -525,10 +525,11 @@ async function runVerify() {
     const report = await verifyArtifact(raw);
     renderReport(report);
   } catch (err) {
-    renderError(
-      err?.message ?? String(err),
-      err?.stack && err.stack !== err.message ? err.stack : null,
-    );
+    // Stack traces in the DOM are noise — they scare users and tell
+    // them nothing actionable. Surface the message in the UI; log the
+    // full error (with stack, if any) to the console for ops/debug.
+    if (err && err.stack) console.error("[verifier]", err);
+    renderError(err?.message ?? String(err), null);
   }
 }
 
@@ -641,7 +642,7 @@ if (tryLoadFromHash()) {
 // hid PoO sensor rows from the v1.2.0 first-day cohort.
 // ----------------------------------------------------------------------------
 window.__kinetikVerifier = {
-  version: "1.3.2",
+  version: "1.3.3",
   verifyArtifact,
   stableStringify,
   PROOF_ATTRIBUTION,
