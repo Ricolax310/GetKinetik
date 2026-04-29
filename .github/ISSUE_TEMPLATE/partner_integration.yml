@@ -1,0 +1,41 @@
+name: Partner integration question (public)
+description: Public-facing question about how the GETKINETIK trust layer integrates with another DePIN network.
+title: "[PARTNERSHIP] "
+labels: ["partner-integration", "question"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        > **For confidential partnership conversations**, please email `eric@outfromnothingllc.com` directly. This template is for public-facing questions only — questions a partner is comfortable having visible to anyone reading the issues page.
+
+  - type: input
+    id: network
+    attributes:
+      label: Which DePIN network is this about?
+      placeholder: DIMO / Hivemapper / WeatherXM / Geodnet / Nodle / Helium / other
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: What are you exploring?
+      description: A read-only earnings integration? A sybil-resistance signal? A cross-network reputation pass-through? Something else?
+    validations:
+      required: true
+
+  - type: textarea
+    id: documentation
+    attributes:
+      label: Relevant network documentation (optional)
+      description: Links to API docs, SDK pages, or developer console pages on the partner side. Helpful for grounding the conversation.
+
+  - type: dropdown
+    id: relationship
+    attributes:
+      label: Are you affiliated with the network?
+      options:
+        - I work for / represent the network
+        - I'm an independent developer building on it
+        - I'm a node operator / user
+        - Other
