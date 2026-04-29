@@ -90,21 +90,25 @@ When the app starts for the first time, it creates a secret key — like an ultr
 
 **What happens if I lose my phone?**
 
-Your actual money is fine. Your DIMO tokens, Nodle rewards, Hivemapper earnings — all of that lives on those networks in your own wallet. GETKINETIK never touched it. You don't lose a single dollar.
+Less than you'd think. Here's the full picture:
 
-What you lose is your **node identity** — think of it like an anonymous username that's been quietly building up a track record behind the scenes. Your node has a unique ID and a chain of signed heartbeats proving how long it's been running. Nobody knows who you are — the network only sees the anonymous ID. But that ID has seniority. If you lose the phone, you'd start fresh with a new anonymous identity, like joining with a brand new account.
+- **Your DePIN earnings (DIMO, Nodle, etc.)** — totally safe. Those live in your wallet on those networks. GETKINETIK never touched them.
+- **Your Genesis Credits** — as long as you've transferred or cashed them out to your wallet before losing the phone, they're safe too. Credits that were already moved out are gone from the phone, sitting safely in your wallet.
+- **What's actually lost** — only your node's anonymous identity and its seniority (how long it's been running). That's it.
 
-Right now that's annoying more than catastrophic. But as the project grows — Genesis Credits turning into real value, node seniority mattering for how rewards get routed — the longer you've been running, the more that history is worth. You can't get that time back.
+And even that isn't as painful as it sounds. The identity is fully anonymous — the network never knew who you were, just that a node with that ID had been running for X days. You can create a new one instantly. You'd just be starting the seniority clock over.
 
-**That sounds scary. Can I back it up?**
+The only real "loss" is time. The longer a node has been running, the more its track record is worth as the network matures. You can't get those days back. But your money? Always yours, always in your wallet.
 
-Not yet — but it's coming. In v1.4 you'll be able to write down 12 words (like a crypto recovery phrase) and restore your node on a new phone. Only one device active at a time.
+**The short version:** keep your credits transferred out regularly and losing your phone is basically just an inconvenience, not a disaster.
 
-Until then: don't factory reset without thinking about it first.
+**Can I back up the node identity so I don't lose the seniority?**
 
-**Why can't you just store it on a server so it's recoverable?**
+Not yet — but it's coming in v1.4. You'll be able to write down 12 words (like a crypto recovery phrase) and restore your exact node on a new phone. Only one device active at a time.
 
-Because the whole point is that your node identity is fully anonymous and fully yours. The moment a copy lives on a server, that server could sign things on your behalf — which breaks the guarantee that your node's proofs are actually coming from you and only you. No server = no middleman = nobody can fake or access your identity. That's the trade-off, and we'd rather be upfront about it than hide it.
+**Why can't you just store it on a server?**
+
+Because the entire point of the node identity is that it's anonymous and only yours. The moment a copy lives on a server, that server could theoretically sign things as you — which breaks the guarantee. No server = nobody can impersonate your node, access your history, or fake your proofs. That's the design, and we think it's the right one.
 
 ---
 
