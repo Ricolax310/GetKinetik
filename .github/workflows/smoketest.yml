@@ -1,0 +1,26 @@
+name: Verifier smoketest
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'landing/verify/**'
+      - 'packages/kinetik-core/src/**'
+  pull_request:
+    paths:
+      - 'landing/verify/**'
+      - 'packages/kinetik-core/src/**'
+
+jobs:
+  smoketest:
+    name: Cryptographic contract parity check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run verifier smoketest
+        run: node landing/verify/smoketest.mjs
