@@ -61,6 +61,38 @@ export type EarningSnapshot = {
 };
 
 // ----------------------------------------------------------------------------
+// AdapterRateMetadata — optional per-adapter pricing metadata used by the
+// optimizer to compute USD value of pending earnings and to record verified-
+// user premium receipts. Adapters that cannot supply this leave it undefined;
+// the optimizer falls back to the CoinGecko price feed.
+// ----------------------------------------------------------------------------
+export type AdapterRateMetadata = {
+  /**
+   * Standard reward rate for this adapter in USD per token unit.
+   * May be approximate — the optimizer uses this for quick comparisons
+   * before hitting the price feed. Leave undefined if unknown.
+   */
+  standardRateUsd?: number;
+  /**
+   * Premium reward rate paid by the partner to hardware-attested nodes,
+   * in USD per token unit. Present only when the partner has activated the
+   * verified-user premium programme for this adapter.
+   */
+  premiumRateUsd?: number;
+  /**
+   * Premium above standard in basis points (100 bp = 1%).
+   * e.g. 1500 = 15% premium. Present only when premiumRateUsd is defined.
+   */
+  premiumBasisPoints?: number;
+  /**
+   * Which EVM chain this adapter's claim() settles on.
+   * Used by the gas-aware scorer in packages/optimizer to look up the
+   * correct gas price. null = auto-deposit (no claim step).
+   */
+  claimChain?: 'polygon' | 'base' | 'solana' | null;
+};
+
+// ----------------------------------------------------------------------------
 // DepinAdapter — the interface.
 // ----------------------------------------------------------------------------
 export interface DepinAdapter {
@@ -72,6 +104,14 @@ export interface DepinAdapter {
   readonly description: string;
   /** Native currency token symbol, e.g. 'NODL'. */
   readonly currency: string;
+  /**
+   * Optional pricing + premium metadata for the optimizer engine.
+   * Adapters that cannot supply this leave it undefined; the optimizer
+   * falls back to the CoinGecko price feed in priceFeed.ts.
+   * Implement this to participate in gas-aware claim timing and the
+   * verified-user premium programme.
+   */
+  readonly rateMetadata?: AdapterRateMetadata;
 
   /**
    * Returns true if the adapter can function on this device/platform.
