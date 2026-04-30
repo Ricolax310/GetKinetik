@@ -134,7 +134,7 @@ fixes, polish, whatever), tell me what before we burn the build.
 ### Step 3 — what v1.3.3 ships (assuming Step 1 confirms DIMO works)
 
 ```
-Build:        v1.3.3 (versionCode 8)
+Build:        v1.3.3 (versionCode 9)
 Includes:     - Gem unit-conversion fix (jitter at rest, m/s² → g)
               - Carries forward all v1.3.2 fixes:
                  · DIMO HTTPS redirect URI architectural fix
