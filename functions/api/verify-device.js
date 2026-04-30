@@ -36,10 +36,11 @@
  * 1. Extract the base64url-encoded payload from the URL fragment (#proof=...)
  * 2. Decode and parse the JSON proof payload
  * 3. Verify the PROOF_ATTRIBUTION field matches the expected constant
- * 4. Re-serialise the payload using stableStringify (lex-sorted keys)
- * 5. Verify the Ed25519 signature against the serialised message and the
+ * 4. Confirm the artifact is a Proof of Origin, not another signed artifact
+ * 5. Re-serialise the payload using stableStringify (lex-sorted keys)
+ * 6. Verify the hash field, when present, matches sha256(message)[:16]
+ * 7. Verify the Ed25519 signature against the serialised message and the
  *    pubkey embedded in the payload using SubtleCrypto (native in CF Workers)
- * 6. Verify the hash field matches sha256(message)[:16]
  *
  * This is a server-side implementation of the same logic in landing/verify/verifier.js.
  * Both must remain byte-for-byte equivalent — the CRYPTOGRAPHIC_CONTRACT comment
@@ -169,7 +170,7 @@ async function verifyProofUrl(proofUrl) {
   }
 
   const { payload, signature, hash } = envelope;
-  if (!payload || !signature || !hash) {
+  if (!payload || !signature) {
     return { valid: false, reason: "missing_fields" };
   }
 
@@ -178,15 +179,23 @@ async function verifyProofUrl(proofUrl) {
     return { valid: false, reason: "attribution_mismatch" };
   }
 
-  // Step 5: verify hash = sha256(stableStringify(payload))[:16].
+  // Step 5: reject valid signatures over other GETKINETIK artifact types.
+  if (payload.kind !== "proof-of-origin") {
+    return { valid: false, reason: "unsupported_artifact_kind" };
+  }
+
+  // Step 6: verify hash = sha256(stableStringify(payload))[:16].
+  // QR/deep-link proofs use compact form { payload, signature }; the browser
+  // verifier derives the hash, so the partner webhook must do the same.
   const message = stableStringify(payload);
   const fullHash = await sha256Hex(message);
   const expectedHash = fullHash.slice(0, 16);
-  if (expectedHash !== hash) {
+  const claimedHash = typeof hash === "string" ? hash.toLowerCase() : expectedHash;
+  if (expectedHash !== claimedHash) {
     return { valid: false, reason: "hash_mismatch" };
   }
 
-  // Step 6: verify Ed25519 signature using SubtleCrypto.
+  // Step 7: verify Ed25519 signature using SubtleCrypto.
   // The pubkey is a 64-char lowercase hex string (32 raw bytes).
   const pubkeyHex = payload.pubkey;
   if (typeof pubkeyHex !== "string" || pubkeyHex.length !== 64) {
@@ -222,12 +231,13 @@ async function verifyProofUrl(proofUrl) {
     return { valid: false, reason: "signature_invalid" };
   }
 
-  // Step 7: return the verified node identity.
+  // Step 8: return the verified node identity.
   return {
     valid: true,
     nodeId: payload.nodeId ?? null,
     pubkey: pubkeyHex,
-    mintedAt: payload.ts ?? null,
+    mintedAt: payload.mintedAt ?? null,
+    issuedAt: payload.issuedAt ?? null,
     schema: `proof-of-origin:v${payload.v ?? 1}`,
     attribution: payload.attribution,
   };
@@ -278,3 +288,5 @@ export async function onRequest(ctx) {
   if (ctx.request.method === "POST")    return onRequestPost(ctx);
   return json({ error: "Method not allowed." }, 405);
 }
+
+export const __test = { verifyProofUrl };
