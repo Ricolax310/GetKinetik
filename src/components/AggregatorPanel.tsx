@@ -271,7 +271,7 @@ function AdapterCard({
       await Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
       const newStatus = await adapter.register(identity);
       setState((prev) => ({ ...prev, status: newStatus, registering: false }));
-      void refresh();
+      void loadStatus();
     } catch {
       setState((prev) => ({ ...prev, registering: false }));
     }
