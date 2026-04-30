@@ -31,6 +31,9 @@ import { PinPad } from './PinPad';
 import { ProofOfOrigin } from './ProofOfOrigin';
 import { Readouts } from './Readouts';
 import { AggregatorPanel, AGGREGATOR_ENABLED } from './AggregatorPanel';
+import { GenesisCreditsTicker } from './GenesisCreditsTicker';
+import { OptimizationReport } from './OptimizationReport';
+import type { OptimizationResult } from '../../packages/optimizer/src/scorer';
 import { nodleAdapter } from '../../packages/adapter-nodle/src';
 import { dimoAdapter } from '../../packages/adapter-dimo/src';
 import { hivemapperAdapter } from '../../packages/adapter-hivemapper/src';
@@ -108,6 +111,8 @@ export function VaultPanel() {
   const [diagOpen, setDiagOpen] = useState(false);
   const [manifestoOpen, setManifestoOpen] = useState(false);
   const [proofOpen, setProofOpen] = useState(false);
+  const [optimizationResult, setOptimizationResult] = useState<OptimizationResult | null>(null);
+  const [reportOpen, setReportOpen] = useState(false);
 
   const authInFlight = useRef(false);
 
@@ -605,7 +610,16 @@ export function VaultPanel() {
         isCharging={isCharging}
       />
 
-      <AggregatorPanel adapters={ADAPTERS} identity={identity} />
+      <GenesisCreditsTicker />
+
+      <AggregatorPanel
+        adapters={ADAPTERS}
+        identity={identity}
+        onOpenOptimizationReport={(result) => {
+          setOptimizationResult(result);
+          setReportOpen(true);
+        }}
+      />
 
       {pinPadMode ? (
         <PinPad
@@ -620,6 +634,15 @@ export function VaultPanel() {
         visible={manifestoOpen}
         onClose={() => setManifestoOpen(false)}
       />
+
+      {optimizationResult && (
+        <OptimizationReport
+          visible={reportOpen}
+          onClose={() => setReportOpen(false)}
+          result={optimizationResult}
+          activeAdapterCount={ADAPTERS.length}
+        />
+      )}
 
       <ProofOfOrigin
         visible={proofOpen}
