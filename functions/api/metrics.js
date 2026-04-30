@@ -59,6 +59,8 @@ const DEFAULT_METRICS = {
   updatedAt: new Date().toISOString(),
 };
 
+const AGGREGATE_RECOMPUTE_INTERVAL_MS = 5 * 60 * 1000;
+
 export async function onRequestGet(ctx) {
   const { env } = ctx;
 
@@ -130,12 +132,24 @@ export async function onRequestPost(ctx) {
     expirationTtl: 60 * 60 * 24 * 90,  // 90 days
   });
 
-  // Recompute aggregate metrics.
-  // This is O(n) over all node keys — fine at our scale (<10k nodes).
-  // At 10k+ nodes, switch to a separate counter key.
-  await recomputeAggregates(env.KINETIK_KV, nowMs);
+  // Recompute at most once per dashboard cache window. The scan is O(n) over
+  // node keys, so doing it on every public POST makes cheap request bursts
+  // amplify into repeated full-namespace KV reads.
+  if (await shouldRecomputeAggregates(env.KINETIK_KV, nowMs)) {
+    await recomputeAggregates(env.KINETIK_KV, nowMs);
+  }
 
   return json({ ok: true });
+}
+
+async function shouldRecomputeAggregates(kv, nowMs) {
+  const aggregate = await kv.get("metrics:aggregate", { type: "json" }).catch(() => null);
+  if (!aggregate?.updatedAt) return true;
+
+  const updatedAtMs = Date.parse(aggregate.updatedAt);
+  if (!Number.isFinite(updatedAtMs)) return true;
+
+  return nowMs - updatedAtMs >= AGGREGATE_RECOMPUTE_INTERVAL_MS;
 }
 
 async function recomputeAggregates(kv, nowMs) {
