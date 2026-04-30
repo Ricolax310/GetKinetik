@@ -185,6 +185,10 @@ const secureSet = async (key: string, value: unknown): Promise<void> => {
   }
 };
 
+const secureSetRequired = async (key: string, value: unknown): Promise<void> => {
+  await SecureStore.setItemAsync(key, String(value));
+};
+
 const secureDelete = async (key: string): Promise<void> => {
   try {
     await SecureStore.deleteItemAsync(key);
@@ -361,9 +365,9 @@ export async function loadWalletSummary(
 // updated summary, and returns the SignedEarning for the caller to display
 // or relay.
 //
-// Fire-and-forget persistence (same pattern as heartbeat): a failed
-// SecureStore write warns but does not block the caller. The signed
-// artifact is the source of truth — the summary can be recomputed.
+// The updated summary must be durable before this returns. Adapter-level
+// deduplication advances its watermark after appendEarningLog succeeds, so a
+// swallowed summary write would lose the chain/count update permanently.
 // ----------------------------------------------------------------------------
 export async function appendEarningLog(
   identity: NodeIdentity,
@@ -409,10 +413,10 @@ export async function appendEarningLog(
 
   const signed = await signEarning(identity, entry);
 
-  // Persist — fire and forget.
+  // Persist the chain tip/count before the adapter watermark advances.
   const newCount = summary.count + 1;
-  void secureSet(WALLET_KEYS.count, newCount);
-  void secureSet(WALLET_KEYS.lastHash, signed.hash);
+  await secureSetRequired(WALLET_KEYS.count, newCount);
+  await secureSetRequired(WALLET_KEYS.lastHash, signed.hash);
 
   return signed;
 }

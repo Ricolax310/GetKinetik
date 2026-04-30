@@ -206,7 +206,7 @@ async function recordEarningDelta(
       currency: adapter.currency,
       gross: delta,
     });
-    await SecureStore.setItemAsync(key, String(curr)).catch(() => {});
+    await SecureStore.setItemAsync(key, String(curr));
     return true;
   } catch (err) {
     console.warn('[aggregator] failed to record earning delta:', err);
@@ -271,7 +271,7 @@ function AdapterCard({
       await Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
       const newStatus = await adapter.register(identity);
       setState((prev) => ({ ...prev, status: newStatus, registering: false }));
-      void refresh();
+      void loadStatus();
     } catch {
       setState((prev) => ({ ...prev, registering: false }));
     }
