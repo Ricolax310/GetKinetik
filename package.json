@@ -12,7 +12,8 @@
     "eas:init": "npx eas-cli@latest init",
     "eas:build:dev": "npx eas-cli@latest build --profile development --platform android",
     "eas:build:preview": "npx eas-cli@latest build --profile preview --platform android",
-    "eas:build:prod": "npx eas-cli@latest build --profile production --platform android"
+    "eas:build:apk": "npx eas-cli@latest build --profile preview --platform android",
+    "eas:build:aab": "npx eas-cli@latest build --profile production --platform android"
   },
   "dependencies": {
     "@noble/ed25519": "^3.1.0",

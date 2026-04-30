@@ -2,7 +2,7 @@
 
 > **Author:** Eric (Kinetik_Rick), Founder — GETKINETIK / OutFromNothing LLC
 > **Updated:** April 2026
-> **Contact:** eric@outfromnothing.com
+> **Contact:** eric@outfromnothingllc.com
 
 ---
 
@@ -61,7 +61,7 @@ You get:
 
 We save more than we cost.
 
-The webhook is live today — you can test it before any agreement. DM me or reach me at eric@outfromnothing.com.
+The webhook is live today — you can test it before any agreement. DM me or reach me at eric@outfromnothingllc.com.
 
 — Eric (Kinetik_Rick)
 GETKINETIK · getkinetik.app
@@ -104,7 +104,7 @@ Verify endpoint spec: https://getkinetik.app/docs/api/verify-device (coming shor
 Best,
 Eric Guthmann (Kinetik_Rick)
 Founder, GETKINETIK / OutFromNothing LLC
-eric@outfromnothing.com
+eric@outfromnothingllc.com
 ```
 
 ---
@@ -137,7 +137,7 @@ WHY IT HELPS HIVEMAPPER:
 
 You save more than you pay.
 
-Happy to answer questions here or at eric@outfromnothing.com.
+Happy to answer questions here or at eric@outfromnothingllc.com.
 
 — Eric (Kinetik_Rick)
 getkinetik.app
@@ -182,7 +182,7 @@ curl -X POST https://getkinetik.app/api/verify-device \
   -H 'Content-Type: application/json' \
   -d '{"proofUrl":"<user_proof_url>"}'
 
-Happy to talk. eric@outfromnothing.com
+Happy to talk. eric@outfromnothingllc.com
 
 — Eric (Kinetik_Rick)
 GETKINETIK · getkinetik.app
@@ -216,7 +216,7 @@ You get hardware-confirmed operators. We pass the premium through to users. Ever
 
 The webhook is live today — test it before any agreement.
 
-eric@outfromnothing.com
+eric@outfromnothingllc.com
 
 — Eric (Kinetik_Rick)
 GETKINETIK · getkinetik.app
@@ -245,7 +245,7 @@ Pay GETKINETIK-verified Nodle nodes a 10–15% NODL premium. The verification is
 
 For a network whose core value proposition is "real edge nodes," having a verified badge from GETKINETIK could be a meaningful differentiator for premium enterprise API customers.
 
-Happy to talk in more detail. eric@outfromnothing.com
+Happy to talk in more detail. eric@outfromnothingllc.com
 
 — Eric (Kinetik_Rick)
 getkinetik.app

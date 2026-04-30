@@ -131,7 +131,7 @@ If you've agreed to the verified-user premium programme:
 - Verified GETKINETIK nodes earn standard rate + premium (e.g. +15%).
 - The user's GETKINETIK app signs the premium into their receipt — both sides of the transaction are auditable.
 
-Contact `eric@outfromnothing.com` to discuss the premium programme.
+Contact `eric@outfromnothingllc.com` to discuss the premium programme.
 
 ---
 
@@ -150,7 +150,7 @@ Contact `eric@outfromnothing.com` to discuss the premium programme.
 | Free (no key) | 100 req/min per IP |
 | Partner (with API key — coming v1.5) | 1,000 req/min |
 
-Contact `eric@outfromnothing.com` to get a partner API key and higher rate limits.
+Contact `eric@outfromnothingllc.com` to get a partner API key and higher rate limits.
 
 ---
 
