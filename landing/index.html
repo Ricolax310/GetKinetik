@@ -839,6 +839,243 @@
       }
 
       /* ------------------------------------------------------------
+         Optimizer section.
+         ------------------------------------------------------------ */
+      .optimizer-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin-top: 16px;
+      }
+
+      @media (max-width: 680px) {
+        .optimizer-grid { grid-template-columns: 1fr; }
+      }
+
+      .optimizer-card {
+        padding: 32px 26px;
+        border: 1px solid var(--hairline);
+        border-radius: 18px;
+        background: linear-gradient(180deg, var(--obsidian-soft) 0%, var(--obsidian) 100%);
+        transition: border-color 0.3s ease, transform 0.3s ease;
+      }
+
+      .optimizer-card:hover {
+        border-color: rgba(58, 155, 255, 0.3);
+        transform: translateY(-2px);
+      }
+
+      .optimizer-card-eyebrow {
+        display: block;
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 3px;
+        color: var(--sapphire-glow);
+        text-transform: uppercase;
+        font-weight: 500;
+        margin-bottom: 12px;
+      }
+
+      .optimizer-card-title {
+        font-family: var(--serif);
+        font-size: 19px;
+        font-weight: 300;
+        line-height: 1.4;
+        color: var(--platinum);
+        margin: 0 0 12px;
+      }
+
+      .optimizer-card-body {
+        font-family: var(--sans);
+        font-size: 14px;
+        line-height: 1.7;
+        color: var(--platinum);
+        opacity: 0.78;
+        margin: 0;
+        font-weight: 300;
+      }
+
+      .optimizer-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 14px;
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: rgba(0, 123, 255, 0.1);
+        border: 1px solid rgba(58, 155, 255, 0.25);
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 2px;
+        color: var(--sapphire-glow);
+        text-transform: uppercase;
+        font-weight: 500;
+      }
+
+      .optimizer-badge::before {
+        content: "";
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--sapphire-glow);
+        box-shadow: 0 0 6px rgba(58, 155, 255, 0.7);
+      }
+
+      /* Genesis Credits callout inside optimizer section */
+      .gc-callout {
+        grid-column: 1 / -1;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        padding: 28px 30px;
+        border: 1px solid rgba(255, 20, 48, 0.22);
+        border-radius: 18px;
+        background: rgba(58, 2, 9, 0.18);
+        flex-wrap: wrap;
+      }
+
+      .gc-callout-text {
+        flex: 1;
+        min-width: 200px;
+      }
+
+      .gc-callout-eyebrow {
+        display: block;
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 3.5px;
+        color: var(--ruby-core);
+        text-transform: uppercase;
+        font-weight: 500;
+        margin-bottom: 8px;
+      }
+
+      .gc-callout-title {
+        font-family: var(--serif);
+        font-size: 18px;
+        font-weight: 300;
+        color: var(--platinum);
+        margin: 0 0 8px;
+        line-height: 1.4;
+      }
+
+      .gc-callout-body {
+        font-family: var(--sans);
+        font-size: 13px;
+        line-height: 1.7;
+        color: var(--platinum);
+        opacity: 0.72;
+        margin: 0;
+        font-weight: 300;
+      }
+
+      .gc-stat-group {
+        display: flex;
+        gap: 18px;
+        flex-wrap: wrap;
+      }
+
+      .gc-stat {
+        text-align: center;
+        min-width: 80px;
+      }
+
+      .gc-stat-num {
+        font-family: var(--serif);
+        font-size: 32px;
+        font-weight: 300;
+        color: var(--ruby-ember);
+        line-height: 1;
+        margin: 0 0 6px;
+      }
+
+      .gc-stat-label {
+        font-family: var(--mono);
+        font-size: 9px;
+        letter-spacing: 2px;
+        color: var(--graphite);
+        text-transform: uppercase;
+        margin: 0;
+      }
+
+      /* ------------------------------------------------------------
+         For Partners section.
+         ------------------------------------------------------------ */
+      .partner-section {
+        background: linear-gradient(180deg, transparent 0%, rgba(0, 42, 102, 0.06) 50%, transparent 100%);
+        border-top: 1px solid var(--hairline);
+        border-bottom: 1px solid var(--hairline);
+      }
+
+      .partner-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 20px;
+        margin-top: 16px;
+      }
+
+      .partner-card {
+        padding: 32px 26px;
+        border: 1px solid rgba(58, 155, 255, 0.15);
+        border-radius: 18px;
+        background: rgba(0, 42, 102, 0.08);
+        transition: border-color 0.3s ease, transform 0.3s ease;
+      }
+
+      .partner-card:hover {
+        border-color: rgba(58, 155, 255, 0.35);
+        transform: translateY(-2px);
+      }
+
+      .partner-card-num {
+        display: block;
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 2px;
+        color: var(--sapphire-glow);
+        margin-bottom: 12px;
+        opacity: 0.7;
+      }
+
+      .partner-card-title {
+        font-family: var(--mono);
+        font-size: 12px;
+        letter-spacing: 3.5px;
+        font-weight: 600;
+        color: var(--platinum);
+        text-transform: uppercase;
+        margin: 0 0 14px;
+      }
+
+      .partner-card-body {
+        font-family: var(--sans);
+        font-size: 14px;
+        line-height: 1.7;
+        color: var(--platinum);
+        opacity: 0.78;
+        margin: 0;
+        font-weight: 300;
+      }
+
+      .partner-card-body code {
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--sapphire-glow);
+        background: rgba(58, 155, 255, 0.08);
+        padding: 2px 6px;
+        border-radius: 4px;
+      }
+
+      .partner-cta-row {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+        margin-top: 48px;
+        justify-content: center;
+      }
+
+      /* ------------------------------------------------------------
          Receipts — concrete traction tiles.
          ------------------------------------------------------------ */
       .receipts {
@@ -1317,7 +1554,7 @@
     <!-- ================================================== -->
     <div class="topbar">
       <span class="topbar-brand">GETKINETIK</span>
-      <span class="topbar-status">ANDROID PREVIEW · LIVE</span>
+      <span class="topbar-status">v1.4 · ANDROID · LIVE</span>
     </div>
 
     <!-- ================================================== -->
@@ -1714,6 +1951,164 @@
     </section>
 
     <!-- ================================================== -->
+    <!-- OPTIMIZER ENGINE                                    -->
+    <!-- ================================================== -->
+    <section>
+      <span class="section-eyebrow">OPTIMIZER ENGINE</span>
+      <h2 class="section-title">
+        GETKINETIK makes you more than any single network alone.
+      </h2>
+      <p class="section-sub">
+        A shared intelligence layer watches gas prices, token rates, and your
+        device's earning potential in real time — and tells you exactly when
+        and what to claim to keep more of what you earn.
+      </p>
+
+      <div class="optimizer-grid">
+        <article class="optimizer-card">
+          <span class="optimizer-card-eyebrow">GAS TIMING</span>
+          <h3 class="optimizer-card-title">Claim at the right moment, not the wrong one.</h3>
+          <p class="optimizer-card-body">
+            The optimizer watches Polygon and Base gas prices every two minutes.
+            It only flags a claim as ready when the pending reward is at least
+            5× the gas cost to collect it. You stop leaving money on the table
+            one transaction at a time.
+          </p>
+          <span class="optimizer-badge">LIVE FEED</span>
+        </article>
+
+        <article class="optimizer-card">
+          <span class="optimizer-card-eyebrow">YIELD SCORING</span>
+          <h3 class="optimizer-card-title">Every network ranked by real-time dollar yield.</h3>
+          <p class="optimizer-card-body">
+            CoinGecko prices refresh every five minutes. Each adapter's pending
+            balance is converted to USD and ranked. The summary badge tells you
+            how many networks have claims ready and how much combined gas you've
+            avoided this week.
+          </p>
+          <span class="optimizer-badge">LIVE PRICES</span>
+        </article>
+
+        <article class="optimizer-card">
+          <span class="optimizer-card-eyebrow">DEVICE DISCOVERY</span>
+          <h3 class="optimizer-card-title">You may qualify for networks you haven't joined yet.</h3>
+          <p class="optimizer-card-body">
+            The optimizer reads your device's capability profile — GPS, motion,
+            camera, barometer — and matches it against every DePIN network's
+            requirements. It surfaces networks you're missing and estimates the
+            additional monthly USD you could be earning.
+          </p>
+          <span class="optimizer-badge">AUTOMATIC</span>
+        </article>
+
+        <article class="optimizer-card">
+          <span class="optimizer-card-eyebrow">SHARED POLLING</span>
+          <h3 class="optimizer-card-title">One poll loop. Five networks. 30% less battery.</h3>
+          <p class="optimizer-card-body">
+            Instead of each network adapter running its own interval, a single
+            PollingPool coordinates all five. Your battery doesn't pay the price
+            for running multiple DePIN nodes simultaneously. More networks,
+            less drain.
+          </p>
+          <span class="optimizer-badge">BUILT IN</span>
+        </article>
+
+        <div class="gc-callout">
+          <div class="gc-callout-text">
+            <span class="gc-callout-eyebrow">GENESIS CREDITS</span>
+            <h3 class="gc-callout-title">Loyalty earned for every hour your node is online.</h3>
+            <p class="gc-callout-body">
+              Genesis Credits are an internal loyalty score — not a token, not a promise,
+              not a financial instrument. Every minute your node runs, every heartbeat it signs,
+              every network it connects earns GC. Genesis nodes (minted now, before public
+              launch) accumulate at a 2× rate. Credits can later be transferred out when
+              wallet export ships. Early node operators will matter most.
+            </p>
+          </div>
+          <div class="gc-stat-group">
+            <div class="gc-stat">
+              <p class="gc-stat-num">2×</p>
+              <p class="gc-stat-label">Genesis rate</p>
+            </div>
+            <div class="gc-stat">
+              <p class="gc-stat-num">5</p>
+              <p class="gc-stat-label">Earning actions</p>
+            </div>
+            <div class="gc-stat">
+              <p class="gc-stat-num">∞</p>
+              <p class="gc-stat-label">Anonymous</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================== -->
+    <!-- FOR PARTNERS                                        -->
+    <!-- ================================================== -->
+    <section class="partner-section">
+      <span class="section-eyebrow">FOR PARTNERS</span>
+      <h2 class="section-title">
+        Your network. Verified users. One webhook.
+      </h2>
+      <p class="section-sub">
+        GETKINETIK users carry a hardware-signed Proof of Origin.
+        Any partner network can verify a user's device authenticity in one API call
+        — and offer verified-user rewards with cryptographic confidence.
+        No code change on your end beyond a single POST.
+      </p>
+
+      <div class="partner-grid">
+        <article class="partner-card">
+          <span class="partner-card-num">01</span>
+          <h3 class="partner-card-title">VERIFY IN ONE CALL</h3>
+          <p class="partner-card-body">
+            POST the user's Proof of Origin URL to
+            <code>getkinetik.app/api/verify-device</code>.
+            The response tells you: valid signature, node age, heartbeat count,
+            and sensor data. No SDK to install. No dependency to manage.
+          </p>
+        </article>
+
+        <article class="partner-card">
+          <span class="partner-card-num">02</span>
+          <h3 class="partner-card-title">VERIFIED-USER PREMIUM</h3>
+          <p class="partner-card-body">
+            Offer a reward boost — even 5–10% — to users whose devices are
+            cryptographically verified. You reduce Sybil exposure. Users earn
+            more by running GETKINETIK. Both sides win without either side
+            holding the other's keys.
+          </p>
+        </article>
+
+        <article class="partner-card">
+          <span class="partner-card-num">03</span>
+          <h3 class="partner-card-title">SYBIL RESISTANCE, FREE</h3>
+          <p class="partner-card-body">
+            Every GETKINETIK node is tied to a unique hardware-sealed Ed25519 key.
+            One phone = one key = one node. The hash-chained heartbeat log makes
+            clocks and uptime tamper-evident. You get Sybil resistance without
+            building it yourself.
+          </p>
+        </article>
+      </div>
+
+      <div class="partner-cta-row">
+        <a
+          class="cta cta-secondary"
+          href="https://github.com/Ricolax310/GetKinetik/blob/main/docs/api/verify-device.md"
+          target="_blank"
+          rel="noopener"
+        >
+          READ THE API DOCS →
+        </a>
+        <a class="cta cta-secondary" href="mailto:eric@outfromnothingllc.com">
+          EMAIL ERIC TO INTEGRATE
+        </a>
+      </div>
+    </section>
+
+    <!-- ================================================== -->
     <!-- RECEIPTS — TRACTION TILES                           -->
     <!-- ================================================== -->
     <section>
@@ -1780,12 +2175,13 @@
     <footer>
       <div class="footer-diamond" aria-hidden="true"></div>
       <p class="footer-line">GETKINETIK by OutFromNothing LLC</p>
-      <p class="footer-sub">DePIN Earnings Aggregator · Sovereign Node Protocol v2 · © 2026</p>
+      <p class="footer-sub">DePIN Earnings Aggregator · Optimizer Engine · Sovereign Node Protocol v2 · © 2026</p>
       <a class="footer-mail" href="mailto:eric@outfromnothingllc.com"
         >eric@outfromnothingllc.com</a
       >
       <div class="footer-links">
         <a href="/verify/">VERIFY A PROOF</a>
+        <a href="https://github.com/Ricolax310/GetKinetik/blob/main/docs/api/verify-device.md" target="_blank" rel="noopener">PARTNER API</a>
         <a href="#manifesto">MANIFESTO</a>
       </div>
     </footer>
