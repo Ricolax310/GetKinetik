@@ -144,7 +144,7 @@ Full API spec: [`docs/api/verify-device.md`](./docs/api/verify-device.md)
 
 Outreach materials: [`PARTNER_EMAILS.md`](./PARTNER_EMAILS.md)
 
-Direct contact: **eric@outfromnothing.com**
+Direct contact: **eric@outfromnothingllc.com**
 
 ---
 
