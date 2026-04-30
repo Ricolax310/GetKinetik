@@ -100,6 +100,27 @@ export type EarningEntry = {
   /** Hash of the previous EarningEntry — null for the first entry ever. */
   prevHash: string | null;
   attribution: typeof WALLET_ATTRIBUTION;
+  // ------------------------------------------------------------------
+  // Optional verified-user premium fields (v1.5+).
+  // Present only when a partner pays the hardware-attestation premium.
+  // OMITTED entirely (not set to undefined) when not applicable so that
+  // stableStringify produces identical output to pre-premium entries.
+  // ------------------------------------------------------------------
+  /**
+   * Standard reward rate per token unit in USD (what non-attested nodes earn).
+   * Signed into the receipt so the premium amount is auditable.
+   */
+  standardRate?: number;
+  /**
+   * Premium reward rate per token unit in USD (what attested nodes earn).
+   * Present only when the partner has activated verified-user premium.
+   */
+  premiumRate?: number;
+  /**
+   * Premium above standard in basis points (100 bp = 1%).
+   * e.g. 1500 means this node earned 15% more than non-attested peers.
+   */
+  premiumBasisPoints?: number;
 };
 
 export type SignedEarning = {
@@ -131,6 +152,14 @@ export type AppendEarningParams = {
   currency: string;
   /** Raw payout in currency units before the protocol fee is deducted. */
   gross: number;
+  /**
+   * Optional verified-user premium data. When present, all three fields
+   * must be supplied together — they are either all signed in or all omitted.
+   * The trio is written to the EarningEntry only if premiumBasisPoints > 0.
+   */
+  premiumBasisPoints?: number;
+  standardRate?: number;
+  premiumRate?: number;
 };
 
 // ----------------------------------------------------------------------------
@@ -346,6 +375,21 @@ export async function appendEarningLog(
   const fee = round8(gross * PROTOCOL_FEE_RATE);
   const net = round8(gross - fee);
 
+  // Build premium fields — only include when all three are supplied and the
+  // premium is positive. Never assign undefined to a key (stableStringify
+  // would serialise undefined as the string "undefined", breaking signatures).
+  const premiumFields: Pick<EarningEntry, 'standardRate' | 'premiumRate' | 'premiumBasisPoints'> =
+    params.premiumBasisPoints != null &&
+    params.premiumBasisPoints > 0 &&
+    params.standardRate != null &&
+    params.premiumRate != null
+      ? {
+          standardRate: params.standardRate,
+          premiumRate: params.premiumRate,
+          premiumBasisPoints: params.premiumBasisPoints,
+        }
+      : {};
+
   const entry: EarningEntry = {
     v: 1,
     kind: 'earning',
@@ -360,6 +404,7 @@ export async function appendEarningLog(
     ts: Date.now(),
     prevHash: summary.lastHash,
     attribution: WALLET_ATTRIBUTION,
+    ...premiumFields,
   };
 
   const signed = await signEarning(identity, entry);

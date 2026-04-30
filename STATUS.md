@@ -27,15 +27,28 @@ Tech companies currently extract data from phones worth hundreds of billions of 
 ### The four-layer aggregator architecture
 
 ```
-L4 — WALLET / EARNINGS / FEE          ⏳ ACTIVE TRACK (see AGGREGATOR.md)
-L3 — DEPIN ROUTING / OPTIMIZER        NOT BUILT (cannot start until 2+ adapters live)
-L2 — SENSOR CAPTURE + SIGNING         IN PROGRESS (3 of 7 sensors signing into chain; backlog parked in AGGREGATOR.md)
+L4 — WALLET / EARNINGS / FEE          ✅ SHIPPED — signed earning ledger + premium-aware receipts
+L3 — DEPIN ROUTING / OPTIMIZER        🔨 BUILDING — packages/optimizer/ shipped (v1.4)
+                                         · Gas-aware claim timing (CoinGecko + Polygon/Base RPC)
+                                         · Shared PollingPool (replaces 5 individual timers)
+                                         · Device capability discovery engine
+                                         · Weekly OptimizationReport modal
+L2 — SENSOR CAPTURE + SIGNING         🟡 PARTIAL — 3 of 7 sensors signing into chain
 L1 — SOVEREIGN IDENTITY + TRUST       ✅ BUILT, SHIPPED, WITNESSED
 ```
 
-L4 starts BEFORE L2 finishes because polishing L2 does not generate revenue and the trust spine is already sufficient to prove a real node to a real DePIN. **The current critical path runs through `AGGREGATOR.md`, not through the L2 sensor backlog.**
+### New in v1.4 build
 
-We built L1 first, intentionally. L1 is the moat. Every competitor can build L2/L3/L4; nobody else has L1.
+- `packages/optimizer/` — full optimizer engine (priceFeed, gasFeed, scorer, discovery, pollingPool, savings)
+- `packages/credits/` — Genesis Credits engine (loyalty points, NOT a token)
+- `src/components/OptimizationReport.tsx` — weekly savings proof modal
+- `src/components/GenesisCreditsTicker.tsx` — GC counter
+- `functions/api/verify-device.js` — partner verification webhook (LIVE)
+- `functions/api/credits.js` — Genesis Credits KV sync
+- `functions/api/metrics.js` — public network metrics API
+- `landing/metrics/index.html` — public metrics dashboard
+- `docs/` — architecture, cryptography, adapter contract, IP assignment, API spec
+- `PARTNER_EMAILS.md` v4 — verified-user premium pitch + webhook CTA
 
 ### The MVP integration targets for L3 (phone-viable DePINs)
 

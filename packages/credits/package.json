@@ -1,0 +1,12 @@
+{
+  "name": "@kinetik/credits",
+  "version": "0.1.0",
+  "private": true,
+  "description": "GETKINETIK Genesis Credits engine — loyalty points earned per heartbeat, attestation, Proof of Origin, and network activity. NOT a token, NOT a monetary promise. Internal points only.",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "dependencies": {
+    "@kinetik/core": "*"
+  },
+  "license": "UNLICENSED"
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@kinetik/optimizer",
+  "version": "0.1.0",
+  "private": true,
+  "description": "GETKINETIK L3 optimizer engine — gas-aware claim timing, shared polling pool, device capability discovery, yield scoring, and weekly savings computation.",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "dependencies": {
+    "@kinetik/core": "*"
+  },
+  "license": "UNLICENSED"
+}

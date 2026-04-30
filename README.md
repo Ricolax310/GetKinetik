@@ -16,7 +16,7 @@ No servers. No accounts. No middleman. Just receipts.
 
 ## Status
 
-**v1.3.0 shipped publicly.** Android-first preview build, install via
+**v1.3.x shipped. v1.4 optimizer in active development.** Android-first preview build, install via
 [getkinetik.app](https://getkinetik.app) or grab the APK directly from
 [Releases](https://github.com/Ricolax310/GetKinetik/releases/latest).
 
@@ -24,13 +24,24 @@ No servers. No accounts. No middleman. Just receipts.
 |---|---|---|
 | **L1** Sovereign Identity + Trust | ✅ Shipped | Ed25519 key + hash-chained heartbeat log + public verifier |
 | **L2** Sensor Capture + Signing | 🟡 Partial | 3 of 7 planned permission-free sensors signing into the chain |
-| **L3** DePIN Routing / Aggregator | 🟡 Read-only | 5 adapters (Nodle, DIMO, Hivemapper, WeatherXM, Geodnet) reading earnings; active routing optimizer is the next layer |
-| **L4** Wallet + 1% Protocol Fee | ⏳ Active track | The toll-booth business model |
+| **L3** DePIN Optimizer | 🔨 Building | Gas-aware claim timing, shared polling pool, yield scoring, device discovery |
+| **L4** Wallet + 1% Protocol Fee | ✅ Shipped | Signed earnings ledger with premium-aware receipts |
+| **Verified-User Premium** | 🔨 v1.5 | 10–15% yield boost for hardware-attested nodes (partner activation required) |
+| **Genesis Credits** | 🔨 Building | Loyalty points for Sovereign Node operators (NOT a token) |
 
 iOS preview is on the roadmap. Currently Android-only because Apple's
 restrictions on background sensor collection and crypto-flavored apps make
 the architecture meaningfully harder there. iPhone visitors hitting the
 download button can join the waitlist on the site.
+
+### Roadmap
+
+```
+v1.3.x  TODAY  — Aggregator (5 adapters), signed ledger, public verifier, DIMO OAuth
+v1.4    NEXT   — Optimizer live: gas-aware claims, shared poll pool, discovery engine
+v1.5    SOON   — First partner activates verified-user premium (10–15% yield boost)
+v2.0    LATER  — Network rails, token routing, full multi-chain settlement
+```
 
 ---
 
@@ -62,29 +73,46 @@ auditor, skeptic — can confirm we're not lying about what's signed.
 │   └── hooks/                   # Sensor + storage glue
 │
 ├── packages/
-│   ├── kinetik-core/            # L1 trust-layer primitive (the moat)
+│   ├── kinetik-core/            # L1 + L4 trust-layer primitive (the moat)
 │   │   └── src/                 #   identity · heartbeat · sensors ·
-│   │                            #   proof · stableJson · wallet
+│   │                            #   proof · stableJson · wallet · adapter
+│   ├── optimizer/               # L3 optimizer engine
+│   │   └── src/                 #   priceFeed · gasFeed · scorer ·
+│   │                            #   discovery · pollingPool · savings
+│   ├── credits/                 # Genesis Credits engine (NOT a token)
 │   ├── adapter-nodle/           # L3 adapter — Nodle Cash
 │   ├── adapter-dimo/            # L3 adapter — DIMO Network
 │   ├── adapter-hivemapper/      # L3 adapter — Hivemapper Honey Jar
 │   ├── adapter-weatherxm/       # L3 adapter — WeatherXM Pro
 │   └── adapter-geodnet/         # L3 adapter — Geodnet
 │
+├── src/components/
+│   ├── AggregatorPanel.tsx      # Multi-adapter earnings UI (shared PollingPool)
+│   ├── OptimizationReport.tsx   # Weekly savings proof modal
+│   ├── GenesisCreditsTicker.tsx # Genesis Credits counter
+│   └── ...
+│
 ├── landing/                     # getkinetik.app (Cloudflare Pages)
 │   ├── index.html               #   marketing site
-│   ├── app.js                   #   waitlist modal + APK download
 │   ├── verify/                  #   public Ed25519 verifier (zero deps)
-│   └── dimo-callback/           #   OAuth bounce page for DIMO login
+│   ├── dimo-callback/           #   OAuth bounce page for DIMO login
+│   └── metrics/                 #   public network metrics dashboard
 │
-├── functions/api/waitlist.js    # Cloudflare Pages Function — KV-backed
+├── functions/api/
+│   ├── waitlist.js              # Cloudflare Function — waitlist KV
+│   ├── verify-device.js         # Cloudflare Function — partner verification webhook
+│   ├── credits.js               # Cloudflare Function — Genesis Credits KV sync
+│   └── metrics.js               # Cloudflare Function — network metrics aggregate
 │
-├── scripts/
-│   └── mint-demo-proof.mjs      # Generate a live demo proof URL
+├── docs/
+│   ├── architecture.md          # System overview for M&A due diligence
+│   ├── cryptography.md          # Signing contract specification
+│   ├── adapter-contract.md      # Partner integration guide
+│   ├── IP-ASSIGNMENT.md         # IP ownership + USPTO trademark guidance
+│   └── api/verify-device.md    # verify-device webhook API spec
 │
-├── PARTNER_EMAILS.md            # Outreach templates for DePIN partners
-├── STATUS.md                    # Internal project handoff document
-└── HANDOFF.md                   # Working session state
+└── scripts/
+    └── mint-demo-proof.mjs      # Generate a live demo proof URL
 ```
 
 The TypeScript app and the browser-side verifier share a cryptographic
@@ -98,23 +126,25 @@ without one or both refusing to validate.
 
 ## For partners
 
-We're an aggregator and trust layer, not a competitor. The integration
-shape is:
+We're an aggregator and trust layer, not a competitor. The integration shape is:
 
-- Read-only against the partner network's own API (we never custody
-  earnings; tokens live in the user's wallet on the partner's network)
-- Hardware-signed Proof of Origin attached to every node-side claim,
-  via the L1 trust primitive
-- Optional partner-side webhook integration (we forward signed
-  attestations on every heartbeat — you can use them as a Sybil-
-  resistance signal whether or not we're a paying integration)
+- **Read-only** against the partner network's own API (we never custody earnings; tokens live in the user's wallet on the partner's network)
+- **Hardware-signed Proof of Origin** attached to every node-side claim, verifiable by anyone via the public verifier at `getkinetik.app/verify/`
+- **Free verification webhook** for anti-Sybil checks: `POST https://getkinetik.app/api/verify-device`
+- **Verified-user premium programme** — pay GETKINETIK-verified nodes 10–15% above your standard rate; we pass it through as a signed receipt. You save more on fraud than you pay in premium.
 
-Outreach materials and example pitches live in
-[`PARTNER_EMAILS.md`](./PARTNER_EMAILS.md). Every template embeds a live,
-verifier-ready Proof of Origin URL. Click it, verify it cryptographically
-in your browser in 5 seconds — that's the highest-credibility move we have.
+Try the webhook right now (no auth required):
+```bash
+curl -X POST https://getkinetik.app/api/verify-device \
+  -H 'Content-Type: application/json' \
+  -d '{"proofUrl":"<paste_any_getkinetik_proof_url>"}'
+```
 
-Direct contact: **eric@outfromnothingllc.com**.
+Full API spec: [`docs/api/verify-device.md`](./docs/api/verify-device.md)
+
+Outreach materials: [`PARTNER_EMAILS.md`](./PARTNER_EMAILS.md)
+
+Direct contact: **eric@outfromnothing.com**
 
 ---
 

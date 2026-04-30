@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GETKINETIK · Network Metrics</title>
+  <meta name="description" content="Live aggregate metrics for the GETKINETIK Sovereign Node network. Privacy-respecting — aggregate only, no per-user data." />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --obsidian: #0A0A0A;
+      --obsidian-soft: #111113;
+      --obsidian-edge: #1A1A1D;
+      --ruby: #FF1430;
+      --sapphire: #3A9BFF;
+      --platinum: #E6E8EC;
+      --graphite: #6A6C72;
+      --hairline: rgba(230,232,236,0.08);
+      --green: #34C759;
+      --mono: 'Courier New', Courier, monospace;
+    }
+
+    html, body {
+      background: var(--obsidian);
+      color: var(--platinum);
+      font-family: var(--mono);
+      min-height: 100vh;
+    }
+
+    header {
+      border-bottom: 1px solid var(--hairline);
+      padding: 24px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .brand-gem {
+      width: 24px;
+      height: 24px;
+      background: radial-gradient(circle at 35% 35%, #FF4060, #B00820);
+      clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+    }
+
+    .brand-name {
+      color: var(--platinum);
+      font-size: 13px;
+      letter-spacing: 3px;
+      font-weight: 600;
+    }
+
+    .page-label {
+      color: var(--graphite);
+      font-size: 10px;
+      letter-spacing: 2.4px;
+    }
+
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 48px 24px;
+    }
+
+    h1 {
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: var(--graphite);
+      margin-bottom: 4px;
+    }
+
+    .last-updated {
+      font-size: 9px;
+      letter-spacing: 1.8px;
+      color: var(--graphite);
+      opacity: 0.6;
+      margin-bottom: 40px;
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .metric-card {
+      background: var(--obsidian-soft);
+      border: 1px solid var(--hairline);
+      border-radius: 14px;
+      padding: 20px 18px;
+    }
+
+    .metric-label {
+      font-size: 9px;
+      letter-spacing: 2.4px;
+      color: var(--graphite);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .metric-value {
+      font-size: 36px;
+      color: var(--platinum);
+      letter-spacing: 1px;
+      font-weight: 200;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .metric-sub {
+      font-size: 9px;
+      letter-spacing: 1.6px;
+      color: var(--sapphire);
+    }
+
+    .section-title {
+      font-size: 10px;
+      letter-spacing: 2.4px;
+      color: var(--graphite);
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+
+    .networks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 12px;
+      margin-bottom: 48px;
+    }
+
+    .network-card {
+      background: var(--obsidian-soft);
+      border: 1px solid var(--hairline);
+      border-radius: 10px;
+      padding: 14px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .network-name {
+      font-size: 10px;
+      letter-spacing: 1.6px;
+      color: var(--graphite);
+      text-transform: uppercase;
+    }
+
+    .network-count {
+      font-size: 18px;
+      color: var(--platinum);
+      font-weight: 300;
+    }
+
+    .privacy-note {
+      background: var(--obsidian-edge);
+      border: 1px solid var(--hairline);
+      border-radius: 10px;
+      padding: 16px 18px;
+      font-size: 9px;
+      letter-spacing: 1.4px;
+      color: var(--graphite);
+      line-height: 1.7;
+    }
+
+    .loading { opacity: 0.4; }
+
+    footer {
+      border-top: 1px solid var(--hairline);
+      padding: 24px 32px;
+      text-align: center;
+      font-size: 9px;
+      letter-spacing: 1.8px;
+      color: var(--graphite);
+    }
+
+    footer a {
+      color: var(--sapphire);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="/" class="brand">
+    <div class="brand-gem"></div>
+    <span class="brand-name">GETKINETIK</span>
+  </a>
+  <span class="page-label">NETWORK METRICS</span>
+</header>
+
+<main>
+  <h1>SOVEREIGN NODE NETWORK</h1>
+  <p class="last-updated" id="last-updated">Loading...</p>
+
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <div class="metric-label">Total Nodes</div>
+      <div class="metric-value loading" id="nodes-total">—</div>
+      <div class="metric-sub" id="nodes-active">— active last 24h</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Heartbeats Signed</div>
+      <div class="metric-value loading" id="heartbeats-total">—</div>
+      <div class="metric-sub" id="heartbeats-24h">— last 24h</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Proofs Minted</div>
+      <div class="metric-value loading" id="proofs-total">—</div>
+      <div class="metric-sub">Lifetime Proofs of Origin</div>
+    </div>
+  </div>
+
+  <div class="section-title">Active Networks</div>
+  <div class="networks-grid" id="networks-grid">
+    <!-- populated by JS -->
+  </div>
+
+  <div class="privacy-note">
+    All metrics are aggregate only. GETKINETIK cannot identify individual nodes
+    from this data. No per-user information is collected or displayed. Node IDs
+    are pseudonymous self-generated identifiers — they are not linked to any
+    real-world identity.
+  </div>
+</main>
+
+<footer>
+  <a href="/">GETKINETIK</a>
+  &nbsp;·&nbsp;
+  <a href="/verify/">VERIFY A PROOF</a>
+  &nbsp;·&nbsp;
+  <a href="https://github.com/Ricolax310/GetKinetik" target="_blank" rel="noopener">GITHUB</a>
+</footer>
+
+<script>
+(async function () {
+  function fmt(n) {
+    if (!Number.isFinite(n) || n <= 0) return '0';
+    if (n >= 1_000_000) return (n / 1_000_000).toFixed(2) + 'M';
+    if (n >= 10_000) return (n / 1_000).toFixed(1) + 'K';
+    return n.toLocaleString();
+  }
+
+  function relTime(iso) {
+    if (!iso) return 'Unknown';
+    const diff = Date.now() - new Date(iso).getTime();
+    const mins = Math.floor(diff / 60_000);
+    if (mins < 1) return 'just now';
+    if (mins < 60) return mins + ' minutes ago';
+    if (mins < 1440) return Math.floor(mins / 60) + ' hours ago';
+    return Math.floor(mins / 1440) + ' days ago';
+  }
+
+  const NETWORK_LABELS = {
+    nodle: 'NODLE',
+    dimo: 'DIMO',
+    hivemapper: 'HIVEMAPPER',
+    weatherxm: 'WXM',
+    geodnet: 'GEODNET',
+  };
+
+  try {
+    const resp = await fetch('/api/metrics');
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    const data = await resp.json();
+
+    // Nodes
+    document.getElementById('nodes-total').textContent = fmt(data.nodes?.total ?? 0);
+    document.getElementById('nodes-total').classList.remove('loading');
+    document.getElementById('nodes-active').textContent =
+      fmt(data.nodes?.active24h ?? 0) + ' active last 24h';
+
+    // Heartbeats
+    document.getElementById('heartbeats-total').textContent = fmt(data.heartbeats?.lifetimeTotal ?? 0);
+    document.getElementById('heartbeats-total').classList.remove('loading');
+    document.getElementById('heartbeats-24h').textContent =
+      fmt(data.heartbeats?.last24h ?? 0) + ' last 24h';
+
+    // Proofs
+    document.getElementById('proofs-total').textContent = fmt(data.proofs?.lifetimeMinted ?? 0);
+    document.getElementById('proofs-total').classList.remove('loading');
+
+    // Networks
+    const grid = document.getElementById('networks-grid');
+    grid.innerHTML = '';
+    const nets = data.networks ?? {};
+    for (const [id, label] of Object.entries(NETWORK_LABELS)) {
+      const count = nets[id] ?? 0;
+      const card = document.createElement('div');
+      card.className = 'network-card';
+      card.innerHTML = `
+        <span class="network-name">${label}</span>
+        <span class="network-count">${fmt(count)}</span>
+      `;
+      grid.appendChild(card);
+    }
+
+    // Last updated
+    document.getElementById('last-updated').textContent =
+      'UPDATED ' + relTime(data.updatedAt).toUpperCase();
+
+  } catch (err) {
+    document.getElementById('last-updated').textContent = 'METRICS UNAVAILABLE · ' + err.message;
+  }
+})();
+</script>
+
+</body>
+</html>

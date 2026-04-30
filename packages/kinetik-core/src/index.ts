@@ -74,6 +74,7 @@ export {
 export {
   type AdapterStatus,
   type EarningSnapshot,
+  type AdapterRateMetadata,
   type DepinAdapter,
 } from './adapter';
 
