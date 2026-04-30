@@ -1,16 +1,19 @@
 // ============================================================================
 // DIMO Developer Credentials — GETKINETIK license #986
 // ----------------------------------------------------------------------------
-// Client ID and API key from console.dimo.org/license/986
-// These are used by DIMOAdapter to authenticate with DIMO's Token Exchange API
-// and to display GETKINETIK's name on the "Login with DIMO" consent screen.
+// Client ID from console.dimo.org/license/986. Used by DIMOAdapter to
+// display GETKINETIK's name on the "Login with DIMO" consent screen.
 //
-// The API key is NOT a user secret — it identifies the app, not the user.
+// The client_id is the app's PUBLIC identifier — it is not a secret.
 // Users authenticate separately via "Login with DIMO" OAuth flow.
+//
+// SERVER-SIDE API KEY: kept out of source. If/when GETKINETIK needs to
+// call DIMO's Token Exchange or backend APIs, the key must be loaded from
+// EAS environment variables (EXPO_SECRET_DIMO_API_KEY) or a backend
+// service — never imported from this file.
 // ============================================================================
 
 export const DIMO_CLIENT_ID = '0x6eF481b692a4b0bC930c1B971EBDA4402c73725D';
-export const DIMO_API_KEY = '64678ab490157f53a98f45b253840eb6abae6800de20fdc9432e87a6c582ea9f';
 // Must EXACTLY match an Authorized Redirect URI on DIMO License #986.
 //
 // DIMO's developer console only accepts http:// or https:// redirect URIs —
