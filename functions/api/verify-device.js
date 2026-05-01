@@ -39,7 +39,7 @@
  * 4. Re-serialise the payload using stableStringify (lex-sorted keys)
  * 5. Verify the Ed25519 signature against the serialised message and the
  *    pubkey embedded in the payload using SubtleCrypto (native in CF Workers)
- * 6. Verify the hash field matches sha256(message)[:16]
+ * 6. Verify the optional message/hash fields match the canonical payload
  *
  * This is a server-side implementation of the same logic in landing/verify/verifier.js.
  * Both must remain byte-for-byte equivalent — the CRYPTOGRAPHIC_CONTRACT comment
@@ -168,8 +168,8 @@ async function verifyProofUrl(proofUrl) {
     return { valid: false, reason: "malformed_envelope" };
   }
 
-  const { payload, signature, hash } = envelope;
-  if (!payload || !signature || !hash) {
+  const { payload, signature } = envelope;
+  if (!payload || !signature) {
     return { valid: false, reason: "missing_fields" };
   }
 
@@ -182,7 +182,16 @@ async function verifyProofUrl(proofUrl) {
   const message = stableStringify(payload);
   const fullHash = await sha256Hex(message);
   const expectedHash = fullHash.slice(0, 16);
-  if (expectedHash !== hash) {
+
+  const claimedMessage =
+    typeof envelope.message === "string" ? envelope.message : message;
+  const claimedHash =
+    typeof envelope.hash === "string" ? envelope.hash.toLowerCase() : expectedHash;
+
+  if (claimedMessage !== message) {
+    return { valid: false, reason: "message_mismatch" };
+  }
+  if (expectedHash !== claimedHash) {
     return { valid: false, reason: "hash_mismatch" };
   }
 
@@ -227,7 +236,7 @@ async function verifyProofUrl(proofUrl) {
     valid: true,
     nodeId: payload.nodeId ?? null,
     pubkey: pubkeyHex,
-    mintedAt: payload.ts ?? null,
+    mintedAt: payload.mintedAt ?? payload.ts ?? null,
     schema: `proof-of-origin:v${payload.v ?? 1}`,
     attribution: payload.attribution,
   };
