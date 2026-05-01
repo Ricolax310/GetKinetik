@@ -16,8 +16,9 @@
      extra clicks required. SHA256 is recorded in the release notes
      so the binary can be verified against the source.
      iOS and desktop still fall through to the waitlist modal. */
+  /* Bump path when you tag a new Android release (asset name must match GitHub). */
   var ANDROID_APK_URL =
-    "https://github.com/Ricolax310/GetKinetik/releases/download/v1.3.0/getkinetik-v1.3.0.apk";
+    "https://github.com/Ricolax310/GetKinetik/releases/download/v1.4.0/GETKINETIK-v1.4.0.apk";
 
   var ua = (typeof navigator !== "undefined" && navigator.userAgent) || "";
   var isAndroid = /Android/i.test(ua);
