@@ -6,10 +6,14 @@ on:
     paths:
       - 'landing/verify/**'
       - 'packages/kinetik-core/src/**'
+      - 'functions/api/verify-device.js'
+      - 'functions/api/verify-device.smoketest.mjs'
   pull_request:
     paths:
       - 'landing/verify/**'
       - 'packages/kinetik-core/src/**'
+      - 'functions/api/verify-device.js'
+      - 'functions/api/verify-device.smoketest.mjs'
 
 jobs:
   smoketest:
@@ -24,3 +28,6 @@ jobs:
 
       - name: Run verifier smoketest
         run: node landing/verify/smoketest.mjs
+
+      - name: Run verify-device API smoketest
+        run: node functions/api/verify-device.smoketest.mjs
