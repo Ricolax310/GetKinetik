@@ -1,7 +1,6 @@
 # v1.4 Release Notes — GETKINETIK
 
-> **Build status:** Queued for versionCode 10. EAS quota resets May 1, 2026.
-> This file is ready to paste into the GitHub Release when the build drops.
+> **Build:** Shipped **2026-04-30** — EAS **preview** profile (sideload **APK**), app **1.4.0**, Android **`versionCode` 11**. Attach the `.apk` under **Assets** on this GitHub Release (or install from the Expo build artifact for that commit).
 
 ---
 
@@ -78,7 +77,7 @@
 
 ## versionCode
 
-`10` (auto-incremented by EAS from `9`)
+`11` (EAS `preview` build auto-increment from prior `10`)
 
 ---
 
