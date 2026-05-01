@@ -50,7 +50,7 @@
 
 **Android (sideload):**
 1. Go to [Releases](https://github.com/Ricolax310/GetKinetik/releases/latest)
-2. Download `GETKINETIK-v1.4.apk`
+2. Download `GETKINETIK-v1.4.0.apk`
 3. Enable "Install from unknown sources" in Android settings
 4. Open the APK and install
 
