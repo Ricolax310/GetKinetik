@@ -38,6 +38,8 @@ import { Alert, Platform } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
 import * as WebBrowser from 'expo-web-browser';
 
+import { openWalletAddressPrompt } from '../../../src/lib/walletAddressPrompt';
+
 import type {
   AdapterStatus,
   DepinAdapter,
@@ -112,8 +114,7 @@ async function fetchGeodBalance(walletAddress: string): Promise<number | null> {
 }
 
 // ----------------------------------------------------------------------------
-// Wallet capture — iOS Alert.prompt, Android informational fallback.
-// Same pattern as Hivemapper + WeatherXM adapters.
+// Wallet capture — iOS Alert.prompt; Android uses openWalletAddressPrompt.
 // ----------------------------------------------------------------------------
 
 function promptForWallet(): Promise<string | null> {
@@ -144,11 +145,16 @@ function promptForWallet(): Promise<string | null> {
         '',
       );
     } else {
-      Alert.alert(
-        'Connect GEODNET',
-        'Open the GEODNET Console → Wallet → copy your Polygon wallet address.\n\nAndroid wallet entry will be available in the next update.',
-        [{ text: 'OK', onPress: () => resolve(null) }],
-      );
+      void openWalletAddressPrompt({
+        title: 'Connect GEODNET Wallet',
+        message:
+          'Enter your Polygon wallet address to track GEOD earnings.\n\nThis is the wallet registered in your GEODNET Console under Wallet.',
+        placeholder: '0x… (42 characters)',
+        validate: (trimmed) => {
+          if (/^0x[0-9a-fA-F]{40}$/.test(trimmed)) return null;
+          return 'Use a Polygon address: 0x plus 40 hex characters.';
+        },
+      }).then(resolve);
     }
   });
 }
@@ -195,10 +201,14 @@ class GeodnetAdapter implements DepinAdapter {
   // --------------------------------------------------------------------------
 
   async register(_identity: NodeIdentity): Promise<AdapterStatus> {
-    try {
-      await WebBrowser.openBrowserAsync(GEODNET_CONSOLE_URL);
-    } catch {
-      // Browser unavailable — proceed to prompt.
+    if (Platform.OS === 'android') {
+      void WebBrowser.openBrowserAsync(GEODNET_CONSOLE_URL).catch(() => {});
+    } else {
+      try {
+        await WebBrowser.openBrowserAsync(GEODNET_CONSOLE_URL);
+      } catch {
+        // Browser unavailable — proceed to prompt.
+      }
     }
 
     const addr = await promptForWallet();

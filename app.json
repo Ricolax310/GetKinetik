@@ -27,13 +27,21 @@
       "edgeToEdgeEnabled": true,
       "userInterfaceStyle": "dark",
       "package": "com.getkinetik.node",
-      "versionCode": 11
+      "versionCode": 12,
+      "permissions": [
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.BLUETOOTH_SCAN",
+        "android.permission.BLUETOOTH_CONNECT",
+        "android.permission.BLUETOOTH_ADVERTISE"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      "expo-web-browser"
+      "expo-web-browser",
+      "nodle-sdk"
     ],
     "extra": {
       "eas": {

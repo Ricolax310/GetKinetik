@@ -5,6 +5,7 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 import { palette } from './src/theme/palette';
 import { VaultPanel } from './src/components/VaultPanel';
+import { WalletAddressPromptHost } from './src/lib/walletAddressPrompt';
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
         <StatusBar style="light" translucent backgroundColor="transparent" />
         <SafeAreaView style={styles.safe} edges={['top', 'bottom', 'left', 'right']}>
           <VaultPanel />
+          <WalletAddressPromptHost />
         </SafeAreaView>
       </View>
     </SafeAreaProvider>

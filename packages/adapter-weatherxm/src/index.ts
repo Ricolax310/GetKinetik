@@ -46,6 +46,8 @@ import { Alert, Platform } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
 import * as WebBrowser from 'expo-web-browser';
 
+import { openWalletAddressPrompt } from '../../../src/lib/walletAddressPrompt';
+
 import type {
   AdapterStatus,
   DepinAdapter,
@@ -121,8 +123,7 @@ async function fetchWxmBalance(walletAddress: string): Promise<number | null> {
 }
 
 // ----------------------------------------------------------------------------
-// Wallet address capture — iOS Alert.prompt, Android informational fallback.
-// Same pattern as HivemapperAdapter. Android TextInput modal arrives in Session I.
+// Wallet address capture — iOS Alert.prompt; Android uses openWalletAddressPrompt.
 // ----------------------------------------------------------------------------
 
 function promptForWallet(): Promise<string | null> {
@@ -154,11 +155,16 @@ function promptForWallet(): Promise<string | null> {
         '',
       );
     } else {
-      Alert.alert(
-        'Connect WeatherXM',
-        'Open the WeatherXM app → Profile → copy your Arbitrum wallet address.\n\nAndroid wallet entry will be available in the next update.',
-        [{ text: 'OK', onPress: () => resolve(null) }],
-      );
+      void openWalletAddressPrompt({
+        title: 'Connect WeatherXM Wallet',
+        message:
+          'Enter your Arbitrum One wallet address to track WXM earnings.\n\nThis is the wallet linked to your WeatherXM station.',
+        placeholder: '0x… (42 characters)',
+        validate: (trimmed) => {
+          if (/^0x[0-9a-fA-F]{40}$/.test(trimmed)) return null;
+          return 'Use an Arbitrum address: 0x plus 40 hex characters.';
+        },
+      }).then(resolve);
     }
   });
 }
@@ -206,10 +212,14 @@ class WeatherXMAdapter implements DepinAdapter {
   // --------------------------------------------------------------------------
 
   async register(_identity: NodeIdentity): Promise<AdapterStatus> {
-    try {
-      await WebBrowser.openBrowserAsync(WXM_CLAIM_URL);
-    } catch {
-      // Browser unavailable — proceed to prompt.
+    if (Platform.OS === 'android') {
+      void WebBrowser.openBrowserAsync(WXM_CLAIM_URL).catch(() => {});
+    } else {
+      try {
+        await WebBrowser.openBrowserAsync(WXM_CLAIM_URL);
+      } catch {
+        // Browser unavailable — proceed to prompt.
+      }
     }
 
     const addr = await promptForWallet();

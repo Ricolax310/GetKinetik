@@ -35,13 +35,13 @@ import { GenesisCreditsTicker } from './GenesisCreditsTicker';
 import { OptimizationReport } from './OptimizationReport';
 import type { OptimizationResult } from '../../packages/optimizer/src/scorer';
 import { nodleAdapter } from '../../packages/adapter-nodle/src';
-import { dimoAdapter } from '../../packages/adapter-dimo/src';
-import { hivemapperAdapter } from '../../packages/adapter-hivemapper/src';
-import { weatherxmAdapter } from '../../packages/adapter-weatherxm/src';
-import { geodnetAdapter } from '../../packages/adapter-geodnet/src';
 
-/** Adapter registry — append new DePIN adapters here. Nothing else changes. */
-const ADAPTERS = AGGREGATOR_ENABLED ? [nodleAdapter, dimoAdapter, hivemapperAdapter, weatherxmAdapter, geodnetAdapter] : [];
+/**
+ * Earnings aggregator adapter list. Nodle-only for now (BLE background
+ * attestation is the shipped path). Re-append dimoAdapter, hivemapperAdapter,
+ * weatherxmAdapter, geodnetAdapter when you want the full multi-DePIN panel.
+ */
+const ADAPTERS = AGGREGATOR_ENABLED ? [nodleAdapter] : [];
 
 // ----------------------------------------------------------------------------
 // SecureStore keys — v1-suffixed so we can migrate cleanly in the future
