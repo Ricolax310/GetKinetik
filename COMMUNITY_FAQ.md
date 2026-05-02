@@ -93,14 +93,14 @@ When the app starts for the first time, it creates a secret key — like an ultr
 Less than you'd think. Here's the full picture:
 
 - **Your DePIN earnings (DIMO, Nodle, etc.)** — totally safe. Those live in your wallet on those networks. GETKINETIK never touched them.
-- **Your Genesis Credits** — as long as you've transferred or cashed them out to your wallet before losing the phone, they're safe too. Credits that were already moved out are gone from the phone, sitting safely in your wallet.
+- **Your Genesis Score** — this is a *reputation grade* about your node, not money. You don't "transfer it out" because it's not a balance. If you lose the phone the grade resets for a new device, but no money is at stake — it never was.
 - **What's actually lost** — only your node's anonymous identity and its seniority (how long it's been running). That's it.
 
 And even that isn't as painful as it sounds. The identity is fully anonymous — the network never knew who you were, just that a node with that ID had been running for X days. You can create a new one instantly. You'd just be starting the seniority clock over.
 
 The only real "loss" is time. The longer a node has been running, the more its track record is worth as the network matures. You can't get those days back. But your money? Always yours, always in your wallet.
 
-**The short version:** keep your credits transferred out regularly and losing your phone is basically just an inconvenience, not a disaster.
+**The short version:** none of your money is on the phone. DePIN tokens live in the partner networks' wallets. Genesis Score is a reputation grade, not currency. Lose the phone and you lose your seniority clock — that's it.
 
 **Can I back up the node identity so I don't lose the seniority?**
 
@@ -152,11 +152,11 @@ Earnings flow through the partner networks directly. GETKINETIK tracks and signs
 
 **Does GETKINETIK take a cut?**
 
-Not yet. Everything is free during the preview. Eventually there's a 1% fee on earnings routed through the optimizer — but that feature isn't live yet.
+The app is free for individual users during preview, and the basic ledger and verifier will stay free permanently. Long-term revenue comes from **partner networks** (who pay for `verify-device` API access in USD/USDC) and an optional **consumer Pro tier** (advanced reports, hardware-ROI analysis, exportable history) — both paid in fiat or stablecoin. No token, no swap fees, no take-rate on your DePIN earnings.
 
 **Is there a token? A GETKINETIK coin?**
 
-No token yet. Genesis Credits (the points you earn now) are being tracked for a potential future launch. Nothing to buy, nothing to sell right now.
+**No token. Not now, not later — by charter.** GETKINETIK is the independent trust layer for DePIN. The moment we issue a token, our grading of other networks loses credibility (we'd have an outcome to pump). Like Carfax, Equifax, or Bloomberg, we are deliberately structured to never have skin in the things we grade. Our charter is in [`NEUTRALITY.md`](https://github.com/Ricolax310/GetKinetik/blob/main/NEUTRALITY.md). Genesis Score is a public reputation number — a *grade*, not a currency. Nothing to buy, nothing to sell, ever.
 
 ---
 

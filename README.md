@@ -1,16 +1,27 @@
 # GETKINETIK
 
-> Aggregate every DePIN earning into one signed ledger. Hardware-signed.
-> Zero custody. Your phone is the sovereign node.
+> **Honest numbers for every DePIN you run.**
+> Built outside the networks. Owned by no one. Hardware-signed proof of
+> what your devices actually did, actually earned, and actually proved —
+> across every network paying out, in plain sight, no spin.
 
-**Yearn for DePIN.** Yearn Finance optimized DeFi yields by routing capital
-to the highest-paying protocol on-chain, automatically. GETKINETIK does the
-same thing for the physical layer — your phone's signed sensor attestations
-get aggregated across every DePIN network paying out (Nodle, DIMO,
-Hivemapper, WeatherXM, Geodnet, more coming), and earnings flow into one
-cryptographically auditable ledger you control.
+GETKINETIK is the **independent trust layer for the decentralized
+physical economy** — a neutral, cryptographically-verifiable record of
+node identity, uptime, and earnings across DePIN networks (Nodle, DIMO,
+Hivemapper, WeatherXM, Geodnet, more coming).
 
-No servers. No accounts. No middleman. Just receipts.
+Networks can't grade themselves and stay credible. Foundations can't
+audit their own ecosystems without conflict. We're the third party that
+sits outside every network, reads what really happened, and signs it
+with hardware-rooted keys you can verify in any browser.
+
+**Our charter** is in [`NEUTRALITY.md`](./NEUTRALITY.md): no token, no
+equity in graded networks, no exclusive partnerships, all revenue in
+fiat or stablecoin, methodology public. That's what makes the data
+worth trusting.
+
+No servers holding your data. No accounts. No middleman taking a cut of
+your tokens. Just signed receipts, on your device, verifiable by anyone.
 
 ---
 
@@ -27,9 +38,10 @@ download) or **`GETKINETIK-v1.4.0.apk`** on
 | **L1** Sovereign Identity + Trust | ✅ Shipped | Ed25519 key + hash-chained heartbeat log + public verifier |
 | **L2** Sensor Capture + Signing | 🟡 Partial | 3 of 7 planned permission-free sensors signing into the chain |
 | **L3** DePIN Optimizer | ✅ Shipped | Gas-aware claim timing, shared polling pool, yield scoring, device discovery |
-| **L4** Wallet + 1% Protocol Fee | ✅ Shipped | Signed earnings ledger with premium-aware receipts |
-| **Verified-User Premium** | 🔨 v1.5 | 10–15% yield boost for hardware-attested nodes (partner activation required) |
-| **Genesis Credits** | 🟡 Partial | In-app score + KV backup; full wallet export path still in progress (NOT a token) |
+| **L4** Earnings Ledger + Disclosure Fee | ✅ Shipped | Hardware-signed earnings receipts; optional 1% bureau fee disclosed in the signature |
+| **Partner Verification API** | ✅ Shipped | `POST /api/verify-device` — signed proof in, attestation out |
+| **Verified-User Premium** | 🔨 v1.5 | Partners pay our verified operators 10–15% above standard rate (partner activation required) |
+| **Genesis Score** | 🟡 Partial | Public node reputation score (uptime, age, attestation count). **Non-transferable. Not a token. Never priced.** |
 
 iOS preview is on the roadmap. Currently Android-only because Apple's
 restrictions on background sensor collection and crypto-flavored apps make
@@ -39,9 +51,12 @@ download button can join the waitlist on the site.
 ### Roadmap
 
 ```
-v1.4.x  SHIPPED — Optimizer, Genesis Credits (MVP), shared PollingPool, verify-device webhook, metrics
-v1.5    NEXT   — Seed-phrase backup; first verified-user premium with a partner network
-v2.0    LATER  — Network rails, token routing, full multi-chain settlement
+v1.4.x  SHIPPED — Optimizer, Genesis Score (MVP), shared PollingPool, verify-device webhook, metrics
+v1.5    NEXT   — Seed-phrase backup; first verified-user premium with a partner network;
+                 Methodology v1.0 published (how the Genesis Score is computed)
+v1.6    SOON   — Partner API tiers (free, pro, enterprise); batch attestation endpoint;
+                 third-party auditor read API
+v2.0    LATER  — Public attestation index across 25+ DePIN networks; transparency reports
 ```
 
 ---
@@ -127,7 +142,8 @@ without one or both refusing to validate.
 
 ## For partners
 
-We're an aggregator and trust layer, not a competitor. The integration shape is:
+We're the **independent trust layer** that grades nodes across every
+DePIN — never a network competitor. The integration shape is:
 
 - **Read-only** against the partner network's own API (we never custody earnings; tokens live in the user's wallet on the partner's network)
 - **Hardware-signed Proof of Origin** attached to every node-side claim, verifiable by anyone via the public verifier at `getkinetik.app/verify/`
@@ -159,17 +175,20 @@ your phone.
 
 - Your DePIN earnings (DIMO, Nodle, Hivemapper, etc.) are safe — they
   live in your wallet on those networks. We only read them, never hold them.
-- Your Genesis Credits, once transferred out to your wallet, are safe.
-- What you lose is your **node's seniority** — how long it's been running,
-  its heartbeat chain, its track record. The anonymous identity itself can
-  be recreated instantly on a new device.
+- Your **Genesis Score** is a public reputation number tied to your node's
+  history. It is **never transferable, never priced, never redeemable** —
+  it's a *grade*, not a currency. Losing your phone resets the grade for
+  the new device, but no money is at stake.
+- What you actually lose is your **node's seniority** — how long it's been
+  running, its heartbeat chain, its track record. The anonymous identity
+  itself can be recreated instantly on a new device.
 
-Right now that trade-off is low stakes — seniority is a clock, not cash.
-As the network matures (Genesis Credits gaining value, node age factoring
-into routing priority), the longer you've been running the more that
-history is worth. But today, losing a node and starting over is an
-inconvenience, not a disaster. Keep your credits transferred out regularly
-and there's essentially nothing to lose.
+Seniority is a reputation clock, not cash. As the bureau grows, partners
+who pay verified-user premiums may weight node age and Genesis Score in
+their offers — meaning a long-running, well-graded node may unlock
+*better partner rates*, but the grade itself is never something you own
+or can sell. Lose your phone and you start the clock over; nothing
+else is lost.
 
 Seed-phrase backup (write down 12 words, restore on a new device, one
 device active at a time) is **in progress** — not in v1.4.0; see

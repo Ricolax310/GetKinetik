@@ -165,9 +165,10 @@ function InfoSheet({
               They track your contribution to the network and mark you as an early builder.
             </Text>
             <Text style={styles.explainerText}>
-              Genesis Credits are NOT a token, NOT redeemable for cash, and carry no monetary
-              value today. They are access points and seniority markers — the record that you
-              were here from the beginning.
+              Genesis Credits are NOT a token, NOT redeemable, NOT transferable, and carry
+              no monetary value — by charter, not by accident. They are a public reputation
+              grade about your node — the bureau's record that you were here from the
+              beginning, used by partner networks to inform verified-user offers.
             </Text>
             {summary.isGenesisTier && (
               <Text style={[styles.explainerText, { color: palette.ruby.ember, marginTop: 4 }]}>

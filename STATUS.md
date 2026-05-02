@@ -1,7 +1,9 @@
 # GETKINETIK — Project Status Handoff
 
 > Living document. Update whenever the state of the project materially changes.
-> Last updated: **2026-04-30 (afternoon)** — **v1.4 code complete, build queued for tonight (5pm-ish when EAS quota resets).** All five v1.4 pillars shipped to `main` (commit `33fd942`): optimizer engine (`packages/optimizer/`), Genesis Credits (`packages/credits/`), verified-user premium-aware EarningEntry, partner verify webhook live at `https://getkinetik.app/api/verify-device`, public metrics API live at `/api/metrics`, OptimizationReport modal + GenesisCreditsTicker now wired into VaultPanel. **Audit pass found and fixed 6 bugs:** (1) `refresh()` undefined → would crash on opt-in, (2) `production` build profile generates AAB which can't be sideloaded, (3) `app.json` version still said 1.3.3, (4) GenesisCreditsTicker + OptimizationReport built but never rendered, (5) dead `DIMO_API_KEY` constant in public source, (6) wrong contact email (`eric@outfromnothing.com` missing "llc") in README/PARTNER_EMAILS/verify-device docs — all references corrected to `eric@outfromnothingllc.com`. Outreach materials ready: `PITCH.md` one-page deck + `OUTREACH_MESSAGES.md` ready-to-paste Discord/Telegram/Twitter messages for DIMO, Hivemapper, Nodle, WeatherXM, Geodnet. Landing page (`getkinetik.app`) updated with Optimizer + For Partners sections. **Next: build v1.4 APK on EAS quota reset, publish GitHub release using `RELEASE_NOTES_v1.4.md`, then start sending outreach.**
+> Last updated: **2026-05-02** — **Strategic pivot: positioned as the independent trust layer ("credit bureau") for the decentralized physical economy, not a DePIN aggregator.** New [`NEUTRALITY.md`](./NEUTRALITY.md) charter committed: no token ever, no equity in graded networks, no exclusive partnerships, all revenue in fiat/stablecoin, methodology public. README + landing hero + FAQ + release notes + PITCH all rewritten to bureau positioning. Genesis Credits renamed conceptually to **Genesis Score** (public reputation grade, never transferable, never priced). v2.0 roadmap line "token routing / multi-chain settlement" removed. Revenue model rewritten: partner verification API + consumer Pro tier + enterprise audit access — all USD/USDC. Outreach next-wave will lead with bureau framing, not aggregator framing. Triggered by trademark/SEO research showing KINETIK is fortressed by Kinetik (energy), Windstream Kinetic (telecom), Kinetik Care (digital health), and by Nodle's explicit "not a fit for our genuity model" reply that revealed the network-by-network premium pitch was orthogonal to network-by-network priorities. Bureau positioning works regardless of which networks like the verified-user premium pitch.
+>
+> Previous: **2026-04-30 (afternoon)** — **v1.4 code complete, build queued for tonight (5pm-ish when EAS quota resets).** All five v1.4 pillars shipped to `main` (commit `33fd942`): optimizer engine (`packages/optimizer/`), Genesis Credits (`packages/credits/`), verified-user premium-aware EarningEntry, partner verify webhook live at `https://getkinetik.app/api/verify-device`, public metrics API live at `/api/metrics`, OptimizationReport modal + GenesisCreditsTicker now wired into VaultPanel. **Audit pass found and fixed 6 bugs:** (1) `refresh()` undefined → would crash on opt-in, (2) `production` build profile generates AAB which can't be sideloaded, (3) `app.json` version still said 1.3.3, (4) GenesisCreditsTicker + OptimizationReport built but never rendered, (5) dead `DIMO_API_KEY` constant in public source, (6) wrong contact email (`eric@outfromnothing.com` missing "llc") in README/PARTNER_EMAILS/verify-device docs — all references corrected to `eric@outfromnothingllc.com`. Outreach materials ready: `PITCH.md` one-page deck + `OUTREACH_MESSAGES.md` ready-to-paste Discord/Telegram/Twitter messages for DIMO, Hivemapper, Nodle, WeatherXM, Geodnet. Landing page (`getkinetik.app`) updated with Optimizer + For Partners sections. **Next: build v1.4 APK on EAS quota reset, publish GitHub release using `RELEASE_NOTES_v1.4.md`, then start sending outreach.**
 
 > Previous: 2026-04-27 (evening) — **L3 DePIN aggregator lands, v1.3.0 building.** AggregatorPanel got the swipe/scroll multi-adapter UI (475 new lines) — all five built adapters visible side-by-side. DIMO OAuth wired with `getkinetik://dimo-callback` (later changed to https in v1.3.2 — DIMO console rejects custom schemes). `VaultPanel` ripped out fake yield accrual. Landing page repitched as DePIN Earnings Aggregator. `app.json` bumped to **1.3.0** / versionCode **4**, `eas.json` switched to local appVersionSource + autoIncrement.
 
@@ -11,36 +13,37 @@
 
 ## THE MISSION (read this first, before any architecture decision)
 
-**GETKINETIK is a DePIN aggregator that turns every phone into a sovereign earning device.**
+**GETKINETIK is the independent trust layer for the decentralized physical economy — the credit bureau every DePIN network needs and none can build for itself.**
 
-Tech companies currently extract data from phones worth hundreds of billions of dollars per year. Users are paid zero. GetKinetik puts a cryptographic wall between the phone's sensors and the extractive apps — then routes the phone's sensor attestations into whichever DePIN network is currently paying the most, converts the earnings to the user's chosen denomination (USD / BTC / native token), and takes a 1% protocol fee on every conversion.
+Networks can't grade themselves and stay credible. Foundations can't audit their own ecosystems without conflict. We sit outside every network, read what really happened on real hardware, and sign it with keys nobody — including us — can forge. That neutrality is the moat. See [`NEUTRALITY.md`](./NEUTRALITY.md) for the immutable rules that protect it.
 
-**The unique wedge:** every DePIN on the market today fails at one thing — proving nodes are real. Helium bled revenue to fake hotspots. Hivemapper wrestles GPS spoofers. WeatherXM shipped dedicated hardware to dodge the problem. GetKinetik's sovereign identity layer (Ed25519 key + hash-chained uptime proof + public verifier) is the Sybil-resistance primitive every DePIN wishes they had. That's the moat.
+**The unique wedge:** every DePIN on the market today fails at one thing — proving nodes are real. Helium bled revenue to fake hotspots. Hivemapper wrestles GPS spoofers. WeatherXM shipped dedicated hardware to dodge the problem. GETKINETIK's sovereign identity layer (Ed25519 key sealed in the device's secure enclave + hash-chained uptime proof + public browser-side verifier) is the Sybil-resistance primitive every DePIN wishes they had — and the trust primitive every lender, insurer, and auditor will eventually need. That's the bureau.
 
-**The business:**
+**The business (all revenue in fiat or stablecoin — no token, no swap fees, no take-rate on user earnings):**
 
-- 1% protocol fee on all DePIN earnings converted through the app (Uniswap-style)
-- $5/mo premium tier for priority routing to highest-paying DePIN slots
-- Opt-in aggregated data licensing to corporations (user gets a cut, we take a cut)
-- Exit value: attractive acquisition target for any major DePIN project, data broker, or crypto exchange once we have 100K+ authenticated active nodes
+- **Partner Verification API** — paid `verify-device` calls + batch attestation endpoints (USD/USDC, monthly billed). Like Stripe Radar for DePIN.
+- **Consumer Pro tier** — advanced reports, hardware-ROI calculators, cross-network comparison, exportable history (USD subscription, optional).
+- **Enterprise audit access** — read API + methodology disclosure for foundations, auditors, exchanges, regulators (USD enterprise contracts).
+- **Optional 1% earnings disclosure fee** — baked into signed receipts for transparency, not for revenue maximization. May be removed entirely as bureau revenue scales.
+- **Exit value:** strategic acquisition target for payments / risk infra (Stripe, Plaid, Visa), credit-bureau adjacencies (Equifax, S&P), exchanges that need neutral attestation (Coinbase, Kraken), or a foundation/consortium that wants to lock in the trust layer.
 
-### The four-layer aggregator architecture
+### The four-layer trust-bureau architecture
 
 ```
-L4 — WALLET / EARNINGS / FEE          ✅ SHIPPED — signed earning ledger + premium-aware receipts
-L3 — DEPIN ROUTING / OPTIMIZER        🔨 BUILDING — packages/optimizer/ shipped (v1.4)
+L4 — EARNINGS LEDGER / DISCLOSURE     ✅ SHIPPED — signed earning ledger + disclosure-fee receipts
+L3 — DEPIN READ / OPTIMIZER           ✅ SHIPPED — packages/optimizer/ (v1.4)
                                          · Gas-aware claim timing (CoinGecko + Polygon/Base RPC)
                                          · Shared PollingPool (replaces 5 individual timers)
                                          · Device capability discovery engine
                                          · Weekly OptimizationReport modal
 L2 — SENSOR CAPTURE + SIGNING         🟡 PARTIAL — 3 of 7 sensors signing into chain
-L1 — SOVEREIGN IDENTITY + TRUST       ✅ BUILT, SHIPPED, WITNESSED
+L1 — SOVEREIGN IDENTITY + TRUST       ✅ BUILT, SHIPPED, WITNESSED — the bureau primitive
 ```
 
 ### New in v1.4 build
 
 - `packages/optimizer/` — full optimizer engine (priceFeed, gasFeed, scorer, discovery, pollingPool, savings)
-- `packages/credits/` — Genesis Credits engine (loyalty points, NOT a token)
+- `packages/credits/` — Genesis Score engine (public node reputation grade, NOT a token, NOT transferable)
 - `src/components/OptimizationReport.tsx` — weekly savings proof modal
 - `src/components/GenesisCreditsTicker.tsx` — GC counter
 - `functions/api/verify-device.js` — partner verification webhook (LIVE)

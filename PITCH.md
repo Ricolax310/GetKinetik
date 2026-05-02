@@ -1,7 +1,7 @@
 # GETKINETIK — Partner Pitch (One Page)
 
 **The 30-second version:**
-GETKINETIK is a DePIN earnings aggregator that runs on Android. It aggregates Nodle, DIMO, Hivemapper, WeatherXM, and Geodnet into one signed ledger. Every device is identified by a hardware-sealed Ed25519 key — one phone, one node, one unforgeable identity. We built a webhook so partner networks can verify user authenticity in one API call and offer verified-user reward boosts.
+GETKINETIK is the **independent trust layer for the decentralized physical economy** — a neutral, hardware-attested record of node identity, uptime, and earnings across DePIN networks. We sit outside every network, we never issue a token, we never take equity in graded networks (see [`NEUTRALITY.md`](./NEUTRALITY.md)), and we publish a `verify-device` API any partner can call to confirm a user's device is real, signed, and well-graded before paying out a reward. Think Carfax for DePIN nodes, with a developer-grade API for verified-user premium offers.
 
 ---
 
@@ -11,26 +11,28 @@ GETKINETIK is a DePIN earnings aggregator that runs on Android. It aggregates No
 |---|---|
 | **Sovereign Identity** | Ed25519 keypair generated and sealed in the device's secure enclave on first activation. Never leaves the device. |
 | **Hash-Chained Heartbeats** | Every 30 seconds, the node signs a statement and chains it to the previous one. Tamper-evident uptime log. |
-| **Multi-Network Aggregation** | 5 DePIN adapters (Nodle, DIMO, Hivemapper, WeatherXM, Geodnet) unified under one signed ledger. |
+| **Multi-Network Read** | 5 DePIN adapters (Nodle, DIMO, Hivemapper, WeatherXM, Geodnet) unified under one signed ledger. We *read*; we never custody. |
 | **Optimizer Engine** | Real-time CoinGecko prices + gas feeds. Ranks all pending claims by USD yield. Tells users exactly when to claim. |
-| **Proof of Origin** | A signed certificate (schema v:2) carrying node ID, heartbeat count, chain tip, sensor readings, and Ed25519 signature — scannable QR, verifiable by anyone. |
-| **Genesis Credits** | Internal loyalty score (NOT a token). 2× rate for early adopters. Tracks uptime, heartbeats, and network connections. |
-| **Partner Webhook** | `POST /api/verify-device` — one call returns valid/invalid + node age + heartbeat count. Zero SDK dependency. |
+| **Proof of Origin** | A signed certificate (schema v:2) carrying node ID, heartbeat count, chain tip, sensor readings, and Ed25519 signature — scannable QR, verifiable by anyone, in any browser, with no server call. |
+| **Genesis Score** | Public node reputation grade (NOT a token, NOT transferable, NEVER priced). Like Equifax for sovereign nodes — partners read it via the verify API to inform premium offers. |
+| **Partner Verification API** | `POST /api/verify-device` — one call returns valid/invalid + node age + heartbeat count + Genesis Score. Zero SDK dependency. Free during preview; paid tiers (USD/USDC) for production volume. |
+| **Neutrality Charter** | Public commitment: no token, no equity in graded networks, no exclusive partnerships, all revenue in fiat. See [`NEUTRALITY.md`](./NEUTRALITY.md). |
 
 ---
 
 ## The Partner Value Prop
 
-**Your problem:** Sybil attacks. Fake nodes. GPS spoofers. Revenue bleeds.
+**Your problem:** Sybil attacks. Fake nodes. GPS spoofers. Hardware fraud. You can't grade your own users without conflict, and there is no neutral third party that can grade them for you. Today.
 
-**What we offer:** A user population whose devices are cryptographically verified at the hardware level. One GETKINETIK proof = one real device = one real human. Not an email. Not a wallet. A sealed key.
+**What we offer:** A neutral trust layer that grades every node it sees. One `verify-device` call returns: valid signature, device age, uptime, attestation count, and a Genesis Score (the bureau's reputation grade). Like calling Equifax before issuing a credit card, or Carfax before buying a used car.
 
-**The integration:** One webhook call. Your backend POSTs the user's proof URL, we return verified + node metadata. You decide to apply a reward boost (5–10% is enough to drive adoption). We never touch your token economy, your chain, or your codebase.
+**The integration:** One HTTP POST. Your backend hits `/api/verify-device` with the user's proof URL, we return JSON. You decide what to do with it — pay verified users a 5–15% premium, gate access, weight rewards, anything. **We never touch your token economy, your chain, or your codebase. We're not a competitor. We're infrastructure.**
 
 **Why it works for both sides:**
-- Users earn more by running GETKINETIK → they use GETKINETIK more
-- You get Sybil resistance without building it → your reward pool is cleaner
-- Neither side holds the other's keys
+- Users get verified-user premiums on networks that opt in → they have a reason to keep running GETKINETIK and earning across networks
+- You get hardware-attested Sybil resistance without building it → your reward pool is cleaner without you having to grade your own users
+- A neutral third party graded the user, not you — so partners, auditors, and capital can independently verify your network metrics
+- We never hold tokens, never have equity in your network, never compete for users' attention. Pure infrastructure.
 
 ---
 
