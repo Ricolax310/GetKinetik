@@ -43,6 +43,8 @@ import { Alert, Platform } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
 import * as WebBrowser from 'expo-web-browser';
 
+import { openWalletAddressPrompt } from '../../../src/lib/walletAddressPrompt';
+
 import type {
   AdapterStatus,
   DepinAdapter,
@@ -143,10 +145,8 @@ async function fetchHoneyBalance(walletAddress: string): Promise<number | null> 
 }
 
 // ----------------------------------------------------------------------------
-// Wallet address capture — iOS uses Alert.prompt; Android falls back to a
-// one-time SecureStore check (user must have set it via another path, e.g.
-// a future settings screen). For the v0 prototype, the iOS path is the
-// primary flow. Android support arrives in Session H with a TextInput modal.
+// Wallet address capture — iOS uses Alert.prompt; Android uses
+// openWalletAddressPrompt (modal TextInput at app root).
 // ----------------------------------------------------------------------------
 
 function promptForWallet(): Promise<string | null> {
@@ -178,13 +178,16 @@ function promptForWallet(): Promise<string | null> {
         '',
       );
     } else {
-      // Android: no Alert.prompt. Return null — the card will stay unregistered
-      // and show an instruction to use the settings page (coming in Session H).
-      Alert.alert(
-        'Connect Hivemapper',
-        'Open the Hivemapper app → Profile → copy your Solana wallet address.\n\nAndroid wallet entry will be available in the next update.',
-        [{ text: 'OK', onPress: () => resolve(null) }],
-      );
+      void openWalletAddressPrompt({
+        title: 'Connect Hivemapper Wallet',
+        message:
+          'Enter your Solana wallet address to track HONEY earnings.\n\nYour address is shown in the Hivemapper app under your profile.',
+        placeholder: 'Solana address',
+        validate: (trimmed) => {
+          if (trimmed.length >= 32 && trimmed.length <= 44) return null;
+          return 'That does not look like a Solana address (32–44 characters).';
+        },
+      }).then(resolve);
     }
   });
 }
@@ -231,10 +234,16 @@ class HivemapperAdapter implements DepinAdapter {
 
   async register(_identity: NodeIdentity): Promise<AdapterStatus> {
     // Open the Hivemapper explorer so the user can copy their wallet address.
-    try {
-      await WebBrowser.openBrowserAsync(HIVEMAPPER_CONTRIBUTOR_URL);
-    } catch {
-      // Browser open failed — proceed to prompt anyway.
+    // On Android, awaiting openBrowserAsync can hang until the Custom Tab is
+    // dismissed; never block register() on that — show the wallet prompt anyway.
+    if (Platform.OS === 'android') {
+      void WebBrowser.openBrowserAsync(HIVEMAPPER_CONTRIBUTOR_URL).catch(() => {});
+    } else {
+      try {
+        await WebBrowser.openBrowserAsync(HIVEMAPPER_CONTRIBUTOR_URL);
+      } catch {
+        // Browser open failed — proceed to prompt anyway.
+      }
     }
 
     const addr = await promptForWallet();

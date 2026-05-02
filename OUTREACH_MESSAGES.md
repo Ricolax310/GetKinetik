@@ -3,6 +3,8 @@
 Copy-paste these directly into Discord DMs, Telegram, or Twitter/X.
 Keep them short. Get on a call. Send the PITCH.md as a follow-up.
 
+**Discord public channels:** Labels like **Discord DM** mean a **private message** to a mod, admin, or partnerships contact — **not** a long intro in `#dev-api` (or similar) with bare links. Many DePIN servers run AutoMod that **blocks unknown domains** (including `getkinetik.app`) and can **timeout** repeat attempts. For public channels, use the **no-link** variant in each section, then send the full link in DM or email once someone replies.
+
 ---
 
 ## DIMO
@@ -56,7 +58,20 @@ https://getkinetik.app
 
 ## WeatherXM
 
-### Discord DM
+### Discord — public channel (#dev-api, etc.) — **no links**
+AutoMod on WeatherXM blocked bare `getkinetik.app` URLs (timeout risk). Use this in **#dev-api** only; put URLs in DM after someone engages.
+
+```
+Hey — I'm building GETKINETIK, a DePIN earnings aggregator with hardware-signed device identity (Ed25519 in the secure enclave).
+
+Built a verify-device webhook: POST a user's proof URL → JSON with verified + device age + uptime heartbeats. Idea for WeatherXM: ground-truth that a station operator's phone is real hardware before you treat their contribution as trusted.
+
+Android app is live; Proof of Origin verifies in-browser.
+
+Who should I DM for a 15-min API / data-quality chat? Happy to send docs link there — AutoMod blocks my domain in-channel.
+```
+
+### Discord DM (private message to mod / BD / team — **full pitch OK**)
 ```
 Hey — quick intro: I built GETKINETIK, a DePIN earnings aggregator with a hardware-signed device identity layer (Ed25519, sealed in the phone's secure enclave).
 
@@ -68,7 +83,8 @@ App is live on Android. Proof of Origin externally verified.
 
 Is there someone on the team I could show this to? 15 minutes.
 
-https://getkinetik.app
+Site: https://getkinetik.app
+Webhook spec: https://github.com/Ricolax310/GetKinetik/blob/main/docs/api/verify-device.md
 ```
 
 ### Telegram DM (if WeatherXM team is on Telegram)
@@ -80,7 +96,9 @@ Hi! I built a DePIN aggregator called GETKINETIK. Every user carries a hardware-
 
 ## Nodle
 
-### Discord DM
+**Where to go (Nodle Discord):** `#create-a-ticket` is **read-only** with buttons — and the pinned bot message says **no partnership requests in tickets**; non-support tickets get **closed**. For BD / integration / partnership inquiries they tell you to **DM `@Community Manager`**. Use **`#developers-chat`** only for casual dev discussion, not as a substitute for that DM.
+
+### Discord DM (to @Community Manager — partnership / integration)
 ```
 Hey Nodle team — I built GETKINETIK, a DePIN earnings aggregator running on Android.
 
@@ -97,6 +115,8 @@ Webhook: https://github.com/Ricolax310/GetKinetik/blob/main/docs/api/verify-devi
 ---
 
 ## Geodnet
+
+**If Discord invite fails:** Use **`https://support.geodnet.com/`** (ticket — best for BD/integration). Telegram group **`t.me/geodnet`** (“GEODNET Official”) is official; **`#Official Team`** is often **staff-only** — do not spam there if you cannot post. Use **`#General Chat`** for a **one-line** “who handles integrations / partnerships?” or send the **Telegram DM** below to a **public** team contact if they list one.
 
 ### Discord/Telegram DM
 ```

@@ -1,0 +1,30 @@
+plugins {
+  id 'com.android.library'
+  id 'expo-module-gradle-plugin'
+}
+
+group = 'expo.modules.nodlesdk'
+version = '0.1.0'
+
+android {
+  namespace 'expo.modules.nodlesdk'
+  defaultConfig {
+    versionCode 1
+    versionName '0.1.0'
+  }
+}
+
+repositories {
+  google()
+  mavenCentral()
+  maven {
+    url 'http://maven.nodle.io'
+    allowInsecureProtocol = true
+  }
+}
+
+dependencies {
+  // Google Play variant — matches Nodle docs (io.nodle:nodlesdk-rc-lp)
+  implementation 'io.nodle:nodlesdk-rc-lp:94207dd00f'
+  implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1'
+}

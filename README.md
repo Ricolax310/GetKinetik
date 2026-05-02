@@ -16,18 +16,20 @@ No servers. No accounts. No middleman. Just receipts.
 
 ## Status
 
-**v1.3.x shipped. v1.4 optimizer in active development.** Android-first preview build, install via
-[getkinetik.app](https://getkinetik.app) or grab the APK directly from
+**v1.4.0 is the current public release** (Android preview APK). **v1.5** is
+next on the roadmap (seed backup, partner premium, etc.) — see the roadmap
+block below. Install via [getkinetik.app](https://getkinetik.app) (Android
+download) or **`GETKINETIK-v1.4.0.apk`** on
 [Releases](https://github.com/Ricolax310/GetKinetik/releases/latest).
 
 | Layer | Status | What it is |
 |---|---|---|
 | **L1** Sovereign Identity + Trust | ✅ Shipped | Ed25519 key + hash-chained heartbeat log + public verifier |
 | **L2** Sensor Capture + Signing | 🟡 Partial | 3 of 7 planned permission-free sensors signing into the chain |
-| **L3** DePIN Optimizer | 🔨 Building | Gas-aware claim timing, shared polling pool, yield scoring, device discovery |
+| **L3** DePIN Optimizer | ✅ Shipped | Gas-aware claim timing, shared polling pool, yield scoring, device discovery |
 | **L4** Wallet + 1% Protocol Fee | ✅ Shipped | Signed earnings ledger with premium-aware receipts |
 | **Verified-User Premium** | 🔨 v1.5 | 10–15% yield boost for hardware-attested nodes (partner activation required) |
-| **Genesis Credits** | 🔨 Building | Loyalty points for Sovereign Node operators (NOT a token) |
+| **Genesis Credits** | 🟡 Partial | In-app score + KV backup; full wallet export path still in progress (NOT a token) |
 
 iOS preview is on the roadmap. Currently Android-only because Apple's
 restrictions on background sensor collection and crypto-flavored apps make
@@ -37,9 +39,8 @@ download button can join the waitlist on the site.
 ### Roadmap
 
 ```
-v1.3.x  TODAY  — Aggregator (5 adapters), signed ledger, public verifier, DIMO OAuth
-v1.4    NEXT   — Optimizer live: gas-aware claims, shared poll pool, discovery engine
-v1.5    SOON   — First partner activates verified-user premium (10–15% yield boost)
+v1.4.x  SHIPPED — Optimizer, Genesis Credits (MVP), shared PollingPool, verify-device webhook, metrics
+v1.5    NEXT   — Seed-phrase backup; first verified-user premium with a partner network
 v2.0    LATER  — Network rails, token routing, full multi-chain settlement
 ```
 
@@ -171,8 +172,8 @@ inconvenience, not a disaster. Keep your credits transferred out regularly
 and there's essentially nothing to lose.
 
 Seed-phrase backup (write down 12 words, restore on a new device, one
-device active at a time) ships in v1.4 for users who want to preserve
-their seniority across devices.
+device active at a time) is **in progress** — not in v1.4.0; see
+`RELEASE_NOTES_v1.4.md` for current limitations.
 
 ---
 

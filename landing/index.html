@@ -340,11 +340,10 @@
          Mint warning — sits between the hero pitch and the CTAs.
          Ruby-bordered, dark fill, monospace eyebrow. Designed to
          read like a contractual term sheet, not a marketing
-         flourish. v1.3.x copy: pre-seed-phrase, sets honest
-         expectations about the no-recovery design before the user
-         taps MINT. Will be re-tuned when the seed-phrase backup
-         flow ships in v1.4 and the in-app first-run gate takes
-         over the proof-of-saved-key responsibility.
+         flourish. Pre-seed-phrase: sets honest expectations about the
+         no-recovery design before the user taps MINT. Will be re-tuned
+         when seed-phrase backup ships (post–v1.4) and the in-app
+         first-run gate takes over proof-of-saved-key responsibility.
          ------------------------------------------------------------ */
       .mint-warning {
         display: block;
@@ -1554,7 +1553,7 @@
     <!-- ================================================== -->
     <div class="topbar">
       <span class="topbar-brand">GETKINETIK</span>
-      <span class="topbar-status">v1.4 · ANDROID · LIVE</span>
+      <span class="topbar-status">v1.4.0 · ANDROID · LIVE</span>
     </div>
 
     <!-- ================================================== -->
@@ -1632,10 +1631,8 @@
 
       <!-- ============================================================
            BEFORE YOU MINT — key responsibility warning.
-           v1.3.x: pre-seed-phrase. Sets honest expectations about the
-           no-recovery design before the user taps MINT. Will be paired
-           with an in-app first-run gate (write down + verify 12 words)
-           when the seed-phrase backup ships in v1.4.
+           Seed-phrase backup is not live yet (see release notes). This
+           block sets honest expectations before the user taps MINT.
            ============================================================ -->
       <aside class="mint-warning" aria-labelledby="mint-warning-title">
         <span class="mint-warning-eyebrow" id="mint-warning-title">BEFORE YOU MINT</span>
@@ -1670,8 +1667,8 @@
         </p>
         <p class="mint-warning-rule">
           <strong>One phone at a time.</strong> Seed-phrase backup
-          (write down 12 words, restore on a new device) ships in v1.4.
-          Until then, treat this device like a hardware wallet.
+          (write down 12 words, restore on a new device) is not available
+          in this build yet — treat this device like a hardware wallet.
         </p>
       </aside>
 
@@ -2279,6 +2276,6 @@
       </div>
     </div>
 
-    <script src="/app.js?v=1.4.0" defer></script>
+    <script src="/app.js?v=1.4.2" defer></script>
   </body>
 </html>

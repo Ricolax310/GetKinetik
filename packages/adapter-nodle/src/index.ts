@@ -27,7 +27,7 @@
 // ============================================================================
 
 import { blake2b } from '@noble/hashes/blake2.js';
-import { Platform } from 'react-native';
+import { PermissionsAndroid, Platform } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
 
 import type {
@@ -60,6 +60,27 @@ const STORE_KEY_NODLE_ADDR = 'kinetik.nodle.addr.v1';
 
 /** SecureStore key — persists the last known NODL balance (planck string). */
 const STORE_KEY_LAST_BALANCE = 'kinetik.nodle.lastBalance.v1';
+
+// ----------------------------------------------------------------------------
+// Android runtime permissions — required before the native Nodle SDK can scan BLE.
+// ----------------------------------------------------------------------------
+
+async function ensureNodleAndroidPermissions(): Promise<boolean> {
+  if (Platform.OS !== 'android') return true;
+  const api = typeof Platform.Version === 'number' ? Platform.Version : 0;
+  const perms = [PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION];
+  if (api >= 31) {
+    perms.push(
+      PermissionsAndroid.PERMISSIONS.BLUETOOTH_SCAN,
+      PermissionsAndroid.PERMISSIONS.BLUETOOTH_CONNECT,
+      PermissionsAndroid.PERMISSIONS.BLUETOOTH_ADVERTISE,
+    );
+  }
+  const results = await PermissionsAndroid.requestMultiple(
+    perms as Parameters<typeof PermissionsAndroid.requestMultiple>[0],
+  );
+  return Object.values(results).every((r) => r === PermissionsAndroid.RESULTS.GRANTED);
+}
 
 // ----------------------------------------------------------------------------
 // SS58 address derivation — pure JS, no @polkadot/keyring needed.
@@ -276,7 +297,6 @@ export class NodleAdapter implements DepinAdapter {
     }
 
     this.nodleAddress = storedAddr;
-    const running = await NodleSdkModule.isRunning();
 
     if (this.lastEarnedAt !== null) {
       return {
@@ -286,15 +306,18 @@ export class NodleAdapter implements DepinAdapter {
       };
     }
 
+    // `registered` until Subscan shows a balance increase (then `earning`).
+    // Real BLE scanning is reflected only after the native SDK replaces the stub
+    // (NodleSdkModule.isRunning() will then distinguish idle vs scanning).
     return {
-      state: running ? 'registered' : 'registered',
+      state: 'registered',
       externalNodeId: storedAddr,
     };
   }
 
   // --------------------------------------------------------------------------
   // register — derives the Nodle SS58 address from the user's Ed25519 key,
-  // persists it, and starts the SDK stub.
+  // persists it, requests BLE/location permissions, and starts the native SDK (when linked).
   // --------------------------------------------------------------------------
   async register(identity: NodeIdentity): Promise<AdapterStatus> {
     if (Platform.OS !== 'android') {
@@ -304,10 +327,27 @@ export class NodleAdapter implements DepinAdapter {
     const addr = deriveNodleAddress(identity.publicKey);
     this.nodleAddress = addr;
 
-    await SecureStore.setItemAsync(STORE_KEY_NODLE_ADDR, addr);
-    await NodleSdkModule.start(addr);
+    // Persist the address first so we can show an opt-in even if the native
+    // SDK fails to start (Subscan polling still works on the address alone).
+    await SecureStore.setItemAsync(STORE_KEY_NODLE_ADDR, addr).catch(() => {});
 
-    console.log('[nodle] registered — address:', addr);
+    try {
+      const granted = await ensureNodleAndroidPermissions();
+      if (!granted) {
+        console.warn('[nodle] BLE/location permissions not fully granted — SDK may not scan');
+      }
+    } catch (e) {
+      console.warn('[nodle] permission request failed', e);
+    }
+
+    try {
+      await NodleSdkModule.start(addr);
+    } catch (e) {
+      // Stub or native start failure — keep the user opted-in (we have their
+      // address) so the adapter can still show on-chain balance via Subscan.
+      console.warn('[nodle] SDK start failed; opt-in stored, BLE inactive', e);
+    }
+
     return { state: 'registered', externalNodeId: addr };
   }
 
@@ -315,13 +355,13 @@ export class NodleAdapter implements DepinAdapter {
   // unregister — stops the SDK and clears persisted state.
   // --------------------------------------------------------------------------
   async unregister(): Promise<void> {
-    await NodleSdkModule.stop();
     try {
-      await SecureStore.deleteItemAsync(STORE_KEY_NODLE_ADDR);
-      await SecureStore.deleteItemAsync(STORE_KEY_LAST_BALANCE);
-    } catch {
-      // ignore
+      await NodleSdkModule.stop();
+    } catch (e) {
+      console.warn('[nodle] SDK stop failed; clearing local state anyway', e);
     }
+    await SecureStore.deleteItemAsync(STORE_KEY_NODLE_ADDR).catch(() => {});
+    await SecureStore.deleteItemAsync(STORE_KEY_LAST_BALANCE).catch(() => {});
     this.nodleAddress = null;
     this.lastKnownBalance = 0;
     this.lastEarnedAt = null;

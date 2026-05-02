@@ -77,7 +77,7 @@
 
 ## versionCode
 
-`11` (EAS `preview` build auto-increment from prior `10`)
+Source tree after release may show **`12`** in `app.json` (EAS auto-increment). The **v1.4.0** GitHub APK used **`11`** unless you attach a newer build to the same tag.
 
 ---
 

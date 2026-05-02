@@ -46,6 +46,7 @@ import {
   loadWalletSummary,
   type WalletSummary,
 } from '../../packages/kinetik-core/src';
+import { NODLE_SDK_IS_STUB } from '../../modules/nodle-sdk/src';
 import { PollingPool } from '../../packages/optimizer/src/pollingPool';
 import {
   fetchTokenPrices,
@@ -117,6 +118,14 @@ function fmtNodl(amount: number | null | undefined): string {
   return amount.toFixed(3);
 }
 
+/** Inactive card hint — Nodle is participatory; other adapters track an external wallet. */
+function inactiveOptInHint(adapter: DepinAdapter): string {
+  if (adapter.id === 'nodle') {
+    return 'Tap to start earning NODL passively.';
+  }
+  return `Tap ENABLE to connect your wallet and track ${adapter.currency} earnings.`;
+}
+
 function fmtRelativeTime(ts: number | null | undefined): string {
   if (ts == null) return 'never';
   const diff = Date.now() - ts;
@@ -128,11 +137,13 @@ function fmtRelativeTime(ts: number | null | undefined): string {
   return `${Math.floor(hours / 24)}d ago`;
 }
 
-function stateLabel(status: AdapterStatus): string {
+function stateLabel(status: AdapterStatus, adapterId?: string): string {
   switch (status.state) {
     case 'unavailable': return 'UNAVAILABLE';
     case 'unregistered': return 'NOT ACTIVE';
-    case 'registered': return 'SCANNING';
+    case 'registered':
+      if (adapterId === 'nodle' && NODLE_SDK_IS_STUB) return 'OPTED IN';
+      return 'SCANNING';
     case 'earning': return 'EARNING';
   }
 }
@@ -267,19 +278,26 @@ function AdapterCard({
   const handleOptIn = async () => {
     if (!identity || state.registering) return;
     setState((prev) => ({ ...prev, registering: true }));
+    let newStatus: AdapterStatus | undefined;
     try {
       await Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-      const newStatus = await adapter.register(identity);
-      setState((prev) => ({ ...prev, status: newStatus, registering: false }));
-      void loadStatus();
+      newStatus = await adapter.register(identity);
     } catch {
-      setState((prev) => ({ ...prev, registering: false }));
+      // Registration threw — clear spinner in `finally`.
+    } finally {
+      setState((prev) => ({
+        ...prev,
+        registering: false,
+        ...(newStatus !== undefined ? { status: newStatus } : {}),
+      }));
     }
+    if (newStatus !== undefined) void loadStatus();
   };
 
   const handleOptOut = async () => {
     if (state.registering) return;
     setState((prev) => ({ ...prev, registering: true }));
+    let cleared = false;
     try {
       await adapter.unregister();
       // Reset the recording watermark — if the user re-registers later, any
@@ -287,14 +305,20 @@ function AdapterCard({
       // earning. The signed ledger entries already on chain are untouched.
       await SecureStore.deleteItemAsync(RECORDED_LIFETIME_KEY(adapter.id))
         .catch(() => {});
-      setState((prev) => ({
-        ...prev,
-        status: { state: 'unregistered' },
-        snapshot: null,
-        registering: false,
-      }));
+      cleared = true;
     } catch {
-      setState((prev) => ({ ...prev, registering: false }));
+      // Leave prior status; spinner clears in `finally`.
+    } finally {
+      setState((prev) =>
+        cleared
+          ? {
+              ...prev,
+              status: { state: 'unregistered' },
+              snapshot: null,
+              registering: false,
+            }
+          : { ...prev, registering: false },
+      );
     }
   };
 
@@ -309,7 +333,7 @@ function AdapterCard({
         <Text style={styles.adapterName}>{adapter.displayName.toUpperCase()}</Text>
         <View style={[styles.badge, { borderColor: stateColor(status) }]}>
           <Text style={[styles.badgeText, { color: stateColor(status) }]}>
-            {stateLabel(status)}
+            {stateLabel(status, adapter.id)}
           </Text>
         </View>
       </View>
@@ -350,7 +374,7 @@ function AdapterCard({
           <Text style={styles.rowLabel}>
             {isUnavailable
               ? (status as { state: 'unavailable'; reason: string }).reason
-              : 'Tap to start earning NODL passively.'}
+              : inactiveOptInHint(adapter)}
           </Text>
         </View>
       )}
@@ -368,7 +392,11 @@ function AdapterCard({
             onPress={isActive ? handleOptOut : handleOptIn}
             disabled={state.registering}
             accessibilityRole="button"
-            accessibilityLabel={isActive ? 'Stop earning with Nodle' : 'Start earning with Nodle'}
+            accessibilityLabel={
+              isActive
+                ? `Stop earning with ${adapter.displayName}`
+                : `Start earning with ${adapter.displayName}`
+            }
           >
             {state.registering ? (
               <ActivityIndicator size="small" color={palette.platinum} />
