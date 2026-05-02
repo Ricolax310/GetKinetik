@@ -14,12 +14,12 @@
 - **Shared PollingPool** — replaces individual `setInterval`s in each adapter; one loop serves all five networks (~30% battery reduction)
 - **OptimizationReport modal** — weekly savings summary: gas avoided, battery hours saved, new networks discovered, verified-user premium earned
 
-### Genesis Credits (`packages/credits/`)
-- Internal loyalty score — NOT a token, NOT a financial instrument
+### Genesis Score (`packages/credits/`)
+- **Public reputation score** for sovereign nodes — like a credit grade. **NOT a token, NOT transferable, NOT priced, NEVER redeemable.**
 - Earns for: uptime, heartbeats, network connections, proof generation, optimizer use
-- 2× rate for Genesis nodes (minted before public launch)
+- 2× accrual for Genesis nodes (minted before public launch); rate is locked permanently
 - Backed up to Cloudflare KV; visible in-app via `GenesisCreditsTicker`
-- Transferable to wallet when wallet export ships
+- Will be readable by partners (via the `verify-device` API) so they can offer better rates to high-grade operators — but the score itself never leaves the bureau
 
 ### Verified-User Premium
 - `EarningEntry` schema extended with `standardRate`, `premiumRate`, `premiumBasisPoints`
