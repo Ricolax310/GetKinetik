@@ -23,6 +23,7 @@ import {
   readSensorAggregate,
   startSensorSampler,
   stopSensorSampler,
+  useAdaptiveCadenceMs,
   useHeartbeat,
 } from '../../packages/kinetik-core/src';
 import { Gemstone } from './Gemstone';
@@ -358,9 +359,19 @@ export function VaultPanel() {
 
   // --------------------------------------------------------------------------
   // Signed heartbeat log — emits an Ed25519-signed, hash-chained uptime
-  // proof every 30s while the node is LIVE. The same gate as yield accrual:
-  // the node only proves presence while it is actually working. See
-  // packages/kinetik-core/src/heartbeat.ts for the full rationale + storage shape.
+  // proof while the node is LIVE. The same gate as yield accrual: the
+  // node only proves presence while it is actually working.
+  //
+  // Cadence is adaptive (see packages/kinetik-core/src/cadence.ts):
+  //   active   30s   — foreground OR charging+online
+  //   background 5m  — backgrounded recently, on battery
+  //   sleep    30m   — backgrounded > 10 minutes, OR offline
+  //
+  // The chain contract is unaffected by the cadence (beats just need to
+  // be ordered). Slower cadence in the background is a battery-budget
+  // policy, not a correctness change. See the cadence module header for
+  // the full rationale and the methodology doc for how the bureau scores
+  // cadence consistency over time.
   // --------------------------------------------------------------------------
   const heartbeatSnapshot = useCallback(
     (): HeartbeatSnapshot => ({
@@ -370,11 +381,14 @@ export function VaultPanel() {
     }),
     [stabilityPct, online, isCharging],
   );
+  const heartbeatActive = !isLocked && online;
+  const heartbeatIntervalMs = useAdaptiveCadenceMs(heartbeatActive, isCharging);
   const { summary: heartbeat } = useHeartbeat(
     identity,
-    !isLocked && online,
+    heartbeatActive,
     heartbeatSnapshot,
     readSensorAggregate,
+    heartbeatIntervalMs,
   );
 
   // --------------------------------------------------------------------------

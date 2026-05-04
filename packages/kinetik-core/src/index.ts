@@ -35,6 +35,7 @@ export { stableStringify } from './stableJson';
 // ----- L1: hash-chained heartbeat log --------------------------------------
 export {
   HEARTBEAT_KEYS,
+  HEARTBEAT_INTERVAL_MS,
   type HeartbeatPayload,
   type HeartbeatSnapshot,
   type HeartbeatSummary,
@@ -43,6 +44,21 @@ export {
   verifyHeartbeat,
   eraseHeartbeatLog,
 } from './heartbeat';
+
+// ----- L1: adaptive cadence policy -----------------------------------------
+// Pure policy + RN hook for slowing the heartbeat when the app is
+// backgrounded / off-charger. Optional — useHeartbeat still defaults to the
+// 30s cadence if no intervalMs is passed. See ./cadence.ts for the policy
+// rationale and battery-budget motivation.
+export {
+  CADENCE_PROFILES,
+  SLEEP_AFTER_BACKGROUND_MS,
+  type CadenceProfile,
+  type CadenceInputs,
+  selectCadenceProfile,
+  selectCadenceMs,
+  useAdaptiveCadenceMs,
+} from './cadence';
 
 // ----- L2: sensor sampler + canonical sensor block -------------------------
 export {
