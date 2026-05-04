@@ -1,0 +1,57 @@
+{
+  "name": "@kinetik/verify",
+  "version": "0.1.0",
+  "description": "Independent, dependency-free verifier for GETKINETIK signed artifacts (Proof of Origin, signed heartbeats, signed earnings). Same byte-for-byte cryptographic contract as the public verifier at https://getkinetik.app/verify/. No network calls — partners can verify offline.",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "prepublishOnly": "npm run build && node smoketest.mjs",
+    "test": "node smoketest.mjs"
+  },
+  "keywords": [
+    "depin",
+    "ed25519",
+    "verifier",
+    "signed-artifact",
+    "proof-of-origin",
+    "kinetik",
+    "getkinetik",
+    "trust-layer",
+    "credit-bureau"
+  ],
+  "homepage": "https://getkinetik.app",
+  "bugs": {
+    "url": "https://github.com/Ricolax310/GetKinetik/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ricolax310/GetKinetik.git",
+    "directory": "packages/verify"
+  },
+  "author": "OutFromNothing LLC",
+  "license": "MIT",
+  "dependencies": {
+    "@noble/ed25519": "^3.1.0",
+    "@noble/hashes": "^2.2.0"
+  },
+  "devDependencies": {
+    "typescript": "~5.9.2"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "private": true
+}

@@ -1,7 +1,9 @@
 # GETKINETIK — Project Status Handoff
 
 > Living document. Update whenever the state of the project materially changes.
-> Last updated: **2026-05-02** — **Strategic pivot: positioned as the independent trust layer ("credit bureau") for the decentralized physical economy, not a DePIN aggregator.** New [`NEUTRALITY.md`](./NEUTRALITY.md) charter committed: no token ever, no equity in graded networks, no exclusive partnerships, all revenue in fiat/stablecoin, methodology public. README + landing hero + FAQ + release notes + PITCH all rewritten to bureau positioning. Genesis Credits renamed conceptually to **Genesis Score** (public reputation grade, never transferable, never priced). v2.0 roadmap line "token routing / multi-chain settlement" removed. Revenue model rewritten: partner verification API + consumer Pro tier + enterprise audit access — all USD/USDC. Outreach next-wave will lead with bureau framing, not aggregator framing. Triggered by trademark/SEO research showing KINETIK is fortressed by Kinetik (energy), Windstream Kinetic (telecom), Kinetik Care (digital health), and by Nodle's explicit "not a fit for our genuity model" reply that revealed the network-by-network premium pitch was orthogonal to network-by-network priorities. Bureau positioning works regardless of which networks like the verified-user premium pitch.
+> Last updated: **2026-05-04** — **Offensive wave: bureau-framed outreach + privacy charter + public Genesis Score methodology + adaptive heartbeat cadence + publishable `@kinetik/verify` npm package + Sign-in-with-Kinetik SDK design (gated on partner).** Six deliverables shipped in one session, all aligned with the bureau pivot from 2026-05-02. (1) `OUTREACH_MESSAGES.md` rewritten end-to-end — every per-network template (DIMO, Hivemapper, Nodle, WeatherXM, Geodnet) plus general cold + adjacent-buyer (lenders/insurers/exchanges/foundations) variants now lead with "independent trust layer / Carfax for DePIN nodes" instead of "DePIN earnings aggregator + verified-user reward boost." (2) New [`PRIVACY.md`](./PRIVACY.md) sibling charter to `NEUTRALITY.md` codifies six immutable privacy rules (no IMEI/IDFA/Android-ID/etc.; no node-to-person mapping; aggregates only; short-lived aggregate logs; no data sale; Genesis Score grades nodes not people). Designed so a future subpoena can be answered truthfully with "we don't have that data" rather than relying on policy. (3) New [`docs/methodology/GENESIS_SCORE.md`](./docs/methodology/GENESIS_SCORE.md) v1.0 — FICO-style public methodology spec: five input categories (identity integrity, uptime continuity, sensor coherence, network engagement, disclosure receipts) with explicit direction (▲/▼) for each signal, hard gates that floor or null-out the score, score range and interpretation bands, update cadence, dispute path, and a versioning policy (patch / minor / major with comment periods). Inputs and direction public; exact weights internal — same shape as FICO. (4) New `packages/kinetik-core/src/cadence.ts` — adaptive heartbeat cadence policy. Pure `selectCadenceProfile`/`selectCadenceMs` functions plus `useAdaptiveCadenceMs` RN hook. Three honest profiles: `active` 30s (foreground OR charging+online), `background` 5min (recently backgrounded on battery), `sleep` 30min (>10min backgrounded OR offline). Wired into `useHeartbeat` via a non-breaking optional `intervalMs` arg; `VaultPanel` now passes the adaptive cadence in. **Chain contract is unchanged** — beats just need ordering, cadence is policy. All 16 signing-contract smoketests + 5 URL-roundtrip smoketests + `tsc --noEmit` still pass. (5) New `packages/verify/` — publishable `@kinetik/verify` npm package. Pure-TS port of `landing/verify/verifier.js` with same byte contract: `stableStringify`, `sha256[:16]`, `ed25519.verifyAsync`, `PROOF_ATTRIBUTION`. Exports `verifyArtifact`, `decodeProofUrl`, `stableStringify`, `PROOF_ATTRIBUTION`, `PROTOCOL_FEE_RATE`, `VERSION`. ESM, types, sourcemaps, MIT license. **27/27 smoketest checks passing** (proof-of-origin, heartbeat, earning happy paths; tampered fee/payload/attribution rejection; wrong-key forgery rejection; URL roundtrip; structural-error throws). Marked `private: true` — ready to publish, just hasn't been pushed to npm. (6) New [`docs/sdk/CLIENT_SDK_DESIGN.md`](./docs/sdk/CLIENT_SDK_DESIGN.md) v0.1 DRAFT — "Sign in with Kinetik" client SDK. `kinetik://verify-device?partnerId&nonce&purpose&returnUrl` deep-link protocol, partner-bound proof minting (new optional `audience`/`nonce`/`purpose` fields on v:2 PoO — minor schema bump, backward-compat), `@kinetik/sdk-react-native` + native counterparts. **Build is gated on a first partner conversation** (DIMO/Hivemapper/Geodnet). Document captured now so when a partner says yes, we don't negotiate the integration shape under time pressure. Open: actually push `@kinetik/verify` to npm; queue v1.5 build that ships the cadence module.
+>
+> Previous: **2026-05-02** — **Strategic pivot: positioned as the independent trust layer ("credit bureau") for the decentralized physical economy, not a DePIN aggregator.** New [`NEUTRALITY.md`](./NEUTRALITY.md) charter committed: no token ever, no equity in graded networks, no exclusive partnerships, all revenue in fiat/stablecoin, methodology public. README + landing hero + FAQ + release notes + PITCH all rewritten to bureau positioning. Genesis Credits renamed conceptually to **Genesis Score** (public reputation grade, never transferable, never priced). v2.0 roadmap line "token routing / multi-chain settlement" removed. Revenue model rewritten: partner verification API + consumer Pro tier + enterprise audit access — all USD/USDC. Outreach next-wave will lead with bureau framing, not aggregator framing. Triggered by trademark/SEO research showing KINETIK is fortressed by Kinetik (energy), Windstream Kinetic (telecom), Kinetik Care (digital health), and by Nodle's explicit "not a fit for our genuity model" reply that revealed the network-by-network premium pitch was orthogonal to network-by-network priorities. Bureau positioning works regardless of which networks like the verified-user premium pitch.
 >
 > Previous: **2026-04-30 (afternoon)** — **v1.4 code complete, build queued for tonight (5pm-ish when EAS quota resets).** All five v1.4 pillars shipped to `main` (commit `33fd942`): optimizer engine (`packages/optimizer/`), Genesis Credits (`packages/credits/`), verified-user premium-aware EarningEntry, partner verify webhook live at `https://getkinetik.app/api/verify-device`, public metrics API live at `/api/metrics`, OptimizationReport modal + GenesisCreditsTicker now wired into VaultPanel. **Audit pass found and fixed 6 bugs:** (1) `refresh()` undefined → would crash on opt-in, (2) `production` build profile generates AAB which can't be sideloaded, (3) `app.json` version still said 1.3.3, (4) GenesisCreditsTicker + OptimizationReport built but never rendered, (5) dead `DIMO_API_KEY` constant in public source, (6) wrong contact email (`eric@outfromnothing.com` missing "llc") in README/PARTNER_EMAILS/verify-device docs — all references corrected to `eric@outfromnothingllc.com`. Outreach materials ready: `PITCH.md` one-page deck + `OUTREACH_MESSAGES.md` ready-to-paste Discord/Telegram/Twitter messages for DIMO, Hivemapper, Nodle, WeatherXM, Geodnet. Landing page (`getkinetik.app`) updated with Optimizer + For Partners sections. **Next: build v1.4 APK on EAS quota reset, publish GitHub release using `RELEASE_NOTES_v1.4.md`, then start sending outreach.**
 
@@ -52,6 +54,15 @@ L1 — SOVEREIGN IDENTITY + TRUST       ✅ BUILT, SHIPPED, WITNESSED — the bu
 - `landing/metrics/index.html` — public metrics dashboard
 - `docs/` — architecture, cryptography, adapter contract, IP assignment, API spec
 - `PARTNER_EMAILS.md` v4 — verified-user premium pitch + webhook CTA
+
+### New in 2026-05-04 offensive wave (writing-first + first code units)
+
+- [`PRIVACY.md`](./PRIVACY.md) — sibling charter to `NEUTRALITY.md`; six immutable privacy rules
+- [`docs/methodology/GENESIS_SCORE.md`](./docs/methodology/GENESIS_SCORE.md) v1.0 — public FICO-style methodology (inputs and direction; weights internal)
+- [`docs/sdk/CLIENT_SDK_DESIGN.md`](./docs/sdk/CLIENT_SDK_DESIGN.md) v0.1 DRAFT — "Sign in with Kinetik" deep-link protocol design (build gated on first partner conversation)
+- [`OUTREACH_MESSAGES.md`](./OUTREACH_MESSAGES.md) — fully rewritten to bureau framing, all five networks + general + adjacent-buyer (lenders/insurers/exchanges/foundations) variants
+- `packages/kinetik-core/src/cadence.ts` — adaptive heartbeat cadence policy module (active / background / sleep), wired into `useHeartbeat` via optional non-breaking `intervalMs` arg, consumed by `VaultPanel` via `useAdaptiveCadenceMs`
+- `packages/verify/` — `@kinetik/verify` npm package (publishable, currently `private: true`), 27/27 smoketests passing, identical byte contract to the public verifier
 
 ### The MVP integration targets for L3 (phone-viable DePINs)
 
@@ -128,17 +139,27 @@ The entire app is built on three cryptographic primitives. If these are sound, t
 
 ```
 packages/
-└── kinetik-core/        # L1 trust-layer primitive (the future public SDK)
-    ├── package.json     # @kinetik/core, internal-only (private: true), v0.1.0
-    ├── README.md        # What's inside, status, contract rules
-    └── src/
-        ├── index.ts     # THE FRONT DOOR — only file the app is allowed to import from
-        ├── identity.ts      # Ed25519 keypair, SecureStore, signMessage/verifyMessage
-        ├── heartbeat.ts     # useHeartbeat hook, hash-chained signed beats (schema v:2 since 2026-04-25)
-        ├── sensors.ts       # L2 sensor sampler — accel motionRms + baro pressureHpa + light lux
-        ├── proof.ts         # createProofOfOrigin, verifyProofOfOrigin, PROOF_ATTRIBUTION
-        ├── proofShare.ts    # buildVerifierUrl, shareProof, base64UrlEncode, VERIFIER_ORIGIN
-        └── stableJson.ts    # stableStringify — canonical JSON for signing
+├── kinetik-core/        # L1 trust-layer primitive (the future public SDK)
+│   ├── package.json     # @kinetik/core, internal-only (private: true), v0.1.0
+│   ├── README.md        # What's inside, status, contract rules
+│   └── src/
+│       ├── index.ts     # THE FRONT DOOR — only file the app is allowed to import from
+│       ├── identity.ts      # Ed25519 keypair, SecureStore, signMessage/verifyMessage
+│       ├── heartbeat.ts     # useHeartbeat hook, hash-chained signed beats (schema v:2 since 2026-04-25)
+│       ├── cadence.ts       # Adaptive heartbeat cadence policy (active 30s / background 5m / sleep 30m) — added 2026-05-04
+│       ├── sensors.ts       # L2 sensor sampler — accel motionRms + baro pressureHpa + light lux
+│       ├── proof.ts         # createProofOfOrigin, verifyProofOfOrigin, PROOF_ATTRIBUTION
+│       ├── proofShare.ts    # buildVerifierUrl, shareProof, base64UrlEncode, VERIFIER_ORIGIN
+│       └── stableJson.ts    # stableStringify — canonical JSON for signing
+│
+└── verify/              # @kinetik/verify — publishable npm package (added 2026-05-04)
+    ├── package.json     # name @kinetik/verify, MIT, ESM, type roots — currently private: true
+    ├── README.md        # Partner-facing docs: install, quickstart, API, contract drift policy
+    ├── tsconfig.json    # tsc → dist/ (declarations + sourcemaps)
+    ├── smoketest.mjs    # 27 checks across happy path + tamper / forgery / URL roundtrip
+    ├── LICENSE          # MIT
+    ├── src/index.ts     # verifyArtifact, decodeProofUrl, stableStringify, constants — pure crypto, no DOM, no network
+    └── dist/            # built output (gitignored) — created by `npm run build`
 
 src/
 ├── components/
@@ -301,9 +322,11 @@ No native modules were added beyond what was already linked. All recent features
 - **Apple Developer account?** Needed for TestFlight ($99/yr). Not yet confirmed whether the user has one.
 - **Google Play Developer account?** Needed for Android internal track ($25 one-time). Unknown.
 - **Bundle identifier / app name at submission time?** `app.json` currently has placeholder values — verify before first EAS build.
-- **Does the user want heartbeat interval user-configurable?** Currently hardcoded at 30s.
+- **Heartbeat interval user-configurable?** *Resolved 2026-05-04* — adopted automatic adaptive cadence (active/background/sleep) instead of user-configurable. Cadence is still hardcoded *per-profile*, but the profile selection is automatic and battery-aware. See `packages/kinetik-core/src/cadence.ts`. If a user-facing toggle is requested later it should override the policy, not replace it.
 - **Brand attestor key.** Do we introduce a second "brand-level" key that co-signs releases? Related to realness ladder step 5.
 - **Brand-name collision: AZ "GET KINETIK, LLC" exists.** A separate Arizona LLC named "GET KINETIK, LLC" surfaced in `seethemoney.az.gov` (campaign-finance) records as of Sep 2024. Our legal entity is OutFromNothing LLC (DBA GETKINETIK as a brand). To resolve: (1) look up that LLC on `https://ecorp.azcc.gov/EntitySearch` to see industry / status; (2) search USPTO TESS at `https://tmsearch.uspto.gov/` for "GETKINETIK" / "GET KINETIK" / "KINETIK" in Class 9 (mobile apps) and Class 42 (SaaS / cryptographic services); (3) regardless of outcome, consider filing our own USPTO trademark in Class 9 + 42 (~$250/class, federal, beats state-level LLC namespacing). Domain `getkinetik.app`, GitHub org, Cloudflare deployment, and signed-proof attribution string are all unaffected — this is purely a commercial branding question.
+- **Push `@kinetik/verify` to npm?** Package is built, smoketested, and `private: true`. Pushing makes the cryptographic verification path available to any partner without copying source files. Recommended once one partner has agreed to integrate (so the v0.1.0 release has a real consumer).
+- **Schema bump for SDK fields (`audience`, `nonce`, `purpose`)?** Optional v:2 PoO additions specified in `docs/sdk/CLIENT_SDK_DESIGN.md` — backward-compatible minor schema bump. Do NOT add until the first partner SDK conversation triggers it; otherwise the verifier surface area grows for nobody.
 
 ---
 

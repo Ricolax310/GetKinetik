@@ -118,12 +118,33 @@ function fmtNodl(amount: number | null | undefined): string {
   return amount.toFixed(3);
 }
 
+/** Panel title — "Earnings" reads yield-aggregator; rewards still fits DePIN without sounding like a farm. */
+const REWARDS_PANEL_TITLE = 'REWARDS';
+
 /** Inactive card hint — Nodle is participatory; other adapters track an external wallet. */
 function inactiveOptInHint(adapter: DepinAdapter): string {
   if (adapter.id === 'nodle') {
     return 'Tap to start earning NODL passively.';
   }
   return `Tap ENABLE to connect your wallet and track ${adapter.currency} earnings.`;
+}
+
+/** Summary line: avoid "1/1 NETWORKS" when only one integration is shipped (Nodle-only). */
+function formatIntegrationStatusLine(activeCount: number, adapters: DepinAdapter[]): string {
+  const n = adapters.length;
+  if (n === 1 && adapters[0]) {
+    const name = adapters[0].displayName.toUpperCase();
+    const on = activeCount >= 1;
+    return `${name} · ${on ? 'LINK ACTIVE' : 'NOT LINKED'}`;
+  }
+  return `${activeCount}/${n} NETWORKS ACTIVE`;
+}
+
+function formatSheetSubtitle(adapters: DepinAdapter[]): string {
+  if (adapters.length === 1 && adapters[0]) {
+    return `${adapters[0].displayName.toUpperCase()} · SWIPE DOWN TO CLOSE`;
+  }
+  return `${adapters.length} NETWORKS · SWIPE DOWN TO CLOSE`;
 }
 
 function fmtRelativeTime(ts: number | null | undefined): string {
@@ -418,9 +439,9 @@ function AdapterCard({
 //
 // HOME SURFACE (always visible):
 //   ┌─────────────────────────────┐
-//   │ EARNINGS              ⌃     │
-//   │ 12 SIGNED ENTRIES · 2/5     │
-//   │ NETWORKS ACTIVE             │
+//   │ REWARDS               ⌃     │
+//   │ 12 SIGNED ENTRIES · NODLE · │
+//   │ LINK ACTIVE                 │
 //   └─────────────────────────────┘
 //
 // The drawer is ALWAYS mounted (translated offscreen when closed) so that
@@ -539,7 +560,6 @@ export function AggregatorPanel({ adapters, identity, onOpenOptimizationReport }
   const activeCount = Object.values(statuses).filter(
     (s) => s.state === 'registered' || s.state === 'earning',
   ).length;
-  const totalCount = adapters.length;
   const entryCount = summary?.count ?? 0;
 
   // Aggregate lifetime earnings by currency.
@@ -581,11 +601,11 @@ export function AggregatorPanel({ adapters, identity, onOpenOptimizationReport }
       <Pressable
         onPress={openDrawer}
         accessibilityRole="button"
-        accessibilityLabel="Open earnings detail drawer"
+        accessibilityLabel="Open rewards detail drawer"
         style={({ pressed }) => [styles.summaryBox, pressed && styles.summaryBoxPressed]}
       >
         <View style={styles.summaryHeaderRow}>
-          <Text style={styles.panelHeader}>EARNINGS</Text>
+          <Text style={styles.panelHeader}>{REWARDS_PANEL_TITLE}</Text>
           <Text style={styles.summaryChevron}>⌃</Text>
         </View>
 
@@ -603,7 +623,7 @@ export function AggregatorPanel({ adapters, identity, onOpenOptimizationReport }
           <View style={styles.totalsBlock}>
             <View style={styles.totalsRow}>
               <Text style={styles.totalsAmount}>—</Text>
-              <Text style={styles.totalsCurrency}>NOTHING EARNED YET</Text>
+              <Text style={styles.totalsCurrency}>NO REWARDS YET</Text>
             </View>
           </View>
         )}
@@ -614,9 +634,10 @@ export function AggregatorPanel({ adapters, identity, onOpenOptimizationReport }
           </Text>
           <Text style={styles.summaryDot}>·</Text>
           <Text style={styles.summaryStat}>
-            {activeCount}/{totalCount} NETWORKS ACTIVE
+            {formatIntegrationStatusLine(activeCount, adapters)}
           </Text>
         </View>
+        <Text style={styles.summaryLedgerHint}>SIGNED INTO YOUR NODE LEDGER</Text>
 
         {/* Optimizer badge — shown when the optimizer has a recommendation. */}
         {(claimNowCount > 0 || gasAvoidedUsd > 0) && (
@@ -760,7 +781,7 @@ function EarningsDrawer({
           style={StyleSheet.absoluteFillObject}
           onPress={onClose}
           accessibilityRole="button"
-          accessibilityLabel="Close earnings drawer"
+          accessibilityLabel="Close rewards drawer"
         />
       </Animated.View>
 
@@ -770,10 +791,8 @@ function EarningsDrawer({
       >
         <View {...panResponder.panHandlers} style={styles.sheetGrip}>
           <View style={styles.dragHandle} />
-          <Text style={styles.sheetTitle}>EARNINGS</Text>
-          <Text style={styles.sheetSubtitle}>
-            {adapters.length} NETWORKS · SWIPE DOWN TO CLOSE
-          </Text>
+          <Text style={styles.sheetTitle}>{REWARDS_PANEL_TITLE}</Text>
+          <Text style={styles.sheetSubtitle}>{formatSheetSubtitle(adapters)}</Text>
         </View>
         <ScrollView
           style={styles.sheetScroll}
@@ -868,6 +887,16 @@ const styles = StyleSheet.create({
     fontSize: 11,
     letterSpacing: 1.6,
     fontWeight: '500',
+  },
+  summaryLedgerHint: {
+    color: palette.sapphire.glow,
+    fontFamily: typography.mono,
+    fontSize: 8,
+    letterSpacing: 2.6,
+    fontWeight: '500',
+    textTransform: 'uppercase',
+    opacity: 0.55,
+    marginTop: 4,
   },
   summaryHash: {
     color: palette.graphite,

@@ -241,7 +241,7 @@ export function OptimizationReport({
 
           {/* Earnings comparison */}
           <View style={styles.section}>
-            <Text style={styles.sectionLabel}>EARNINGS COMPARISON</Text>
+            <Text style={styles.sectionLabel}>REWARDS COMPARISON</Text>
 
             <SavingsRow
               label="Standalone earnings"

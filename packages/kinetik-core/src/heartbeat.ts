@@ -65,10 +65,16 @@ import {
 import { stableStringify } from './stableJson';
 
 // ----------------------------------------------------------------------------
-// Tunables. Interval is conservative — 30s is cheap on battery and dense
-// enough to make a meaningful uptime record. SESSION_RING_MAX bounds memory.
+// Tunables. The default interval is 30s — cheap on battery, dense enough to
+// make a meaningful uptime record, and the cadence the chain has been signed
+// at since rung 2. Callers may pass a different `intervalMs` to useHeartbeat
+// (see ./cadence.ts) to slow the cadence when the app is backgrounded /
+// off-charger; that is policy, not part of the chain contract. The chain
+// itself is order-only — variable cadence does not change any signature
+// shape, any prevHash linkage, or the verifier's accept rules. SESSION_RING_MAX
+// bounds in-memory ring size regardless of cadence.
 // ----------------------------------------------------------------------------
-const HEARTBEAT_INTERVAL_MS = 30_000;
+export const HEARTBEAT_INTERVAL_MS = 30_000;
 const SESSION_RING_MAX = 64;
 
 export const HEARTBEAT_KEYS = {
@@ -232,6 +238,15 @@ export function useHeartbeat(
   active: boolean,
   getSnapshot: () => HeartbeatSnapshot,
   getSensors?: () => Promise<SensorReadout>,
+  /**
+   * Optional cadence in ms. Defaults to HEARTBEAT_INTERVAL_MS (30s) so
+   * existing callers see no behavior change. When set, the interval
+   * re-binds whenever the value changes, so consumers can pass an
+   * adaptive cadence from useAdaptiveCadenceMs (see ./cadence.ts) to
+   * slow down on battery / in background. The chain contract is
+   * unaffected — beats just need to be ordered.
+   */
+  intervalMs: number = HEARTBEAT_INTERVAL_MS,
 ) {
   const [summary, setSummary] = useState<HeartbeatSummary>(EMPTY_SUMMARY);
   const summaryRef = useRef<HeartbeatSummary>(EMPTY_SUMMARY);
@@ -363,17 +378,22 @@ export function useHeartbeat(
     }
   }, [identity, commitSummary]);
 
-  // Start/stop the interval whenever `active` toggles or identity first
-  // materializes. We also emit one beat immediately on activation so the
-  // DIAG panel reflects liveness without a 30s wait.
+  // Start/stop the interval whenever `active` toggles, identity materializes,
+  // or the cadence changes. We also emit one beat immediately on activation
+  // so the DIAG panel reflects liveness without a full cadence wait. When
+  // intervalMs changes (e.g. AppState dropped from foreground to background
+  // and useAdaptiveCadenceMs returned a slower value), the effect re-runs:
+  // the previous interval is cleared and a new one starts at the new cadence.
+  // The pending beat from the previous cadence is allowed to settle via the
+  // inFlightRef guard — we never overlap two emit calls.
   useEffect(() => {
     if (!identity || !active) return;
     void emitHeartbeat();
     const id = setInterval(() => {
       void emitHeartbeat();
-    }, HEARTBEAT_INTERVAL_MS);
+    }, intervalMs);
     return () => clearInterval(id);
-  }, [identity, active, emitHeartbeat]);
+  }, [identity, active, intervalMs, emitHeartbeat]);
 
   // Persist a final summary when the app backgrounds — if the interval is
   // cut off mid-cycle we still want the seq/count/firstTs/lastHash written.
