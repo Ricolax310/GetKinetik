@@ -82,6 +82,11 @@ async function ensureNodleAndroidPermissions(): Promise<boolean> {
   return Object.values(results).every((r) => r === PermissionsAndroid.RESULTS.GRANTED);
 }
 
+async function clearStoredNodleRegistration(): Promise<void> {
+  await SecureStore.deleteItemAsync(STORE_KEY_NODLE_ADDR).catch(() => {});
+  await SecureStore.deleteItemAsync(STORE_KEY_LAST_BALANCE).catch(() => {});
+}
+
 // ----------------------------------------------------------------------------
 // SS58 address derivation — pure JS, no @polkadot/keyring needed.
 // Uses blake2b from @noble/hashes (already in package.json).
@@ -325,29 +330,41 @@ export class NodleAdapter implements DepinAdapter {
     }
 
     const addr = deriveNodleAddress(identity.publicKey);
-    this.nodleAddress = addr;
-
-    // Persist the address first so we can show an opt-in even if the native
-    // SDK fails to start (Subscan polling still works on the address alone).
-    await SecureStore.setItemAsync(STORE_KEY_NODLE_ADDR, addr).catch(() => {});
 
     try {
       const granted = await ensureNodleAndroidPermissions();
       if (!granted) {
-        console.warn('[nodle] BLE/location permissions not fully granted — SDK may not scan');
+        console.warn('[nodle] BLE/location permissions denied — not registering');
+        await clearStoredNodleRegistration();
+        this.nodleAddress = null;
+        this.lastKnownBalance = 0;
+        this.lastEarnedAt = null;
+        return { state: 'unregistered' };
       }
     } catch (e) {
       console.warn('[nodle] permission request failed', e);
+      await clearStoredNodleRegistration();
+      this.nodleAddress = null;
+      this.lastKnownBalance = 0;
+      this.lastEarnedAt = null;
+      return { state: 'unregistered' };
     }
 
     try {
       await NodleSdkModule.start(addr);
     } catch (e) {
-      // Stub or native start failure — keep the user opted-in (we have their
-      // address) so the adapter can still show on-chain balance via Subscan.
-      console.warn('[nodle] SDK start failed; opt-in stored, BLE inactive', e);
+      console.warn('[nodle] SDK start failed; not registering', e);
+      await clearStoredNodleRegistration();
+      this.nodleAddress = null;
+      this.lastKnownBalance = 0;
+      this.lastEarnedAt = null;
+      return { state: 'unregistered' };
     }
 
+    // Persist only after scanning can actually start; stored state drives the
+    // UI's registered/earning labels on future launches.
+    this.nodleAddress = addr;
+    await SecureStore.setItemAsync(STORE_KEY_NODLE_ADDR, addr).catch(() => {});
     return { state: 'registered', externalNodeId: addr };
   }
 
