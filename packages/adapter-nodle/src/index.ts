@@ -36,7 +36,7 @@ import type {
   EarningSnapshot,
 } from '../../kinetik-core/src/adapter';
 import type { NodeIdentity } from '../../kinetik-core/src/identity';
-import { NodleSdkModule } from '../../../modules/nodle-sdk/src';
+import { NODLE_SDK_IS_STUB, NodleSdkModule } from '../../../modules/nodle-sdk/src';
 
 // ----------------------------------------------------------------------------
 // Constants.
@@ -325,29 +325,38 @@ export class NodleAdapter implements DepinAdapter {
     }
 
     const addr = deriveNodleAddress(identity.publicKey);
-    this.nodleAddress = addr;
 
-    // Persist the address first so we can show an opt-in even if the native
-    // SDK fails to start (Subscan polling still works on the address alone).
-    await SecureStore.setItemAsync(STORE_KEY_NODLE_ADDR, addr).catch(() => {});
+    const failRegistration = async () => {
+      await SecureStore.deleteItemAsync(STORE_KEY_NODLE_ADDR).catch(() => {});
+      this.nodleAddress = null;
+      this.lastKnownBalance = 0;
+      this.lastEarnedAt = null;
+      return { state: 'unregistered' } as const;
+    };
 
     try {
       const granted = await ensureNodleAndroidPermissions();
       if (!granted) {
-        console.warn('[nodle] BLE/location permissions not fully granted — SDK may not scan');
+        console.warn('[nodle] BLE/location permissions not fully granted — registration cancelled');
+        return await failRegistration();
       }
     } catch (e) {
       console.warn('[nodle] permission request failed', e);
+      return await failRegistration();
     }
 
     try {
       await NodleSdkModule.start(addr);
     } catch (e) {
-      // Stub or native start failure — keep the user opted-in (we have their
-      // address) so the adapter can still show on-chain balance via Subscan.
-      console.warn('[nodle] SDK start failed; opt-in stored, BLE inactive', e);
+      if (!NODLE_SDK_IS_STUB) {
+        console.warn('[nodle] SDK start failed; registration cancelled', e);
+        return await failRegistration();
+      }
+      console.warn('[nodle] SDK start failed in stub mode; storing opt-in only', e);
     }
 
+    this.nodleAddress = addr;
+    await SecureStore.setItemAsync(STORE_KEY_NODLE_ADDR, addr).catch(() => {});
     return { state: 'registered', externalNodeId: addr };
   }
 
