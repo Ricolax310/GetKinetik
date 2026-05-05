@@ -321,11 +321,8 @@ function AdapterCard({
     let cleared = false;
     try {
       await adapter.unregister();
-      // Reset the recording watermark — if the user re-registers later, any
-      // accrued balance is treated as a fresh starting point, not a missed
-      // earning. The signed ledger entries already on chain are untouched.
-      await SecureStore.deleteItemAsync(RECORDED_LIFETIME_KEY(adapter.id))
-        .catch(() => {});
+      // Keep the lifetime watermark. Re-registering the same wallet/address
+      // must not sign the already-recorded balance a second time.
       cleared = true;
     } catch {
       // Leave prior status; spinner clears in `finally`.
