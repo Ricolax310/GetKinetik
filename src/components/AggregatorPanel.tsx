@@ -202,48 +202,84 @@ const RECORDED_LIFETIME_KEY = (adapterId: string) =>
 /** Smallest delta we bother recording. Suppresses dust noise from polling jitter. */
 const MIN_RECORDABLE_DELTA = 1e-8;
 
+const earningRecordLocks = new Map<string, Promise<boolean>>();
+
+async function setRecordedLifetime(key: string, value: number): Promise<boolean> {
+  try {
+    await SecureStore.setItemAsync(key, String(value));
+    return true;
+  } catch (err) {
+    console.warn('[aggregator] failed to persist earning watermark:', err);
+    return false;
+  }
+}
+
+function withEarningRecordLock(
+  adapterId: string,
+  task: () => Promise<boolean>,
+): Promise<boolean> {
+  const previous = earningRecordLocks.get(adapterId) ?? Promise.resolve(false);
+  const next = previous
+    .catch(() => false)
+    .then(task);
+
+  earningRecordLocks.set(adapterId, next);
+
+  return next.finally(() => {
+    if (earningRecordLocks.get(adapterId) === next) {
+      earningRecordLocks.delete(adapterId);
+    }
+  });
+}
+
 async function recordEarningDelta(
   adapter: DepinAdapter,
   snapshot: EarningSnapshot,
   identity: NodeIdentity,
 ): Promise<boolean> {
-  if (!Number.isFinite(snapshot.lifetimeGross) || snapshot.lifetimeGross <= 0) {
-    return false;
-  }
+  return withEarningRecordLock(adapter.id, async () => {
+    if (!Number.isFinite(snapshot.lifetimeGross) || snapshot.lifetimeGross <= 0) {
+      return false;
+    }
 
-  const key = RECORDED_LIFETIME_KEY(adapter.id);
-  const prevRaw = await SecureStore.getItemAsync(key).catch(() => null);
-  const prevLifetime = prevRaw ? parseFloat(prevRaw) : 0;
-  const safePrev = Number.isFinite(prevLifetime) && prevLifetime >= 0 ? prevLifetime : 0;
-  const curr = snapshot.lifetimeGross;
-  const delta = curr - safePrev;
+    const key = RECORDED_LIFETIME_KEY(adapter.id);
+    const prevRaw = await SecureStore.getItemAsync(key).catch(() => null);
+    const prevLifetime = prevRaw ? parseFloat(prevRaw) : 0;
+    const safePrev = Number.isFinite(prevLifetime) && prevLifetime >= 0 ? prevLifetime : 0;
+    const curr = snapshot.lifetimeGross;
+    const delta = curr - safePrev;
 
-  // Down-ratchet on withdrawal — silently track the new floor, no entry.
-  if (delta < 0) {
-    await SecureStore.setItemAsync(key, String(curr)).catch(() => {});
-    return false;
-  }
+    // Down-ratchet on withdrawal — silently track the new floor, no entry.
+    if (delta < 0) {
+      await setRecordedLifetime(key, curr);
+      return false;
+    }
 
-  if (delta < MIN_RECORDABLE_DELTA) return false;
+    if (delta < MIN_RECORDABLE_DELTA) return false;
 
-  // externalRef is auditable + dedup-friendly: anyone replaying the chain can
-  // confirm the watermark sequence is monotonically increasing for this source.
-  const ts = Date.now();
-  const externalRef = `${adapter.id}:lifetime:${curr.toFixed(8)}:${ts}`;
+    // externalRef is auditable + dedup-friendly: anyone replaying the chain can
+    // confirm the watermark sequence is monotonically increasing for this source.
+    const externalRef = `${adapter.id}:lifetime:${safePrev.toFixed(8)}:${curr.toFixed(8)}`;
 
-  try {
-    await appendEarningLog(identity, {
-      source: adapter.id,
-      externalRef,
-      currency: adapter.currency,
-      gross: delta,
-    });
-    await SecureStore.setItemAsync(key, String(curr)).catch(() => {});
-    return true;
-  } catch (err) {
-    console.warn('[aggregator] failed to record earning delta:', err);
-    return false;
-  }
+    try {
+      // Advance the watermark before signing. If SecureStore rejects the write,
+      // abort rather than minting a duplicate receipt on the next poll.
+      if (!(await setRecordedLifetime(key, curr))) {
+        return false;
+      }
+
+      await appendEarningLog(identity, {
+        source: adapter.id,
+        externalRef,
+        currency: adapter.currency,
+        gross: delta,
+      });
+      return true;
+    } catch (err) {
+      console.warn('[aggregator] failed to record earning delta:', err);
+      return false;
+    }
+  });
 }
 
 // ----------------------------------------------------------------------------
