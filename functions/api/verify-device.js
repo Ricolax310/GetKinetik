@@ -37,9 +37,9 @@
  * 2. Decode and parse the JSON proof payload
  * 3. Verify the PROOF_ATTRIBUTION field matches the expected constant
  * 4. Re-serialise the payload using stableStringify (lex-sorted keys)
- * 5. Verify the Ed25519 signature against the serialised message and the
+ * 5. Verify the derived hash matches the optional hash field when present
+ * 6. Verify the Ed25519 signature against the serialised message and the
  *    pubkey embedded in the payload using SubtleCrypto (native in CF Workers)
- * 6. Verify the hash field matches sha256(message)[:16]
  *
  * This is a server-side implementation of the same logic in landing/verify/verifier.js.
  * Both must remain byte-for-byte equivalent — the CRYPTOGRAPHIC_CONTRACT comment
@@ -100,6 +100,7 @@ function fromBase64Url(b64url) {
  * hexToBytes — convert a hex string to Uint8Array.
  */
 function hexToBytes(hex) {
+  if (typeof hex !== "string" || !/^[0-9a-f]+$/i.test(hex)) return null;
   if (hex.length % 2 !== 0) return null;
   const bytes = new Uint8Array(hex.length / 2);
   for (let i = 0; i < bytes.length; i++) {
@@ -168,25 +169,35 @@ async function verifyProofUrl(proofUrl) {
     return { valid: false, reason: "malformed_envelope" };
   }
 
-  const { payload, signature, hash } = envelope;
-  if (!payload || !signature || !hash) {
+  const { payload, signature } = envelope;
+  const hash = typeof envelope.hash === "string" ? envelope.hash.toLowerCase() : null;
+  const message = typeof envelope.message === "string" ? envelope.message : null;
+  if (!payload || typeof payload !== "object" || !signature) {
     return { valid: false, reason: "missing_fields" };
   }
 
-  // Step 4: verify attribution.
+  // Step 4: verify this endpoint is only accepting Proof-of-Origin artifacts.
+  if (payload.kind !== "proof-of-origin") {
+    return { valid: false, reason: "wrong_kind" };
+  }
+
+  // Step 5: verify attribution.
   if (payload.attribution !== PROOF_ATTRIBUTION) {
     return { valid: false, reason: "attribution_mismatch" };
   }
 
-  // Step 5: verify hash = sha256(stableStringify(payload))[:16].
-  const message = stableStringify(payload);
-  const fullHash = await sha256Hex(message);
+  // Step 6: derive canonical message/hash. COMPACT proofs omit both fields.
+  const canonicalMessage = stableStringify(payload);
+  if (message !== null && message !== canonicalMessage) {
+    return { valid: false, reason: "message_mismatch" };
+  }
+  const fullHash = await sha256Hex(canonicalMessage);
   const expectedHash = fullHash.slice(0, 16);
-  if (expectedHash !== hash) {
+  if (hash !== null && expectedHash !== hash) {
     return { valid: false, reason: "hash_mismatch" };
   }
 
-  // Step 6: verify Ed25519 signature using SubtleCrypto.
+  // Step 7: verify Ed25519 signature using SubtleCrypto.
   // The pubkey is a 64-char lowercase hex string (32 raw bytes).
   const pubkeyHex = payload.pubkey;
   if (typeof pubkeyHex !== "string" || pubkeyHex.length !== 64) {
@@ -210,7 +221,7 @@ async function verifyProofUrl(proofUrl) {
       false,
       ["verify"],
     );
-    const msgBytes = new TextEncoder().encode(message);
+    const msgBytes = new TextEncoder().encode(canonicalMessage);
     verified = await crypto.subtle.verify("Ed25519", cryptoKey, sigBytes, msgBytes);
   } catch {
     // SubtleCrypto Ed25519 may not be available in all CF Worker environments.
@@ -222,7 +233,7 @@ async function verifyProofUrl(proofUrl) {
     return { valid: false, reason: "signature_invalid" };
   }
 
-  // Step 7: return the verified node identity.
+  // Step 8: return the verified node identity.
   // Timestamp field priority: Proof-of-Origin uses issuedAt (card signed) /
   // mintedAt (key birth); heartbeat uses ts. Previous payload.ts-only mapping
   // returned null for every valid PoO — fixed 2026-05.

@@ -70,12 +70,14 @@ The `proofUrl` is what the GETKINETIK app generates when the user taps **Share P
 | `reason` | Meaning |
 |---|---|
 | `signature_invalid` | The Ed25519 signature does not verify against the payload. The proof was tampered with or fabricated. |
-| `hash_mismatch` | The proof's hash field doesn't match `sha256(payload)[:16]`. Truncated or corrupted URL. |
+| `message_mismatch` | The optional full proof message does not match the canonical payload. |
+| `hash_mismatch` | The optional proof hash doesn't match `sha256(payload)[:16]`. Truncated or corrupted URL. |
 | `attribution_mismatch` | The attribution field was altered. |
+| `wrong_kind` | The artifact is signed but is not a Proof of Origin. |
 | `invalid_url_format` | Could not parse a proof from the supplied URL. |
 | `base64_decode_failed` | The base64url payload could not be decoded. |
 | `json_parse_failed` | The decoded payload is not valid JSON. |
-| `missing_fields` | Required fields (`payload`, `signature`, `hash`) are absent. |
+| `missing_fields` | Required fields (`payload`, `signature`) are absent. |
 | `invalid_pubkey` | The pubkey field is malformed. |
 | `crypto_unavailable` | Server-side Ed25519 crypto unavailable (rare, transient). Retry. |
 | `internal_error` | Unexpected server error. Retry. |
