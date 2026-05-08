@@ -25,7 +25,7 @@ GETKINETIK
 
 ### Short Tagline (1 sentence)
 ```
-Hardware-attested DePIN earnings aggregator — your phone is the sovereign node.
+Independent trust layer for DePIN — hardware-signed sovereign node; honest ledger across networks.
 ```
 
 ### Website
@@ -40,17 +40,20 @@ https://github.com/Ricolax310/GetKinetik
 
 ### Project Description (paste into the long description field)
 ```
-GETKINETIK is a DePIN earnings aggregator that turns any Android phone into
-a sovereign, hardware-attested node across five DePIN networks simultaneously:
-Nodle, DIMO, Hivemapper, WeatherXM, and Geodnet.
+GETKINETIK is the independent trust layer for the decentralized physical economy
+— a neutral, hardware-attested record of node identity and uptime, with a
+public verifier and partner verify API. The app also turns any Android phone
+into a sovereign node that reads Nodle, DIMO, Hivemapper, WeatherXM, and
+Geodnet in one signed local ledger (no token; charter in NEUTRALITY.md).
 
 The core innovation is a cryptographic identity layer baked into the phone's
 hardware-backed secure enclave (Android Keystore). On first launch, an Ed25519
 keypair is generated and sealed in silicon — it cannot be extracted, copied, or
-faked from a server. Every 60 seconds, the phone signs a heartbeat extending a
+faked from a server. On an adaptive cadence (typically ~30s when active; slower
+off-charger / backgrounded), the phone signs a heartbeat extending a
 tamper-evident hash chain proving continuous single-device presence. Every
-earning from every DePIN network flows into one cryptographically signed local
-ledger you fully control.
+earning from every connected DePIN network can flow into one cryptographically
+signed local ledger you fully control.
 
 Every Proof of Origin this system produces is publicly verifiable by anyone, in
 any browser, in under five seconds, with zero server calls and zero trust
@@ -59,7 +62,7 @@ required. The math is the witness.
 **What's shipped and running today (v1.3.0):**
 - Live Android app — download at getkinetik.app
 - Ed25519 keypair generation in hardware-backed secure storage
-- Hash-chained heartbeat log — signs every 60 seconds since launch
+- Hash-chained heartbeat log — adaptive cadence (see kinetik-core cadence module)
 - Proof of Origin v:2 schema with sensor block (lux, motion RMS, barometric pressure)
 - Public verifier at getkinetik.app/verify/ — client-side, zero dependencies, zero server calls
 - Five DePIN adapters reading earnings: Nodle, DIMO, Hivemapper, WeatherXM, Geodnet
@@ -118,8 +121,8 @@ GETKINETIK × DIMO — builder grant request, $10K
 ```
 Hi DIMO Foundation team,
 
-I'm Eric, founder of GETKINETIK — a hardware-attested DePIN earnings
-aggregator at getkinetik.app. DIMO is live in our v1.3.0 Android build:
+I'm Eric, founder of GETKINETIK — independent trust layer for DePIN (neutral
+hardware attestation + signed ledger) at getkinetik.app. DIMO is live in our v1.3.0 Android build:
 we're reading $DIMO balances, vehicle data, and trip events into a signed
 local earnings ledger via your public API, with hardware-attested Proof of
 Origin tied to every read.
@@ -180,7 +183,7 @@ eric@outfromnothingllc.com
 Hey Hivemapper team 👋
 
 I'm Eric, founder of GETKINETIK (getkinetik.app) — a hardware-attested DePIN
-aggregator that aggregates earnings across five DePIN networks from one phone.
+stack that reads five DePIN networks from one phone into one signed ledger.
 Hivemapper is one of our live integrations in v1.3.0.
 
 I'm here via MIP-26 to ask about a builder grant to deepen the Hivemapper
@@ -236,24 +239,20 @@ https://github.com/Ricolax310/GetKinetik
 
 ### One-line description
 ```
-Hardware-attested DePIN earnings aggregator — turns any Android phone into a
-sovereign node earning across Nodle, DIMO, Hivemapper, WeatherXM, and Geodnet.
+Independent trust layer for DePIN — hardware-signed sovereign node plus one signed ledger across Nodle, DIMO, Hivemapper, WeatherXM, Geodnet.
 ```
 
 ### Project Overview (paste into description field)
 ```
-GETKINETIK is the "Yearn Finance for DePIN" — a yield aggregator for the
-physical layer. Just as Yearn routes DeFi capital to the highest-paying
-protocol automatically, GETKINETIK aggregates earnings across every DePIN
-network a phone can participate in, with hardware-attested cryptographic
-proof attached to every receipt.
-
-The core innovation is a trust-layer primitive: an Ed25519 keypair generated
-and sealed in the phone's hardware-backed secure enclave (Android Keystore)
-on first launch. This key cannot be extracted, copied, or faked from a server.
-Every 60 seconds, the phone signs a heartbeat extending a tamper-evident
-hash chain. Every Proof of Origin can be verified by anyone in any browser
-in under 5 seconds with zero server calls — the math is the witness.
+GETKINETIK is the independent trust layer for the physical economy — Carfax-
+shaped bureau semantics (no GETKINETIK token; no equity in graded networks;
+public methodology). The product includes gas-aware claim timing and multi-
+network reads so operators optimise yield, but the moat is attestable identity:
+an Ed25519 keypair generated and sealed in the phone's hardware-backed secure
+enclave (Android Keystore) on first launch. This key cannot be extracted,
+copied, or faked from a server. The phone signs a hash-chained heartbeat log;
+every Proof of Origin verifies in any browser in under 5 seconds with zero
+server calls — the math is the witness.
 
 Current state (v1.3.0, publicly shipped):
 - Live Android app with hardware-backed Ed25519 identity
@@ -306,13 +305,10 @@ GitHub: @Ricolax310
 
 ### Why peaq?
 ```
-peaq is the DePIN chain. GETKINETIK is a DePIN aggregator with the only
-hardware-attested node identity primitive in the mobile DePIN space. These
-two things should be connected. Anchoring GETKINETIK node identities on
-peaq gives both projects something they can't easily get alone: peaq gets
-hardware-attested mobile nodes; GETKINETIK gets on-chain identity
-permanence. The ioID system is the exact abstraction we need — it was
-designed for exactly this use case.
+peaq is the DePIN chain. GETKINETIK ships the independent hardware-attested
+node identity layer mobile DePIN lacks — plus optional on-chain anchoring.
+Connecting them gives peaq hardware-attested mobile nodes and gives GETKINETIK
+permanent interoperable identity records. The ioID system is the natural fit.
 ```
 
 ---
@@ -405,8 +401,9 @@ funding request.
 
 ### Hacker Application — "Tell us about yourself"
 ```
-Solo founder of GETKINETIK — a hardware-attested DePIN earnings aggregator
-built entirely by me over the past several months. I've shipped a live
+Solo founder of GETKINETIK — independent trust layer for DePIN (hardware-
+signed identity + public verifier + multi-network signed ledger), built
+entirely by me over the past several months. I've shipped a live
 Android app (v1.3.0), a public cryptographic verifier, five DePIN adapters,
 and an OAuth bounce page, all solo. I work in TypeScript, React Native,
 Expo, and Cloudflare Workers. My project sits at the intersection of DePIN,
@@ -416,10 +413,10 @@ at most Ethereum hackathons despite being critical infrastructure.
 
 ### "What are you hoping to build at ETHGlobal New York?"
 ```
-I plan to ship the "Verified-User Premium" webhook — a public endpoint
-that any DePIN partner can ping to verify that a GETKINETIK user has a
-hardware-attested node, turning our identity primitive into a real-time
-Sybil-resistance API. I'll also deploy the GETKINETIK device key registry
+I plan to extend the live partner verification webhook — a public endpoint
+partners already use to verify Proof-of-Origin URLs — with richer bureau
+outputs (Genesis Score on the wire) and clearer SLA tiers, keeping verification
+cryptographically grounded and neutrality-charter clean. I'll also deploy the GETKINETIK device key registry
 on an EVM chain (likely Base or Optimism) — a permissionless smart contract
 that anchors phone-side Ed25519 public keys on-chain so any project can
 verify node authenticity without trusting us.
@@ -452,11 +449,10 @@ At ETHGlobal New York we shipped two new features:
    on Base can now query this registry to verify a user has a real, unique
    hardware-attested device without trusting GETKINETIK as an intermediary.
 
-2. **Verified-User Premium webhook** — a public HTTPS endpoint that partners
-   can call to verify a user's node in real-time. Response includes: node
-   age, heartbeat count, last-seen timestamp, and an Ed25519 signature from
-   the device proving it's online. This turns our identity primitive into an
-   API any protocol can use for Sybil resistance.
+2. **Partner verification API** — extend the live `/api/verify-device` HTTPS
+   endpoint so partners get richer bureau outputs (Genesis Score on the wire)
+   alongside cryptographic validity, still with no GETKINETIK token and no
+   equity in graded networks (see NEUTRALITY.md).
 ```
 
 **Tech Stack:**

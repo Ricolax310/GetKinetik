@@ -1,143 +1,137 @@
-# GETKINETIK — Partner Outreach Templates v4 (Verified-User Premium)
+# GETKINETIK — Partner outreach templates v5 (independent trust layer)
 
 > **Author:** Eric (Kinetik_Rick), Founder — GETKINETIK / OutFromNothing LLC
-> **Updated:** April 2026
+> **Updated:** May 2026
 > **Contact:** eric@outfromnothingllc.com
+>
+> **Framing:** GETKINETIK is the **independent trust layer for the decentralized
+> physical economy** — Carfax-shaped, bureau-shaped. We sit outside every
+> DePIN, grade the device, never issue a token, never hold equity in any
+> network we grade, never accept payment in graded networks' native assets.
+> The app also tracks multi-network earnings in one signed ledger; that
+> product feature is **not** the partner pitch. Partners care about **neutral
+> attestation** first. See [`NEUTRALITY.md`](./NEUTRALITY.md),
+> [`PITCH.md`](./PITCH.md), [`OUTREACH_MESSAGES.md`](./OUTREACH_MESSAGES.md).
 
 ---
 
-## The Pitch (one sentence)
+## The pitch (one paragraph)
 
-> "We bring you Sybil-resistant users. In return, pay them a 10–15% verified-user
-> premium. We pass it through. You get higher data quality, lower fraud loss, free
-> anti-bot infrastructure. Net: you save more than you pay."
+GETKINETIK publishes hardware-attested device identity and a hash-chained
+uptime record for every Sovereign Node. Your backend can **cryptographically
+verify** any user's Proof of Origin today — `POST https://getkinetik.app/api/verify-device`
+with `{ "proofUrl": "<their verifier URL>" }` → `{ "valid": true, "nodeId",
+"pubkey", "mintedAt", "schema", "attribution" }`. No auth. No API key.
+Genesis Score (public reputation grade, **not** a token) is documented in
+[`docs/methodology/GENESIS_SCORE.md`](./docs/methodology/GENESIS_SCORE.md);
+full score-on-wire integration with the webhook is on the roadmap — today
+the hook proves **identity + signature validity**, which is already the
+Sybil-resistance primitive.
 
-The live verification webhook is already deployed:
-`POST https://getkinetik.app/api/verify-device { proofUrl }`
-→ `{ valid: true, nodeId, mintedAt, pubkey }`
+**Optional commercial layer (when a partner wants it):** Some networks may
+choose to pay verified operators a premium or weight rewards — that is
+**their** policy decision using **our** attestation as input. We do not
+grade networks differently for money ([`NEUTRALITY.md`](./NEUTRALITY.md)
+Rule 3). The numbers below (10–15%) are a **conversation starter**, not a
+promise.
 
-Any partner can call it today, for free, before any agreement is signed.
+**Docs:** Webhook spec — `https://github.com/Ricolax310/GetKinetik/blob/main/docs/api/verify-device.md`
 
 ---
 
-## Status Tracker
+## Status tracker
 
-| Partner | Channel | Status | Follow-up By |
-|---|---|---|---|
-| DIMO | Discord DM + grants@dimo.zone | Sent | May 14, 2026 |
-| Hivemapper | MIP-26 Discord | Sent | May 14, 2026 |
-| WeatherXM | Discord + email | Not sent | April 30, 2026 |
-| Geodnet | Discord + email | Not sent | April 30, 2026 |
-| Nodle | Discord DM | Not sent | May 7, 2026 |
+| Partner    | Channel              | Status            | Follow-up by |
+| ---------- | -------------------- | ----------------- | ------------ |
+| DIMO       | Discord DM + grants  | Sent — awaiting   | May 14, 2026 |
+| Hivemapper | MIP-26 Discord       | Sent — awaiting   | May 14, 2026 |
+| WeatherXM  | Discord + email      | **SEND NOW**      | May 7, 2026  |
+| Geodnet    | Discord + email      | **SEND NOW**      | May 7, 2026  |
+| Nodle      | Discord DM           | Hard no — parked  | —            |
 
 ---
 
 ## DIMO
 
-### Discord DM / Forum Post
+### Discord DM / forum post
 
 ```
-Hey DIMO team 👋
+Hey DIMO team
 
-I'm Eric (Kinetik_Rick) — founder of GETKINETIK, a DePIN earnings aggregator that runs a Sovereign Node on each user's phone.
+I'm Eric (Kinetik_Rick) — founder of GETKINETIK, the independent trust layer for DePIN (Carfax-shaped: we sit outside every network and attest hardware, we never issue a token, never hold equity in graded networks — see our charter link below).
 
-We already have DIMO integrated in our app (Login with DIMO works, we're tracking DIMO earnings in our signed ledger). What I want to propose is the next layer.
+We already have DIMO integrated in the app (Login with DIMO; DIMO reads flow into our signed local ledger). What I want to discuss is the **verification layer**, not the aggregator UI.
 
-THE PITCH:
-Our users already proved their hardware is real — they have a signed, on-chain-verifiable identity with a hash-chained heartbeat log. That means DIMO can verify their node isn't a bot farm before paying rewards.
+THE CORE ASK:
+Every GETKINETIK user has an Ed25519 identity sealed in the phone and a hash-chained heartbeat log. DIMO can call our public webhook to confirm the device behind a driver is real before paying rewards or weighting contributions:
 
-Here's the mechanic:
-1. User shares their GETKINETIK Proof of Origin URL with DIMO
-2. DIMO calls our free verification webhook: POST https://getkinetik.app/api/verify-device
-3. Webhook returns: { valid: true, nodeId, mintedAt }
-4. DIMO pays verified nodes 10–15% more than unverified ones
-5. GETKINETIK passes the premium through — the user sees "verified premium: +$1.20" in their weekly savings report
+POST https://getkinetik.app/api/verify-device
+Body: { "proofUrl": "<user's Proof of Origin URL>" }
 
-You get:
-✓ Hardware-attested users (Sybil-resistant by design)
-✓ Higher data quality from real devices
-✓ Free anti-bot layer you didn't have to build
-✓ A story: "we pay more for verified nodes"
+No auth. Test it before any meeting.
 
-We save more than we cost.
+OPTIONAL (if DIMO wants to incentivize verified hardware):
+Some networks pay verified operators a premium above the standard rate — that's your economics, not ours. We don't touch your token; we publish attestation. If that conversation is interesting, I'm happy to walk through signed receipts and `verify-device` together.
 
-The webhook is live today — you can test it before any agreement. DM me or reach me at eric@outfromnothingllc.com.
+Charter: https://github.com/Ricolax310/GetKinetik/blob/main/NEUTRALITY.md
+Site: https://getkinetik.app
 
 — Eric (Kinetik_Rick)
-GETKINETIK · getkinetik.app
 ```
 
 ### Email to grants@dimo.zone
 
-**Subject:** GETKINETIK × DIMO — Verified-User Premium Proposal + Verification Webhook
+**Subject:** GETKINETIK × DIMO — Independent trust layer + verification webhook
 
 ```
 Hi DIMO Grants Team,
 
-I'm Eric Guthmann, founder of GETKINETIK (getkinetik.app) — a DePIN earnings aggregator. We already have DIMO integrated: users connect via Login with DIMO and their DIMO earnings are tracked in our signed, auditable ledger.
+I'm Eric Guthmann, founder of GETKINETIK (getkinetik.app). We position as the independent trust layer for the decentralized physical economy — neutral hardware attestation for DePIN nodes, same structural rules as a credit bureau: no GETKINETIK token, no equity in graded networks, methodology public (see NEUTRALITY.md on our repo).
 
-I'm writing with two things:
+We already integrate DIMO in our Android build (Login with DIMO; earnings flow into a signed local ledger). I'm writing about two tracks:
 
-1. VERIFICATION WEBHOOK (live today, free)
-
-Any user who runs a GETKINETIK Sovereign Node has a cryptographically signed, hardware-attested identity. You can verify any node instantly:
+1) VERIFICATION WEBHOOK (live today, free)
 
 POST https://getkinetik.app/api/verify-device
-Body: { "proofUrl": "<user's Proof of Origin URL>" }
-Response: { "valid": true, "nodeId": "KINETIK-NODE-...", "mintedAt": 1714000000000 }
+Content-Type: application/json
+{ "proofUrl": "<user Proof of Origin URL from the app>" }
 
-No auth. No API key. Call it now and test it before replying.
+Returns cryptographic validity + nodeId + pubkey + timestamp fields. Partners use this for Sybil resistance without building their own hardware identity stack.
 
-2. THE PREMIUM PROPOSAL
+Spec: https://github.com/Ricolax310/GetKinetik/blob/main/docs/api/verify-device.md
 
-Pay verified GETKINETIK nodes 10–15% above your standard rate. We pass it through to users as a signed receipt. You get:
-- Sybil-resistant users (one keypair per hardware device)
-- Higher data quality from confirmed physical machines
-- Free anti-Sybil infrastructure
-- A compelling story for user acquisition: "verified nodes earn more"
+2) GRANT TRACK (optional)
 
-I'm also applying to the DIMO Foundation grants programme for $10K–$25K to fund the premium activation layer. Happy to discuss both tracks.
-
-App: https://github.com/Ricolax310/GetKinetik
-Verify endpoint spec: https://getkinetik.app/docs/api/verify-device (coming shortly)
+I'm applying for a builder grant to deepen DIMO integration (webhooks, docs, demo video). Happy to align milestones with Foundation priorities.
 
 Best,
 Eric Guthmann (Kinetik_Rick)
 Founder, GETKINETIK / OutFromNothing LLC
 eric@outfromnothingllc.com
+https://github.com/Ricolax310/GetKinetik
 ```
 
 ---
 
 ## Hivemapper
 
-### MIP-26 Discord Post
+### MIP-26 Discord post
 
 ```
 Hey Hivemapper community,
 
-I'm Eric (Kinetik_Rick) — founder of GETKINETIK, a multi-network DePIN aggregator. We already track HONEY earnings for users who connect their Solana wallet — your rewards show up in our signed, auditable earnings ledger.
+I'm Eric (Kinetik_Rick) — founder of GETKINETIK, the independent trust layer for DePIN (neutral device attestation; charter: no token, no equity in graded networks — github.com/Ricolax310/GetKinetik NEUTRALITY.md).
 
-I want to propose something for MIP-26 discussion: verified-user premium for GETKINETIK nodes.
-
-WHAT WE HAVE:
-Every GETKINETIK user has a signed, hardware-attested node identity — a hash-chained heartbeat log proving they're running on a real device. It's verifiable publicly: https://getkinetik.app/verify/
-
-THE ASK:
-Pay GETKINETIK-verified mappers a 10–15% premium above standard HONEY rewards. We provide the verification webhook for free:
+We track HONEY for connected wallets in our signed ledger, but the relevant pitch for MIP-26 is **not** aggregation — it's that every GETKINETIK node has a hardware-sealed Ed25519 identity and a hash-chained uptime log you can verify in one POST:
 
 POST https://getkinetik.app/api/verify-device
-→ { valid: true, nodeId, mintedAt }
+→ { valid, nodeId, pubkey, mintedAt, ... }
 
-WHY IT HELPS HIVEMAPPER:
-- Confirmed you're paying real dashcam operators, not bots
-- Higher quality coverage data from verified contributors
-- An incentive that pulls serious mappers toward your network
-- Free Sybil resistance you didn't have to build yourself
+GPS spoofing is your fraud problem; independent device attestation is the bureau-shaped complement to whatever data-quality scoring you run in-network.
 
-You save more than you pay.
+If Hivemapper ever wants to weight or reward verified hardware differently, that's your policy call — we supply the attestation input, not the payout curve.
 
-Happy to answer questions here or at eric@outfromnothingllc.com.
+Happy to take questions here or at eric@outfromnothingllc.com.
 
 — Eric (Kinetik_Rick)
 getkinetik.app
@@ -147,42 +141,28 @@ getkinetik.app
 
 ## WeatherXM
 
-### Discord DM / Email
+### Discord DM / email
 
-**Subject:** GETKINETIK × WeatherXM — Verified Stations Premium Proposal
+**Subject:** GETKINETIK × WeatherXM — Neutral device attestation (verify webhook)
 
 ```
 Hey WeatherXM team,
 
-I'm Eric (Kinetik_Rick), founder of GETKINETIK — a DePIN earnings aggregator running on smartphones.
+I'm Eric (Kinetik_Rick), founder of GETKINETIK — the independent trust layer for DePIN (hardware-signed node identity + public methodology; we never issue a token — see NEUTRALITY.md).
 
-We have WeatherXM on our integration roadmap (tracking WXM earnings for users with weather stations). But I want to propose something beyond simple tracking.
+WeatherXM cares about ground-truth data quality. We provide ground-truth **device** truth: one POST to our webhook confirms the operator's phone-class node is a real device with a continuous signed chain.
 
-THE PROBLEM WE BOTH HAVE:
-Weather station reward fraud — fake stations, duplicated stations, GPS spoofing. It's a known issue across DePIN weather networks.
+POST https://getkinetik.app/api/verify-device
+Body: { "proofUrl": "<Proof of Origin URL>" }
 
-THE SOLUTION WE BUILT:
-Every GETKINETIK node has a signed, hardware-attested identity. We can verify that a station is running on a real device with a real sensor suite. The verification is:
-- Cryptographic (Ed25519 signed proof chain)
-- Public (anyone can verify at getkinetik.app/verify/)
-- Free to call (webhook: POST https://getkinetik.app/api/verify-device)
+Optional policy layer: if you ever pay verified operators differently, that's your economics — we stay neutral on payout curves.
 
-THE PROPOSAL:
-Pay GETKINETIK-verified stations a 10–15% premium above standard WXM rates. You get:
-✓ Hardware-confirmed physical stations (not virtual)
-✓ Sybil-resistant claims
-✓ Higher data quality from verified contributors
-
-We pass the premium through to users as a signed receipt. They see the premium in their weekly "GETKINETIK vs Standalone" savings report — which creates a strong reason to stay on our platform and keep their station online.
-
-You save more on fraud than you pay in premium. Net positive.
-
-Live webhook for testing (no auth required):
+Live testing — no agreement required:
 curl -X POST https://getkinetik.app/api/verify-device \
   -H 'Content-Type: application/json' \
   -d '{"proofUrl":"<user_proof_url>"}'
 
-Happy to talk. eric@outfromnothingllc.com
+eric@outfromnothingllc.com
 
 — Eric (Kinetik_Rick)
 GETKINETIK · getkinetik.app
@@ -192,29 +172,23 @@ GETKINETIK · getkinetik.app
 
 ## Geodnet
 
-### Discord DM / Email
+### Discord DM / email
 
-**Subject:** GETKINETIK × Geodnet — Verified GNSS Operator Premium
+**Subject:** GETKINETIK × Geodnet — GNSS operator device attestation
 
 ```
 Hey Geodnet team,
 
-I'm Eric (Kinetik_Rick), founder of GETKINETIK — a DePIN earnings aggregator.
+I'm Eric (Kinetik_Rick), founder of GETKINETIK — independent trust layer for DePIN (neutral bureau framing; charter on our repo).
 
-Quick context: GETKINETIK runs on smartphones and aggregates earnings from multiple DePIN networks. Geodnet is on our integration roadmap for users who run GNSS reference stations.
-
-THE PITCH:
-Our users have signed, hardware-attested node identities — cryptographic proof that they're running on real devices. For a network where positioning accuracy depends on station legitimacy, that matters.
-
-What I'm proposing:
-Pay GETKINETIK-verified Geodnet operators 10–15% above standard GEOD rates. We provide a free verification webhook:
+Geodnet integration is on our roadmap for multi-network reads; the pitch that matters for you is **GNSS-adjacent fraud**: independent proof that an operator's device is real hardware with a signed uptime record.
 
 POST https://getkinetik.app/api/verify-device
-→ { valid: true, nodeId: "KINETIK-NODE-...", mintedAt }
+→ cryptographic validity + identity fields
 
-You get hardware-confirmed operators. We pass the premium through to users. Everyone wins.
+If Geodnet wants to use that signal next to your own vetting — reward weighting, fraud screening, enterprise SLAs — that's your policy. We publish attestation; we don't grade Geodnet differently for money.
 
-The webhook is live today — test it before any agreement.
+Webhook is live today.
 
 eric@outfromnothingllc.com
 
@@ -231,21 +205,15 @@ GETKINETIK · getkinetik.app
 ```
 Hey Nodle team,
 
-I'm Eric (Kinetik_Rick) — we already have Nodle integrated in GETKINETIK (our DePIN aggregator). NODL earnings show up in our signed, auditable ledger alongside other networks.
+I'm Eric (Kinetik_Rick) — GETKINETIK ships Nodle in-app today (NODL flows into our signed ledger alongside other networks).
 
-I want to raise the verified-user premium idea.
+I'm re-opening with **bureau framing**, not the old "aggregator premium" pitch: we're the independent trust layer — neutral device attestation, no token, no equity in graded networks (NEUTRALITY.md).
 
-Nodle's value is BLE data quality. A bot farm could theoretically fake BLE traffic without a real device actually being in the field. Our hardware-attested identity proves the opposite — a real phone, running continuously, with sensor data signed into a hash chain.
+Nodle already told us the premium idea wasn't a fit for your genuity model; understood. The verification primitive still stands: POST /api/verify-device proves hardware-backed identity for any partner who wants it, without asking Nodle to change rewards.
 
-THE PROPOSAL:
-Pay GETKINETIK-verified Nodle nodes a 10–15% NODL premium. The verification is:
-- Cryptographic, not just KYC
-- Public and auditable
-- Free to call (webhook at getkinetik.app/api/verify-device)
+If technical or BD wants a 15-minute walkthrough of the webhook + charter, I'm here.
 
-For a network whose core value proposition is "real edge nodes," having a verified badge from GETKINETIK could be a meaningful differentiator for premium enterprise API customers.
-
-Happy to talk in more detail. eric@outfromnothingllc.com
+eric@outfromnothingllc.com
 
 — Eric (Kinetik_Rick)
 getkinetik.app
@@ -253,26 +221,28 @@ getkinetik.app
 
 ---
 
-## Follow-Up Schedule
+## Follow-up schedule
 
-| Partner | Follow up if no response by |
-|---|---|
-| DIMO | May 14, 2026 |
-| Hivemapper | May 14, 2026 |
-| WeatherXM | May 7, 2026 |
-| Geodnet | May 7, 2026 |
-| Nodle | May 14, 2026 |
+| Partner    | Follow up if no response by |
+| ---------- | -------------------------- |
+| DIMO       | May 14, 2026               |
+| Hivemapper | May 14, 2026               |
+| WeatherXM  | May 21, 2026 (send ASAP)   |
+| Geodnet    | May 21, 2026 (send ASAP)   |
+| Nodle      | Parked — hard no           |
 
 ---
 
-## Key Facts for All Outreach
+## Key facts for all outreach
 
 - **Live webhook:** `POST https://getkinetik.app/api/verify-device`
-- **Verification takes <200ms** — can be called inline with reward processing
-- **No auth required** — test it before any agreement
-- **Source code public:** https://github.com/Ricolax310/GetKinetik
+- **Verification is fast** — suitable for inline reward pipelines
+- **No auth required** — test before any agreement
+- **Source code:** https://github.com/Ricolax310/GetKinetik
 - **App download:** https://github.com/Ricolax310/GetKinetik/releases/latest
-- **Verify a proof:** https://getkinetik.app/verify/
+- **Public verifier:** https://getkinetik.app/verify/
+- **Neutrality charter:** https://github.com/Ricolax310/GetKinetik/blob/main/NEUTRALITY.md
+- **Privacy charter:** https://github.com/Ricolax310/GetKinetik/blob/main/PRIVACY.md
 - **Network metrics:** https://getkinetik.app/metrics/
 
-*Templates v4 — updated April 2026 to include verified-user premium pitch and live webhook.*
+*Templates v5 — May 2026. Supersedes v4 (verified-user premium / aggregator lead).*

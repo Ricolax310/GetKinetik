@@ -69,7 +69,7 @@ All code is in active production use. Nothing in this application is vaporware.
 - Migrate the appropriate DePIN adapter (e.g. Hivemapper for Solana grants, DIMO for Polygon grants, WeatherXM for Base grants) to use the on-chain anchor
 
 **For DePIN-specific funders (IoTeX, Helium Foundation, Coinbase Ventures):**
-- Open-source the adapter interface contract so other DePIN aggregators can interoperate
+- Open-source the adapter interface contract so other DePIN apps and wallets can interoperate
 - Build a public dashboard showing fraud reduction metrics across integrated networks
 
 ### Why GETKINETIK and not someone else
@@ -161,7 +161,7 @@ DePIN networks lose 10–30% of their token issuance to Sybil attacks. There is 
 
 **If submitting an existing project:**
 GETKINETIK was already in development before this hackathon. During the event window we shipped:
-- [New feature 1, e.g. "Verified-User Premium webhook"]
+- [New feature 1, e.g. "Genesis Score on verify-device API"]
 - [New feature 2, e.g. "Token foundation grant integration for Solana"]
 - [New feature 3]
 

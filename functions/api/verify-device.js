@@ -223,11 +223,21 @@ async function verifyProofUrl(proofUrl) {
   }
 
   // Step 7: return the verified node identity.
+  // Timestamp field priority: Proof-of-Origin uses issuedAt (card signed) /
+  // mintedAt (key birth); heartbeat uses ts. Previous payload.ts-only mapping
+  // returned null for every valid PoO — fixed 2026-05.
   return {
     valid: true,
     nodeId: payload.nodeId ?? null,
     pubkey: pubkeyHex,
-    mintedAt: payload.ts ?? null,
+    mintedAt:
+      typeof payload.issuedAt === "number"
+        ? payload.issuedAt
+        : typeof payload.mintedAt === "number"
+          ? payload.mintedAt
+          : typeof payload.ts === "number"
+            ? payload.ts
+            : null,
     schema: `proof-of-origin:v${payload.v ?? 1}`,
     attribution: payload.attribution,
   };

@@ -7,7 +7,11 @@
 
 ## Overview
 
-GETKINETIK is a **DePIN earnings aggregator** — a Sovereign Node running on a user's smartphone that simultaneously participates in multiple decentralised physical infrastructure networks and optimises the user's yield across all of them.
+GETKINETIK is the **independent trust layer for the decentralized physical economy**
+(Carfax-shaped: neutral hardware attestation + public methodology; see `NEUTRALITY.md`).
+The product ships as a Sovereign Node app that **also** participates in multiple DePIN
+networks through adapters and optimises claim timing — but the **technical moat** is
+the attestable identity + signed ledger, not routing APIs alone.
 
 The architecture is a four-layer stack:
 
@@ -44,7 +48,7 @@ Nodle address:  SS58(pubkey, prefix=37) — same key, different encoding
 
 **Package:** `packages/kinetik-core/src/heartbeat.ts`
 
-Every 60 seconds, the app signs a heartbeat payload:
+While the node is live (unlocked + online), the app signs a heartbeat on an **adaptive cadence** — typically **30 seconds** when foreground or charging, slower when backgrounded on battery (see `packages/kinetik-core/src/cadence.ts`). Heartbeat payloads do **not** carry `attribution` (that field is for Proof of Origin and signed earnings only).
 
 ```json
 {
@@ -54,15 +58,17 @@ Every 60 seconds, the app signs a heartbeat payload:
   "pubkey": "<64-char hex>",
   "seq": 1204,
   "ts": 1714000000000,
+  "stabilityPct": 97,
+  "online": true,
+  "charging": false,
   "prevHash": "<16-char hex>",
-  "sensors": { "accel_rms": 0.12, "baro_hpa": 1013.2 },
-  "attribution": "GETKINETIK by OutFromNothing LLC"
+  "sensors": { "lux": 348, "motionRms": 0.07, "pressureHpa": 1013.21 }
 }
 ```
 
 Each heartbeat includes the SHA-256 truncated hash of the previous one, forming a tamper-evident chain. Any gap or alteration in sequence is detectable.
 
-**Key invariant:** `attribution` is baked into every signature. Stripping the attribution breaks the signature — there is no way to remove GETKINETIK's branding from a signed artifact without invalidating it.
+**Proof of Origin / earning invariant:** `PROOF_ATTRIBUTION` is baked into signed PoO and earning payloads. Stripping it breaks the signature — there is no way to remove GETKINETIK's branding from those artifacts without invalidating them.
 
 ---
 
@@ -133,7 +139,7 @@ interface DepinAdapter {
 
 **Current adapters:** Nodle, DIMO, Hivemapper, WeatherXM, Geodnet.
 
-Adding a new DePIN = drop a new package that satisfies this interface, register it in the adapter list. No changes to the aggregator UI required.
+Adding a new DePIN = drop a new package that satisfies this interface, register it in the adapter list. No changes to the multi-network rewards panel required.
 
 ---
 
@@ -193,12 +199,12 @@ The 1% protocol fee is **baked into the signature**. Altering the `fee` field in
 **Host:** Cloudflare Pages (static site + Pages Functions)
 **KV namespaces:**
 - `WAITLIST` — waitlist signups
-- `KINETIK_KV` — Genesis Credits backup, node metrics
+- `KINETIK_KV` — Genesis Score sync (package `credits/`), node metrics
 
 **API endpoints:**
 - `POST /api/waitlist` — waitlist signup
 - `POST /api/verify-device` — public partner verification webhook
-- `POST /api/credits` — Genesis Credits KV sync
+- `POST /api/credits` — Genesis Score / credits KV sync
 
 ---
 
@@ -220,7 +226,7 @@ See `docs/cryptography.md` for the full signing contract.
 packages/
   kinetik-core/     L1 + L4 primitives (identity, heartbeat, proof, wallet)
   optimizer/        L3 optimizer (price feed, gas feed, scorer, discovery, pool)
-  credits/          Genesis Credits engine
+  credits/          Genesis Score engine (internal package name unchanged)
   adapter-nodle/    Nodle adapter
   adapter-dimo/     DIMO adapter
   adapter-hivemapper/ Hivemapper adapter
@@ -240,5 +246,5 @@ landing/
 functions/api/
   waitlist.js       Cloudflare Function — waitlist
   verify-device.js  Cloudflare Function — partner verification webhook
-  credits.js        Cloudflare Function — Genesis Credits KV sync
+  credits.js        Cloudflare Function — Genesis Score / credits KV sync
 ```

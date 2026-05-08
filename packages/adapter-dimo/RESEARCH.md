@@ -136,7 +136,7 @@ Unlike Nodle (where we can *derive* a new SS58 address from the user's existing 
 
 ## Limitations (v0)
 
-1. **Requires user to already have a DIMO account and connected vehicle.** GETKINETIK is an earnings aggregator here, not an earnings generator. A user with no DIMO account sees "tap to connect DIMO account" and gets redirected to DIMO's onboarding — that part is DIMO's funnel, not ours.
+1. **Requires user to already have a DIMO account and connected vehicle.** GETKINETIK reads DIMO through an adapter — it does not mint DIMO rewards without the user's DIMO relationship. A user with no DIMO account sees "tap to connect DIMO account" and gets redirected to DIMO's onboarding — that part is DIMO's funnel, not ours.
 2. **No vehicle telemetry.** We read earnings only. Telemetry (speed, location, battery) requires a Vehicle JWT and is explicitly out of scope for v0.
 3. **Weekly resolution.** DIMO distributes weekly, so `lifetimeGross` changes at most once per week. The earnings card will show a stable number most of the week, then tick up on Mondays (5 AM UTC).
 4. **Polygon wallet is separate from kn1 wallet.** The user's DIMO earnings sit in their Polygon wallet, not in the GETKINETIK sovereign wallet. GETKINETIK records signed receipts — it does not move tokens.
@@ -155,7 +155,7 @@ Unlike Nodle (where we can *derive* a new SS58 address from the user's existing 
 
 > `partnerships@dimo.zone` or via `console.dimo.org` Developer Discord
 >
-> **Subject:** GETKINETIK × DIMO — Aggregator Integration (DePIN Plaid Thesis)
+> **Subject:** GETKINETIK × DIMO — Trust Layer + DIMO Read Integration (DePIN Plaid Thesis)
 >
 > Angle: GETKINETIK is the identity + signed earnings layer every DePIN needs. DIMO users who also earn on other DePIN networks (Nodle, WeatherXM, etc.) want one signed ledger for all earnings. GETKINETIK is that ledger. DIMO is our second integration; Nodle is first. We'd love to be listed as a DIMO ecosystem partner.
 

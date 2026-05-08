@@ -55,7 +55,7 @@ The `proofUrl` is what the GETKINETIK app generates when the user taps **Share P
 | `valid` | boolean | `true` — the proof is cryptographically valid |
 | `nodeId` | string | Stable node identifier. Use this as the user's GETKINETIK identity key in your system. |
 | `pubkey` | string | Ed25519 public key (64-char hex). Cache this — it never changes for a given node. |
-| `mintedAt` | number | Unix ms when the Proof of Origin was minted. |
+| `mintedAt` | number | Best-effort timestamp from the signed payload: `issuedAt` (when this PoO was signed) if present, else `mintedAt` (key birth), else `ts` (heartbeat-style). |
 | `schema` | string | Proof schema version. |
 | `attribution` | string | Always `"GETKINETIK by OutFromNothing LLC"`. |
 
