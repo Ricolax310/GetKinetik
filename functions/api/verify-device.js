@@ -17,6 +17,7 @@
  *   "nodeId": "KINETIK-NODE-A3F2B719",
  *   "pubkey": "<64-char hex>",
  *   "mintedAt": 1714000000000,
+ *   "issuedAt": 1714600000000,
  *   "schema": "proof-of-origin:v2",
  *   "attribution": "GETKINETIK by OutFromNothing LLC"
  * }
@@ -223,21 +224,26 @@ async function verifyProofUrl(proofUrl) {
   }
 
   // Step 7: return the verified node identity.
-  // Timestamp field priority: Proof-of-Origin uses issuedAt (card signed) /
-  // mintedAt (key birth); heartbeat uses ts. Previous payload.ts-only mapping
-  // returned null for every valid PoO — fixed 2026-05.
+  // Keep key-birth time and proof signing time distinct. Partners use mintedAt
+  // for node age; overloading it with issuedAt silently corrupts that signal.
   return {
     valid: true,
     nodeId: payload.nodeId ?? null,
     pubkey: pubkeyHex,
     mintedAt:
-      typeof payload.issuedAt === "number"
-        ? payload.issuedAt
-        : typeof payload.mintedAt === "number"
-          ? payload.mintedAt
+      typeof payload.mintedAt === "number"
+        ? payload.mintedAt
+        : typeof payload.issuedAt === "number"
+          ? payload.issuedAt
           : typeof payload.ts === "number"
             ? payload.ts
             : null,
+    issuedAt:
+      typeof payload.issuedAt === "number"
+        ? payload.issuedAt
+        : typeof payload.ts === "number"
+          ? payload.ts
+          : null,
     schema: `proof-of-origin:v${payload.v ?? 1}`,
     attribution: payload.attribution,
   };

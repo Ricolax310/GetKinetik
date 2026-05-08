@@ -272,15 +272,15 @@ on success, roughly:
   "nodeId": "KINETIK-NODE-…",
   "pubkey": "<64-char hex>",
   "mintedAt": 1714000000000,
+  "issuedAt": 1714600000000,
   "schema": "proof-of-origin:v2",
   "attribution": "GETKINETIK by OutFromNothing LLC"
 }
 ```
 
-`mintedAt` is the best available timestamp from the signed payload
-(`issuedAt` for a PoO card, `mintedAt` for key birth, or `ts` for
-heartbeat-shaped artifacts). The exact field list and types are
-the source of truth in
+`mintedAt` is the node key-birth timestamp; `issuedAt` is when this
+specific proof was signed. The exact field list and types are the source
+of truth in
 [`docs/api/verify-device.md`](../api/verify-device.md).
 
 ### Target (not shipped yet)

@@ -45,6 +45,7 @@ The `proofUrl` is what the GETKINETIK app generates when the user taps **Share P
   "nodeId": "KINETIK-NODE-A3F2B719",
   "pubkey": "a3f2b719c8e4d6f1...(64-char hex)",
   "mintedAt": 1714000000000,
+  "issuedAt": 1714600000000,
   "schema": "proof-of-origin:v2",
   "attribution": "GETKINETIK by OutFromNothing LLC"
 }
@@ -55,7 +56,8 @@ The `proofUrl` is what the GETKINETIK app generates when the user taps **Share P
 | `valid` | boolean | `true` — the proof is cryptographically valid |
 | `nodeId` | string | Stable node identifier. Use this as the user's GETKINETIK identity key in your system. |
 | `pubkey` | string | Ed25519 public key (64-char hex). Cache this — it never changes for a given node. |
-| `mintedAt` | number | Best-effort timestamp from the signed payload: `issuedAt` (when this PoO was signed) if present, else `mintedAt` (key birth), else `ts` (heartbeat-style). |
+| `mintedAt` | number | Key-birth timestamp from the signed payload. Use this for node age. Falls back to `issuedAt` or `ts` only for legacy artifacts that lack `mintedAt`. |
+| `issuedAt` | number | Proof signing timestamp from the signed payload. Use this for proof freshness. Falls back to `ts` for heartbeat-style artifacts. |
 | `schema` | string | Proof schema version. |
 | `attribution` | string | Always `"GETKINETIK by OutFromNothing LLC"`. |
 
@@ -154,12 +156,14 @@ Contact `eric@outfromnothingllc.com` to get a partner API key and higher rate li
 
 ---
 
-## Proof Freshness
+## Node Age and Proof Freshness
 
-A proof is a snapshot of the node's state at `mintedAt`. There is no built-in expiry. However:
+A proof is a snapshot of the node's state at `issuedAt`, while `mintedAt`
+describes when the node key was first created. There is no built-in expiry.
+However:
 
-- Proofs older than **30 days** should prompt re-verification.
-- The `mintedAt` field lets you enforce your own freshness policy.
+- Proofs with `issuedAt` older than **30 days** should prompt re-verification.
+- The `mintedAt` field lets you enforce your own node-age policy.
 - In v1.5, proofs will include a `lifetimeBeats` count — you can reject proofs from nodes with fewer than N heartbeats (e.g. `lifetimeBeats < 1440` = node is less than 24h old).
 
 ---
