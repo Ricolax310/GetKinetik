@@ -3,6 +3,8 @@
 > **Status:** ACTIVE. Started 2026-04-25 night. This is the track where GETKINETIK stops being “signed phone” and starts being “Plaid for DePIN.”
 >
 > **Read first:** `STATUS.md` (the mission, four-layer architecture, and trust spine context). This document is scoped: it is **only** the aggregator/wallet/earnings track. It does not duplicate the L1/L2 narrative.
+>
+> **Positioning (2026-05):** Externally the product is the **independent trust layer** for DePIN (see `README.md`, `NEUTRALITY.md`, `PITCH.md`). *Aggregator* here means **multi-network read + signed earnings ledger** — an implementation track name, not the public one-liner.
 
 ---
 
@@ -10,7 +12,7 @@
 
 We have built the **trust spine** (L1 + first slice of L2). It is real, it is shipped, it is witnessed. But on its own it does **not** make money. Every additional polish on the trust spine — gyro, verifier null-rendering, EAS auto-increment, sensor permissions UX — is **optional** until **at least one DePIN pays through GETKINETIK**. From this point forward, polish is opportunistic; **integration + wallet is the critical path.**
 
-The vision in one line: **one app, many DePIN networks earning into one sovereign wallet, GETKINETIK takes a fee on the way through.**
+The vision in one line: **one app, many DePIN networks flowing into one sovereign signed ledger — revenue from partner verification API / consumer Pro / enterprise audit access (fiat or stablecoin); optional 1% disclosure fee baked into receipts.** See `NEUTRALITY.md` for what we do not do (no GETKINETIK token, no equity in graded networks).
 
 ---
 

@@ -38,7 +38,7 @@ import type { OptimizationResult } from '../../packages/optimizer/src/scorer';
 import { nodleAdapter } from '../../packages/adapter-nodle/src';
 
 /**
- * Earnings aggregator adapter list. Nodle-only for now (BLE background
+ * Multi-network adapter list (signed rewards ledger). Nodle-only for now (BLE background
  * attestation is the shipped path). Re-append dimoAdapter, hivemapperAdapter,
  * weatherxmAdapter, geodnetAdapter when you want the full multi-DePIN panel.
  */

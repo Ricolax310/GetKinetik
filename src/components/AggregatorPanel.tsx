@@ -1,5 +1,6 @@
 // ============================================================================
-// AggregatorPanel — DePIN earnings aggregator UI with shared PollingPool.
+// AggregatorPanel — multi-network DePIN rewards UI (signed ledger) with shared PollingPool.
+// Product positioning: independent trust layer; this panel is the L3/L4 read surface.
 // ----------------------------------------------------------------------------
 // Renders one card per registered adapter. The panel is adapter-agnostic —
 // it iterates the adapter list and calls the same interface on every entry.

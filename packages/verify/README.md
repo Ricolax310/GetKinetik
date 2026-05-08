@@ -202,8 +202,8 @@ and `packages/kinetik-core/`'s schema.
 ## Use cases
 
 - **Partner networks** — confirm a contributor's device is real
-  hardware before paying out a reward boost or weighting their
-  contributions higher.
+  hardware before applying **their own** payout policy (premium tiers,
+  weighting, fraud screening — attestation is input; payouts remain theirs).
 - **Lenders / underwriters** — confirm a hardware-loan applicant's
   node has a continuous signed uptime record before approving an
   advance against future earnings.

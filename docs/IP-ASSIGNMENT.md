@@ -26,7 +26,7 @@ All source code, object code, compiled artifacts, configuration files, build scr
 - Mobile application (React Native / Expo)
 - `packages/kinetik-core/` — L1 cryptographic primitives
 - `packages/optimizer/` — L3 yield optimizer engine
-- `packages/credits/` — Genesis Credits engine
+- `packages/credits/` — Genesis Score engine (implementation package; public grade / not a token)
 - `packages/adapter-*/` — DePIN network adapter packages
 - `landing/` — getkinetik.app website
 - `functions/` — Cloudflare Pages Functions

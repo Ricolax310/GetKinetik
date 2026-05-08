@@ -9,7 +9,7 @@
 
 GETKINETIK uses the **Plaid pattern** for DePIN integrations. Plaid doesn't care which bank it talks to — each bank is abstracted behind the same interface. GETKINETIK does the same for DePIN networks.
 
-The aggregator UI iterates `adapters[]` and treats every adapter identically. It calls the same `pollEarnings()` method on Nodle as it does on DIMO. Adding a new DePIN = drop a new package that satisfies the `DepinAdapter` interface and register it in the adapter list.
+The multi-network rewards UI (`AggregatorPanel`) iterates `adapters[]` and treats every adapter identically. It calls the same `pollEarnings()` method on Nodle as it does on DIMO. Adding a new DePIN = drop a new package that satisfies the `DepinAdapter` interface and register it in the adapter list.
 
 ---
 
@@ -65,7 +65,7 @@ interface DepinAdapter {
 
 ## AdapterRateMetadata
 
-Optional. Implement this to participate in the optimizer's gas-aware claim timing and the verified-user premium programme.
+Optional. Implement this to participate in the optimizer's gas-aware claim timing and **optional partner-side premium hints** (if a network chooses to pay verified operators differently — see `NEUTRALITY.md`: we never sell favorable grades; commercial access is API/SLA only).
 
 ```typescript
 type AdapterRateMetadata = {
@@ -175,16 +175,18 @@ export const exampleAdapter = new ExampleAdapter();
 
 ## Registration in VaultPanel
 
-Add your adapter to the adapters array in `src/components/VaultPanel.tsx` (or wherever the adapter list is initialised). The AggregatorPanel and PollingPool pick it up automatically.
+Add your adapter to the adapters array in `src/components/VaultPanel.tsx` (or wherever the adapter list is initialised). The multi-network rewards panel (`AggregatorPanel`) and `PollingPool` pick it up automatically.
 
 ---
 
-## Verified-User Premium (v1.5)
+## Optional partner premium hints on receipts (v1.5)
 
-Once the `/api/verify-device` webhook is live and a partner is ready to pay the premium:
+When `/api/verify-device` attestation is live **and** a **partner network**
+chooses to pay verified operators differently (their policy — not a GETKINETIK
+token or equity):
 
 1. Implement `rateMetadata.premiumBasisPoints` and `premiumRateUsd`.
 2. In your adapter's `pollEarnings()`, check whether the partner has confirmed premium status for this node (via a partner API call or a stored flag).
 3. Pass `premiumBasisPoints`, `standardRate`, and `premiumRate` to `appendEarningLog()` when recording the earning. These fields are signed into the receipt.
 
-See `docs/api/verify-device.md` for the partner-side webhook spec.
+See `docs/api/verify-device.md` for the partner verification spec.

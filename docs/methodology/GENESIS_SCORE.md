@@ -259,28 +259,55 @@ counts and outcome categories in the annual transparency report
 
 ## 7. What the API returns
 
-Calling `POST /api/verify-device` with a valid proof returns (in
-addition to cryptographic outputs):
+### Today (production)
+
+Calling `POST /api/verify-device` **cryptographically verifies** the
+Proof of Origin and returns identity fields only — **not** a Genesis
+Score yet. The live worker (`functions/api/verify-device.js`) returns,
+on success, roughly:
+
+```json
+{
+  "valid": true,
+  "nodeId": "KINETIK-NODE-…",
+  "pubkey": "<64-char hex>",
+  "mintedAt": 1714000000000,
+  "schema": "proof-of-origin:v2",
+  "attribution": "GETKINETIK by OutFromNothing LLC"
+}
+```
+
+`mintedAt` is the best available timestamp from the signed payload
+(`issuedAt` for a PoO card, `mintedAt` for key birth, or `ts` for
+heartbeat-shaped artifacts). The exact field list and types are
+the source of truth in
+[`docs/api/verify-device.md`](../api/verify-device.md).
+
+### Target (not shipped yet)
+
+When the bureau wires **KV-backed Genesis Score** into the same
+endpoint, a successful response is expected to add something like:
 
 ```jsonc
 {
-  // ... cryptographic fields (valid, nodeId, mintedAt, ageMs, lifetimeBeats, etc.)
   "genesisScore": 832,
-  "scoreBand": "STRONG",         // see §4
+  "scoreBand": "STRONG",
   "methodologyVersion": "v1.0",
-  "tamperFlags": [],             // empty if none
+  "tamperFlags": [],
   "asOf": "2026-05-04T17:32:11Z"
 }
 ```
 
-Partners that want the raw signed proof in addition to the score
-get both — the score is the bureau's output, the signed proof is
-the node's input, and they are independent.
+That block is the **intended** contract; it is **not** returned by
+production today. When it ships, this section and
+`docs/api/verify-device.md` will be updated in the same commit so
+the wire format and the methodology stay in lockstep.
 
-The exact API response shape is documented in
-[`docs/api/verify-device.md`](../api/verify-device.md). When the
-verify-device docs and this methodology doc disagree, the API doc
-governs the wire format and this doc governs the meaning.
+Partners that want a score *today* can derive a **qualitative**
+signal from the proof fields embedded in the artifact (`lifetimeBeats`,
+`firstBeatTs`, etc.) after cryptographic verification — but the
+numbered Genesis Score and bands in §4 require server-side grading
+that is still being integrated.
 
 ---
 

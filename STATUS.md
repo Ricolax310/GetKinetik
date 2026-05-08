@@ -83,7 +83,7 @@ iOS is increasingly hostile to background sensor collection and data-monetizatio
 
 ## What's shipping right now (L1 trust layer + first slice of L2)
 
-**GETKINETIK** is a React Native / Expo app that turns a phone into a *Sovereign Node* — a cryptographic identity device with on-chain-style semantics but zero servers, zero accounts, zero custodians. Every claim the app makes about itself is mathematically verifiable by any human with a browser. This is L1 of the four-layer aggregator.
+**GETKINETIK** is a React Native / Expo app that turns a phone into a *Sovereign Node* — a cryptographic identity device with on-chain-style semantics but zero servers, zero accounts, zero custodians. Every claim the app makes about itself is mathematically verifiable by any human with a browser. This is L1 of the four-layer product stack (identity → sensors → multi-network read → signed earnings).
 
 As of 2026-04-25, every signed heartbeat also carries three permission-free privacy-neutral sensor aggregates — accelerometer motion RMS, barometer pressure, ambient light — bound into the same hash chain as the heartbeat itself. Schema bumped from v:1 to v:2; verifier accepts both. First slice of L2 ships into the chain.
 
