@@ -255,11 +255,11 @@ async function run() {
     assert("v:2 PoO with null sensors verifies after URL round-trip", pooSigOk);
   }
 
-  console.log("\n[5] Unicode + emoji payload encodes safely");
+  console.log("\n[5] Unicode + emoji signed metadata encodes safely");
   const weird = {
     v: 1,
     kind: "proof-of-origin",
-    nodeId: "KINETIK-NODE-ÜNÏCØDÉ",
+    nodeId,
     pubkey,
     mintedAt: 0,
     issuedAt: 0,
@@ -267,12 +267,14 @@ async function run() {
     firstBeatTs: null,
     chainTip: null,
     attribution: PROOF_ATTRIBUTION,
+    memo: "unicode survives: ÜNÏCØDÉ 🚀",
   };
   const wmsg = stableStringify(weird);
   const wsig = toHex(await ed.signAsync(utf8(wmsg), sk));
   const wurl = `${VERIFIER_ORIGIN}#proof=${base64UrlEncode(JSON.stringify({ payload: weird, signature: wsig }))}`;
   const wdecoded = JSON.parse(fromBase64Url(wurl.split("#proof=")[1]));
-  assert("unicode nodeId round-trips", wdecoded.payload.nodeId === weird.nodeId);
+  assert("valid nodeId round-trips", wdecoded.payload.nodeId === weird.nodeId);
+  assert("unicode memo round-trips", wdecoded.payload.memo === weird.memo);
   const wsigOk = await ed.verifyAsync(
     fromHex(wdecoded.signature),
     utf8(stableStringify(wdecoded.payload)),
