@@ -17,7 +17,7 @@
       whenever you bump window.__kinetikVerifier.version at the bottom of
       verifier.js — the two MUST stay in lockstep.
     -->
-    <link rel="stylesheet" href="./styles.css?v=1.3.1" />
+    <link rel="stylesheet" href="./styles.css?v=1.3.4" />
   </head>
   <body>
     <!--
@@ -86,12 +86,17 @@
             part of the message, so stripping it breaks verification.
           </li>
           <li>
+            The visible <code>nodeId</code> must equal
+            <code>KINETIK-NODE-</code> plus the first 8 hex chars of
+            <code>sha256(payload.pubkey)</code>.
+          </li>
+          <li>
             <code>Ed25519.verify(signature, message, payload.pubkey)</code>
             must return <code>true</code>.
           </li>
         </ol>
         <p class="explainer-foot">
-          If all four checks pass, the device that owns the secret key
+          If all five checks pass, the device that owns the secret key
           matching <code>payload.pubkey</code> signed this exact artifact.
           The verifier does not call home, does not log, does not persist —
           once the page closes, nothing remains.
@@ -147,6 +152,6 @@
       </footer>
     </main>
 
-    <script type="module" src="./verifier.js?v=1.3.3"></script>
+    <script type="module" src="./verifier.js?v=1.3.4"></script>
   </body>
 </html>

@@ -175,6 +175,8 @@ export type VerifyChecks = {
   canonicalMatches: boolean;
   /** sha256(canonicalMessage)[:16] byte-equals the claimed `hash`. */
   hashMatches: boolean;
+  /** payload.nodeId matches KINETIK-NODE- + sha256(payload.pubkey)[:8]. */
+  nodeIdMatches: boolean;
   /** PROOF_ATTRIBUTION present in payload (proof-of-origin and earning only). */
   attributionOk: boolean | null;
   /** Earning fee is exactly 1% of gross AND net = gross - fee (earnings only). */
@@ -209,8 +211,13 @@ export type VerifyReport = {
 
 const round8 = (n: number): number => Math.round(n * 1e8) / 1e8;
 
+const deriveNodeIdFromPubkeyHex = (pubkeyHex: string): string => {
+  const fingerprint = toHex(sha256(fromHex(pubkeyHex)));
+  return `KINETIK-NODE-${fingerprint.slice(0, 8).toUpperCase()}`;
+};
+
 // ----------------------------------------------------------------------------
-// verifyArtifact — runs all five checks and returns a structured report.
+// verifyArtifact — runs all six checks and returns a structured report.
 //
 // Throws ONLY on structurally-invalid input (missing payload, malformed
 // signature hex, malformed pubkey hex). Any cryptographic or content-level
@@ -250,6 +257,9 @@ export async function verifyArtifact(
 
   const canonicalMatches = claimedMessage === canonicalMessage;
   const hashMatches = claimedHash === canonicalHash;
+  const nodeIdMatches =
+    (payload as { nodeId?: unknown }).nodeId ===
+    deriveNodeIdFromPubkeyHex(pubkey);
 
   const kindRaw = (payload as { kind?: unknown }).kind;
   const isProofOfOrigin = kindRaw === 'proof-of-origin';
@@ -296,6 +306,7 @@ export async function verifyArtifact(
   const valid =
     canonicalMatches &&
     hashMatches &&
+    nodeIdMatches &&
     (attributionOk === true || attributionOk === null) &&
     (feeIntegrityOk === true || feeIntegrityOk === null) &&
     signatureOk;
@@ -320,6 +331,7 @@ export async function verifyArtifact(
     checks: {
       canonicalMatches,
       hashMatches,
+      nodeIdMatches,
       attributionOk,
       feeIntegrityOk,
       signatureOk,

@@ -119,6 +119,16 @@ async function sha256Hex(message) {
   return Array.from(new Uint8Array(buf), (b) => b.toString(16).padStart(2, "0")).join("");
 }
 
+async function sha256BytesHex(bytes) {
+  const buf = await crypto.subtle.digest("SHA-256", bytes);
+  return Array.from(new Uint8Array(buf), (b) => b.toString(16).padStart(2, "0")).join("");
+}
+
+async function deriveNodeId(pubkeyBytes) {
+  const fingerprint = await sha256BytesHex(pubkeyBytes);
+  return `KINETIK-NODE-${fingerprint.slice(0, 8).toUpperCase()}`;
+}
+
 /**
  * extractProofFragment — parses the base64url proof payload from a verifier URL.
  * Handles both full URLs and bare base64url strings.
@@ -169,7 +179,7 @@ async function verifyProofUrl(proofUrl) {
   }
 
   const { payload, signature, hash } = envelope;
-  if (!payload || !signature || !hash) {
+  if (!payload || !signature) {
     return { valid: false, reason: "missing_fields" };
   }
 
@@ -182,7 +192,10 @@ async function verifyProofUrl(proofUrl) {
   const message = stableStringify(payload);
   const fullHash = await sha256Hex(message);
   const expectedHash = fullHash.slice(0, 16);
-  if (expectedHash !== hash) {
+  // App-generated verifier URLs use compact artifacts ({ payload, signature })
+  // and let verifiers re-derive the hash. Full JSON shares may include `hash`.
+  const claimedHash = typeof hash === "string" ? hash : expectedHash;
+  if (expectedHash !== claimedHash) {
     return { valid: false, reason: "hash_mismatch" };
   }
 
@@ -195,6 +208,10 @@ async function verifyProofUrl(proofUrl) {
   const pubkeyBytes = hexToBytes(pubkeyHex);
   if (!pubkeyBytes) {
     return { valid: false, reason: "pubkey_decode_failed" };
+  }
+  const expectedNodeId = await deriveNodeId(pubkeyBytes);
+  if (payload.nodeId !== expectedNodeId) {
+    return { valid: false, reason: "node_id_mismatch" };
   }
   const sigBytes = hexToBytes(signature);
   if (!sigBytes || sigBytes.length !== 64) {

@@ -4,7 +4,7 @@
 //
 //   node verifier/smoketest.mjs
 //
-// This does not require a browser. It proves the four-step verification
+// This does not require a browser. It proves the verification
 // pipeline agrees with the signing pipeline — any drift between the app's
 // stableStringify / attribution / hash-truncation rules and the verifier
 // will fail here before a real artifact is ever minted in anger.
@@ -37,6 +37,8 @@ const fromHex = (hex) => {
   return out;
 };
 const utf8 = (s) => new TextEncoder().encode(s);
+const deriveNodeIdFromPubkeyHex = (pubkeyHex) =>
+  `KINETIK-NODE-${toHex(sha256(fromHex(pubkeyHex))).slice(0, 8).toUpperCase()}`;
 
 // Mint a proof-of-origin exactly the way packages/kinetik-core/src/proof.ts does.
 async function mintProof() {
@@ -74,6 +76,7 @@ async function verifyArtifact(raw) {
 
   const canonicalMatches = claimedMessage === canonicalMessage;
   const hashMatches = claimedHash === canonicalHash;
+  const nodeIdMatches = payload.nodeId === deriveNodeIdFromPubkeyHex(payload.pubkey);
   const attributionOk =
     payload.kind === "proof-of-origin"
       ? payload.attribution === PROOF_ATTRIBUTION
@@ -87,9 +90,10 @@ async function verifyArtifact(raw) {
   const valid =
     canonicalMatches &&
     hashMatches &&
+    nodeIdMatches &&
     (attributionOk === true || attributionOk === null) &&
     signatureOk;
-  return { valid, canonicalMatches, hashMatches, attributionOk, signatureOk };
+  return { valid, canonicalMatches, hashMatches, nodeIdMatches, attributionOk, signatureOk };
 }
 
 // ----------------------------------------------------------------------------
@@ -109,12 +113,27 @@ async function run() {
     const r = await verifyArtifact(artifact);
     assert("canonical serialization matches", r.canonicalMatches);
     assert("sha256(message)[:16] matches hash", r.hashMatches);
+    assert("nodeId matches pubkey fingerprint", r.nodeIdMatches);
     assert("attribution intact", r.attributionOk === true);
     assert("signature verifies", r.signatureOk);
     assert("overall valid", r.valid);
   }
 
-  console.log("\n[2] Tampered lifetimeBeats — should fail canonical + sig");
+  console.log("\n[2] Signed spoofed nodeId — should fail nodeId binding only");
+  {
+    const { sk, artifact } = await mintProof();
+    const payload = { ...artifact.payload, nodeId: "KINETIK-NODE-FFFFFFFF" };
+    const message = stableStringify(payload);
+    const signature = toHex(await ed.signAsync(utf8(message), sk));
+    const hash = toHex(sha256(utf8(message))).slice(0, 16);
+    const r = await verifyArtifact({ payload, message, signature, hash });
+    assert("canonical serialization still matches", r.canonicalMatches);
+    assert("signature still verifies", r.signatureOk);
+    assert("nodeIdMatches is false", !r.nodeIdMatches);
+    assert("overall invalid", !r.valid);
+  }
+
+  console.log("\n[3] Tampered lifetimeBeats — should fail canonical + sig");
   {
     const { artifact } = await mintProof();
     const tampered = JSON.parse(JSON.stringify(artifact));
@@ -125,7 +144,7 @@ async function run() {
     assert("overall invalid", !r.valid);
   }
 
-  console.log("\n[3] Stripped attribution — should fail attribution check");
+  console.log("\n[4] Stripped attribution — should fail attribution check");
   {
     const { artifact } = await mintProof();
     const tampered = JSON.parse(JSON.stringify(artifact));
@@ -135,7 +154,7 @@ async function run() {
     assert("overall invalid", !r.valid);
   }
 
-  console.log("\n[4] Signature forged with wrong key — should fail sig");
+  console.log("\n[5] Signature forged with wrong key — should fail sig");
   {
     const { artifact } = await mintProof();
     const { sk: otherSk } = await mintProof();
@@ -148,7 +167,7 @@ async function run() {
     assert("overall invalid", !r.valid);
   }
 
-  console.log("\n[5] COMPACT form (no message, no hash) — should still verify");
+  console.log("\n[6] COMPACT form (no message, no hash) — should still verify");
   {
     const { artifact } = await mintProof();
     const compact = { payload: artifact.payload, signature: artifact.signature };
@@ -156,7 +175,7 @@ async function run() {
     assert("compact form verifies", r.valid);
   }
 
-  console.log("\n[6] Heartbeat payload — no attribution check, still valid");
+  console.log("\n[7] Heartbeat payload — no attribution check, still valid");
   {
     const sk = ed.utils.randomSecretKey();
     const pk = await ed.getPublicKeyAsync(sk);
@@ -183,14 +202,14 @@ async function run() {
   }
 
   // --------------------------------------------------------------------------
-  // [7] v:2 heartbeat with sensors — the L2 schema bump.
+  // [8] v:2 heartbeat with sensors — the L2 schema bump.
   //
   // The `sensors` block is constructed in lexicographic key order (lux,
   // motionRms, pressureHpa) so JSON.stringify emits a reproducible byte
   // sequence regardless of where the readout originated. That ordering is
   // the contract enforced in packages/kinetik-core/src/sensors.ts canonicalSensorBlock().
   // --------------------------------------------------------------------------
-  console.log("\n[7] v:2 heartbeat with sensors — schema bump verifies");
+  console.log("\n[8] v:2 heartbeat with sensors — schema bump verifies");
   {
     const sk = ed.utils.randomSecretKey();
     const pk = await ed.getPublicKeyAsync(sk);
@@ -220,14 +239,14 @@ async function run() {
   }
 
   // --------------------------------------------------------------------------
-  // [8] v:2 heartbeat with NULL sensor fields — graceful degradation.
+  // [9] v:2 heartbeat with NULL sensor fields — graceful degradation.
   //
   // A device missing a barometer (common on budget Androids and on iOS for
   // light) signs a payload with explicit nulls. The verifier MUST accept
   // null values without choking; the schema is what's signed, not the
   // nullability of any one field.
   // --------------------------------------------------------------------------
-  console.log("\n[8] v:2 heartbeat with null sensor fields — still verifies");
+  console.log("\n[9] v:2 heartbeat with null sensor fields — still verifies");
   {
     const sk = ed.utils.randomSecretKey();
     const pk = await ed.getPublicKeyAsync(sk);

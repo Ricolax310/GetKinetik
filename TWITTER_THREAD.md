@@ -197,12 +197,13 @@ Encoded as base64url in a URL fragment. Never hits a server.
 
 **Tweet 4**
 ```
-Verification is four checks, client-side, in any browser:
+Verification is five checks, client-side, in any browser:
 
 1. base64url decode the fragment
 2. sha256(message)[:16] === hash ✓
-3. ed25519.verify(signature, message, pubkey) ✓
-4. attribution string === "GETKINETIK by OutFromNothing LLC" ✓
+3. nodeId === fingerprint(pubkey) ✓
+4. ed25519.verify(signature, message, pubkey) ✓
+5. attribution string === "GETKINETIK by OutFromNothing LLC" ✓
 
 No account. No API call. Pure math.
 
@@ -211,7 +212,7 @@ getkinetik.app/verify
 
 **Tweet 5**
 ```
-The partner API wraps those same four checks server-side:
+The partner API wraps those same five checks server-side:
 
 POST getkinetik.app/api/verify-device
 { "proofUrl": "..." }

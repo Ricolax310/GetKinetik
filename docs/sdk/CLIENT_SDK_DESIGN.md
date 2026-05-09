@@ -242,7 +242,7 @@ and resolves the `Promise` it returned in step ①.
 
 The partner can verify on-device (using `@kinetik/verify` bundled
 into their app) or send the proof to their backend and verify
-there. Either way, verification is the **same five checks** the
+there. Either way, verification is the **same six checks** the
 existing verifier runs, plus three SDK-specific checks:
 
 | Extra check | What it confirms |

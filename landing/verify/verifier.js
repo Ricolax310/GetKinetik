@@ -92,6 +92,9 @@ const fromHex = (hex) => {
 
 const utf8 = (s) => new TextEncoder().encode(s);
 
+const deriveNodeIdFromPubkeyHex = (pubkeyHex) =>
+  `KINETIK-NODE-${toHex(sha256(fromHex(pubkeyHex))).slice(0, 8).toUpperCase()}`;
+
 // base64url decode, for `#proof=...` URL fragments.
 //
 // Defensive against the most common real-world failure mode: a user
@@ -144,7 +147,7 @@ const fromBase64Url = (s) => {
 };
 
 // ----------------------------------------------------------------------------
-// verifyArtifact — runs all four checks, returns a structured report the
+// verifyArtifact — runs every verifier check, returns a structured report the
 // UI can render without re-running any crypto. The report is intentionally
 // verbose: each check's pass/fail + observed/expected values are exposed
 // so a user can trace EXACTLY why an invalid proof was rejected.
@@ -188,6 +191,9 @@ async function verifyArtifact(raw) {
 
   // ---- Check 2: sha256(message)[:16] === claimed hash. --------------------
   const hashMatches = claimedHash === canonicalHash;
+
+  // ---- Check 2b: visible node ID is bound to the verified public key. ------
+  const nodeIdMatches = payload.nodeId === deriveNodeIdFromPubkeyHex(payload.pubkey);
 
   // ---- Check 3: attribution intact (proof-of-origin and earning). ----------
   // Earnings carry the same attribution stamp as PoOs. Heartbeats carry none.
@@ -235,6 +241,7 @@ async function verifyArtifact(raw) {
   const valid =
     canonicalMatches &&
     hashMatches &&
+    nodeIdMatches &&
     (attributionOk === true || attributionOk === null) &&
     (feeIntegrityOk === true || feeIntegrityOk === null) &&
     signatureOk;
@@ -252,6 +259,7 @@ async function verifyArtifact(raw) {
     checks: {
       canonicalMatches,
       hashMatches,
+      nodeIdMatches,
       attributionOk,
       feeIntegrityOk,
       signatureOk,
@@ -434,7 +442,7 @@ function renderReport(report) {
     .join("");
 
   // Checks list — always rendered, so a user can see exactly which of the
-  // four tests passed/failed even on a valid proof (reinforces what the
+  // checks passed/failed even on a valid proof (reinforces what the
   // seal actually means).
   const mkCheck = (passed, label, skipped = false) => {
     const cls = skipped
@@ -449,6 +457,7 @@ function renderReport(report) {
   const checksHtml = [
     mkCheck(checks.canonicalMatches, "Payload re-serializes to signed message"),
     mkCheck(checks.hashMatches, "SHA-256(message)[:16] matches embedded hash"),
+    mkCheck(checks.nodeIdMatches, "Node ID matches SHA-256(payload.pubkey) fingerprint"),
     mkCheck(
       checks.attributionOk === true,
       `Attribution intact: "${PROOF_ATTRIBUTION}"`,
@@ -555,7 +564,7 @@ async function runSelfTest() {
     const sk = ed.utils.randomSecretKey();
     const pk = await ed.getPublicKeyAsync(sk);
     const pubkey = toHex(pk);
-    const nodeId = `KINETIK-TEST-${toHex(sha256(pk)).slice(0, 8).toUpperCase()}`;
+    const nodeId = `KINETIK-NODE-${toHex(sha256(pk)).slice(0, 8).toUpperCase()}`;
 
     const payload = {
       v: 1,
@@ -642,7 +651,7 @@ if (tryLoadFromHash()) {
 // hid PoO sensor rows from the v1.2.0 first-day cohort.
 // ----------------------------------------------------------------------------
 window.__kinetikVerifier = {
-  version: "1.3.3",
+  version: "1.3.4",
   verifyArtifact,
   stableStringify,
   PROOF_ATTRIBUTION,

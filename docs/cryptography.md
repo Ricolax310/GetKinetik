@@ -87,9 +87,10 @@ SignedProof = { payload: proofPayload, message, signature, hash }
 1. Check `payload.attribution === PROOF_ATTRIBUTION`
 2. Re-serialize: `canonical = stableStringify(payload)`
 3. Check `sha256(canonical)[:16] === hash`
-4. Check `ed25519.verify(signature, canonical, pubkey)` where pubkey is `payload.pubkey` decoded from hex
+4. Check `payload.nodeId === "KINETIK-NODE-" + sha256(payload.pubkey)[:8]`
+5. Check `ed25519.verify(signature, canonical, pubkey)` where pubkey is `payload.pubkey` decoded from hex
 
-All four checks must pass. Failure at any step = invalid proof.
+All five checks must pass. Failure at any step = invalid proof.
 
 ---
 

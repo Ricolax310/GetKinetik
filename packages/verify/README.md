@@ -74,7 +74,7 @@ The verifier accepts both the **FULL** form
 
 ## What gets checked
 
-For every artifact, `verifyArtifact` runs five independent checks and
+For every artifact, `verifyArtifact` runs six independent checks and
 returns a structured report. None of them throw — failures are reflected
 in `report.checks.*` and the aggregate `report.valid` boolean.
 
@@ -82,6 +82,7 @@ in `report.checks.*` and the aggregate `report.valid` boolean.
 |-------|---------|
 | `canonicalMatches` | `stableStringify(payload)` byte-equals the claimed `message` (or canonical, in compact form) |
 | `hashMatches` | `sha256(canonicalMessage)[:16]` byte-equals the claimed `hash` |
+| `nodeIdMatches` | `payload.nodeId === "KINETIK-NODE-" + sha256(payload.pubkey)[:8]` |
 | `attributionOk` | `payload.attribution === "GETKINETIK by OutFromNothing LLC"` (proof-of-origin and earning only; `null` for heartbeats) |
 | `feeIntegrityOk` | The signed earning's `fee` is exactly 1% of `gross` and `net = gross - fee` (earnings only; `null` otherwise) |
 | `signatureOk` | Ed25519 signature verifies against the canonical message + `payload.pubkey` |
@@ -156,6 +157,7 @@ type ArtifactKind = 'proof-of-origin' | 'heartbeat' | 'earning' | 'unknown';
 type VerifyChecks = {
   canonicalMatches: boolean;
   hashMatches: boolean;
+  nodeIdMatches: boolean;
   attributionOk: boolean | null;     // null = N/A for this kind
   feeIntegrityOk: boolean | null;    // null = N/A for non-earning kinds
   signatureOk: boolean;

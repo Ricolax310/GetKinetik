@@ -77,12 +77,39 @@ console.log('[1] proof-of-origin happy path');
   assert(report.kind === 'proof-of-origin', 'kind is proof-of-origin');
   assert(report.checks.canonicalMatches, 'canonical matches');
   assert(report.checks.hashMatches, 'hash matches');
+  assert(report.checks.nodeIdMatches, 'nodeId matches pubkey fingerprint');
   assert(report.checks.attributionOk === true, 'attribution intact');
   assert(report.checks.signatureOk, 'signature verifies');
   assert(report.checks.feeIntegrityOk === null, 'feeIntegrityOk is N/A');
 }
 
-// ---- [3] heartbeat happy path (no attribution check) -----------------------
+// ---- [3] signed nodeId spoof — signature passes but identity binding fails --
+console.log('\n[2] signed nodeId spoof rejected');
+{
+  const payload = {
+    v: 2,
+    kind: 'proof-of-origin',
+    nodeId: 'KINETIK-NODE-FFFFFFFF',
+    pubkey,
+    mintedAt: Date.now(),
+    issuedAt: Date.now(),
+    lifetimeBeats: 1,
+    firstBeatTs: Date.now() - 1000,
+    chainTip: '0000000000000000',
+    attribution: PROOF_ATTRIBUTION,
+    sensors: { lux: null, motionRms: null, pressureHpa: null },
+  };
+  const message = stableStringify(payload);
+  const signature = toHex(await ed.signAsync(utf8(message), sk));
+  const hash = toHex(sha256(utf8(message))).slice(0, 16);
+  const report = await verifyArtifact({ payload, message, signature, hash });
+  assert(!report.valid, 'spoofed nodeId rejected');
+  assert(report.checks.canonicalMatches, 'canonical still matches');
+  assert(report.checks.signatureOk, 'signature still verifies');
+  assert(report.checks.nodeIdMatches === false, 'nodeId binding failed');
+}
+
+// ---- [4] heartbeat happy path (no attribution check) -----------------------
 console.log('\n[2] v:2 heartbeat happy path');
 {
   const payload = {
@@ -103,6 +130,7 @@ console.log('\n[2] v:2 heartbeat happy path');
   const report = await verifyArtifact({ payload, signature });
   assert(report.valid, 'compact form heartbeat verifies');
   assert(report.kind === 'heartbeat', 'kind is heartbeat');
+  assert(report.checks.nodeIdMatches, 'nodeId matches pubkey fingerprint');
   assert(report.checks.attributionOk === null, 'attributionOk is N/A');
   assert(report.checks.feeIntegrityOk === null, 'feeIntegrityOk is N/A');
 }
