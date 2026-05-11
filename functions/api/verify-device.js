@@ -35,11 +35,12 @@
  * ── VERIFICATION ALGORITHM ───────────────────────────────────────────────
  * 1. Extract the base64url-encoded payload from the URL fragment (#proof=...)
  * 2. Decode and parse the JSON proof payload
- * 3. Verify the PROOF_ATTRIBUTION field matches the expected constant
- * 4. Re-serialise the payload using stableStringify (lex-sorted keys)
- * 5. Verify the Ed25519 signature against the serialised message and the
+ * 3. Verify PROOF_ATTRIBUTION for proof-of-origin / earning artifacts
+ * 4. Verify earning fee + net math when the payload kind is "earning"
+ * 5. Re-serialise the payload using stableStringify (lex-sorted keys)
+ * 6. Verify the Ed25519 signature against the serialised message and the
  *    pubkey embedded in the payload using SubtleCrypto (native in CF Workers)
- * 6. Verify the hash field matches sha256(message)[:16]
+ * 7. Verify the hash field matches sha256(message)[:16] when present
  *
  * This is a server-side implementation of the same logic in landing/verify/verifier.js.
  * Both must remain byte-for-byte equivalent — the CRYPTOGRAPHIC_CONTRACT comment
@@ -48,6 +49,7 @@
 
 // ── Constants ────────────────────────────────────────────────────────────────
 const PROOF_ATTRIBUTION = "GETKINETIK by OutFromNothing LLC";
+const PROTOCOL_FEE_RATE = 0.01;
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -119,6 +121,10 @@ async function sha256Hex(message) {
   return Array.from(new Uint8Array(buf), (b) => b.toString(16).padStart(2, "0")).join("");
 }
 
+function round8(n) {
+  return Math.round(n * 1e8) / 1e8;
+}
+
 /**
  * extractProofFragment — parses the base64url proof payload from a verifier URL.
  * Handles both full URLs and bare base64url strings.
@@ -168,21 +174,49 @@ async function verifyProofUrl(proofUrl) {
     return { valid: false, reason: "malformed_envelope" };
   }
 
-  const { payload, signature, hash } = envelope;
-  if (!payload || !signature || !hash) {
+  const { payload, message, signature, hash } = envelope;
+  if (!payload || !signature) {
     return { valid: false, reason: "missing_fields" };
   }
 
-  // Step 4: verify attribution.
-  if (payload.attribution !== PROOF_ATTRIBUTION) {
+  const kind = typeof payload.kind === "string" ? payload.kind : "unknown";
+  const isProofOfOrigin = kind === "proof-of-origin";
+  const isEarning = kind === "earning";
+
+  // Step 4: verify attribution where the signed artifact kind carries it.
+  // Heartbeats intentionally omit attribution; the browser/package verifier
+  // treats that check as N/A for heartbeat artifacts.
+  if ((isProofOfOrigin || isEarning) && payload.attribution !== PROOF_ATTRIBUTION) {
     return { valid: false, reason: "attribution_mismatch" };
   }
 
-  // Step 5: verify hash = sha256(stableStringify(payload))[:16].
-  const message = stableStringify(payload);
-  const fullHash = await sha256Hex(message);
+  if (isEarning) {
+    const gross = typeof payload.gross === "number" ? payload.gross : 0;
+    const expectedFee = round8(gross * PROTOCOL_FEE_RATE);
+    const expectedNet = round8(gross - expectedFee);
+    const feeOk =
+      typeof payload.fee === "number" &&
+      typeof payload.net === "number" &&
+      Math.abs(payload.fee - expectedFee) < 1e-9 &&
+      Math.abs(payload.net - expectedNet) < 1e-9;
+    if (!feeOk) {
+      return { valid: false, reason: "fee_integrity_mismatch" };
+    }
+  }
+
+  // Step 5: verify canonical message + hash = sha256(stableStringify(payload))[:16].
+  // message/hash are optional in compact artifacts, but when present they must
+  // match the canonical payload exactly.
+  const canonicalMessage = stableStringify(payload);
+  const claimedMessage = typeof message === "string" ? message : canonicalMessage;
+  if (claimedMessage !== canonicalMessage) {
+    return { valid: false, reason: "message_mismatch" };
+  }
+
+  const fullHash = await sha256Hex(canonicalMessage);
   const expectedHash = fullHash.slice(0, 16);
-  if (expectedHash !== hash) {
+  const claimedHash = typeof hash === "string" ? hash.toLowerCase() : expectedHash;
+  if (expectedHash !== claimedHash) {
     return { valid: false, reason: "hash_mismatch" };
   }
 
@@ -210,7 +244,7 @@ async function verifyProofUrl(proofUrl) {
       false,
       ["verify"],
     );
-    const msgBytes = new TextEncoder().encode(message);
+    const msgBytes = new TextEncoder().encode(canonicalMessage);
     verified = await crypto.subtle.verify("Ed25519", cryptoKey, sigBytes, msgBytes);
   } catch {
     // SubtleCrypto Ed25519 may not be available in all CF Worker environments.
@@ -238,7 +272,7 @@ async function verifyProofUrl(proofUrl) {
           : typeof payload.ts === "number"
             ? payload.ts
             : null,
-    schema: `proof-of-origin:v${payload.v ?? 1}`,
+    schema: `${kind}:v${payload.v ?? 1}`,
     attribution: payload.attribution,
   };
 }
