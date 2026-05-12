@@ -4,6 +4,8 @@
 > **Auth:** None required. Public endpoint.
 > **Cost:** Free. Rate limit: 100 req/min per IP.
 
+**GET (browser):** If you open the endpoint URL in a browser tab, you’ll receive **200 JSON** with usage hints (`documentation: true`). That is **not** a verification outcome — verification always requires **POST** with `proofUrl`. For interactive checks, use the public verifier: `https://getkinetik.app/verify/`.
+
 ---
 
 ## What It Does
