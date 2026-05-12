@@ -8,6 +8,14 @@ Android `versionCode` is noted alongside each release for sideload verification.
 
 ## [Unreleased] — v1.3.3
 
+### Changed
+- **`GET /api/verify-device` discovery response.** Visiting the webhook URL in
+  a browser (GET) previously returned **405 Method not allowed**. It now
+  returns **200 JSON** with `documentation: true`, a POST body example, links
+  to the public verifier and the integration spec, and a copy-paste `curl`
+  line — so pasted links read as intentional documentation, not a broken
+  endpoint. **POST behaviour is unchanged.**
+
 > EAS build queued for 2026-05-01. Not publicly released yet.
 > The v1.3.2 build existed as an internal EAS build only and was never
 > given a public GitHub Release — a gem-animation regression was caught

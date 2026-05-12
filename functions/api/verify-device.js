@@ -1,5 +1,6 @@
 /**
- * POST /api/verify-device
+ * POST /api/verify-device — partner verification webhook.
+ * GET returns discovery JSON (humans pasting the URL in a browser tab).
  *
  * Public webhook for partner-side device verification.
  * Any DePIN partner can call this endpoint to confirm that a GETKINETIK
@@ -26,6 +27,10 @@
  *
  * ── Response 400 ─────────────────────────────────────────────────────────
  * { "error": "proofUrl is required" }
+ *
+ * ── GET (browser discovery) ───────────────────────────────────────────────
+ * Opening this URL in a browser tab issues GET (not POST). We return 200
+ * JSON with usage hints — not a verification result.
  *
  * ── CORS ──────────────────────────────────────────────────────────────────
  * All origins are permitted — this is a public verification API, not an
@@ -58,7 +63,7 @@ function json(body, status = 200) {
       "content-type": "application/json; charset=utf-8",
       "cache-control": "no-store",
       "access-control-allow-origin": "*",
-      "access-control-allow-methods": "POST, OPTIONS",
+      "access-control-allow-methods": "GET, POST, OPTIONS",
       "access-control-allow-headers": "content-type",
     },
   });
@@ -250,10 +255,35 @@ export async function onRequestOptions() {
     status: 204,
     headers: {
       "access-control-allow-origin": "*",
-      "access-control-allow-methods": "POST, OPTIONS",
+      "access-control-allow-methods": "GET, POST, OPTIONS",
       "access-control-allow-headers": "content-type",
     },
   });
+}
+
+const VERIFY_DEVICE_SPEC =
+  "https://github.com/Ricolax310/GetKinetik/blob/main/docs/api/verify-device.md";
+const PUBLIC_VERIFIER = "https://getkinetik.app/verify/";
+
+/** GET — human pastes the API URL in a browser; explain POST instead of 405. */
+export async function onRequestGet() {
+  return json(
+    {
+      documentation: true,
+      summary:
+        "Partner verification webhook — call with HTTP POST and a JSON body. This GET response is not a proof result.",
+      method: "POST",
+      contentType: "application/json",
+      bodyExample: {
+        proofUrl: "https://getkinetik.app/verify/#proof=<paste from GETKINETIK app Share>",
+      },
+      tryInBrowser: PUBLIC_VERIFIER,
+      spec: VERIFY_DEVICE_SPEC,
+      curlExample:
+        "curl -s -X POST https://getkinetik.app/api/verify-device -H \"Content-Type: application/json\" -d \"{\\\"proofUrl\\\":\\\"PASTE_FULL_PROOF_URL\\\"}\"",
+    },
+    200,
+  );
 }
 
 export async function onRequestPost(ctx) {
