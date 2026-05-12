@@ -73,6 +73,7 @@ The `proofUrl` is what the GETKINETIK app generates when the user taps **Share P
 |---|---|
 | `signature_invalid` | The Ed25519 signature does not verify against the payload. The proof was tampered with or fabricated. |
 | `hash_mismatch` | The proof's hash field doesn't match `sha256(payload)[:16]`. Truncated or corrupted URL. |
+| `message_mismatch` | The proof's optional message field doesn't match the canonical payload serialization. |
 | `attribution_mismatch` | The attribution field was altered. |
 | `invalid_url_format` | Could not parse a proof from the supplied URL. |
 | `base64_decode_failed` | The base64url payload could not be decoded. |

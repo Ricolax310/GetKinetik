@@ -138,9 +138,14 @@ function extractProofFragment(proofUrl) {
     fragment = proofUrl;
   }
 
-  // Support both #proof=<b64> and bare <b64>.
-  if (fragment.startsWith("proof=")) {
-    return fragment.slice("proof=".length);
+  // Support #proof=<b64>, fragments with additional params, and bare <b64>.
+  const match = fragment.match(/(?:^|&)proof=([^&]+)/);
+  if (match) {
+    try {
+      return decodeURIComponent(match[1]);
+    } catch {
+      return match[1];
+    }
   }
   return fragment;
 }
@@ -173,8 +178,8 @@ async function verifyProofUrl(proofUrl) {
     return { valid: false, reason: "malformed_envelope" };
   }
 
-  const { payload, signature, hash } = envelope;
-  if (!payload || !signature || !hash) {
+  const { payload, signature } = envelope;
+  if (!payload || typeof payload !== "object" || !signature) {
     return { valid: false, reason: "missing_fields" };
   }
 
@@ -184,10 +189,22 @@ async function verifyProofUrl(proofUrl) {
   }
 
   // Step 5: verify hash = sha256(stableStringify(payload))[:16].
+  // Compact QR proofs omit message/hash; derive them from the signed payload.
   const message = stableStringify(payload);
+  if (
+    Object.prototype.hasOwnProperty.call(envelope, "message") &&
+    envelope.message !== message
+  ) {
+    return { valid: false, reason: "message_mismatch" };
+  }
   const fullHash = await sha256Hex(message);
   const expectedHash = fullHash.slice(0, 16);
-  if (expectedHash !== hash) {
+  const claimedHash = Object.prototype.hasOwnProperty.call(envelope, "hash")
+    ? typeof envelope.hash === "string"
+      ? envelope.hash.toLowerCase()
+      : ""
+    : expectedHash;
+  if (expectedHash !== claimedHash) {
     return { valid: false, reason: "hash_mismatch" };
   }
 
