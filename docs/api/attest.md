@@ -2,7 +2,7 @@
 
 > **Endpoint:** `POST https://getkinetik.app/api/attest`
 > **Auth:** `Authorization: Bearer <partner-api-key>` (issued out-of-band)
-> **Status:** **v1.0 records attestations. v1.1 folds them into the Genesis Score.**
+> **Status:** **v1.1 records partner-attributed attestations. v1.2 folds them into the Genesis Score.**
 
 ---
 
@@ -67,11 +67,12 @@ Authorization: Bearer <your-key>
   "ok": true,
   "receipt": "attest:KINETIK-NODE-A3F2B719:1715581234567",
   "recordedAt": "2026-05-13T03:00:00.000Z",
-  "note": "Recorded. v1.0 stores attestations; v1.1 will fold them into the Genesis Score."
+  "attestor": "dimo",
+  "note": "Recorded. v1.1 stores attestations with partner attribution; v1.2 folds them into the Genesis Score."
 }
 ```
 
-Save the `receipt` if you want to reference this attestation later (e.g. in a dispute).
+Save the `receipt` if you want to reference this attestation later (e.g. in a dispute). The `attestor` field is derived from your API key — it tells the bureau *who* submitted the signal, separate from the self-declared `network` field in your request body.
 
 ---
 
