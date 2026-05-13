@@ -61,6 +61,7 @@ import {
   VERIFIER_ORIGIN,
 } from '../../packages/kinetik-core/src';
 import { ProofQr } from './ProofQr';
+import type { GenesisScoreResult } from '../hooks/useGenesisScore';
 
 // ----------------------------------------------------------------------------
 // Props — controlled component; VaultPanel owns the open flag and passes in
@@ -82,6 +83,13 @@ type ProofOfOriginProps = {
      */
     lastSensors: SensorReadout | null;
   };
+  /**
+   * Bureau Genesis Score — fetched by VaultPanel via useGenesisScore.
+   * Optional: null while loading or not yet scored. When present, renders
+   * a GENESIS SCORE row on the card so a screenshot captures the bureau
+   * grade alongside the cryptographic proof.
+   */
+  genesisScore?: GenesisScoreResult | null;
 };
 
 // ----------------------------------------------------------------------------
@@ -114,6 +122,7 @@ export function ProofOfOrigin({
   onClose,
   identity,
   stats,
+  genesisScore = null,
 }: ProofOfOriginProps) {
   const insets = useSafeAreaInsets();
   const { height } = useWindowDimensions();
@@ -294,6 +303,7 @@ export function ProofOfOrigin({
             <Row label="PRESSURE" value={pressureLabel} />
             <Row label="LIGHT" value={lightLabel} />
             <Row label="HASH" value={hashLabel} />
+            <ScoreRow score={genesisScore} />
           </View>
 
           <View style={styles.divider} />
@@ -393,6 +403,28 @@ function Row({ label, value }: { label: string; value: string }) {
   );
 }
 
+// ----------------------------------------------------------------------------
+// ScoreRow — bureau Genesis Score row with ruby value accent.
+// Visually distinct from the sapphire data rows so the score reads as
+// an external attestation rather than a local measurement.
+// ----------------------------------------------------------------------------
+function ScoreRow({ score }: { score: GenesisScoreResult | null }) {
+  const value = score
+    ? `${score.score} · ${score.band}`
+    : '—';
+  return (
+    <View style={styles.row}>
+      <Text style={styles.rowLabel}>GENESIS SCORE</Text>
+      <Text
+        style={[styles.rowValue, score && styles.rowValueScore]}
+        numberOfLines={1}
+      >
+        {value}
+      </Text>
+    </View>
+  );
+}
+
 const styles = StyleSheet.create({
   backdrop: {
     ...StyleSheet.absoluteFillObject,
@@ -478,6 +510,9 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     maxWidth: '62%',
     textAlign: 'right',
+  },
+  rowValueScore: {
+    color: palette.ruby.ember,
   },
   fieldHeader: {
     color: palette.sapphire.glow,
