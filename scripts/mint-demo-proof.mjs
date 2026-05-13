@@ -118,6 +118,10 @@ async function main() {
   const message = stableStringify(payload);
   const signature = toHex(await ed.signAsync(utf8(message), sk));
 
+  // hash = first 16 hex chars of sha256(message) — required by verify-device.
+  const hashFull = toHex(sha256(utf8(message)));
+  const hash = hashFull.slice(0, 16);
+
   // --- Self-verify before we hand the URL out ------------------------------
   const sigOk = await ed.verifyAsync(
     fromHex(signature),
@@ -129,7 +133,7 @@ async function main() {
     process.exit(1);
   }
 
-  const compact = { payload, signature };
+  const compact = { payload, signature, hash };
   const url = `${VERIFIER_ORIGIN}#proof=${base64UrlEncode(JSON.stringify(compact))}`;
 
   console.log("");
