@@ -98,17 +98,20 @@ Content-Type: application/json
 { "proofUrl": "<user's proof URL>" }
 
 → { "valid": true, "nodeId": "KINETIK-NODE-A3F2B719",
-    "pubkey": "a3f2b719...", "mintedAt": 1714000000000 }
+    "genesisScore": 636, "scoreBand": "STANDING",
+    "lifetimeBeats": 25847, "pubkey": "a3f2b719..." }
 ```
 
-**Below the code block:**
+**Below the code block — second box, smaller:**
 ```
-No auth required.  No SDK dependency.  Test it right now.
+Or independently:  npm i @getkinetik/verify   (live on npm)
 ```
 
-**Speaker note:** This is the monetization path. Partners call this before
-paying rewards. If valid — pay. If invalid — investigate. One call. Works
-from any backend. Free during preview. Paid at production volume.
+**Speaker note:** Two paths, both live. Path A is convenience: one call,
+gets a Genesis Score back. Path B is what makes us credible: a partner can
+`npm install` our verifier and verify every proof byte-for-byte without
+ever calling getkinetik.app. That's what makes us a real bureau, not just
+an API vendor. **The grader has to be verifiable by people who don't trust it.**
 
 ---
 
@@ -124,7 +127,7 @@ Ed25519 sovereign identity     External iPhone verified QR → VALID
 289+ heartbeats on chain       Hash-chained, tamper-evident
 5 DePIN adapters               Nodle, DIMO, Hivemapper, WeatherXM, Geodnet
 Partner webhook live           getkinetik.app/api/verify-device
-@getkinetik/verify npm package    27/27 smoketests passing
+@getkinetik/verify on npm         npm i @getkinetik/verify — 27/27 smoketests, published 2026-05-13
 DIMO OAuth wired               Login with DIMO working
 Public verifier                getkinetik.app/verify — no server, pure math
 ```
@@ -198,9 +201,10 @@ USE OF FUNDS
 
 MILESTONES
 ────────────────────────────────────
-→  First production partner integration (verified-user premium live)
-→  @getkinetik/verify published on npm with a real consumer
+→  First production partner integrating @getkinetik/verify
+→  @getkinetik/sdk-react-native v1.0 — Sign-in-with-Kinetik deep link
 →  1,000 active authenticated nodes
+→  iOS port via Expo
 →  Series A conversation
 ```
 

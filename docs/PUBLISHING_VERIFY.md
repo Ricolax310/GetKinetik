@@ -1,11 +1,15 @@
 # Publishing `@getkinetik/verify` to npm
 
-The `packages/verify/` workspace is **publish-ready**. This document is
-the one-shot runbook for actually pushing it to the public registry.
+The `packages/verify/` workspace is **published and live**. This document
+is the runbook for the initial publish and for every subsequent version
+bump.
 
-> Status as of 2026-05-12: built, 27/27 smoketests passing,
-> `publishConfig.access` set to `public`, scope `@getkinetik` registered
-> on npm. Not yet published.
+> Status as of 2026-05-13: **`@getkinetik/verify@0.1.0` is LIVE on npm.**
+> Confirmed via clean `npm install` from a fresh directory and via the
+> public page at https://www.npmjs.com/package/@getkinetik/verify. The
+> initial publish was 2FA-gated via a WebAuthn security key (Windows
+> Hello). The sections below describe both the one-time setup that
+> already ran, and the recurring publish flow for every version after.
 
 ---
 
@@ -38,7 +42,10 @@ If a future package goes public (`@getkinetik/sdk-react-native`,
 
 ---
 
-## One-time setup (only before first publish)
+## One-time setup (DONE — kept here for the record)
+
+> The setup below was completed during the v0.1.0 publish on 2026-05-13.
+> Future publishes only need the **Publishing** section.
 
 ### 1. Log in to npm
 
@@ -65,15 +72,34 @@ You should see yourself as an owner of the org. If npm returns an
 "unauthorized" error, you're logged in under a different account
 than the one that created `@getkinetik` — fix the login first.
 
+### 3. Enable 2FA on the publishing account
+
+npm requires 2FA (or a 2FA-bypassed granular access token) before
+allowing publishes to a public scope. On the `kinetik_rick` account
+we registered a **Security Key (WebAuthn / Passkey)** via Windows
+Hello — this is the strongest 2FA path npm supports and it works
+in the CLI publish flow by opening a browser tab when prompted.
+
+When publishing, npm will print an authentication URL and pause:
+
+```
+Authenticate your account at: https://www.npmjs.com/auth/cli/<id>
+Press ENTER to open in the browser...
+```
+
+**Run `npm publish` in an interactive terminal** — press ENTER, the
+browser opens, Windows Hello prompts, you confirm, and the terminal
+finishes the publish. A non-interactive shell will exit before the
+WebAuthn handshake completes and the publish will fail with `EOTP`.
+
 ---
 
-## Publishing
+## Publishing (subsequent versions)
 
-From the repo root:
+From the repo root, after merging the version bump to `main`:
 
 ```bash
 cd packages/verify
-npm install        # only the first time; rewrites package-lock with new name
 npm run build      # tsc -> dist/, must be clean
 npm test           # 27/27 smoketest, exits 0 on pass
 npm publish        # --access public is baked into package.json
@@ -84,14 +110,31 @@ before publish — if either fails, npm aborts before pushing anything.
 So the `npm run build` and `npm test` lines above are belt-and-
 suspenders, not strictly required.
 
-Confirm the package is live:
+**Run `npm publish` in an interactive terminal** — npm will pause
+on the WebAuthn confirmation step (see 2FA section above).
+
+Confirm the new version is live:
 
 ```bash
-npm view @getkinetik/verify
+npm view @getkinetik/verify version
+# expect: <the version you just bumped>
+
+# Or do a clean install in a temp dir to test it end-to-end:
+mkdir -Force "$env:TEMP/gk-verify-test"; cd "$env:TEMP/gk-verify-test"
+npm init -y >$null
+npm install @getkinetik/verify
+node -e "import('@getkinetik/verify').then(m => console.log(m.VERSION))"
 ```
 
 And visit https://www.npmjs.com/package/@getkinetik/verify — the
 README renders directly on that page.
+
+> **Note on cache propagation.** For a fresh scope's first publish,
+> npm's CDN can take up to a few minutes to surface the new package
+> on `npm view` and on the public registry endpoint, even though
+> `npm publish` exited cleanly and `npm install` works against the
+> origin. Don't chase 404s in that window — wait, then re-check.
+> Subsequent publishes propagate within seconds.
 
 ---
 
@@ -121,6 +164,17 @@ Bump rules:
 the day the first partner ships an integration that imports it. Before
 `1.0.0`, minor bumps may include breaking type changes — after `1.0.0`,
 the type surface is part of the contract and only changes on major.
+
+**Current version: `0.1.0` (published 2026-05-13).** Next bump candidates:
+
+- `0.1.1` — fix the `repository.url` warning (`git+` prefix) so future
+  publishes don't show the auto-correction notice. Already applied in
+  the local working tree; will go out with the next release.
+- `0.2.0` — when the v:2 PoO schema gains optional `audience`/`nonce`/
+  `purpose` fields per `docs/sdk/CLIENT_SDK_DESIGN.md`. Verifier gains
+  optional rendering for those fields. Additive, backward-compat.
+- `1.0.0` — when the first partner ships an integration that imports
+  this package in production.
 
 ---
 

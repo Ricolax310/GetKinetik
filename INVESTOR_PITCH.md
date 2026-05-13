@@ -36,7 +36,9 @@ That identity accumulates a tamper-evident, hash-chained uptime record. The resu
 is a **Proof of Origin** — a cryptographically signed certificate that any party
 can verify in a browser with no account, no API key, no server call.
 
-Partners call one endpoint:
+Partners have **two paths**, both live in production today:
+
+**Path A — call our API.** One HTTP POST returns a Genesis Score in <200ms:
 
 ```
 POST https://getkinetik.app/api/verify-device
@@ -54,12 +56,26 @@ POST https://getkinetik.app/api/verify-device
   }
 ```
 
-That's it. One HTTP call. Returns real-or-fake, the device's age, **and a 0–1000
-Genesis Score** computed from a published FICO-style methodology
-(`docs/methodology/GENESIS_SCORE.md`). Works from any backend in any language.
+**Path B — `npm install` our verifier.** Cryptographic independence from us:
 
-Score bands are calibration anchors — partners pick a threshold appropriate
-to their own fraud cost (e.g. 500 permissive, 750 strict, 900 premium tier).
+```
+npm install @getkinetik/verify
+
+import { verifyArtifact } from '@getkinetik/verify';
+const report = await verifyArtifact(signedProof);
+if (report.valid) { /* device is real, signed by GETKINETIK */ }
+```
+
+Live since 2026-05-13 at https://www.npmjs.com/package/@getkinetik/verify.
+27/27 cryptographic smoketests enforced before every publish. **No network
+call to getkinetik.app at all.** A partner that doesn't trust us — and a
+real bureau needs to be verifiable by partners that don't trust it —
+can still verify every proof we issue, byte-for-byte, with pure math.
+
+The Genesis Score, the published FICO-style methodology
+(`docs/methodology/GENESIS_SCORE.md`), and the 0–1000 grade bands are
+calibration anchors — partners pick a threshold appropriate to their
+own fraud cost (e.g. 500 permissive, 750 strict, 900 premium tier).
 We never decide the network's payout policy; we just publish the grade.
 
 **What we never do:**
@@ -122,7 +138,7 @@ Paid tiers unlock volume, SLAs, batch attestation, and historical data.
 | Partner score lookup API | `GET /api/score/:nodeId` — partners look up a graded node without re-submitting a fresh proof. KV-cached, 30-day TTL. |
 | Partner attestation channel | `POST /api/attest` — networks feed signed observations into the bureau (planned v1.1 score input) |
 | Bureau landing page | `getkinetik.app/bureau/` — score bands, methodology, sample response, neutrality + privacy charters |
-| `@getkinetik/verify` npm package | Publish-ready (`publishConfig.access: public`). 27/27 smoketests passing. Runbook at `docs/PUBLISHING_VERIFY.md`. |
+| `@getkinetik/verify` npm package | **LIVE on npm** — `npm i @getkinetik/verify` (published 2026-05-13). 27/27 smoketests enforced as `prepublishOnly`. Byte-equivalent to the public browser verifier. Partners can verify proofs **offline, with zero dependency on our infrastructure**. |
 | Public verifier | `getkinetik.app/verify` — runs fully client-side, no server, no telemetry |
 | Optimizer engine | Gas-aware claim timing across all 5 networks |
 | DIMO integration | Login with DIMO wired, earnings flow into signed ledger |
@@ -180,10 +196,10 @@ one BD hire with DePIN network relationships.
 | Ops + infra | 10% | Cloudflare Workers paid tier, AWS, tooling |
 
 **Milestones this capital unlocks:**
-1. First production partner integration (verified-user premium live on one network)
-2. `@getkinetik/verify` published on npm with a real consumer
-3. `@getkinetik/sdk-react-native` v1.0 — "Sign in with Kinetik" deep-link flow
-4. 1,000 active authenticated nodes
+1. First production partner integration (verified-user premium live on one network) — wires `@getkinetik/verify` into a real partner backend
+2. `@getkinetik/sdk-react-native` v1.0 — "Sign in with Kinetik" deep-link flow (design in `docs/sdk/CLIENT_SDK_DESIGN.md`)
+3. 1,000 active authenticated nodes
+4. iOS port via Expo (Android stays primary; iOS sideload-only as secondary)
 5. First enterprise audit contract or second paying partner → Series A conversation
 
 ---

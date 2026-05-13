@@ -466,6 +466,35 @@
         <a href="https://github.com/Ricolax310/GetKinetik/blob/main/docs/methodology/GENESIS_SCORE.md">Full methodology spec ↗</a>
       </p>
 
+      <h2>Or verify it yourself, offline</h2>
+      <p>
+        A grading bureau that requires you to trust its servers is not
+        a bureau — it's a vendor. Partners who want zero infrastructure
+        dependency can verify every signed proof in-house, with pure
+        math, using the same byte-for-byte cryptographic contract our
+        app uses:
+      </p>
+
+      <div class="card">
+<pre><span class="k">npm</span> install <span class="s">@getkinetik/verify</span>
+
+<span class="k">import</span> { verifyArtifact } <span class="k">from</span> <span class="s">'@getkinetik/verify'</span>;
+
+<span class="k">const</span> report = <span class="k">await</span> verifyArtifact(signedProof);
+<span class="k">if</span> (report.valid) {
+  <span class="b">// device is real, signed by a GETKINETIK sovereign node.</span>
+  <span class="b">// no network call to getkinetik.app was made.</span>
+}</pre>
+      </div>
+
+      <p>
+        Published 2026-05-13 ·
+        <a href="https://www.npmjs.com/package/@getkinetik/verify">npmjs.com/package/@getkinetik/verify ↗</a>
+        · 27/27 cryptographic smoketests enforced before every publish ·
+        MIT licensed · ~36 KB unpacked · two audited noble crypto deps,
+        no DOM, no telemetry, no network.
+      </p>
+
       <h2>What this bureau will never do</h2>
       <ul class="rules">
         <li>

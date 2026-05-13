@@ -16,6 +16,7 @@ GETKINETIK is the **independent trust layer for the decentralized physical econo
 | **Proof of Origin** | A signed certificate (schema v:2) carrying node ID, heartbeat count, chain tip, sensor readings, and Ed25519 signature — scannable QR, verifiable by anyone, in any browser, with no server call. |
 | **Genesis Score** | Public node reputation grade (NOT a token, NOT transferable, NEVER priced). Like Equifax for sovereign nodes — partners read it via the verify API to inform premium offers. |
 | **Partner Verification API** | `POST /api/verify-device` — one call returns valid/invalid + node age + heartbeat count + Genesis Score. Zero SDK dependency. Free during preview; paid tiers (USD/USDC) for production volume. |
+| **Offline verifier (npm)** | [`npm i @getkinetik/verify`](https://www.npmjs.com/package/@getkinetik/verify) — drop the same byte-for-byte cryptographic contract into your own backend. **No network call to us.** 27/27 smoketests enforced before every publish. The bureau is independently verifiable, by design. |
 | **Neutrality Charter** | Public commitment: no token, no equity in graded networks, no exclusive partnerships, all revenue in fiat. See [`NEUTRALITY.md`](./NEUTRALITY.md). |
 
 ---
@@ -45,6 +46,7 @@ GETKINETIK is the **independent trust layer for the decentralized physical econo
 - Optimizer engine live in codebase (`packages/optimizer/`)
 - Cloudflare Pages deployment at **getkinetik.app**
 - Verify webhook live at **getkinetik.app/api/verify-device**
+- **`@getkinetik/verify` v0.1.0 on npm** (`npm i @getkinetik/verify`) — partners can verify proofs without ever calling our infrastructure
 
 ---
 

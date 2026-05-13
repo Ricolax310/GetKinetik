@@ -215,14 +215,79 @@ The partner API wraps those same four checks server-side:
 
 POST getkinetik.app/api/verify-device
 { "proofUrl": "..." }
-→ { "valid": true/false, "nodeId", "pubkey", "mintedAt" }
+→ { "valid": true/false, "nodeId", "pubkey", "genesisScore" }
 
 For DePIN networks that want Sybil resistance without building it.
 
-@getkinetik/verify npm package (27/27 smoketests passing) ships when
-the first partner integration is live.
+Or skip our server entirely:
+
+  npm install @getkinetik/verify
+
+Same byte-for-byte contract. 27/27 smoketests. Pure math.
+A real bureau has to be verifiable by people who don't trust it.
 
 github.com/Ricolax310/GetKinetik
+```
+
+---
+
+## THREAD 4 — The npm publish moment (post when you want to announce it)
+
+> Short, technical, credibility-focused. Best for dev-Twitter audiences.
+
+**Tweet 1**
+```
+GETKINETIK is the credit bureau for DePIN.
+
+A real bureau has to be verifiable by people who don't trust it.
+
+So today the verifier is on npm:
+
+  npm install @getkinetik/verify
+
+Same byte-for-byte cryptographic contract our app uses.
+Zero network calls to us.
+
+🧵
+```
+
+**Tweet 2**
+```
+Every signed proof a GETKINETIK node mints carries:
+
+  payload  — node ID, pubkey, lifetime beats, chain tip, sensors
+  message  — stableStringify(payload), byte-deterministic
+  hash     — sha256(message)[:16]
+  signature — Ed25519 sig over the message
+
+@getkinetik/verify checks all of it. Pure function of input.
+```
+
+**Tweet 3**
+```
+Why this matters:
+
+A grading bureau that relies on you trusting its servers
+is not a bureau. It's a vendor.
+
+Partners can `npm install` our verifier into Node, browser,
+or edge worker and verify every proof we issue with no
+dependency on getkinetik.app at all.
+
+Math, not infrastructure.
+```
+
+**Tweet 4 (close)**
+```
+27/27 smoketests passing (proof-of-origin, heartbeat, earnings,
+tamper detection, URL roundtrip, structural-error throws).
+
+MIT licensed. ~36 KB unpacked. Two audited noble deps.
+
+npmjs.com/package/@getkinetik/verify
+github.com/Ricolax310/GetKinetik
+
+eric@outfromnothingllc.com — open to partner integrations now.
 ```
 
 ---
