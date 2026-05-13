@@ -152,7 +152,7 @@ function findColocationClusters(nodes) {
   return clusters;
 }
 
-// 2. Birth bursts: nodes whose firstSeenMs falls in a 60-minute window that
+// 2. Birth bursts: nodes whose firstSeenMs falls in any 60-minute window that
 // contains BIRTH_BURST_MIN_COUNT+ entries. Organic onboarding spreads through
 // the day; bursts of 10+ in an hour are almost always a single operator
 // scripting a fleet onboard.
@@ -160,20 +160,24 @@ function findBirthBursts(nodes) {
   const dated = nodes
     .filter((n) => typeof n.firstSeenMs === "number")
     .sort((a, b) => a.firstSeenMs - b.firstSeenMs);
-  const buckets = new Map();
-  for (const n of dated) {
-    const k = Math.floor(n.firstSeenMs / BIRTH_BURST_WINDOW_MS);
-    if (!buckets.has(k)) buckets.set(k, []);
-    buckets.get(k).push(n);
-  }
   const bursts = [];
-  for (const [k, list] of buckets.entries()) {
+  let end = 0;
+  for (let start = 0; start < dated.length; start++) {
+    while (
+      end < dated.length &&
+      dated[end].firstSeenMs - dated[start].firstSeenMs <= BIRTH_BURST_WINDOW_MS
+    ) {
+      end += 1;
+    }
+
+    const list = dated.slice(start, end);
     if (list.length >= BIRTH_BURST_MIN_COUNT) {
       bursts.push({
-        windowStartMs: k * BIRTH_BURST_WINDOW_MS,
-        windowEndMs: (k + 1) * BIRTH_BURST_WINDOW_MS,
+        windowStartMs: dated[start].firstSeenMs,
+        windowEndMs: dated[start].firstSeenMs + BIRTH_BURST_WINDOW_MS,
         nodes: list,
       });
+      start = end - 1;
     }
   }
   return bursts;
