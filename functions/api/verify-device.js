@@ -42,9 +42,10 @@
  * 2. Decode and parse the JSON proof payload
  * 3. Verify the PROOF_ATTRIBUTION field matches the expected constant
  * 4. Re-serialise the payload using stableStringify (lex-sorted keys)
- * 5. Verify the Ed25519 signature against the serialised message and the
+ * 5. Derive the canonical nodeId from the pubkey and require it to match
+ * 6. Verify the Ed25519 signature against the serialised message and the
  *    pubkey embedded in the payload using SubtleCrypto (native in CF Workers)
- * 6. Verify the hash field matches sha256(message)[:16]
+ * 7. If a hash field is present, verify it matches sha256(message)[:16]
  *
  * This is a server-side implementation of the same logic in landing/verify/verifier.js.
  * Both must remain byte-for-byte equivalent — the CRYPTOGRAPHIC_CONTRACT comment
@@ -106,6 +107,7 @@ function fromBase64Url(b64url) {
  * hexToBytes — convert a hex string to Uint8Array.
  */
 function hexToBytes(hex) {
+  if (typeof hex !== "string" || !/^[0-9a-f]+$/i.test(hex)) return null;
   if (hex.length % 2 !== 0) return null;
   const bytes = new Uint8Array(hex.length / 2);
   for (let i = 0; i < bytes.length; i++) {
@@ -123,6 +125,19 @@ async function sha256Hex(message) {
   const encoded = new TextEncoder().encode(message);
   const buf = await crypto.subtle.digest("SHA-256", encoded);
   return Array.from(new Uint8Array(buf), (b) => b.toString(16).padStart(2, "0")).join("");
+}
+
+/**
+ * sha256BytesHex — SHA-256 of raw bytes, returned as a lowercase hex string.
+ */
+async function sha256BytesHex(bytes) {
+  const buf = await crypto.subtle.digest("SHA-256", bytes);
+  return Array.from(new Uint8Array(buf), (b) => b.toString(16).padStart(2, "0")).join("");
+}
+
+async function deriveNodeIdFromPubkey(pubkeyBytes) {
+  const fingerprint = (await sha256BytesHex(pubkeyBytes)).slice(0, 8).toUpperCase();
+  return `KINETIK-NODE-${fingerprint}`;
 }
 
 /**
@@ -368,7 +383,7 @@ async function verifyProofUrl(proofUrl, env) {
   }
 
   const { payload, signature, hash } = envelope;
-  if (!payload || !signature || !hash) {
+  if (!payload || !signature) {
     return { valid: false, reason: "missing_fields" };
   }
 
@@ -377,11 +392,12 @@ async function verifyProofUrl(proofUrl, env) {
     return { valid: false, reason: "attribution_mismatch" };
   }
 
-  // Step 5: verify hash = sha256(stableStringify(payload))[:16].
+  // Step 5: derive canonical message/hash. Compact QR URLs omit `hash`;
+  // full artifacts include it, and a present-but-wrong hash is rejected.
   const message = stableStringify(payload);
   const fullHash = await sha256Hex(message);
   const expectedHash = fullHash.slice(0, 16);
-  if (expectedHash !== hash) {
+  if (hash !== undefined && expectedHash !== hash) {
     return { valid: false, reason: "hash_mismatch" };
   }
 
@@ -394,6 +410,10 @@ async function verifyProofUrl(proofUrl, env) {
   const pubkeyBytes = hexToBytes(pubkeyHex);
   if (!pubkeyBytes) {
     return { valid: false, reason: "pubkey_decode_failed" };
+  }
+  const expectedNodeId = await deriveNodeIdFromPubkey(pubkeyBytes);
+  if (payload.nodeId !== expectedNodeId) {
+    return { valid: false, reason: "node_id_mismatch" };
   }
   const sigBytes = hexToBytes(signature);
   if (!sigBytes || sigBytes.length !== 64) {

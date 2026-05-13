@@ -35,7 +35,7 @@ Content-Type: application/json
 |---|---|---|---|
 | `proofUrl` | string | ✓ | The full verifier URL or just the base64url proof fragment. Both are accepted. |
 
-The `proofUrl` is what the GETKINETIK app generates when the user taps **Share Proof**. Users share it with your platform as part of the onboarding flow.
+The `proofUrl` is what the GETKINETIK app generates when rendering the proof QR / verifier link. Compact verifier URLs carry `{ payload, signature }`; the API re-derives the canonical message and hash server-side.
 
 ---
 
@@ -97,10 +97,11 @@ See [`docs/methodology/GENESIS_SCORE.md`](../methodology/GENESIS_SCORE.md) for t
 | `signature_invalid` | The Ed25519 signature does not verify against the payload. The proof was tampered with or fabricated. |
 | `hash_mismatch` | The proof's hash field doesn't match `sha256(payload)[:16]`. Truncated or corrupted URL. |
 | `attribution_mismatch` | The attribution field was altered. |
+| `node_id_mismatch` | The signed `nodeId` is not the canonical `KINETIK-NODE-XXXXXXXX` fingerprint derived from the signed public key. |
 | `invalid_url_format` | Could not parse a proof from the supplied URL. |
 | `base64_decode_failed` | The base64url payload could not be decoded. |
 | `json_parse_failed` | The decoded payload is not valid JSON. |
-| `missing_fields` | Required fields (`payload`, `signature`, `hash`) are absent. |
+| `missing_fields` | Required fields (`payload`, `signature`) are absent. |
 | `invalid_pubkey` | The pubkey field is malformed. |
 | `crypto_unavailable` | Server-side Ed25519 crypto unavailable (rare, transient). Retry. |
 | `internal_error` | Unexpected server error. Retry. |
