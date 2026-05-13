@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0A0A0A" />
+    <meta name="color-scheme" content="dark" />
+
+    <title>The Bureau — GETKINETIK Genesis Score</title>
+    <meta
+      name="description"
+      content="The independent grading bureau for DePIN. Genesis Score is a 0–1000 public reputation grade for every sovereign node — computed live from hardware-signed evidence."
+    />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="GETKINETIK Bureau — Genesis Score" />
+    <meta
+      property="og:description"
+      content="A 0–1000 reputation grade for every DePIN device — computed live, methodology published, no token."
+    />
+    <meta property="og:url" content="https://getkinetik.app/bureau/" />
+    <meta property="og:site_name" content="GETKINETIK" />
+    <meta property="og:image" content="https://getkinetik.app/og-image.png" />
+    <meta property="og:image:width" content="1024" />
+    <meta property="og:image:height" content="1024" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://getkinetik.app/og-image.png" />
+    <meta name="twitter:title" content="GETKINETIK Bureau — Genesis Score" />
+    <meta
+      name="twitter:description"
+      content="The independent grading bureau for DePIN. 0–1000 reputation grade per device. Live."
+    />
+
+    <link rel="canonical" href="https://getkinetik.app/bureau/" />
+
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230A0A0A'/%3E%3Cpolygon points='16,6 24,16 16,26 8,16' fill='%23FF1430'/%3E%3Cpolygon points='16,6 24,16 16,14 8,16' fill='%23FFB199' opacity='0.6'/%3E%3C/svg%3E"
+    />
+
+    <style>
+      :root {
+        --obsidian: #0a0a0a;
+        --obsidian-soft: #111113;
+        --obsidian-edge: #1a1a1d;
+        --ruby-core: #ff1430;
+        --ruby-mid: #b00820;
+        --ruby-deep: #3a0209;
+        --ruby-ember: #ffb199;
+        --platinum: #e8e8ea;
+        --silver: #b8b8bd;
+        --steel: #6e6e75;
+      }
+
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+
+      html, body {
+        background: var(--obsidian);
+        color: var(--platinum);
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+                     "Inter", "Segoe UI", system-ui, sans-serif;
+        line-height: 1.55;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .container {
+        max-width: 920px;
+        margin: 0 auto;
+        padding: 64px 24px 96px;
+      }
+
+      header.top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 48px;
+        border-bottom: 1px solid var(--obsidian-edge);
+        margin-bottom: 48px;
+      }
+
+      header.top a.home {
+        color: var(--silver);
+        text-decoration: none;
+        font-size: 14px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      header.top a.home:hover { color: var(--platinum); }
+
+      header.top .brand {
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        font-size: 14px;
+        color: var(--ruby-ember);
+      }
+
+      h1 {
+        font-size: clamp(36px, 6vw, 56px);
+        line-height: 1.08;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        margin-bottom: 16px;
+      }
+
+      h1 .accent { color: var(--ruby-core); }
+
+      .lede {
+        font-size: 19px;
+        color: var(--silver);
+        max-width: 640px;
+        margin-bottom: 40px;
+      }
+
+      h2 {
+        font-size: 26px;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        margin: 56px 0 16px;
+        color: var(--platinum);
+      }
+
+      h3 {
+        font-size: 18px;
+        font-weight: 600;
+        margin: 24px 0 8px;
+        color: var(--ruby-ember);
+        letter-spacing: 0.02em;
+      }
+
+      p {
+        margin-bottom: 14px;
+        color: var(--silver);
+      }
+
+      p strong { color: var(--platinum); font-weight: 600; }
+      em.subtle { color: var(--steel); font-style: normal; }
+
+      a {
+        color: var(--ruby-ember);
+        text-decoration: underline;
+        text-decoration-color: rgba(255, 177, 153, 0.3);
+        text-underline-offset: 3px;
+      }
+
+      a:hover { text-decoration-color: var(--ruby-ember); }
+
+      /* Score bands visual */
+
+      .bands {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 16px;
+        margin: 24px 0 16px;
+      }
+
+      .band {
+        background: var(--obsidian-soft);
+        border: 1px solid var(--obsidian-edge);
+        border-radius: 10px;
+        padding: 18px 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        transition: transform 0.15s ease, border-color 0.15s ease;
+      }
+
+      .band:hover {
+        transform: translateY(-2px);
+        border-color: rgba(255, 177, 153, 0.25);
+      }
+
+      .band .name {
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        font-weight: 700;
+      }
+
+      .band .range {
+        font-size: 13px;
+        color: var(--steel);
+      }
+
+      .band .desc {
+        font-size: 13px;
+        color: var(--silver);
+        margin-top: 6px;
+      }
+
+      .band.tampered .name { color: #ff7474; }
+      .band.new      .name { color: #c8c8cd; }
+      .band.standing .name { color: #ffd28a; }
+      .band.strong   .name { color: #ffb199; }
+      .band.premier  .name { color: #ff1430; }
+
+      /* Sample response card */
+
+      .card {
+        background: var(--obsidian-soft);
+        border: 1px solid var(--obsidian-edge);
+        border-radius: 14px;
+        padding: 24px;
+        margin: 24px 0;
+        overflow-x: auto;
+      }
+
+      pre, code {
+        font-family: "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+        font-size: 13px;
+        color: var(--platinum);
+      }
+
+      pre {
+        white-space: pre;
+        line-height: 1.6;
+      }
+
+      pre .k { color: var(--ruby-ember); }
+      pre .s { color: #c2ffb0; }
+      pre .n { color: #a3c9ff; }
+      pre .b { color: #ffd28a; }
+
+      /* Input categories */
+
+      .categories {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 16px;
+        margin-top: 16px;
+      }
+
+      .category {
+        background: var(--obsidian-soft);
+        border: 1px solid var(--obsidian-edge);
+        border-radius: 12px;
+        padding: 20px;
+      }
+
+      .category h4 {
+        font-size: 14px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--ruby-ember);
+        margin-bottom: 8px;
+      }
+
+      .category .status {
+        display: inline-block;
+        font-size: 10px;
+        letter-spacing: 0.12em;
+        font-weight: 700;
+        padding: 3px 8px;
+        border-radius: 4px;
+        margin-bottom: 8px;
+      }
+
+      .status.live { background: rgba(122, 255, 122, 0.1); color: #a8ffa8; }
+      .status.queue { background: rgba(255, 177, 153, 0.12); color: var(--ruby-ember); }
+
+      .category p { font-size: 13px; margin-bottom: 0; }
+
+      /* Rules block */
+
+      .rules {
+        margin: 24px 0;
+        padding-left: 20px;
+        list-style: none;
+      }
+
+      .rules li {
+        position: relative;
+        margin-bottom: 12px;
+        color: var(--silver);
+        font-size: 15px;
+      }
+
+      .rules li::before {
+        content: "—";
+        position: absolute;
+        left: -20px;
+        color: var(--ruby-core);
+      }
+
+      footer {
+        margin-top: 80px;
+        padding-top: 32px;
+        border-top: 1px solid var(--obsidian-edge);
+        font-size: 13px;
+        color: var(--steel);
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+
+      footer a { color: var(--silver); }
+
+      .pill-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 16px 0 32px;
+      }
+
+      .pill {
+        background: var(--obsidian-soft);
+        border: 1px solid var(--obsidian-edge);
+        border-radius: 999px;
+        padding: 6px 12px;
+        font-size: 12px;
+        letter-spacing: 0.04em;
+        color: var(--silver);
+      }
+
+      .pill strong { color: var(--ruby-ember); font-weight: 600; }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <header class="top">
+        <a class="home" href="/">← getkinetik.app</a>
+        <span class="brand">THE BUREAU</span>
+      </header>
+
+      <h1>
+        The <span class="accent">independent grading bureau</span> for
+        every device in the decentralized physical economy.
+      </h1>
+
+      <p class="lede">
+        Every GETKINETIK sovereign node — a hardware-sealed Ed25519
+        identity inside a real device — is graded on a public 0–1000 scale
+        called the <strong>Genesis Score</strong>. Published methodology.
+        Auditable inputs. No token, no equity in any network we grade.
+      </p>
+
+      <div class="pill-row">
+        <span class="pill"><strong>LIVE</strong> · v1.0 in production</span>
+        <span class="pill">Methodology <strong>public</strong></span>
+        <span class="pill">No token, ever</span>
+        <span class="pill">No equity in graded networks</span>
+      </div>
+
+      <h2>The five score bands</h2>
+      <p>
+        Calibration anchors — partners pick a threshold appropriate to their
+        own fraud cost (e.g. 500 permissive, 750 strict, 900 premium tier).
+      </p>
+
+      <div class="bands">
+        <div class="band tampered">
+          <span class="name">TAMPERED</span>
+          <span class="range">≤ 199</span>
+          <span class="desc">
+            Physically impossible inputs detected. Do not pay.
+          </span>
+        </div>
+        <div class="band new">
+          <span class="name">NEW</span>
+          <span class="range">200 – 499</span>
+          <span class="desc">
+            Insufficient evidence yet. Not necessarily a problem.
+          </span>
+        </div>
+        <div class="band standing">
+          <span class="name">STANDING</span>
+          <span class="range">500 – 749</span>
+          <span class="desc">
+            Real-device operation confirmed. Reasonable pay threshold.
+          </span>
+        </div>
+        <div class="band strong">
+          <span class="name">STRONG</span>
+          <span class="range">750 – 899</span>
+          <span class="desc">
+            Long, continuous, sensor-coherent record. Premium tier.
+          </span>
+        </div>
+        <div class="band premier">
+          <span class="name">PREMIER</span>
+          <span class="range">900 – 999</span>
+          <span class="desc">
+            Top tier. Multi-input attested with clean disclosure.
+          </span>
+        </div>
+      </div>
+
+      <h2>Inputs to the score</h2>
+      <p>
+        Five categories. Each is signed evidence the node produced — or
+        signed evidence a partner network reported through a typed
+        attestation channel.
+      </p>
+
+      <div class="categories">
+        <div class="category">
+          <h4>Identity integrity</h4>
+          <span class="status live">LIVE</span>
+          <p>
+            Signature verifies. Node ID matches the public key fingerprint.
+            Attribution string intact. Failures hard-gate the score to
+            <code>null</code>.
+          </p>
+        </div>
+        <div class="category">
+          <h4>Uptime continuity</h4>
+          <span class="status live">LIVE</span>
+          <p>
+            Chain age (when the first heartbeat was signed) and lifetime
+            beat count. Long, unbroken chains can't be faked.
+          </p>
+        </div>
+        <div class="category">
+          <h4>Sensor coherence</h4>
+          <span class="status live">LIVE</span>
+          <p>
+            Light, motion, and pressure sensors must be within physical
+            ranges. Impossible values raise tamper flags.
+          </p>
+        </div>
+        <div class="category">
+          <h4>Network engagement</h4>
+          <span class="status queue">v1.1</span>
+          <p>
+            Partner attestations: did the node perform expected work?
+            Wired through the <code>/api/attest</code> partner channel.
+          </p>
+        </div>
+        <div class="category">
+          <h4>Disclosure receipts</h4>
+          <span class="status queue">v1.1</span>
+          <p>
+            The L4 earnings ledger: each receipt carries the canonical
+            1% protocol disclosure fee and verifies against the chain.
+          </p>
+        </div>
+      </div>
+
+      <h2>What partners get on every call</h2>
+      <p>
+        One <code>POST /api/verify-device</code> returns identity fields
+        plus the bureau's live grade for that node:
+      </p>
+
+      <div class="card">
+<pre>{
+  <span class="k">"valid"</span>: <span class="b">true</span>,
+  <span class="k">"nodeId"</span>: <span class="s">"KINETIK-NODE-CDC262E7"</span>,
+  <span class="k">"pubkey"</span>: <span class="s">"ff07e53d…"</span>,
+  <span class="k">"lifetimeBeats"</span>: <span class="n">25847</span>,
+  <span class="k">"firstBeatTs"</span>: <span class="n">1777086288998</span>,
+  <span class="k">"genesisScore"</span>: <span class="n">636</span>,
+  <span class="k">"scoreBand"</span>: <span class="s">"STANDING"</span>,
+  <span class="k">"methodologyVersion"</span>: <span class="s">"v1.0"</span>,
+  <span class="k">"tamperFlags"</span>: [],
+  <span class="k">"asOf"</span>: <span class="s">"2026-05-13T03:00:00.000Z"</span>
+}</pre>
+      </div>
+
+      <p>
+        <a href="https://github.com/Ricolax310/GetKinetik/blob/main/docs/QUICKSTART.md">5-minute integration guide ↗</a>
+        ·
+        <a href="https://github.com/Ricolax310/GetKinetik/blob/main/docs/methodology/GENESIS_SCORE.md">Full methodology spec ↗</a>
+      </p>
+
+      <h2>What this bureau will never do</h2>
+      <ul class="rules">
+        <li>
+          <strong>No token.</strong> We never issue a GETKINETIK token of
+          any kind. A bureau that pumps a token loses credibility the
+          second the token moves.
+        </li>
+        <li>
+          <strong>No equity in graded networks.</strong> We never accept
+          equity, advisor grants, or vested tokens from a network we
+          grade. The grade has to be the product, not the relationship.
+        </li>
+        <li>
+          <strong>No pay-for-grade.</strong> Scores cannot be purchased,
+          boosted, or negotiated. Partners pay for API access; nothing
+          they pay for moves a node's number.
+        </li>
+        <li>
+          <strong>No retroactive re-scoring without notice.</strong>
+          Methodology changes go through a public comment period. Old
+          scores stay queryable for the transition window so partner
+          decisions remain auditable.
+        </li>
+      </ul>
+
+      <p>
+        Charter:
+        <a href="https://github.com/Ricolax310/GetKinetik/blob/main/NEUTRALITY.md">NEUTRALITY.md</a>
+        ·
+        <a href="https://github.com/Ricolax310/GetKinetik/blob/main/PRIVACY.md">PRIVACY.md</a>
+      </p>
+
+      <h2>For partner networks</h2>
+      <p>
+        If you run a DePIN network and want to pilot scoring or wire a
+        partner attestation channel into the bureau, write to
+        <a href="mailto:eric@outfromnothingllc.com">eric@outfromnothingllc.com</a>.
+        Pilots are free for the first wave.
+      </p>
+
+      <footer>
+        <span>OutFromNothing LLC · GETKINETIK · The Bureau · v1.0</span>
+        <span>
+          <a href="/verify/">Public verifier</a>
+          ·
+          <a href="/api/verify-device">API endpoint</a>
+        </span>
+      </footer>
+    </div>
+  </body>
+</html>

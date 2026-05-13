@@ -18,6 +18,22 @@ Android `versionCode` is noted alongside each release for sideload verification.
   proof; network engagement and disclosure receipts wait on partner
   attestation channels. Methodology in `docs/methodology/GENESIS_SCORE.md`
   §7 updated from "Target (not shipped yet)" to "Live in production".
+- **Bureau page at `getkinetik.app/bureau/`.** Public landing for the
+  grading bureau: the five score bands as calibration anchors, the input
+  categories with live/queued status, a sample verification response,
+  and the four "what this bureau will never do" rules from the
+  neutrality charter. Linked from the main nav.
+- **`GET /api/score/:nodeId` — score lookup endpoint.** Returns the most
+  recent Genesis Score on file for a node from KV, without requiring a
+  fresh proof. `verify-device` now writes each computed score to
+  `score:<nodeId>` in KV (30-day TTL) so the lookup endpoint has data.
+  Returns 404 if the bureau has never been called for that node.
+- **`POST /api/attest` — partner attestation channel.** Authenticated
+  endpoint (Bearer API key in `ATTEST_API_KEY` env var) where partner
+  networks submit typed signals (`engagement` / `fault` / `fraud`) with
+  a signed weight in `[-3, +3]`. v1.0 records attestations to KV; v1.1
+  will feed them into the live Genesis Score per methodology §3.4. Full
+  spec in `docs/api/attest.md`.
 
 ### Changed
 - **`GET /api/verify-device` discovery response.** Visiting the webhook URL in
