@@ -671,12 +671,19 @@ async function maybeFireScoreWebhook(env, result, priorBand) {
   const urls = parseWebhookUrls(env);
   if (urls.length === 0) return;
 
+  const secret =
+    typeof env?.SCORE_WEBHOOK_SECRET === "string"
+      ? env.SCORE_WEBHOOK_SECRET.trim()
+      : "";
+  if (!secret) {
+    console.error(
+      "[verify-device] SCORE_WEBHOOK_SECRET is required when SCORE_WEBHOOK_URLS is configured",
+    );
+    return;
+  }
+
   // Only fire on band transitions (incl. first-ever sighting if priorBand=null).
   if (priorBand && priorBand === result.scoreBand) return;
-
-  const secret = typeof env?.SCORE_WEBHOOK_SECRET === "string"
-    ? env.SCORE_WEBHOOK_SECRET
-    : "";
 
   // crypto.randomUUID is available in Cloudflare Workers.
   const delivery =
@@ -696,7 +703,7 @@ async function maybeFireScoreWebhook(env, result, priorBand) {
   };
 
   const body = JSON.stringify(payload);
-  const signature = secret ? `sha256=${await hmacSha256Hex(secret, body)}` : "";
+  const signature = `sha256=${await hmacSha256Hex(secret, body)}`;
 
   await Promise.all(
     urls.map(async (url) => {
@@ -708,7 +715,7 @@ async function maybeFireScoreWebhook(env, result, priorBand) {
             "user-agent": "GETKINETIK-Bureau/1.1",
             "x-getkinetik-event": "score.changed",
             "x-getkinetik-delivery": delivery,
-            ...(signature ? { "x-getkinetik-signature": signature } : {}),
+            "x-getkinetik-signature": signature,
           },
           body,
           // 5-second hard ceiling — slow partners don't get to slow us down.
