@@ -44,10 +44,42 @@ ed.hashes.sha512Async = (async (msg: Uint8Array): Promise<Uint8Array> =>
 export const PROOF_ATTRIBUTION = 'GETKINETIK by OutFromNothing LLC';
 export const PROTOCOL_FEE_RATE = 0.01;
 
-/** Package version. Bump this on any change to the four contract constants
- *  above (stableStringify shape, sha256 truncation, signature scheme, or
- *  attribution string). Stays in lockstep with landing/verify/verifier.js. */
-export const VERSION = '0.1.0';
+// ----------------------------------------------------------------------------
+// BUREAU_PUBKEY — the Genesis Bureau's published Ed25519 verification key.
+// Every bureau-signed attestation MUST verify against this exact pubkey for
+// `report.checks.bureauOk` to pass. A different valid signature (from any
+// other Ed25519 key) will still verify cryptographically — `signatureOk` —
+// but fails the `bureauOk` check, surfacing forgery attempts where someone
+// tries to mint attestations under a non-bureau key.
+//
+// PLACEHOLDER: this constant is 64 zero hex chars until the bureau key
+// ceremony has been performed (see scripts/mint-bureau-key.mjs). While
+// the placeholder is in effect, every attestation's `bureauOk` is false
+// because no real bureau pubkey has been published yet. Cryptographic
+// verification (`signatureOk`) still works against whatever pubkey is
+// embedded in the payload — so test harnesses that mint ephemeral bureau
+// keys can exercise the full pipeline.
+//
+// After the ceremony:
+//   1. Replace the constant below with the 64-char hex pubkey output by
+//      scripts/mint-bureau-key.mjs.
+//   2. Bump VERSION (this is a contract change for every downstream
+//      consumer of the verify package).
+//   3. Add a CHANGELOG entry noting the bureau key fingerprint and the
+//      date of the ceremony.
+// ----------------------------------------------------------------------------
+export const BUREAU_PUBKEY = '852fbc2bdd7c0243c6ee42462f7d31274fd3be3a0f2125e8eb797b76410dfb26';
+
+/** Package version. Bump this on any change to the contract constants
+ *  above (stableStringify shape, sha256 truncation, signature scheme,
+ *  attribution string, or the bureau pubkey). Stays in lockstep with
+ *  landing/verify/verifier.js.
+ *
+ *  v0.2.1 (2026-05-13) — Genesis Bureau key minted and published. The
+ *  BUREAU_PUBKEY constant above is no longer a placeholder; every
+ *  attestation signed by `functions/api/_lib/bureauSign.js` in
+ *  production verifies against this exact key. */
+export const VERSION = '0.2.1';
 
 // ----------------------------------------------------------------------------
 // stableStringify — byte-for-byte equivalent of
@@ -145,12 +177,22 @@ const fromBase64Url = (s: string): string => {
 // rejection beyond the four required fields (payload, signature, payload.pubkey).
 // ----------------------------------------------------------------------------
 
-/** The four kinds of artifact this verifier recognizes. Anything else is
- *  reported as 'unknown' but still verified at the cryptographic layer. */
+/** The artifact kinds this verifier recognizes. Anything else is reported
+ *  as 'unknown' but still verified at the cryptographic layer.
+ *
+ *  · proof-of-origin, heartbeat, earning — signed by the DEVICE's Ed25519
+ *    key. `payload.pubkey` is the device pubkey; the signature verifies
+ *    against it.
+ *
+ *  · attestation — signed by the BUREAU's Ed25519 key. `payload.pubkey`
+ *    is the bureau pubkey (compared against BUREAU_PUBKEY in `bureauOk`);
+ *    `payload.subject.pubkey` is the device the attestation is about.
+ *    Attestations are bureau evidence, NEVER a verdict / score band. */
 export type ArtifactKind =
   | 'proof-of-origin'
   | 'heartbeat'
   | 'earning'
+  | 'attestation'
   | 'unknown';
 
 /** A signed artifact as minted by the GETKINETIK app or any byte-equivalent
@@ -169,16 +211,21 @@ export type SignedArtifact = {
 };
 
 /** Per-check result. `null` means N/A for this artifact kind (e.g. heartbeats
- *  carry no attribution; non-earning kinds carry no fee math). */
+ *  carry no attribution; non-earning kinds carry no fee math; non-attestation
+ *  kinds carry no bureau check). */
 export type VerifyChecks = {
   /** stableStringify(payload) byte-equals the claimed `message`. */
   canonicalMatches: boolean;
   /** sha256(canonicalMessage)[:16] byte-equals the claimed `hash`. */
   hashMatches: boolean;
-  /** PROOF_ATTRIBUTION present in payload (proof-of-origin and earning only). */
+  /** PROOF_ATTRIBUTION present in payload (proof-of-origin, earning, attestation). */
   attributionOk: boolean | null;
   /** Earning fee is exactly 1% of gross AND net = gross - fee (earnings only). */
   feeIntegrityOk: boolean | null;
+  /** payload.pubkey equals BUREAU_PUBKEY (attestation only). False when the
+   *  attestation was signed by some other key (or while BUREAU_PUBKEY is the
+   *  pre-ceremony placeholder). null for non-attestation artifact kinds. */
+  bureauOk: boolean | null;
   /** Ed25519 signature verifies against canonical message + payload.pubkey. */
   signatureOk: boolean;
   /** Error message from the signature pipeline if one was thrown. */
@@ -224,19 +271,25 @@ export async function verifyArtifact(
   if (!raw || typeof raw !== 'object') {
     throw new Error('artifact must be a JSON object');
   }
-  const { payload, signature } = raw;
+  const { payload, signature: rawSignature } = raw;
   if (!payload || typeof payload !== 'object') {
     throw new Error('artifact missing `payload` object');
   }
   if (
-    typeof signature !== 'string' ||
-    !/^[0-9a-f]{128}$/i.test(signature)
+    typeof rawSignature !== 'string' ||
+    !/^[0-9a-f]{128}$/i.test(rawSignature)
   ) {
-    throw new Error('artifact `signature` must be 128-char lowercase hex');
+    throw new Error('artifact `signature` must be 128-char hex');
   }
+  // Canonicalize signature to lowercase so the rest of the pipeline (and
+  // the returned report) always reflect the contract documented above.
+  // Uppercase hex is structurally valid Ed25519 input but historically we
+  // emit lowercase from the app, so callers can use string equality on
+  // report.signature without surprise normalization.
+  const signature = rawSignature.toLowerCase();
   const pubkey = (payload as { pubkey?: unknown }).pubkey;
   if (typeof pubkey !== 'string' || !/^[0-9a-f]{64}$/i.test(pubkey)) {
-    throw new Error('payload.pubkey must be 64-char lowercase hex');
+    throw new Error('payload.pubkey must be 64-char hex');
   }
 
   const canonicalMessage = stableStringify(payload);
@@ -254,9 +307,13 @@ export async function verifyArtifact(
   const kindRaw = (payload as { kind?: unknown }).kind;
   const isProofOfOrigin = kindRaw === 'proof-of-origin';
   const isEarning = kindRaw === 'earning';
+  const isAttestation = kindRaw === 'attestation';
 
+  // Attribution is carried on every artifact kind except heartbeats. The
+  // bureau attestation kind embeds the same PROOF_ATTRIBUTION string so a
+  // partner can grep for it without knowing the kind in advance.
   const attributionOk: boolean | null =
-    isProofOfOrigin || isEarning
+    isProofOfOrigin || isEarning || isAttestation
       ? (payload as { attribution?: unknown }).attribution ===
         PROOF_ATTRIBUTION
       : null;
@@ -275,6 +332,18 @@ export async function verifyArtifact(
       Math.abs(feeRaw - expectedFee) < 1e-9 &&
       Math.abs(netRaw - expectedNet) < 1e-9;
   }
+
+  // bureauOk: payload.pubkey is the BUREAU's pubkey (signer), not the
+  // device's. We confirm it equals the published BUREAU_PUBKEY constant —
+  // this is what prevents a forger from minting attestations under their
+  // own key and having partners accept them.
+  //
+  // Case insensitivity: BUREAU_PUBKEY is stored lowercase, payload pubkey
+  // is normalized lowercase by the caller before signing, but compare
+  // case-insensitively for defensive robustness.
+  const bureauOk: boolean | null = isAttestation
+    ? pubkey.toLowerCase() === BUREAU_PUBKEY.toLowerCase()
+    : null;
 
   // We verify against the CANONICAL message, not the claimed one. If the
   // claimed message has been altered to match a different payload,
@@ -298,12 +367,14 @@ export async function verifyArtifact(
     hashMatches &&
     (attributionOk === true || attributionOk === null) &&
     (feeIntegrityOk === true || feeIntegrityOk === null) &&
+    (bureauOk === true || bureauOk === null) &&
     signatureOk;
 
   const kind: ArtifactKind =
     kindRaw === 'proof-of-origin' ||
     kindRaw === 'heartbeat' ||
-    kindRaw === 'earning'
+    kindRaw === 'earning' ||
+    kindRaw === 'attestation'
       ? kindRaw
       : 'unknown';
 
@@ -322,6 +393,7 @@ export async function verifyArtifact(
       hashMatches,
       attributionOk,
       feeIntegrityOk,
+      bureauOk,
       signatureOk,
       signatureError,
     },
