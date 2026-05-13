@@ -16,7 +16,7 @@
      iOS and desktop still fall through to the waitlist modal. */
   /* Bump this when EAS produces a new build URL for the next version. */
   var ANDROID_APK_URL =
-    "https://expo.dev/artifacts/eas/8Xtgv9Mi2Aii1edJ4xyReD.apk";
+    "https://github.com/Ricolax310/GetKinetik/releases/download/v1.5.0/getkinetik-v1.5.0.apk";
 
   var ua = (typeof navigator !== "undefined" && navigator.userAgent) || "";
   var isAndroid = /Android/i.test(ua);
