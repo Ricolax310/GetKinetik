@@ -1,0 +1,35 @@
+[
+  { "id": "node-001", "lat": 40.7128, "lng": -74.0060, "firstSeenMs": 1714600000000, "lifetimeBeats": 86400, "lifetimeRewardUsd": 12, "metadata": { "firmware": "v1.2.0", "hardwareId": "OEM-A:01" } },
+  { "id": "node-002", "lat": 40.7128, "lng": -74.0060, "firstSeenMs": 1714600060000, "lifetimeBeats": 86400, "lifetimeRewardUsd": 12, "metadata": { "firmware": "v1.2.0", "hardwareId": "OEM-A:01" } },
+  { "id": "node-003", "lat": 40.71281, "lng": -74.00601, "firstSeenMs": 1714600120000, "lifetimeBeats": 86400, "lifetimeRewardUsd": 12, "metadata": { "firmware": "v1.2.0", "hardwareId": "OEM-A:01" } },
+  { "id": "node-004", "lat": 40.71279, "lng": -74.00603, "firstSeenMs": 1714600180000, "lifetimeBeats": 86400, "lifetimeRewardUsd": 12, "metadata": { "firmware": "v1.2.0", "hardwareId": "OEM-A:01" } },
+  { "id": "node-005", "lat": 40.71282, "lng": -74.00599, "firstSeenMs": 1714600240000, "lifetimeBeats": 86400, "lifetimeRewardUsd": 12, "metadata": { "firmware": "v1.2.0", "hardwareId": "OEM-A:01" } },
+  { "id": "node-006", "lat": 40.71283, "lng": -74.00602, "firstSeenMs": 1714600300000, "lifetimeBeats": 86400, "lifetimeRewardUsd": 12, "metadata": { "firmware": "v1.2.0", "hardwareId": "OEM-A:01" } },
+
+  { "id": "burst-101", "lat": 34.0522, "lng": -118.2437, "firstSeenMs": 1764630000000, "lifetimeBeats": 1200, "metadata": { "firmware": "v0.9.1", "hardwareId": "OEM-B:7F" } },
+  { "id": "burst-102", "lat": 34.0533, "lng": -118.2418, "firstSeenMs": 1764630300000, "lifetimeBeats": 1200, "metadata": { "firmware": "v0.9.1", "hardwareId": "OEM-B:7F" } },
+  { "id": "burst-103", "lat": 34.0501, "lng": -118.2455, "firstSeenMs": 1764630600000, "lifetimeBeats": 1200, "metadata": { "firmware": "v0.9.1", "hardwareId": "OEM-B:7F" } },
+  { "id": "burst-104", "lat": 34.0512, "lng": -118.2402, "firstSeenMs": 1764630900000, "lifetimeBeats": 1200, "metadata": { "firmware": "v0.9.1", "hardwareId": "OEM-B:7F" } },
+  { "id": "burst-105", "lat": 34.0488, "lng": -118.2390, "firstSeenMs": 1764631200000, "lifetimeBeats": 1200, "metadata": { "firmware": "v0.9.1", "hardwareId": "OEM-B:7F" } },
+  { "id": "burst-106", "lat": 34.0561, "lng": -118.2470, "firstSeenMs": 1764631500000, "lifetimeBeats": 1200, "metadata": { "firmware": "v0.9.1", "hardwareId": "OEM-B:7F" } },
+  { "id": "burst-107", "lat": 34.0577, "lng": -118.2412, "firstSeenMs": 1764631800000, "lifetimeBeats": 1200, "metadata": { "firmware": "v0.9.1", "hardwareId": "OEM-B:7F" } },
+  { "id": "burst-108", "lat": 34.0589, "lng": -118.2433, "firstSeenMs": 1764632100000, "lifetimeBeats": 1200, "metadata": { "firmware": "v0.9.1", "hardwareId": "OEM-B:7F" } },
+  { "id": "burst-109", "lat": 34.0500, "lng": -118.2398, "firstSeenMs": 1764632400000, "lifetimeBeats": 1200, "metadata": { "firmware": "v0.9.1", "hardwareId": "OEM-B:7F" } },
+  { "id": "burst-110", "lat": 34.0530, "lng": -118.2440, "firstSeenMs": 1764632700000, "lifetimeBeats": 1200, "metadata": { "firmware": "v0.9.1", "hardwareId": "OEM-B:7F" } },
+  { "id": "burst-111", "lat": 34.0550, "lng": -118.2425, "firstSeenMs": 1764633000000, "lifetimeBeats": 1200, "metadata": { "firmware": "v0.9.1", "hardwareId": "OEM-B:7F" } },
+  { "id": "burst-112", "lat": 34.0570, "lng": -118.2415, "firstSeenMs": 1764633300000, "lifetimeBeats": 1200, "metadata": { "firmware": "v0.9.1", "hardwareId": "OEM-B:7F" } },
+
+  { "id": "rate-201", "lat": 51.5074, "lng": -0.1278, "firstSeenMs": 1762470000000, "lifetimeBeats": 99999999, "lifetimeRewardUsd": 1200, "metadata": { "firmware": "v1.0.0", "hardwareId": "OEM-C:11" } },
+  { "id": "rate-202", "lat": 48.8566, "lng": 2.3522, "firstSeenMs": 1762470000000, "lifetimeBeats": 50000000, "lifetimeRewardUsd": 600, "metadata": { "firmware": "v1.0.0", "hardwareId": "OEM-C:12" } },
+
+  { "id": "honest-301", "lat": 37.7749, "lng": -122.4194, "firstSeenMs": 1700000000000, "lifetimeBeats": 9000000, "lifetimeRewardUsd": 240, "metadata": { "firmware": "v1.3.4", "hardwareId": "OEM-D:A1" } },
+  { "id": "honest-302", "lat": 47.6062, "lng": -122.3321, "firstSeenMs": 1701000000000, "lifetimeBeats": 8500000, "lifetimeRewardUsd": 220, "metadata": { "firmware": "v1.3.4", "hardwareId": "OEM-D:A2" } },
+  { "id": "honest-303", "lat": 41.8781, "lng": -87.6298, "firstSeenMs": 1702000000000, "lifetimeBeats": 8000000, "lifetimeRewardUsd": 210, "metadata": { "firmware": "v1.3.3", "hardwareId": "OEM-D:A3" } },
+  { "id": "honest-304", "lat": 29.7604, "lng": -95.3698, "firstSeenMs": 1703000000000, "lifetimeBeats": 7000000, "lifetimeRewardUsd": 180, "metadata": { "firmware": "v1.3.2", "hardwareId": "OEM-D:A4" } },
+  { "id": "honest-305", "lat": 32.7767, "lng": -96.7970, "firstSeenMs": 1704000000000, "lifetimeBeats": 6000000, "lifetimeRewardUsd": 160, "metadata": { "firmware": "v1.3.2", "hardwareId": "OEM-D:A5" } },
+  { "id": "honest-306", "lat": 33.4484, "lng": -112.0740, "firstSeenMs": 1705000000000, "lifetimeBeats": 5500000, "lifetimeRewardUsd": 150, "metadata": { "firmware": "v1.3.1", "hardwareId": "OEM-D:A6" } },
+  { "id": "honest-307", "lat": 39.7392, "lng": -104.9903, "firstSeenMs": 1706000000000, "lifetimeBeats": 5000000, "lifetimeRewardUsd": 140, "metadata": { "firmware": "v1.3.1", "hardwareId": "OEM-D:A7" } },
+  { "id": "honest-308", "lat": 35.2271, "lng": -80.8431, "firstSeenMs": 1707000000000, "lifetimeBeats": 4500000, "lifetimeRewardUsd": 120, "metadata": { "firmware": "v1.3.0", "hardwareId": "OEM-D:A8" } },
+  { "id": "honest-309", "lat": 36.1627, "lng": -86.7816, "firstSeenMs": 1708000000000, "lifetimeBeats": 4000000, "lifetimeRewardUsd": 110, "metadata": { "firmware": "v1.3.0", "hardwareId": "OEM-D:A9" } },
+  { "id": "honest-310", "lat": 45.5152, "lng": -122.6784, "firstSeenMs": 1709000000000, "lifetimeBeats": 3500000, "lifetimeRewardUsd": 95, "metadata": { "firmware": "v1.3.0", "hardwareId": "OEM-D:AA" } }
+]
