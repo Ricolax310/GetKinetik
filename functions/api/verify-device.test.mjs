@@ -1,12 +1,6 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 
-import * as ed from "@noble/ed25519";
-import { sha256, sha512 } from "@noble/hashes/sha2.js";
-
-ed.hashes.sha512 = sha512;
-ed.hashes.sha512Async = async (msg) => sha512(msg);
-
 const PROOF_ATTRIBUTION = "GETKINETIK by OutFromNothing LLC";
 
 const stableStringify = (obj) => {
@@ -23,6 +17,11 @@ const toHex = (bytes) =>
 
 const utf8 = (s) => new TextEncoder().encode(s);
 
+const sha256Hex = async (bytes) => {
+  const digest = await crypto.subtle.digest("SHA-256", bytes);
+  return toHex(new Uint8Array(digest));
+};
+
 const base64UrlEncode = (input) =>
   Buffer.from(input, "utf8").toString("base64url");
 
@@ -33,26 +32,32 @@ const workerModuleUrl = `data:text/javascript;charset=utf-8,${encodeURIComponent
 const { verifyProofUrl } = await import(workerModuleUrl);
 
 async function mintProofEnvelope() {
-  const sk = ed.utils.randomSecretKey();
-  const pk = await ed.getPublicKeyAsync(sk);
+  const keyPair = await crypto.subtle.generateKey(
+    { name: "Ed25519" },
+    true,
+    ["sign", "verify"],
+  );
+  const pk = new Uint8Array(await crypto.subtle.exportKey("raw", keyPair.publicKey));
   const pubkey = toHex(pk);
   const now = Date.now();
   const payload = {
     v: 2,
     kind: "proof-of-origin",
-    nodeId: `KINETIK-NODE-${toHex(sha256(pk)).slice(0, 8).toUpperCase()}`,
+    nodeId: `KINETIK-NODE-${(await sha256Hex(pk)).slice(0, 8).toUpperCase()}`,
     pubkey,
     mintedAt: now - 9 * 86_400_000,
     issuedAt: now,
     lifetimeBeats: 25_847,
     firstBeatTs: now - 9 * 86_400_000 + 5_000,
-    chainTip: toHex(sha256(utf8("verify-device-test"))).slice(0, 16),
+    chainTip: (await sha256Hex(utf8("verify-device-test"))).slice(0, 16),
     attribution: PROOF_ATTRIBUTION,
     sensors: { lux: 412, motionRms: 0.06, pressureHpa: 1014.07 },
   };
   const message = stableStringify(payload);
-  const signature = toHex(await ed.signAsync(utf8(message), sk));
-  const hash = toHex(sha256(utf8(message))).slice(0, 16);
+  const signature = toHex(
+    new Uint8Array(await crypto.subtle.sign("Ed25519", keyPair.privateKey, utf8(message))),
+  );
+  const hash = (await sha256Hex(utf8(message))).slice(0, 16);
   return { payload, message, signature, hash };
 }
 
