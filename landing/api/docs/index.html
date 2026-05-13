@@ -28,7 +28,8 @@
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230A0A0A'/%3E%3Cpolygon points='16,6 24,16 16,26 8,16' fill='%23FF1430'/%3E%3Cpolygon points='16,6 24,16 16,14 8,16' fill='%23FFB199' opacity='0.6'/%3E%3C/svg%3E"
     />
 
-    <script type="module" src="https://unpkg.com/rapidoc/dist/rapidoc-min.js"></script>
+    <!-- Self-hosted: global CSP only allows script-src 'self'; unpkg was blocked. -->
+    <script type="module" src="/api/docs/rapidoc-min.js?v=9.3.8"></script>
 
     <style>
       html, body { margin: 0; padding: 0; background: #0a0a0a; height: 100%; }
@@ -39,6 +40,7 @@
   <body>
     <rapi-doc
       spec-url="/api/openapi.yaml"
+      load-fonts="false"
       theme="dark"
       bg-color="#0a0a0a"
       text-color="#e8e8ea"
