@@ -38,14 +38,17 @@
 
 # Interactive docs viewer — RapiDoc loads from unpkg.com, so the strict
 # global CSP would block it. This route gets a scoped CSP override.
-# Note: Cloudflare's /api/docs/* pattern does not match the directory URL
-# /api/docs/ (no extra path segment), so /api/docs and /api/docs/ must be
-# listed explicitly or visitors only see unstyled slot fallback text.
+# Cloudflare Pages inherits matching header blocks, so detach the global CSP
+# before adding the docs policy. Keep /api/docs and /api/docs/ explicit for
+# extensionless and directory URL visitors.
 /api/docs
+  ! Content-Security-Policy
   Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://unpkg.com; img-src 'self' data:; font-src 'self' data: https://unpkg.com; connect-src 'self' https://unpkg.com; base-uri 'self'; frame-ancestors 'none'
 
 /api/docs/
+  ! Content-Security-Policy
   Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://unpkg.com; img-src 'self' data:; font-src 'self' data: https://unpkg.com; connect-src 'self' https://unpkg.com; base-uri 'self'; frame-ancestors 'none'
 
 /api/docs/*
+  ! Content-Security-Policy
   Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://unpkg.com; img-src 'self' data:; font-src 'self' data: https://unpkg.com; connect-src 'self' https://unpkg.com; base-uri 'self'; frame-ancestors 'none'
