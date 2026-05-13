@@ -259,12 +259,12 @@ counts and outcome categories in the annual transparency report
 
 ## 7. What the API returns
 
-### Today (production)
+### Live in production (v1.0)
 
-Calling `POST /api/verify-device` **cryptographically verifies** the
-Proof of Origin and returns identity fields only — **not** a Genesis
-Score yet. The live worker (`functions/api/verify-device.js`) returns,
-on success, roughly:
+Calling `POST /api/verify-device` cryptographically verifies the
+Proof of Origin **and** returns a Genesis Score computed from the
+observable proof fields. The live worker
+(`functions/api/verify-device.js`) returns, on success:
 
 ```json
 {
@@ -273,41 +273,56 @@ on success, roughly:
   "pubkey": "<64-char hex>",
   "mintedAt": 1714000000000,
   "schema": "proof-of-origin:v2",
-  "attribution": "GETKINETIK by OutFromNothing LLC"
+  "attribution": "GETKINETIK by OutFromNothing LLC",
+  "lifetimeBeats": 25847,
+  "firstBeatTs": 1777086000000,
+  "genesisScore": 636,
+  "scoreBand": "STANDING",
+  "methodologyVersion": "v1.0",
+  "tamperFlags": [],
+  "asOf": "2026-05-13T03:00:00.000Z"
 }
 ```
 
 `mintedAt` is the best available timestamp from the signed payload
 (`issuedAt` for a PoO card, `mintedAt` for key birth, or `ts` for
-heartbeat-shaped artifacts). The exact field list and types are
-the source of truth in
-[`docs/api/verify-device.md`](../api/verify-device.md).
+heartbeat-shaped artifacts).
 
-### Target (not shipped yet)
+### v1.0 scoring surface
 
-When the bureau wires **KV-backed Genesis Score** into the same
-endpoint, a successful response is expected to add something like:
+The shipped scorer reads three of the five methodology categories,
+since they are the ones a single signed proof can prove without
+server-side state:
 
-```jsonc
-{
-  "genesisScore": 832,
-  "scoreBand": "STRONG",
-  "methodologyVersion": "v1.0",
-  "tamperFlags": [],
-  "asOf": "2026-05-04T17:32:11Z"
-}
-```
+- **Identity integrity** (§3.1) — hard-gated by the caller; only
+  cryptographically valid proofs reach the scorer.
+- **Uptime continuity** (§3.2) — `firstBeatTs` chain age and
+  `lifetimeBeats` count.
+- **Sensor coherence** (§3.3) — presence and per-field physical
+  plausibility of the `sensors` block (`lux`, `motionRms`,
+  `pressureHpa`).
 
-That block is the **intended** contract; it is **not** returned by
-production today. When it ships, this section and
-`docs/api/verify-device.md` will be updated in the same commit so
-the wire format and the methodology stay in lockstep.
+Two categories are **not yet wired** in v1.0 and contribute 0 to
+the score until their channels exist:
 
-Partners that want a score *today* can derive a **qualitative**
-signal from the proof fields embedded in the artifact (`lifetimeBeats`,
-`firstBeatTs`, etc.) after cryptographic verification — but the
-numbered Genesis Score and bands in §4 require server-side grading
-that is still being integrated.
+- **Network engagement** (§3.4) — requires the partner attestation
+  channel.
+- **Disclosure receipts** (§3.5) — requires the L4 earnings ledger
+  ingestion pipeline.
+
+That means today's scores skew conservative: a node operating
+honestly on multiple networks with clean disclosure receipts will
+score *at most* in the **STRONG** band on the proof alone until
+network attestations and earnings receipts are integrated. Partners
+should treat this as a **floor**, not a ceiling.
+
+### Wire format contract
+
+The full field list and types are the source of truth in
+[`docs/api/verify-device.md`](../api/verify-device.md). The exact
+numeric weights used inside `computeGenesisScoreV1` are managed
+internally per §1; the **direction** and **category set** in §3
+match the implementation byte for byte.
 
 ---
 

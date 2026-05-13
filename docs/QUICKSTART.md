@@ -34,11 +34,28 @@ You'll get back:
   "pubkey": "ff07e53d...",
   "mintedAt": 1777863288998,
   "schema": "proof-of-origin:v2",
-  "attribution": "GETKINETIK by OutFromNothing LLC"
+  "attribution": "GETKINETIK by OutFromNothing LLC",
+  "lifetimeBeats": 25847,
+  "firstBeatTs": 1777086288998,
+  "genesisScore": 636,
+  "scoreBand": "STANDING",
+  "methodologyVersion": "v1.0",
+  "tamperFlags": [],
+  "asOf": "2026-05-13T03:00:00.000Z"
 }
 ```
 
-**That's a real cryptographic verification.** No server state — the signature in the URL is the proof.
+**That's a real cryptographic verification plus a bureau-grade reputation score.** No server state on your side — the signature in the URL is the proof, and the score is computed deterministically from its contents per the [published methodology](./methodology/GENESIS_SCORE.md).
+
+### What the score means
+
+| Band | Score | Use |
+|---|---|---|
+| `NEW` | 0–499 | Insufficient evidence yet. New nodes start here. |
+| `STANDING` | 500–749 | Sufficient evidence of real-device operation. Reasonable pay threshold. |
+| `STRONG` | 750–899 | Long, continuous, sensor-coherent record. Premium pay threshold. |
+| `PREMIER` | 900–1000 | Top tier. Multi-input attested. |
+| `TAMPERED` | floored to ≤199 | Physical impossibility detected (e.g. negative pressure). Do not pay. |
 
 ---
 
@@ -62,6 +79,31 @@ if (await isDeviceVerified(user.kinetikProofUrl)) {
   reward = baseReward * 1.15; // verified-device premium
 } else {
   reward = baseReward;
+}
+```
+
+### Score-tiered payouts
+
+```typescript
+async function getDeviceTier(proofUrl: string) {
+  const res = await fetch('https://getkinetik.app/api/verify-device', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ proofUrl }),
+  });
+  return res.json();
+}
+
+const v = await getDeviceTier(user.kinetikProofUrl);
+
+if (!v.valid || v.scoreBand === 'TAMPERED') {
+  reward = 0; // don't pay
+} else if (v.scoreBand === 'STRONG' || v.scoreBand === 'PREMIER') {
+  reward = baseReward * 1.15; // premium tier
+} else if (v.scoreBand === 'STANDING') {
+  reward = baseReward; // standard rate
+} else {
+  reward = baseReward * 0.5; // new — half rate until established
 }
 ```
 
