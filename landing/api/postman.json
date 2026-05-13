@@ -1,0 +1,96 @@
+{
+  "info": {
+    "_postman_id": "getkinetik-bureau-v1.1",
+    "name": "GETKINETIK Bureau API",
+    "description": "Hardware-rooted device verification, Genesis Score lookup, partner attestation channel, and public bureau telemetry. Drop into Postman → Import → File. Set the {{baseUrl}} variable (defaults to https://getkinetik.app) and the {{attestApiKey}} variable (request one via eric@outfromnothingllc.com).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://getkinetik.app",
+      "type": "string"
+    },
+    {
+      "key": "attestApiKey",
+      "value": "REPLACE_ME",
+      "type": "string"
+    },
+    {
+      "key": "nodeId",
+      "value": "KINETIK-NODE-A49C9E14",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Verify Device",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/verify-device",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "verify-device"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"proofUrl\": \"https://getkinetik.app/verify/#proof=PASTE_FULL_PROOF_URL_FRAGMENT\"\n}"
+        },
+        "description": "Verify a Proof-of-Origin URL. Returns Genesis Score on success."
+      },
+      "response": []
+    },
+    {
+      "name": "Get Score (by nodeId)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/score/{{nodeId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "score", "{{nodeId}}"]
+        },
+        "description": "Look up the most recent cached Genesis Score for a node. Returns 404 if no verification has happened for this nodeId."
+      },
+      "response": []
+    },
+    {
+      "name": "Submit Attestation (Bearer auth)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{attestApiKey}}" }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/attest",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "attest"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nodeId\":  \"{{nodeId}}\",\n  \"kind\":    \"engagement\",\n  \"network\": \"dimo\",\n  \"detail\":  \"Trip uploaded successfully (vehicle ID matched).\",\n  \"weight\":  1\n}"
+        },
+        "description": "Submit a typed partner attestation. Bearer key required — email eric@outfromnothingllc.com to enroll."
+      },
+      "response": []
+    },
+    {
+      "name": "Bureau Stats (public)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/bureau/stats",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "bureau", "stats"]
+        },
+        "description": "Public counters that power the live ticker on /bureau/."
+      },
+      "response": []
+    }
+  ]
+}

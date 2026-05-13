@@ -1,0 +1,449 @@
+openapi: 3.1.0
+
+info:
+  title: GETKINETIK Bureau API
+  summary: The independent grading bureau for DePIN — public Genesis Score, hardware-rooted device verification, partner attestation channel.
+  description: |
+    GETKINETIK is the **independent grading bureau** for the decentralized
+    physical economy. Every sovereign node carries a hardware-sealed Ed25519
+    identity. Every uptime claim is hash-chained and signed. Every grade is
+    computed against the published methodology at
+    https://github.com/Ricolax310/GetKinetik/blob/main/docs/methodology/GENESIS_SCORE.md.
+
+    Four public endpoints:
+
+    - `POST /api/verify-device` — verify a Proof-of-Origin URL and return
+      the live Genesis Score.
+    - `GET  /api/score/{nodeId}` — look up the most recent Genesis Score for
+      a node without supplying a fresh proof.
+    - `POST /api/attest` — partner attestation channel (Bearer auth) for
+      signalling cross-network observations into the bureau.
+    - `GET  /api/bureau/stats` — public bureau telemetry powering the live
+      ticker on https://getkinetik.app/bureau/.
+
+    **Neutrality.** GETKINETIK never issues a token, never holds equity in
+    a graded network, and never accepts payment in a graded network's
+    native asset. Charter: https://github.com/Ricolax310/GetKinetik/blob/main/NEUTRALITY.md.
+  version: "1.1.0"
+  contact:
+    name: Eric · GETKINETIK
+    email: eric@outfromnothingllc.com
+    url: https://getkinetik.app
+  license:
+    name: MIT
+    url: https://github.com/Ricolax310/GetKinetik/blob/main/LICENSE
+  termsOfService: https://github.com/Ricolax310/GetKinetik/blob/main/NEUTRALITY.md
+
+externalDocs:
+  description: Genesis Score methodology (public, versioned)
+  url: https://github.com/Ricolax310/GetKinetik/blob/main/docs/methodology/GENESIS_SCORE.md
+
+servers:
+  - url: https://getkinetik.app
+    description: Production bureau
+
+tags:
+  - name: Verification
+    description: Hardware-rooted device verification.
+  - name: Score
+    description: Genesis Score lookup.
+  - name: Attestation
+    description: Partner cross-network signals.
+  - name: Telemetry
+    description: Public bureau stats.
+
+security: []
+
+paths:
+  /api/verify-device:
+    post:
+      tags: [Verification]
+      summary: Verify a Proof of Origin and return its Genesis Score
+      operationId: verifyDevice
+      description: |
+        Posts a Proof-of-Origin URL (from the GETKINETIK app's **Share**
+        action, or a partner SDK) and returns whether the proof is valid,
+        plus the live Genesis Score. No authentication required — anyone
+        can verify any proof.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VerifyDeviceRequest"
+            examples:
+              proofUrl:
+                summary: A signed proof URL
+                value:
+                  proofUrl: "https://getkinetik.app/verify/#proof=<base64url-payload>"
+      responses:
+        "200":
+          description: Verification result (valid or invalid — both 200).
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/VerifyDeviceValid"
+                  - $ref: "#/components/schemas/VerifyDeviceInvalid"
+              examples:
+                valid:
+                  summary: Valid signature, scored node
+                  value:
+                    valid: true
+                    nodeId: "KINETIK-NODE-A49C9E14"
+                    pubkey: "3062f3ba272db9204afe1fe11dd3cb086e06a3292e299e33f0450bcf30434c22"
+                    mintedAt: 1778679227172
+                    schema: "proof-of-origin:v2"
+                    attribution: "GETKINETIK by OutFromNothing LLC"
+                    lifetimeBeats: 25847
+                    firstBeatTs: 1777901632172
+                    genesisScore: 636
+                    scoreBand: "STANDING"
+                    methodologyVersion: "v1.1"
+                    tamperFlags: []
+                    asOf: "2026-05-13T13:34:22.674Z"
+                invalid:
+                  summary: Signature mismatch
+                  value:
+                    valid: false
+                    reason: "signature_invalid"
+        "400":
+          description: Malformed request.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+    get:
+      tags: [Verification]
+      summary: Discovery — humans pasting the URL in a browser
+      operationId: verifyDeviceDiscovery
+      description: |
+        Browser GETs return JSON documentation rather than a 405. Useful
+        for partner engineers who paste the webhook URL into a tab while
+        wiring it up.
+      responses:
+        "200":
+          description: Discovery JSON.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/EndpointDiscovery" }
+
+  /api/score/{nodeId}:
+    get:
+      tags: [Score]
+      summary: Look up the most recent Genesis Score for a node
+      operationId: getScore
+      description: |
+        Returns the cached Genesis Score from the bureau's last verification
+        of this node. If no partner has ever called `verify-device` for this
+        nodeId, the bureau has no record and returns 404. Scores are cached
+        for 30 days after the last verification.
+      parameters:
+        - name: nodeId
+          in: path
+          required: true
+          description: Sovereign node ID, format `KINETIK-NODE-XXXXXXXX` (8 uppercase hex).
+          schema:
+            type: string
+            pattern: "^KINETIK-NODE-[0-9A-F]{8}$"
+            example: "KINETIK-NODE-A49C9E14"
+      responses:
+        "200":
+          description: Cached Genesis Score for the node.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/CachedScore" }
+        "400":
+          description: Invalid node ID format.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "404":
+          description: Node not found in the bureau cache.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "503":
+          description: Score storage temporarily unavailable.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+
+  /api/attest:
+    post:
+      tags: [Attestation]
+      summary: Submit a partner attestation about a node
+      operationId: attest
+      description: |
+        Partner networks (DIMO, Hivemapper, WeatherXM, Geodnet, etc.) post
+        typed observations here — "this node performed expected work",
+        "this node failed our integrity check", "this node was flagged for
+        fraud" — and the bureau records them for cross-network reputation.
+
+        v1.1 records attestations; v1.2 folds them into the live Genesis
+        Score. Partner API keys are issued by emailing
+        eric@outfromnothingllc.com.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/AttestRequest" }
+            examples:
+              engagement:
+                summary: Positive engagement signal
+                value:
+                  nodeId: "KINETIK-NODE-A49C9E14"
+                  kind: "engagement"
+                  network: "dimo"
+                  detail: "Trip uploaded successfully (vehicle ID matched)."
+                  weight: 1
+              fraud:
+                summary: Fraud flag
+                value:
+                  nodeId: "KINETIK-NODE-A49C9E14"
+                  kind: "fraud"
+                  network: "hivemapper"
+                  detail: "GPS coordinates outside claimed coverage region."
+                  weight: -3
+      responses:
+        "200":
+          description: Attestation recorded.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/AttestResponse" }
+        "400":
+          description: Validation failed (bad nodeId, kind, weight, etc.).
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "401":
+          description: Missing or invalid Bearer token.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+        "503":
+          description: Attestation channel offline (no partner key configured on this deployment).
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ApiError" }
+
+  /api/bureau/stats:
+    get:
+      tags: [Telemetry]
+      summary: Public bureau telemetry counters
+      operationId: bureauStats
+      description: |
+        Aggregate verification counters powering the live ticker on
+        https://getkinetik.app/bureau/. Eventually consistent; do not use
+        for billing or compliance.
+      responses:
+        "200":
+          description: Bureau counters.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/BureauStats" }
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: opaque-string
+      description: |
+        Partner API key (issued by emailing eric@outfromnothingllc.com).
+        Send as `Authorization: Bearer <partner-api-key>`.
+
+  schemas:
+    NodeId:
+      type: string
+      pattern: "^KINETIK-NODE-[0-9A-F]{8}$"
+      example: "KINETIK-NODE-A49C9E14"
+      description: Sovereign node identifier — 8 uppercase hex characters of `sha256(pubkey)`.
+
+    ScoreBand:
+      type: string
+      enum: [TAMPERED, NEW, STANDING, STRONG, PREMIER]
+      description: |
+        - **TAMPERED** (≤ 199): impossible inputs detected; do not pay.
+        - **NEW** (200–499): insufficient evidence yet.
+        - **STANDING** (500–749): real-device operation confirmed.
+        - **STRONG** (750–899): long, sensor-coherent record.
+        - **PREMIER** (900–999): top tier; multi-input attested.
+
+    TamperFlag:
+      type: string
+      enum:
+        - beat_rate_implausible
+        - chain_rewind
+        - lux_implausible
+        - motion_implausible
+        - pressure_implausible
+      description: Specific failure modes documented in methodology §3.6.
+
+    VerifyDeviceRequest:
+      type: object
+      required: [proofUrl]
+      properties:
+        proofUrl:
+          type: string
+          format: uri
+          maxLength: 8192
+          description: |
+            Full proof URL from the GETKINETIK app's **Share** action, or a
+            bare base64url payload. Both `https://getkinetik.app/verify/#proof=...`
+            and the raw fragment are accepted.
+
+    VerifyDeviceValid:
+      type: object
+      required: [valid, nodeId, pubkey, mintedAt, schema, attribution, genesisScore, scoreBand, methodologyVersion, tamperFlags, asOf]
+      properties:
+        valid:        { type: boolean, enum: [true] }
+        nodeId:       { $ref: "#/components/schemas/NodeId" }
+        pubkey:       { type: string, pattern: "^[0-9a-f]{64}$" }
+        mintedAt:     { type: integer, description: "Unix ms — when the proof was minted." }
+        schema:       { type: string, enum: ["proof-of-origin:v2"] }
+        attribution:  { type: string, enum: ["GETKINETIK by OutFromNothing LLC"] }
+        lifetimeBeats:
+          type: integer
+          minimum: 0
+          description: Claimed heartbeats over the node's lifetime.
+        firstBeatTs:
+          type: integer
+          description: Unix ms — node's claimed first heartbeat (bureau-bounded).
+        genesisScore:
+          type: integer
+          minimum: 0
+          maximum: 1000
+        scoreBand: { $ref: "#/components/schemas/ScoreBand" }
+        methodologyVersion:
+          type: string
+          example: "v1.1"
+        tamperFlags:
+          type: array
+          items: { $ref: "#/components/schemas/TamperFlag" }
+        asOf:
+          type: string
+          format: date-time
+
+    VerifyDeviceInvalid:
+      type: object
+      required: [valid, reason]
+      properties:
+        valid: { type: boolean, enum: [false] }
+        reason:
+          type: string
+          enum:
+            - malformed_envelope
+            - missing_fields
+            - attribution_mismatch
+            - hash_mismatch
+            - invalid_pubkey
+            - pubkey_decode_failed
+            - signature_invalid
+            - internal_error
+
+    CachedScore:
+      type: object
+      required: [nodeId, genesisScore, scoreBand, methodologyVersion, asOf, source]
+      properties:
+        nodeId:             { $ref: "#/components/schemas/NodeId" }
+        genesisScore:       { type: integer, minimum: 0, maximum: 1000 }
+        scoreBand:          { $ref: "#/components/schemas/ScoreBand" }
+        methodologyVersion: { type: string, example: "v1.1" }
+        tamperFlags:
+          type: array
+          items: { $ref: "#/components/schemas/TamperFlag" }
+        lifetimeBeats:      { type: integer, minimum: 0 }
+        firstBeatTs:        { type: integer }
+        asOf:               { type: string, format: date-time }
+        cachedAt:           { type: string, format: date-time }
+        source:             { type: string, enum: [kv] }
+
+    AttestRequest:
+      type: object
+      required: [nodeId, kind, network, weight]
+      properties:
+        nodeId:  { $ref: "#/components/schemas/NodeId" }
+        kind:
+          type: string
+          enum: [engagement, fault, fraud]
+          description: |
+            - **engagement** — positive observation (work performed, expected behaviour).
+            - **fault** — node failed an integrity / data-quality check.
+            - **fraud** — strong evidence of misbehaviour.
+        network:
+          type: string
+          minLength: 1
+          maxLength: 32
+          example: "dimo"
+          description: Partner network identifier (free-form, lowercased).
+        detail:
+          type: string
+          maxLength: 256
+          description: Optional partner-defined detail string.
+        weight:
+          type: integer
+          minimum: -3
+          maximum: 3
+          description: Signed magnitude. Clamped to ±3 server-side.
+
+    AttestResponse:
+      type: object
+      required: [ok, receipt, recordedAt]
+      properties:
+        ok:         { type: boolean, enum: [true] }
+        receipt:
+          type: string
+          description: KV key the attestation is stored under.
+          example: "attest:KINETIK-NODE-A49C9E14:1778679539654"
+        recordedAt: { type: string, format: date-time }
+        note:       { type: string }
+
+    BureauStats:
+      type: object
+      required: [ok, stats, methodologyVersion, asOf]
+      properties:
+        ok: { type: boolean, enum: [true] }
+        stats:
+          type: object
+          required: [total, valid, invalid, tampered, byBand]
+          properties:
+            total:    { type: integer, minimum: 0 }
+            valid:    { type: integer, minimum: 0 }
+            invalid:  { type: integer, minimum: 0 }
+            tampered: { type: integer, minimum: 0 }
+            byBand:
+              type: object
+              required: [NEW, STANDING, STRONG, PREMIER, TAMPERED]
+              properties:
+                NEW:      { type: integer, minimum: 0 }
+                STANDING: { type: integer, minimum: 0 }
+                STRONG:   { type: integer, minimum: 0 }
+                PREMIER:  { type: integer, minimum: 0 }
+                TAMPERED: { type: integer, minimum: 0 }
+            firstVerifyAt:
+              type: [string, "null"]
+              format: date-time
+            lastVerifyAt:
+              type: [string, "null"]
+              format: date-time
+        methodologyVersion: { type: string, example: "v1.1" }
+        asOf:               { type: string, format: date-time }
+
+    EndpointDiscovery:
+      type: object
+      properties:
+        documentation: { type: boolean, enum: [true] }
+        summary:       { type: string }
+        method:        { type: string }
+        contentType:   { type: string }
+        bodyExample:   { type: object }
+        spec:          { type: string, format: uri }
+
+    ApiError:
+      type: object
+      required: [error]
+      properties:
+        error: { type: string }
+        hint:  { type: string }
