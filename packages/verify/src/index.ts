@@ -94,6 +94,9 @@ const fromHex = (hex: string): Uint8Array => {
 
 const utf8 = (s: string): Uint8Array => new TextEncoder().encode(s);
 
+const deriveNodeIdFromPubkeyHex = (pubkeyHex: string): string =>
+  `KINETIK-NODE-${toHex(sha256(fromHex(pubkeyHex))).slice(0, 8).toUpperCase()}`;
+
 // base64url decode, for `#proof=...` URL fragments.
 //
 // Defensive against the most common real-world failure mode: a user copy-
@@ -175,6 +178,8 @@ export type VerifyChecks = {
   canonicalMatches: boolean;
   /** sha256(canonicalMessage)[:16] byte-equals the claimed `hash`. */
   hashMatches: boolean;
+  /** payload.nodeId equals KINETIK-NODE-XXXXXXXX derived from payload.pubkey. */
+  nodeIdMatches: boolean;
   /** PROOF_ATTRIBUTION present in payload (proof-of-origin and earning only). */
   attributionOk: boolean | null;
   /** Earning fee is exactly 1% of gross AND net = gross - fee (earnings only). */
@@ -250,6 +255,9 @@ export async function verifyArtifact(
 
   const canonicalMatches = claimedMessage === canonicalMessage;
   const hashMatches = claimedHash === canonicalHash;
+  const nodeIdMatches =
+    (payload as { nodeId?: unknown }).nodeId ===
+    deriveNodeIdFromPubkeyHex(pubkey);
 
   const kindRaw = (payload as { kind?: unknown }).kind;
   const isProofOfOrigin = kindRaw === 'proof-of-origin';
@@ -296,6 +304,7 @@ export async function verifyArtifact(
   const valid =
     canonicalMatches &&
     hashMatches &&
+    nodeIdMatches &&
     (attributionOk === true || attributionOk === null) &&
     (feeIntegrityOk === true || feeIntegrityOk === null) &&
     signatureOk;
@@ -320,6 +329,7 @@ export async function verifyArtifact(
     checks: {
       canonicalMatches,
       hashMatches,
+      nodeIdMatches,
       attributionOk,
       feeIntegrityOk,
       signatureOk,

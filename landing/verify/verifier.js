@@ -92,6 +92,9 @@ const fromHex = (hex) => {
 
 const utf8 = (s) => new TextEncoder().encode(s);
 
+const deriveNodeIdFromPubkeyHex = (pubkeyHex) =>
+  `KINETIK-NODE-${toHex(sha256(fromHex(pubkeyHex))).slice(0, 8).toUpperCase()}`;
+
 // base64url decode, for `#proof=...` URL fragments.
 //
 // Defensive against the most common real-world failure mode: a user
@@ -193,6 +196,8 @@ async function verifyArtifact(raw) {
   // Earnings carry the same attribution stamp as PoOs. Heartbeats carry none.
   const isProofOfOrigin = payload.kind === "proof-of-origin";
   const isEarning = payload.kind === "earning";
+  const derivedNodeId = deriveNodeIdFromPubkeyHex(payload.pubkey);
+  const nodeIdMatches = payload.nodeId === derivedNodeId;
   const attributionOk =
     isProofOfOrigin || isEarning
       ? payload.attribution === PROOF_ATTRIBUTION
@@ -235,6 +240,7 @@ async function verifyArtifact(raw) {
   const valid =
     canonicalMatches &&
     hashMatches &&
+    nodeIdMatches &&
     (attributionOk === true || attributionOk === null) &&
     (feeIntegrityOk === true || feeIntegrityOk === null) &&
     signatureOk;
@@ -252,6 +258,7 @@ async function verifyArtifact(raw) {
     checks: {
       canonicalMatches,
       hashMatches,
+      nodeIdMatches,
       attributionOk,
       feeIntegrityOk,
       signatureOk,
@@ -434,7 +441,7 @@ function renderReport(report) {
     .join("");
 
   // Checks list — always rendered, so a user can see exactly which of the
-  // four tests passed/failed even on a valid proof (reinforces what the
+  // verification tests passed/failed even on a valid proof (reinforces what the
   // seal actually means).
   const mkCheck = (passed, label, skipped = false) => {
     const cls = skipped
@@ -449,6 +456,7 @@ function renderReport(report) {
   const checksHtml = [
     mkCheck(checks.canonicalMatches, "Payload re-serializes to signed message"),
     mkCheck(checks.hashMatches, "SHA-256(message)[:16] matches embedded hash"),
+    mkCheck(checks.nodeIdMatches, "Node ID is derived from payload.pubkey"),
     mkCheck(
       checks.attributionOk === true,
       `Attribution intact: "${PROOF_ATTRIBUTION}"`,

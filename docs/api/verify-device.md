@@ -78,7 +78,7 @@ The `proofUrl` is what the GETKINETIK app generates when the user taps **Share P
 |---|---|---|
 | `genesisScore` | number | The bureau's reputation grade for this node in `[0, 1000]`. Higher is better. |
 | `scoreBand` | string | Calibration anchor: `NEW` (<500), `STANDING` (500–749), `STRONG` (750–899), `PREMIER` (≥900), `TAMPERED` (any flag raised). |
-| `methodologyVersion` | string | Version of the scoring methodology used to produce this score. Currently `v1.0`. |
+| `methodologyVersion` | string | Version of the scoring methodology used to produce this score. Currently `v1.1`. |
 | `tamperFlags` | string[] | Empty array on a clean proof. Non-empty values floor the score and signal physically-impossible sensor inputs (e.g. `pressure_implausible`). |
 | `asOf` | string | ISO-8601 timestamp the score was computed. |
 
@@ -95,12 +95,13 @@ See [`docs/methodology/GENESIS_SCORE.md`](../methodology/GENESIS_SCORE.md) for t
 | `reason` | Meaning |
 |---|---|
 | `signature_invalid` | The Ed25519 signature does not verify against the payload. The proof was tampered with or fabricated. |
-| `hash_mismatch` | The proof's hash field doesn't match `sha256(payload)[:16]`. Truncated or corrupted URL. |
+| `hash_mismatch` | A supplied proof hash doesn't match `sha256(payload)[:16]`. Truncated or corrupted URL. Compact app QR proofs may omit `hash`; the server derives it. |
+| `node_id_mismatch` | The signed `nodeId` does not match the deterministic node ID derived from `payload.pubkey`. |
 | `attribution_mismatch` | The attribution field was altered. |
 | `invalid_url_format` | Could not parse a proof from the supplied URL. |
 | `base64_decode_failed` | The base64url payload could not be decoded. |
 | `json_parse_failed` | The decoded payload is not valid JSON. |
-| `missing_fields` | Required fields (`payload`, `signature`, `hash`) are absent. |
+| `missing_fields` | Required fields (`payload`, `signature`) are absent. |
 | `invalid_pubkey` | The pubkey field is malformed. |
 | `crypto_unavailable` | Server-side Ed25519 crypto unavailable (rare, transient). Retry. |
 | `internal_error` | Unexpected server error. Retry. |

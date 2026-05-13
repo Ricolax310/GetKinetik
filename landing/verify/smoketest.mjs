@@ -37,6 +37,8 @@ const fromHex = (hex) => {
   return out;
 };
 const utf8 = (s) => new TextEncoder().encode(s);
+const deriveNodeIdFromPubkeyHex = (pubkeyHex) =>
+  `KINETIK-NODE-${toHex(sha256(fromHex(pubkeyHex))).slice(0, 8).toUpperCase()}`;
 
 // Mint a proof-of-origin exactly the way packages/kinetik-core/src/proof.ts does.
 async function mintProof() {
@@ -74,6 +76,7 @@ async function verifyArtifact(raw) {
 
   const canonicalMatches = claimedMessage === canonicalMessage;
   const hashMatches = claimedHash === canonicalHash;
+  const nodeIdMatches = payload.nodeId === deriveNodeIdFromPubkeyHex(payload.pubkey);
   const attributionOk =
     payload.kind === "proof-of-origin"
       ? payload.attribution === PROOF_ATTRIBUTION
@@ -87,9 +90,10 @@ async function verifyArtifact(raw) {
   const valid =
     canonicalMatches &&
     hashMatches &&
+    nodeIdMatches &&
     (attributionOk === true || attributionOk === null) &&
     signatureOk;
-  return { valid, canonicalMatches, hashMatches, attributionOk, signatureOk };
+  return { valid, canonicalMatches, hashMatches, nodeIdMatches, attributionOk, signatureOk };
 }
 
 // ----------------------------------------------------------------------------
@@ -109,6 +113,7 @@ async function run() {
     const r = await verifyArtifact(artifact);
     assert("canonical serialization matches", r.canonicalMatches);
     assert("sha256(message)[:16] matches hash", r.hashMatches);
+    assert("nodeId derives from pubkey", r.nodeIdMatches);
     assert("attribution intact", r.attributionOk === true);
     assert("signature verifies", r.signatureOk);
     assert("overall valid", r.valid);
@@ -148,7 +153,24 @@ async function run() {
     assert("overall invalid", !r.valid);
   }
 
-  console.log("\n[5] COMPACT form (no message, no hash) — should still verify");
+  console.log("\n[5] Node ID from a different key — should fail node binding");
+  {
+    const { artifact } = await mintProof();
+    const { artifact: otherArtifact, sk: otherSk } = await mintProof();
+    const payload = {
+      ...otherArtifact.payload,
+      nodeId: artifact.payload.nodeId,
+    };
+    const message = stableStringify(payload);
+    const signature = toHex(await ed.signAsync(utf8(message), otherSk));
+    const hash = toHex(sha256(utf8(message))).slice(0, 16);
+    const r = await verifyArtifact({ payload, message, signature, hash });
+    assert("nodeIdMatches is false", !r.nodeIdMatches);
+    assert("signature still verifies for payload.pubkey", r.signatureOk);
+    assert("overall invalid", !r.valid);
+  }
+
+  console.log("\n[6] COMPACT form (no message, no hash) — should still verify");
   {
     const { artifact } = await mintProof();
     const compact = { payload: artifact.payload, signature: artifact.signature };
@@ -156,7 +178,7 @@ async function run() {
     assert("compact form verifies", r.valid);
   }
 
-  console.log("\n[6] Heartbeat payload — no attribution check, still valid");
+  console.log("\n[7] Heartbeat payload — no attribution check, still valid");
   {
     const sk = ed.utils.randomSecretKey();
     const pk = await ed.getPublicKeyAsync(sk);

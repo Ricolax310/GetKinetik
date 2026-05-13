@@ -362,9 +362,12 @@ components:
             - missing_fields
             - attribution_mismatch
             - hash_mismatch
+            - node_id_mismatch
             - invalid_pubkey
             - pubkey_decode_failed
+            - invalid_signature_format
             - signature_invalid
+            - crypto_unavailable
             - internal_error
 
     CachedScore:

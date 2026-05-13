@@ -65,9 +65,10 @@ verifiable from a partner browser without an account.
   - **Bureau-bounded chain age:** the score uses `max(claimed firstBeatTs,
     bureau-first-seen)`. The bureau records when it *itself* first saw
     a node and won't credit age it didn't observe.
-  - **Beat-rate sanity:** claimed `lifetimeBeats` divided by bureau-observed
-    window must stay below 1 beat / 25 seconds. Violation raises a
-    `beat_rate_implausible` tamper flag and floors the score.
+  - **Beat-rate sanity:** new beats above the bureau's first-sighting
+    baseline divided by the bureau-observed window must stay below 1 beat /
+    25 seconds. Violation raises a `beat_rate_implausible` tamper flag and
+    floors the score.
   - **Chain rewind detection:** the bureau tracks each node's peak
     `lifetimeBeats`. Any later proof claiming fewer trips a `chain_rewind`
     hard gate per methodology §3.2.

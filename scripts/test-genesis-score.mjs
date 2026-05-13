@@ -7,7 +7,7 @@
 //
 // v1.1 hardening covered here:
 //   - bureau-bounded chain age (firstBeatTs can't exceed bureau first-seen)
-//   - beat-rate sanity (claimed beats / observed window must be plausible)
+//   - beat-rate sanity (new bureau-observed beats / observed window must be plausible)
 //   - chain rewind detection (later proof claiming fewer beats than peak)
 //
 // Run: node scripts/test-genesis-score.mjs
@@ -49,10 +49,25 @@ function computeGenesisScoreV1(payload, bureauContext) {
       ? payload.lifetimeBeats
       : 0;
 
+  const hasBureauContext =
+    bureauContext && typeof bureauContext.firstSeenMs === "number";
+  const firstSeenLifetimeBeats =
+    hasBureauContext &&
+    typeof bureauContext.firstSeenLifetimeBeats === "number"
+      ? bureauContext.firstSeenLifetimeBeats
+      : hasBureauContext &&
+          typeof bureauContext.peakLifetimeBeats === "number"
+        ? bureauContext.peakLifetimeBeats
+        : lifetimeBeats;
+  const bureauObservedBeats = Math.max(
+    0,
+    lifetimeBeats - firstSeenLifetimeBeats,
+  );
+
   let beatRateOk = true;
-  if (lifetimeBeats > 0) {
+  if (hasBureauContext && bureauObservedBeats > 0) {
     const observedWindowMs = Math.max(1, referenceTs - bureauFirstSeenMs);
-    if (lifetimeBeats / observedWindowMs > MAX_BEAT_RATE_PER_MS) {
+    if (bureauObservedBeats / observedWindowMs > MAX_BEAT_RATE_PER_MS) {
       tamperFlags.push("beat_rate_implausible");
       beatRateOk = false;
     }
@@ -66,10 +81,10 @@ function computeGenesisScoreV1(payload, bureauContext) {
     tamperFlags.push("chain_rewind");
   }
 
-  if (lifetimeBeats > 0 && beatRateOk) {
+  if (bureauObservedBeats > 0 && beatRateOk) {
     const beatScore = Math.min(
       300,
-      Math.round(Math.log10(lifetimeBeats + 1) * 50),
+      Math.round(Math.log10(bureauObservedBeats + 1) * 50),
     );
     score += beatScore;
   }
@@ -132,10 +147,10 @@ const cases = [
       sensors: { lux: 412, motionRms: 0.06, pressureHpa: 1014.07 },
     },
     bureauContext: null, // first time bureau sees it → first-seen = now
-    expect: "TAMPERED", // 25k beats in 0 observed time = implausible rate
+    expect: "NEW", // pre-bureau beats establish a baseline, not a tamper flag
   },
   {
-    name: "9-day node, 25k beats, full sensors, bureau saw it 9 days ago",
+    name: "9-day node, 25k new beats, full sensors, bureau saw it 9 days ago",
     payload: {
       firstBeatTs: now - 9 * dayMs,
       issuedAt: now,
@@ -144,6 +159,7 @@ const cases = [
     },
     bureauContext: {
       firstSeenMs: now - 9 * dayMs,
+      firstSeenLifetimeBeats: 0,
       peakLifetimeBeats: 24_000,
     },
     expect: "STANDING",
@@ -158,6 +174,7 @@ const cases = [
     },
     bureauContext: {
       firstSeenMs: now - 365 * dayMs,
+      firstSeenLifetimeBeats: 0,
       peakLifetimeBeats: 999_000,
     },
     expect: "PREMIER",
@@ -172,6 +189,7 @@ const cases = [
     },
     bureauContext: {
       firstSeenMs: now - 100 * dayMs,
+      firstSeenLifetimeBeats: 0,
       peakLifetimeBeats: 249_000,
     },
     expect: "STRONG",
@@ -184,7 +202,11 @@ const cases = [
       lifetimeBeats: 50_000,
       sensors: { lux: 400, motionRms: 0.1, pressureHpa: -50 },
     },
-    bureauContext: { firstSeenMs: now - 90 * dayMs, peakLifetimeBeats: 0 },
+    bureauContext: {
+      firstSeenMs: now - 90 * dayMs,
+      firstSeenLifetimeBeats: 0,
+      peakLifetimeBeats: 0,
+    },
     expect: "TAMPERED",
   },
 
@@ -208,7 +230,22 @@ const cases = [
       sensors: { lux: 400, motionRms: 0.1, pressureHpa: 1014 },
     },
     bureauContext: null, // bureau hasn't seen it → observed window = 0ms
-    expect: "TAMPERED", // beat_rate_implausible
+    expect: "NEW", // no age/beat credit before bureau sighting
+  },
+  {
+    name: "ATTACK: huge beat jump after first sighting (impossible rate)",
+    payload: {
+      firstBeatTs: now - 180 * dayMs,
+      issuedAt: now,
+      lifetimeBeats: 1_001_000,
+      sensors: { lux: 400, motionRms: 0.1, pressureHpa: 1014 },
+    },
+    bureauContext: {
+      firstSeenMs: now - 5 * 60 * 1000,
+      firstSeenLifetimeBeats: 1_000_000,
+      peakLifetimeBeats: 1_000_000,
+    },
+    expect: "TAMPERED", // 1k new beats in 5 minutes is impossible
   },
   {
     name: "ATTACK: chain rewind — claims fewer beats than bureau previously saw",
@@ -220,6 +257,7 @@ const cases = [
     },
     bureauContext: {
       firstSeenMs: now - 30 * dayMs,
+      firstSeenLifetimeBeats: 0,
       peakLifetimeBeats: 100_000, // bureau previously saw 100k
     },
     expect: "TAMPERED", // chain_rewind
@@ -234,6 +272,7 @@ const cases = [
     },
     bureauContext: {
       firstSeenMs: now - 30 * dayMs,
+      firstSeenLifetimeBeats: 0,
       peakLifetimeBeats: 100_000, // matches, no rewind
     },
     expect: "STANDING", // 30 days too young to hit STRONG; still clean

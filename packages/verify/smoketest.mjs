@@ -77,6 +77,7 @@ console.log('[1] proof-of-origin happy path');
   assert(report.kind === 'proof-of-origin', 'kind is proof-of-origin');
   assert(report.checks.canonicalMatches, 'canonical matches');
   assert(report.checks.hashMatches, 'hash matches');
+  assert(report.checks.nodeIdMatches, 'nodeId derives from pubkey');
   assert(report.checks.attributionOk === true, 'attribution intact');
   assert(report.checks.signatureOk, 'signature verifies');
   assert(report.checks.feeIntegrityOk === null, 'feeIntegrityOk is N/A');
@@ -103,6 +104,7 @@ console.log('\n[2] v:2 heartbeat happy path');
   const report = await verifyArtifact({ payload, signature });
   assert(report.valid, 'compact form heartbeat verifies');
   assert(report.kind === 'heartbeat', 'kind is heartbeat');
+  assert(report.checks.nodeIdMatches, 'nodeId derives from pubkey');
   assert(report.checks.attributionOk === null, 'attributionOk is N/A');
   assert(report.checks.feeIntegrityOk === null, 'feeIntegrityOk is N/A');
 }
@@ -132,12 +134,40 @@ console.log('\n[3] earning happy path');
   const signature = toHex(await ed.signAsync(utf8(message), sk));
   const report = await verifyArtifact({ payload, message, signature });
   assert(report.valid, 'earning overall valid');
+  assert(report.checks.nodeIdMatches, 'nodeId derives from pubkey');
   assert(report.checks.feeIntegrityOk === true, 'fee integrity holds');
   assert(report.checks.attributionOk === true, 'attribution intact');
 }
 
+// ---- [4] signed nodeId/pubkey mismatch — must fail --------------------------
+console.log('\n[4] nodeId/pubkey mismatch');
+{
+  const sk2 = ed.utils.randomSecretKey();
+  const pk2 = await ed.getPublicKeyAsync(sk2);
+  const pubkey2 = toHex(pk2);
+  const payload = {
+    v: 2,
+    kind: 'proof-of-origin',
+    nodeId, // victim node ID from the first key
+    pubkey: pubkey2, // attacker-controlled signing key
+    mintedAt: Date.now(),
+    issuedAt: Date.now(),
+    lifetimeBeats: 0,
+    firstBeatTs: null,
+    chainTip: null,
+    attribution: PROOF_ATTRIBUTION,
+    sensors: null,
+  };
+  const message = stableStringify(payload);
+  const signature = toHex(await ed.signAsync(utf8(message), sk2));
+  const report = await verifyArtifact({ payload, message, signature });
+  assert(!report.valid, 'signed mismatched nodeId rejected');
+  assert(!report.checks.nodeIdMatches, 'nodeIdMatches false');
+  assert(report.checks.signatureOk, 'signature itself still verifies');
+}
+
 // ---- [5] tampered earning fee — must fail ----------------------------------
-console.log('\n[4] tampered earning fee');
+console.log('\n[5] tampered earning fee');
 {
   const gross = 2;
   const fee = 0.05; // wrong: should be 0.02
@@ -165,7 +195,7 @@ console.log('\n[4] tampered earning fee');
 }
 
 // ---- [6] tampered payload (lifetimeBeats changed) — must fail --------------
-console.log('\n[5] tampered proof-of-origin payload');
+console.log('\n[6] tampered proof-of-origin payload');
 {
   const payload = {
     v: 2,
@@ -191,7 +221,7 @@ console.log('\n[5] tampered proof-of-origin payload');
 }
 
 // ---- [7] stripped attribution — must fail ----------------------------------
-console.log('\n[6] stripped attribution');
+console.log('\n[7] stripped attribution');
 {
   const payload = {
     v: 2,
@@ -214,7 +244,7 @@ console.log('\n[6] stripped attribution');
 }
 
 // ---- [8] wrong-key forgery — must fail -------------------------------------
-console.log('\n[7] wrong-key forgery');
+console.log('\n[8] wrong-key forgery');
 {
   const sk2 = ed.utils.randomSecretKey();
   const payload = {
@@ -239,7 +269,7 @@ console.log('\n[7] wrong-key forgery');
 }
 
 // ---- [9] decodeProofUrl roundtrip ------------------------------------------
-console.log('\n[8] decodeProofUrl roundtrip');
+console.log('\n[9] decodeProofUrl roundtrip');
 {
   const payload = {
     v: 2,
@@ -269,7 +299,7 @@ console.log('\n[8] decodeProofUrl roundtrip');
 }
 
 // ---- [10] structurally-invalid input — must throw --------------------------
-console.log('\n[9] structurally-invalid inputs throw');
+console.log('\n[10] structurally-invalid inputs throw');
 {
   let threw = false;
   try {

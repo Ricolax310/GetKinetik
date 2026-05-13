@@ -77,19 +77,26 @@ identity surface fails, the rest of the score is meaningless.
 
 | Signal | Direction |
 |---|---|
-| Long unbroken heartbeat chain (high `lifetimeBeats`, valid `prevHash` linkage from beat to beat) | ▲ |
+| Long bureau-observed heartbeat chain (new beats since bureau first sighting, valid `prevHash` linkage from beat to beat) | ▲ |
 | Recent chain tip (latest signed beat is within the active window) | ▲ |
 | Long calendar age (`firstBeatTs` far in the past with continuing activity) | ▲ |
 | Gap in the chain that resumes cleanly (legitimate offline period) | neutral after a short cooldown |
 | Chain tip not advancing while the node claims to be online | ▼ |
 | Chain rewind (later proof claims fewer `lifetimeBeats` than the bureau previously recorded for this node) | **HARD GATE.** Failure → score floored to a low value and `chain_rewind` tamper flag is published. |
-| Beat rate beyond physical limits (claimed `lifetimeBeats` exceeds what could accrue at 1 beat / 25s over the bureau-observed window) | **HARD GATE.** `beat_rate_implausible` tamper flag. |
+| Beat rate beyond physical limits (new beats since bureau first sighting exceed what could accrue at 1 beat / 25s over the bureau-observed window) | **HARD GATE.** `beat_rate_implausible` tamper flag. |
 
 **Bureau-bounded age.** The chain age contribution to the score uses
 `max(claimed firstBeatTs, bureau-first-seen)`. A freshly minted
 keypair cannot back-date itself: the bureau only credits age it
 *itself* observed. Real long-running nodes accrue full age credit as
 they continue to be re-verified.
+
+**Bureau-bounded beats.** The first successful bureau sighting stores
+the node's current `lifetimeBeats` as a baseline. Earlier beats are
+not credited toward the score, but they are also not treated as
+tampering merely because the bureau had not seen the node yet. Later
+proofs are scored and rate-checked on the increment above that
+baseline.
 
 **Why:** the chain *is* the uptime claim. Nodes that have been
 running honestly for a long time have a long chain to show. Nodes

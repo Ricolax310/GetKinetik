@@ -106,7 +106,8 @@ function fromBase64Url(b64url) {
  * hexToBytes — convert a hex string to Uint8Array.
  */
 function hexToBytes(hex) {
-  if (hex.length % 2 !== 0) return null;
+  if (typeof hex !== "string" || hex.length % 2 !== 0) return null;
+  if (!/^[0-9a-f]+$/i.test(hex)) return null;
   const bytes = new Uint8Array(hex.length / 2);
   for (let i = 0; i < bytes.length; i++) {
     const byte = parseInt(hex.slice(i * 2, i * 2 + 2), 16);
@@ -116,13 +117,30 @@ function hexToBytes(hex) {
   return bytes;
 }
 
+function bytesToHex(bytes) {
+  let out = "";
+  for (let i = 0; i < bytes.length; i++) {
+    out += bytes[i].toString(16).padStart(2, "0");
+  }
+  return out;
+}
+
 /**
  * sha256Hex — SHA-256 of a UTF-8 string, returned as a lowercase hex string.
  */
 async function sha256Hex(message) {
   const encoded = new TextEncoder().encode(message);
-  const buf = await crypto.subtle.digest("SHA-256", encoded);
-  return Array.from(new Uint8Array(buf), (b) => b.toString(16).padStart(2, "0")).join("");
+  return sha256BytesHex(encoded);
+}
+
+async function sha256BytesHex(bytes) {
+  const buf = await crypto.subtle.digest("SHA-256", bytes);
+  return bytesToHex(new Uint8Array(buf));
+}
+
+async function deriveNodeIdFromPubkey(pubkeyBytes) {
+  const fingerprint = await sha256BytesHex(pubkeyBytes);
+  return `KINETIK-NODE-${fingerprint.slice(0, 8).toUpperCase()}`;
 }
 
 /**
@@ -155,9 +173,9 @@ function extractProofFragment(proofUrl) {
 //   - chain age is bounded by `bureauFirstSeenAt` (server-side first-seen
 //     registration). A fresh keypair claiming to be 6 months old gets the
 //     bureau's first-seen timestamp instead — no time travel.
-//   - claimed `lifetimeBeats` is rate-checked against the *bureau-observed*
-//     age. Beats accruing faster than 1 per 25s for the entire window is
-//     physically impossible and raises a `beat_rate_implausible` flag.
+//   - new `lifetimeBeats` accrued after the bureau first sees the node are
+//     rate-checked. Pre-bureau history is not trusted for scoring, but it is
+//     also not treated as tampering on first sight.
 //   - prior peak `lifetimeBeats` is tracked. Any later proof claiming
 //     fewer beats trips a `chain_rewind` hard gate per methodology §3.2.
 //
@@ -217,14 +235,28 @@ function computeGenesisScoreV1(payload, bureauContext) {
       ? payload.lifetimeBeats
       : 0;
 
-  // Beat-rate sanity: claimed beats divided by bureau-observed window.
-  // Use the bureau-observed window (referenceTs - bureauFirstSeenMs), not
-  // the claimed window, so a brand-new node can't claim a million beats
-  // and an ancient firstBeatTs to dodge the check.
+  const hasBureauContext =
+    bureauContext && typeof bureauContext.firstSeenMs === "number";
+  const firstSeenLifetimeBeats =
+    hasBureauContext &&
+    typeof bureauContext.firstSeenLifetimeBeats === "number"
+      ? bureauContext.firstSeenLifetimeBeats
+      : hasBureauContext &&
+          typeof bureauContext.peakLifetimeBeats === "number"
+        ? bureauContext.peakLifetimeBeats
+        : lifetimeBeats;
+  const bureauObservedBeats = Math.max(
+    0,
+    lifetimeBeats - firstSeenLifetimeBeats,
+  );
+
+  // Beat-rate sanity: only beats accrued since the bureau first saw this node
+  // can be rate-checked. The first sighting establishes the baseline; otherwise
+  // every existing honest node with any history would be flagged immediately.
   let beatRateOk = true;
-  if (lifetimeBeats > 0) {
+  if (hasBureauContext && bureauObservedBeats > 0) {
     const observedWindowMs = Math.max(1, referenceTs - bureauFirstSeenMs);
-    if (lifetimeBeats / observedWindowMs > MAX_BEAT_RATE_PER_MS) {
+    if (bureauObservedBeats / observedWindowMs > MAX_BEAT_RATE_PER_MS) {
       tamperFlags.push("beat_rate_implausible");
       beatRateOk = false;
     }
@@ -241,10 +273,10 @@ function computeGenesisScoreV1(payload, bureauContext) {
     tamperFlags.push("chain_rewind");
   }
 
-  if (lifetimeBeats > 0 && beatRateOk) {
+  if (bureauObservedBeats > 0 && beatRateOk) {
     const beatScore = Math.min(
       300,
-      Math.round(Math.log10(lifetimeBeats + 1) * 50),
+      Math.round(Math.log10(bureauObservedBeats + 1) * 50),
     );
     score += beatScore;
   }
@@ -318,14 +350,24 @@ async function loadBureauContext(env, nodeId) {
 
 async function persistBureauContext(env, nodeId, prior, observed) {
   if (!env?.KINETIK_KV || !nodeId) return;
+  const priorPeak =
+    typeof prior?.peakLifetimeBeats === "number" ? prior.peakLifetimeBeats : 0;
+  const observedBeats =
+    typeof observed.lifetimeBeats === "number" && observed.lifetimeBeats >= 0
+      ? observed.lifetimeBeats
+      : 0;
+  const peakLifetimeBeats = observed.allowPeakAdvance === false
+    ? priorPeak
+    : Math.max(priorPeak, observedBeats);
   const next = {
     nodeId,
     firstSeenMs: prior?.firstSeenMs ?? observed.nowMs,
     firstSeenAt: prior?.firstSeenAt ?? new Date(observed.nowMs).toISOString(),
-    peakLifetimeBeats: Math.max(
-      prior?.peakLifetimeBeats ?? 0,
-      observed.lifetimeBeats ?? 0,
-    ),
+    firstSeenLifetimeBeats:
+      typeof prior?.firstSeenLifetimeBeats === "number"
+        ? prior.firstSeenLifetimeBeats
+        : observedBeats,
+    peakLifetimeBeats,
     lastSeenMs: observed.nowMs,
     lastSeenAt: new Date(observed.nowMs).toISOString(),
   };
@@ -368,7 +410,7 @@ async function verifyProofUrl(proofUrl, env) {
   }
 
   const { payload, signature, hash } = envelope;
-  if (!payload || !signature || !hash) {
+  if (!payload || !signature) {
     return { valid: false, reason: "missing_fields" };
   }
 
@@ -381,7 +423,10 @@ async function verifyProofUrl(proofUrl, env) {
   const message = stableStringify(payload);
   const fullHash = await sha256Hex(message);
   const expectedHash = fullHash.slice(0, 16);
-  if (expectedHash !== hash) {
+  if (
+    Object.prototype.hasOwnProperty.call(envelope, "hash") &&
+    (typeof hash !== "string" || expectedHash !== hash.toLowerCase())
+  ) {
     return { valid: false, reason: "hash_mismatch" };
   }
 
@@ -394,6 +439,10 @@ async function verifyProofUrl(proofUrl, env) {
   const pubkeyBytes = hexToBytes(pubkeyHex);
   if (!pubkeyBytes) {
     return { valid: false, reason: "pubkey_decode_failed" };
+  }
+  const expectedNodeId = await deriveNodeIdFromPubkey(pubkeyBytes);
+  if (payload.nodeId !== expectedNodeId) {
+    return { valid: false, reason: "node_id_mismatch" };
   }
   const sigBytes = hexToBytes(signature);
   if (!sigBytes || sigBytes.length !== 64) {
@@ -433,6 +482,7 @@ async function verifyProofUrl(proofUrl, env) {
     nowMs: Date.now(),
     lifetimeBeats:
       typeof payload.lifetimeBeats === "number" ? payload.lifetimeBeats : 0,
+    allowPeakAdvance: !scoreBlock.tamperFlags.includes("beat_rate_implausible"),
   });
 
   // Step 8: return the verified node identity + score.
@@ -623,14 +673,6 @@ export async function onRequestPost(ctx) {
 //
 // Delivery is best-effort: no retries, no queue. Webhook failures are logged
 // and never affect the /verify-device response.
-
-function bytesToHex(bytes) {
-  let out = "";
-  for (let i = 0; i < bytes.length; i++) {
-    out += bytes[i].toString(16).padStart(2, "0");
-  }
-  return out;
-}
 
 async function hmacSha256Hex(secret, message) {
   const key = await crypto.subtle.importKey(
