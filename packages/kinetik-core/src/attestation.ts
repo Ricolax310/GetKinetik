@@ -314,8 +314,8 @@ export async function createAttestation(
     bureauObserved: input.bureauObserved,
     chainClaim: input.chainClaim,
     sensorCoherence: input.sensorCoherence,
-    flags: input.flags ?? [],
-    witnesses: input.witnesses ?? [],
+    flags: Array.from(input.flags ?? []),
+    witnesses: Array.from(input.witnesses ?? []),
   });
 
   const message = stableStringify(
