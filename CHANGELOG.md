@@ -8,7 +8,56 @@ Android `versionCode` is noted alongside each release for sideload verification.
 
 ## [Unreleased] — v1.3.3
 
-### Added
+### Added (bureau hardening sprint, 2026-05-13)
+
+This batch turns the bureau from "shipped" into "undeniable" — public
+positioning, live telemetry, machine-readable spec, multi-partner auth,
+push delivery, and a self-monitoring status page. Every endpoint is
+verifiable from a partner browser without an account.
+
+- **Bureau positioning page at `/bureau/why/`.** One-page response to the
+  "we already grade our own users" objection. Five reasons a neutral
+  third-party score is structurally different from a DIY check
+  (neutrality, cross-network signal, cryptographic root, regulatory
+  shape, zero ops cost) plus a side-by-side comparison table. Linked
+  from the bureau page and from every refreshed outreach message.
+- **Public bureau telemetry — `GET /api/bureau/stats` + live ticker.**
+  Every successful verification now bumps eventually-consistent counters
+  in KV (total / valid / invalid / tampered / per-band distribution /
+  first+last verification timestamps). The bureau page renders a live
+  ticker that refreshes from your browser every 30 seconds.
+- **OpenAPI 3.1 spec at `/api/openapi.yaml` + Postman collection at
+  `/api/postman.json` + interactive RapiDoc docs at `/api/docs/`.** Drop
+  the YAML into Postman, openapi-generator, or your IDE to get a typed
+  client in 30 seconds. The interactive docs let partner engineers hit
+  *Try* against production without writing a line of code.
+- **Per-partner API keys with attribution (`ATTEST_API_KEYS`).** The
+  attest endpoint now accepts a JSON dict `{"partner": "key", ...}` in
+  the `ATTEST_API_KEYS` env var, records each attestation with an
+  `attestor` field, and lets the bureau issue or rotate keys without
+  code changes. Legacy single-key `ATTEST_API_KEY` mode still works for
+  backwards compatibility. Includes `scripts/mint-partner-key.mjs` for
+  generating new keys.
+- **Score-change webhooks (`score.changed` event).** When a node's
+  `scoreBand` transitions, the bureau POSTs an HMAC-SHA256-signed event
+  to every URL configured in `SCORE_WEBHOOK_URLS`. Headers include
+  `X-GETKINETIK-Signature`, `X-GETKINETIK-Delivery` (idempotency UUID),
+  and `X-GETKINETIK-Event`. Best-effort, no retries — partners
+  reconcile against `GET /api/score/:nodeId` for authoritative reads.
+  Full spec: `docs/api/webhooks.md`.
+- **Public status page at `/status/`.** Live browser-side probes against
+  every public endpoint (verify-device discovery, score lookup, attest
+  discovery, bureau stats, health) with wall-clock latency, last-seen
+  timestamps, and an aggregate "All systems operational" indicator.
+- **Service health probe at `/api/health`.** Checks KV binding + KV
+  readability + attest key presence. Returns 200 with `ok: false` when
+  degraded (instead of 503) so external monitors can tell the
+  difference between "down" and "degraded".
+- **Waitlist modal reframed for iOS launch.** "Nodes are being minted in
+  waves" → "iOS is coming. Android live now." Same KV-backed email
+  capture, honest framing, no artificial scarcity.
+
+### Genesis Score v1.1 (continued)
 - **Genesis Score v1.1 — bureau-bounded scoring (security hardening).**
   v1.0 trusted self-reported `firstBeatTs` and `lifetimeBeats`, which
   meant a fresh keypair could mint a single proof claiming "6 months old,
