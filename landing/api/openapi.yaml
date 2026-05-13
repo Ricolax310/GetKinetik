@@ -228,6 +228,30 @@ paths:
             application/json:
               schema: { $ref: "#/components/schemas/ApiError" }
 
+  /api/webhooks/score-changed:
+    x-webhook-direction: outbound
+    description: |
+      **Outbound webhook (bureau → partner).** Documented here as a path
+      for tooling clarity, but this endpoint is not served by the bureau —
+      it's the *shape* of the POST the bureau sends to receivers
+      registered via `SCORE_WEBHOOK_URLS`. See `docs/api/webhooks.md` for
+      registration, signature verification, and delivery semantics.
+    post:
+      tags: [Verification]
+      summary: Outbound — score.changed event the bureau POSTs to your URL
+      operationId: scoreChangedWebhook
+      description: |
+        Fired when a node's `scoreBand` transitions. Best-effort delivery
+        with HMAC-SHA256 signature in `X-GETKINETIK-Signature`.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ScoreChangedEvent" }
+      responses:
+        "200":
+          description: Partner acknowledged delivery.
+
   /api/bureau/stats:
     get:
       tags: [Telemetry]
@@ -447,6 +471,28 @@ components:
         contentType:   { type: string }
         bodyExample:   { type: object }
         spec:          { type: string, format: uri }
+
+    ScoreChangedEvent:
+      type: object
+      required: [event, nodeId, toBand, toScore, methodologyVersion, asOf, delivery]
+      properties:
+        event:    { type: string, enum: [score.changed] }
+        nodeId:   { $ref: "#/components/schemas/NodeId" }
+        fromBand:
+          oneOf:
+            - { $ref: "#/components/schemas/ScoreBand" }
+            - { type: "null" }
+          description: Previous band, or `null` on first sighting.
+        toBand:   { $ref: "#/components/schemas/ScoreBand" }
+        toScore:  { type: integer, minimum: 0, maximum: 1000 }
+        tamperFlags:
+          type: array
+          items: { $ref: "#/components/schemas/TamperFlag" }
+        methodologyVersion: { type: string, example: "v1.1" }
+        asOf:     { type: string, format: date-time }
+        delivery:
+          type: string
+          description: UUID for deduplication on the receiver.
 
     ApiError:
       type: object
