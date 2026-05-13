@@ -6,7 +6,7 @@
 > integration shape is already specified rather than negotiated under
 > time pressure.
 
-**Versioned alongside** [`@kinetik/verify`](../../packages/verify/) (the
+**Versioned alongside** [`@getkinetik/verify`](../../packages/verify/) (the
 server-side / generic verifier) and the [`verify-device`](../api/verify-device.md)
 webhook (the hosted partner API). This document defines the **third leg**
 of the integration triad — the **client-side SDK** that lets a third-party
@@ -22,7 +22,7 @@ Today, a partner network can verify a GETKINETIK user three ways:
 | Path | What partner runs | What partner trusts |
 |------|--------------------|----------------------|
 | **A. Hosted webhook** | `POST /api/verify-device` | Our server, our uptime |
-| **B. `@kinetik/verify` library** | `import { verifyArtifact }` | Math only — no servers |
+| **B. `@getkinetik/verify` library** | `import { verifyArtifact }` | Math only — no servers |
 | **C. Public verifier UI** | Open the URL in any browser | Math only — runs in the browser |
 
 All three require the partner to **already have the proof** — i.e. the
@@ -53,12 +53,12 @@ These constraints are non-negotiable and flow directly from
    See `PRIVACY.md` Rule 1 for what is never collected.
 3. **Same artifact shape as today.** The client SDK does not invent a
    new payload kind. It returns the same `{ payload, signature }`
-   compact form `@kinetik/verify` and the public verifier already
+   compact form `@getkinetik/verify` and the public verifier already
    accept. Drift between mobile-mint, hosted-webhook-verify, and SDK-
    verify is a release-blocking bug.
 4. **Stateless — no server required for the partner.** The SDK is a
    thin client; the partner's backend can verify the returned artifact
-   with `@kinetik/verify` (offline) or by calling the hosted webhook
+   with `@getkinetik/verify` (offline) or by calling the hosted webhook
    (network round-trip). Partner's choice.
 5. **No "browser bounce" if avoidable.** The flow uses native deep
    links / universal links so the user never sees a web tab. Failure
@@ -66,7 +66,7 @@ These constraints are non-negotiable and flow directly from
 6. **No telemetry.** The SDK does not phone home. Build success
    metrics from `verify-device` webhook usage, not from SDK pings.
 7. **Open-source.** The SDK is published under the same MIT license
-   as `@kinetik/verify`, so a partner can audit (or fork) the bridge
+   as `@getkinetik/verify`, so a partner can audit (or fork) the bridge
    independently of trusting our binary.
 
 ---
@@ -77,13 +77,13 @@ We ship two thin SDKs that share the same protocol on the wire. A
 partner picks the one that matches their stack. Both interoperate with
 the same GETKINETIK app.
 
-### 3.1 `@kinetik/sdk-react-native`
+### 3.1 `@getkinetik/sdk-react-native`
 
 For partner mobile apps built on React Native / Expo. The most likely
 first integration target (DIMO, Hivemapper).
 
 ```ts
-import { requestProofOfOrigin } from '@kinetik/sdk-react-native';
+import { requestProofOfOrigin } from '@getkinetik/sdk-react-native';
 
 async function attachKinetikIdentity() {
   const result = await requestProofOfOrigin({
@@ -108,7 +108,7 @@ async function attachKinetikIdentity() {
 }
 ```
 
-### 3.2 `@kinetik/sdk-android` (Kotlin) and `@kinetik/sdk-ios` (Swift)
+### 3.2 `@getkinetik/sdk-android` (Kotlin) and `@getkinetik/sdk-ios` (Swift)
 
 For partner native apps. Same protocol, idiomatic platform API. Names
 TBD; expect e.g. `KinetikClient.requestProofOfOrigin(...)` returning
@@ -213,7 +213,7 @@ v:2 PoO schema:
 
 Notes on the new fields:
 
-- **Optional.** Verifiers (the `@kinetik/verify` package, the public
+- **Optional.** Verifiers (the `@getkinetik/verify` package, the public
   web verifier, the hosted webhook) accept proofs with or without
   the audience/nonce/purpose triplet. v:2 forward-compat.
 - **Inside the signed bytes.** A partner that re-uses an old proof
@@ -224,7 +224,7 @@ Notes on the new fields:
 
 Schema bump: this is a **minor** change (new optional field,
 backward-compatible), captured in the next minor version bump of
-`landing/verify/verifier.js` and `@kinetik/verify`. No `v:2 → v:3`
+`landing/verify/verifier.js` and `@getkinetik/verify`. No `v:2 → v:3`
 needed.
 
 ### 4.3 Step ③ — return via partner deep link
@@ -235,12 +235,12 @@ identical encoding to the public verifier URL fragment so a single
 encoder/decoder is shared.
 
 The SDK on the partner side intercepts the deep link, decodes the
-proof with the same logic as `decodeProofUrl()` from `@kinetik/verify`,
+proof with the same logic as `decodeProofUrl()` from `@getkinetik/verify`,
 and resolves the `Promise` it returned in step ①.
 
 ### 4.4 Step ④ — partner backend verification (optional)
 
-The partner can verify on-device (using `@kinetik/verify` bundled
+The partner can verify on-device (using `@getkinetik/verify` bundled
 into their app) or send the proof to their backend and verify
 there. Either way, verification is the **same five checks** the
 existing verifier runs, plus three SDK-specific checks:
@@ -251,13 +251,13 @@ existing verifier runs, plus three SDK-specific checks:
 | `nonce === expected nonce` | Replay protection — partner-generated nonce matches |
 | `Date.now() - issuedAt < 5 * 60_000` | Proof is fresh (within 5 min of mint) |
 
-These three checks are **not part of `@kinetik/verify` core** —
+These three checks are **not part of `@getkinetik/verify` core** —
 that package stays pure to the cryptographic contract. They are
-helper utilities exposed from `@kinetik/sdk-*`:
+helper utilities exposed from `@getkinetik/sdk-*`:
 
 ```ts
-import { verifyArtifact } from '@kinetik/verify';
-import { verifyAudienceClaim } from '@kinetik/sdk-react-native';
+import { verifyArtifact } from '@getkinetik/verify';
+import { verifyAudienceClaim } from '@getkinetik/sdk-react-native';
 
 const report = await verifyArtifact(proof);
 const audOk  = verifyAudienceClaim(proof, {
@@ -313,7 +313,7 @@ Phase C — app side (GETKINETIK)
 - Open the partner's `returnUrl` with the proof.
 
 Phase D — partner SDK (RN first, then native if needed)
-- `@kinetik/sdk-react-native`: thin wrapper around
+- `@getkinetik/sdk-react-native`: thin wrapper around
   `Linking.openURL` + a `Linking` listener for the return.
 - `verifyAudienceClaim` helper.
 - Fallback to public verifier URL when GETKINETIK is not
@@ -347,7 +347,7 @@ These are open for the conversation with the first partner.
 - **Server-side nonce.** The current draft has the partner client
   generate the nonce. Some partners may prefer server-issued
   nonces; the SDK should support both shapes.
-- **Web SDK.** Do we ship a `@kinetik/sdk-web`? Probably not in
+- **Web SDK.** Do we ship a `@getkinetik/sdk-web`? Probably not in
   v1 — most partner integrations of interest are mobile, and the
   existing verifier URL covers the web case. Revisit if a desktop
   partner asks for it.

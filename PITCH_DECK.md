@@ -124,7 +124,7 @@ Ed25519 sovereign identity     External iPhone verified QR → VALID
 289+ heartbeats on chain       Hash-chained, tamper-evident
 5 DePIN adapters               Nodle, DIMO, Hivemapper, WeatherXM, Geodnet
 Partner webhook live           getkinetik.app/api/verify-device
-@kinetik/verify npm package    27/27 smoketests passing
+@getkinetik/verify npm package    27/27 smoketests passing
 DIMO OAuth wired               Login with DIMO working
 Public verifier                getkinetik.app/verify — no server, pure math
 ```
@@ -199,7 +199,7 @@ USE OF FUNDS
 MILESTONES
 ────────────────────────────────────
 →  First production partner integration (verified-user premium live)
-→  @kinetik/verify published on npm with a real consumer
+→  @getkinetik/verify published on npm with a real consumer
 →  1,000 active authenticated nodes
 →  Series A conversation
 ```

@@ -219,7 +219,7 @@ POST getkinetik.app/api/verify-device
 
 For DePIN networks that want Sybil resistance without building it.
 
-@kinetik/verify npm package (27/27 smoketests passing) ships when
+@getkinetik/verify npm package (27/27 smoketests passing) ships when
 the first partner integration is live.
 
 github.com/Ricolax310/GetKinetik

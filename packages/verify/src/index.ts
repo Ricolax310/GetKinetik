@@ -1,5 +1,5 @@
 // ============================================================================
-// @kinetik/verify — independent verifier for GETKINETIK signed artifacts.
+// @getkinetik/verify — independent verifier for GETKINETIK signed artifacts.
 // ----------------------------------------------------------------------------
 // This package is the byte-for-byte equivalent of the verifier shipped at
 // https://getkinetik.app/verify/. It exists so partner networks, lenders,

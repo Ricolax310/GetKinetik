@@ -1,10 +1,11 @@
-# Publishing `@kinetik/verify` to npm
+# Publishing `@getkinetik/verify` to npm
 
 The `packages/verify/` workspace is **publish-ready**. This document is
 the one-shot runbook for actually pushing it to the public registry.
 
-> Status as of 2026-05-12: built, 27/27 smoketests passing, `private`
-> flag removed, `publishConfig.access` set to `public`. Not yet published.
+> Status as of 2026-05-12: built, 27/27 smoketests passing,
+> `publishConfig.access` set to `public`, scope `@getkinetik` registered
+> on npm. Not yet published.
 
 ---
 
@@ -17,61 +18,52 @@ our infrastructure. That's what this package is — a pure-function,
 zero-network verifier any partner can drop into a Node, browser, or
 edge worker.
 
-A live `npm install @kinetik/verify` is the cheapest credibility
+A live `npm install @getkinetik/verify` is the cheapest credibility
 unlock available. It turns the SDK from an internal artifact into a
 public install. Partner conversations change shape the moment "here's
 the webhook" becomes "here's the npm package."
 
 ---
 
-## One-time setup (~10 minutes, before first publish only)
+## Scope decision (2026-05-12, locked)
+
+The `@kinetik` scope on npm was unavailable — soft-squatted by a
+dormant `kinetik` user account with 0 packages and 0 orgs that npm
+will not release. We claimed `@getkinetik` instead, which matches
+the `getkinetik.app` domain and reads cleanly as
+`npm i @getkinetik/verify`.
+
+If a future package goes public (`@getkinetik/sdk-react-native`,
+`@getkinetik/sdk-android`, etc.), it ships under the same scope.
+
+---
+
+## One-time setup (only before first publish)
 
 ### 1. Log in to npm
-
-If you have an existing npm account:
 
 ```bash
 npm login
 ```
 
 This opens a browser auth flow. Sign in there; the terminal will
-unblock when done.
-
-If you do NOT have an npm account yet:
-
-1. Visit https://www.npmjs.com/signup
-2. Create an account with `eric@outfromnothingllc.com` (use the same
-   email the company is reachable at, so future ownership transfers
-   are clean)
-3. Verify the email
-4. Run `npm login` in this terminal
-
-Confirm with:
+unblock when done. Confirm with:
 
 ```bash
 npm whoami
 ```
 
-You should see your npm username.
+You should see your npm username (e.g. `kinetik_rick`).
 
-### 2. Claim the `@kinetik` organization
+### 2. Verify you have permission to publish under `@getkinetik`
 
-Visit https://www.npmjs.com/org/create and create the organization
-`kinetik` (free tier — unlimited public packages, $0/month).
-
-If npm rejects the name because the user `kinetik` already exists
-and is yours, no action needed: `@kinetik/...` will publish under
-your user scope automatically.
-
-If npm rejects because the user `kinetik` is someone else, fall back
-to `@getkinetik` — edit `packages/verify/package.json`:
-
-```diff
-- "name": "@kinetik/verify",
-+ "name": "@getkinetik/verify",
+```bash
+npm org ls getkinetik
 ```
 
-Then create the `@getkinetik` org instead.
+You should see yourself as an owner of the org. If npm returns an
+"unauthorized" error, you're logged in under a different account
+than the one that created `@getkinetik` — fix the login first.
 
 ---
 
@@ -81,10 +73,10 @@ From the repo root:
 
 ```bash
 cd packages/verify
-npm install          # only the first time, ensures node_modules is fresh
-npm run build        # tsc -> dist/, must be clean
-npm test             # 27/27 smoketest, exits 0 on pass
-npm publish          # --access public is baked into package.json
+npm install        # only the first time; rewrites package-lock with new name
+npm run build      # tsc -> dist/, must be clean
+npm test           # 27/27 smoketest, exits 0 on pass
+npm publish        # --access public is baked into package.json
 ```
 
 The `prepublishOnly` script runs `build` and `smoketest` automatically
@@ -95,11 +87,11 @@ suspenders, not strictly required.
 Confirm the package is live:
 
 ```bash
-npm view @kinetik/verify
+npm view @getkinetik/verify
 ```
 
-And visit https://www.npmjs.com/package/@kinetik/verify — the README
-renders directly on that page.
+And visit https://www.npmjs.com/package/@getkinetik/verify — the
+README renders directly on that page.
 
 ---
 
@@ -143,10 +135,14 @@ the type surface is part of the contract and only changes on major.
   unpublish requests for packages with more than 1 dependent. A bad
   release is fixed by publishing a patch, not by retracting.
 - **Do not publish the entire monorepo.** Only `packages/verify/`
-  ships. `packages/kinetik-core/` is private by design (`"private":
-  true` in its `package.json`) and the in-app code stays private
-  until the L1 SDK boundary is formalized (see
-  `packages/kinetik-core/README.md` for the three gates).
+  ships. The other workspace packages (`packages/kinetik-core/`,
+  `packages/optimizer/`, `packages/credits/`, `packages/adapter-*`)
+  are `private: true` by design and the in-app code stays private
+  until each L1/L2/L3/L4 SDK boundary is formalized (see
+  `packages/kinetik-core/README.md` for the three gates on the
+  identity package specifically). When any of those packages goes
+  public, they get renamed to the `@getkinetik/...` scope before
+  publish.
 - **Do not sign commits as the bot.** Publishing identity stays with
   the human author so npm 2FA stays meaningful.
 

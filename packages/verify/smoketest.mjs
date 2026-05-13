@@ -1,5 +1,5 @@
 // ============================================================================
-// @kinetik/verify — package smoketest.
+// @getkinetik/verify — package smoketest.
 // ----------------------------------------------------------------------------
 // Mints a fresh ephemeral keypair, signs sample artifacts (proof-of-origin,
 // heartbeat, earning) using the same byte contract the GETKINETIK app uses,
@@ -45,7 +45,7 @@ const assert = (cond, label) => {
   }
 };
 
-console.log(`@kinetik/verify smoketest — package version ${VERSION}\n`);
+console.log(`@getkinetik/verify smoketest — package version ${VERSION}\n`);
 
 // ---- [1] mint a fresh node identity ----------------------------------------
 const sk = ed.utils.randomSecretKey();
@@ -290,7 +290,7 @@ console.log('\n[9] structurally-invalid inputs throw');
 
 // ----------------------------------------------------------------------------
 console.log('\n--------------------------------------------------------');
-console.log(`@kinetik/verify  ${passed} passed  ${failed} failed`);
+console.log(`@getkinetik/verify  ${passed} passed  ${failed} failed`);
 if (failed > 0) {
   console.log('SMOKETEST FAILED');
   process.exit(1);

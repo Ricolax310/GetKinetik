@@ -41,10 +41,26 @@ Partners call one endpoint:
 ```
 POST https://getkinetik.app/api/verify-device
 { "proofUrl": "<user's proof URL>" }
-→ { "valid": true, "nodeId", "pubkey", "mintedAt", ... }
+→ {
+    "valid": true,
+    "nodeId": "KINETIK-NODE-CDC262E7",
+    "pubkey": "ff07e53d...",
+    "lifetimeBeats": 25847,
+    "firstBeatTs": 1777086288998,
+    "genesisScore": 636,         ← THE BUREAU GRADE — live in production
+    "scoreBand": "STANDING",     ← public 5-band scale (TAMPERED → PREMIER)
+    "methodologyVersion": "v1.0",
+    "tamperFlags": []
+  }
 ```
 
-That's it. One HTTP call. Returns real or fake. Works from any backend in any language.
+That's it. One HTTP call. Returns real-or-fake, the device's age, **and a 0–1000
+Genesis Score** computed from a published FICO-style methodology
+(`docs/methodology/GENESIS_SCORE.md`). Works from any backend in any language.
+
+Score bands are calibration anchors — partners pick a threshold appropriate
+to their own fraud cost (e.g. 500 permissive, 750 strict, 900 premium tier).
+We never decide the network's payout policy; we just publish the grade.
 
 **What we never do:**
 - We never issue a token
@@ -97,18 +113,26 @@ Paid tiers unlock volume, SLAs, batch attestation, and historical data.
 |---|---|
 | Android app live | v1.4.0 — sideload APK on GitHub Releases |
 | Ed25519 sovereign identity | Ships on every install. Key never leaves device. |
-| Hash-chained heartbeat log | Running on real hardware. 289+ beats on chain. |
+| Hash-chained heartbeat log | Running on real hardware. Tamper-evident. Thousands of beats on chain across active nodes. |
+| Adaptive cadence (battery-aware) | Active 30s / background 5min / sleep 30min — shipped in `packages/kinetik-core/src/cadence.ts` |
 | Proof of Origin verified by external device | Rung 3 confirmed — iPhone scanned Android QR → VALID |
 | 5 DePIN network adapters | Nodle, DIMO, Hivemapper, WeatherXM, Geodnet |
-| Partner verification webhook | Live at getkinetik.app/api/verify-device |
-| `@kinetik/verify` npm package | Built, 27/27 smoketests passing, ready to publish |
-| Public verifier | getkinetik.app/verify — runs fully client-side, no server |
+| Partner verification webhook | Live at `getkinetik.app/api/verify-device` (POST: verify proof, GET: API discovery JSON) |
+| **Genesis Score v1.0 LIVE** | Public 0–1000 reputation grade returned on every verify call. Methodology + score bands published. |
+| Partner score lookup API | `GET /api/score/:nodeId` — partners look up a graded node without re-submitting a fresh proof. KV-cached, 30-day TTL. |
+| Partner attestation channel | `POST /api/attest` — networks feed signed observations into the bureau (planned v1.1 score input) |
+| Bureau landing page | `getkinetik.app/bureau/` — score bands, methodology, sample response, neutrality + privacy charters |
+| `@getkinetik/verify` npm package | Publish-ready (`publishConfig.access: public`). 27/27 smoketests passing. Runbook at `docs/PUBLISHING_VERIFY.md`. |
+| Public verifier | `getkinetik.app/verify` — runs fully client-side, no server, no telemetry |
 | Optimizer engine | Gas-aware claim timing across all 5 networks |
 | DIMO integration | Login with DIMO wired, earnings flow into signed ledger |
-| NEUTRALITY.md + PRIVACY.md | Public charters: no token, no equity, no data sale |
+| NEUTRALITY.md + PRIVACY.md + GENESIS_SCORE.md | Three public charters: no token, no equity, no data sale, FICO-style methodology |
+| 5-minute integration quickstart | `docs/QUICKSTART.md` — live demo proof + curl recipe + code examples |
 
 **Outreach sent:** DIMO (Discord DM + grants@dimo.zone), Hivemapper (MIP-26 Discord).
-Awaiting response. WeatherXM, Geodnet outreach in progress.
+Awaiting response. WeatherXM, Geodnet, Nodle (bureau-reframe) outreach in progress.
+Bureau positioning materials (`PITCH.md`, `OUTREACH_MESSAGES.md`, `NEUTRALITY.md`,
+`PRIVACY.md`, `GENESIS_SCORE.md`, `CLIENT_SDK_DESIGN.md`) all shipped and consistent.
 
 ---
 
@@ -150,15 +174,15 @@ one BD hire with DePIN network relationships.
 **Use of funds:**
 | Line | % | Purpose |
 |---|---|---|
-| Engineering | 55% | Senior Android/RN engineer, 6 months. Ship `@kinetik/sdk-react-native`, iOS port, first production partner integration |
+| Engineering | 55% | Senior Android/RN engineer, 6 months. Ship `@getkinetik/sdk-react-native`, iOS port, first production partner integration |
 | BD + travel | 25% | Close first paying partner. DePIN conferences (Token2049, ETH Denver, Permissionless) |
 | Legal + IP | 10% | USPTO trademark Class 9+42, IP assignment formalization, partnership agreements |
 | Ops + infra | 10% | Cloudflare Workers paid tier, AWS, tooling |
 
 **Milestones this capital unlocks:**
 1. First production partner integration (verified-user premium live on one network)
-2. `@kinetik/verify` published on npm with a real consumer
-3. `@kinetik/sdk-react-native` v1.0 — "Sign in with Kinetik" deep-link flow
+2. `@getkinetik/verify` published on npm with a real consumer
+3. `@getkinetik/sdk-react-native` v1.0 — "Sign in with Kinetik" deep-link flow
 4. 1,000 active authenticated nodes
 5. First enterprise audit contract or second paying partner → Series A conversation
 
