@@ -776,6 +776,7 @@ async function bumpBureauStats(kv, result) {
 
 export async function onRequest(ctx) {
   if (ctx.request.method === "OPTIONS") return onRequestOptions();
+  if (ctx.request.method === "GET")     return onRequestGet();
   if (ctx.request.method === "POST")    return onRequestPost(ctx);
   return json({ error: "Method not allowed." }, 405);
 }
