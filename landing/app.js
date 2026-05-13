@@ -10,15 +10,13 @@
 (function () {
   "use strict";
 
-  /* Public APK download URL hosted on GitHub Releases.
-     This is a permanent, CDN-backed URL we control: anyone hitting
-     it gets the signed Sovereign Node APK directly, no account or
-     extra clicks required. SHA256 is recorded in the release notes
-     so the binary can be verified against the source.
+  /* Public APK download URL. Hosted on Expo's CDN (signed by our keystore on EAS).
+     We mirror this from the GitHub release notes so the binary is verifiable —
+     SHA256 is recorded on the release page so anyone can hash-check the artifact.
      iOS and desktop still fall through to the waitlist modal. */
-  /* Bump path when you tag a new Android release (asset name must match GitHub). */
+  /* Bump this when EAS produces a new build URL for the next version. */
   var ANDROID_APK_URL =
-    "https://github.com/Ricolax310/GetKinetik/releases/download/v1.4.0/GETKINETIK-v1.4.0.apk";
+    "https://expo.dev/artifacts/eas/8Xtgv9Mi2Aii1edJ4xyReD.apk";
 
   var ua = (typeof navigator !== "undefined" && navigator.userAgent) || "";
   var isAndroid = /Android/i.test(ua);
