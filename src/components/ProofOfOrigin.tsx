@@ -90,6 +90,14 @@ type ProofOfOriginProps = {
    * grade alongside the cryptographic proof.
    */
   genesisScore?: GenesisScoreResult | null;
+  /**
+   * Fired after a fresh proof has been successfully signed. Wired into
+   * useGenesisScore.refresh by VaultPanel so the bureau chip refetches
+   * the moment the user mints a card — closing the gap between "I just
+   * verified" and "the chip still says AWAITING PROOF". v1.5.0 shipped
+   * without this; v1.5.1 ties them together.
+   */
+  onProofMinted?: () => Promise<void> | void;
 };
 
 // ----------------------------------------------------------------------------
@@ -123,6 +131,7 @@ export function ProofOfOrigin({
   identity,
   stats,
   genesisScore = null,
+  onProofMinted,
 }: ProofOfOriginProps) {
   const insets = useSafeAreaInsets();
   const { height } = useWindowDimensions();
@@ -165,6 +174,12 @@ export function ProofOfOrigin({
       try {
         const p = await createProofOfOrigin(identity, statsRef.current);
         setProof(p);
+        // Nudge the bureau chip to re-verify against the freshly-minted
+        // proof. Best-effort: failures are silent so a degraded network
+        // can never block the screenshot-ready card from rendering.
+        if (onProofMinted) {
+          void Promise.resolve(onProofMinted()).catch(() => undefined);
+        }
       } catch (err) {
         console.warn('[ProofOfOrigin] sign failed:', err);
         setProof(null);
@@ -172,6 +187,9 @@ export function ProofOfOrigin({
         signingRef.current = false;
       }
     })();
+    // onProofMinted intentionally excluded — a parent re-render that
+    // produces a new function reference must not cause us to re-mint.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [visible, identity]);
 
   // Presentation — same 360ms inOut(cubic) curve as the Manifesto so the
