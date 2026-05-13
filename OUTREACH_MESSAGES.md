@@ -214,11 +214,32 @@ Site: https://getkinetik.app
 
 ---
 
-## Priority Order for Outreach (Today)
+## Priority Order for Outreach (this week — 2026-05-13)
 
-1. **Hivemapper** — MIP-26 is active, perfect timing for an independent device-grading pitch
-2. **DIMO** — already have integration context, BD-ready
-3. **Geodnet** — GNSS fraud angle is the sharpest version of the bureau pitch, smaller team = faster decisions
-4. **WeatherXM** — data quality angle, AutoMod requires DM-first
-5. **Nodle** — re-open with bureau reframing (their earlier reply was to the aggregator pitch, not this one)
-6. **Adjacent buyers** — when one network conversation is in motion, use it as a reference point with a lender / insurer / foundation; they value bureau independence even more than networks do
+**As of 2026-05-13, `@getkinetik/verify` is live on npm.** The strongest
+new opener for every message below is:
+
+> *As of yesterday our verifier is on npm: `npm install @getkinetik/verify`.
+> Same byte-for-byte cryptographic contract our app uses, zero network
+> calls to us. A real trust bureau has to be verifiable by partners who
+> don't trust it — that's what we just shipped, and it's what makes the
+> rest of this pitch worth your 15 minutes.*
+
+Lead with that paragraph (or a tighter variant) on every send this week.
+The **send-list** with specific contacts, channels, days, and follow-up
+triggers lives in [`OUTREACH_SENDLIST.md`](./OUTREACH_SENDLIST.md) —
+this file is just the message library.
+
+Priority order for this week's sends:
+
+1. **Twitter Thread 4** (the npm publish moment) — tonight, pinned
+2. **DePIN investor DMs** (Multicoin / Borderless / Onchainy) — tonight, one-liner
+3. **Hivemapper** — Wed AM, MIP-26 angle is still live
+4. **DIMO** — Wed PM, reply to existing `grants@dimo.zone` thread with npm update
+5. **Geodnet** — Thu AM, support ticket + Telegram (GNSS fraud is the sharpest pitch)
+6. **WeatherXM** — Thu PM, DM first (AutoMod blocks our domain in-channel)
+7. **Nodle** — Fri AM, bureau-reframe DM to @Community Manager
+8. **First adjacent buyer** (DePIN lender) — Fri PM, lender-flavored variant
+
+See [`OUTREACH_SENDLIST.md`](./OUTREACH_SENDLIST.md) for the full sequence,
+bump rules, reply triggers, and "reawaken later" queue.
