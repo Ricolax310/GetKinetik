@@ -112,27 +112,37 @@ export function useGenesisScore(
   }, [identity]);
 
   // ── Response parser ────────────────────────────────────────────────
-  // The bureau replies with `{valid:true, genesisScore, scoreBand, ...}`
-  // on success and `{valid:false, reason}` (HTTP 200) on a verification
-  // failure. v1.5.0 trusted `verifyRes.ok` and read `data.genesisScore`
-  // unconditionally — which surfaced as the literal string "undefined"
-  // in the chip whenever verification failed (e.g. when the server
-  // rejected the COMPACT proof URL for `missing_fields`). We now require
-  // a numeric score before promoting the response into `result`; anything
-  // else is treated as "not yet graded" and leaves `result` as null.
+  // v2 bureau responses put the convenience score under `derived`; older
+  // responses exposed top-level `genesisScore` / `scoreBand` aliases. Accept
+  // both shapes so shipped clients and local builds survive API cutovers.
   const parseScore = (data: unknown): GenesisScoreResult | null => {
     if (!data || typeof data !== 'object') return null;
     const d = data as Record<string, unknown>;
     if ('valid' in d && d.valid === false) return null;
-    const score = typeof d.genesisScore === 'number' ? d.genesisScore : null;
+    const derived =
+      d.derived && typeof d.derived === 'object'
+        ? (d.derived as Record<string, unknown>)
+        : null;
+    const score =
+      typeof d.genesisScore === 'number'
+        ? d.genesisScore
+        : typeof derived?.score === 'number'
+          ? derived.score
+          : null;
     if (score === null) return null;
     return {
       score,
       band:
-        typeof d.scoreBand === 'string' ? (d.scoreBand as string) : 'UNGRADED',
+        typeof d.scoreBand === 'string'
+          ? (d.scoreBand as string)
+          : typeof derived?.tier === 'string'
+            ? (derived.tier as string)
+            : 'UNGRADED',
       methodologyVersion:
         typeof d.methodologyVersion === 'string'
           ? (d.methodologyVersion as string)
+          : typeof derived?.policyVersion === 'string'
+            ? (derived.policyVersion as string)
           : 'v1.0',
       asOf:
         typeof d.asOf === 'string'

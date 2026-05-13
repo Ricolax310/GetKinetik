@@ -162,8 +162,39 @@ console.log("\n[3] flagged node (chain_rewind)");
   assert(r.flags.includes("chain_rewind"), "chain_rewind in flags");
 }
 
-// ---- [4] sensor observed but implausible — floor still applies -------------
-console.log("\n[4] sensor implausible (lux out of range)");
+// ---- [4] first_sighting is informational by default -------------------------
+console.log("\n[4] first_sighting is informational");
+{
+  const att = buildAttestation({
+    flags: ["first_sighting"],
+  });
+  const r = attestationToTier(att);
+  assert(r.flagged === false, "not flagged");
+  assert(r.tier === "NEW", "tier remains NEW");
+  assert(r.score === DEFAULT_POLICY.baseline, "score is not floored");
+  assert(r.flags.includes("first_sighting"), "first_sighting remains visible");
+}
+
+// ---- [5] custom policy can treat first_sighting as tamper -------------------
+console.log("\n[5] custom policy floors first_sighting");
+{
+  const att = buildAttestation({
+    flags: ["first_sighting"],
+  });
+  const r = attestationToTier(att, {
+    ...DEFAULT_POLICY,
+    informationalFlags: [],
+  });
+  assert(r.flagged === true, "flagged by custom policy");
+  assert(r.tier === "TAMPERED", "tier is TAMPERED");
+  assert(
+    r.score <= DEFAULT_POLICY.flaggedScoreCeiling,
+    `score <= ${DEFAULT_POLICY.flaggedScoreCeiling} (got ${r.score})`,
+  );
+}
+
+// ---- [6] sensor observed but implausible — floor still applies -------------
+console.log("\n[6] sensor implausible (lux out of range)");
 {
   const att = buildAttestation({
     bureauObserved: {
@@ -199,8 +230,8 @@ console.log("\n[4] sensor implausible (lux out of range)");
   );
 }
 
-// ---- [5] pure-function determinism -----------------------------------------
-console.log("\n[5] determinism (same input → same output)");
+// ---- [7] pure-function determinism -----------------------------------------
+console.log("\n[7] determinism (same input → same output)");
 {
   const att = buildAttestation({
     bureauObserved: {
@@ -233,8 +264,8 @@ console.log("\n[5] determinism (same input → same output)");
   );
 }
 
-// ---- [6] custom policy — stricter PREMIER threshold ------------------------
-console.log("\n[6] custom policy (strict PREMIER threshold)");
+// ---- [8] custom policy — stricter PREMIER threshold ------------------------
+console.log("\n[8] custom policy (strict PREMIER threshold)");
 {
   const now = Date.now();
   const att = buildAttestation({
@@ -278,8 +309,8 @@ console.log("\n[6] custom policy (strict PREMIER threshold)");
   );
 }
 
-// ---- [7] contributingFactors sum equals score (before flag floor) ----------
-console.log("\n[7] contributingFactors sum");
+// ---- [9] contributingFactors sum equals score (before flag floor) ----------
+console.log("\n[9] contributingFactors sum");
 {
   const now = Date.now();
   const att = buildAttestation({

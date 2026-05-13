@@ -144,6 +144,16 @@ async function sha256Hex(message) {
   return Array.from(new Uint8Array(buf), (b) => b.toString(16).padStart(2, "0")).join("");
 }
 
+async function sha256BytesHex(bytes) {
+  const buf = await crypto.subtle.digest("SHA-256", bytes);
+  return Array.from(new Uint8Array(buf), (b) => b.toString(16).padStart(2, "0")).join("");
+}
+
+async function nodeIdForPubkey(pubkeyBytes) {
+  const fingerprint = await sha256BytesHex(pubkeyBytes);
+  return `KINETIK-NODE-${fingerprint.slice(0, 8).toUpperCase()}`;
+}
+
 function extractProofFragment(proofUrl) {
   let fragment;
   try {
@@ -228,14 +238,23 @@ async function loadBureauContext(env, nodeId) {
 
 async function persistBureauContext(env, nodeId, prior, observed) {
   if (!env?.KINETIK_KV || !nodeId) return;
+  const priorPeak =
+    typeof prior?.peakLifetimeBeats === "number" ? prior.peakLifetimeBeats : 0;
+  const observedBeats =
+    typeof observed.lifetimeBeats === "number" ? observed.lifetimeBeats : 0;
   const next = {
     nodeId,
     firstSeenMs: prior?.firstSeenMs ?? observed.nowMs,
     firstSeenAt: prior?.firstSeenAt ?? new Date(observed.nowMs).toISOString(),
-    peakLifetimeBeats: Math.max(
-      prior?.peakLifetimeBeats ?? 0,
-      observed.lifetimeBeats ?? 0,
-    ),
+    firstSeenLifetimeBeats:
+      typeof prior?.firstSeenLifetimeBeats === "number"
+        ? prior.firstSeenLifetimeBeats
+        : prior
+          ? priorPeak
+          : observedBeats,
+    peakLifetimeBeats: observed.advancePeak === false
+      ? priorPeak
+      : Math.max(priorPeak, observedBeats),
     lastSeenMs: observed.nowMs,
     lastSeenAt: new Date(observed.nowMs).toISOString(),
   };
@@ -272,6 +291,7 @@ const DEFAULT_POLICY = {
   sensorBaseline: 50,
   sensorPerFieldPoints: 50,
   flaggedScoreCeiling: 199,
+  informationalFlags: ["first_sighting"],
   tierBands: {
     PREMIER: { min: 900 },
     STRONG: { min: 750 },
@@ -283,7 +303,8 @@ const DEFAULT_POLICY = {
 function attestationToTier(att, policy = DEFAULT_POLICY) {
   let score = policy.baseline;
   const flags = Array.isArray(att.flags) ? att.flags : [];
-  const flagged = flags.length > 0;
+  const informationalFlags = new Set(policy.informationalFlags ?? []);
+  const flagged = flags.some((flag) => !informationalFlags.has(flag));
 
   const observedWindowMs = Math.max(
     0,
@@ -425,8 +446,20 @@ async function verifyAndAttest(proofUrl, env) {
   }
   if (!verified) return { valid: false, reason: "signature_invalid" };
 
+  const claimedNodeId =
+    typeof payload.nodeId === "string" ? payload.nodeId.trim() : "";
+  const derivedNodeId = await nodeIdForPubkey(pubkeyBytes);
+  if (claimedNodeId !== derivedNodeId) {
+    return {
+      valid: false,
+      reason: "node_id_mismatch",
+      nodeId: claimedNodeId || null,
+      expectedNodeId: derivedNodeId,
+    };
+  }
+
   // Step 7: load bureau context and compute flags.
-  const nodeId = payload.nodeId ?? null;
+  const nodeId = claimedNodeId;
   const priorContext = await loadBureauContext(env, nodeId);
 
   const nowMs = Date.now();
@@ -448,13 +481,28 @@ async function verifyAndAttest(proofUrl, env) {
 
   const flags = [];
 
-  // Beat-rate sanity: claimed beats divided by bureau-observed window.
-  if (claimedLifetimeBeats > 0) {
+  const firstSeenLifetimeBeats =
+    typeof priorContext?.firstSeenLifetimeBeats === "number"
+      ? priorContext.firstSeenLifetimeBeats
+      : priorContext && typeof priorContext.peakLifetimeBeats === "number"
+        ? priorContext.peakLifetimeBeats
+        : claimedLifetimeBeats;
+
+  // Beat-rate sanity: only beats accrued after the bureau first observed
+  // the node are rate-checkable. Pre-bureau lifetime beats are signed chain
+  // claims, but they are not evidence of impossible bureau-observed rate.
+  let beatRateImplausible = false;
+  const bureauObservedBeats = Math.max(
+    0,
+    claimedLifetimeBeats - firstSeenLifetimeBeats,
+  );
+  if (bureauObservedBeats > 0) {
     const observedWindowMs = Math.max(1, nowMs - bureauFirstSeenMs);
     if (
-      claimedLifetimeBeats / observedWindowMs >
+      bureauObservedBeats / observedWindowMs >
       DEFAULT_POLICY.maxBeatRatePerMs
     ) {
+      beatRateImplausible = true;
       flags.push("beat_rate_implausible");
     }
   }
@@ -482,11 +530,13 @@ async function verifyAndAttest(proofUrl, env) {
   const persistedContext = await persistBureauContext(env, nodeId, priorContext, {
     nowMs,
     lifetimeBeats: claimedLifetimeBeats,
+    advancePeak: !beatRateImplausible,
   });
   const bureauContext = persistedContext ?? {
     nodeId,
     firstSeenMs: nowMs,
     lastSeenMs: nowMs,
+    firstSeenLifetimeBeats,
     peakLifetimeBeats: claimedLifetimeBeats,
   };
 
@@ -564,6 +614,9 @@ async function verifyAndAttest(proofUrl, env) {
     schema: `${schemaKind}:v${schemaVer}`,
     attestation,
     derived,
+    genesisScore: derived.score,
+    scoreBand: derived.tier,
+    methodologyVersion: derived.policyVersion,
     asOf: new Date(nowMs).toISOString(),
   };
 }
@@ -652,6 +705,9 @@ export async function onRequestPost(ctx) {
         nodeId: result.nodeId,
         attestation: result.attestation,
         derived: result.derived,
+        genesisScore: result.derived?.score,
+        scoreBand: result.derived?.tier,
+        methodologyVersion: result.derived?.policyVersion,
         asOf: result.asOf,
         cachedAt: new Date().toISOString(),
       };

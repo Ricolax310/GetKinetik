@@ -103,7 +103,26 @@ export async function onRequestGet(ctx) {
       );
     }
 
-    return json({ ...raw, source: "kv" }, 200);
+    const derived =
+      raw && typeof raw.derived === "object" && raw.derived !== null
+        ? raw.derived
+        : null;
+    const legacyAliases = derived
+      ? {
+          genesisScore:
+            typeof raw.genesisScore === "number"
+              ? raw.genesisScore
+              : derived.score,
+          scoreBand:
+            typeof raw.scoreBand === "string" ? raw.scoreBand : derived.tier,
+          methodologyVersion:
+            typeof raw.methodologyVersion === "string"
+              ? raw.methodologyVersion
+              : derived.policyVersion,
+        }
+      : {};
+
+    return json({ ...raw, ...legacyAliases, source: "kv" }, 200);
   } catch (err) {
     console.error("[score] kv error:", err);
     return json({ error: "attestation_storage_unavailable" }, 503);

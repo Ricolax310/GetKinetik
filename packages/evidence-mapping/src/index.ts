@@ -116,6 +116,10 @@ export type EvidencePolicy = {
   /** Score is floored at this value when any flag is present. The live
    *  methodology v1.1 floors flagged nodes to <200 ("TAMPERED" band). */
   flaggedScoreCeiling: number;
+  /** Flag tokens that remain visible in `flags` but do not force the
+   *  default TAMPERED floor. Set to [] in a custom policy to treat every
+   *  flag token as a hard tamper signal. */
+  informationalFlags?: string[];
   /** Reward tier bands. min is inclusive, max is exclusive. */
   tierBands: {
     PREMIER: { min: number };
@@ -139,6 +143,7 @@ export const DEFAULT_POLICY: EvidencePolicy = {
   sensorBaseline: 50,
   sensorPerFieldPoints: 50,
   flaggedScoreCeiling: 199,
+  informationalFlags: ['first_sighting'],
   tierBands: {
     PREMIER: { min: 900 },
     STRONG: { min: 750 },
@@ -163,8 +168,9 @@ export type EvidenceMappingResult = {
   tier: RewardTier;
   /** Score in [0, 1000]. Sortable; tier is derived from it. */
   score: number;
-  /** True if any flag was present in the attestation. When true, tier is
-   *  forced to TAMPERED regardless of score (score is also floored). */
+  /** True if any tamper flag was present in the attestation. Informational
+   *  flags such as `first_sighting` remain in `flags` without forcing the
+   *  default TAMPERED floor. */
   flagged: boolean;
   /** Audit breakdown — each contributing factor and how many points it
    *  contributed. Sum equals `score` (before the flag floor is applied). */
@@ -202,7 +208,8 @@ export function attestationToTier(
 ): EvidenceMappingResult {
   let score = policy.baseline;
   const flags = Array.isArray(attestation.flags) ? attestation.flags : [];
-  const flagged = flags.length > 0;
+  const informationalFlags = new Set(policy.informationalFlags ?? []);
+  const flagged = flags.some((flag) => !informationalFlags.has(flag));
 
   // Bureau-observed age — uses bureau clock, not node-claimed firstBeatTs.
   // The bureau has already done the bounding (firstSeenMs is the later of
