@@ -27,7 +27,7 @@
       "edgeToEdgeEnabled": true,
       "userInterfaceStyle": "dark",
       "package": "com.getkinetik.node",
-      "versionCode": 15,
+      "versionCode": 16,
       "permissions": [
         "android.permission.ACCESS_FINE_LOCATION",
         "android.permission.ACCESS_COARSE_LOCATION",
@@ -41,7 +41,23 @@
     },
     "plugins": [
       "expo-web-browser",
-      "nodle-sdk"
+      "nodle-sdk",
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "packagingOptions": {
+              "pickFirst": [
+                "org/bouncycastle/**",
+                "META-INF/versions/9/OSGI-INF/MANIFEST.MF",
+                "META-INF/BCKEY.DSA",
+                "META-INF/BCKEY.SF",
+                "META-INF/BCKEY.RSA"
+              ]
+            }
+          }
+        }
+      ]
     ],
     "extra": {
       "eas": {
