@@ -12,6 +12,31 @@ android {
     versionCode 1
     versionName '0.1.0'
   }
+
+  // Bouncy Castle is bundled inside nodlesdk-rc-lp AND pulled in transitively
+  // by other deps. Pick one version and drop the duplicates.
+  packaging {
+    resources {
+      pickFirsts += [
+        'META-INF/versions/9/OSGI-INF/MANIFEST.MF',
+        'META-INF/BCKEY.DSA',
+        'META-INF/BCKEY.SF',
+        'META-INF/BCKEY.RSA',
+      ]
+      excludes += [
+        'META-INF/LICENSE.md',
+        'META-INF/NOTICE.md',
+        'META-INF/DEPENDENCIES',
+      ]
+    }
+  }
+}
+
+// Force a single Bouncy Castle version across all transitive deps.
+configurations.all {
+  resolutionStrategy {
+    force 'org.bouncycastle:bcprov-jdk15to18:1.78.1'
+  }
 }
 
 repositories {
@@ -24,7 +49,11 @@ repositories {
 }
 
 dependencies {
-  // Google Play variant — matches Nodle docs (io.nodle:nodlesdk-rc-lp)
-  implementation 'io.nodle:nodlesdk-rc-lp:94207dd00f'
+  // Exclude org.bouncycastle from the Nodle SDK so only one copy lands in the APK.
+  implementation('io.nodle:nodlesdk-rc-lp:94207dd00f') {
+    exclude group: 'org.bouncycastle'
+  }
+  // Single explicit Bouncy Castle version — satisfies both Nodle and any other dep.
+  implementation 'org.bouncycastle:bcprov-jdk15to18:1.78.1'
   implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1'
 }
