@@ -9,6 +9,22 @@ Android `versionCode` is noted alongside each release for sideload verification.
 ## [Unreleased] — v1.3.3
 
 ### Added
+- **Genesis Score v1.1 — bureau-bounded scoring (security hardening).**
+  v1.0 trusted self-reported `firstBeatTs` and `lifetimeBeats`, which
+  meant a fresh keypair could mint a single proof claiming "6 months old,
+  1M beats" and instantly score PREMIER. v1.1 fixes this:
+  - **Bureau-bounded chain age:** the score uses `max(claimed firstBeatTs,
+    bureau-first-seen)`. The bureau records when it *itself* first saw
+    a node and won't credit age it didn't observe.
+  - **Beat-rate sanity:** claimed `lifetimeBeats` divided by bureau-observed
+    window must stay below 1 beat / 25 seconds. Violation raises a
+    `beat_rate_implausible` tamper flag and floors the score.
+  - **Chain rewind detection:** the bureau tracks each node's peak
+    `lifetimeBeats`. Any later proof claiming fewer trips a `chain_rewind`
+    hard gate per methodology §3.2.
+  - All three fixes are KV-backed (`bureau:<nodeId>`, 2-year TTL) and
+    degrade gracefully to v1.0 behaviour if KV is unavailable.
+  Bumps `methodologyVersion` from `v1.0` to `v1.1`.
 - **Genesis Score v1.0 live on `/api/verify-device`.** Successful responses
   now include `genesisScore` (0–1000), `scoreBand` (`NEW` / `STANDING` /
   `STRONG` / `PREMIER` / `TAMPERED`), `methodologyVersion`, `tamperFlags`,

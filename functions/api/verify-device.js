@@ -53,7 +53,7 @@
 
 // ── Constants ────────────────────────────────────────────────────────────────
 const PROOF_ATTRIBUTION = "GETKINETIK by OutFromNothing LLC";
-const GENESIS_METHODOLOGY_VERSION = "v1.0";
+const GENESIS_METHODOLOGY_VERSION = "v1.1";
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -146,31 +146,42 @@ function extractProofFragment(proofUrl) {
   return fragment;
 }
 
-// ── Genesis Score v1 ─────────────────────────────────────────────────────────
+// ── Genesis Score v1.1 ───────────────────────────────────────────────────────
 //
 // Computes a 0–1000 score from observable proof-of-origin fields per the
 // published methodology at docs/methodology/GENESIS_SCORE.md.
 //
-// v1 inputs (everything available in a single signed proof, no server state):
+// v1.1 hardens v1.0 against payload-claim attacks:
+//   - chain age is bounded by `bureauFirstSeenAt` (server-side first-seen
+//     registration). A fresh keypair claiming to be 6 months old gets the
+//     bureau's first-seen timestamp instead — no time travel.
+//   - claimed `lifetimeBeats` is rate-checked against the *bureau-observed*
+//     age. Beats accruing faster than 1 per 25s for the entire window is
+//     physically impossible and raises a `beat_rate_implausible` flag.
+//   - prior peak `lifetimeBeats` is tracked. Any later proof claiming
+//     fewer beats trips a `chain_rewind` hard gate per methodology §3.2.
+//
+// v1.1 inputs:
 //   - Identity integrity:   already gated by caller (signature verified)
-//   - Uptime continuity:    chain age from firstBeatTs, plus lifetimeBeats
+//   - Uptime continuity:    bureau-bounded chain age, rate-checked beats
 //   - Sensor coherence:     presence + per-field plausibility ranges
 //
-// Not yet wired (returns 0 contribution from these categories):
-//   - Network engagement:   requires partner attestation channel
+// Not yet wired (return 0 contribution from these categories):
+//   - Network engagement:   /api/attest stores attestations; v1.2 reads them
 //   - Disclosure receipts:  requires L4 earnings ledger ingestion
 //
-// Hard gates (per §3.6) that floor the score and raise tamperFlags:
-//   - Sensor values physically impossible (e.g. negative pressure)
+// Hard gates per §3.6:
+//   - Sensor values physically impossible
+//   - chain_rewind: claimed lifetimeBeats < previously-recorded peak
 //
 // The methodology document is authoritative; this function must stay in sync.
-function computeGenesisScoreV1(payload) {
+const MAX_BEAT_RATE_PER_MS = 1 / 25_000; // one beat per 25 seconds, hard ceiling
+
+function computeGenesisScoreV1(payload, bureauContext) {
   let score = 200; // §4 baseline for a cryptographically valid identity.
   const tamperFlags = [];
 
-  // ── Uptime continuity — chain age ─────────────────────────────────────────
-  // Linear ramp: 0 days → 0 pts, 180 days → 300 pts (capped).
-  const firstBeatTs =
+  const claimedFirstBeatTs =
     typeof payload.firstBeatTs === "number" ? payload.firstBeatTs : null;
   const referenceTs =
     typeof payload.issuedAt === "number"
@@ -178,19 +189,59 @@ function computeGenesisScoreV1(payload) {
       : typeof payload.mintedAt === "number"
         ? payload.mintedAt
         : Date.now();
-  if (firstBeatTs !== null && firstBeatTs <= referenceTs) {
-    const ageDays = (referenceTs - firstBeatTs) / 86_400_000;
+
+  // ── Bureau-bounded chain age ─────────────────────────────────────────────
+  // Use the LATER of (claimed firstBeatTs) and (bureau first-seen) so a
+  // fresh keypair can't backdate itself. If we've never seen this node,
+  // bureauContext.firstSeenMs is the current request time.
+  const bureauFirstSeenMs =
+    bureauContext && typeof bureauContext.firstSeenMs === "number"
+      ? bureauContext.firstSeenMs
+      : referenceTs;
+
+  const effectiveFirstBeatTs =
+    claimedFirstBeatTs === null
+      ? bureauFirstSeenMs
+      : Math.max(claimedFirstBeatTs, bureauFirstSeenMs);
+
+  if (effectiveFirstBeatTs <= referenceTs) {
+    const ageDays = (referenceTs - effectiveFirstBeatTs) / 86_400_000;
     const ageScore = Math.min(300, Math.round((ageDays / 180) * 300));
     score += Math.max(0, ageScore);
   }
 
-  // ── Uptime continuity — lifetime beats (logarithmic) ──────────────────────
+  // ── Lifetime beats with rate sanity ──────────────────────────────────────
   // log10(beats+1) * 50: ~25k → 220 pts, ~250k → 270 pts, ~1M → 300 pts (cap).
   const lifetimeBeats =
     typeof payload.lifetimeBeats === "number" && payload.lifetimeBeats >= 0
       ? payload.lifetimeBeats
       : 0;
+
+  // Beat-rate sanity: claimed beats divided by bureau-observed window.
+  // Use the bureau-observed window (referenceTs - bureauFirstSeenMs), not
+  // the claimed window, so a brand-new node can't claim a million beats
+  // and an ancient firstBeatTs to dodge the check.
+  let beatRateOk = true;
   if (lifetimeBeats > 0) {
+    const observedWindowMs = Math.max(1, referenceTs - bureauFirstSeenMs);
+    if (lifetimeBeats / observedWindowMs > MAX_BEAT_RATE_PER_MS) {
+      tamperFlags.push("beat_rate_implausible");
+      beatRateOk = false;
+    }
+  }
+
+  // ── Chain rewind hard gate (§3.2 / §3.6) ─────────────────────────────────
+  // If we have ever recorded a higher lifetimeBeats for this node, a later
+  // proof claiming fewer beats is a tamper signal.
+  if (
+    bureauContext &&
+    typeof bureauContext.peakLifetimeBeats === "number" &&
+    lifetimeBeats < bureauContext.peakLifetimeBeats
+  ) {
+    tamperFlags.push("chain_rewind");
+  }
+
+  if (lifetimeBeats > 0 && beatRateOk) {
     const beatScore = Math.min(
       300,
       Math.round(Math.log10(lifetimeBeats + 1) * 50),
@@ -250,9 +301,47 @@ function computeGenesisScoreV1(payload) {
   };
 }
 
+// ── Bureau context (KV-backed first-seen + peak beats per nodeId) ────────────
+// Lookup is best-effort: if KV is unavailable, hardening degrades gracefully
+// to v1.0 behaviour (no chain_rewind detection, claimed firstBeatTs trusted).
+
+async function loadBureauContext(env, nodeId) {
+  if (!env?.KINETIK_KV || !nodeId) return null;
+  try {
+    const raw = await env.KINETIK_KV.get(`bureau:${nodeId}`, { type: "json" });
+    if (raw && typeof raw === "object") return raw;
+  } catch (err) {
+    console.error("[verify-device] bureau context read failed:", err);
+  }
+  return null;
+}
+
+async function persistBureauContext(env, nodeId, prior, observed) {
+  if (!env?.KINETIK_KV || !nodeId) return;
+  const next = {
+    nodeId,
+    firstSeenMs: prior?.firstSeenMs ?? observed.nowMs,
+    firstSeenAt: prior?.firstSeenAt ?? new Date(observed.nowMs).toISOString(),
+    peakLifetimeBeats: Math.max(
+      prior?.peakLifetimeBeats ?? 0,
+      observed.lifetimeBeats ?? 0,
+    ),
+    lastSeenMs: observed.nowMs,
+    lastSeenAt: new Date(observed.nowMs).toISOString(),
+  };
+  try {
+    await env.KINETIK_KV.put(`bureau:${nodeId}`, JSON.stringify(next), {
+      // Keep bureau context for 2 years — we want long memory of peak claims.
+      expirationTtl: 60 * 60 * 24 * 365 * 2,
+    });
+  } catch (err) {
+    console.error("[verify-device] bureau context write failed:", err);
+  }
+}
+
 // ── Main verification logic ───────────────────────────────────────────────────
 
-async function verifyProofUrl(proofUrl) {
+async function verifyProofUrl(proofUrl, env) {
   // Step 1: extract the base64url payload.
   const b64 = extractProofFragment(proofUrl);
   if (!b64 || b64.length < 16) {
@@ -332,8 +421,19 @@ async function verifyProofUrl(proofUrl) {
     return { valid: false, reason: "signature_invalid" };
   }
 
-  // Step 7: compute Genesis Score from observable proof fields.
-  const scoreBlock = computeGenesisScoreV1(payload);
+  // Step 7: compute Genesis Score from observable proof fields, bounded by
+  // the bureau's prior knowledge of this node (first-seen, peak beats).
+  const nodeId = payload.nodeId ?? null;
+  const priorContext = await loadBureauContext(env, nodeId);
+  const scoreBlock = computeGenesisScoreV1(payload, priorContext);
+
+  // Update bureau memory regardless of score (we still want to record the
+  // first-seen moment for new nodes that turn out tampered later).
+  await persistBureauContext(env, nodeId, priorContext, {
+    nowMs: Date.now(),
+    lifetimeBeats:
+      typeof payload.lifetimeBeats === "number" ? payload.lifetimeBeats : 0,
+  });
 
   // Step 8: return the verified node identity + score.
   // Timestamp field priority: Proof-of-Origin uses issuedAt (card signed) /
@@ -417,7 +517,7 @@ export async function onRequestPost(ctx) {
   }
 
   try {
-    const result = await verifyProofUrl(proofUrl);
+    const result = await verifyProofUrl(proofUrl, ctx.env);
 
     // Cache score under score:<nodeId> so GET /api/score/:nodeId can serve
     // partner lookups without a fresh proof. Best-effort — a KV write
