@@ -1700,6 +1700,84 @@
     </section>
 
     <!-- ================================================== -->
+    <!-- THE BUREAU (PARTNER-FIRST)                          -->
+    <!-- ================================================== -->
+    <section class="partner-section" id="bureau">
+      <span class="section-eyebrow">THE INDEPENDENT BUREAU</span>
+      <h2 class="section-title">
+        The credit bureau slot DePIN never had.
+      </h2>
+      <p class="section-sub">
+        GETKINETIK grades the <em>device</em>, not the data.
+        Every sovereign node has a hardware-sealed Ed25519 identity,
+        a hash-chained uptime record, and a public
+        <strong>Genesis Score</strong> — computed against an open methodology,
+        by a third party that never issues a token and never holds equity in
+        any network it grades.
+        One POST to the verify API returns the score. No SDK. No account.
+      </p>
+
+      <div class="partner-grid">
+        <article class="partner-card">
+          <span class="partner-card-num">01</span>
+          <h3 class="partner-card-title">NEUTRAL BY CHARTER</h3>
+          <p class="partner-card-body">
+            We sit outside every network. No token. No equity in graded
+            networks. No payment in graded networks' native assets. Published
+            methodology, versioned in public. The neutrality is the product —
+            same shape as Carfax, Equifax, Moody's.
+            <br /><br />
+            <a href="/bureau/why/" style="color:var(--ruby-ember)">Why a bureau is different from your own genuity check →</a>
+          </p>
+        </article>
+
+        <article class="partner-card">
+          <span class="partner-card-num">02</span>
+          <h3 class="partner-card-title">VERIFY IN ONE CALL — OR OFFLINE</h3>
+          <p class="partner-card-body">
+            <strong>Path A:</strong> <code>POST /api/verify-device</code> —
+            returns valid/invalid + Genesis Score (0–1000) + tamper flags +
+            device age. No SDK required.<br /><br />
+            <strong>Path B:</strong>
+            <code>npm install @getkinetik/verify</code> — same cryptographic
+            contract, air-gapped, no call back to our servers.
+          </p>
+        </article>
+
+        <article class="partner-card">
+          <span class="partner-card-num">03</span>
+          <h3 class="partner-card-title">CROSS-NETWORK REPUTATION</h3>
+          <p class="partner-card-body">
+            A node's Genesis Score reflects what the bureau has observed
+            across every network it touches — not just yours. That
+            cross-network signal only exists because a neutral third party
+            publishes it. Tier your rewards by score band. Push fraud
+            signals back via the attestation channel. The bureau folds them
+            in.
+          </p>
+        </article>
+      </div>
+
+      <div class="partner-cta-row">
+        <a
+          class="cta cta-primary"
+          href="/bureau/"
+        >
+          SEE THE BUREAU →
+        </a>
+        <a
+          class="cta cta-secondary"
+          href="/api/docs/"
+        >
+          INTERACTIVE API DOCS
+        </a>
+        <a class="cta cta-secondary" href="mailto:eric@outfromnothingllc.com">
+          15-MIN CALL
+        </a>
+      </div>
+    </section>
+
+    <!-- ================================================== -->
     <!-- HOW IT WORKS                                        -->
     <!-- ================================================== -->
     <section>
@@ -2059,75 +2137,6 @@
     </section>
 
     <!-- ================================================== -->
-    <!-- FOR PARTNERS                                        -->
-    <!-- ================================================== -->
-    <section class="partner-section">
-      <span class="section-eyebrow">FOR PARTNERS</span>
-      <h2 class="section-title">
-        Your network. Verified users. One webhook.
-      </h2>
-      <p class="section-sub">
-        GETKINETIK users carry a hardware-signed Proof of Origin.
-        Any partner network can verify a user's device authenticity in one API call
-        — and offer verified-user rewards with cryptographic confidence.
-        No code change on your end beyond a single POST.
-      </p>
-
-      <div class="partner-grid">
-        <article class="partner-card">
-          <span class="partner-card-num">01</span>
-          <h3 class="partner-card-title">VERIFY IN ONE CALL — OR OFFLINE</h3>
-          <p class="partner-card-body">
-            <strong>Path A:</strong> POST the user's Proof of Origin URL to
-            <code>getkinetik.app/api/verify-device</code>.
-            Returns: valid signature, Genesis Score, node age, heartbeat
-            count, sensor data. No SDK required.<br /><br />
-            <strong>Path B:</strong>
-            <code>npm install @getkinetik/verify</code> — run the same
-            verifier in your own infrastructure, fully air-gapped. No HTTP
-            call, no dependency on our uptime.
-          </p>
-        </article>
-
-        <article class="partner-card">
-          <span class="partner-card-num">02</span>
-          <h3 class="partner-card-title">VERIFIED-USER PREMIUM</h3>
-          <p class="partner-card-body">
-            Offer a reward boost — even 5–10% — to users whose devices are
-            cryptographically verified. You reduce Sybil exposure. Users earn
-            more by running GETKINETIK. Both sides win without either side
-            holding the other's keys.
-          </p>
-        </article>
-
-        <article class="partner-card">
-          <span class="partner-card-num">03</span>
-          <h3 class="partner-card-title">SYBIL RESISTANCE, FREE</h3>
-          <p class="partner-card-body">
-            Every GETKINETIK node is tied to a unique hardware-sealed Ed25519 key.
-            One phone = one key = one node. The hash-chained heartbeat log makes
-            clocks and uptime tamper-evident. You get Sybil resistance without
-            building it yourself.
-          </p>
-        </article>
-      </div>
-
-      <div class="partner-cta-row">
-        <a
-          class="cta cta-secondary"
-          href="https://github.com/Ricolax310/GetKinetik/blob/main/docs/api/verify-device.md"
-          target="_blank"
-          rel="noopener"
-        >
-          READ THE API DOCS →
-        </a>
-        <a class="cta cta-secondary" href="mailto:eric@outfromnothingllc.com">
-          EMAIL ERIC TO INTEGRATE
-        </a>
-      </div>
-    </section>
-
-    <!-- ================================================== -->
     <!-- RECEIPTS — TRACTION TILES                           -->
     <!-- ================================================== -->
     <section>
@@ -2139,10 +2148,18 @@
 
       <div class="receipts">
         <article class="receipt">
-          <p class="receipt-num">25K+</p>
-          <p class="receipt-label">HEARTBEATS · ON CHAIN</p>
+          <p class="receipt-num" data-bureau-stat="totalVerifications">—</p>
+          <p class="receipt-label">VERIFICATIONS · BUREAU</p>
           <p class="receipt-sub">
-            Hash-chained, signed, persistent across reboots
+            Live count from the public bureau endpoint
+          </p>
+        </article>
+
+        <article class="receipt">
+          <p class="receipt-num" data-bureau-stat="uniqueNodes">—</p>
+          <p class="receipt-label">SOVEREIGN NODES · SEEN</p>
+          <p class="receipt-sub">
+            Distinct hardware-sealed identities graded
           </p>
         </article>
 
@@ -2167,14 +2184,6 @@
           <p class="receipt-label">BUREAU ENDPOINT · LIVE</p>
           <p class="receipt-sub">
             verify-device · score lookup · public methodology
-          </p>
-        </article>
-
-        <article class="receipt">
-          <p class="receipt-num">1</p>
-          <p class="receipt-label">EXTERNAL WITNESS</p>
-          <p class="receipt-sub">
-            iPhone-scanned QR returned <strong style="color:var(--ruby-ember)">VALID</strong>
           </p>
         </article>
 

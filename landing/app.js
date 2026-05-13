@@ -213,3 +213,31 @@
     });
   }
 })();
+
+/* ============================================================
+   Bureau stats — hydrate [data-bureau-stat] receipt tiles.
+   Mirrors the ticker.js pattern used on /bureau/.
+   ============================================================ */
+(function () {
+  "use strict";
+
+  var tiles = document.querySelectorAll("[data-bureau-stat]");
+  if (!tiles.length) return;
+
+  function fmt(n) {
+    if (typeof n !== "number") return "—";
+    if (n >= 1000) return (n / 1000).toFixed(1).replace(/\.0$/, "") + "K";
+    return String(n);
+  }
+
+  fetch("/api/bureau/stats", { cache: "no-store" })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (d) {
+      if (!d) return;
+      tiles.forEach(function (el) {
+        var key = el.getAttribute("data-bureau-stat");
+        if (d[key] !== undefined) el.textContent = fmt(d[key]);
+      });
+    })
+    .catch(function () {});
+})();
