@@ -44,7 +44,7 @@
  * 4. Re-serialise the payload using stableStringify (lex-sorted keys)
  * 5. Verify the Ed25519 signature against the serialised message and the
  *    pubkey embedded in the payload using SubtleCrypto (native in CF Workers)
- * 6. Verify the hash field matches sha256(message)[:16]
+ * 6. If a hash field is present, verify it matches sha256(message)[:16]
  *
  * This is a server-side implementation of the same logic in landing/verify/verifier.js.
  * Both must remain byte-for-byte equivalent — the CRYPTOGRAPHIC_CONTRACT comment
@@ -279,7 +279,7 @@ async function verifyProofUrl(proofUrl) {
   }
 
   const { payload, signature, hash } = envelope;
-  if (!payload || !signature || !hash) {
+  if (!payload || !signature) {
     return { valid: false, reason: "missing_fields" };
   }
 
@@ -288,11 +288,13 @@ async function verifyProofUrl(proofUrl) {
     return { valid: false, reason: "attribution_mismatch" };
   }
 
-  // Step 5: verify hash = sha256(stableStringify(payload))[:16].
+  // Step 5: verify hash = sha256(stableStringify(payload))[:16] when supplied.
+  // App QR/verifier URLs use compact { payload, signature } envelopes and rely
+  // on the verifier deriving the canonical hash from the signed payload.
   const message = stableStringify(payload);
   const fullHash = await sha256Hex(message);
   const expectedHash = fullHash.slice(0, 16);
-  if (expectedHash !== hash) {
+  if (hash !== undefined && expectedHash !== hash) {
     return { valid: false, reason: "hash_mismatch" };
   }
 
