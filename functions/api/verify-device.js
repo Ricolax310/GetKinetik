@@ -116,13 +116,23 @@ function hexToBytes(hex) {
   return bytes;
 }
 
+function bytesToHex(bytes) {
+  return Array.from(bytes, (b) => b.toString(16).padStart(2, "0")).join("");
+}
+
 /**
  * sha256Hex — SHA-256 of a UTF-8 string, returned as a lowercase hex string.
  */
 async function sha256Hex(message) {
   const encoded = new TextEncoder().encode(message);
   const buf = await crypto.subtle.digest("SHA-256", encoded);
-  return Array.from(new Uint8Array(buf), (b) => b.toString(16).padStart(2, "0")).join("");
+  return bytesToHex(new Uint8Array(buf));
+}
+
+async function deriveNodeId(pubkeyBytes) {
+  const buf = await crypto.subtle.digest("SHA-256", pubkeyBytes);
+  const fingerprint = bytesToHex(new Uint8Array(buf)).slice(0, 8).toUpperCase();
+  return `KINETIK-NODE-${fingerprint}`;
 }
 
 /**
@@ -305,6 +315,10 @@ async function verifyProofUrl(proofUrl) {
   const pubkeyBytes = hexToBytes(pubkeyHex);
   if (!pubkeyBytes) {
     return { valid: false, reason: "pubkey_decode_failed" };
+  }
+  const expectedNodeId = await deriveNodeId(pubkeyBytes);
+  if (payload.nodeId !== expectedNodeId) {
+    return { valid: false, reason: "node_id_mismatch" };
   }
   const sigBytes = hexToBytes(signature);
   if (!sigBytes || sigBytes.length !== 64) {
