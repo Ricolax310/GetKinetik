@@ -27,7 +27,7 @@
 //   without causing unnecessary re-fires.
 // ============================================================================
 
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   buildVerifierUrl,
   createProofOfOrigin,
@@ -50,6 +50,14 @@ export type UseGenesisScoreReturn = {
   result: GenesisScoreResult | null;
   loading: boolean;
   error: boolean;
+  /**
+   * Force an immediate refetch of the bureau Genesis Score. Wired into
+   * ProofOfOrigin so the chip updates the moment a user mints a fresh
+   * proof — previously the user had to wait up to 5 minutes for the
+   * interval tick. v1.5.0 shipped without this and we saw users report
+   * "I verified and nothing changed".
+   */
+  refresh: () => Promise<void>;
 };
 
 // ---------------------------------------------------------------------------
@@ -103,7 +111,37 @@ export function useGenesisScore(
     identityRef.current = identity;
   }, [identity]);
 
-  const runFetch = async () => {
+  // ── Response parser ────────────────────────────────────────────────
+  // The bureau replies with `{valid:true, genesisScore, scoreBand, ...}`
+  // on success and `{valid:false, reason}` (HTTP 200) on a verification
+  // failure. v1.5.0 trusted `verifyRes.ok` and read `data.genesisScore`
+  // unconditionally — which surfaced as the literal string "undefined"
+  // in the chip whenever verification failed (e.g. when the server
+  // rejected the COMPACT proof URL for `missing_fields`). We now require
+  // a numeric score before promoting the response into `result`; anything
+  // else is treated as "not yet graded" and leaves `result` as null.
+  const parseScore = (data: unknown): GenesisScoreResult | null => {
+    if (!data || typeof data !== 'object') return null;
+    const d = data as Record<string, unknown>;
+    if ('valid' in d && d.valid === false) return null;
+    const score = typeof d.genesisScore === 'number' ? d.genesisScore : null;
+    if (score === null) return null;
+    return {
+      score,
+      band:
+        typeof d.scoreBand === 'string' ? (d.scoreBand as string) : 'UNGRADED',
+      methodologyVersion:
+        typeof d.methodologyVersion === 'string'
+          ? (d.methodologyVersion as string)
+          : 'v1.0',
+      asOf:
+        typeof d.asOf === 'string'
+          ? (d.asOf as string)
+          : new Date().toISOString(),
+    };
+  };
+
+  const runFetch = useCallback(async () => {
     const id    = identityRef.current;
     const stats = statsRef.current;
     if (!id || stats.lifetimeBeats === 0 || !stats.chainTip) return;
@@ -117,23 +155,27 @@ export function useGenesisScore(
       // ── Fast path: cached score ──────────────────────────────────────
       const cacheRes = await fetch(SCORE_ENDPOINT(id.nodeId));
       if (cacheRes.ok) {
-        const data = (await cacheRes.json()) as {
-          genesisScore: number;
-          scoreBand: string;
-          methodologyVersion: string;
-          asOf: string;
-        };
-        setResult({
-          score:              data.genesisScore,
-          band:               data.scoreBand,
-          methodologyVersion: data.methodologyVersion,
-          asOf:               data.asOf,
-        });
-        return;
+        let data: unknown = null;
+        try {
+          data = await cacheRes.json();
+        } catch {
+          /* 200 with empty/garbled body — treat as not-yet-graded */
+        }
+        const parsed = parseScore(data);
+        if (parsed) {
+          setResult(parsed);
+          return;
+        }
+        // 200 with no usable score: fall through to self-verify so we
+        // can seed the bureau cache rather than leaving the chip stuck
+        // on the empty body forever.
       }
 
       // ── Slow path: self-verify to seed the bureau cache ──────────────
-      if (cacheRes.status === 404) {
+      // Triggered on 404 (no cache) OR on a malformed 200 (empty body /
+      // missing fields). Self-verification is valid — the bureau verifies
+      // the signature; it doesn't care who posts.
+      if (cacheRes.status === 404 || cacheRes.ok) {
         const proof = await createProofOfOrigin(id, stats);
         const proofUrl = buildVerifierUrl(proof);
         const verifyRes = await fetch(VERIFY_ENDPOINT, {
@@ -142,23 +184,21 @@ export function useGenesisScore(
           body: JSON.stringify({ proofUrl }),
         });
         if (verifyRes.ok) {
-          const data = (await verifyRes.json()) as {
-            genesisScore: number;
-            scoreBand: string;
-            methodologyVersion: string;
-            asOf: string;
-          };
-          setResult({
-            score:              data.genesisScore,
-            band:               data.scoreBand,
-            methodologyVersion: data.methodologyVersion,
-            asOf:               data.asOf ?? new Date().toISOString(),
-          });
-          return;
+          let vdata: unknown = null;
+          try {
+            vdata = await verifyRes.json();
+          } catch {
+            /* shape error — drop to error state below */
+          }
+          const parsed = parseScore(vdata);
+          if (parsed) {
+            setResult(parsed);
+            return;
+          }
         }
       }
 
-      // Any unexpected status: mark error, keep previous result displayed.
+      // Any other branch: mark error, keep previous result displayed.
       setError(true);
     } catch {
       setError(true);
@@ -166,7 +206,11 @@ export function useGenesisScore(
       setLoading(false);
       fetchingRef.current = false;
     }
-  };
+  }, []);
+
+  const refresh = useCallback(async () => {
+    await runFetch();
+  }, [runFetch]);
 
   useEffect(() => {
     if (!identity || lifetimeBeats === 0 || !chainTip) return;
@@ -184,5 +228,5 @@ export function useGenesisScore(
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [identity?.nodeId, lifetimeBeats > 0, !!chainTip]);
 
-  return { result, loading, error };
+  return { result, loading, error, refresh };
 }

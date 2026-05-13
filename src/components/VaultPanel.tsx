@@ -651,6 +651,7 @@ export function VaultPanel() {
       <GenesisScoreTicker
         result={genesisScore.result}
         loading={genesisScore.loading}
+        onRequestRefresh={genesisScore.refresh}
       />
 
       <GenesisCreditsTicker />
@@ -698,6 +699,7 @@ export function VaultPanel() {
           lastSensors: heartbeat?.lastSensors ?? null,
         }}
         genesisScore={genesisScore.result}
+        onProofMinted={genesisScore.refresh}
       />
     </View>
   );

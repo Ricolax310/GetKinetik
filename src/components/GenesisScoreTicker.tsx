@@ -12,12 +12,23 @@
 //   · Score band displayed as a right-aligned badge so the number +
 //     band are readable at a glance without opening the sheet.
 //
-// Layout (compact chip):
+// Layout (compact chip — single line):
 //
 //   ┌──────────────────────────────────────────────┐
-//   │  GENESIS SCORE                    [STANDING] │
-//   │  636                         0 — 1000 SCALE  │
+//   │  GENESIS SCORE   636 / 1000      [STANDING]  │
 //   └──────────────────────────────────────────────┘
+//
+// Single-line geometry keeps the chip's vertical footprint identical to the
+// GenesisCreditsTicker chip below it, so the home stack fits under the hero
+// hex on a Pixel-class Android viewport without clipping the NODE LIVE row.
+//
+// Display states (collapsed):
+//   · loading + no prior result → "GENESIS SCORE  …  FETCHING…"
+//   · result.score is a number → "GENESIS SCORE  636 / 1000  STANDING"
+//   · result is null            → "GENESIS SCORE  —          AWAITING PROOF"
+//   · result with score not a number (e.g. server returned {valid:false})
+//                              → "GENESIS SCORE  —          AWAITING PROOF"
+//     We NEVER render the literal string "undefined".
 //
 // Score bands (from docs/methodology/GENESIS_SCORE.md):
 //   TAMPERED   ≤ 199   — invalid signature / impossible inputs. Do not pay.
@@ -147,7 +158,10 @@ function ScoreInfoSheet({
     transform: [{ translateY: translateY.value }],
   }));
 
-  const currentBandColor = result ? bandColor(result.band) : palette.graphite;
+  const currentBandColor =
+    result && typeof result.score === 'number'
+      ? bandColor(result.band)
+      : palette.graphite;
 
   return (
     <Modal visible={visible} transparent animationType="none" onRequestClose={onClose}>
@@ -171,15 +185,18 @@ function ScoreInfoSheet({
           contentContainerStyle={styles.scrollContent}
           showsVerticalScrollIndicator={false}
         >
-          {/* Current score */}
+          {/* Current score — guard against `result.score` being undefined,
+              which happens when the server returns 200 with valid:false. */}
           <View style={styles.scoreBox}>
-            {result ? (
+            {result && typeof result.score === 'number' ? (
               <>
                 <Text style={styles.scoreValue}>{result.score}</Text>
                 <Text style={[styles.scoreBand, { color: currentBandColor }]}>
-                  {result.band}
+                  {result.band ?? ''}
                 </Text>
-                <Text style={styles.scoreScale}>0 – 1000 SCALE · {result.methodologyVersion}</Text>
+                <Text style={styles.scoreScale}>
+                  0 – 1000 SCALE{result.methodologyVersion ? ` · ${result.methodologyVersion}` : ''}
+                </Text>
                 {result.asOf ? (
                   <Text style={styles.scoreAsOf}>{fmtAsOf(result.asOf)}</Text>
                 ) : null}
@@ -187,7 +204,7 @@ function ScoreInfoSheet({
             ) : (
               <>
                 <Text style={styles.scoreValue}>—</Text>
-                <Text style={styles.scoreScale}>COMPUTING…</Text>
+                <Text style={styles.scoreScale}>AWAITING PROOF</Text>
               </>
             )}
           </View>
@@ -259,9 +276,19 @@ function ScoreInfoSheet({
 type GenesisScoreTickerProps = {
   result: GenesisScoreResult | null;
   loading: boolean;
+  /**
+   * Fired when the user taps the chip. Surfaces a manual refetch hook
+   * so a user who just minted a proof can pull the chip out of the
+   * "AWAITING PROOF" state without waiting for the 5-min interval.
+   */
+  onRequestRefresh?: () => Promise<void> | void;
 };
 
-export function GenesisScoreTicker({ result, loading }: GenesisScoreTickerProps) {
+export function GenesisScoreTicker({
+  result,
+  loading,
+  onRequestRefresh,
+}: GenesisScoreTickerProps) {
   const [sheetOpen, setSheetOpen] = useState(false);
   const scale = useSharedValue(1);
 
@@ -271,21 +298,39 @@ export function GenesisScoreTicker({ result, loading }: GenesisScoreTickerProps)
       await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     } catch { /* ignore */ }
     setSheetOpen(true);
+    // Fire-and-forget: opening the sheet is also a soft "please re-check"
+    // gesture. Failure is silently ignored — the hook will surface its
+    // own error state on the next tick.
+    if (onRequestRefresh) {
+      void Promise.resolve(onRequestRefresh()).catch(() => undefined);
+    }
   };
 
   const chipStyle = useAnimatedStyle(() => ({ transform: [{ scale: scale.value }] }));
 
-  const currentBandColor = result ? bandColor(result.band) : palette.graphite;
-  const scored = Boolean(result);
-  const borderColor = scored ? 'rgba(255, 20, 48, 0.4)' : palette.hairline;
+  // ── Defensive value normalisation ───────────────────────────────────────
+  // result is non-null whenever the hook has parsed *something* — but the
+  // server can legitimately return a 200 with `valid:false` (e.g. signature
+  // failed verification) and no `genesisScore` field. In that case
+  // result.score is `undefined` and we must NEVER stringify it. v1.5.0
+  // shipped without this guard and the chip rendered the literal word
+  // "undefined" on real devices. Fixed here.
+  const hasScore = typeof result?.score === 'number';
+  const currentBandColor = hasScore ? bandColor(result!.band) : palette.graphite;
+  const borderColor = hasScore ? 'rgba(255, 20, 48, 0.4)' : palette.hairline;
 
-  const scoreLabel = loading && !result
-    ? '…'
-    : result
-      ? String(result.score)
-      : '—';
-
-  const bandLabel = result?.band ?? (loading ? 'COMPUTING' : 'NOT YET GRADED');
+  let scoreLabel: string;
+  let badgeLabel: string;
+  if (hasScore) {
+    scoreLabel = `${result!.score} / 1000`;
+    badgeLabel = result!.band ?? 'GRADED';
+  } else if (loading) {
+    scoreLabel = '…';
+    badgeLabel = 'FETCHING…';
+  } else {
+    scoreLabel = '—';
+    badgeLabel = 'AWAITING PROOF';
+  }
 
   return (
     <>
@@ -296,18 +341,22 @@ export function GenesisScoreTicker({ result, loading }: GenesisScoreTickerProps)
         accessibilityHint="Opens bureau score information"
       >
         <Animated.View style={[styles.chip, { borderColor }, chipStyle]}>
-          <View style={styles.chipContent}>
-            <Text style={[styles.chipLabel, { color: scored ? palette.ruby.ember : palette.graphite }]}>
-              GENESIS SCORE
-            </Text>
-            <View style={styles.chipValueRow}>
-              <Text style={styles.chipValue}>{scoreLabel}</Text>
-              <Text style={styles.chipScale}>0 – 1000</Text>
-            </View>
-          </View>
+          <Text style={[styles.chipLabel, { color: hasScore ? palette.ruby.ember : palette.graphite }]}>
+            GENESIS SCORE
+          </Text>
+          <Text
+            style={styles.chipValue}
+            numberOfLines={1}
+            adjustsFontSizeToFit
+          >
+            {scoreLabel}
+          </Text>
           <View style={[styles.chipBadge, { borderColor: currentBandColor + '55' }]}>
-            <Text style={[styles.chipBadgeText, { color: currentBandColor }]}>
-              {bandLabel}
+            <Text
+              style={[styles.chipBadgeText, { color: currentBandColor }]}
+              numberOfLines={1}
+            >
+              {badgeLabel}
             </Text>
           </View>
         </Animated.View>
@@ -327,6 +376,9 @@ export function GenesisScoreTicker({ result, loading }: GenesisScoreTickerProps)
 // ---------------------------------------------------------------------------
 
 const styles = StyleSheet.create({
+  // Single-line compact chip. Vertical footprint matches the credits chip
+  // immediately below it so the home stack fits under the hero hex without
+  // pushing the NODE LIVE status row off-screen on a Pixel-class viewport.
   chip: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -335,12 +387,8 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     borderWidth: StyleSheet.hairlineWidth,
     paddingHorizontal: 14,
-    paddingVertical: 10,
+    paddingVertical: 9,
     gap: 10,
-  },
-  chipContent: {
-    gap: 2,
-    flex: 1,
   },
   chipLabel: {
     fontFamily: typography.mono,
@@ -349,37 +397,29 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     textTransform: 'uppercase',
   },
-  chipValueRow: {
-    flexDirection: 'row',
-    alignItems: 'baseline',
-    gap: 8,
-  },
   chipValue: {
     color: palette.platinum,
     fontFamily: typography.mono,
-    fontSize: 20,
+    fontSize: 13,
     letterSpacing: 1,
-    fontWeight: '300',
-  },
-  chipScale: {
-    color: palette.graphite,
-    fontFamily: typography.mono,
-    fontSize: 9,
-    letterSpacing: 1.6,
     fontWeight: '400',
+    flex: 1,
+    textAlign: 'center',
   },
   chipBadge: {
     borderRadius: 6,
     borderWidth: StyleSheet.hairlineWidth,
-    paddingHorizontal: 8,
+    paddingHorizontal: 7,
     paddingVertical: 3,
     backgroundColor: 'rgba(255, 20, 48, 0.06)',
+    maxWidth: 110,
   },
   chipBadgeText: {
     fontFamily: typography.mono,
     fontSize: 8,
-    letterSpacing: 1.4,
+    letterSpacing: 1.2,
     fontWeight: '600',
+    textAlign: 'center',
   },
   // Sheet styles.
   backdrop: {

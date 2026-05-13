@@ -363,12 +363,22 @@ async function verifyProofUrl(proofUrl, env) {
   }
 
   // Step 3: validate envelope structure.
+  // Two accepted envelope shapes (parity with landing/verify/verifier.js):
+  //   FULL    { payload, signature, hash[, message] } — direct JSON share
+  //   COMPACT { payload, signature }                  — base64url'd into
+  //                                                     a #proof=… fragment;
+  //                                                     hash is re-derived
+  //                                                     from payload via
+  //                                                     sha256(stableStringify(payload))[:16].
+  // v1.5.0 of the mobile app emits COMPACT (smallest QR + URL), so refusing
+  // COMPACT here causes every device-side self-verify to return missing_fields
+  // and the chip never leaves AWAITING PROOF. Fixed in v1.5.1.
   if (!envelope || typeof envelope !== "object") {
     return { valid: false, reason: "malformed_envelope" };
   }
 
-  const { payload, signature, hash } = envelope;
-  if (!payload || !signature || !hash) {
+  const { payload, signature } = envelope;
+  if (!payload || !signature) {
     return { valid: false, reason: "missing_fields" };
   }
 
@@ -377,11 +387,15 @@ async function verifyProofUrl(proofUrl, env) {
     return { valid: false, reason: "attribution_mismatch" };
   }
 
-  // Step 5: verify hash = sha256(stableStringify(payload))[:16].
+  // Step 5: re-derive the canonical message + hash from the payload, then
+  // verify any claimed hash. Compact envelopes (no hash field) accept the
+  // canonical hash directly; full envelopes must match.
   const message = stableStringify(payload);
   const fullHash = await sha256Hex(message);
-  const expectedHash = fullHash.slice(0, 16);
-  if (expectedHash !== hash) {
+  const canonicalHash = fullHash.slice(0, 16);
+  const claimedHash =
+    typeof envelope.hash === "string" ? envelope.hash.toLowerCase() : null;
+  if (claimedHash !== null && claimedHash !== canonicalHash) {
     return { valid: false, reason: "hash_mismatch" };
   }
 
