@@ -44,7 +44,7 @@
  * 4. Re-serialise the payload using stableStringify (lex-sorted keys)
  * 5. Verify the Ed25519 signature against the serialised message and the
  *    pubkey embedded in the payload using SubtleCrypto (native in CF Workers)
- * 6. Verify the hash field matches sha256(message)[:16]
+ * 6. Verify the hash field, when present, matches sha256(message)[:16]
  *
  * This is a server-side implementation of the same logic in landing/verify/verifier.js.
  * Both must remain byte-for-byte equivalent — the CRYPTOGRAPHIC_CONTRACT comment
@@ -123,6 +123,16 @@ async function sha256Hex(message) {
   const encoded = new TextEncoder().encode(message);
   const buf = await crypto.subtle.digest("SHA-256", encoded);
   return Array.from(new Uint8Array(buf), (b) => b.toString(16).padStart(2, "0")).join("");
+}
+
+async function sha256BytesHex(bytes) {
+  const buf = await crypto.subtle.digest("SHA-256", bytes);
+  return Array.from(new Uint8Array(buf), (b) => b.toString(16).padStart(2, "0")).join("");
+}
+
+async function deriveNodeIdFromPubkeyBytes(pubkeyBytes) {
+  const fingerprint = await sha256BytesHex(pubkeyBytes);
+  return `KINETIK-NODE-${fingerprint.slice(0, 8).toUpperCase()}`;
 }
 
 /**
@@ -368,7 +378,7 @@ async function verifyProofUrl(proofUrl, env) {
   }
 
   const { payload, signature, hash } = envelope;
-  if (!payload || !signature || !hash) {
+  if (!payload || !signature) {
     return { valid: false, reason: "missing_fields" };
   }
 
@@ -381,7 +391,11 @@ async function verifyProofUrl(proofUrl, env) {
   const message = stableStringify(payload);
   const fullHash = await sha256Hex(message);
   const expectedHash = fullHash.slice(0, 16);
-  if (expectedHash !== hash) {
+  if (hash !== undefined && typeof hash !== "string") {
+    return { valid: false, reason: "invalid_hash_format" };
+  }
+  const claimedHash = typeof hash === "string" ? hash.toLowerCase() : expectedHash;
+  if (expectedHash !== claimedHash) {
     return { valid: false, reason: "hash_mismatch" };
   }
 
@@ -394,6 +408,14 @@ async function verifyProofUrl(proofUrl, env) {
   const pubkeyBytes = hexToBytes(pubkeyHex);
   if (!pubkeyBytes) {
     return { valid: false, reason: "pubkey_decode_failed" };
+  }
+  const claimedNodeId = payload.nodeId;
+  if (typeof claimedNodeId !== "string") {
+    return { valid: false, reason: "invalid_node_id" };
+  }
+  const expectedNodeId = await deriveNodeIdFromPubkeyBytes(pubkeyBytes);
+  if (claimedNodeId !== expectedNodeId) {
+    return { valid: false, reason: "node_id_mismatch" };
   }
   const sigBytes = hexToBytes(signature);
   if (!sigBytes || sigBytes.length !== 64) {
