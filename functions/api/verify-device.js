@@ -42,9 +42,10 @@
  * 2. Decode and parse the JSON proof payload
  * 3. Verify the PROOF_ATTRIBUTION field matches the expected constant
  * 4. Re-serialise the payload using stableStringify (lex-sorted keys)
- * 5. Verify the Ed25519 signature against the serialised message and the
+ * 5. Verify the optional hash field matches sha256(message)[:16]
+ * 6. Verify the Ed25519 signature against the serialised message and the
  *    pubkey embedded in the payload using SubtleCrypto (native in CF Workers)
- * 6. Verify the hash field matches sha256(message)[:16]
+ * 7. Verify nodeId is derived from that pubkey
  *
  * This is a server-side implementation of the same logic in landing/verify/verifier.js.
  * Both must remain byte-for-byte equivalent — the CRYPTOGRAPHIC_CONTRACT comment
@@ -123,6 +124,16 @@ async function sha256Hex(message) {
   const encoded = new TextEncoder().encode(message);
   const buf = await crypto.subtle.digest("SHA-256", encoded);
   return Array.from(new Uint8Array(buf), (b) => b.toString(16).padStart(2, "0")).join("");
+}
+
+async function sha256BytesHex(bytes) {
+  const buf = await crypto.subtle.digest("SHA-256", bytes);
+  return Array.from(new Uint8Array(buf), (b) => b.toString(16).padStart(2, "0")).join("");
+}
+
+async function deriveNodeIdFromPubkey(pubkeyBytes) {
+  const fingerprint = await sha256BytesHex(pubkeyBytes);
+  return `KINETIK-NODE-${fingerprint.slice(0, 8).toUpperCase()}`;
 }
 
 /**
@@ -318,14 +329,20 @@ async function loadBureauContext(env, nodeId) {
 
 async function persistBureauContext(env, nodeId, prior, observed) {
   if (!env?.KINETIK_KV || !nodeId) return;
+  const priorPeakLifetimeBeats =
+    typeof prior?.peakLifetimeBeats === "number" ? prior.peakLifetimeBeats : 0;
+  const observedLifetimeBeats =
+    typeof observed.lifetimeBeats === "number" && observed.lifetimeBeats >= 0
+      ? observed.lifetimeBeats
+      : 0;
+  const nextPeakLifetimeBeats = observed.advancePeakLifetimeBeats
+    ? Math.max(priorPeakLifetimeBeats, observedLifetimeBeats)
+    : priorPeakLifetimeBeats;
   const next = {
     nodeId,
     firstSeenMs: prior?.firstSeenMs ?? observed.nowMs,
     firstSeenAt: prior?.firstSeenAt ?? new Date(observed.nowMs).toISOString(),
-    peakLifetimeBeats: Math.max(
-      prior?.peakLifetimeBeats ?? 0,
-      observed.lifetimeBeats ?? 0,
-    ),
+    peakLifetimeBeats: nextPeakLifetimeBeats,
     lastSeenMs: observed.nowMs,
     lastSeenAt: new Date(observed.nowMs).toISOString(),
   };
@@ -368,7 +385,7 @@ async function verifyProofUrl(proofUrl, env) {
   }
 
   const { payload, signature, hash } = envelope;
-  if (!payload || !signature || !hash) {
+  if (!payload || !signature) {
     return { valid: false, reason: "missing_fields" };
   }
 
@@ -381,7 +398,8 @@ async function verifyProofUrl(proofUrl, env) {
   const message = stableStringify(payload);
   const fullHash = await sha256Hex(message);
   const expectedHash = fullHash.slice(0, 16);
-  if (expectedHash !== hash) {
+  const claimedHash = typeof hash === "string" ? hash.toLowerCase() : expectedHash;
+  if (expectedHash !== claimedHash) {
     return { valid: false, reason: "hash_mismatch" };
   }
 
@@ -394,6 +412,11 @@ async function verifyProofUrl(proofUrl, env) {
   const pubkeyBytes = hexToBytes(pubkeyHex);
   if (!pubkeyBytes) {
     return { valid: false, reason: "pubkey_decode_failed" };
+  }
+  const nodeId = typeof payload.nodeId === "string" ? payload.nodeId : null;
+  const expectedNodeId = await deriveNodeIdFromPubkey(pubkeyBytes);
+  if (nodeId !== expectedNodeId) {
+    return { valid: false, reason: "node_id_mismatch" };
   }
   const sigBytes = hexToBytes(signature);
   if (!sigBytes || sigBytes.length !== 64) {
@@ -423,16 +446,18 @@ async function verifyProofUrl(proofUrl, env) {
 
   // Step 7: compute Genesis Score from observable proof fields, bounded by
   // the bureau's prior knowledge of this node (first-seen, peak beats).
-  const nodeId = payload.nodeId ?? null;
   const priorContext = await loadBureauContext(env, nodeId);
   const scoreBlock = computeGenesisScoreV1(payload, priorContext);
 
   // Update bureau memory regardless of score (we still want to record the
-  // first-seen moment for new nodes that turn out tampered later).
+  // first-seen moment for new nodes that turn out tampered later). However,
+  // never let an impossible beat-rate claim raise the monotonic peak.
   await persistBureauContext(env, nodeId, priorContext, {
     nowMs: Date.now(),
     lifetimeBeats:
       typeof payload.lifetimeBeats === "number" ? payload.lifetimeBeats : 0,
+    advancePeakLifetimeBeats:
+      !scoreBlock.tamperFlags.includes("beat_rate_implausible"),
   });
 
   // Step 8: return the verified node identity + score.
