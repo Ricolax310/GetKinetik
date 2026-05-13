@@ -396,7 +396,7 @@ components:
         receipt:
           type: string
           description: KV key the attestation is stored under.
-          example: "attest:KINETIK-NODE-A49C9E14:1778679539654"
+          example: "attest:KINETIK-NODE-A49C9E14:1778679539654:2c0c87f5-fb4b-4f11-83aa-4d51f7f7a49f"
         recordedAt: { type: string, format: date-time }
         attestor:
           type: string

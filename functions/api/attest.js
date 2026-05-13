@@ -43,7 +43,7 @@
  * ── Response 200 ─────────────────────────────────────────────────────────
  * {
  *   "ok":       true,
- *   "receipt":  "attest:KINETIK-NODE-A3F2B719:1715581234567",
+ *   "receipt":  "attest:KINETIK-NODE-A3F2B719:1715581234567:<uuid>",
  *   "recordedAt": "2026-05-13T03:00:00.000Z",
  *   "attestor": "dimo"
  * }
@@ -77,6 +77,21 @@ function constantTimeEqual(a, b) {
     mismatch |= a.charCodeAt(i) ^ b.charCodeAt(i);
   }
   return mismatch === 0;
+}
+
+function randomReceiptSuffix() {
+  const cryptoApi = globalThis.crypto;
+  if (cryptoApi && typeof cryptoApi.randomUUID === "function") {
+    return cryptoApi.randomUUID();
+  }
+
+  const bytes = new Uint8Array(16);
+  if (cryptoApi && typeof cryptoApi.getRandomValues === "function") {
+    cryptoApi.getRandomValues(bytes);
+    return Array.from(bytes, (b) => b.toString(16).padStart(2, "0")).join("");
+  }
+
+  return `${Date.now()}-${Math.random().toString(36).slice(2)}`;
 }
 
 export async function onRequestOptions() {
@@ -225,7 +240,7 @@ export async function onRequestPost(ctx) {
 
   const nowMs = Date.now();
   const recordedAt = new Date(nowMs).toISOString();
-  const key = `attest:${nodeId}:${nowMs}`;
+  const key = `attest:${nodeId}:${nowMs}:${randomReceiptSuffix()}`;
 
   const record = {
     nodeId,

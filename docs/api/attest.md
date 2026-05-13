@@ -65,7 +65,7 @@ Authorization: Bearer <your-key>
 ```json
 {
   "ok": true,
-  "receipt": "attest:KINETIK-NODE-A3F2B719:1715581234567",
+  "receipt": "attest:KINETIK-NODE-A3F2B719:1715581234567:2c0c87f5-fb4b-4f11-83aa-4d51f7f7a49f",
   "recordedAt": "2026-05-13T03:00:00.000Z",
   "attestor": "dimo",
   "note": "Recorded. v1.1 stores attestations with partner attribution; v1.2 folds them into the Genesis Score."
