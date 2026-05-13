@@ -7,7 +7,7 @@ import expo.modules.kotlin.modules.Module
 import expo.modules.kotlin.modules.ModuleDefinition
 import io.nodle.sdk.android.Nodle
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.runBlocking
 
 private const val TAG = "ExpoNodleSdk"
 
@@ -36,13 +36,13 @@ class ExpoNodleSdkModule : Module() {
   override fun definition() = ModuleDefinition {
     Name("ExpoNodleSdk")
 
-    AsyncFunction("start") Coroutine@{ key: String ->
+    AsyncFunction("start") { key: String ->
       val ctx = appContext.reactContext?.applicationContext
         ?: throw NodleStartException("React application context is not available")
 
       val arg = if (key.startsWith("ss58:")) key else "ss58:$key"
 
-      withContext(Dispatchers.Main) {
+      runBlocking(Dispatchers.Main) {
         try {
           ensureInit(ctx)
           Nodle.Nodle().config("heartbeat.background-mode", true)
@@ -56,9 +56,9 @@ class ExpoNodleSdkModule : Module() {
       }
     }
 
-    AsyncFunction("stop") Coroutine@{
-      withContext(Dispatchers.Main) {
-        if (!initialized) return@withContext
+    AsyncFunction("stop") {
+      runBlocking(Dispatchers.Main) {
+        if (!initialized) return@runBlocking
         try {
           Nodle.Nodle().stop()
           Log.i(TAG, "Nodle.stop ok")
@@ -68,9 +68,9 @@ class ExpoNodleSdkModule : Module() {
       }
     }
 
-    AsyncFunction("isRunning") Coroutine@{
-      withContext(Dispatchers.Main) {
-        if (!initialized) return@withContext false
+    AsyncFunction("isRunning") {
+      runBlocking(Dispatchers.Main) {
+        if (!initialized) return@runBlocking false
         try {
           Nodle.Nodle().isStarted() && Nodle.Nodle().isScanning()
         } catch (e: Throwable) {
