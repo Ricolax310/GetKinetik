@@ -27,36 +27,50 @@ your tokens. Just signed receipts, on your device, verifiable by anyone.
 
 ## Status
 
-**v1.4.0 is the current public release** (Android preview APK). **v1.5** is
-next on the roadmap (seed backup, partner premium, etc.) — see the roadmap
-block below. Install via [getkinetik.app](https://getkinetik.app) (Android
-download) or **`GETKINETIK-v1.4.0.apk`** on
+**v1.5.0 · BUREAU · LIVE** — Android preview APK available now.
+Install via [getkinetik.app](https://getkinetik.app) or download
+**`GETKINETIK-v1.4.0.apk`** from
 [Releases](https://github.com/Ricolax310/GetKinetik/releases/latest).
+iOS is in development; iPhone visitors can join the waitlist on the site.
 
-| Layer | Status | What it is |
+| Layer / Feature | Status | What it is |
 |---|---|---|
-| **L1** Sovereign Identity + Trust | ✅ Shipped | Ed25519 key + hash-chained heartbeat log + public verifier |
+| **L1** Sovereign Identity + Trust | ✅ Live | Ed25519 key + hash-chained heartbeat log + public Ed25519 verifier |
 | **L2** Sensor Capture + Signing | 🟡 Partial | 3 of 7 planned permission-free sensors signing into the chain |
-| **L3** DePIN Optimizer | ✅ Shipped | Gas-aware claim timing, shared polling pool, yield scoring, device discovery |
-| **L4** Earnings Ledger + Disclosure Fee | ✅ Shipped | Hardware-signed earnings receipts; optional 1% bureau fee disclosed in the signature |
-| **Partner Verification API** | ✅ Shipped | `POST /api/verify-device` — signed proof in, attestation out |
-| **Verified-User Premium** | 🔨 v1.5 | Partners pay our verified operators 10–15% above standard rate (partner activation required) |
-| **Genesis Score** | 🟡 Partial | Public node reputation score (uptime, age, attestation count). **Non-transferable. Not a token. Never priced.** |
-
-iOS preview is on the roadmap. Currently Android-only because Apple's
-restrictions on background sensor collection and crypto-flavored apps make
-the architecture meaningfully harder there. iPhone visitors hitting the
-download button can join the waitlist on the site.
+| **L3** DePIN Optimizer | ✅ Live | Gas-aware claim timing, shared polling pool, yield scoring, device discovery |
+| **L4** Earnings Ledger + Disclosure Fee | ✅ Live | Hardware-signed earnings receipts; optional 1% bureau fee disclosed in the signature |
+| **Partner Verification API** | ✅ Live | `POST /api/verify-device` — Proof URL in, Genesis Score + tamper flags + node age out |
+| **Genesis Score v1.1** | ✅ Live | 0–1000 public node reputation. Bureau-bounded chain age, beat-rate sanity, chain-rewind hard gate. **Not a token. Never priced.** |
+| **Public Bureau (`/bureau/`)** | ✅ Live | Score bands, input methodology, neutrality rules, sample API response, live verification ticker |
+| **Bureau Positioning Page (`/bureau/why/`)** | ✅ Live | Direct answer to the "we already do this" objection |
+| **Bureau Stats API (`/api/bureau/stats`)** | ✅ Live | Public telemetry counters: total verifications, unique nodes, last-seen timestamp |
+| **Score Lookup API (`/api/score/:nodeId`)** | ✅ Live | `GET` a cached Genesis Score for any node ID |
+| **Partner Attestation API (`/api/attest`)** | ✅ Live | Authenticated `POST` — partners push positive or negative signals; KV-persisted, `attestor` attributed |
+| **Per-Partner API Keys** | ✅ Live | `ATTEST_API_KEYS` JSON dict; each key carries a partner name for attribution |
+| **Score-Change Webhooks** | ✅ Live | `score.changed` event pushed to partners on band transitions; HMAC-SHA256 signed |
+| **OpenAPI 3.1 Spec** | ✅ Live | `/api/openapi.yaml` — machine-readable contract for all endpoints |
+| **Interactive API Docs** | ✅ Live | `/api/docs/` — RapiDoc viewer; try every endpoint in-browser |
+| **Postman Collection** | ✅ Live | `/api/postman.json` — import and run against live API in 30 seconds |
+| **Public Status Page (`/status/`)** | ✅ Live | Browser-side probes for all key endpoints; live bureau telemetry |
+| **Health Probe (`/api/health`)** | ✅ Live | Lightweight `GET` — integrates with uptime monitors |
+| **`@getkinetik/verify` NPM package** | ✅ Live | Offline, air-gapped verifier — same cryptographic contract as the hosted API |
+| **Verified-User Premium** | 🔨 Next | Partners tier rewards by Genesis Score band (requires partner activation) |
+| **Seed-phrase backup** | 🔨 Next | 12-word restore; one active device at a time; no bypass |
 
 ### Roadmap
 
 ```
-v1.4.x  SHIPPED — Optimizer, Genesis Score (MVP), shared PollingPool, verify-device webhook, metrics
-v1.5    NEXT   — Seed-phrase backup; first verified-user premium with a partner network;
-                 Methodology v1.0 published (how the Genesis Score is computed)
-v1.6    SOON   — Partner API tiers (free, pro, enterprise); batch attestation endpoint;
-                 third-party auditor read API
-v2.0    LATER  — Public attestation index across 25+ DePIN networks; transparency reports
+v1.5.0  LIVE   — Genesis Score v1.1 (hardened); public bureau at /bureau/;
+                 /bureau/why/ positioning page; live bureau stats ticker;
+                 OpenAPI 3.1 + Postman collection + interactive docs at /api/docs/;
+                 per-partner API keys; score-change webhooks; /status/ page;
+                 @getkinetik/verify NPM package; QUICKSTART.md
+
+v1.6    NEXT   — Seed-phrase backup; verified-user premium (partner activation);
+                 batch attestation endpoint; iOS preview
+
+v2.0    LATER  — Public attestation index across 25+ DePIN networks;
+                 third-party auditor read API; transparency reports
 ```
 
 ---
@@ -102,33 +116,52 @@ auditor, skeptic — can confirm we're not lying about what's signed.
 │   ├── adapter-weatherxm/       # L3 adapter — WeatherXM Pro
 │   └── adapter-geodnet/         # L3 adapter — Geodnet
 │
-├── src/components/
-│   ├── AggregatorPanel.tsx      # Multi-adapter earnings UI (shared PollingPool)
-│   ├── OptimizationReport.tsx   # Weekly savings proof modal
-│   ├── GenesisCreditsTicker.tsx # Genesis Credits counter
-│   └── ...
-│
 ├── landing/                     # getkinetik.app (Cloudflare Pages)
-│   ├── index.html               #   marketing site
-│   ├── verify/                  #   public Ed25519 verifier (zero deps)
+│   ├── index.html               #   marketing site + live bureau stats
+│   ├── app.js                   #   platform detection, waitlist modal, bureau stats hydration
+│   ├── _headers                 #   security headers + CSP + content-type overrides
+│   ├── verify/                  #   public Ed25519 verifier (zero deps, no server)
+│   ├── bureau/                  #   public Genesis Score bureau
+│   │   ├── index.html           #     score bands, methodology, live ticker
+│   │   ├── ticker.js            #     live bureau stat ticker (CSP-safe external script)
+│   │   └── why/index.html       #     "Why a neutral bureau ≠ your own genuity check"
+│   ├── api/                     #   developer resources (static, served by Pages)
+│   │   ├── openapi.yaml         #     OpenAPI 3.1 spec for all public endpoints
+│   │   ├── postman.json         #     Postman collection
+│   │   └── docs/index.html      #     Interactive RapiDoc viewer
+│   ├── status/                  #   public service status page
+│   │   ├── index.html           #     browser-side endpoint probes + bureau telemetry
+│   │   └── status.js            #     probe logic (CSP-safe external script)
 │   ├── dimo-callback/           #   OAuth bounce page for DIMO login
 │   └── metrics/                 #   public network metrics dashboard
 │
-├── functions/api/
-│   ├── waitlist.js              # Cloudflare Function — waitlist KV
-│   ├── verify-device.js         # Cloudflare Function — partner verification webhook
-│   ├── credits.js               # Cloudflare Function — Genesis Credits KV sync
-│   └── metrics.js               # Cloudflare Function — network metrics aggregate
+├── functions/api/               # Cloudflare Pages Functions (edge workers)
+│   ├── waitlist.js              #   waitlist KV
+│   ├── verify-device.js         #   partner verification; Genesis Score compute + KV cache; webhook fire
+│   ├── attest.js                #   authenticated partner attestation endpoint
+│   ├── health.js                #   lightweight health probe for uptime monitors
+│   ├── credits.js               #   Genesis Credits KV sync
+│   ├── metrics.js               #   network metrics aggregate
+│   ├── score/[nodeId].js        #   GET cached Genesis Score for any node
+│   └── bureau/stats.js          #   GET public bureau telemetry counters
 │
 ├── docs/
-│   ├── architecture.md          # System overview for M&A due diligence
-│   ├── cryptography.md          # Signing contract specification
-│   ├── adapter-contract.md      # Partner integration guide
-│   ├── IP-ASSIGNMENT.md         # IP ownership + USPTO trademark guidance
-│   └── api/verify-device.md    # verify-device webhook API spec
+│   ├── QUICKSTART.md            #   5-Minute Integration Guide for partners
+│   ├── architecture.md          #   System overview for M&A due diligence
+│   ├── cryptography.md          #   Signing contract specification
+│   ├── adapter-contract.md      #   Partner integration guide
+│   ├── IP-ASSIGNMENT.md         #   IP ownership + USPTO trademark guidance
+│   ├── api/
+│   │   ├── verify-device.md     #     verify-device API spec
+│   │   ├── attest.md            #     attestation endpoint spec
+│   │   └── webhooks.md          #     score-change webhook payload + HMAC spec
+│   └── methodology/
+│       └── GENESIS_SCORE.md     #     Published Genesis Score methodology (v1.1)
 │
 └── scripts/
-    └── mint-demo-proof.mjs      # Generate a live demo proof URL
+    ├── mint-demo-proof.mjs      #   Generate a live verifiable demo proof URL
+    ├── mint-partner-key.mjs     #   Generate a new partner API key (ATTEST_API_KEYS format)
+    └── test-genesis-score.mjs   #   Local unit tests for the Genesis Score algorithm
 ```
 
 The TypeScript app and the browser-side verifier share a cryptographic
@@ -142,26 +175,41 @@ without one or both refusing to validate.
 
 ## For partners
 
-We're the **independent trust layer** that grades nodes across every
-DePIN — never a network competitor. The integration shape is:
+GETKINETIK is the **independent credit bureau for the decentralized
+physical economy** — never a network competitor. We grade the *device*,
+not the data, with a published methodology, a versioned public score, and
+a charter that prohibits holding equity in or issuing tokens on any
+graded network. That neutrality is the product.
 
-- **Read-only** against the partner network's own API (we never custody earnings; tokens live in the user's wallet on the partner's network)
-- **Hardware-signed Proof of Origin** attached to every node-side claim, verifiable by anyone via the public verifier at `getkinetik.app/verify/`
-- **Free verification webhook** for anti-Sybil checks: `POST https://getkinetik.app/api/verify-device`
-- **Verified-user premium programme** — pay GETKINETIK-verified nodes 10–15% above your standard rate; we pass it through as a signed receipt. You save more on fraud than you pay in premium.
+**Why a neutral bureau matters more than your own genuity check:**
+[getkinetik.app/bureau/why/](https://getkinetik.app/bureau/why/)
 
-Try the webhook right now (no auth required):
+**What partners get:**
+
+| Tool | URL | Auth |
+|---|---|---|
+| Verify a proof + get Genesis Score | `POST /api/verify-device` | None |
+| Look up a cached score by node ID | `GET /api/score/:nodeId` | None |
+| Push attestations (positive / negative) | `POST /api/attest` | Bearer key |
+| Score-change webhooks | configure in your partner key | Bearer key |
+| Interactive API docs | `/api/docs/` | None |
+| OpenAPI 3.1 spec | `/api/openapi.yaml` | None |
+| Postman collection | `/api/postman.json` | None |
+
+Try it right now — no auth, no account:
+
 ```bash
 curl -X POST https://getkinetik.app/api/verify-device \
   -H 'Content-Type: application/json' \
   -d '{"proofUrl":"<paste_any_getkinetik_proof_url>"}'
 ```
 
+5-minute integration guide: [`docs/QUICKSTART.md`](./docs/QUICKSTART.md)
+
 Full API spec: [`docs/api/verify-device.md`](./docs/api/verify-device.md)
 
-Outreach materials: [`PARTNER_EMAILS.md`](./PARTNER_EMAILS.md)
-
-Direct contact: **eric@outfromnothingllc.com**
+To request a partner API key (enables attestations + webhooks):
+**eric@outfromnothingllc.com**
 
 ---
 
