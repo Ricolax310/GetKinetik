@@ -7,7 +7,7 @@
 // the app, and again when they want to remember what they bought into.
 //
 // The tone is prophetic-monastic by design — sentences short, weight heavy,
-// claims absolute. A DePIN manifesto that sounds like a technical whitepaper
+// claims absolute. A trust-bureau manifesto that sounds like a technical whitepaper
 // will be skimmed and forgotten. One that sounds like a scripture gets
 // re-read, screenshotted, and quoted.
 //
@@ -42,11 +42,11 @@ import { palette, typography } from '../theme/palette';
 const SECTIONS: ReadonlyArray<{ title: string; body: string }> = [
   {
     title: 'THE PROMISE',
-    body: 'Your device is not a terminal.\nIt is a sovereign node.\nIt answers to you alone.',
+    body: 'Your device is not a terminal.\nIt is a sovereign node.\nIt answers to you alone \u2014\nand it can prove that answer to anyone who asks.',
   },
   {
     title: 'WHAT MAKES A NODE REAL',
-    body: 'A node is defined by what it can prove.\nNot by what it claims.\nProof is the only coin of this realm.',
+    body: 'A node is defined by what it can prove.\nNot by what it claims.\nProof is the only coin of this realm.\nNetworks may promise rewards.\nOnly mathematics can promise truth.',
   },
   {
     title: 'THE KEY',
@@ -54,19 +54,19 @@ const SECTIONS: ReadonlyArray<{ title: string; body: string }> = [
   },
   {
     title: 'THE CHAIN',
-    body: 'Every thirty seconds, this node signs a statement.\nIt says: I exist. I am healthy. I am here.\nEach statement is hashed into the next.\nBending one breaks them all.\nUptime becomes mathematics.',
+    body: 'On a steady cadence, this node signs a statement.\nIt says: I exist. I am here. I have not been replaced.\nEach statement is hashed into the next.\nBending one breaks them all.\nUptime becomes mathematics.',
   },
   {
     title: 'THE STONE',
     body: 'The ruby is the node\u2019s face.\nIt reflects only when the hardware is well.\nWhen the battery fades, the pulse hastens.\nWhen the connection drops, the light dims.\nIt cannot be faked. It reports what is.',
   },
   {
-    title: 'THE YIELD',
-    body: 'KNT is a measure, not a promise.\nIt counts what has been proved, not what has been spent.\nReal tokens will come from real proof.\nUntil then, every unit is a vow kept.',
+    title: 'THE BUREAU',
+    body: 'GETKINETIK is not another network.\nIt does not mint a token.\nIt does not take equity in the networks it reads.\nIt sits outside them \u2014 a witness, not a competitor.\nWhat you earn elsewhere stays elsewhere.\nHere you only sign what happened.',
   },
   {
     title: 'THE COMPACT',
-    body: 'You own this node.\nThe node owes nothing to anyone.\nIt does not seek permission.\nIt does not ask to be watched.\nIt simply persists \u2014\nand that, in this age, is a kind of defiance.',
+    body: 'You own this node.\nThe node owes nothing to anyone.\nIt does not seek permission.\nIt does not ask to be watched.\nIt persists \u2014\nand what it signs, the world may verify without trusting us.\nThat, in this age, is a kind of defiance.',
   },
 ];
 
@@ -159,7 +159,7 @@ export function Manifesto({ visible, onClose }: ManifestoProps) {
             <View style={styles.footer}>
               <View style={styles.footerDiamond} />
               <Text style={styles.footerLine}>
-                SIGNED BY YOUR NODE. SEEN BY YOU ALONE.
+                SIGNED BY YOUR NODE. VERIFIED WITHOUT TRUSTING US.
               </Text>
             </View>
           </ScrollView>
