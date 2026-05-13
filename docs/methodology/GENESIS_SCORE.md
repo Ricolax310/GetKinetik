@@ -5,7 +5,7 @@
 > auditors, foundations, and graded operators read to understand how
 > their score is computed.*
 
-**Version:** v1.0
+**Version:** v1.1
 **Effective from:** 2026-05
 **Charter:** see [`NEUTRALITY.md`](../../NEUTRALITY.md) and [`PRIVACY.md`](../../PRIVACY.md). The methodology here lives downstream of those rules.
 
@@ -82,11 +82,20 @@ identity surface fails, the rest of the score is meaningless.
 | Long calendar age (`firstBeatTs` far in the past with continuing activity) | ▲ |
 | Gap in the chain that resumes cleanly (legitimate offline period) | neutral after a short cooldown |
 | Chain tip not advancing while the node claims to be online | ▼ |
-| Chain rewind (a later beat references a `prevHash` not consistent with a previously published tip) | **HARD GATE.** Failure → score floored to a low value and a tamper flag is published. |
+| Chain rewind (later proof claims fewer `lifetimeBeats` than the bureau previously recorded for this node) | **HARD GATE.** Failure → score floored to a low value and `chain_rewind` tamper flag is published. |
+| Beat rate beyond physical limits (claimed `lifetimeBeats` exceeds what could accrue at 1 beat / 25s over the bureau-observed window) | **HARD GATE.** `beat_rate_implausible` tamper flag. |
+
+**Bureau-bounded age.** The chain age contribution to the score uses
+`max(claimed firstBeatTs, bureau-first-seen)`. A freshly minted
+keypair cannot back-date itself: the bureau only credits age it
+*itself* observed. Real long-running nodes accrue full age credit as
+they continue to be re-verified.
 
 **Why:** the chain *is* the uptime claim. Nodes that have been
 running honestly for a long time have a long chain to show. Nodes
-that have been spinning up emulators or scripted attesters do not.
+that have been spinning up emulators or scripted attesters do not —
+and the bureau-bounded age + beat-rate sanity stop a fresh keypair
+from forging a long history in a single signed payload.
 
 ### 3.3 Sensor coherence
 
