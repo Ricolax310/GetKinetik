@@ -21,8 +21,15 @@ import fs from "node:fs";
 import path from "node:path";
 
 const STATIONS_URL = "https://rtk.geodnet.com/api/v2/coverage_stations";
-const OUTPUT_REPORT = "docs/reports/geodnet-sybil-report.md";
-const OUTPUT_SNAPSHOT = "scripts/data/geodnet-snapshot.json";
+const inputPath = process.argv.find((a) => a.startsWith("--input="))?.split("=")[1] || null;
+const generatedAtArg =
+  process.argv.find((a) => a.startsWith("--generated-at="))?.split("=")[1] || null;
+const OUTPUT_REPORT =
+  process.argv.find((a) => a.startsWith("--out="))?.split("=")[1] ||
+  "docs/reports/geodnet-sybil-report.md";
+const OUTPUT_SNAPSHOT =
+  process.argv.find((a) => a.startsWith("--snapshot="))?.split("=")[1] ||
+  "scripts/data/geodnet-snapshot.json";
 
 const DUPLICATE_RADIUS_M = 10;           // GNSS antennas don't share addresses
 const CLUSTER_RADIUS_M = 100;            // tighter than any honest CORS site
@@ -57,25 +64,57 @@ function gridKey(lat, lng, gridDeg) {
   return Math.floor(lat / gridDeg) + "/" + Math.floor(lng / gridDeg);
 }
 
+function stationId(s) {
+  return s._scanId;
+}
+
+function publicStation(s) {
+  const { _scanId, ...station } = s;
+  return station;
+}
+
+function publicGroup(g) {
+  return g.map(publicStation);
+}
+
+async function loadStations() {
+  if (inputPath) {
+    const raw = JSON.parse(fs.readFileSync(inputPath, "utf8"));
+    if (Array.isArray(raw)) return raw;
+    if (Array.isArray(raw.data)) return raw.data;
+    console.error("unexpected fixture shape: expected an array or { data: [...] }");
+    process.exit(1);
+  }
+
+  const res = await fetch(STATIONS_URL);
+  if (!res.ok) {
+    console.error("failed: HTTP " + res.status);
+    process.exit(1);
+  }
+  const body = await res.json();
+  if (body.code !== 0 || !Array.isArray(body.data)) {
+    console.error("unexpected response shape: code=" + body.code);
+    process.exit(1);
+  }
+  return body.data;
+}
+
 // ---- 1. Pull ---------------------------------------------------------------
-console.error("[1/3] Fetching Geodnet coverage_stations …");
-const res = await fetch(STATIONS_URL);
-if (!res.ok) {
-  console.error("failed: HTTP " + res.status);
-  process.exit(1);
-}
-const body = await res.json();
-if (body.code !== 0 || !Array.isArray(body.data)) {
-  console.error("unexpected response shape: code=" + body.code);
-  process.exit(1);
-}
-const stations = body.data.filter(
-  (s) =>
-    typeof s.lat === "number" &&
-    typeof s.lng === "number" &&
-    isFinite(s.lat) &&
-    isFinite(s.lng),
+console.error(
+  inputPath
+    ? "[1/3] Loading Geodnet station fixture …"
+    : "[1/3] Fetching Geodnet coverage_stations …",
 );
+const rawStations = await loadStations();
+const stations = rawStations
+  .filter(
+    (s) =>
+      typeof s.lat === "number" &&
+      typeof s.lng === "number" &&
+      isFinite(s.lat) &&
+      isFinite(s.lng),
+  )
+  .map((s, i) => ({ ...s, _scanId: i }));
 console.error(`      → ${stations.length.toLocaleString()} stations with coordinates.`);
 
 // ---- 2. Build spatial index -----------------------------------------------
@@ -108,7 +147,7 @@ console.error("[2/3] Running heuristics …");
 const duplicates = new Map(); // key -> [stations]
 const seenDup = new Set();
 for (const a of stations) {
-  if (seenDup.has(a.name)) continue;
+  if (seenDup.has(stationId(a))) continue;
   const neighbours = neighbourCells(a.lat, a.lng);
   const group = [a];
   for (const b of neighbours) {
@@ -119,7 +158,7 @@ for (const a of stations) {
     const key = `${a.lat.toFixed(5)},${a.lng.toFixed(5)}`;
     if (!duplicates.has(key)) {
       duplicates.set(key, group);
-      group.forEach((s) => seenDup.add(s.name));
+      group.forEach((s) => seenDup.add(stationId(s)));
     }
   }
 }
@@ -128,7 +167,7 @@ for (const a of stations) {
 const clusters = [];
 const seenCluster = new Set();
 for (const a of stations) {
-  if (seenCluster.has(a.name)) continue;
+  if (seenCluster.has(stationId(a))) continue;
   const neighbours = neighbourCells(a.lat, a.lng);
   const group = [a];
   for (const b of neighbours) {
@@ -136,7 +175,7 @@ for (const a of stations) {
     if (distanceMeters(a, b) <= CLUSTER_RADIUS_M) group.push(b);
   }
   if (group.length >= CLUSTER_MIN_COUNT) {
-    group.forEach((s) => seenCluster.add(s.name));
+    group.forEach((s) => seenCluster.add(stationId(s)));
     clusters.push(group);
   }
 }
@@ -168,13 +207,13 @@ fs.writeFileSync(
   OUTPUT_SNAPSHOT,
   JSON.stringify(
     {
-      generatedAt: new Date().toISOString(),
-      source: STATIONS_URL,
+      generatedAt: generatedAtArg || new Date().toISOString(),
+      source: inputPath || STATIONS_URL,
       stationsTotal: stations.length,
-      duplicates: [...duplicates.values()],
-      clusters,
-      exactDups,
-      lowPrecision,
+      duplicates: [...duplicates.values()].map(publicGroup),
+      clusters: clusters.map(publicGroup),
+      exactDups: exactDups.map(publicGroup),
+      lowPrecision: lowPrecision.map(publicStation),
     },
     null,
     2,
@@ -185,12 +224,14 @@ fs.writeFileSync(
 console.error("[3/3] Rendering report …");
 
 const flaggedSet = new Set();
-[...duplicates.values()].forEach((g) => g.forEach((s) => flaggedSet.add(s.name)));
-clusters.forEach((g) => g.forEach((s) => flaggedSet.add(s.name)));
-exactDups.forEach((g) => g.forEach((s) => flaggedSet.add(s.name)));
-lowPrecision.forEach((s) => flaggedSet.add(s.name));
+// The public endpoint masks names, so rows with the same name are not necessarily
+// the same station. Count by source row to avoid collapsing unrelated stations.
+[...duplicates.values()].forEach((g) => g.forEach((s) => flaggedSet.add(stationId(s))));
+clusters.forEach((g) => g.forEach((s) => flaggedSet.add(stationId(s))));
+exactDups.forEach((g) => g.forEach((s) => flaggedSet.add(stationId(s))));
+lowPrecision.forEach((s) => flaggedSet.add(stationId(s)));
 
-const now = new Date();
+const now = generatedAtArg ? new Date(generatedAtArg) : new Date();
 const lines = [];
 lines.push("# Sybil Risk Scan — Geodnet RTK Network");
 lines.push("");
