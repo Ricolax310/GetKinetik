@@ -44,7 +44,7 @@
  * 4. Re-serialise the payload using stableStringify (lex-sorted keys)
  * 5. Verify the Ed25519 signature against the serialised message and the
  *    pubkey embedded in the payload using SubtleCrypto (native in CF Workers)
- * 6. Verify the hash field matches sha256(message)[:16]
+ * 6. If a hash field is present, verify it matches sha256(message)[:16]
  *
  * This is a server-side implementation of the same logic in landing/verify/verifier.js.
  * Both must remain byte-for-byte equivalent — the CRYPTOGRAPHIC_CONTRACT comment
@@ -173,9 +173,16 @@ async function verifyProofUrl(proofUrl) {
     return { valid: false, reason: "malformed_envelope" };
   }
 
-  const { payload, signature, hash } = envelope;
-  if (!payload || !signature || !hash) {
+  const { payload, signature } = envelope;
+  const hasClaimedHash = Object.prototype.hasOwnProperty.call(envelope, "hash");
+  const claimedHash = hasClaimedHash && typeof envelope.hash === "string"
+    ? envelope.hash.toLowerCase()
+    : null;
+  if (!payload || !signature) {
     return { valid: false, reason: "missing_fields" };
+  }
+  if (hasClaimedHash && !claimedHash) {
+    return { valid: false, reason: "hash_mismatch" };
   }
 
   // Step 4: verify attribution.
@@ -183,11 +190,11 @@ async function verifyProofUrl(proofUrl) {
     return { valid: false, reason: "attribution_mismatch" };
   }
 
-  // Step 5: verify hash = sha256(stableStringify(payload))[:16].
+  // Step 5: compact QR URLs omit hash; full artifacts must match it.
   const message = stableStringify(payload);
   const fullHash = await sha256Hex(message);
   const expectedHash = fullHash.slice(0, 16);
-  if (expectedHash !== hash) {
+  if (claimedHash !== null && expectedHash !== claimedHash) {
     return { valid: false, reason: "hash_mismatch" };
   }
 

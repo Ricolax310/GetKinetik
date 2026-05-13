@@ -77,7 +77,7 @@ The `proofUrl` is what the GETKINETIK app generates when the user taps **Share P
 | `invalid_url_format` | Could not parse a proof from the supplied URL. |
 | `base64_decode_failed` | The base64url payload could not be decoded. |
 | `json_parse_failed` | The decoded payload is not valid JSON. |
-| `missing_fields` | Required fields (`payload`, `signature`, `hash`) are absent. |
+| `missing_fields` | Required fields (`payload`, `signature`) are absent. Compact proof URLs omit `hash`; full artifacts that include it must match. |
 | `invalid_pubkey` | The pubkey field is malformed. |
 | `crypto_unavailable` | Server-side Ed25519 crypto unavailable (rare, transient). Retry. |
 | `internal_error` | Unexpected server error. Retry. |
