@@ -48,9 +48,18 @@ The `proofUrl` is what the GETKINETIK app generates when the user taps **Share P
   "pubkey": "a3f2b719c8e4d6f1...(64-char hex)",
   "mintedAt": 1714000000000,
   "schema": "proof-of-origin:v2",
-  "attribution": "GETKINETIK by OutFromNothing LLC"
+  "attribution": "GETKINETIK by OutFromNothing LLC",
+  "lifetimeBeats": 25847,
+  "firstBeatTs": 1777086000000,
+  "genesisScore": 636,
+  "scoreBand": "STANDING",
+  "methodologyVersion": "v1.0",
+  "tamperFlags": [],
+  "asOf": "2026-05-13T03:00:00.000Z"
 }
 ```
+
+### Identity fields
 
 | Field | Type | Description |
 |---|---|---|
@@ -60,6 +69,20 @@ The `proofUrl` is what the GETKINETIK app generates when the user taps **Share P
 | `mintedAt` | number | Best-effort timestamp from the signed payload: `issuedAt` (when this PoO was signed) if present, else `mintedAt` (key birth), else `ts` (heartbeat-style). |
 | `schema` | string | Proof schema version. |
 | `attribution` | string | Always `"GETKINETIK by OutFromNothing LLC"`. |
+| `lifetimeBeats` | number \| null | Total signed heartbeats in this node's chain at proof time. |
+| `firstBeatTs` | number \| null | Timestamp of the node's first heartbeat (chain birth). |
+
+### Genesis Score fields
+
+| Field | Type | Description |
+|---|---|---|
+| `genesisScore` | number | The bureau's reputation grade for this node in `[0, 1000]`. Higher is better. |
+| `scoreBand` | string | Calibration anchor: `NEW` (<500), `STANDING` (500–749), `STRONG` (750–899), `PREMIER` (≥900), `TAMPERED` (any flag raised). |
+| `methodologyVersion` | string | Version of the scoring methodology used to produce this score. Currently `v1.0`. |
+| `tamperFlags` | string[] | Empty array on a clean proof. Non-empty values floor the score and signal physically-impossible sensor inputs (e.g. `pressure_implausible`). |
+| `asOf` | string | ISO-8601 timestamp the score was computed. |
+
+See [`docs/methodology/GENESIS_SCORE.md`](../methodology/GENESIS_SCORE.md) for the full scoring methodology (inputs, direction, bands, versioning policy).
 
 ---
 

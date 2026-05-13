@@ -8,6 +8,17 @@ Android `versionCode` is noted alongside each release for sideload verification.
 
 ## [Unreleased] — v1.3.3
 
+### Added
+- **Genesis Score v1.0 live on `/api/verify-device`.** Successful responses
+  now include `genesisScore` (0–1000), `scoreBand` (`NEW` / `STANDING` /
+  `STRONG` / `PREMIER` / `TAMPERED`), `methodologyVersion`, `tamperFlags`,
+  and `asOf`, plus the raw `lifetimeBeats` and `firstBeatTs` inputs.
+  Scoring reads three of the five methodology categories (identity
+  integrity, uptime continuity, sensor coherence) from a single signed
+  proof; network engagement and disclosure receipts wait on partner
+  attestation channels. Methodology in `docs/methodology/GENESIS_SCORE.md`
+  §7 updated from "Target (not shipped yet)" to "Live in production".
+
 ### Changed
 - **`GET /api/verify-device` discovery response.** Visiting the webhook URL in
   a browser (GET) previously returned **405 Method not allowed**. It now

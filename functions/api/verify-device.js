@@ -53,6 +53,7 @@
 
 // ── Constants ────────────────────────────────────────────────────────────────
 const PROOF_ATTRIBUTION = "GETKINETIK by OutFromNothing LLC";
+const GENESIS_METHODOLOGY_VERSION = "v1.0";
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -145,6 +146,110 @@ function extractProofFragment(proofUrl) {
   return fragment;
 }
 
+// ── Genesis Score v1 ─────────────────────────────────────────────────────────
+//
+// Computes a 0–1000 score from observable proof-of-origin fields per the
+// published methodology at docs/methodology/GENESIS_SCORE.md.
+//
+// v1 inputs (everything available in a single signed proof, no server state):
+//   - Identity integrity:   already gated by caller (signature verified)
+//   - Uptime continuity:    chain age from firstBeatTs, plus lifetimeBeats
+//   - Sensor coherence:     presence + per-field plausibility ranges
+//
+// Not yet wired (returns 0 contribution from these categories):
+//   - Network engagement:   requires partner attestation channel
+//   - Disclosure receipts:  requires L4 earnings ledger ingestion
+//
+// Hard gates (per §3.6) that floor the score and raise tamperFlags:
+//   - Sensor values physically impossible (e.g. negative pressure)
+//
+// The methodology document is authoritative; this function must stay in sync.
+function computeGenesisScoreV1(payload) {
+  let score = 200; // §4 baseline for a cryptographically valid identity.
+  const tamperFlags = [];
+
+  // ── Uptime continuity — chain age ─────────────────────────────────────────
+  // Linear ramp: 0 days → 0 pts, 180 days → 300 pts (capped).
+  const firstBeatTs =
+    typeof payload.firstBeatTs === "number" ? payload.firstBeatTs : null;
+  const referenceTs =
+    typeof payload.issuedAt === "number"
+      ? payload.issuedAt
+      : typeof payload.mintedAt === "number"
+        ? payload.mintedAt
+        : Date.now();
+  if (firstBeatTs !== null && firstBeatTs <= referenceTs) {
+    const ageDays = (referenceTs - firstBeatTs) / 86_400_000;
+    const ageScore = Math.min(300, Math.round((ageDays / 180) * 300));
+    score += Math.max(0, ageScore);
+  }
+
+  // ── Uptime continuity — lifetime beats (logarithmic) ──────────────────────
+  // log10(beats+1) * 50: ~25k → 220 pts, ~250k → 270 pts, ~1M → 300 pts (cap).
+  const lifetimeBeats =
+    typeof payload.lifetimeBeats === "number" && payload.lifetimeBeats >= 0
+      ? payload.lifetimeBeats
+      : 0;
+  if (lifetimeBeats > 0) {
+    const beatScore = Math.min(
+      300,
+      Math.round(Math.log10(lifetimeBeats + 1) * 50),
+    );
+    score += beatScore;
+  }
+
+  // ── Sensor coherence — presence + plausibility ────────────────────────────
+  // Up to 200 pts: 50 baseline for the block, 50 per plausible field.
+  const sensors =
+    payload.sensors && typeof payload.sensors === "object"
+      ? payload.sensors
+      : null;
+  if (sensors) {
+    let sensorScore = 50;
+    const lux = sensors.lux;
+    const motionRms = sensors.motionRms;
+    const pressureHpa = sensors.pressureHpa;
+
+    if (typeof lux === "number") {
+      if (lux < 0 || lux > 200_000) tamperFlags.push("lux_implausible");
+      else sensorScore += 50;
+    }
+    if (typeof motionRms === "number") {
+      if (motionRms < 0 || motionRms > 50)
+        tamperFlags.push("motion_implausible");
+      else sensorScore += 50;
+    }
+    if (typeof pressureHpa === "number") {
+      if (pressureHpa < 800 || pressureHpa > 1100)
+        tamperFlags.push("pressure_implausible");
+      else sensorScore += 50;
+    }
+    score += sensorScore;
+  }
+
+  // ── Hard gate — sensor tamper flags floor the score per §3.6 ──────────────
+  if (tamperFlags.length > 0) score = Math.min(score, 199);
+
+  // ── Clamp to [0, 1000] ────────────────────────────────────────────────────
+  score = Math.max(0, Math.min(1000, score));
+
+  // ── Score band per §4 ─────────────────────────────────────────────────────
+  let scoreBand;
+  if (tamperFlags.length > 0) scoreBand = "TAMPERED";
+  else if (score < 500) scoreBand = "NEW";
+  else if (score < 750) scoreBand = "STANDING";
+  else if (score < 900) scoreBand = "STRONG";
+  else scoreBand = "PREMIER";
+
+  return {
+    genesisScore: score,
+    scoreBand,
+    methodologyVersion: GENESIS_METHODOLOGY_VERSION,
+    tamperFlags,
+    asOf: new Date().toISOString(),
+  };
+}
+
 // ── Main verification logic ───────────────────────────────────────────────────
 
 async function verifyProofUrl(proofUrl) {
@@ -227,7 +332,10 @@ async function verifyProofUrl(proofUrl) {
     return { valid: false, reason: "signature_invalid" };
   }
 
-  // Step 7: return the verified node identity.
+  // Step 7: compute Genesis Score from observable proof fields.
+  const scoreBlock = computeGenesisScoreV1(payload);
+
+  // Step 8: return the verified node identity + score.
   // Timestamp field priority: Proof-of-Origin uses issuedAt (card signed) /
   // mintedAt (key birth); heartbeat uses ts. Previous payload.ts-only mapping
   // returned null for every valid PoO — fixed 2026-05.
@@ -245,6 +353,11 @@ async function verifyProofUrl(proofUrl) {
             : null,
     schema: `proof-of-origin:v${payload.v ?? 1}`,
     attribution: payload.attribution,
+    lifetimeBeats:
+      typeof payload.lifetimeBeats === "number" ? payload.lifetimeBeats : null,
+    firstBeatTs:
+      typeof payload.firstBeatTs === "number" ? payload.firstBeatTs : null,
+    ...scoreBlock,
   };
 }
 
