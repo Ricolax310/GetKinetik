@@ -1,367 +1,340 @@
-# Genesis Score — Public Methodology v1
+# Genesis Score — Public Methodology v2
 
-> *FICO-style: inputs and direction, not the proprietary weights. This
-> document is the public spec partner networks, lenders, insurers,
-> auditors, foundations, and graded operators read to understand how
-> their score is computed.*
+> *FICO-style: inputs and direction, plus the reference policy as
+> open-source code. Partner networks, lenders, insurers, auditors,
+> foundations, and graded operators read this document to understand
+> how a node's reward tier is computed from a signed bureau attestation.*
 
-**Version:** v1.1
+**Version:** v2.0
 **Effective from:** 2026-05
 **Charter:** see [`NEUTRALITY.md`](../../NEUTRALITY.md) and [`PRIVACY.md`](../../PRIVACY.md). The methodology here lives downstream of those rules.
 
 ---
 
+## What changed in v2
+
+Genesis Score v2 separates **bureau evidence** from **partner policy**:
+
+- The bureau emits a [**signed attestation**](./ATTESTATION.md) — a
+  cryptographically signed bundle of observable facts about a node.
+  The attestation contains no score, no tier, no verdict.
+- This document describes the **reference policy** — the open-source
+  mapping from a signed attestation to a reward tier
+  (`PREMIER` / `STRONG` / `STANDING` / `NEW` / `TAMPERED`).
+- The reference policy is implemented in
+  [`@getkinetik/evidence-mapping`](https://npmjs.com/package/@getkinetik/evidence-mapping)
+  as a pure function with zero runtime dependencies. Partners adopt
+  it as-is, fork it, or write their own. The bureau ships evidence;
+  networks ship policy.
+
+The previous v1.x bureau-server-computed score band still exists as
+the `derived` block in the `/api/verify-device` response, but it is
+explicitly marked as a convenience computed using
+[`DEFAULT_POLICY`](https://github.com/Ricolax310/GetKinetik/blob/main/packages/evidence-mapping/src/index.ts).
+Partners doing real integration consume the signed `attestation` field
+and run the mapping themselves.
+
+---
+
 ## 1. What Genesis Score is
 
-Genesis Score is a **public reputation grade about a single sovereign
-node** — a specific Ed25519 keypair sealed inside a specific physical
-device. It is the bureau's standing estimate of whether that node is
-real hardware, has been running honestly, and is producing a
-verifiable record of its conduct.
+Genesis Score is a **reference reward-tier mapping** from a signed
+GETKINETIK bureau attestation to one of five tiers. It is computed
+client-side by anyone who holds a verified attestation:
 
-Concretely, the score is a number reported via the partner
-`verify-device` API alongside the cryptographic claims (validity,
-device age, heartbeat count, chain tip). Partners can read it. The
-public verifier exposes it. The graded operator can read their own
-score.
+```ts
+import { verifyArtifact } from '@getkinetik/verify';
+import { attestationToTier, DEFAULT_POLICY } from '@getkinetik/evidence-mapping';
 
-It is computed by GETKINETIK from data that is either (a) signed by
-the node itself or (b) reported by a partner network through a typed
-attestation channel. Inputs from each side are explicitly typed and
-traceable so the score can be reconstructed from public data.
+const report = await verifyArtifact(signedAttestation);
+if (!report.valid || !report.checks.bureauOk) return 'reject';
+
+const result = attestationToTier(report.payload, DEFAULT_POLICY);
+// result.tier === 'PREMIER' | 'STRONG' | 'STANDING' | 'NEW' | 'TAMPERED'
+// result.score in [0, 1000]
+// result.contributingFactors — audit breakdown
+```
+
+A partner running `DEFAULT_POLICY` against any attestation gets the
+same result GETKINETIK's own dashboard displays. A partner running a
+custom policy gets a tier reflecting *their* fraud tolerance, not
+the bureau's.
 
 ## 2. What Genesis Score is not
 
-- **Not a token, point with monetary value, or any financial wrapper.**
-  Issuing one would violate `NEUTRALITY.md` Rule 1.
-- **Not transferable.** A node cannot sell, gift, or assign its score
-  to another node. There is no marketplace.
-- **Not stakable.** A node cannot put its score at risk to earn
-  upside. The score is not collateral.
-- **Not a credit score for the operator.** It grades the node, not
+- **Not a bureau output.** The bureau emits evidence, not tiers.
+- **Not a token, point, or any financial wrapper.** Issuing one would
+  violate `NEUTRALITY.md` Rule 1.
+- **Not transferable.** A node cannot sell, gift, or assign its tier.
+- **Not stakable.** No collateral function.
+- **Not a credit score for the operator.** It grades the device, not
   the human behind it. See `PRIVACY.md` Rule 6.
-- **Not a guarantee.** A high score reduces the likelihood of certain
+- **Not a guarantee.** A high tier reduces the likelihood of certain
   failure modes; it does not eliminate them. Partners should treat
-  it as one input alongside their own checks, not a substitute for
-  them.
+  it as one input alongside their own checks.
 
-## 3. Inputs to the score (and direction)
+## 3. Inputs (direction)
 
-The methodology defines five **input categories** plus a small set of
-**hard gates**. Each category is signed evidence the node itself
-produced (or signed evidence produced by a partner). The bureau does
-not add unaudited side-channels into the score.
+The mapping reads four input categories plus a small set of hard
+gates. **Inputs come from the signed bureau attestation** — partners
+do not need to call any bureau endpoint at score time. Direction
+indicates whether the input raises (▲) or lowers (▼) the score.
 
-For each input below, **direction** indicates whether it raises (▲)
-or lowers (▼) the score, all else equal. Numerical weights are
-managed internally and tuned over time; they are not public, the
-same way FICO publishes which factors matter and the direction but
-not the exact percentages. Methodology changes that affect direction
-or add/remove a category trigger a major version bump and a public
-comment period (see §6).
-
-### 3.1 Identity integrity (gate + input)
+### 3.1 Identity integrity (gate)
 
 | Signal | Direction |
 |---|---|
-| Ed25519 signature on every signed artifact verifies cleanly against the claimed public key | **HARD GATE.** Failure → score reported as `null` and a verify error returned to the caller. |
-| Node ID matches `KINETIK-NODE-` + first 8 hex chars of `sha256(publicKey)` | **HARD GATE.** Failure → score reported as `null`. |
-| `PROOF_ATTRIBUTION` string intact in the signed payload (proof-of-origin, earning) | **HARD GATE.** Failure → score reported as `null`. |
-| Single, stable public key over the lifetime of the chain | ▲ |
-| Chain reset / new public key after a previously-anchored chain ended | ▼ (lowers because earned standing does not transfer across keys; node starts fresh) |
+| `@getkinetik/verify` reports `report.valid === true` on the attestation | **HARD GATE.** Failure → reject. |
+| `report.checks.bureauOk === true` (signature is from the published `BUREAU_PUBKEY`) | **HARD GATE.** Failure → reject. |
+| `payload.subject.nodeId` matches `KINETIK-NODE-` + first 8 hex chars of `sha256(payload.subject.pubkey)` | **HARD GATE.** Failure → reject. |
 
-**Why:** these are the structural cryptographic claims. If the
-identity surface fails, the rest of the score is meaningless.
+If any identity gate fails, the partner does not compute a tier — the
+attestation is rejected wholesale.
 
-### 3.2 Uptime continuity
+### 3.2 Uptime continuity (`bureauObserved`)
 
 | Signal | Direction |
 |---|---|
-| Long unbroken heartbeat chain (high `lifetimeBeats`, valid `prevHash` linkage from beat to beat) | ▲ |
-| Recent chain tip (latest signed beat is within the active window) | ▲ |
-| Long calendar age (`firstBeatTs` far in the past with continuing activity) | ▲ |
-| Gap in the chain that resumes cleanly (legitimate offline period) | neutral after a short cooldown |
-| Chain tip not advancing while the node claims to be online | ▼ |
-| Chain rewind (later proof claims fewer `lifetimeBeats` than the bureau previously recorded for this node) | **HARD GATE.** Failure → score floored to a low value and `chain_rewind` tamper flag is published. |
-| Beat rate beyond physical limits (claimed `lifetimeBeats` exceeds what could accrue at 1 beat / 25s over the bureau-observed window) | **HARD GATE.** `beat_rate_implausible` tamper flag. |
+| Long bureau-observed window (`lastSeenMs − firstSeenMs` large) | ▲ |
+| High `peakLifetimeBeats` | ▲ |
+| `chain_rewind` flag present (later attestation claims fewer beats than the bureau previously recorded) | **HARD GATE → TAMPERED.** |
+| `beat_rate_implausible` flag present (claimed beats exceed 1 beat / 25 s over the bureau-observed window) | **HARD GATE → TAMPERED.** |
 
-**Bureau-bounded age.** The chain age contribution to the score uses
-`max(claimed firstBeatTs, bureau-first-seen)`. A freshly minted
-keypair cannot back-date itself: the bureau only credits age it
-*itself* observed. Real long-running nodes accrue full age credit as
-they continue to be re-verified.
-
-**Why:** the chain *is* the uptime claim. Nodes that have been
-running honestly for a long time have a long chain to show. Nodes
-that have been spinning up emulators or scripted attesters do not —
-and the bureau-bounded age + beat-rate sanity stop a fresh keypair
-from forging a long history in a single signed payload.
+**Bureau-bounded age.** The mapping reads the bureau-observed window
+directly from `payload.bureauObserved.firstSeenMs` and `lastSeenMs`.
+These are bureau-clock facts, not node claims. A freshly minted
+keypair cannot back-date itself: the bureau only records age it
+observed.
 
 ### 3.3 Sensor coherence
 
 | Signal | Direction |
 |---|---|
-| L2 sensor block (`motionRms`, `pressureHpa`, `lux`) present on each beat with values inside expected physical ranges | ▲ |
-| Sensor variation over time consistent with a phone in real use (motion changes, pressure drifts with weather, light follows day/night when present) | ▲ |
-| Constant or implausibly stable sensor values across a long window (e.g. perfectly identical motion RMS for hours) | ▼ |
-| All sensor fields persistently `null` for a device class that should report them (e.g. a recent Android phone that should have a barometer reporting `pressureHpa: null` indefinitely) | neutral, but the **Sensor coherence** category contributes less to the total |
-| Sensor values that are physically inconsistent (negative pressure, lux beyond saturation) | ▼ and a tamper flag |
+| `sensorCoherence.*Observed && *Plausible` for each of lux / motionRms / pressureHpa | ▲ per field |
+| Any of `lux_implausible`, `motion_implausible`, `pressure_implausible` flags present | ▼ — flag floors the tier to `TAMPERED` |
+| All sensor fields unobserved (legacy device, no sensors at all) | neutral — 0 points but no penalty |
 
-**Why:** real devices look like real devices. Aggregates are kept
-deliberately permission-light (see `PRIVACY.md` Rule 3) — what we
-sign is enough to grade coherence, not enough to identify a person.
+The attestation carries **booleans only** for sensor observations —
+not raw values. This is a privacy property: a partner running the
+mapping cannot fingerprint a device beyond the per-field plausibility.
 
-### 3.4 Network engagement (independent across networks)
+### 3.4 Network engagement (future)
 
-| Signal | Direction |
-|---|---|
-| Partner network attestation that the node has performed its
-  expected work (e.g. Nodle BLE scan attestations, DIMO trip
-  reports, Hivemapper drive sessions, WeatherXM uptime, Geodnet
-  GNSS reports) — received via a partner attestation channel and
-  cross-checked against the chain | ▲ |
-| Attestation reports a fault (e.g. "device stopped reporting GNSS"
-  or "signal quality below floor") | ▼ |
-| Attestation channel reports active fraud (e.g. "GPS spoof
-  detected") | ▼ and a fraud flag |
+Reserved for v2.1+. Will be populated by the partner attestation
+channel (`POST /api/attest`) feeding into the bureau's `flags`
+computation. Until then, this category contributes 0 to the score.
 
-**Why:** the node's signed chain is internal evidence. Partner
-attestations are external evidence. A bureau that can correlate the
-two is harder to game than either side alone.
+### 3.5 Disclosure receipts (future)
 
-**Independence rule:** the score for a node does not depend on
-*which* networks it engages with, only on whether the engagement is
-real and reported. We do not raise scores in exchange for adoption
-of any specific network, per `NEUTRALITY.md` Rule 3.
-
-### 3.5 Disclosure receipts (L4 earnings ledger)
-
-| Signal | Direction |
-|---|---|
-| Node maintains a hash-chained earnings ledger with the canonical
-  1% protocol disclosure fee baked into each receipt — and the
-  receipts verify against the node's pubkey | ▲ |
-| Earnings receipts that fail fee-integrity check (1% violated) or
-  break the prevHash chain | ▼ and a tamper flag |
-| Node has no earnings activity yet (new node, or no integrated
-  network earning) | neutral |
-
-**Why:** the disclosure fee is a transparency artifact. A node that
-ships clean disclosure receipts is providing more verifiable
-information about its own conduct, which is what the bureau grades.
+Reserved for v2.1+. Requires L4 earnings ledger ingestion. Until then,
+this category contributes 0.
 
 ### 3.6 Hard gates (summary)
 
-A node receives a score of `null` (treated by partners as "do not
-attest") if:
-
-- Any signature in the most recent claim does not verify.
-- The node ID does not match the public key fingerprint.
-- The attribution string has been altered.
-- A chain rewind has been observed.
-
-A node receives a low score with an attached tamper flag if:
-
-- Sensor values are physically impossible.
-- Earnings receipts violate the 1% fee constraint.
-- Partner attestation reports active fraud.
-
----
-
-## 4. Score range, scale, and interpretation
-
-The Genesis Score is reported as an integer in **[0, 1000]**, with
-1000 being the highest. The scale is one-sided: there is no negative
-score. A `null` score means "not gradable" (see hard gates above), not
-"low".
-
-| Range | Interpretation |
+| Cause | Outcome |
 |---|---|
-| `null` | Hard gate failed. Do not treat as graded. |
-| 0–199 | Tamper flag(s) raised. Treat as untrusted. |
-| 200–499 | New or recovering. Insufficient evidence to grade as high; not necessarily a problem. |
-| 500–749 | Standing OK. Sufficient evidence of real-device operation. |
-| 750–899 | Strong. Long, continuous, sensor-coherent record. |
-| 900–999 | Premier. Long, continuous, sensor-coherent, multi-network attested with clean disclosure receipts. |
-| 1000 | Reserved (no node currently held at exactly 1000). |
+| Cryptographic verification fails (`!report.valid`) | Reject — no tier computed. |
+| `bureauOk` fails (attestation signed by a non-bureau key) | Reject — likely forgery. |
+| `chain_rewind` flag present | `flagged = true`, score floored to ≤199, tier = `TAMPERED`. |
+| `beat_rate_implausible` flag present | Same as above. |
+| Any `*_implausible` sensor flag | Same as above. |
 
-These bands are **calibration anchors**, not a contract. The exact
-mapping from inputs to score is an internal computation that
-includes calibration against observed real-vs-fraud datasets and is
-versioned in step with this document.
-
-**For partners:** treat the score as a continuous signal, not as
-a categorical label. A v1 partner integration that wants a binary
-"verified / not verified" gate should pick a threshold appropriate
-to its own fraud cost (e.g. 500 for permissive, 750 for strict,
-900 for premium-tier).
+A partner using a stricter custom policy may treat additional flag
+tokens (e.g. `first_sighting`) as soft floors. The default policy
+treats `first_sighting` as informational only.
 
 ---
 
-## 5. Update cadence
+## 4. Tier bands
 
-- **Continuous** for cryptographic gates (Identity integrity, chain
-  rewind detection). A failure is reflected in the next API
-  response from `verify-device`.
-- **Sliding window** for uptime and sensor coherence. The window is
-  deliberately not published in exact form — the bureau does not
-  want a node to optimize for "looking good for the score window
-  and quiet otherwise" — but it is bounded above by the node's
-  total chain age and updated at least daily.
-- **Per-attestation** for network engagement and disclosure
-  receipts. A partner attestation arriving at the bureau is
-  reflected in the score by the next computed update.
-- A node's score is **stable between observed events**. Partners
-  calling `verify-device` can cache the score per their SLA tier
-  (currently 60s minimum for free, configurable for paid).
+Under `DEFAULT_POLICY`, the integer score (0–1000) maps to tiers as:
+
+| Score | Tier | Interpretation |
+|---|---|---|
+| Any flag present | `TAMPERED` | Score floored to ≤199. Do not pay. |
+| ≥ 900 | `PREMIER` | Long, continuous, sensor-coherent, multi-network attested. |
+| ≥ 750 | `STRONG` | Long, continuous, sensor-coherent record. |
+| ≥ 500 | `STANDING` | Sufficient evidence of real-device operation. |
+| < 500 | `NEW` | New or recovering. Insufficient evidence to grade as high. |
+
+These are **calibration anchors**, not a contract. The exact mapping
+is in `@getkinetik/evidence-mapping`'s source code; partners reading
+this document for behavior should treat that source as authoritative.
+
+**For partners:** treat the score as a continuous signal in [0, 1000],
+not as a categorical label. A v1 partner integration that wants a
+binary "verified / not verified" gate should pick a threshold
+appropriate to its own fraud cost (e.g. 500 for permissive, 750 for
+strict, 900 for premium-tier).
 
 ---
 
-## 6. Versioning, changes, and disputes
+## 5. Custom policy
+
+A partner with a different fraud cost should write a custom policy:
+
+```ts
+import { attestationToTier, DEFAULT_POLICY, type EvidencePolicy } from '@getkinetik/evidence-mapping';
+
+const strictPolicy: EvidencePolicy = {
+  ...DEFAULT_POLICY,
+  fullAgeCreditDays: 365,           // we want a year of observed age
+  tierBands: {
+    ...DEFAULT_POLICY.tierBands,
+    PREMIER: { min: 950 },          // premium tier is gated higher
+  },
+};
+
+const result = attestationToTier(report.payload, strictPolicy);
+```
+
+Custom policies are encouraged. The bureau is neutral with respect to
+how a partner weights the evidence — that's the entire reason scoring
+moved client-side.
+
+---
+
+## 6. Update cadence
+
+- **Continuous** for cryptographic gates and identity checks. A
+  failure is reflected in the next `/api/verify-device` response.
+- **Sliding window** for uptime via `bureauObserved`. The window is
+  bounded above by the node's total bureau-observed age and updated
+  on every successful verify call. Partners that want stricter
+  freshness should require a fresh proof (call `verify-device`)
+  instead of trusting a cached attestation.
+- **Per-attestation** for the rest. A partner calling `verify-device`
+  with a fresh proof always gets a fresh attestation; a partner
+  calling `GET /api/score/:nodeId` gets whatever the bureau last
+  cached (≤ 30 days).
+- A node's mapping result is **stable for a given attestation +
+  policy pair**. Partners caching results should pin the
+  `policyVersion` (returned in `EvidenceMappingResult`) so they
+  detect a policy upgrade that would shift tiers.
+
+---
+
+## 7. Versioning, changes, and disputes
 
 ### Versioning
 
-- This document is the *public* methodology spec. The version
-  number above (`v1.0`) is the spec version.
-- A **patch version** (`v1.x`) is bumped for clarifications,
-  worked examples, or anchor wording changes that do not change
-  scoring direction or category set.
-- A **minor version** (`v1.X`) is bumped for adding a new input
-  category, retiring a deprecated one, or changing a threshold
-  band in §4. Public comment period: **14 days** from the date a
-  change PR is opened.
-- A **major version** (`v2`) is bumped for changing the direction
-  of any input, changing the score range, or otherwise altering
-  what the score *means*. Public comment period: **30 days**.
-- Old scores remain queryable so partners can audit historical
-  decisions against the methodology version in effect at the time
-  of decision. The version of the methodology used to produce a
-  score is included in the API response as `methodologyVersion`.
+- This document versions independently from
+  [`ATTESTATION.md`](./ATTESTATION.md) and from the
+  `@getkinetik/evidence-mapping` package.
+- A **patch version** is bumped for clarifications / examples.
+- A **minor version** is bumped for adding a new input category,
+  retiring a deprecated one, or changing a threshold band in §4.
+  Public comment period: **14 days**.
+- A **major version** is bumped for changing the direction of any
+  input, changing the score range, or otherwise altering what the
+  score *means*. Public comment period: **30 days**.
+- Cached attestations remain valid forever — they are signed bureau
+  facts, independent of any mapping policy. A partner running a new
+  policy against an old attestation always gets a self-consistent
+  result, just possibly a different tier than before.
 
 ### Changes
 
 Methodology changes are committed as PRs to this file in the public
 repository. Material changes (minor / major version bumps) require
-the comment period above before taking effect on production. We do
-not retroactively re-score nodes against a new methodology without
-explicit notice; instead, both old and new scores are queryable
-during a transition window.
+the comment period above before taking effect on production.
 
 ### Disputes
 
-A graded node operator who believes their score is incorrect can
-file a dispute by:
+A graded node operator who believes their tier is incorrect can file
+a dispute by:
 
-1. Signing a dispute artifact with their node's secret key (so we
-   can verify they own the node).
+1. Signing a dispute artifact with their node's secret key.
 2. Submitting it via the public dispute endpoint (path will be
-   announced when the dispute API ships in v1.1).
-3. Receiving a signed bureau response with the result of the
-   review and the methodology version under which it was reviewed.
+   announced when the dispute API ships).
+3. Receiving a signed bureau response with the result of the review
+   and the methodology version under which it was reviewed.
 
-The first dispute interface is open to all graded nodes regardless
-of partner status. The bureau will publish anonymized dispute
-counts and outcome categories in the annual transparency report
+The first dispute interface is open to all graded nodes regardless of
+partner status. The bureau will publish anonymized dispute counts and
+outcome categories in the annual transparency report
 (per `NEUTRALITY.md`).
 
 ---
 
-## 7. What the API returns
+## 8. What the API returns
 
-### Live in production (v1.0)
-
-Calling `POST /api/verify-device` cryptographically verifies the
-Proof of Origin **and** returns a Genesis Score computed from the
-observable proof fields. The live worker
-(`functions/api/verify-device.js`) returns, on success:
+### `POST /api/verify-device` (v2.0)
 
 ```json
 {
   "valid": true,
-  "nodeId": "KINETIK-NODE-…",
-  "pubkey": "<64-char hex>",
-  "mintedAt": 1714000000000,
+  "nodeId": "KINETIK-NODE-A3F2B719",
+  "pubkey": "<64-char hex device pubkey>",
   "schema": "proof-of-origin:v2",
-  "attribution": "GETKINETIK by OutFromNothing LLC",
-  "lifetimeBeats": 25847,
-  "firstBeatTs": 1777086000000,
-  "genesisScore": 636,
-  "scoreBand": "STANDING",
-  "methodologyVersion": "v1.0",
-  "tamperFlags": [],
+
+  "attestation": {
+    "payload":   { "...AttestationPayload...": "..." },
+    "message":   "<canonical bytes that were signed>",
+    "signature": "<128-char hex bureau Ed25519>",
+    "hash":      "<16-char hex sha256(message)[:16]>"
+  },
+
+  "derived": {
+    "tier":             "STRONG",
+    "score":            812,
+    "flagged":          false,
+    "flags":            [],
+    "policyVersion":    "v2.0.0",
+    "contributingFactors": {
+      "baseline":          200,
+      "bureauObservedAge": 280,
+      "lifetimeBeats":     232,
+      "sensorCoherence":   200
+    }
+  },
+
   "asOf": "2026-05-13T03:00:00.000Z"
 }
 ```
 
-`mintedAt` is the best available timestamp from the signed payload
-(`issuedAt` for a PoO card, `mintedAt` for key birth, or `ts` for
-heartbeat-shaped artifacts).
+The `attestation` field is the authoritative bureau output. Partners
+SHOULD:
 
-### v1.0 scoring surface
+1. Run `@getkinetik/verify` on `attestation` to confirm it's signed by
+   the published `BUREAU_PUBKEY` (i.e. `report.checks.bureauOk === true`).
+2. Run their own policy via `@getkinetik/evidence-mapping` on
+   `attestation.payload` to compute their reward decision.
 
-The shipped scorer reads three of the five methodology categories,
-since they are the ones a single signed proof can prove without
-server-side state:
+The `derived` block is a convenience — same math as
+`DEFAULT_POLICY`. Partners that adopt the default policy can read
+`derived.tier` directly and skip step 2.
 
-- **Identity integrity** (§3.1) — hard-gated by the caller; only
-  cryptographically valid proofs reach the scorer.
-- **Uptime continuity** (§3.2) — `firstBeatTs` chain age and
-  `lifetimeBeats` count.
-- **Sensor coherence** (§3.3) — presence and per-field physical
-  plausibility of the `sensors` block (`lux`, `motionRms`,
-  `pressureHpa`).
+See [`docs/api/verify-device.md`](../api/verify-device.md) for the
+full wire spec.
 
-Two categories are **not yet wired** in v1.0 and contribute 0 to
-the score until their channels exist:
+### `GET /api/score/:nodeId` (v2.0)
 
-- **Network engagement** (§3.4) — requires the partner attestation
-  channel.
-- **Disclosure receipts** (§3.5) — requires the L4 earnings ledger
-  ingestion pipeline.
-
-That means today's scores skew conservative: a node operating
-honestly on multiple networks with clean disclosure receipts will
-score *at most* in the **STRONG** band on the proof alone until
-network attestations and earnings receipts are integrated. Partners
-should treat this as a **floor**, not a ceiling.
-
-### Wire format contract
-
-The full field list and types are the source of truth in
-[`docs/api/verify-device.md`](../api/verify-device.md). The exact
-numeric weights used inside `computeGenesisScoreV1` are managed
-internally per §1; the **direction** and **category set** in §3
-match the implementation byte for byte.
-
----
-
-## 8. What this document does *not* do
-
-- It does not list the exact numerical weights. Those are managed
-  internally and tuned against calibration data.
-- It does not describe partner-specific extensions. A partner that
-  wants additional structured signals reflected in the bureau's
-  score (e.g. a network-specific fraud feed) negotiates that
-  through a partner attestation channel under §3.4 — and once
-  added, it appears in this document.
-- It does not describe how the score is rendered to the operator
-  in the GETKINETIK app. That is a UX concern; the score on the
-  wire is the contract.
+Returns the most recent cached attestation + derived block for a node,
+without requiring a fresh proof. The cached entry is the same shape
+as the `attestation` and `derived` fields above. Returns 404 if the
+bureau has never observed the node.
 
 ---
 
 ## 9. Why this document exists
 
-The bureau is only credible if its grading is auditable. The
-shortest path to "auditable" is publishing the inputs and the
-direction so anyone — a graded operator, a partner integrating
-the API, a foundation auditor, an academic reviewer — can examine
-the methodology, observe a node's signed evidence, and reach the
-same qualitative conclusion the score implies.
+The bureau is only credible if its grading is auditable. With v2, the
+audit surface improved:
 
-Closed scoring systems do not survive scrutiny; open ones do. We
-are betting on the open one.
+- **The bureau output is signed.** A partner running `@getkinetik/verify`
+  against a cached attestation can confirm offline that the bureau
+  said what it said.
+- **The mapping is open source.** Any partner can read
+  `@getkinetik/evidence-mapping` and confirm that
+  `attestationToTier(attestation, DEFAULT_POLICY)` produces the same
+  number the bureau's dashboard shows.
+- **The policy is forkable.** A partner that disagrees with the
+  reference policy ships their own; the bureau imposes nothing.
+
+Closed scoring systems do not survive scrutiny; open ones do. We are
+betting on the open one.
 
 ---
 
-*OutFromNothing LLC · GETKINETIK · Genesis Score Methodology · v1.0 · 2026-05*
+*OutFromNothing LLC · GETKINETIK · Genesis Score Methodology · v2.0 · 2026-05*

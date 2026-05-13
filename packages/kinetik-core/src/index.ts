@@ -86,6 +86,26 @@ export {
   shareProof,
 } from './proofShare';
 
+// ----- L1: Bureau attestation (signed evidence bundle) ---------------------
+// Type-only surface for the device app — devices consume bureau attestations
+// (e.g. to show "your bureau record" UI), they never sign them. The bureau
+// service imports createAttestation directly from ./attestation; that path is
+// re-exported here so server code that already depends on @kinetik/core can
+// reach it without a deeper import.
+export {
+  type AttestationPayload,
+  type AttestationSubject,
+  type AttestationBureauObserved,
+  type AttestationChainClaim,
+  type AttestationSensorCoherence,
+  type AttestationWitness,
+  type SignedAttestation,
+  type BureauSigner,
+  type CreateAttestationInput,
+  canonicalAttestation,
+  createAttestation,
+} from './attestation';
+
 // ----- L3: DePIN adapter contract -------------------------------------------
 export {
   type AdapterStatus,

@@ -16,6 +16,7 @@
 import * as ed from '@noble/ed25519';
 import { sha256, sha512 } from '@noble/hashes/sha2.js';
 import {
+  BUREAU_PUBKEY,
   PROOF_ATTRIBUTION,
   PROTOCOL_FEE_RATE,
   VERSION,
@@ -268,8 +269,234 @@ console.log('\n[8] decodeProofUrl roundtrip');
   assert(report.kind === 'proof-of-origin', 'kind survives roundtrip');
 }
 
-// ---- [10] structurally-invalid input — must throw --------------------------
-console.log('\n[9] structurally-invalid inputs throw');
+// ---- [9.5] BUREAU_PUBKEY constant sanity ------------------------------------
+console.log('\n[9.5] BUREAU_PUBKEY shape');
+{
+  assert(typeof BUREAU_PUBKEY === 'string', 'BUREAU_PUBKEY is a string');
+  assert(
+    /^[0-9a-f]{64}$/.test(BUREAU_PUBKEY),
+    'BUREAU_PUBKEY is 64-char lowercase hex',
+  );
+}
+
+// ---- [10] attestation happy path -------------------------------------------
+//
+// Mints an ephemeral bureau key, signs a canonical attestation, then verifies
+// against @getkinetik/verify. signatureOk must pass; bureauOk fails *iff* the
+// ephemeral key is not the published BUREAU_PUBKEY (it isn't, until the
+// ceremony lands), so the overall artifact is `valid: false` due to bureauOk.
+// Post-ceremony, this test must be updated to load the real bureau key.
+console.log('\n[10] attestation happy path');
+
+// Canonical sub-block helpers that mirror packages/kinetik-core/src/attestation.ts
+// and functions/api/_lib/bureauSign.js — keep these byte-for-byte identical.
+const canonicalSubject = (s) => ({
+  chainTip: s.chainTip ?? null,
+  mintedAt: s.mintedAt,
+  nodeId: s.nodeId,
+  pubkey: s.pubkey,
+});
+const canonicalBureauObserved = (b) => ({
+  firstSeenMs: b.firstSeenMs,
+  lastSeenMs: b.lastSeenMs,
+  peakLifetimeBeats: b.peakLifetimeBeats,
+});
+const canonicalChainClaim = (c) => ({
+  firstBeatTs: c.firstBeatTs ?? null,
+  lifetimeBeats: c.lifetimeBeats,
+  schema: c.schema,
+});
+const canonicalSensorCoherence = (s) => ({
+  luxObserved: !!s.luxObserved,
+  luxPlausible: s.luxPlausible ?? null,
+  motionRmsObserved: !!s.motionRmsObserved,
+  motionRmsPlausible: s.motionRmsPlausible ?? null,
+  pressureHpaObserved: !!s.pressureHpaObserved,
+  pressureHpaPlausible: s.pressureHpaPlausible ?? null,
+});
+const canonicalFlags = (flags) =>
+  Array.from(new Set(Array.isArray(flags) ? flags : [])).sort();
+
+{
+  const bureauSk = ed.utils.randomSecretKey();
+  const bureauPk = await ed.getPublicKeyAsync(bureauSk);
+  const bureauPubHex = toHex(bureauPk);
+  const now = Date.now();
+
+  const payload = {
+    v: 1,
+    kind: 'attestation',
+    attribution: PROOF_ATTRIBUTION,
+    pubkey: bureauPubHex,
+    bureauTs: now,
+    subject: canonicalSubject({
+      mintedAt: now - 1_000_000,
+      nodeId,
+      pubkey,
+      chainTip: 'a1b2c3d4e5f60718',
+    }),
+    bureauObserved: canonicalBureauObserved({
+      firstSeenMs: now - 10_000_000,
+      lastSeenMs: now,
+      peakLifetimeBeats: 25_847,
+    }),
+    chainClaim: canonicalChainClaim({
+      firstBeatTs: now - 10_000_000,
+      lifetimeBeats: 25_847,
+      schema: 'proof-of-origin:v2',
+    }),
+    sensorCoherence: canonicalSensorCoherence({
+      luxObserved: true,
+      luxPlausible: true,
+      motionRmsObserved: true,
+      motionRmsPlausible: true,
+      pressureHpaObserved: true,
+      pressureHpaPlausible: true,
+    }),
+    flags: canonicalFlags([]),
+    witnesses: [],
+  };
+  const message = stableStringify(payload);
+  const signature = toHex(await ed.signAsync(utf8(message), bureauSk));
+  const report = await verifyArtifact({ payload, message, signature });
+
+  assert(report.kind === 'attestation', 'kind is attestation');
+  assert(report.checks.canonicalMatches, 'canonical matches');
+  assert(report.checks.hashMatches, 'hash matches');
+  assert(report.checks.attributionOk === true, 'attribution intact');
+  assert(report.checks.feeIntegrityOk === null, 'feeIntegrityOk is N/A');
+  assert(report.checks.signatureOk, 'signature verifies against bureau key');
+
+  // bureauOk reflects whether the signing key equals the PUBLISHED bureau key.
+  // While BUREAU_PUBKEY is the pre-ceremony placeholder (zeros), or any test
+  // bureau key, this is expected to be false. Post-ceremony, the test must
+  // be updated to use the real bureau key.
+  const expectedBureauOk = bureauPubHex === BUREAU_PUBKEY;
+  assert(
+    report.checks.bureauOk === expectedBureauOk,
+    `bureauOk matches BUREAU_PUBKEY comparison (${expectedBureauOk})`,
+  );
+  // Overall validity tracks bureauOk for the attestation kind.
+  assert(
+    report.valid === expectedBureauOk,
+    `valid follows bureauOk (${expectedBureauOk})`,
+  );
+}
+
+// ---- [11] attestation tampered subject — must fail -------------------------
+console.log('\n[11] tampered attestation subject');
+{
+  const bureauSk = ed.utils.randomSecretKey();
+  const bureauPk = await ed.getPublicKeyAsync(bureauSk);
+  const bureauPubHex = toHex(bureauPk);
+  const now = Date.now();
+
+  const payload = {
+    v: 1,
+    kind: 'attestation',
+    attribution: PROOF_ATTRIBUTION,
+    pubkey: bureauPubHex,
+    bureauTs: now,
+    subject: canonicalSubject({
+      mintedAt: now - 1_000_000,
+      nodeId,
+      pubkey,
+      chainTip: 'a1b2c3d4e5f60718',
+    }),
+    bureauObserved: canonicalBureauObserved({
+      firstSeenMs: now - 10_000_000,
+      lastSeenMs: now,
+      peakLifetimeBeats: 100,
+    }),
+    chainClaim: canonicalChainClaim({
+      firstBeatTs: now - 10_000_000,
+      lifetimeBeats: 100,
+      schema: 'proof-of-origin:v2',
+    }),
+    sensorCoherence: canonicalSensorCoherence({
+      luxObserved: false,
+      motionRmsObserved: false,
+      pressureHpaObserved: false,
+    }),
+    flags: canonicalFlags([]),
+    witnesses: [],
+  };
+  const message = stableStringify(payload);
+  const signature = toHex(await ed.signAsync(utf8(message), bureauSk));
+
+  // Tamper: change the subject nodeId after signing.
+  const tampered = {
+    ...payload,
+    subject: { ...payload.subject, nodeId: 'KINETIK-NODE-DEADBEEF' },
+  };
+  const report = await verifyArtifact({
+    payload: tampered,
+    message,
+    signature,
+  });
+  assert(!report.valid, 'tampered subject rejected');
+  assert(!report.checks.canonicalMatches, 'canonicalMatches false');
+  assert(
+    !report.checks.signatureOk,
+    'signature does not verify against tampered payload',
+  );
+}
+
+// ---- [12] non-bureau-key forgery — bureauOk catches it ----------------------
+//
+// Sign a structurally-valid attestation with some random key whose hex is
+// NOT equal to BUREAU_PUBKEY. signatureOk passes (it's a valid Ed25519
+// signature against the embedded pubkey), but bureauOk fails — which is
+// the property that protects partners from forged "GETKINETIK bureau"
+// attestations signed by an attacker's own key.
+console.log('\n[12] non-bureau-key forgery (bureauOk catches it)');
+{
+  const forgerSk = ed.utils.randomSecretKey();
+  const forgerPk = await ed.getPublicKeyAsync(forgerSk);
+  const forgerPubHex = toHex(forgerPk);
+  const now = Date.now();
+
+  // Confirm the forger key is definitely not the published bureau key.
+  // Astronomically unlikely to collide; an extra defensive guard.
+  assert(forgerPubHex !== BUREAU_PUBKEY, 'forger key != BUREAU_PUBKEY');
+
+  const payload = {
+    v: 1,
+    kind: 'attestation',
+    attribution: PROOF_ATTRIBUTION,
+    pubkey: forgerPubHex,
+    bureauTs: now,
+    subject: canonicalSubject({
+      mintedAt: now,
+      nodeId,
+      pubkey,
+      chainTip: null,
+    }),
+    bureauObserved: canonicalBureauObserved({
+      firstSeenMs: now,
+      lastSeenMs: now,
+      peakLifetimeBeats: 0,
+    }),
+    chainClaim: canonicalChainClaim({
+      firstBeatTs: null,
+      lifetimeBeats: 0,
+      schema: 'proof-of-origin:v2',
+    }),
+    sensorCoherence: canonicalSensorCoherence({}),
+    flags: canonicalFlags([]),
+    witnesses: [],
+  };
+  const message = stableStringify(payload);
+  const signature = toHex(await ed.signAsync(utf8(message), forgerSk));
+  const report = await verifyArtifact({ payload, message, signature });
+
+  assert(report.checks.signatureOk, 'forger signature is cryptographically valid');
+  assert(report.checks.bureauOk === false, 'bureauOk catches the non-bureau signer');
+  assert(!report.valid, 'forgery rejected by bureauOk');
+}
+
+// ---- [13] structurally-invalid input — must throw --------------------------
+console.log('\n[13] structurally-invalid inputs throw');
 {
   let threw = false;
   try {

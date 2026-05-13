@@ -82,8 +82,9 @@ in `report.checks.*` and the aggregate `report.valid` boolean.
 |-------|---------|
 | `canonicalMatches` | `stableStringify(payload)` byte-equals the claimed `message` (or canonical, in compact form) |
 | `hashMatches` | `sha256(canonicalMessage)[:16]` byte-equals the claimed `hash` |
-| `attributionOk` | `payload.attribution === "GETKINETIK by OutFromNothing LLC"` (proof-of-origin and earning only; `null` for heartbeats) |
+| `attributionOk` | `payload.attribution === "GETKINETIK by OutFromNothing LLC"` (proof-of-origin, earning, and attestation only; `null` for heartbeats) |
 | `feeIntegrityOk` | The signed earning's `fee` is exactly 1% of `gross` and `net = gross - fee` (earnings only; `null` otherwise) |
+| `bureauOk` | `payload.pubkey === BUREAU_PUBKEY` — confirms the attestation was signed by the published Genesis Bureau key (attestation only; `null` otherwise) |
 | `signatureOk` | Ed25519 signature verifies against the canonical message + `payload.pubkey` |
 
 A `valid: true` report means **every applicable check passed**. The
@@ -133,11 +134,27 @@ can pin it independently if they want.
 `0.01`. The 1% disclosure fee baked into every signed earning. Used
 internally by the `feeIntegrityOk` check.
 
+### `BUREAU_PUBKEY: string`
+
+The published 64-char hex Ed25519 public key of the Genesis Bureau.
+Every signed attestation must verify against this exact pubkey for
+`report.checks.bureauOk` to pass. A cryptographically valid signature
+under a different key still fails `bureauOk` — that's the property
+that catches forged "GETKINETIK bureau" attestations signed by
+someone else's key.
+
+Until the bureau key ceremony has been performed, this constant is
+64 zero hex chars (a placeholder). The placeholder fails `bureauOk`
+for every attestation, which is the safe default: partners who
+integrate against attestations should reject anything that doesn't
+pass `bureauOk` before the ceremony is complete.
+
 ### `VERSION: string`
 
 The package version. Stays in lockstep with the cryptographic
 contract — bumped whenever any of `stableStringify`, the SHA-256
-truncation rule, the signature scheme, or `PROOF_ATTRIBUTION` changes.
+truncation rule, the signature scheme, `PROOF_ATTRIBUTION`, or
+`BUREAU_PUBKEY` changes.
 
 ---
 
@@ -151,12 +168,18 @@ type SignedArtifact = {
   hash?: string;
 };
 
-type ArtifactKind = 'proof-of-origin' | 'heartbeat' | 'earning' | 'unknown';
+type ArtifactKind =
+  | 'proof-of-origin'  // signed by device key
+  | 'heartbeat'        // signed by device key
+  | 'earning'          // signed by device key
+  | 'attestation'      // signed by BUREAU key; bureauOk check applies
+  | 'unknown';
 
 type VerifyChecks = {
   canonicalMatches: boolean;
   hashMatches: boolean;
   attributionOk: boolean | null;     // null = N/A for this kind
+  bureauOk: boolean | null;          // null = N/A; attestation kind only
   feeIntegrityOk: boolean | null;    // null = N/A for non-earning kinds
   signatureOk: boolean;
   signatureError: string | null;
@@ -180,7 +203,7 @@ type VerifyReport = {
 
 ## Cryptographic contract — drift policy
 
-The four constants below define the contract this package implements.
+The five constants below define the contract this package implements.
 **Drift between this package and the GETKINETIK app, the
 `functions/api/verify-device.js` worker, or the public verifier at
 `landing/verify/verifier.js` is a release-blocking bug.**
@@ -192,10 +215,39 @@ The four constants below define the contract this package implements.
 3. Ed25519 signing with SHA-512 over UTF-8 bytes of the canonical
    message.
 4. `PROOF_ATTRIBUTION` constant string.
+5. `BUREAU_PUBKEY` — the published 64-char hex pubkey of the Genesis
+   Bureau. Rotating it requires republishing this package; partners
+   detect a rotation via `bureauOk` returning false on every old
+   attestation. See `docs/methodology/ATTESTATION.md` §6 for the
+   rotation procedure.
 
-The `VERSION` constant is bumped on any change to the four constants,
+The `VERSION` constant is bumped on any change to the five constants,
 in lockstep with `landing/verify/verifier.js`'s `__kinetikVerifier.version`
 and `packages/kinetik-core/`'s schema.
+
+## Companion package — `@getkinetik/evidence-mapping`
+
+This package verifies that a bureau attestation is authentic. It does
+NOT compute a reward tier or score from it. That mapping is
+deliberately separate, shipped as
+[`@getkinetik/evidence-mapping`](https://npmjs.com/package/@getkinetik/evidence-mapping):
+
+```ts
+import { verifyArtifact } from '@getkinetik/verify';
+import { attestationToTier, DEFAULT_POLICY } from '@getkinetik/evidence-mapping';
+
+const report = await verifyArtifact(rawAttestation);
+if (!report.valid || !report.checks.bureauOk) return 'reject';
+
+// Default policy — same math GETKINETIK runs on its own dashboard.
+const result = attestationToTier(report.payload, DEFAULT_POLICY);
+console.log(result.tier);   // 'PREMIER' | 'STRONG' | 'STANDING' | 'NEW' | 'TAMPERED'
+```
+
+The split is the positioning made structural: a partner running
+`npm install @getkinetik/verify` gets zero policy code, zero tier
+logic, zero opinions about reward decisions. The bureau ships
+evidence; networks ship policy.
 
 ---
 

@@ -1,0 +1,53 @@
+{
+  "name": "@getkinetik/evidence-mapping",
+  "version": "0.1.0",
+  "description": "Reference policy package for mapping a GETKINETIK bureau attestation (signed evidence about a sovereign node) to a reward tier. Pure function, zero runtime dependencies. Networks adopt, fork, or ignore — the bureau ships evidence, never a verdict.",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "prepublishOnly": "npm run build && node smoketest.mjs",
+    "test": "node smoketest.mjs"
+  },
+  "keywords": [
+    "depin",
+    "kinetik",
+    "getkinetik",
+    "genesis-score",
+    "reward-tier",
+    "policy",
+    "trust-layer"
+  ],
+  "homepage": "https://getkinetik.app",
+  "bugs": {
+    "url": "https://github.com/Ricolax310/GetKinetik/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ricolax310/GetKinetik.git",
+    "directory": "packages/evidence-mapping"
+  },
+  "author": "OutFromNothing LLC",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "~5.9.2"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
