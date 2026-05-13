@@ -519,6 +519,25 @@ export async function onRequestPost(ctx) {
   try {
     const result = await verifyProofUrl(proofUrl, ctx.env);
 
+    // If valid + scored, snapshot the previous cached band BEFORE we write
+    // the new one, so the webhook helper can detect band transitions.
+    // Synchronous read here — adds one KV round trip but unblocks correct
+    // webhook semantics. Best-effort: any failure → null prior band.
+    let priorBand = null;
+    if (result.valid && result.nodeId && ctx.env?.KINETIK_KV) {
+      try {
+        const prior = await ctx.env.KINETIK_KV.get(
+          `score:${result.nodeId}`,
+          { type: "json" },
+        );
+        if (prior && typeof prior.scoreBand === "string") {
+          priorBand = prior.scoreBand;
+        }
+      } catch (err) {
+        console.error("[verify-device] prior score read failed:", err);
+      }
+    }
+
     // Cache score under score:<nodeId> so GET /api/score/:nodeId can serve
     // partner lookups without a fresh proof. Best-effort — a KV write
     // failure must not change the API response shape callers depend on.
@@ -555,12 +574,156 @@ export async function onRequestPost(ctx) {
       );
     }
 
+    // Score-change webhooks — fire when the band moved (or on first sighting
+    // if so configured). Best-effort, no retries.
+    if (result.valid && result.nodeId) {
+      ctx.waitUntil(
+        maybeFireScoreWebhook(ctx.env, result, priorBand).catch((err) => {
+          console.error("[verify-device] webhook fire failed:", err);
+        }),
+      );
+    }
+
     return json(result, 200);
   } catch (err) {
     // Catch-all — never expose stack traces to callers.
     console.error("[verify-device] unexpected error:", err);
     return json({ valid: false, reason: "internal_error" }, 200);
   }
+}
+
+// ── Score-change webhooks ────────────────────────────────────────────────────
+//
+// Partners can register receiver URLs that get a signed POST whenever a node's
+// `scoreBand` transitions. Wired via Cloudflare env:
+//
+//   SCORE_WEBHOOK_URLS    JSON array of URLs, e.g. ["https://x.com/hook"]
+//   SCORE_WEBHOOK_SECRET  HMAC-SHA256 signing key (any sufficiently long string)
+//
+// Payload:
+//   {
+//     "event":     "score.changed",
+//     "nodeId":    "KINETIK-NODE-...",
+//     "fromBand":  "STANDING" | null,
+//     "toBand":    "TAMPERED",
+//     "fromScore": 636 | null,
+//     "toScore":   199,
+//     "tamperFlags": ["chain_rewind"],
+//     "methodologyVersion": "v1.1",
+//     "asOf":      "2026-05-13T13:34:22.674Z",
+//     "delivery":  "<uuid>"
+//   }
+//
+// Headers:
+//   Content-Type: application/json
+//   User-Agent:   GETKINETIK-Bureau/1.1
+//   X-GETKINETIK-Event:     score.changed
+//   X-GETKINETIK-Delivery:  <uuid>
+//   X-GETKINETIK-Signature: sha256=<hex hmac of raw body>
+//
+// Delivery is best-effort: no retries, no queue. Webhook failures are logged
+// and never affect the /verify-device response.
+
+function bytesToHex(bytes) {
+  let out = "";
+  for (let i = 0; i < bytes.length; i++) {
+    out += bytes[i].toString(16).padStart(2, "0");
+  }
+  return out;
+}
+
+async function hmacSha256Hex(secret, message) {
+  const key = await crypto.subtle.importKey(
+    "raw",
+    new TextEncoder().encode(secret),
+    { name: "HMAC", hash: "SHA-256" },
+    false,
+    ["sign"],
+  );
+  const sig = await crypto.subtle.sign(
+    "HMAC",
+    key,
+    new TextEncoder().encode(message),
+  );
+  return bytesToHex(new Uint8Array(sig));
+}
+
+function parseWebhookUrls(env) {
+  const raw =
+    typeof env?.SCORE_WEBHOOK_URLS === "string"
+      ? env.SCORE_WEBHOOK_URLS.trim()
+      : "";
+  if (!raw) return [];
+  let parsed;
+  try {
+    parsed = JSON.parse(raw);
+  } catch {
+    console.error("[verify-device] SCORE_WEBHOOK_URLS is not valid JSON");
+    return [];
+  }
+  if (!Array.isArray(parsed)) return [];
+  return parsed
+    .filter((u) => typeof u === "string" && /^https:\/\//i.test(u))
+    .slice(0, 16); // hard cap
+}
+
+async function maybeFireScoreWebhook(env, result, priorBand) {
+  const urls = parseWebhookUrls(env);
+  if (urls.length === 0) return;
+
+  // Only fire on band transitions (incl. first-ever sighting if priorBand=null).
+  if (priorBand && priorBand === result.scoreBand) return;
+
+  const secret = typeof env?.SCORE_WEBHOOK_SECRET === "string"
+    ? env.SCORE_WEBHOOK_SECRET
+    : "";
+
+  // crypto.randomUUID is available in Cloudflare Workers.
+  const delivery =
+    (crypto.randomUUID && crypto.randomUUID()) ||
+    `del-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+
+  const payload = {
+    event: "score.changed",
+    nodeId: result.nodeId,
+    fromBand: priorBand,
+    toBand: result.scoreBand,
+    toScore: result.genesisScore,
+    tamperFlags: result.tamperFlags,
+    methodologyVersion: result.methodologyVersion,
+    asOf: result.asOf,
+    delivery,
+  };
+
+  const body = JSON.stringify(payload);
+  const signature = secret ? `sha256=${await hmacSha256Hex(secret, body)}` : "";
+
+  await Promise.all(
+    urls.map(async (url) => {
+      try {
+        const res = await fetch(url, {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+            "user-agent": "GETKINETIK-Bureau/1.1",
+            "x-getkinetik-event": "score.changed",
+            "x-getkinetik-delivery": delivery,
+            ...(signature ? { "x-getkinetik-signature": signature } : {}),
+          },
+          body,
+          // 5-second hard ceiling — slow partners don't get to slow us down.
+          signal: AbortSignal.timeout ? AbortSignal.timeout(5000) : undefined,
+        });
+        if (!res.ok) {
+          console.error(
+            `[verify-device] webhook ${url} → HTTP ${res.status}`,
+          );
+        }
+      } catch (err) {
+        console.error(`[verify-device] webhook ${url} failed:`, err);
+      }
+    }),
+  );
 }
 
 // ── Bureau stats ─────────────────────────────────────────────────────────────
