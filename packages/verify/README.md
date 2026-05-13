@@ -1,4 +1,4 @@
-# @kinetik/verify
+# @getkinetik/verify
 
 > Independent, dependency-free verifier for **GETKINETIK** signed artifacts —
 > Proof of Origin, signed heartbeats, and signed earnings.
@@ -16,7 +16,7 @@ Sovereign Node artifact is real without ever calling our servers.
 
 > **Why a separate package?** Because trust requires an independent
 > implementation path. Calling our `verify-device` webhook is convenient,
-> but it's still trusting our infrastructure. Importing `@kinetik/verify`
+> but it's still trusting our infrastructure. Importing `@getkinetik/verify`
 > into your own backend or browser bundle gives you a verification path
 > that depends only on math.
 
@@ -25,7 +25,7 @@ Sovereign Node artifact is real without ever calling our servers.
 ## Install
 
 ```bash
-npm install @kinetik/verify
+npm install @getkinetik/verify
 ```
 
 Peer-light: depends only on
@@ -40,7 +40,7 @@ in Node ≥ 18, modern browsers, and edge workers.
 ## Quick start
 
 ```ts
-import { verifyArtifact, decodeProofUrl } from '@kinetik/verify';
+import { verifyArtifact, decodeProofUrl } from '@getkinetik/verify';
 
 // 1) Verify an artifact you already have as JSON.
 const report = await verifyArtifact({
