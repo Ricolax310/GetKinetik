@@ -438,13 +438,20 @@ components:
         ok: { type: boolean, enum: [true] }
         stats:
           type: object
-          required: [total, valid, invalid, tampered, byBand]
+          required: [total, valid, invalid, flagged, signedAttestations, byTier]
           properties:
-            total:    { type: integer, minimum: 0 }
-            valid:    { type: integer, minimum: 0 }
-            invalid:  { type: integer, minimum: 0 }
-            tampered: { type: integer, minimum: 0 }
-            byBand:
+            total:              { type: integer, minimum: 0 }
+            valid:              { type: integer, minimum: 0 }
+            invalid:            { type: integer, minimum: 0 }
+            flagged:
+              type: integer
+              minimum: 0
+              description: Verifications where the bureau set a tamper / chain-integrity flag.
+            signedAttestations:
+              type: integer
+              minimum: 0
+              description: Verifications that returned a bureau-signed attestation envelope.
+            byTier:
               type: object
               required: [NEW, STANDING, STRONG, PREMIER, TAMPERED]
               properties:

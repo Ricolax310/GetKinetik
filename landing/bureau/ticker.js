@@ -41,10 +41,10 @@
         var s = data.stats || {};
         set("total", fmtN(s.total));
         set("valid", fmtN(s.valid));
-        set("tampered", fmtN(s.tampered));
+        set("tampered", fmtN(s.flagged));
         var strong =
-          (s.byBand && s.byBand.STRONG ? s.byBand.STRONG : 0) +
-          (s.byBand && s.byBand.PREMIER ? s.byBand.PREMIER : 0);
+          (s.byTier && s.byTier.STRONG ? s.byTier.STRONG : 0) +
+          (s.byTier && s.byTier.PREMIER ? s.byTier.PREMIER : 0);
         set("strong", fmtN(strong));
         set("version", data.methodologyVersion || "v1.1");
         set("last", fmtAgo(s.lastVerifyAt));

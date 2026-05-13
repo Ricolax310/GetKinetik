@@ -1079,6 +1079,175 @@
       }
 
       /* ------------------------------------------------------------
+         What the bureau found this week — dated, public findings.
+         Uses the same border + sapphire glow as .partner-section so
+         partners read it as a continuation of the bureau pitch.
+         ------------------------------------------------------------ */
+      .findings-section {
+        background: linear-gradient(180deg, transparent 0%, rgba(58, 155, 255, 0.05) 50%, transparent 100%);
+        border-top: 1px solid var(--hairline);
+        border-bottom: 1px solid var(--hairline);
+      }
+
+      .findings-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 22px;
+        margin-top: 18px;
+      }
+
+      .finding-card {
+        position: relative;
+        padding: 30px 28px;
+        border: 1px solid rgba(58, 155, 255, 0.18);
+        border-radius: 18px;
+        background: rgba(0, 42, 102, 0.1);
+        transition: border-color 0.3s ease, transform 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .finding-card:hover {
+        border-color: rgba(58, 155, 255, 0.4);
+        transform: translateY(-2px);
+      }
+
+      .finding-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 3px;
+      }
+
+      .finding-net {
+        color: var(--ruby-ember);
+        font-weight: 600;
+      }
+
+      .finding-date {
+        color: var(--platinum);
+        opacity: 0.6;
+      }
+
+      .finding-title {
+        font-family: var(--serif);
+        font-weight: 300;
+        font-size: 22px;
+        line-height: 1.3;
+        color: var(--platinum);
+        margin: 0;
+      }
+
+      .finding-stats {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px 18px;
+      }
+
+      .finding-stats li {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        padding: 12px 14px;
+        border: 1px solid rgba(58, 155, 255, 0.12);
+        border-radius: 10px;
+        background: rgba(8, 12, 26, 0.5);
+      }
+
+      .finding-num {
+        font-family: var(--serif);
+        font-size: 26px;
+        font-weight: 300;
+        color: var(--platinum);
+        line-height: 1;
+      }
+
+      .finding-lbl {
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 1.5px;
+        color: var(--platinum);
+        opacity: 0.65;
+        line-height: 1.4;
+      }
+
+      .finding-lbl code {
+        font-family: var(--mono);
+        font-size: 9px;
+        color: var(--sapphire-glow);
+        background: rgba(58, 155, 255, 0.1);
+        padding: 1px 5px;
+        border-radius: 3px;
+        letter-spacing: 0.5px;
+      }
+
+      .finding-body {
+        font-family: var(--sans);
+        font-size: 14px;
+        line-height: 1.65;
+        font-weight: 300;
+        color: var(--platinum);
+        opacity: 0.78;
+        margin: 0;
+      }
+
+      .finding-body code {
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--sapphire-glow);
+        background: rgba(58, 155, 255, 0.08);
+        padding: 2px 6px;
+        border-radius: 4px;
+      }
+
+      .finding-cta {
+        margin-top: auto;
+      }
+
+      .finding-link {
+        display: inline-block;
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 2px;
+        color: var(--ruby-ember);
+        text-decoration: none;
+        padding: 10px 0;
+        border-bottom: 1px solid rgba(255, 80, 80, 0.3);
+        transition: border-color 0.2s ease, color 0.2s ease;
+      }
+
+      .finding-link:hover {
+        color: var(--platinum);
+        border-bottom-color: var(--platinum);
+      }
+
+      .findings-foot {
+        margin-top: 28px;
+        font-family: var(--sans);
+        font-size: 13px;
+        line-height: 1.7;
+        color: var(--platinum);
+        opacity: 0.7;
+        font-weight: 300;
+        max-width: 880px;
+      }
+
+      .findings-foot code {
+        font-family: var(--mono);
+        font-size: 11px;
+        color: var(--sapphire-glow);
+        background: rgba(58, 155, 255, 0.08);
+        padding: 2px 5px;
+        border-radius: 3px;
+      }
+
+      /* ------------------------------------------------------------
          Receipts — concrete traction tiles.
          ------------------------------------------------------------ */
       .receipts {
@@ -1727,20 +1896,22 @@
             We never hold them.
           </li>
           <li>
-            <strong>Credits transferred out are safe.</strong> Anything moved
+            <strong>Earnings transferred out are safe.</strong> Anything moved
             to your wallet before the phone is gone stays yours, always.
           </li>
           <li>
             <strong>What you lose is seniority</strong> — how long this node
-            has been running, its heartbeat chain, its track record. The
-            anonymous identity can be recreated instantly on a new device.
+            has been running, its heartbeat chain, its Genesis Score history.
+            The anonymous identity can be recreated instantly on a new device,
+            but the bureau will see it as a new node with a fresh clock.
           </li>
         </ul>
         <p class="mint-warning-keep">
           Right now that's low stakes — seniority is a clock, not cash.
-          As the network grows, node age will carry more weight. Genesis
-          nodes that run longest will matter most. Keep your credits
-          transferred out regularly and losing a phone is just an inconvenience.
+          As partner networks start reading Genesis Score to tier verified-user
+          premiums, long-running nodes will matter more. Keep your DePIN
+          earnings transferred out regularly and losing a phone is just an
+          inconvenience.
         </p>
         <p class="mint-warning-rule">
           <strong>One phone at a time.</strong> Seed-phrase backup
@@ -1845,6 +2016,125 @@
         </a>
         <a class="cta cta-secondary" href="mailto:eric@outfromnothingllc.com">
           15-MIN CALL
+        </a>
+      </div>
+    </section>
+
+    <!-- ================================================== -->
+    <!-- WHAT THE BUREAU FOUND THIS WEEK                     -->
+    <!-- Concrete, dated findings against real partner data. -->
+    <!-- Pulled from /docs/reports/. Update headline numbers -->
+    <!-- when those reports get regenerated.                 -->
+    <!-- ================================================== -->
+    <section class="findings-section" id="findings">
+      <span class="section-eyebrow">WHAT THE BUREAU FOUND THIS WEEK</span>
+      <h2 class="section-title">
+        Two networks. One public API per scan. Real numbers.
+      </h2>
+      <p class="section-sub">
+        Sybil-shape scans the bureau ran in the open, using only each
+        network's own public endpoints — no insider data, no SDK, no
+        permission asked. Methodology and inputs are in each report.
+        Partners who want a private scan against their internal feed get
+        one on request; the bureau still publishes the methodology.
+      </p>
+
+      <div class="findings-grid">
+        <article class="finding-card">
+          <header class="finding-head">
+            <span class="finding-net">WEATHERXM</span>
+            <span class="finding-date">2026-05-13</span>
+          </header>
+          <h3 class="finding-title">
+            290 cells reporting more devices than capacity.
+          </h3>
+          <ul class="finding-stats">
+            <li>
+              <span class="finding-num">8,487</span>
+              <span class="finding-lbl">cells observed</span>
+            </li>
+            <li>
+              <span class="finding-num">290</span>
+              <span class="finding-lbl">cells over capacity</span>
+            </li>
+            <li>
+              <span class="finding-num">3.4%</span>
+              <span class="finding-lbl">of the network</span>
+            </li>
+            <li>
+              <span class="finding-num">60</span>
+              <span class="finding-lbl">devices flagged <code>NO_LOCATION_DATA</code> (their own pipeline)</span>
+            </li>
+          </ul>
+          <p class="finding-body">
+            Pulled from <code>api.weatherxm.com/api/v1/cells</code>. Drilled
+            the 40 most over-capacity cells, found 112 devices, and surfaced
+            the <code>pol_reason</code> and <code>qod_score</code> flags
+            WeatherXM's own pipeline already attaches.
+          </p>
+          <div class="finding-cta">
+            <a class="finding-link" href="https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/weatherxm-sybil-report.md" rel="noopener" target="_blank">
+              READ THE WEATHERXM SCAN →
+            </a>
+          </div>
+        </article>
+
+        <article class="finding-card">
+          <header class="finding-head">
+            <span class="finding-net">GEODNET</span>
+            <span class="finding-date">2026-05-13</span>
+          </header>
+          <h3 class="finding-title">
+            1,854 RTK stations failing the bureau's geometry test.
+          </h3>
+          <ul class="finding-stats">
+            <li>
+              <span class="finding-num">19,673</span>
+              <span class="finding-lbl">stations observed</span>
+            </li>
+            <li>
+              <span class="finding-num">1,854</span>
+              <span class="finding-lbl">flagged (any heuristic)</span>
+            </li>
+            <li>
+              <span class="finding-num">9.42%</span>
+              <span class="finding-lbl">of the network</span>
+            </li>
+            <li>
+              <span class="finding-num">10</span>
+              <span class="finding-lbl">groups at identical (lat, lng) — structurally undefined for RTK</span>
+            </li>
+          </ul>
+          <p class="finding-body">
+            Pulled from <code>rtk.geodnet.com/api/v2/coverage_stations</code>.
+            RTK reference stations are surveyed hardware at fixed coordinates;
+            duplicates and sub-10m clusters are the obvious shape to ask
+            about. 931 clusters within 10m, 6 tight clusters of ≥4 stations
+            in 100m.
+          </p>
+          <div class="finding-cta">
+            <a class="finding-link" href="https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/geodnet-sybil-report.md" rel="noopener" target="_blank">
+              READ THE GEODNET SCAN →
+            </a>
+          </div>
+        </article>
+      </div>
+
+      <p class="findings-foot">
+        Findings are <strong>shape, not allegations</strong> — the bureau
+        does not run either network. The signals (capacity, <code>pol_reason</code>,
+        <code>qod_score</code>, coordinate identity) are produced by the
+        networks themselves; the bureau just reads them and counts. Every
+        report is reproducible from <code>scripts/sybil-scan-*.mjs</code> in
+        the public repo.
+      </p>
+
+      <div class="partner-cta-row" style="margin-top:32px;">
+        <a class="cta cta-primary" href="https://github.com/Ricolax310/GetKinetik/tree/main/docs/reports" rel="noopener" target="_blank">
+          ALL PUBLISHED SCANS →
+        </a>
+        <a class="cta cta-secondary" href="mailto:eric@outfromnothingllc.com?subject=Private%20bureau%20scan%20against%20our%20network">
+          REQUEST A PRIVATE SCAN
         </a>
       </div>
     </section>
@@ -2180,24 +2470,25 @@
             <span class="gc-callout-eyebrow">GENESIS SCORE</span>
             <h3 class="gc-callout-title">Your node's public reputation. A grade, not a currency.</h3>
             <p class="gc-callout-body">
-              Genesis Score is a public, hardware-attested reputation number for your
-              node — like a credit score for a sovereign device. Uptime, heartbeats,
-              attestations, network diversity, and seniority all roll up into one
-              grade partners can read before they pay you a verified-user premium.
-              Genesis nodes (minted now, before public launch) accumulate at a 2× rate
-              forever. The score is <strong>never a token, never transferable, never
-              priced</strong> — it's the bureau publishing a grade about your node, the
-              way Equifax publishes a grade about a borrower.
+              Genesis Score is a public, hardware-attested 0–1000 reputation
+              grade for your node — like a credit score for a sovereign
+              device. Identity integrity, uptime continuity, sensor coherence,
+              network engagement, and disclosure receipts all roll up into
+              one number partners can read before they pay a verified-user
+              premium. The score is <strong>never a token, never transferable,
+              never priced</strong> — it is the bureau publishing a grade about
+              your node, the way Equifax publishes a grade about a borrower.
+              Methodology is public and versioned (v1.1 live).
             </p>
           </div>
           <div class="gc-stat-group">
             <div class="gc-stat">
-              <p class="gc-stat-num">2×</p>
-              <p class="gc-stat-label">Genesis rate</p>
+              <p class="gc-stat-num">0–1000</p>
+              <p class="gc-stat-label">Genesis Score</p>
             </div>
             <div class="gc-stat">
               <p class="gc-stat-num">5</p>
-              <p class="gc-stat-label">Earning actions</p>
+              <p class="gc-stat-label">Graded networks</p>
             </div>
             <div class="gc-stat">
               <p class="gc-stat-num">∞</p>
@@ -2220,7 +2511,7 @@
 
       <div class="receipts">
         <article class="receipt">
-          <p class="receipt-num" data-bureau-stat="totalVerifications">—</p>
+          <p class="receipt-num" data-bureau-stat="total">—</p>
           <p class="receipt-label">VERIFICATIONS · BUREAU</p>
           <p class="receipt-sub">
             Live count from the public bureau endpoint
@@ -2228,10 +2519,10 @@
         </article>
 
         <article class="receipt">
-          <p class="receipt-num" data-bureau-stat="uniqueNodes">—</p>
-          <p class="receipt-label">SOVEREIGN NODES · SEEN</p>
+          <p class="receipt-num" data-bureau-stat="valid">—</p>
+          <p class="receipt-label">VALID · SIGNED</p>
           <p class="receipt-sub">
-            Distinct hardware-sealed identities graded
+            Ed25519 chain held; signature matched declared pubkey
           </p>
         </article>
 

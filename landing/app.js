@@ -215,6 +215,9 @@
 /* ============================================================
    Bureau stats — hydrate [data-bureau-stat] receipt tiles.
    Mirrors the ticker.js pattern used on /bureau/.
+   Response shape: { ok, stats: { total, valid, invalid, flagged,
+   signedAttestations, byTier, firstVerifyAt, lastVerifyAt },
+   methodologyVersion, asOf }.
    ============================================================ */
 (function () {
   "use strict";
@@ -223,7 +226,7 @@
   if (!tiles.length) return;
 
   function fmt(n) {
-    if (typeof n !== "number") return "—";
+    if (typeof n !== "number" || !isFinite(n)) return "—";
     if (n >= 1000) return (n / 1000).toFixed(1).replace(/\.0$/, "") + "K";
     return String(n);
   }
@@ -231,10 +234,11 @@
   fetch("/api/bureau/stats", { cache: "no-store" })
     .then(function (r) { return r.ok ? r.json() : null; })
     .then(function (d) {
-      if (!d) return;
+      if (!d || !d.stats) return;
+      var s = d.stats;
       tiles.forEach(function (el) {
         var key = el.getAttribute("data-bureau-stat");
-        if (d[key] !== undefined) el.textContent = fmt(d[key]);
+        if (s[key] !== undefined) el.textContent = fmt(s[key]);
       });
     })
     .catch(function () {});

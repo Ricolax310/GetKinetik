@@ -18,8 +18,9 @@
  *     "total": 12,
  *     "valid": 11,
  *     "invalid": 1,
- *     "tampered": 4,
- *     "byBand": { "NEW": 3, "STANDING": 4, "STRONG": 2, "PREMIER": 2, "TAMPERED": 1 },
+ *     "flagged": 4,
+ *     "signedAttestations": 3,
+ *     "byTier": { "NEW": 3, "STANDING": 4, "STRONG": 2, "PREMIER": 2, "TAMPERED": 1 },
  *     "firstVerifyAt": "2026-05-13T03:00:00.000Z",
  *     "lastVerifyAt":  "2026-05-13T13:34:22.674Z"
  *   },
@@ -29,9 +30,14 @@
  *
  * Cache-Control: public, max-age=30 (cheap edge cache, partners scraping
  * this don't need real-time precision).
+ *
+ * KEY NOTE: this reader and functions/api/verify-device.js#bumpBureauStats
+ * MUST share the same KV key + shape. They were drifted across versions
+ * (v1 with byBand vs v2 with byTier) and the public ticker silently zeroed.
+ * If you bump either, bump both in the same commit.
  */
 
-const STATS_KEY = "stats:bureau:v1";
+const STATS_KEY = "stats:bureau:v2";
 const METHODOLOGY_VERSION = "v1.1";
 
 function json(body, status = 200, extraHeaders = {}) {
@@ -64,8 +70,9 @@ export async function onRequestGet(ctx) {
     total: 0,
     valid: 0,
     invalid: 0,
-    tampered: 0,
-    byBand: { NEW: 0, STANDING: 0, STRONG: 0, PREMIER: 0, TAMPERED: 0 },
+    flagged: 0,
+    signedAttestations: 0,
+    byTier: { NEW: 0, STANDING: 0, STRONG: 0, PREMIER: 0, TAMPERED: 0 },
     firstVerifyAt: null,
     lastVerifyAt: null,
   };
@@ -91,13 +98,14 @@ export async function onRequestGet(ctx) {
         total: raw.total || 0,
         valid: raw.valid || 0,
         invalid: raw.invalid || 0,
-        tampered: raw.tampered || 0,
-        byBand: {
-          NEW: raw.byBand?.NEW || 0,
-          STANDING: raw.byBand?.STANDING || 0,
-          STRONG: raw.byBand?.STRONG || 0,
-          PREMIER: raw.byBand?.PREMIER || 0,
-          TAMPERED: raw.byBand?.TAMPERED || 0,
+        flagged: raw.flagged || 0,
+        signedAttestations: raw.signedAttestations || 0,
+        byTier: {
+          NEW: raw.byTier?.NEW || 0,
+          STANDING: raw.byTier?.STANDING || 0,
+          STRONG: raw.byTier?.STRONG || 0,
+          PREMIER: raw.byTier?.PREMIER || 0,
+          TAMPERED: raw.byTier?.TAMPERED || 0,
         },
         firstVerifyAt: raw.firstVerifyAt || null,
         lastVerifyAt: raw.lastVerifyAt || null,

@@ -101,11 +101,12 @@
       <details class="explainer">
         <summary>What is GETKINETIK?</summary>
         <p>
-          GETKINETIK turns any smartphone into a sovereign earning node.
-          Every device generates a hardware-backed Ed25519 identity keypair —
-          one that never leaves the device — and uses it to sign a
-          hash-chained uptime log, Proof of Origin cards, and earnings
-          receipts from DePIN networks.
+          GETKINETIK is the <strong>independent bureau</strong> for the
+          decentralized physical economy. Every node generates a hardware-backed
+          Ed25519 identity that never leaves the device, signs a hash-chained
+          uptime log, and earns a public <strong>Genesis Score</strong> — a
+          0–1000 grade partner networks can read before they pay verified-user
+          premiums. Methodology is public and versioned.
         </p>
         <p>
           The three artifact types this verifier recognizes:
@@ -118,25 +119,28 @@
           </li>
           <li>
             <strong>Proof of Origin</strong> — a shareable QR-code artifact
-            minted on demand. Contains the node's full sensor state, signed
-            by its Ed25519 key. Paste the JSON here to verify.
+            minted on demand. Contains the node's full sensor state plus its
+            current Genesis Score, signed by its Ed25519 key. Paste the JSON
+            here to verify, or POST the share URL to <code>/api/verify-device</code>.
           </li>
           <li>
             <strong>Signed earning</strong> — a receipt for a DePIN payout.
             Records the source network (e.g., Nodle, DIMO), the currency,
-            gross amount, 1% protocol fee, and net — all signed in so none
-            can be altered after the fact.
+            gross amount, 1% bureau fee disclosed in the signature, and net —
+            all signed in so none can be altered after the fact.
           </li>
         </ul>
         <p>
-          GETKINETIK is the identity and earnings layer that every DePIN
-          network needs but none builds for itself. One app, many networks,
-          one sovereign ledger.
+          GETKINETIK sits outside every DePIN network it grades — no token,
+          no equity in graded networks, no payment in any network's native
+          asset. The bureau publishes the grade; partners decide what to do
+          with it.
         </p>
         <p class="explainer-foot">
-          Built by OutFromNothing LLC · The app is not yet publicly available
-          — if you received this link from a tester, the JSON artifact they
-          shared was minted by their device and signed with their private key.
+          Built by OutFromNothing LLC · Android preview is live on
+          <a href="https://getkinetik.app/" target="_blank" rel="noopener">getkinetik.app</a>
+          · iOS in development · Partner API at
+          <a href="https://getkinetik.app/bureau/" target="_blank" rel="noopener">getkinetik.app/bureau/</a>.
         </p>
       </details>
 

@@ -9,9 +9,11 @@
  * between "endpoint is up but degraded" and "endpoint is gone".
  */
 
+import { loadBureauSigner } from "./_lib/bureauSign.js";
+
 const SERVICE = "GETKINETIK Bureau";
 const METHODOLOGY_VERSION = "v1.1";
-const STATS_KEY = "stats:bureau:v1";
+const STATS_KEY = "stats:bureau:v2";
 
 function json(body, status = 200) {
   return new Response(JSON.stringify(body), {
@@ -42,7 +44,10 @@ export async function onRequestGet(ctx) {
   const checks = {
     kv_binding: "unknown",
     kv_read: "unknown",
+    /** Partner attestation API key(s) for /api/attest — not the bureau Ed25519 signer. */
     attest_configured: "unknown",
+    /** Bureau attestation signing: pass only if BUREAU_* secrets load and self-check. */
+    bureau_signer: "unknown",
   };
 
   // 1. KV binding present?
@@ -73,9 +78,31 @@ export async function onRequestGet(ctx) {
     checks.attest_configured = "fail";
   }
 
+  // 4. Bureau Ed25519 signer (attestations on /api/verify-device)?
+  const sk =
+    typeof ctx.env?.BUREAU_SIGNING_KEY_HEX === "string"
+      ? ctx.env.BUREAU_SIGNING_KEY_HEX.trim()
+      : "";
+  const pub =
+    typeof ctx.env?.BUREAU_PUBKEY_HEX === "string"
+      ? ctx.env.BUREAU_PUBKEY_HEX.trim()
+      : "";
+  if (!sk && !pub) {
+    checks.bureau_signer = "skip";
+  } else {
+    try {
+      const signer = await loadBureauSigner(ctx.env);
+      checks.bureau_signer = signer ? "pass" : "fail";
+    } catch (err) {
+      checks.bureau_signer = "fail";
+      console.error("[health] bureau signer probe failed:", err);
+    }
+  }
+
   const ok =
     checks.kv_binding === "pass" &&
-    (checks.kv_read === "pass" || checks.kv_read === "skip");
+    (checks.kv_read === "pass" || checks.kv_read === "skip") &&
+    checks.bureau_signer !== "fail";
 
   return json(
     {

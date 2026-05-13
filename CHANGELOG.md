@@ -8,7 +8,52 @@ Android `versionCode` is noted alongside each release for sideload verification.
 
 ## [Unreleased] — v1.3.3
 
-### Added (bureau hardening sprint, 2026-05-13)
+### Added (front door + bureau hardening sprint, 2026-05-13)
+
+- **"What the bureau found this week" section on the homepage.** Two
+  dated finding cards — WeatherXM (290 of 8,487 cells over capacity,
+  ~3.4% of the network) and Geodnet (1,854 of 19,673 RTK stations
+  failing geometry checks, ~9.42%) — each linking to the full published
+  scan in `docs/reports/`. Section sits immediately after the bureau
+  pitch on `/` and gives partners a concrete "this is what they do" tile
+  instead of an abstract claim. CTAs to all scans + a private-scan
+  request mailto. Findings framed as "shape, not allegations" since the
+  underlying signals come from each network's own pipeline.
+
+### Fixed (stats endpoint key/shape drift)
+
+- **Bureau stats endpoint was reading the wrong KV key.** The writer in
+  `functions/api/verify-device.js#bumpBureauStats` had been bumped to
+  `stats:bureau:v2` with `byTier` + `flagged`, but
+  `functions/api/bureau/stats.js` and `functions/api/health.js` were
+  still reading `stats:bureau:v1` with `byBand` + `tampered`. Every
+  public ticker silently returned zeros. Aligned all readers + writer +
+  OpenAPI schema on the v2 shape.
+- **Homepage receipt tiles were querying non-existent fields.** The
+  hydrator in `landing/app.js` read `d[key]` instead of `d.stats[key]`,
+  and the tiles asked for `totalVerifications` / `uniqueNodes` which
+  don't exist in either schema version. Both tiles now read real fields
+  (`total`, `valid`) from `d.stats`.
+- **`landing/bureau/ticker.js`** updated to read `byTier` and `flagged`
+  matching the v2 writer.
+
+### Changed (stale copy cleanup on user-facing pages)
+
+- **`/` mint-warning aside:** "Credits transferred out are safe" →
+  "Earnings transferred out are safe"; "Keep your credits transferred
+  out regularly" → "Keep your DePIN earnings transferred out regularly".
+  Genesis Credits was retired when Genesis Score shipped; lingering copy
+  was implying a transferable currency that doesn't exist.
+- **`/` Genesis Score callout stats:** removed the legacy "2× Genesis
+  rate" and "5 Earning actions" stats (carried over from the Genesis
+  Credits accrual model that doesn't apply to a 0–1000 reputation
+  grade). Replaced with "0–1000 Genesis Score" and "5 Graded networks".
+- **`/verify/` explainer:** dropped "The app is not yet publicly
+  available" (Android preview is live), reframed "earnings layer that
+  every DePIN network needs" as the bureau positioning, added explicit
+  links to `/bureau/` and `/api/verify-device`.
+
+### Added (earlier this sprint)
 
 This batch turns the bureau from "shipped" into "undeniable" — public
 positioning, live telemetry, machine-readable spec, multi-partner auth,
