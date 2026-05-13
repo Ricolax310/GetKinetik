@@ -117,20 +117,26 @@ Hi — I built GETKINETIK, the independent trust layer for DePIN (Carfax for nod
 
 ### Discord DM (to @Community Manager — partnership / integration)
 ```
-Hey Nodle team — I built GETKINETIK, the independent trust layer for DePIN. Carfax-shaped: we sit outside every network, grade the device, and publish.
+Hey Nodle team — circling back from a few weeks ago, with a sharper framing.
 
-Reframing this from my last note: I'm NOT pitching a reward boost or a network change. I'm pitching that a neutral third party now exists that can independently attest to the realness of any phone-class node — including Nodle operators. We never issue a token, never hold equity in any graded network, never accept payment in graded networks' native assets. The neutrality is the entire moat.
+You said the bureau didn't fit because Nodle already has a genuity check (collected NODL, holder rank, click + DAO participation). That feedback was correct — and it pushed me to write a public response to exactly that objection:
 
-What this means for Nodle:
-  · Operators who are good come out well in independent grading without you doing anything.
-  · External parties (lenders, insurers, foundations, future regulators) can verify Nodle network health via a neutral source instead of trusting the operator.
-  · You're not asked to integrate, change UX, or alter genuity logic. The bureau just exists, grades what it sees, and publishes.
+  https://getkinetik.app/bureau/why/
 
-If that's interesting, 15 minutes — happy to walk through the verify-device webhook + the neutrality charter. If it isn't, totally fair, and the bureau will keep grading regardless.
+The short version: a bureau is not a replacement for your genuity check; it's a different shape. Same reason a bank's internal risk model doesn't replace a credit bureau. Five points: neutrality, cross-network signal, cryptographic root, regulatory shape, zero ops cost on your team.
 
-https://getkinetik.app
+What's new since last time:
+  · Genesis Score v1.1 is live — bureau-bound chain age + beat-rate sanity + chain-rewind hard gate. Three attack vectors closed since v1.0.
+  · Public live telemetry at getkinetik.app/bureau/ (verifications served, tamper flags caught, distribution by band).
+  · OpenAPI 3.1 + Postman collection at getkinetik.app/api/docs/. Hit "Try" on any endpoint live.
+  · @getkinetik/verify on npm — partners can verify proofs offline with zero calls back to us.
+
+Still: never a token, never equity in any graded network, never payment in graded networks' native assets. Same charter.
+
+If the framing in /bureau/why/ doesn't land after a quick read, the bureau genuinely isn't a fit for Nodle and I won't follow up. If it does, 15 minutes.
+
+https://getkinetik.app · https://getkinetik.app/bureau/why/
 Charter: https://github.com/Ricolax310/GetKinetik/blob/main/NEUTRALITY.md
-Webhook: https://github.com/Ricolax310/GetKinetik/blob/main/docs/api/verify-device.md
 ```
 
 ---
@@ -200,14 +206,16 @@ Site: https://getkinetik.app
 > "Here's a one-pager: [paste PITCH.md contents or link to getkinetik.app]. The short version: we're the independent trust layer for DePIN — Carfax-shaped, never a token, never equity in any network we grade. Your network's operators get graded by a neutral third party, you get fraud signal without building it, and external parties (lenders, foundations, regulators) get a credible source to read your network ground truth from. When's a good time for 15 minutes?"
 
 **If they push back with "we don't need a third party to grade our users":**
-> "Totally fair — the network grading itself is the default state today. The reason a neutral bureau exists in every other graded market (credit, ratings, automotive history) is that the *graded party can never be the credible source for its own grade.* That's not a comment on your network — it's a structural property of any rated market. We're filling the slot, and the value to you is that the grade exists whether you adopt it or not."
+> "Totally fair — that's the default position today. I actually wrote a one-page response specifically for this objection: **getkinetik.app/bureau/why/**. Five reasons in plain language why a bureau is structurally different from a DIY check (cross-network signal, regulatory shape, cryptographic root, zero maintenance, hardware-rooted neutrality). If those reasons don't land after a quick read, the bureau isn't for you and I won't follow up. If they do, 15 minutes."
 
 **If they say "send us an email":**
 > Subject: GETKINETIK × [Network] — Independent Trust Layer
 > Body: Use the PARTNER_EMAILS.md template for their network (bureau framing, not aggregator).
 
 **If they ask for a demo:**
-> "Absolutely. I can screen-share the app live, mint a Proof of Origin from my device, scan it with a clean second device, and walk you through the verify-device webhook response — including the neutrality charter that makes the grade worth trusting. 15 minutes via Google Meet or Discord call — your preference. When works?"
+> "Absolutely. Two options — pick whichever your team prefers:
+> 1) Open **getkinetik.app/api/docs/** in a browser and hit *Try* on any endpoint live against production (full OpenAPI 3.1, no signup, no key needed for verify or score lookup). Or
+> 2) 15-min screen share: I mint a Proof of Origin live in the app, scan it with a clean second device, walk you through the verify-device response (Genesis Score + tamper flags + methodology version), and show the neutrality charter. Google Meet, Discord, or Telegram — your preference. When works?"
 
 **If they ask "are you a token?" / "is Genesis Score a token?":**
 > "No. The charter (`NEUTRALITY.md`) explicitly forbids issuing any token, point system with monetary value, or financial wrapper — including soulbound/wrapped versions of Genesis Score itself. Genesis Score is a public reputation grade *about a node*, not a currency. It's non-transferable, never priced, and never redeemable. That's the entire moat — we can't be a credible bureau if our own grade is a tradable asset."
@@ -216,16 +224,26 @@ Site: https://getkinetik.app
 
 ## Priority Order for Outreach (this week — 2026-05-13)
 
-**As of 2026-05-13, `@getkinetik/verify` is live on npm.** The strongest
-new opener for every message below is:
+**As of 2026-05-13, the bureau is live end-to-end.** Strongest opener for
+every message below — pick the half-sentence that matches the contact:
 
-> *As of yesterday our verifier is on npm: `npm install @getkinetik/verify`.
-> Same byte-for-byte cryptographic contract our app uses, zero network
-> calls to us. A real trust bureau has to be verifiable by partners who
-> don't trust it — that's what we just shipped, and it's what makes the
-> rest of this pitch worth your 15 minutes.*
+> *Quick update: the GETKINETIK Bureau is now live end-to-end —
+> Genesis Score v1.1 (hardware-bound, three attack gates), public
+> live-ticker telemetry at **getkinetik.app/bureau/**, OpenAPI 3.1 + Postman
+> at **getkinetik.app/api/docs/**, partner attestation channel, and the
+> verifier published on npm (`@getkinetik/verify`). A real bureau has to
+> be verifiable by partners who don't trust it — that's what we shipped,
+> and it's what makes the rest of this pitch worth your 15 minutes.*
 
-Lead with that paragraph (or a tighter variant) on every send this week.
+If the prospect has previously said "we already grade our own users," lead
+with this instead and append the link:
+
+> *Position paper on why a neutral third-party score is structurally
+> different from your own genuity check — short, no jargon:
+> **getkinetik.app/bureau/why/**. If the framing doesn't land, the bureau
+> isn't for you, and no follow-up needed. If it does, 15 minutes?*
+
+Lead with one of those paragraphs (or a tighter variant) on every send this week.
 The **send-list** with specific contacts, channels, days, and follow-up
 triggers lives in [`OUTREACH_SENDLIST.md`](./OUTREACH_SENDLIST.md) —
 this file is just the message library.

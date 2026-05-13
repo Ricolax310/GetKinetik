@@ -398,6 +398,13 @@ components:
           description: KV key the attestation is stored under.
           example: "attest:KINETIK-NODE-A49C9E14:1778679539654"
         recordedAt: { type: string, format: date-time }
+        attestor:
+          type: string
+          description: |
+            Partner identity derived from the Bearer key. In dict-key mode
+            (`ATTEST_API_KEYS`), this is the partner name. In legacy
+            single-key mode (`ATTEST_API_KEY`), this is `"unknown"`.
+          example: "dimo"
         note:       { type: string }
 
     BureauStats:
