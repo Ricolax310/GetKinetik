@@ -26,12 +26,14 @@
 
 # OpenAPI spec — explicit YAML content-type for tools that sniff it.
 /api/openapi.yaml
+  ! Cache-Control
   Content-Type: application/yaml; charset=utf-8
   Cache-Control: public, max-age=300
   Access-Control-Allow-Origin: *
 
 # Postman collection — explicit JSON content-type and short edge cache.
 /api/postman.json
+  ! Cache-Control
   Content-Type: application/json; charset=utf-8
   Cache-Control: public, max-age=300
   Access-Control-Allow-Origin: *
@@ -40,4 +42,5 @@
 # global CSP would block it. This route gets a scoped CSP override:
 # allow scripts/styles from unpkg + self only. No data leaves the page.
 /api/docs/*
+  ! Content-Security-Policy
   Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://unpkg.com; img-src 'self' data:; font-src 'self' data: https://unpkg.com; connect-src 'self'; base-uri 'self'; frame-ancestors 'none'
