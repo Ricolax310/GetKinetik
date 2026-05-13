@@ -30,13 +30,14 @@ without trusting the app, the domain, or anyone else.
 
 ## Verification contract
 
-For any artifact, all four of these must pass:
+For any artifact, all five of these must pass:
 
 1. `stableStringify(payload)` equals the signed `message` byte-for-byte.
 2. `sha256(message)` truncated to 16 hex chars equals the embedded `hash`.
-3. For Proof of Origin: `payload.attribution` equals
+3. `payload.nodeId` equals `KINETIK-NODE-${sha256(raw public key bytes)[:8]}`.
+4. For Proof of Origin: `payload.attribution` equals
    `"GETKINETIK by OutFromNothing LLC"`.
-4. `Ed25519.verify(signature, message, payload.pubkey)` returns `true`.
+5. `Ed25519.verify(signature, message, payload.pubkey)` returns `true`.
 
 These checks mirror `packages/kinetik-core/src/proof.ts::verifyProofOfOrigin` and
 `packages/kinetik-core/src/heartbeat.ts::verifyHeartbeat` in the app. If either side

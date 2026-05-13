@@ -37,6 +37,8 @@ const fromHex = (hex) => {
   return out;
 };
 const utf8 = (s) => new TextEncoder().encode(s);
+const deriveNodeId = (pubkeyBytes) =>
+  `KINETIK-NODE-${toHex(sha256(pubkeyBytes)).slice(0, 8).toUpperCase()}`;
 
 // Mint a proof-of-origin exactly the way packages/kinetik-core/src/proof.ts does.
 async function mintProof() {
@@ -67,6 +69,8 @@ async function mintProof() {
 // Port of verifier.js::verifyArtifact — MUST stay byte-identical in behavior.
 async function verifyArtifact(raw) {
   const { payload, signature } = raw;
+  const pubBytes = fromHex(payload.pubkey);
+  const expectedNodeId = deriveNodeId(pubBytes);
   const canonicalMessage = stableStringify(payload);
   const canonicalHash = toHex(sha256(utf8(canonicalMessage))).slice(0, 16);
   const claimedMessage = raw.message ?? canonicalMessage;
@@ -74,6 +78,7 @@ async function verifyArtifact(raw) {
 
   const canonicalMatches = claimedMessage === canonicalMessage;
   const hashMatches = claimedHash === canonicalHash;
+  const nodeIdMatches = payload.nodeId === expectedNodeId;
   const attributionOk =
     payload.kind === "proof-of-origin"
       ? payload.attribution === PROOF_ATTRIBUTION
@@ -81,15 +86,24 @@ async function verifyArtifact(raw) {
   const signatureOk = await ed.verifyAsync(
     fromHex(signature),
     utf8(canonicalMessage),
-    fromHex(payload.pubkey),
+    pubBytes,
   );
 
   const valid =
     canonicalMatches &&
     hashMatches &&
+    nodeIdMatches &&
     (attributionOk === true || attributionOk === null) &&
     signatureOk;
-  return { valid, canonicalMatches, hashMatches, attributionOk, signatureOk };
+  return {
+    valid,
+    canonicalMatches,
+    hashMatches,
+    nodeIdMatches,
+    expectedNodeId,
+    attributionOk,
+    signatureOk,
+  };
 }
 
 // ----------------------------------------------------------------------------
@@ -109,9 +123,24 @@ async function run() {
     const r = await verifyArtifact(artifact);
     assert("canonical serialization matches", r.canonicalMatches);
     assert("sha256(message)[:16] matches hash", r.hashMatches);
+    assert("nodeId is derived from pubkey", r.nodeIdMatches);
     assert("attribution intact", r.attributionOk === true);
     assert("signature verifies", r.signatureOk);
     assert("overall valid", r.valid);
+  }
+
+  console.log("\n[1b] Forged nodeId with attacker key — should fail binding");
+  {
+    const { sk, artifact } = await mintProof();
+    const forged = JSON.parse(JSON.stringify(artifact));
+    forged.payload.nodeId = "KINETIK-NODE-DEADBEEF";
+    forged.message = stableStringify(forged.payload);
+    forged.signature = toHex(await ed.signAsync(utf8(forged.message), sk));
+    forged.hash = toHex(sha256(utf8(forged.message))).slice(0, 16);
+    const r = await verifyArtifact(forged);
+    assert("signature still verifies", r.signatureOk);
+    assert("nodeId binding fails", !r.nodeIdMatches);
+    assert("overall invalid", !r.valid);
   }
 
   console.log("\n[2] Tampered lifetimeBeats — should fail canonical + sig");

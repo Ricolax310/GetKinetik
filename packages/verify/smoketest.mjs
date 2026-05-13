@@ -77,9 +77,36 @@ console.log('[1] proof-of-origin happy path');
   assert(report.kind === 'proof-of-origin', 'kind is proof-of-origin');
   assert(report.checks.canonicalMatches, 'canonical matches');
   assert(report.checks.hashMatches, 'hash matches');
+  assert(report.checks.nodeIdMatches, 'nodeId is derived from pubkey');
   assert(report.checks.attributionOk === true, 'attribution intact');
   assert(report.checks.signatureOk, 'signature verifies');
   assert(report.checks.feeIntegrityOk === null, 'feeIntegrityOk is N/A');
+}
+
+// ---- [2b] nodeId/pubkey impersonation — must fail ---------------------------
+console.log('\n[2b] nodeId/pubkey impersonation');
+{
+  const payload = {
+    v: 2,
+    kind: 'proof-of-origin',
+    nodeId: 'KINETIK-NODE-DEADBEEF',
+    pubkey,
+    mintedAt: Date.now() - 86400000,
+    issuedAt: Date.now(),
+    lifetimeBeats: 999999,
+    firstBeatTs: Date.now() - 180 * 86400000,
+    chainTip: toHex(sha256(utf8('spoofed-identity'))).slice(0, 16),
+    attribution: PROOF_ATTRIBUTION,
+    sensors: { lux: 348, motionRms: 0.07, pressureHpa: 1013.21 },
+  };
+  const message = stableStringify(payload);
+  const signature = toHex(await ed.signAsync(utf8(message), sk));
+  const hash = toHex(sha256(utf8(message))).slice(0, 16);
+  const report = await verifyArtifact({ payload, message, signature, hash });
+  assert(!report.valid, 'spoofed nodeId rejected');
+  assert(report.checks.signatureOk, 'signature still verifies against attacker key');
+  assert(!report.checks.nodeIdMatches, 'nodeId/pubkey binding failed');
+  assert(report.expectedNodeId === nodeId, 'expected nodeId is derived from pubkey');
 }
 
 // ---- [3] heartbeat happy path (no attribution check) -----------------------
@@ -103,6 +130,7 @@ console.log('\n[2] v:2 heartbeat happy path');
   const report = await verifyArtifact({ payload, signature });
   assert(report.valid, 'compact form heartbeat verifies');
   assert(report.kind === 'heartbeat', 'kind is heartbeat');
+  assert(report.checks.nodeIdMatches, 'heartbeat nodeId is derived from pubkey');
   assert(report.checks.attributionOk === null, 'attributionOk is N/A');
   assert(report.checks.feeIntegrityOk === null, 'feeIntegrityOk is N/A');
 }

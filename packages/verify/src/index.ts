@@ -47,7 +47,7 @@ export const PROTOCOL_FEE_RATE = 0.01;
 /** Package version. Bump this on any change to the four contract constants
  *  above (stableStringify shape, sha256 truncation, signature scheme, or
  *  attribution string). Stays in lockstep with landing/verify/verifier.js. */
-export const VERSION = '0.1.0';
+export const VERSION = '0.1.1';
 
 // ----------------------------------------------------------------------------
 // stableStringify — byte-for-byte equivalent of
@@ -94,6 +94,15 @@ const fromHex = (hex: string): Uint8Array => {
 
 const utf8 = (s: string): Uint8Array => new TextEncoder().encode(s);
 
+const deriveNodeId = (pubkeyBytes: Uint8Array): string =>
+  `KINETIK-NODE-${toHex(sha256(pubkeyBytes)).slice(0, 8).toUpperCase()}`;
+
+type BufferLike = {
+  from(input: string, encoding: 'base64'): {
+    toString(encoding: 'binary'): string;
+  };
+};
+
 // base64url decode, for `#proof=...` URL fragments.
 //
 // Defensive against the most common real-world failure mode: a user copy-
@@ -127,12 +136,15 @@ const fromBase64Url = (s: string): string => {
       const message = err instanceof Error ? err.message : String(err);
       throw new Error(`base64url decode failed: ${message}`);
     }
-  } else if (typeof Buffer !== 'undefined') {
-    bin = Buffer.from(b64, 'base64').toString('binary');
   } else {
-    throw new Error(
-      'No base64 decoder available (need atob or Node Buffer in this runtime)',
-    );
+    const nodeBuffer = (globalThis as typeof globalThis & { Buffer?: BufferLike })
+      .Buffer;
+    if (!nodeBuffer) {
+      throw new Error(
+        'No base64 decoder available (need atob or Node Buffer in this runtime)',
+      );
+    }
+    bin = nodeBuffer.from(b64, 'base64').toString('binary');
   }
   const out = new Uint8Array(bin.length);
   for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
@@ -141,8 +153,8 @@ const fromBase64Url = (s: string): string => {
 
 // ----------------------------------------------------------------------------
 // Public types — the shape of artifacts the package accepts and the report
-// it returns. All structural — verifyArtifact does no schema-level
-// rejection beyond the four required fields (payload, signature, payload.pubkey).
+// it returns. All structural — verifyArtifact does no schema-level rejection
+// beyond the required signed-envelope fields (payload, signature, nodeId, pubkey).
 // ----------------------------------------------------------------------------
 
 /** The four kinds of artifact this verifier recognizes. Anything else is
@@ -175,6 +187,8 @@ export type VerifyChecks = {
   canonicalMatches: boolean;
   /** sha256(canonicalMessage)[:16] byte-equals the claimed `hash`. */
   hashMatches: boolean;
+  /** payload.nodeId equals KINETIK-NODE-${sha256(raw pubkey bytes)[:8]}. */
+  nodeIdMatches: boolean;
   /** PROOF_ATTRIBUTION present in payload (proof-of-origin and earning only). */
   attributionOk: boolean | null;
   /** Earning fee is exactly 1% of gross AND net = gross - fee (earnings only). */
@@ -200,6 +214,8 @@ export type VerifyReport = {
   canonicalHash: string;
   /** sha256(canonicalMessage) full 64-char hex. */
   canonicalHashFull: string;
+  /** Node ID derived from payload.pubkey. Must equal payload.nodeId. */
+  expectedNodeId: string;
   /** The `message` field as claimed by the artifact (or canonicalMessage if absent). */
   claimedMessage: string;
   /** The `hash` field as claimed by the artifact (or canonicalHash if absent). */
@@ -210,7 +226,7 @@ export type VerifyReport = {
 const round8 = (n: number): number => Math.round(n * 1e8) / 1e8;
 
 // ----------------------------------------------------------------------------
-// verifyArtifact — runs all five checks and returns a structured report.
+// verifyArtifact — runs all six checks and returns a structured report.
 //
 // Throws ONLY on structurally-invalid input (missing payload, malformed
 // signature hex, malformed pubkey hex). Any cryptographic or content-level
@@ -238,6 +254,10 @@ export async function verifyArtifact(
   if (typeof pubkey !== 'string' || !/^[0-9a-f]{64}$/i.test(pubkey)) {
     throw new Error('payload.pubkey must be 64-char lowercase hex');
   }
+  const pubBytes = fromHex(pubkey);
+  const expectedNodeId = deriveNodeId(pubBytes);
+  const nodeIdMatches =
+    (payload as { nodeId?: unknown }).nodeId === expectedNodeId;
 
   const canonicalMessage = stableStringify(payload);
   const canonicalHashFull = toHex(sha256(utf8(canonicalMessage)));
@@ -286,7 +306,6 @@ export async function verifyArtifact(
   let signatureError: string | null = null;
   try {
     const sigBytes = fromHex(signature);
-    const pubBytes = fromHex(pubkey);
     const msgBytes = utf8(canonicalMessage);
     signatureOk = await ed.verifyAsync(sigBytes, msgBytes, pubBytes);
   } catch (err) {
@@ -296,6 +315,7 @@ export async function verifyArtifact(
   const valid =
     canonicalMatches &&
     hashMatches &&
+    nodeIdMatches &&
     (attributionOk === true || attributionOk === null) &&
     (feeIntegrityOk === true || feeIntegrityOk === null) &&
     signatureOk;
@@ -315,11 +335,13 @@ export async function verifyArtifact(
     canonicalMessage,
     canonicalHash,
     canonicalHashFull,
+    expectedNodeId,
     claimedMessage,
     claimedHash,
     checks: {
       canonicalMatches,
       hashMatches,
+      nodeIdMatches,
       attributionOk,
       feeIntegrityOk,
       signatureOk,

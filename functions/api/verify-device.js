@@ -42,9 +42,10 @@
  * 2. Decode and parse the JSON proof payload
  * 3. Verify the PROOF_ATTRIBUTION field matches the expected constant
  * 4. Re-serialise the payload using stableStringify (lex-sorted keys)
- * 5. Verify the Ed25519 signature against the serialised message and the
+ * 5. Verify the hash field matches sha256(message)[:16]
+ * 6. Verify payload.nodeId is derived from payload.pubkey
+ * 7. Verify the Ed25519 signature against the serialised message and the
  *    pubkey embedded in the payload using SubtleCrypto (native in CF Workers)
- * 6. Verify the hash field matches sha256(message)[:16]
  *
  * This is a server-side implementation of the same logic in landing/verify/verifier.js.
  * Both must remain byte-for-byte equivalent — the CRYPTOGRAPHIC_CONTRACT comment
@@ -123,6 +124,14 @@ async function sha256Hex(message) {
   const encoded = new TextEncoder().encode(message);
   const buf = await crypto.subtle.digest("SHA-256", encoded);
   return Array.from(new Uint8Array(buf), (b) => b.toString(16).padStart(2, "0")).join("");
+}
+
+async function deriveNodeId(pubkeyBytes) {
+  const buf = await crypto.subtle.digest("SHA-256", pubkeyBytes);
+  const fingerprint = Array.from(new Uint8Array(buf), (b) =>
+    b.toString(16).padStart(2, "0"),
+  ).join("");
+  return `KINETIK-NODE-${fingerprint.slice(0, 8).toUpperCase()}`;
 }
 
 /**
@@ -305,6 +314,10 @@ async function verifyProofUrl(proofUrl) {
   const pubkeyBytes = hexToBytes(pubkeyHex);
   if (!pubkeyBytes) {
     return { valid: false, reason: "pubkey_decode_failed" };
+  }
+  const expectedNodeId = await deriveNodeId(pubkeyBytes);
+  if (payload.nodeId !== expectedNodeId) {
+    return { valid: false, reason: "node_id_pubkey_mismatch", expectedNodeId };
   }
   const sigBytes = hexToBytes(signature);
   if (!sigBytes || sigBytes.length !== 64) {
