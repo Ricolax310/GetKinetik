@@ -44,7 +44,8 @@
  * 4. Re-serialise the payload using stableStringify (lex-sorted keys)
  * 5. Verify the Ed25519 signature against the serialised message and the
  *    pubkey embedded in the payload using SubtleCrypto (native in CF Workers)
- * 6. Verify the hash field matches sha256(message)[:16]
+ * 6. If a hash field is present, verify it matches sha256(message)[:16]
+ * 7. Verify the nodeId is derived from the claimed public key
  *
  * This is a server-side implementation of the same logic in landing/verify/verifier.js.
  * Both must remain byte-for-byte equivalent — the CRYPTOGRAPHIC_CONTRACT comment
@@ -116,13 +117,22 @@ function hexToBytes(hex) {
   return bytes;
 }
 
+function bytesToHex(bytes) {
+  return Array.from(bytes, (b) => b.toString(16).padStart(2, "0")).join("");
+}
+
 /**
  * sha256Hex — SHA-256 of a UTF-8 string, returned as a lowercase hex string.
  */
 async function sha256Hex(message) {
   const encoded = new TextEncoder().encode(message);
   const buf = await crypto.subtle.digest("SHA-256", encoded);
-  return Array.from(new Uint8Array(buf), (b) => b.toString(16).padStart(2, "0")).join("");
+  return bytesToHex(new Uint8Array(buf));
+}
+
+async function deriveNodeIdFromPubkeyBytes(pubkeyBytes) {
+  const digest = await crypto.subtle.digest("SHA-256", pubkeyBytes);
+  return `KINETIK-NODE-${bytesToHex(new Uint8Array(digest)).slice(0, 8).toUpperCase()}`;
 }
 
 /**
@@ -318,14 +328,16 @@ async function loadBureauContext(env, nodeId) {
 
 async function persistBureauContext(env, nodeId, prior, observed) {
   if (!env?.KINETIK_KV || !nodeId) return;
+  const priorPeak =
+    typeof prior?.peakLifetimeBeats === "number" ? prior.peakLifetimeBeats : 0;
+  const nextPeak = observed.allowPeakAdvance
+    ? Math.max(priorPeak, observed.lifetimeBeats ?? 0)
+    : priorPeak;
   const next = {
     nodeId,
     firstSeenMs: prior?.firstSeenMs ?? observed.nowMs,
     firstSeenAt: prior?.firstSeenAt ?? new Date(observed.nowMs).toISOString(),
-    peakLifetimeBeats: Math.max(
-      prior?.peakLifetimeBeats ?? 0,
-      observed.lifetimeBeats ?? 0,
-    ),
+    peakLifetimeBeats: nextPeak,
     lastSeenMs: observed.nowMs,
     lastSeenAt: new Date(observed.nowMs).toISOString(),
   };
@@ -368,7 +380,7 @@ async function verifyProofUrl(proofUrl, env) {
   }
 
   const { payload, signature, hash } = envelope;
-  if (!payload || !signature || !hash) {
+  if (!payload || !signature) {
     return { valid: false, reason: "missing_fields" };
   }
 
@@ -381,7 +393,7 @@ async function verifyProofUrl(proofUrl, env) {
   const message = stableStringify(payload);
   const fullHash = await sha256Hex(message);
   const expectedHash = fullHash.slice(0, 16);
-  if (expectedHash !== hash) {
+  if (typeof hash === "string" && expectedHash !== hash) {
     return { valid: false, reason: "hash_mismatch" };
   }
 
@@ -394,6 +406,10 @@ async function verifyProofUrl(proofUrl, env) {
   const pubkeyBytes = hexToBytes(pubkeyHex);
   if (!pubkeyBytes) {
     return { valid: false, reason: "pubkey_decode_failed" };
+  }
+  const derivedNodeId = await deriveNodeIdFromPubkeyBytes(pubkeyBytes);
+  if (payload.nodeId !== derivedNodeId) {
+    return { valid: false, reason: "node_id_mismatch" };
   }
   const sigBytes = hexToBytes(signature);
   if (!sigBytes || sigBytes.length !== 64) {
@@ -433,6 +449,7 @@ async function verifyProofUrl(proofUrl, env) {
     nowMs: Date.now(),
     lifetimeBeats:
       typeof payload.lifetimeBeats === "number" ? payload.lifetimeBeats : 0,
+    allowPeakAdvance: !scoreBlock.tamperFlags.includes("beat_rate_implausible"),
   });
 
   // Step 8: return the verified node identity + score.
