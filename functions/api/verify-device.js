@@ -418,6 +418,33 @@ export async function onRequestPost(ctx) {
 
   try {
     const result = await verifyProofUrl(proofUrl);
+
+    // Cache score under score:<nodeId> so GET /api/score/:nodeId can serve
+    // partner lookups without a fresh proof. Best-effort — a KV write
+    // failure must not change the API response shape callers depend on.
+    if (result.valid && result.nodeId && ctx.env?.KINETIK_KV) {
+      const cacheEntry = {
+        nodeId: result.nodeId,
+        genesisScore: result.genesisScore,
+        scoreBand: result.scoreBand,
+        methodologyVersion: result.methodologyVersion,
+        tamperFlags: result.tamperFlags,
+        lifetimeBeats: result.lifetimeBeats,
+        firstBeatTs: result.firstBeatTs,
+        asOf: result.asOf,
+        cachedAt: new Date().toISOString(),
+      };
+      ctx.waitUntil(
+        ctx.env.KINETIK_KV.put(
+          `score:${result.nodeId}`,
+          JSON.stringify(cacheEntry),
+          { expirationTtl: 60 * 60 * 24 * 30 }, // 30 days
+        ).catch((err) => {
+          console.error("[verify-device] kv score cache failed:", err);
+        }),
+      );
+    }
+
     return json(result, 200);
   } catch (err) {
     // Catch-all — never expose stack traces to callers.

@@ -168,6 +168,15 @@ Contact `eric@outfromnothingllc.com` to discuss the premium programme.
 
 ---
 
+## Related endpoints
+
+| Endpoint | Purpose |
+|---|---|
+| `GET /api/score/:nodeId` | Look up the most recent Genesis Score the bureau has for a node, without supplying a fresh proof. Requires a prior `POST /api/verify-device` call to have populated the cache. |
+| `POST /api/attest` | Partner attestation channel — submit network-engagement / fault / fraud signals about a node. Auth required. See [`docs/api/attest.md`](./attest.md). |
+
+---
+
 ## Rate Limits
 
 | Tier | Limit |
