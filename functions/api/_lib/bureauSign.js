@@ -5,6 +5,13 @@
  * Cloudflare environment and exposes a signAttestation() helper that
  * mints a SignedAttestation envelope from a canonical AttestationPayload.
  *
+ * ZERO npm dependencies on purpose. Uses crypto.subtle natively — the
+ * Cloudflare Workers runtime supports Ed25519 sign/verify via SubtleCrypto
+ * since 2023 (workerd PR #500). Pages Functions are bundled with esbuild
+ * and have no node_modules to resolve against unless a build command is
+ * configured; staying inside the runtime API keeps deploys friction-free
+ * and matches the pattern the other functions/api/*.js workers already use.
+ *
  * KEY STORAGE CONTRACT — set these as Cloudflare Pages secrets:
  *
  *   BUREAU_SIGNING_KEY_HEX   64-char lowercase hex of the 32-byte Ed25519
@@ -18,11 +25,13 @@
  *   BUREAU_PUBKEY_HEX        64-char lowercase hex of the matching pubkey.
  *                            Server-side mirror of the public constant —
  *                            stored as an env var so we don't have to
- *                            re-derive from the seed on every request.
- *                            Verified against the derived pubkey at startup
- *                            so a misconfigured deployment fails loudly
- *                            instead of silently signing under the wrong
- *                            identity.
+ *                            derive the pubkey from the seed via signing
+ *                            tricks on every request. Verified against
+ *                            the seed at startup (we sign a self-test
+ *                            message with the seed and verify against
+ *                            this pubkey) so a misconfigured deployment
+ *                            fails loudly instead of silently signing
+ *                            under the wrong identity.
  *
  * MIGRATION TO HSM / KMS — see docs/methodology/ATTESTATION.md §6.
  *   The contract here is: anything that exports a `pubkeyHex` string and a
@@ -36,16 +45,30 @@
  * Cloudflare logs are not a secret store.
  */
 
-import * as ed from "@noble/ed25519";
-import { sha256, sha512 } from "@noble/hashes/sha2.js";
+// ----------------------------------------------------------------------------
+// PKCS8 prefix for an Ed25519 private key. Per RFC 8410:
+//
+//   SEQUENCE (0x30) length 0x2e (46 bytes following)
+//     INTEGER (0x02) length 1, value 0      ← version
+//     SEQUENCE (0x30) length 5
+//       OID (0x06) length 3, value 1.3.101.112  ← id-Ed25519
+//     OCTET STRING (0x04) length 0x22 (34)  ← curvePrivateKey wrapper
+//       OCTET STRING (0x04) length 0x20 (32) ← raw 32-byte seed follows
+//
+// Total length of the prefix bytes: 16. Append the 32-byte seed to get a
+// complete 48-byte pkcs8 DER. This wrapper never changes for Ed25519.
+// ----------------------------------------------------------------------------
+const PKCS8_PREFIX = new Uint8Array([
+  0x30, 0x2e, 0x02, 0x01, 0x00, 0x30, 0x05, 0x06,
+  0x03, 0x2b, 0x65, 0x70, 0x04, 0x22, 0x04, 0x20,
+]);
 
-// @noble/ed25519 v3 freezes `ed.hashes` but the fields are writable. We
-// override sha512 + sha512Async with the pure-JS @noble/hashes implementation
-// so signing works in the Cloudflare Workers runtime without depending on
-// `crypto.subtle.digest("SHA-512")` being available (it is, but we want the
-// signer to be runtime-portable for unit tests that run in Node too).
-ed.hashes.sha512 = sha512;
-ed.hashes.sha512Async = async (msg) => sha512(msg);
+function seedToPkcs8(seedBytes) {
+  const out = new Uint8Array(PKCS8_PREFIX.length + seedBytes.length);
+  out.set(PKCS8_PREFIX, 0);
+  out.set(seedBytes, PKCS8_PREFIX.length);
+  return out;
+}
 
 // ----------------------------------------------------------------------------
 // Hex / byte helpers — local so this file has no cross-cutting dependency
@@ -73,6 +96,11 @@ function bytesToHex(bytes) {
 
 const utf8 = (s) => new TextEncoder().encode(s);
 
+async function sha256Bytes(message) {
+  const buf = await crypto.subtle.digest("SHA-256", utf8(message));
+  return new Uint8Array(buf);
+}
+
 // ----------------------------------------------------------------------------
 // stableStringify — byte-for-byte equivalent of packages/kinetik-core's
 // stableJson.ts and packages/verify's stableStringify. CRITICAL: this must
@@ -94,7 +122,14 @@ export function stableStringify(obj) {
 // Callers MUST handle the null case (typically by omitting the signed
 // attestation field from the response so partners get a clean signal
 // instead of an attestation under a placeholder key).
+//
+// Self-check at load time: we sign a fixed test message with the seed
+// and verify against the published BUREAU_PUBKEY_HEX. If the verification
+// fails, the two env vars disagree — refuse to return a signer rather
+// than silently sign under the wrong identity.
 // ----------------------------------------------------------------------------
+const SELF_CHECK_MESSAGE = "GETKINETIK-bureau-signer-self-check";
+
 export async function loadBureauSigner(env) {
   const skHex =
     typeof env?.BUREAU_SIGNING_KEY_HEX === "string"
@@ -112,32 +147,66 @@ export async function loadBureauSigner(env) {
   }
 
   const seed = hexToBytes(skHex);
-  if (!seed) return null;
+  const pub = hexToBytes(pubHex);
+  if (!seed || !pub) return null;
 
-  // Sanity check: derive the pubkey from the seed and confirm it matches
-  // the BUREAU_PUBKEY_HEX env var. A mismatch means the secrets have been
-  // rotated incorrectly and we would otherwise silently sign under the
-  // wrong identity — every partner's bureauOk check would fail.
-  let derivedPubHex;
+  // Import the private key (non-extractable, sign-only). Wrapping the
+  // 32-byte seed in the fixed pkcs8 prefix is what makes this work with
+  // crypto.subtle — the runtime accepts pkcs8 DER but not a raw seed.
+  let privateKey;
   try {
-    const derived = await ed.getPublicKeyAsync(seed);
-    derivedPubHex = bytesToHex(new Uint8Array(derived));
+    privateKey = await crypto.subtle.importKey(
+      "pkcs8",
+      seedToPkcs8(seed),
+      { name: "Ed25519" },
+      false,
+      ["sign"],
+    );
   } catch (err) {
-    console.error("[bureauSign] failed to derive pubkey from seed:", err);
+    console.error("[bureauSign] failed to import bureau private key:", err);
     return null;
   }
-  if (derivedPubHex !== pubHex) {
-    console.error(
-      "[bureauSign] BUREAU_PUBKEY_HEX does not match the pubkey derived from BUREAU_SIGNING_KEY_HEX — check Cloudflare Pages secrets.",
+
+  // Sanity check: sign a fixed message with the private key and verify
+  // against the published pubkey. If they disagree, the env vars were
+  // rotated incorrectly and we would otherwise silently sign under the
+  // wrong identity — every partner's bureauOk check would fail.
+  try {
+    const publicKey = await crypto.subtle.importKey(
+      "raw",
+      pub,
+      { name: "Ed25519" },
+      false,
+      ["verify"],
     );
+    const testMsg = utf8(SELF_CHECK_MESSAGE);
+    const testSig = await crypto.subtle.sign("Ed25519", privateKey, testMsg);
+    const matches = await crypto.subtle.verify(
+      "Ed25519",
+      publicKey,
+      testSig,
+      testMsg,
+    );
+    if (!matches) {
+      console.error(
+        "[bureauSign] BUREAU_PUBKEY_HEX does not match the pubkey derived from BUREAU_SIGNING_KEY_HEX — check Cloudflare Pages secrets.",
+      );
+      return null;
+    }
+  } catch (err) {
+    console.error("[bureauSign] bureau self-check failed:", err);
     return null;
   }
 
   return {
     pubkeyHex: pubHex,
     async sign(message) {
-      const sigBytes = await ed.signAsync(utf8(message), seed);
-      return bytesToHex(new Uint8Array(sigBytes));
+      const sigBuf = await crypto.subtle.sign(
+        "Ed25519",
+        privateKey,
+        utf8(message),
+      );
+      return bytesToHex(new Uint8Array(sigBuf));
     },
   };
 }
@@ -234,8 +303,8 @@ const PROOF_ATTRIBUTION = "GETKINETIK by OutFromNothing LLC";
 // proof + KV bureau context. This function:
 //   1. Canonicalizes every sub-block.
 //   2. Stably stringifies the payload.
-//   3. Signs with the bureau key.
-//   4. Computes the 16-char chain-tip hash.
+//   3. Signs with the bureau key via crypto.subtle.
+//   4. Computes the 16-char chain-tip hash via crypto.subtle.digest.
 //   5. Returns { payload, message, signature, hash } in the SignedAttestation
 //      envelope shape the verifier expects.
 //
@@ -263,7 +332,7 @@ export async function signAttestation(signer, input) {
 
   const message = stableStringify(payload);
   const signature = await signer.sign(message);
-  const hashFull = bytesToHex(sha256(utf8(message)));
+  const hashFull = bytesToHex(await sha256Bytes(message));
   const hash = hashFull.slice(0, 16);
 
   return { payload, message, signature, hash };
