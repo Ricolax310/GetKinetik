@@ -33,9 +33,11 @@ import { ProofOfOrigin } from './ProofOfOrigin';
 import { Readouts } from './Readouts';
 import { AggregatorPanel, AGGREGATOR_ENABLED } from './AggregatorPanel';
 import { GenesisCreditsTicker } from './GenesisCreditsTicker';
+import { GenesisScoreTicker } from './GenesisScoreTicker';
 import { OptimizationReport } from './OptimizationReport';
 import type { OptimizationResult } from '../../packages/optimizer/src/scorer';
 import { nodleAdapter } from '../../packages/adapter-nodle/src';
+import { useGenesisScore } from '../hooks/useGenesisScore';
 
 /**
  * Multi-network adapter list (signed rewards ledger). Nodle-only for now (BLE background
@@ -133,10 +135,10 @@ export function VaultPanel() {
   }, [diagOpen, diagAnim]);
   const diagStyle = useAnimatedStyle(() => ({
     opacity: diagAnim.value,
-    // Sized for 15 rows (12 base + 3 L2 sensor rows). Each row is ~22px
-    // tall (padding 4 + ~14px text); plus 28px of card padding. Bump on
-    // any new row addition or this clips the bottom rows silently.
-    maxHeight: interpolate(diagAnim.value, [0, 1], [0, 580]),
+    // Sized for 16 rows (12 base + 3 L2 sensor rows + 1 Genesis Score).
+    // Each row is ~22px tall (padding 4 + ~14px text); plus 28px of card
+    // padding. Bump on any new row addition or this clips the bottom rows.
+    maxHeight: interpolate(diagAnim.value, [0, 1], [0, 610]),
     transform: [
       { translateY: interpolate(diagAnim.value, [0, 1], [-6, 0]) },
     ],
@@ -392,6 +394,21 @@ export function VaultPanel() {
   );
 
   // --------------------------------------------------------------------------
+  // Bureau Genesis Score — fetched from the bureau API once the node has
+  // its first heartbeat. Refreshes every 5 min (see useGenesisScore for the
+  // fast-path vs. self-verify strategy). Passed to the DIAG panel, the
+  // GenesisScoreTicker chip, and the ProofOfOrigin card so the score is
+  // surfaced at every level the user might look.
+  // --------------------------------------------------------------------------
+  const genesisScore = useGenesisScore(
+    identity,
+    heartbeat?.lifetimeCount ?? 0,
+    heartbeat?.firstTs ?? null,
+    heartbeat?.lastHash ?? null,
+    heartbeat?.lastSensors ?? null,
+  );
+
+  // --------------------------------------------------------------------------
   // Diagnostic panel rows.
   // --------------------------------------------------------------------------
   const bioAuthLabel =
@@ -446,6 +463,12 @@ export function VaultPanel() {
       ? `${Math.round(sensors.lux)} LX`
       : '—';
 
+  const genesisScoreLabel = genesisScore.result
+    ? `${genesisScore.result.score} · ${genesisScore.result.band}`
+    : genesisScore.loading
+      ? 'FETCHING…'
+      : '—';
+
   const diagRows: Array<{ label: string; value: string }> = [
     { label: 'NPU', value: 'PASS' },
     { label: 'TEE', value: 'LOCKED' },
@@ -462,6 +485,7 @@ export function VaultPanel() {
     { label: 'MOTION', value: motionLabel },
     { label: 'PRESSURE', value: pressureLabel },
     { label: 'LIGHT', value: lightLabel },
+    { label: 'GENESIS SCORE', value: genesisScoreLabel },
   ];
 
   return (
@@ -624,6 +648,11 @@ export function VaultPanel() {
         isCharging={isCharging}
       />
 
+      <GenesisScoreTicker
+        result={genesisScore.result}
+        loading={genesisScore.loading}
+      />
+
       <GenesisCreditsTicker />
 
       <AggregatorPanel
@@ -668,6 +697,7 @@ export function VaultPanel() {
           chainTip: heartbeat?.lastHash ?? null,
           lastSensors: heartbeat?.lastSensors ?? null,
         }}
+        genesisScore={genesisScore.result}
       />
     </View>
   );

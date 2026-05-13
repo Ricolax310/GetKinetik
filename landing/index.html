@@ -1557,7 +1557,7 @@
     <!-- ================================================== -->
     <div class="topbar">
       <span class="topbar-brand">GETKINETIK</span>
-      <span class="topbar-status">v1.4.0 · TRUST LAYER · LIVE</span>
+      <span class="topbar-status">v1.5.0 · BUREAU · LIVE</span>
     </div>
 
     <!-- ================================================== -->
@@ -1705,12 +1705,13 @@
     <section>
       <span class="section-eyebrow">HOW IT WORKS</span>
       <h2 class="section-title">
-        One sovereign node. Many DePIN networks. One signed ledger.
+        One sovereign node. A hardware-sealed identity. A public bureau grade.
       </h2>
       <p class="section-sub">
-        DePIN earnings are scattered across half a dozen apps and chains.
-        GETKINETIK aggregates them under a single hardware-signed identity
-        — no custody, no token movement, only verifiable receipts.
+        Every GETKINETIK node mints a cryptographic identity, signs a
+        tamper-evident uptime record, and earns a public Genesis Score — the
+        bureau's grade on whether the device is real. One call to the verify API
+        returns it all.
       </p>
 
       <div class="steps">
@@ -1729,26 +1730,27 @@
 
         <article class="step">
           <span class="step-num">2</span>
-          <p class="step-title">AGGREGATE</p>
-          <h3 class="step-headline">Earnings are read from every DePIN you run.</h3>
+          <p class="step-title">PROVE</p>
+          <h3 class="step-headline">Every 30 seconds your node signs a tamper-evident heartbeat.</h3>
           <p class="step-body">
-            Plug in your wallet addresses. The app queries each DePIN
-            network's public chain — Polygon, Solana, Arbitrum, Polkadot —
-            and reads your token balance directly. We never custody funds.
-            We never touch your tokens. We only observe and record.
+            While the node is live, it emits a signed statement: timestamp,
+            device sensors (motion, pressure, light), and battery state.
+            Each beat is hash-chained to the previous one. The chain makes
+            uptime mathematically provable — alter one beat and every
+            subsequent signature breaks.
           </p>
         </article>
 
         <article class="step">
           <span class="step-num">3</span>
-          <p class="step-title">SIGN</p>
-          <h3 class="step-headline">Every earning becomes a signed, hash-chained receipt.</h3>
+          <p class="step-title">GRADE</p>
+          <h3 class="step-headline">The bureau scores your node 0–1000 and publishes the grade.</h3>
           <p class="step-body">
-            Each delta-earning is recorded as a Ed25519-signed entry on a
-            tamper-evident local ledger. The 1% protocol fee is baked
-            into every signature so it's publicly auditable. Anyone can
-            verify your earnings at <strong>getkinetik.app/verify</strong>
-            with nothing but your public key.
+            GETKINETIK reads your signed proof, verifies the Ed25519 chain,
+            and computes a Genesis Score — a public, non-transferable
+            reputation grade. Partner networks call our API before they pay
+            verified-user premiums. The methodology is public; the score
+            is yours forever.
           </p>
         </article>
       </div>
@@ -1759,12 +1761,13 @@
     <!-- ================================================== -->
     <section>
       <span class="section-eyebrow">DEPIN NETWORKS</span>
-      <h2 class="section-title">Five DePIN integrations. All adapters built.</h2>
+      <h2 class="section-title">Five graded networks. Any DePIN can call the bureau.</h2>
       <p class="section-sub">
         Every network adapter is a standalone TypeScript package
-        (<code style="font-family:var(--mono);font-size:13px;color:var(--ruby-ember);">@kinetik/adapter-*</code>)
-        that consumes the same sovereign signing primitive. Production-ready
-        on day one of partner approval.
+        (<code style="font-family:var(--mono);font-size:13px;color:var(--ruby-ember);">@getkinetik/adapter-*</code>)
+        that feeds the same sovereign signing and verification pipeline.
+        The bureau grades nodes for each network independently —
+        one bad actor on one network doesn't contaminate another.
       </p>
 
       <div class="networks">
@@ -1841,13 +1844,14 @@
 
         <article class="claim">
           <span class="claim-index">03</span>
-          <h3 class="claim-title">PROOF IS THE ONLY COIN</h3>
+          <h3 class="claim-title">THE BUREAU OWNS NOTHING</h3>
           <p class="claim-body">
-            Every earning aggregated in GETKINETIK traces back to an
-            Ed25519 signature your device alone can produce. The 1%
-            protocol fee is baked into the same signature, so the fee
-            is publicly auditable forever. No off-chain accounting.
-            No trust required.
+            GETKINETIK holds no equity in any graded network, issues
+            no token, and takes no payment in any network's native asset.
+            Revenue is fiat from partners for verification — the same
+            model as a credit bureau. That structural neutrality is what
+            makes the Genesis Score credible: the bureau has no incentive
+            to inflate grades.
           </p>
         </article>
       </div>
@@ -1916,6 +1920,10 @@
             <span class="poo-label">HASH</span>
             <span class="poo-value">7E2A8F1C43B9D5E0</span>
           </div>
+          <div class="poo-row">
+            <span class="poo-label">GENESIS SCORE</span>
+            <span class="poo-value" style="color:var(--ruby-ember)">636 · STANDING</span>
+          </div>
 
           <div class="poo-divider"></div>
 
@@ -1943,11 +1951,13 @@
 
         <p class="proof-caption">
           Self-auditing. Timestamped. Signed with a key that never leaves
-          your device. The card now also carries the on-chain sensor
-          reading at the time it was minted — motion, pressure, light —
-          all hash-chained to the heartbeat log. A screenshot of this
-          card is a cryptographic claim that anyone can verify at
-          <strong>getkinetik.app/verify</strong>.
+          your device. The card carries the on-chain sensor reading at
+          minting — motion, pressure, light — all hash-chained to the
+          heartbeat log. The Genesis Score is the bureau's live grade on
+          that proof. A screenshot of this card is a cryptographic claim
+          that anyone can verify at
+          <strong>getkinetik.app/verify</strong> — or offline via
+          <code style="font-family:var(--mono);color:var(--ruby-ember)">npm install @getkinetik/verify</code>.
         </p>
       </div>
     </section>
@@ -2066,12 +2076,16 @@
       <div class="partner-grid">
         <article class="partner-card">
           <span class="partner-card-num">01</span>
-          <h3 class="partner-card-title">VERIFY IN ONE CALL</h3>
+          <h3 class="partner-card-title">VERIFY IN ONE CALL — OR OFFLINE</h3>
           <p class="partner-card-body">
-            POST the user's Proof of Origin URL to
+            <strong>Path A:</strong> POST the user's Proof of Origin URL to
             <code>getkinetik.app/api/verify-device</code>.
-            The response tells you: valid signature, node age, heartbeat count,
-            and sensor data. No SDK to install. No dependency to manage.
+            Returns: valid signature, Genesis Score, node age, heartbeat
+            count, sensor data. No SDK required.<br /><br />
+            <strong>Path B:</strong>
+            <code>npm install @getkinetik/verify</code> — run the same
+            verifier in your own infrastructure, fully air-gapped. No HTTP
+            call, no dependency on our uptime.
           </p>
         </article>
 
@@ -2125,7 +2139,7 @@
 
       <div class="receipts">
         <article class="receipt">
-          <p class="receipt-num">289+</p>
+          <p class="receipt-num">25K+</p>
           <p class="receipt-label">HEARTBEATS · ON CHAIN</p>
           <p class="receipt-sub">
             Hash-chained, signed, persistent across reboots
@@ -2137,6 +2151,22 @@
           <p class="receipt-label">DEPIN ADAPTERS · BUILT</p>
           <p class="receipt-sub">
             Nodle · DIMO · Hivemapper · WeatherXM · Geodnet
+          </p>
+        </article>
+
+        <article class="receipt">
+          <p class="receipt-num">v0.1.0</p>
+          <p class="receipt-label">@GETKINETIK/VERIFY · NPM</p>
+          <p class="receipt-sub">
+            Independent verifier · <strong style="color:var(--ruby-ember)">LIVE ON NPM</strong> · 2026-05-13
+          </p>
+        </article>
+
+        <article class="receipt">
+          <p class="receipt-num">API</p>
+          <p class="receipt-label">BUREAU ENDPOINT · LIVE</p>
+          <p class="receipt-sub">
+            verify-device · score lookup · public methodology
           </p>
         </article>
 
@@ -2180,13 +2210,14 @@
     <footer>
       <div class="footer-diamond" aria-hidden="true"></div>
       <p class="footer-line">GETKINETIK by OutFromNothing LLC</p>
-      <p class="footer-sub">Independent Trust Layer · Multi-Network Signed Ledger · Sovereign Node Protocol v2 · © 2026</p>
+      <p class="footer-sub">Independent Bureau · Hardware-Sealed Identity · Genesis Score · Sovereign Node Protocol v2 · © 2026</p>
       <a class="footer-mail" href="mailto:eric@outfromnothingllc.com"
         >eric@outfromnothingllc.com</a
       >
       <div class="footer-links">
         <a href="/verify/">VERIFY A PROOF</a>
         <a href="/bureau/">THE BUREAU</a>
+        <a href="https://www.npmjs.com/package/@getkinetik/verify" target="_blank" rel="noopener">NPM PACKAGE</a>
         <a href="https://github.com/Ricolax310/GetKinetik/blob/main/docs/api/verify-device.md" target="_blank" rel="noopener">PARTNER API</a>
         <a href="#manifesto">MANIFESTO</a>
       </div>
@@ -2285,6 +2316,6 @@
       </div>
     </div>
 
-    <script src="/app.js?v=1.4.3" defer></script>
+    <script src="/app.js?v=1.5.0" defer></script>
   </body>
 </html>
