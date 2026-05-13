@@ -545,12 +545,70 @@ export async function onRequestPost(ctx) {
       );
     }
 
+    // Bureau stats — eventually-consistent counters under stats:* keys.
+    // Best-effort; never blocks or changes the response shape.
+    if (ctx.env?.KINETIK_KV) {
+      ctx.waitUntil(
+        bumpBureauStats(ctx.env.KINETIK_KV, result).catch((err) => {
+          console.error("[verify-device] stats bump failed:", err);
+        }),
+      );
+    }
+
     return json(result, 200);
   } catch (err) {
     // Catch-all — never expose stack traces to callers.
     console.error("[verify-device] unexpected error:", err);
     return json({ valid: false, reason: "internal_error" }, 200);
   }
+}
+
+// ── Bureau stats ─────────────────────────────────────────────────────────────
+// Eventually-consistent aggregate counters published at GET /api/bureau/stats.
+// Stored under a single key so the read endpoint is one KV get.
+// Last-writer-wins is fine: a public dashboard does not require exact counts.
+async function bumpBureauStats(kv, result) {
+  const STATS_KEY = "stats:bureau:v1";
+
+  let stats;
+  try {
+    stats = (await kv.get(STATS_KEY, { type: "json" })) || null;
+  } catch {
+    stats = null;
+  }
+
+  if (!stats || typeof stats !== "object") {
+    stats = {
+      total: 0,
+      valid: 0,
+      invalid: 0,
+      tampered: 0,
+      byBand: { NEW: 0, STANDING: 0, STRONG: 0, PREMIER: 0, TAMPERED: 0 },
+      uniqueNodeIds: 0,
+      firstVerifyAt: null,
+      lastVerifyAt: null,
+    };
+  }
+
+  stats.total = (stats.total || 0) + 1;
+  if (result.valid) stats.valid = (stats.valid || 0) + 1;
+  else stats.invalid = (stats.invalid || 0) + 1;
+
+  if (Array.isArray(result.tamperFlags) && result.tamperFlags.length > 0) {
+    stats.tampered = (stats.tampered || 0) + 1;
+  }
+
+  if (result.scoreBand && stats.byBand && stats.byBand[result.scoreBand] !== undefined) {
+    stats.byBand[result.scoreBand] += 1;
+  }
+
+  const nowIso = new Date().toISOString();
+  if (!stats.firstVerifyAt) stats.firstVerifyAt = nowIso;
+  stats.lastVerifyAt = nowIso;
+
+  await kv.put(STATS_KEY, JSON.stringify(stats), {
+    expirationTtl: 60 * 60 * 24 * 365 * 2, // 2 years
+  });
 }
 
 export async function onRequest(ctx) {

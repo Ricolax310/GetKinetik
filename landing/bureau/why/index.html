@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0A0A0A" />
+    <meta name="color-scheme" content="dark" />
+
+    <title>Why a Bureau — GETKINETIK</title>
+    <meta
+      name="description"
+      content="Why DePIN needs an independent grading bureau, not another internal genuity check. The same reason banks don't grade their own customers — a neutral third-party score isn't a feature, it's a different shape."
+    />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Why a Bureau — GETKINETIK" />
+    <meta
+      property="og:description"
+      content="A neutral third-party score isn't a feature. It's a different shape. Here's why every DePIN network — including the ones that already have their own genuity checks — needs one."
+    />
+    <meta property="og:url" content="https://getkinetik.app/bureau/why/" />
+    <meta property="og:site_name" content="GETKINETIK" />
+    <meta property="og:image" content="https://getkinetik.app/og-image.png" />
+    <meta property="og:image:width" content="1024" />
+    <meta property="og:image:height" content="1024" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://getkinetik.app/og-image.png" />
+    <meta name="twitter:title" content="Why a Bureau — GETKINETIK" />
+    <meta
+      name="twitter:description"
+      content="A neutral third-party score isn't a feature. It's a different shape."
+    />
+
+    <link rel="canonical" href="https://getkinetik.app/bureau/why/" />
+
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230A0A0A'/%3E%3Cpolygon points='16,6 24,16 16,26 8,16' fill='%23FF1430'/%3E%3Cpolygon points='16,6 24,16 16,14 8,16' fill='%23FFB199' opacity='0.6'/%3E%3C/svg%3E"
+    />
+
+    <style>
+      :root {
+        --obsidian: #0a0a0a;
+        --obsidian-soft: #111113;
+        --obsidian-edge: #1a1a1d;
+        --ruby-core: #ff1430;
+        --ruby-mid: #b00820;
+        --ruby-deep: #3a0209;
+        --ruby-ember: #ffb199;
+        --platinum: #e8e8ea;
+        --silver: #b8b8bd;
+        --steel: #6e6e75;
+      }
+
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+
+      html, body {
+        background: var(--obsidian);
+        color: var(--platinum);
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+                     "Inter", "Segoe UI", system-ui, sans-serif;
+        line-height: 1.55;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .container {
+        max-width: 880px;
+        margin: 0 auto;
+        padding: 64px 24px 96px;
+      }
+
+      header.top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 48px;
+        border-bottom: 1px solid var(--obsidian-edge);
+        margin-bottom: 48px;
+      }
+
+      header.top a {
+        color: var(--silver);
+        text-decoration: none;
+        font-size: 14px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      header.top a:hover { color: var(--platinum); }
+
+      header.top .brand {
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        font-size: 14px;
+        color: var(--ruby-ember);
+      }
+
+      .crumb {
+        font-size: 12px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--ruby-ember);
+        margin-bottom: 16px;
+      }
+
+      h1 {
+        font-size: clamp(36px, 6vw, 56px);
+        line-height: 1.08;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        margin-bottom: 16px;
+      }
+
+      h1 .accent { color: var(--ruby-core); }
+
+      .lede {
+        font-size: 19px;
+        color: var(--silver);
+        max-width: 640px;
+        margin-bottom: 40px;
+      }
+
+      h2 {
+        font-size: 26px;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        margin: 64px 0 16px;
+        color: var(--platinum);
+      }
+
+      h3 {
+        font-size: 17px;
+        font-weight: 600;
+        margin: 24px 0 8px;
+        color: var(--ruby-ember);
+        letter-spacing: 0.02em;
+      }
+
+      p {
+        margin-bottom: 14px;
+        color: var(--silver);
+        font-size: 16px;
+      }
+
+      p strong { color: var(--platinum); font-weight: 600; }
+      em.subtle { color: var(--steel); font-style: normal; }
+
+      a {
+        color: var(--ruby-ember);
+        text-decoration: underline;
+        text-decoration-color: rgba(255, 177, 153, 0.3);
+        text-underline-offset: 3px;
+      }
+      a:hover { text-decoration-color: var(--ruby-ember); }
+
+      .objection {
+        margin: 28px 0;
+        padding: 24px 24px 20px;
+        border-left: 3px solid var(--ruby-core);
+        background: var(--obsidian-soft);
+        border-radius: 0 10px 10px 0;
+      }
+
+      .objection .o-tag {
+        font-size: 11px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--steel);
+        margin-bottom: 8px;
+      }
+
+      .objection .o-quote {
+        font-size: 17px;
+        color: var(--platinum);
+        font-weight: 500;
+        margin-bottom: 14px;
+        font-style: italic;
+      }
+
+      .objection .o-answer {
+        font-size: 15px;
+        color: var(--silver);
+      }
+
+      .objection .o-answer strong { color: var(--ruby-ember); font-weight: 600; }
+
+      .compare {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 24px 0;
+        font-size: 14px;
+      }
+
+      .compare th, .compare td {
+        text-align: left;
+        padding: 14px 16px;
+        border-bottom: 1px solid var(--obsidian-edge);
+        vertical-align: top;
+      }
+
+      .compare th {
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--ruby-ember);
+        background: var(--obsidian-soft);
+      }
+
+      .compare td:first-child {
+        color: var(--steel);
+        font-size: 13px;
+        width: 28%;
+        font-weight: 500;
+      }
+
+      .compare .yes { color: #a8ffa8; font-weight: 600; }
+      .compare .no  { color: #ff7474; font-weight: 600; }
+      .compare .mid { color: #ffd28a; font-weight: 600; }
+
+      .pullquote {
+        margin: 40px 0;
+        padding: 32px 32px;
+        background: linear-gradient(135deg, rgba(255, 20, 48, 0.06), rgba(255, 177, 153, 0.03));
+        border-radius: 14px;
+        border: 1px solid rgba(255, 177, 153, 0.18);
+      }
+
+      .pullquote p {
+        font-size: 20px;
+        line-height: 1.45;
+        color: var(--platinum);
+        font-weight: 500;
+        margin-bottom: 0;
+      }
+
+      .cta-row {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+        margin-top: 32px;
+      }
+
+      .cta-row a {
+        display: inline-flex;
+        align-items: center;
+        padding: 14px 22px;
+        border-radius: 10px;
+        font-size: 13px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-weight: 600;
+        text-decoration: none;
+        transition: transform 0.15s ease;
+      }
+
+      .cta-row a:hover { transform: translateY(-2px); }
+
+      .cta-row .primary {
+        background: var(--ruby-core);
+        color: var(--obsidian);
+      }
+
+      .cta-row .ghost {
+        border: 1px solid var(--obsidian-edge);
+        color: var(--platinum);
+      }
+
+      footer {
+        margin-top: 80px;
+        padding-top: 32px;
+        border-top: 1px solid var(--obsidian-edge);
+        font-size: 13px;
+        color: var(--steel);
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+      footer a { color: var(--silver); }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <header class="top">
+        <span class="brand">GETKINETIK · BUREAU</span>
+        <a href="/bureau/">← BACK TO BUREAU</a>
+      </header>
+
+      <p class="crumb">Position paper · v1</p>
+      <h1>A neutral score isn't a feature. <span class="accent">It's a different shape.</span></h1>
+      <p class="lede">
+        Most DePIN networks already have their own genuity checks — and they
+        should. A bureau is not a replacement for those checks. It's the
+        layer above them. Here is the difference, in plain language, with the
+        comparison most networks ask for after the first call.
+      </p>
+
+      <h2>The objection we get</h2>
+
+      <div class="objection">
+        <div class="o-tag">Real response, real DePIN network</div>
+        <p class="o-quote">
+          "Our genuity check works over time — collected token, holder rank,
+          click participation, DAO participation. We already have plenty of
+          checks in place to ensure the authenticity of a node."
+        </p>
+        <p class="o-answer">
+          <strong>Correct — and not what a bureau does.</strong> A network's
+          internal genuity check is <em>your bank's</em> internal risk model.
+          The bureau is the <em>credit report</em>. They are not the same
+          shape, they are not substitutes, and a serious financial system
+          ships with both.
+        </p>
+      </div>
+
+      <h2>Why a bureau is structurally different from a DIY check</h2>
+
+      <h3>1. A bureau is neutral. Your own check is not.</h3>
+      <p>
+        When a network grades its own users, the network has every incentive
+        to be lenient — flagging users hurts the network's headline numbers.
+        A bureau has the opposite incentive: <strong>its only product is
+        being right</strong>. The same reason FICO, Moody's, and Carfax
+        exist as independent companies is the reason a DePIN bureau has to
+        be independent of every network it grades. We never issue a token.
+        We never hold equity in a graded network. We never accept payment
+        in a graded network's native asset. The neutrality is the product.
+      </p>
+
+      <h3>2. A bureau is cross-network. Your own check is not.</h3>
+      <p>
+        Your genuity check sees only your data. A bureau sees a node's
+        behavior across <em>every</em> network it touches — DIMO trips,
+        Hivemapper coverage, WeatherXM contributions, Helium uptime. A
+        node that behaves honestly on three networks and starts misbehaving
+        on the fourth is a signal you can't generate from inside your own
+        walls. That cross-network reputation only exists if a neutral third
+        party publishes it.
+      </p>
+
+      <h3>3. A bureau is cryptographic. Your own check is policy.</h3>
+      <p>
+        Most genuity checks are heuristics: time-weighted activity,
+        engagement scores, manual review. They work — until an adversary
+        learns the heuristic and games it. GETKINETIK's input is a
+        hardware-signed proof from the device's secure enclave. <strong>You
+        cannot fake a Genesis Score input without breaking Android's
+        TEE</strong>. The methodology is published, the algorithm is open
+        source, every grade is reproducible from public evidence. That's a
+        different category of trust from "we've seen this user click a lot."
+      </p>
+
+      <h3>4. A bureau is regulator-shaped. Your own check is not.</h3>
+      <p>
+        When DePIN networks scale into custodial or financial territory —
+        token rewards as income, insurance products on top of contributions,
+        institutional staking — regulators will ask <em>who graded the
+        underlying participant?</em> "We graded ourselves" is a worse answer
+        than "a third party with published methodology graded them." The
+        bureau shape is the answer that pre-exists the question.
+      </p>
+
+      <h3>5. A bureau is maintenance-free for you.</h3>
+      <p>
+        Every internal fraud heuristic decays. Sybil patterns evolve.
+        Spoofing tools improve. If you maintain your own check, you maintain
+        it forever. The bureau ships methodology versions on its own clock
+        — you call one endpoint and inherit every improvement automatically.
+        That's not a cost saving. That's a different ops shape.
+      </p>
+
+      <h2>Side-by-side</h2>
+
+      <table class="compare">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Your own genuity check</th>
+            <th>GETKINETIK Bureau</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Neutral third party</td>
+            <td class="no">No — you grade your own users</td>
+            <td class="yes">Yes — outside every network</td>
+          </tr>
+          <tr>
+            <td>Sees node across networks</td>
+            <td class="no">Your network only</td>
+            <td class="yes">Every network the node touches</td>
+          </tr>
+          <tr>
+            <td>Hardware-rooted evidence</td>
+            <td class="mid">Sometimes (behavioral usually)</td>
+            <td class="yes">Always — TEE-signed Ed25519</td>
+          </tr>
+          <tr>
+            <td>Public methodology</td>
+            <td class="no">Internal, opaque</td>
+            <td class="yes">Versioned, open</td>
+          </tr>
+          <tr>
+            <td>Independently reproducible grade</td>
+            <td class="no">No</td>
+            <td class="yes">Yes — replay proof + methodology</td>
+          </tr>
+          <tr>
+            <td>Maintenance cost on your team</td>
+            <td class="no">You maintain it forever</td>
+            <td class="yes">Zero — we ship versions</td>
+          </tr>
+          <tr>
+            <td>Regulatory third-party-grade narrative</td>
+            <td class="no">"We graded ourselves"</td>
+            <td class="yes">"An independent bureau did"</td>
+          </tr>
+          <tr>
+            <td>Cost to your users</td>
+            <td class="mid">N/A</td>
+            <td class="yes">Free — bureau never charges users</td>
+          </tr>
+          <tr>
+            <td>Cost to your team</td>
+            <td class="mid">Engineering team forever</td>
+            <td class="yes">One HTTP call</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>What partners actually do with it</h2>
+
+      <p>
+        You don't have to <em>replace</em> your genuity check. The most
+        valuable integrations stack them:
+      </p>
+
+      <h3>Tier reward by Genesis Score band</h3>
+      <p>
+        Pay verified-device users a 5–10% bonus. The bureau's grade decides
+        the tier; your network decides the dollar amount. You reduce Sybil
+        exposure without raising rewards for everyone. Users earn more by
+        running on real hardware. Both sides win.
+      </p>
+
+      <h3>Fraud filter on payouts</h3>
+      <p>
+        Before sending tokens, hit <code>/api/score/:nodeId</code>. If the
+        score band is <code>TAMPERED</code>, hold the payout for review.
+        Your own check still runs; the bureau is a second opinion that
+        catches things your heuristic doesn't.
+      </p>
+
+      <h3>Disclosure receipts</h3>
+      <p>
+        After a payout, POST to <code>/api/attest</code> with what your
+        network observed. The bureau folds your signal into the next score
+        version (v1.2). Your contribution feeds back into a better grade for
+        every other network — a reputation flywheel no single network can
+        build alone.
+      </p>
+
+      <div class="pullquote">
+        <p>
+          Banks don't trust their own credit scores in isolation. They pull
+          a third-party bureau report. DePIN networks will do the same — the
+          only question is whether they integrate the bureau that already
+          exists, or wait for one they can't influence.
+        </p>
+      </div>
+
+      <h2>If your network doesn't need a bureau</h2>
+
+      <p>
+        Fine. We are not arguing every network needs one today. We are
+        arguing that <strong>the networks that win the next five years will
+        have a third-party grade attached to every participant</strong> — the
+        same way every meaningful piece of physical infrastructure carries a
+        UL rating, every used car carries a Carfax, and every loan applicant
+        has a FICO. DePIN does not get to skip that step. The only choice
+        is whether to integrate it early, before the methodology hardens
+        around someone else's assumptions.
+      </p>
+
+      <p>
+        The methodology is at <a href="https://github.com/Ricolax310/GetKinetik/blob/main/docs/methodology/GENESIS_SCORE.md">docs/methodology/GENESIS_SCORE.md</a>.
+        It's open. Read it. Disagree with it on the record. We'll publish
+        your dissent in the changelog.
+      </p>
+
+      <div class="cta-row">
+        <a class="primary" href="/bureau/">SEE THE BUREAU</a>
+        <a class="ghost" href="https://github.com/Ricolax310/GetKinetik/blob/main/docs/QUICKSTART.md">5-MIN INTEGRATION</a>
+        <a class="ghost" href="mailto:eric@outfromnothingllc.com?subject=Bureau integration — 15-min call">15-MIN CALL</a>
+      </div>
+
+      <footer>
+        <span>© OutFromNothing LLC · GETKINETIK Bureau</span>
+        <span>
+          <a href="/">getkinetik.app</a> ·
+          <a href="https://github.com/Ricolax310/GetKinetik">GitHub</a>
+        </span>
+      </footer>
+    </div>
+  </body>
+</html>

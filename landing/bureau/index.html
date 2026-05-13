@@ -315,6 +315,70 @@
       }
 
       .pill strong { color: var(--ruby-ember); font-weight: 600; }
+
+      /* Live ticker */
+      .ticker {
+        margin: 12px 0 36px;
+        background: linear-gradient(135deg, rgba(255, 20, 48, 0.06), rgba(255, 177, 153, 0.03));
+        border: 1px solid rgba(255, 177, 153, 0.18);
+        border-radius: 14px;
+        padding: 22px 24px;
+      }
+
+      .ticker .label {
+        font-size: 10px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--ruby-ember);
+        margin-bottom: 14px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .ticker .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #a8ffa8;
+        box-shadow: 0 0 8px rgba(168, 255, 168, 0.6);
+        animation: pulse 1.8s infinite;
+      }
+
+      @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.45; }
+      }
+
+      .ticker .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 18px;
+      }
+
+      .ticker .cell .n {
+        font-size: 28px;
+        font-weight: 700;
+        font-family: "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+        color: var(--platinum);
+        line-height: 1.1;
+      }
+
+      .ticker .cell .l {
+        font-size: 11px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--steel);
+        margin-top: 4px;
+      }
+
+      .ticker .foot {
+        font-size: 11px;
+        color: var(--steel);
+        margin-top: 14px;
+        font-family: "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+        letter-spacing: 0.04em;
+      }
     </style>
   </head>
 
@@ -338,10 +402,37 @@
       </p>
 
       <div class="pill-row">
-        <span class="pill"><strong>LIVE</strong> · v1.0 in production</span>
+        <span class="pill"><strong>LIVE</strong> · v1.1 in production</span>
         <span class="pill">Methodology <strong>public</strong></span>
         <span class="pill">No token, ever</span>
         <span class="pill">No equity in graded networks</span>
+      </div>
+
+      <div class="ticker" id="ticker">
+        <div class="label"><span class="dot"></span>BUREAU TELEMETRY · LIVE</div>
+        <div class="grid">
+          <div class="cell">
+            <div class="n" data-stat="total">—</div>
+            <div class="l">Verifications</div>
+          </div>
+          <div class="cell">
+            <div class="n" data-stat="valid">—</div>
+            <div class="l">Valid signed</div>
+          </div>
+          <div class="cell">
+            <div class="n" data-stat="tampered">—</div>
+            <div class="l">Tamper flags</div>
+          </div>
+          <div class="cell">
+            <div class="n" data-stat="strong">—</div>
+            <div class="l">Strong / Premier</div>
+          </div>
+        </div>
+        <div class="foot">
+          <span data-stat="version">v1.1</span>
+          · last verification <span data-stat="last">—</span>
+          · refreshes every 30s
+        </div>
       </div>
 
       <h2>The five score bands</h2>
@@ -461,6 +552,8 @@
       </div>
 
       <p>
+        <a href="/bureau/why/">Why a bureau, not a DIY check ↗</a>
+        ·
         <a href="https://github.com/Ricolax310/GetKinetik/blob/main/docs/QUICKSTART.md">5-minute integration guide ↗</a>
         ·
         <a href="https://github.com/Ricolax310/GetKinetik/blob/main/docs/methodology/GENESIS_SCORE.md">Full methodology spec ↗</a>
@@ -536,13 +629,70 @@
       </p>
 
       <footer>
-        <span>OutFromNothing LLC · GETKINETIK · The Bureau · v1.0</span>
+        <span>OutFromNothing LLC · GETKINETIK · The Bureau · v1.1</span>
         <span>
           <a href="/verify/">Public verifier</a>
           ·
           <a href="/api/verify-device">API endpoint</a>
+          ·
+          <a href="/api/bureau/stats">/api/bureau/stats</a>
         </span>
       </footer>
     </div>
+
+    <script>
+      // Live ticker — pulls /api/bureau/stats every 30s and hydrates the tiles.
+      // Numbers stay '—' on failure; the dashboard should never lie.
+      (function () {
+        var TICKER_REFRESH_MS = 30000;
+
+        function fmtN(n) {
+          if (typeof n !== "number" || !isFinite(n) || n < 0) return "—";
+          if (n >= 1_000_000) return (n / 1_000_000).toFixed(1) + "M";
+          if (n >= 10_000) return (n / 1000).toFixed(1) + "k";
+          return n.toString();
+        }
+
+        function fmtAgo(iso) {
+          if (!iso) return "—";
+          var t;
+          try { t = new Date(iso).getTime(); } catch (_) { return "—"; }
+          if (!t) return "—";
+          var diff = Date.now() - t;
+          if (diff < 0 || !isFinite(diff)) return "—";
+          if (diff < 60_000) return "< 1m ago";
+          if (diff < 3_600_000) return Math.floor(diff / 60_000) + "m ago";
+          if (diff < 86_400_000) return Math.floor(diff / 3_600_000) + "h ago";
+          return Math.floor(diff / 86_400_000) + "d ago";
+        }
+
+        function set(attr, val) {
+          var el = document.querySelector('[data-stat="' + attr + '"]');
+          if (el) el.textContent = val;
+        }
+
+        function refresh() {
+          fetch("/api/bureau/stats", { cache: "no-store" })
+            .then(function (r) { return r.json(); })
+            .then(function (data) {
+              if (!data || !data.ok) return;
+              var s = data.stats || {};
+              set("total", fmtN(s.total));
+              set("valid", fmtN(s.valid));
+              set("tampered", fmtN(s.tampered));
+              var strong =
+                (s.byBand && s.byBand.STRONG ? s.byBand.STRONG : 0) +
+                (s.byBand && s.byBand.PREMIER ? s.byBand.PREMIER : 0);
+              set("strong", fmtN(strong));
+              set("version", data.methodologyVersion || "v1.1");
+              set("last", fmtAgo(s.lastVerifyAt));
+            })
+            .catch(function () { /* keep '—' on failure */ });
+        }
+
+        refresh();
+        setInterval(refresh, TICKER_REFRESH_MS);
+      })();
+    </script>
   </body>
 </html>
