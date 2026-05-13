@@ -1125,6 +1125,56 @@
       }
 
       /* ------------------------------------------------------------
+         Continuity + FAQ (device-bound seniority, backup roadmap).
+         ------------------------------------------------------------ */
+      .honesty-section .section-sub {
+        margin-bottom: 48px;
+      }
+
+      .faq-list {
+        display: grid;
+        gap: 16px;
+        max-width: 720px;
+        margin: 0 auto;
+      }
+
+      .faq-item {
+        padding: 24px 22px 26px;
+        border: 1px solid var(--hairline);
+        border-radius: 16px;
+        background: linear-gradient(180deg, var(--obsidian-soft) 0%, var(--obsidian) 100%);
+        text-align: left;
+      }
+
+      .faq-q {
+        font-family: var(--serif);
+        font-size: clamp(17px, 2.2vw, 19px);
+        font-weight: 300;
+        line-height: 1.35;
+        color: var(--platinum);
+        margin: 0;
+      }
+
+      .faq-a {
+        font-family: var(--sans);
+        font-size: 14px;
+        line-height: 1.7;
+        font-weight: 300;
+        color: var(--platinum);
+        opacity: 0.78;
+        margin: 14px 0 0;
+      }
+
+      .faq-a a {
+        color: var(--ruby-ember);
+        text-decoration: none;
+      }
+
+      .faq-a a:hover {
+        text-decoration: underline;
+      }
+
+      /* ------------------------------------------------------------
          Manifesto excerpt.
          ------------------------------------------------------------ */
       .manifesto {
@@ -2198,6 +2248,58 @@
     </section>
 
     <!-- ================================================== -->
+    <!-- CONTINUITY + FAQ                                    -->
+    <!-- ================================================== -->
+    <section class="honesty-section" id="faq">
+      <span class="section-eyebrow">HONEST ON CONTINUITY</span>
+      <h2 class="section-title">Your Genesis seniority lives on this phone.</h2>
+      <p class="section-sub">
+        Today there is no in-app backup: your bureau grade and heartbeat
+        seniority are bound to the hardware-sealed identity on this device.
+        If the phone is gone, that reputation clock starts over on a new
+        install — your tokens on Nodle, DIMO, Hivemapper, and the rest stay
+        in <em>your</em> wallets on those networks; we never held them.
+        We are building optional <strong>seed-phrase restore</strong> so you
+        can move your node to a new phone without losing seniority; until
+        then, treat the device like something worth protecting — not because
+        we say “hardware wallet,” but because the grade really is local.
+      </p>
+
+      <div class="faq-list">
+        <article class="faq-item">
+          <h3 class="faq-q">What happens if I lose this phone?</h3>
+          <p class="faq-a">
+            Partner-network earnings remain yours wherever those wallets live.
+            Your <strong>Genesis Score and seniority</strong> are tied to this
+            node ID on this device — lose the device without a backup and the
+            bureau sees a new identity with a fresh clock. That is the trade
+            for Sybil-resistant, hardware-rooted proof today.
+          </p>
+        </article>
+
+        <article class="faq-item">
+          <h3 class="faq-q">When can I back up or restore my node?</h3>
+          <p class="faq-a">
+            <strong>Not in the app yet.</strong> Seed-phrase style recovery (one
+            active device at a time) is on the roadmap so you can replace a
+            phone without resetting seniority. Join the email list in the app
+            flow or <a href="mailto:eric@outfromnothingllc.com">reach out</a> if
+            you are integrating and need a partner timeline.
+          </p>
+        </article>
+
+        <article class="faq-item">
+          <h3 class="faq-q">Why is there no cloud login?</h3>
+          <p class="faq-a">
+            We do not want custody of your keys or a server-side copy of your
+            identity. The verifier and bureau APIs are public; the secret stays
+            on-device so the signature chain stays meaningful.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ================================================== -->
     <!-- MANIFESTO EXCERPT                                   -->
     <!-- ================================================== -->
     <section class="manifesto" id="manifesto">
@@ -2228,6 +2330,7 @@
         <a href="/bureau/">THE BUREAU</a>
         <a href="https://www.npmjs.com/package/@getkinetik/verify" target="_blank" rel="noopener">NPM PACKAGE</a>
         <a href="https://github.com/Ricolax310/GetKinetik/blob/main/docs/api/verify-device.md" target="_blank" rel="noopener">PARTNER API</a>
+        <a href="#faq">FAQ</a>
         <a href="#manifesto">MANIFESTO</a>
       </div>
     </footer>
@@ -2263,8 +2366,9 @@
           </h2>
           <p class="waitlist-sub">
             GETKINETIK is live on Android now. Leave your email and we will
-            notify you the moment iOS ships — plus major bureau and partner
-            network updates.
+            notify you the moment iOS ships — plus when
+            <strong>secure node backup</strong> (restore on a new phone without
+            losing Genesis seniority) is ready, and other bureau updates.
           </p>
 
           <form data-waitlist-form novalidate>
@@ -2298,7 +2402,8 @@
 
           <p class="waitlist-note">
             ANDROID · LIVE NOW<br />
-            IOS · IN DEVELOPMENT
+            IOS · IN DEVELOPMENT<br />
+            NODE BACKUP / RESTORE · COMING
           </p>
         </div>
 
