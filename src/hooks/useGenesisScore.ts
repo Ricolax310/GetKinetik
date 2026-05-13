@@ -97,6 +97,16 @@ export function useGenesisScore(
   // previous request is still in flight).
   const fetchingRef  = useRef(false);
   const intervalRef  = useRef<ReturnType<typeof setInterval> | null>(null);
+  // Tracks whether the host component is still mounted. We never want to
+  // call setResult/setLoading/setError after unmount — the fetch/json
+  // awaits can settle after the user has already left the screen.
+  const mountedRef   = useRef(true);
+  useEffect(() => {
+    mountedRef.current = true;
+    return () => {
+      mountedRef.current = false;
+    };
+  }, []);
 
   // Keep a stable ref to the latest stats so the interval callback can
   // always read the freshest values without being in its own dep array.
@@ -112,28 +122,55 @@ export function useGenesisScore(
   }, [identity]);
 
   // ── Response parser ────────────────────────────────────────────────
-  // The bureau replies with `{valid:true, genesisScore, scoreBand, ...}`
-  // on success and `{valid:false, reason}` (HTTP 200) on a verification
-  // failure. v1.5.0 trusted `verifyRes.ok` and read `data.genesisScore`
-  // unconditionally — which surfaced as the literal string "undefined"
-  // in the chip whenever verification failed (e.g. when the server
-  // rejected the COMPACT proof URL for `missing_fields`). We now require
-  // a numeric score before promoting the response into `result`; anything
-  // else is treated as "not yet graded" and leaves `result` as null.
+  // v1.x bureau: `{ valid:true, genesisScore, scoreBand, methodologyVersion }`.
+  // v2 bureau:   `{ valid:true, derived:{ score, tier, policyVersion }, ... }`
+  //              and GET /api/score returns `{ derived, asOf, ... }` (no `valid`).
+  // We accept both shapes so the app stays compatible across deployments.
   const parseScore = (data: unknown): GenesisScoreResult | null => {
     if (!data || typeof data !== 'object') return null;
     const d = data as Record<string, unknown>;
+    if ('error' in d && d.error) return null;
     if ('valid' in d && d.valid === false) return null;
-    const score = typeof d.genesisScore === 'number' ? d.genesisScore : null;
+
+    const derived =
+      d.derived && typeof d.derived === 'object'
+        ? (d.derived as Record<string, unknown>)
+        : null;
+
+    let score: number | null = null;
+    let band: string | null = null;
+
+    if (typeof d.genesisScore === 'number' && Number.isFinite(d.genesisScore)) {
+      score = d.genesisScore;
+      band = typeof d.scoreBand === 'string' ? d.scoreBand : null;
+    } else if (
+      derived &&
+      typeof derived.score === 'number' &&
+      Number.isFinite(derived.score)
+    ) {
+      score = derived.score;
+      band = typeof derived.tier === 'string' ? derived.tier : null;
+    }
+
     if (score === null) return null;
+
+    let methodologyVersion = 'v1.0';
+    if (typeof d.methodologyVersion === 'string' && d.methodologyVersion) {
+      methodologyVersion = d.methodologyVersion;
+    } else if (
+      derived &&
+      typeof derived.policyVersion === 'string' &&
+      derived.policyVersion
+    ) {
+      methodologyVersion = derived.policyVersion;
+    } else if (derived) {
+      methodologyVersion = 'v2.0.0';
+    }
+
     return {
       score,
-      band:
-        typeof d.scoreBand === 'string' ? (d.scoreBand as string) : 'UNGRADED',
-      methodologyVersion:
-        typeof d.methodologyVersion === 'string'
-          ? (d.methodologyVersion as string)
-          : 'v1.0',
+      band: band ?? 'UNGRADED',
+      methodologyVersion,
       asOf:
         typeof d.asOf === 'string'
           ? (d.asOf as string)
@@ -148,12 +185,15 @@ export function useGenesisScore(
     if (fetchingRef.current) return;
 
     fetchingRef.current = true;
-    setLoading(true);
-    setError(false);
+    if (mountedRef.current) {
+      setLoading(true);
+      setError(false);
+    }
 
     try {
       // ── Fast path: cached score ──────────────────────────────────────
       const cacheRes = await fetch(SCORE_ENDPOINT(id.nodeId));
+      if (!mountedRef.current) return;
       if (cacheRes.ok) {
         let data: unknown = null;
         try {
@@ -161,6 +201,7 @@ export function useGenesisScore(
         } catch {
           /* 200 with empty/garbled body — treat as not-yet-graded */
         }
+        if (!mountedRef.current) return;
         const parsed = parseScore(data);
         if (parsed) {
           setResult(parsed);
@@ -183,6 +224,7 @@ export function useGenesisScore(
           headers: { 'content-type': 'application/json' },
           body: JSON.stringify({ proofUrl }),
         });
+        if (!mountedRef.current) return;
         if (verifyRes.ok) {
           let vdata: unknown = null;
           try {
@@ -190,6 +232,7 @@ export function useGenesisScore(
           } catch {
             /* shape error — drop to error state below */
           }
+          if (!mountedRef.current) return;
           const parsed = parseScore(vdata);
           if (parsed) {
             setResult(parsed);
@@ -199,11 +242,11 @@ export function useGenesisScore(
       }
 
       // Any other branch: mark error, keep previous result displayed.
-      setError(true);
+      if (mountedRef.current) setError(true);
     } catch {
-      setError(true);
+      if (mountedRef.current) setError(true);
     } finally {
-      setLoading(false);
+      if (mountedRef.current) setLoading(false);
       fetchingRef.current = false;
     }
   }, []);

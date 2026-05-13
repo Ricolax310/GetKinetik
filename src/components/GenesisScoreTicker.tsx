@@ -166,7 +166,12 @@ function ScoreInfoSheet({
   return (
     <Modal visible={visible} transparent animationType="none" onRequestClose={onClose}>
       <Animated.View style={[StyleSheet.absoluteFillObject, styles.backdrop, backdropStyle]}>
-        <Pressable style={StyleSheet.absoluteFillObject} onPress={onClose} />
+        <Pressable
+          style={StyleSheet.absoluteFillObject}
+          onPress={onClose}
+          accessibilityRole="button"
+          accessibilityLabel="Dismiss Genesis Score details"
+        />
       </Animated.View>
 
       <Animated.View style={[styles.sheet, sheetStyle]} pointerEvents="auto">
@@ -175,7 +180,12 @@ function ScoreInfoSheet({
             <Text style={styles.sheetTitle}>GENESIS SCORE</Text>
             <Text style={styles.sheetSub}>THE BUREAU · INDEPENDENT GRADE</Text>
           </View>
-          <Pressable onPress={onClose} style={styles.closeBtn}>
+          <Pressable
+            onPress={onClose}
+            style={styles.closeBtn}
+            accessibilityRole="button"
+            accessibilityLabel="Close Genesis Score details"
+          >
             <Text style={styles.closeBtnText}>✕</Text>
           </Pressable>
         </View>
@@ -336,6 +346,7 @@ export function GenesisScoreTicker({
     <>
       <Pressable
         onPress={handlePress}
+        style={{ width: '100%' }}
         accessibilityRole="button"
         accessibilityLabel="Genesis Score"
         accessibilityHint="Opens bureau score information"

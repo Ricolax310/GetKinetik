@@ -133,7 +133,12 @@ function InfoSheet({
   return (
     <Modal visible={visible} transparent animationType="none" onRequestClose={onClose}>
       <Animated.View style={[StyleSheet.absoluteFillObject, styles.backdrop, backdropStyle]}>
-        <Pressable style={StyleSheet.absoluteFillObject} onPress={onClose} />
+        <Pressable
+          style={StyleSheet.absoluteFillObject}
+          onPress={onClose}
+          accessibilityRole="button"
+          accessibilityLabel="Dismiss Genesis Credits details"
+        />
       </Animated.View>
       <Animated.View style={[styles.sheet, sheetStyle]} pointerEvents="auto">
         <View style={styles.sheetHeader}>
@@ -141,7 +146,12 @@ function InfoSheet({
             <Text style={styles.sheetTitle}>GENESIS CREDITS</Text>
             <Text style={[styles.tierLabel, { color: tierColor }]}>{tierLabel}</Text>
           </View>
-          <Pressable onPress={onClose} style={styles.closeBtn}>
+          <Pressable
+            onPress={onClose}
+            style={styles.closeBtn}
+            accessibilityRole="button"
+            accessibilityLabel="Close Genesis Credits details"
+          >
             <Text style={styles.closeBtnText}>✕</Text>
           </Pressable>
         </View>
@@ -248,7 +258,12 @@ export function GenesisCreditsTicker({ onPress }: GenesisCreditsTicker) {
 
   return (
     <>
-      <Pressable onPress={handlePress} accessibilityRole="button" accessibilityLabel="Genesis Credits">
+      <Pressable
+        onPress={handlePress}
+        style={{ width: '100%' }}
+        accessibilityRole="button"
+        accessibilityLabel="Genesis Credits"
+      >
         <Animated.View style={[styles.chip, { borderColor }, chipStyle]}>
           <View style={styles.chipContent}>
             <Text style={[styles.chipLabel, { color: labelColor }]}>

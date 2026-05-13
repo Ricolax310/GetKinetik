@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import * as Battery from 'expo-battery';
 import * as Haptics from 'expo-haptics';
@@ -271,10 +271,13 @@ export function VaultPanel() {
           console.warn('[VaultPanel] battery state unavailable:', err);
         });
       lvlSub = Battery.addBatteryLevelListener(({ batteryLevel: lvl }) => {
-        if (lvl >= 0) setBatteryLevel(lvl);
+        // Mirror the same `mounted` guard as the initial fetch above — the
+        // listener fires asynchronously and can land after the effect has
+        // already torn down (e.g. fast unmount during onboarding).
+        if (mounted && lvl >= 0) setBatteryLevel(lvl);
       });
       stateSub = Battery.addBatteryStateListener(({ batteryState }) => {
-        commitCharging(batteryState);
+        if (mounted) commitCharging(batteryState);
       });
     } catch (err) {
       console.warn('[VaultPanel] battery module init failed:', err);
@@ -469,24 +472,54 @@ export function VaultPanel() {
       ? 'FETCHING…'
       : '—';
 
-  const diagRows: Array<{ label: string; value: string }> = [
-    { label: 'NPU', value: 'PASS' },
-    { label: 'TEE', value: 'LOCKED' },
-    { label: 'BIO-AUTH', value: bioAuthLabel },
-    { label: 'THERMAL', value: `${Math.round(batteryLevel * 100)}%` },
-    { label: 'CHARGING', value: isCharging ? 'HYPER' : 'IDLE' },
-    { label: 'NODE', value: nodeId },
-    { label: 'PUBKEY', value: pubkeyLabel },
-    { label: 'MINTED', value: mintedLabel },
-    { label: 'BEATS', value: beatsLabel },
-    { label: 'SINCE', value: sinceLabel },
-    { label: 'CHAIN', value: chainLabel },
-    { label: 'LAST SIG', value: lastSigLabel },
-    { label: 'MOTION', value: motionLabel },
-    { label: 'PRESSURE', value: pressureLabel },
-    { label: 'LIGHT', value: lightLabel },
-    { label: 'GENESIS SCORE', value: genesisScoreLabel },
-  ];
+  // Memoize the row array so each render doesn't allocate a fresh 16-element
+  // array of objects (the rows themselves only change when their values do).
+  // Keeps the FlatList-style mapping below from triggering needless work in
+  // the children.
+  const diagRows: Array<{ label: string; value: string }> = useMemo(
+    () => [
+      { label: 'NPU', value: 'PASS' },
+      { label: 'TEE', value: 'LOCKED' },
+      { label: 'BIO-AUTH', value: bioAuthLabel },
+      { label: 'THERMAL', value: `${Math.round(batteryLevel * 100)}%` },
+      { label: 'CHARGING', value: isCharging ? 'HYPER' : 'IDLE' },
+      { label: 'NODE', value: nodeId },
+      { label: 'PUBKEY', value: pubkeyLabel },
+      { label: 'MINTED', value: mintedLabel },
+      { label: 'BEATS', value: beatsLabel },
+      { label: 'SINCE', value: sinceLabel },
+      { label: 'CHAIN', value: chainLabel },
+      { label: 'LAST SIG', value: lastSigLabel },
+      { label: 'MOTION', value: motionLabel },
+      { label: 'PRESSURE', value: pressureLabel },
+      { label: 'LIGHT', value: lightLabel },
+      { label: 'GENESIS SCORE', value: genesisScoreLabel },
+    ],
+    [
+      bioAuthLabel,
+      batteryLevel,
+      isCharging,
+      nodeId,
+      pubkeyLabel,
+      mintedLabel,
+      beatsLabel,
+      sinceLabel,
+      chainLabel,
+      lastSigLabel,
+      motionLabel,
+      pressureLabel,
+      lightLabel,
+      genesisScoreLabel,
+    ],
+  );
+
+  // Resolve the status dot colour once per render so the inline style object
+  // below doesn't churn a fresh `{ backgroundColor }` per frame.
+  const statusDotColor = isLocked
+    ? palette.graphite
+    : online
+      ? palette.ruby.core
+      : palette.graphite;
 
   return (
     <View style={styles.container}>
@@ -617,18 +650,7 @@ export function VaultPanel() {
           onToggle={handleGemPress}
         />
         <View style={styles.statusRow}>
-          <View
-            style={[
-              styles.dot,
-              {
-                backgroundColor: isLocked
-                  ? palette.graphite
-                  : online
-                    ? palette.ruby.core
-                    : palette.graphite,
-              },
-            ]}
-          />
+          <View style={[styles.dot, { backgroundColor: statusDotColor }]} />
           <Text style={styles.statusText}>
             {isLocked
               ? 'NODE · SECURED'
@@ -645,16 +667,20 @@ export function VaultPanel() {
         stabilityPct={stabilityPct}
         online={online}
         locked={isLocked}
-        isCharging={isCharging}
       />
 
-      <GenesisScoreTicker
-        result={genesisScore.result}
-        loading={genesisScore.loading}
-        onRequestRefresh={genesisScore.refresh}
-      />
-
-      <GenesisCreditsTicker />
+      <View style={styles.tickerRow}>
+        <View style={styles.tickerCol}>
+          <GenesisScoreTicker
+            result={genesisScore.result}
+            loading={genesisScore.loading}
+            onRequestRefresh={genesisScore.refresh}
+          />
+        </View>
+        <View style={styles.tickerCol}>
+          <GenesisCreditsTicker />
+        </View>
+      </View>
 
       <AggregatorPanel
         adapters={ADAPTERS}
@@ -834,9 +860,20 @@ const styles = StyleSheet.create({
   },
   stage: {
     flex: 1,
+    minHeight: 0,
     alignItems: 'center',
     justifyContent: 'center',
     gap: 28,
+  },
+  tickerRow: {
+    flexDirection: 'row',
+    alignItems: 'stretch',
+    gap: 10,
+    marginTop: 4,
+  },
+  tickerCol: {
+    flex: 1,
+    minWidth: 0,
   },
   statusRow: {
     flexDirection: 'row',
