@@ -52,6 +52,13 @@ export type UseGenesisScoreReturn = {
   error: boolean;
 };
 
+type GenesisScorePayload = {
+  genesisScore: number;
+  scoreBand: string;
+  methodologyVersion: string;
+  asOf?: string;
+};
+
 // ---------------------------------------------------------------------------
 // Internal constants.
 // ---------------------------------------------------------------------------
@@ -60,6 +67,26 @@ const SCORE_ENDPOINT = (nodeId: string) =>
   `https://getkinetik.app/api/score/${nodeId}`;
 const VERIFY_ENDPOINT = 'https://getkinetik.app/api/verify-device';
 const REFRESH_MS = 5 * 60 * 1_000; // 5 min
+
+function toGenesisScoreResult(payload: unknown): GenesisScoreResult | null {
+  if (!payload || typeof payload !== 'object') return null;
+
+  const data = payload as Partial<GenesisScorePayload>;
+  if (
+    typeof data.genesisScore !== 'number' ||
+    typeof data.scoreBand !== 'string' ||
+    typeof data.methodologyVersion !== 'string'
+  ) {
+    return null;
+  }
+
+  return {
+    score:              data.genesisScore,
+    band:               data.scoreBand,
+    methodologyVersion: data.methodologyVersion,
+    asOf:               typeof data.asOf === 'string' ? data.asOf : new Date().toISOString(),
+  };
+}
 
 // ---------------------------------------------------------------------------
 // Hook.
@@ -117,19 +144,11 @@ export function useGenesisScore(
       // ── Fast path: cached score ──────────────────────────────────────
       const cacheRes = await fetch(SCORE_ENDPOINT(id.nodeId));
       if (cacheRes.ok) {
-        const data = (await cacheRes.json()) as {
-          genesisScore: number;
-          scoreBand: string;
-          methodologyVersion: string;
-          asOf: string;
-        };
-        setResult({
-          score:              data.genesisScore,
-          band:               data.scoreBand,
-          methodologyVersion: data.methodologyVersion,
-          asOf:               data.asOf,
-        });
-        return;
+        const parsed = toGenesisScoreResult(await cacheRes.json());
+        if (parsed) {
+          setResult(parsed);
+          return;
+        }
       }
 
       // ── Slow path: self-verify to seed the bureau cache ──────────────
@@ -142,19 +161,18 @@ export function useGenesisScore(
           body: JSON.stringify({ proofUrl }),
         });
         if (verifyRes.ok) {
-          const data = (await verifyRes.json()) as {
-            genesisScore: number;
-            scoreBand: string;
-            methodologyVersion: string;
-            asOf: string;
-          };
-          setResult({
-            score:              data.genesisScore,
-            band:               data.scoreBand,
-            methodologyVersion: data.methodologyVersion,
-            asOf:               data.asOf ?? new Date().toISOString(),
-          });
-          return;
+          const data = await verifyRes.json();
+          if (
+            data &&
+            typeof data === 'object' &&
+            (data as { valid?: unknown }).valid === true
+          ) {
+            const parsed = toGenesisScoreResult(data);
+            if (parsed) {
+              setResult(parsed);
+              return;
+            }
+          }
         }
       }
 
