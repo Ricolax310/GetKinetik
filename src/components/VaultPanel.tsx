@@ -642,13 +642,22 @@ export function VaultPanel() {
       </Animated.View>
 
       <View style={styles.stage}>
-        <Gemstone
-          active={online}
-          locked={isLocked}
-          batteryLevel={batteryLevel}
-          isCharging={isCharging}
-          onToggle={handleGemPress}
-        />
+        {/*
+          Gemstone is laid out 300×300, but Skia draws halos (r ≈ 1.55× facet
+          radius) below the canvas bottom and Reanimated scale can exceed 1.0.
+          That overflow does not expand the layout box — on some Android
+          compositors it paints over the next sibling. gemSlot reserves foot
+          margin so NODE · LIVE stays readable (S24-class viewports, font scale).
+        */}
+        <View style={styles.gemSlot}>
+          <Gemstone
+            active={online}
+            locked={isLocked}
+            batteryLevel={batteryLevel}
+            isCharging={isCharging}
+            onToggle={handleGemPress}
+          />
+        </View>
         <View style={styles.statusRow}>
           <View style={[styles.dot, { backgroundColor: statusDotColor }]} />
           <Text style={styles.statusText}>
@@ -863,7 +872,13 @@ const styles = StyleSheet.create({
     minHeight: 0,
     alignItems: 'center',
     justifyContent: 'center',
-    gap: 28,
+    gap: 32,
+  },
+  gemSlot: {
+    alignItems: 'center',
+    // Halo bleed (~13px) + max scale breath (~10–15px) + font-scale slack
+    paddingBottom: 8,
+    marginBottom: 12,
   },
   tickerRow: {
     flexDirection: 'row',
@@ -879,6 +894,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 10,
+    zIndex: 2,
   },
   dot: {
     width: 6,
