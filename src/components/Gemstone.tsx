@@ -373,6 +373,20 @@ export function Gemstone({ active, locked, batteryLevel, isCharging, onToggle }:
 
   useFrameCallback(() => {
     'worklet';
+    // Skip all sensor math when the gem isn't visibly reactive:
+    //   · locked  → no decorative shine renders at all
+    //   · !active → dormant veil suppresses every tilt-driven layer
+    // In both states the EMA outputs are invisible, so updating them on
+    // every UI frame is pure burn. We DO want the smoothed values to
+    // decay back to 0 while dormant so the next activation starts from
+    // rest — apply a one-step decay toward zero when gated.
+    const aliveAnim = activeAnim.value * (1 - lockedAnim.value);
+    if (aliveAnim < 0.01) {
+      tiltX.value *= 1 - A_PRIMARY;
+      tiltY.value *= 1 - A_PRIMARY;
+      blade2Lag.value *= 1 - A_BLADE2;
+      return;
+    }
     const sample = accel.sensor.value;
     if (!sample) return;
     // Convert m/s² → g, clamp to ±1 (any tilt ≥ 90° saturates), then
@@ -663,7 +677,12 @@ export function Gemstone({ active, locked, batteryLevel, isCharging, onToggle }:
   return (
     <Pressable
       onPress={handlePress}
-      hitSlop={0}
+      // The gem occupies a 300×300 box, so the touch target is comfortably
+      // above the 44pt minimum already. Use a small positive hitSlop anyway
+      // so users tapping the corner of the visible silhouette still register
+      // — and so accessibility tools report a touchable area rather than a
+      // zero hit slop.
+      hitSlop={8}
       style={{ width: SIZE, height: SIZE }}
       accessibilityRole="button"
       accessibilityLabel="Toggle Sovereign Node"
@@ -673,8 +692,14 @@ export function Gemstone({ active, locked, batteryLevel, isCharging, onToggle }:
           { width: SIZE, height: SIZE, alignItems: 'center', justifyContent: 'center' },
           wrapperStyle,
         ]}
+        needsOffscreenAlphaCompositing
+        collapsable={false}
       >
-        <View style={{ width: SIZE, height: SIZE }}>
+        {/* collapsable={false}: on some Samsung / Mali / Adreno paths the Android
+            view flattening step zeroes sublayers when Skia uses clip + blendMode.
+            That can read as a random "hole" or black splotch in the gem center.
+            collapsable keeps this subtree intact for the compositor. */}
+        <View style={{ width: SIZE, height: SIZE }} collapsable={false}>
           <Canvas style={{ width: SIZE, height: SIZE }}>
             {/* 1. UV halo — deep crimson aura (live-gated) */}
             <Circle cx={CX} cy={CY} r={R * 1.55} opacity={crimsonHaloOpacity}>
