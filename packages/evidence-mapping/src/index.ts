@@ -34,6 +34,13 @@
 // ============================================================================
 
 // ----------------------------------------------------------------------------
+// Flags that attestations may carry for partner telemetry but that must not
+// force the reference tier mapping into TAMPERED. (Bureau still emits them in
+// `flags` for audits.) Keep in lockstep with `verify-device.js` if extended.
+// ----------------------------------------------------------------------------
+export const INFORMATIONAL_ATTESTATION_FLAGS = new Set(['first_sighting']);
+
+// ----------------------------------------------------------------------------
 // Structural input type. We don't import from @getkinetik/verify so partners
 // can use this package standalone — every field below corresponds 1:1 to the
 // AttestationPayload schema, but we type it structurally to avoid coupling.
@@ -151,7 +158,7 @@ export const DEFAULT_POLICY: EvidencePolicy = {
  *  algorithm shape. Independent from the bureau's methodology version —
  *  this is the version of the CLIENT-SIDE mapping, not the methodology
  *  the bureau used to populate the attestation's flags / bureauObserved. */
-export const POLICY_VERSION = 'v2.0.0';
+export const POLICY_VERSION = 'v2.0.1';
 
 // ----------------------------------------------------------------------------
 // EvidenceMappingResult — the structured output. Partners that only care
@@ -163,8 +170,7 @@ export type EvidenceMappingResult = {
   tier: RewardTier;
   /** Score in [0, 1000]. Sortable; tier is derived from it. */
   score: number;
-  /** True if any flag was present in the attestation. When true, tier is
-   *  forced to TAMPERED regardless of score (score is also floored). */
+  /** True if any *tier-driving* flag is present (excludes e.g. `first_sighting`). */
   flagged: boolean;
   /** Audit breakdown — each contributing factor and how many points it
    *  contributed. Sum equals `score` (before the flag floor is applied). */
@@ -202,7 +208,7 @@ export function attestationToTier(
 ): EvidenceMappingResult {
   let score = policy.baseline;
   const flags = Array.isArray(attestation.flags) ? attestation.flags : [];
-  const flagged = flags.length > 0;
+  const flagged = flags.some((f) => !INFORMATIONAL_ATTESTATION_FLAGS.has(f));
 
   // Bureau-observed age — uses bureau clock, not node-claimed firstBeatTs.
   // The bureau has already done the bounding (firstSeenMs is the later of
@@ -267,7 +273,8 @@ export function attestationToTier(
   // would otherwise have scored 900.
   score = Math.max(0, Math.min(1000, score));
 
-  // Flag floor — any tamper flag forces the score into the TAMPERED band.
+  // Flag floor — tamper / coherence flags force TAMPERED; informational
+  // flags (e.g. first_sighting) are passed through but do not flip tier.
   if (flagged) {
     score = Math.min(score, policy.flaggedScoreCeiling);
   }

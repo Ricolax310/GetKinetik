@@ -40,7 +40,7 @@
  *     "score":            0..1000,
  *     "flagged":          true | false,
  *     "flags":            string[],
- *     "policyVersion":    "v2.0.0",
+ *     "policyVersion":    "v2.0.1",
  *     "contributingFactors": {...}
  *   } | null,
  *
@@ -261,7 +261,7 @@ async function persistBureauContext(env, nodeId, prior, observed) {
 // exists for response convenience only; partners doing real integration
 // run the package against the signed attestation themselves.
 
-const POLICY_VERSION = "v2.0.0";
+const POLICY_VERSION = "v2.0.1";
 const DEFAULT_POLICY = {
   maxBeatRatePerMs: 1 / 25_000,
   fullAgeCreditDays: 180,
@@ -283,7 +283,9 @@ const DEFAULT_POLICY = {
 function attestationToTier(att, policy = DEFAULT_POLICY) {
   let score = policy.baseline;
   const flags = Array.isArray(att.flags) ? att.flags : [];
-  const flagged = flags.length > 0;
+  /** Flags that inform partners but must not imply tamper / TAMPERED tier. */
+  const informational = new Set(["first_sighting"]);
+  const flagged = flags.filter((f) => !informational.has(f)).length > 0;
 
   const observedWindowMs = Math.max(
     0,
@@ -448,14 +450,31 @@ async function verifyAndAttest(proofUrl, env) {
 
   const flags = [];
 
-  // Beat-rate sanity: claimed beats divided by bureau-observed window.
+  // Beat-rate sanity: claimed beats vs elapsed time the proof can bound.
+  // On *first* bureau contact, `bureauFirstSeenMs === nowMs`, so
+  // `nowMs - bureauFirstSeenMs` is ~0. Forcing a 1ms floor made every
+  // honest node with lifetimeBeats > 0 look like an infinite beat rate.
+  // Use the max of (bureau span, device-claimed span from firstBeatTs). If
+  // we still cannot bound time — skip rather than false-positive.
   if (claimedLifetimeBeats > 0) {
-    const observedWindowMs = Math.max(1, nowMs - bureauFirstSeenMs);
+    const bureauSpanMs = Math.max(0, nowMs - bureauFirstSeenMs);
+    let claimedSpanMs = 0;
     if (
-      claimedLifetimeBeats / observedWindowMs >
-      DEFAULT_POLICY.maxBeatRatePerMs
+      typeof claimedFirstBeatTs === "number" &&
+      Number.isFinite(claimedFirstBeatTs) &&
+      claimedFirstBeatTs > 0 &&
+      claimedFirstBeatTs <= nowMs
     ) {
-      flags.push("beat_rate_implausible");
+      claimedSpanMs = nowMs - claimedFirstBeatTs;
+    }
+    const observedWindowMs = Math.max(bureauSpanMs, claimedSpanMs);
+    if (observedWindowMs > 0) {
+      if (
+        claimedLifetimeBeats / observedWindowMs >
+        DEFAULT_POLICY.maxBeatRatePerMs
+      ) {
+        flags.push("beat_rate_implausible");
+      }
     }
   }
 

@@ -30,7 +30,7 @@
  *     "score":            0..1000,
  *     "flagged":          true | false,
  *     "flags":            string[],
- *     "policyVersion":    "v2.0.0",
+ *     "policyVersion":    "v2.0.1",
  *     "contributingFactors": {...}
  *   } | null,
  *
