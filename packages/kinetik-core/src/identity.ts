@@ -24,6 +24,8 @@ import * as ed from '@noble/ed25519';
 import { sha256, sha512 } from '@noble/hashes/sha2.js';
 import * as SecureStore from 'expo-secure-store';
 
+import { eraseHeartbeatLog } from './heartbeatPersist';
+
 // ----------------------------------------------------------------------------
 // @noble/ed25519 React Native wiring.
 // ----------------------------------------------------------------------------
@@ -91,7 +93,14 @@ const toHex = (bytes: Uint8Array): string =>
   Array.from(bytes, (b) => b.toString(16).padStart(2, '0')).join('');
 
 const fromHex = (hex: string): Uint8Array => {
+  // Validate before decoding: bad characters / odd length silently produced
+  // NaN bytes on the old path, which downstream Ed25519 calls would either
+  // accept (if NaN coerced to 0) or reject with a misleading error. The
+  // verify package guards the same way; keep them aligned.
   const clean = hex.toLowerCase();
+  if (clean.length % 2 !== 0 || !/^[0-9a-f]*$/.test(clean)) {
+    throw new Error(`[identity] invalid hex string (length ${hex.length})`);
+  }
   const len = clean.length / 2;
   const out = new Uint8Array(len);
   for (let i = 0; i < len; i++) {
@@ -172,6 +181,11 @@ export async function getOrCreateNodeIdentity(): Promise<NodeIdentity> {
         IDENTITY_KEYS.createdAt,
         String(createdAt),
       );
+      // Heartbeat seq/count live in separate SecureStore keys that are NOT
+      // namespaced by nodeId. Without this wipe, a fresh keypair would inherit
+      // the previous install's lifetime beat counter (confusing in DIAG and
+      // in Proof-of-Origin payloads).
+      await eraseHeartbeatLog();
       console.log('[identity] new sovereign keypair minted');
     } catch (err) {
       console.warn('[identity] SecureStore write failed:', err);

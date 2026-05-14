@@ -39,12 +39,7 @@
 //
 // Storage shape — deliberately minimal so the entire persisted summary fits
 // in a few SecureStore keys (Android's EncryptedSharedPreferences has a
-// ~2KB soft limit per value):
-//
-//   kinetik.hb.seq.v1        last sequence number, monotonic across reboots
-//   kinetik.hb.count.v1      lifetime heartbeat count
-//   kinetik.hb.firstTs.v1    ms-since-epoch of the first-ever heartbeat
-//   kinetik.hb.lastHash.v1   16-char hex of the tip hash (chain continuity)
+// ~2KB soft limit per value). Key strings live in ./heartbeatPersist.ts.
 //
 // The full session ring of signed heartbeats lives in memory only. That's
 // enough for Phase 5 Step 4's Proof of Origin card, which stamps the
@@ -57,12 +52,19 @@ import { AppState } from 'react-native';
 import { sha256 } from '@noble/hashes/sha2.js';
 import * as SecureStore from 'expo-secure-store';
 
-import { type NodeIdentity, signMessage } from './identity';
+import { type NodeIdentity, signMessage, verifyMessage } from './identity';
+import {
+  HEARTBEAT_KEYS,
+  HEARTBEAT_CHAIN_PUBKEY_KEY,
+  eraseHeartbeatLog,
+} from './heartbeatPersist';
 import {
   canonicalSensorBlock,
   type SensorReadout,
 } from './sensors';
 import { stableStringify } from './stableJson';
+
+export { HEARTBEAT_KEYS, eraseHeartbeatLog } from './heartbeatPersist';
 
 // ----------------------------------------------------------------------------
 // Tunables. The default interval is 30s — cheap on battery, dense enough to
@@ -76,13 +78,11 @@ import { stableStringify } from './stableJson';
 // ----------------------------------------------------------------------------
 export const HEARTBEAT_INTERVAL_MS = 30_000;
 const SESSION_RING_MAX = 64;
-
-export const HEARTBEAT_KEYS = {
-  seq: 'kinetik.hb.seq.v1',
-  count: 'kinetik.hb.count.v1',
-  firstTs: 'kinetik.hb.firstTs.v1',
-  lastHash: 'kinetik.hb.lastHash.v1',
-} as const;
+// Hard floor on the heartbeat cadence. The chain itself doesn't care about
+// the cadence, but `setInterval` with a value ≤ 0 (or NaN) collapses to a
+// tight loop on most JS runtimes. Five seconds is plenty for tests and the
+// shortest profile we ever ship (`active` = 30s).
+const MIN_INTERVAL_MS = 5_000;
 
 // ----------------------------------------------------------------------------
 // Types.
@@ -181,25 +181,6 @@ const secureSet = async (key: string, value: unknown): Promise<void> => {
   }
 };
 
-const secureDelete = async (key: string): Promise<void> => {
-  try {
-    await SecureStore.deleteItemAsync(key);
-  } catch (err) {
-    console.warn('[heartbeat] SecureStore delete failed:', key, err);
-  }
-};
-
-// ----------------------------------------------------------------------------
-// eraseHeartbeatLog — for __kinetikResetSecureStore. Wiping identity without
-// wiping the heartbeat summary would leave orphan seq/count under a new key.
-// ----------------------------------------------------------------------------
-export async function eraseHeartbeatLog(): Promise<void> {
-  await secureDelete(HEARTBEAT_KEYS.seq);
-  await secureDelete(HEARTBEAT_KEYS.count);
-  await secureDelete(HEARTBEAT_KEYS.firstTs);
-  await secureDelete(HEARTBEAT_KEYS.lastHash);
-}
-
 // ----------------------------------------------------------------------------
 // Offline verification helper. Given a signed heartbeat and the emitting
 // node's public key, confirm:
@@ -213,7 +194,6 @@ export async function verifyHeartbeat(
   beat: SignedHeartbeat,
   publicKeyHex: string,
 ): Promise<boolean> {
-  const { verifyMessage } = await import('./identity');
   const hashOk =
     toHex(sha256(new TextEncoder().encode(beat.message))).slice(0, 16) ===
     beat.hash;
@@ -251,10 +231,16 @@ export function useHeartbeat(
   const [summary, setSummary] = useState<HeartbeatSummary>(EMPTY_SUMMARY);
   const summaryRef = useRef<HeartbeatSummary>(EMPTY_SUMMARY);
   const ringRef = useRef<SignedHeartbeat[]>([]);
-  const hydratedRef = useRef(false);
+  /** False until SecureStore chain is loaded for the current `identity` pubkey. */
+  const [chainReady, setChainReady] = useState(false);
   const inFlightRef = useRef(false);
   const snapshotRef = useRef(getSnapshot);
   const sensorsRef = useRef<typeof getSensors>(getSensors);
+  const identityRef = useRef(identity);
+
+  useEffect(() => {
+    identityRef.current = identity;
+  }, [identity]);
 
   // Keep the latest getSnapshot / getSensors closures in refs so the interval
   // body always sees current accessors without re-binding the interval on
@@ -272,17 +258,44 @@ export function useHeartbeat(
     setSummary(next);
   }, []);
 
-  // Hydrate persisted summary exactly once.
+  // Hydrate persisted summary whenever the node's signing pubkey changes.
+  // Waits for `identity` so we never flash another node's lifetime count from
+  // global SecureStore keys before the real identity has mounted.
   useEffect(() => {
+    if (!identity?.publicKeyHex) {
+      commitSummary(EMPTY_SUMMARY);
+      setChainReady(false);
+      return;
+    }
+    let cancelled = false;
     (async () => {
-      const [seqRaw, countRaw, firstRaw, lastHashRaw] = await Promise.all([
-        secureGet(HEARTBEAT_KEYS.seq),
-        secureGet(HEARTBEAT_KEYS.count),
-        secureGet(HEARTBEAT_KEYS.firstTs),
-        secureGet(HEARTBEAT_KEYS.lastHash),
-      ]);
-      const seq = Number(seqRaw);
+      const pub = identity.publicKeyHex;
+      const [seqRaw, countRaw, firstRaw, lastHashRaw, chainPubRaw] =
+        await Promise.all([
+          secureGet(HEARTBEAT_KEYS.seq),
+          secureGet(HEARTBEAT_KEYS.count),
+          secureGet(HEARTBEAT_KEYS.firstTs),
+          secureGet(HEARTBEAT_KEYS.lastHash),
+          secureGet(HEARTBEAT_CHAIN_PUBKEY_KEY),
+        ]);
+      if (cancelled) return;
+
       const count = Number(countRaw);
+      const hasChain = Number.isFinite(count) && count > 0;
+      if (
+        hasChain &&
+        typeof chainPubRaw === 'string' &&
+        /^[0-9a-f]{64}$/i.test(chainPubRaw) &&
+        chainPubRaw.toLowerCase() !== pub.toLowerCase()
+      ) {
+        await eraseHeartbeatLog();
+        if (cancelled) return;
+        commitSummary(EMPTY_SUMMARY);
+        setChainReady(true);
+        return;
+      }
+
+      const seq = Number(seqRaw);
       const firstTs = Number(firstRaw);
       const validHash =
         typeof lastHashRaw === 'string' && /^[0-9a-f]{16}$/i.test(lastHashRaw)
@@ -297,19 +310,22 @@ export function useHeartbeat(
         lastHash: validHash,
         lastSignature: null,
         lastTs: null,
-        // Sensor block is in-memory only — first beat after boot will
-        // populate it. Persisting last-known sensors would mislead the
-        // verifier into thinking they're current; "—" is the honest value.
         lastSensors: null,
       });
-      hydratedRef.current = true;
-    })();
-  }, [commitSummary]);
+      setChainReady(true);
+    })().catch((err) => {
+      console.warn('[heartbeat] hydrate failed:', err);
+      if (!cancelled) setChainReady(true);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [identity?.publicKeyHex, commitSummary, identity]);
 
   // The actual beat emit. Extracted so we can call it from both the interval
   // and AppState change handlers without duplicating the signing pipeline.
   const emitHeartbeat = useCallback(async () => {
-    if (!identity || !hydratedRef.current) return;
+    if (!identity || !chainReady) return;
     if (inFlightRef.current) return; // never queue: one beat at a time
     inFlightRef.current = true;
     try {
@@ -368,6 +384,7 @@ export function useHeartbeat(
       void secureSet(HEARTBEAT_KEYS.seq, nextSeq);
       void secureSet(HEARTBEAT_KEYS.count, nextSummary.lifetimeCount);
       void secureSet(HEARTBEAT_KEYS.lastHash, hash);
+      void secureSet(HEARTBEAT_CHAIN_PUBKEY_KEY, identity.publicKeyHex);
       if (prev.firstTs === null) {
         void secureSet(HEARTBEAT_KEYS.firstTs, now);
       }
@@ -376,7 +393,7 @@ export function useHeartbeat(
     } finally {
       inFlightRef.current = false;
     }
-  }, [identity, commitSummary]);
+  }, [identity, chainReady, commitSummary]);
 
   // Start/stop the interval whenever `active` toggles, identity materializes,
   // or the cadence changes. We also emit one beat immediately on activation
@@ -389,9 +406,14 @@ export function useHeartbeat(
   useEffect(() => {
     if (!identity || !active) return;
     void emitHeartbeat();
+    // Defensive clamp: if a caller (or a bug) ever hands us 0 / NaN /
+    // negative, fall back to the default cadence rather than spinning.
+    const safeInterval = Number.isFinite(intervalMs) && intervalMs >= MIN_INTERVAL_MS
+      ? intervalMs
+      : HEARTBEAT_INTERVAL_MS;
     const id = setInterval(() => {
       void emitHeartbeat();
-    }, intervalMs);
+    }, safeInterval);
     return () => clearInterval(id);
   }, [identity, active, intervalMs, emitHeartbeat]);
 
@@ -406,6 +428,8 @@ export function useHeartbeat(
           void secureSet(HEARTBEAT_KEYS.count, s.lifetimeCount);
           if (s.lastHash) void secureSet(HEARTBEAT_KEYS.lastHash, s.lastHash);
           if (s.firstTs) void secureSet(HEARTBEAT_KEYS.firstTs, s.firstTs);
+          const pk = identityRef.current?.publicKeyHex;
+          if (pk) void secureSet(HEARTBEAT_CHAIN_PUBKEY_KEY, pk);
         }
       }
     });
