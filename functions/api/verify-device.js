@@ -40,7 +40,7 @@
  *     "score":            0..1000,
  *     "flagged":          true | false,
  *     "flags":            string[],
- *     "policyVersion":    "v2.0.1",
+ *     "policyVersion":    "v2.0.2",
  *     "contributingFactors": {...}
  *   } | null,
  *
@@ -261,7 +261,7 @@ async function persistBureauContext(env, nodeId, prior, observed) {
 // exists for response convenience only; partners doing real integration
 // run the package against the signed attestation themselves.
 
-const POLICY_VERSION = "v2.0.1";
+const POLICY_VERSION = "v2.0.2";
 const DEFAULT_POLICY = {
   maxBeatRatePerMs: 1 / 25_000,
   fullAgeCreditDays: 180,
@@ -456,6 +456,13 @@ async function verifyAndAttest(proofUrl, env) {
   // honest node with lifetimeBeats > 0 look like an infinite beat rate.
   // Use the max of (bureau span, device-claimed span from firstBeatTs). If
   // we still cannot bound time — skip rather than false-positive.
+  //
+  // Short-window false positive: the app emits an immediate heartbeat on go-
+  // live then ~30s cadence. Over the first 60–90s the *average* beats/ms is
+  // higher than sustained 1/25s policy (e.g. 2 beats in 40s looks "too
+  // fast"). Skip the rate check until the observation span is long enough
+  // for a 30s cadence to dominate the average (two full intervals + slack).
+  const BEAT_RATE_MIN_WINDOW_MS = 120_000;
   if (claimedLifetimeBeats > 0) {
     const bureauSpanMs = Math.max(0, nowMs - bureauFirstSeenMs);
     let claimedSpanMs = 0;
@@ -468,13 +475,11 @@ async function verifyAndAttest(proofUrl, env) {
       claimedSpanMs = nowMs - claimedFirstBeatTs;
     }
     const observedWindowMs = Math.max(bureauSpanMs, claimedSpanMs);
-    if (observedWindowMs > 0) {
-      if (
-        claimedLifetimeBeats / observedWindowMs >
-        DEFAULT_POLICY.maxBeatRatePerMs
-      ) {
-        flags.push("beat_rate_implausible");
-      }
+    if (
+      observedWindowMs >= BEAT_RATE_MIN_WINDOW_MS &&
+      claimedLifetimeBeats / observedWindowMs > DEFAULT_POLICY.maxBeatRatePerMs
+    ) {
+      flags.push("beat_rate_implausible");
     }
   }
 

@@ -164,7 +164,7 @@ export function useGenesisScore(
     ) {
       methodologyVersion = derived.policyVersion;
     } else if (derived) {
-      methodologyVersion = 'v2.0.1';
+      methodologyVersion = 'v2.0.2';
     }
 
     return {

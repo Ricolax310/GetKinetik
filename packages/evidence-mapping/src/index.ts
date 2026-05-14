@@ -158,7 +158,7 @@ export const DEFAULT_POLICY: EvidencePolicy = {
  *  algorithm shape. Independent from the bureau's methodology version —
  *  this is the version of the CLIENT-SIDE mapping, not the methodology
  *  the bureau used to populate the attestation's flags / bureauObserved. */
-export const POLICY_VERSION = 'v2.0.1';
+export const POLICY_VERSION = 'v2.0.2';
 
 // ----------------------------------------------------------------------------
 // EvidenceMappingResult — the structured output. Partners that only care
