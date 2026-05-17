@@ -316,6 +316,109 @@
 
       .pill strong { color: var(--ruby-ember); font-weight: 600; }
 
+      /* Public reports section */
+
+      .report-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 16px;
+        margin: 24px 0;
+      }
+
+      .report-card {
+        background: var(--obsidian-soft);
+        border: 1px solid var(--obsidian-edge);
+        border-radius: 14px;
+        padding: 22px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        transition: border-color 0.15s ease, transform 0.15s ease;
+      }
+
+      .report-card:hover {
+        border-color: rgba(255, 177, 153, 0.3);
+        transform: translateY(-2px);
+      }
+
+      .report-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .report-network {
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--ruby-ember);
+      }
+
+      .report-date {
+        font-size: 11px;
+        color: var(--steel);
+        font-family: "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+      }
+
+      .report-finding {
+        font-size: 14px;
+        color: var(--platinum);
+        line-height: 1.5;
+      }
+
+      .report-crossval {
+        background: rgba(168, 255, 168, 0.05);
+        border: 1px solid rgba(168, 255, 168, 0.15);
+        border-radius: 8px;
+        padding: 10px 14px;
+        font-size: 12px;
+        color: var(--silver);
+        line-height: 1.5;
+      }
+
+      .crossval-label {
+        display: inline-block;
+        font-size: 10px;
+        letter-spacing: 0.12em;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #a8ffa8;
+        margin-bottom: 4px;
+      }
+
+      .report-links {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+
+      .report-links a {
+        font-size: 12px;
+        letter-spacing: 0.04em;
+      }
+
+      .founders-reply {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 11px;
+        color: #a8ffa8;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .founders-reply::before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #a8ffa8;
+        box-shadow: 0 0 6px rgba(168, 255, 168, 0.6);
+        flex-shrink: 0;
+      }
+
       /* Live ticker */
       .ticker {
         margin: 12px 0 36px;
@@ -404,6 +507,7 @@
       <div class="pill-row">
         <span class="pill"><strong>LIVE</strong> · v1.1 in production</span>
         <span class="pill">Methodology <strong>public</strong></span>
+        <span class="pill">Cross-network <strong>scoring</strong></span>
         <span class="pill">No token, ever</span>
         <span class="pill">No equity in graded networks</span>
       </div>
@@ -432,6 +536,46 @@
           <span data-stat="version">v1.1</span>
           · last verification <span data-stat="last">—</span>
           · refreshes every 30s
+        </div>
+      </div>
+
+      <h2>Public network reports</h2>
+      <p>
+        The bureau publishes independent sybil-risk scans using only public APIs — no internal network data, no allegations of intent, just structural patterns. Both reports below prompted responses from the respective network founders.
+      </p>
+
+      <div class="report-grid">
+        <div class="report-card">
+          <div class="report-header">
+            <span class="report-network">WeatherXM</span>
+            <span class="report-date">2026-05-15</span>
+          </div>
+          <div class="report-finding">
+            3 cells at 9–10× capacity. 29 devices flagged <code>NO_LOCATION_DATA</code>. Cross-validated against reward history: all correctly zeroed by WXM pipeline — but 16,186 WXM earned before zeroing, devices still registered and counting toward cell capacity.
+          </div>
+          <div class="report-crossval">
+            <span class="crossval-label">Cross-validated · 2026-05-17</span><br>
+            Suggested by @nikil511 (Manolis Nikiforakis, WeatherXM). 29/29 devices confirmed zeroed. Registration-layer gap persists.
+          </div>
+          <div class="report-links">
+            <span class="founders-reply">Founder replied</span>
+            <a href="https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/weatherxm-sybil-report.md" target="_blank" rel="noopener">Sybil report ↗</a>
+            <a href="https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/weatherxm-crossval-report.md" target="_blank" rel="noopener">Cross-validation ↗</a>
+          </div>
+        </div>
+
+        <div class="report-card">
+          <div class="report-header">
+            <span class="report-network">Geodnet</span>
+            <span class="report-date">2026-05-15</span>
+          </div>
+          <div class="report-finding">
+            Exact-coordinate duplicates: 6 RTK stations at a single GPS point (51.986433°N, 4.385757°E) near Delft, Netherlands — all sharing the same name pattern <code>****0DLF*</code>. Coordinate collision impossible for real hardware. Registration-layer anomaly.
+          </div>
+          <div class="report-links">
+            <span class="founders-reply">Founder replied</span>
+            <a href="https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/geodnet-sybil-report.md" target="_blank" rel="noopener">Sybil report ↗</a>
+          </div>
         </div>
       </div>
 
