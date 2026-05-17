@@ -68,7 +68,10 @@ export class PollingPool {
   /**
    * Register an adapter in the pool.
    * If the adapter is already registered, the callback is added to its
-   * subscriber list without changing the interval.
+   * subscriber list. If the supplied `intervalMs` is SHORTER than the
+   * current value, the timer is restarted at the faster cadence so the
+   * pool honours the most aggressive subscriber. A LONGER value is
+   * ignored to avoid one subscriber starving the others.
    */
   register(
     adapter: DepinAdapter,
@@ -78,6 +81,17 @@ export class PollingPool {
     const existing = this.entries.get(adapter.id);
     if (existing) {
       existing.callbacks.push(callback);
+      // Re-register with a shorter interval → re-arm at the faster pace.
+      if (Number.isFinite(intervalMs) && intervalMs > 0 && intervalMs < existing.intervalMs) {
+        existing.intervalMs = intervalMs;
+        if (existing.timer) {
+          clearInterval(existing.timer);
+          existing.timer = null;
+        }
+        if (this.running) {
+          this._startEntry(adapter.id);
+        }
+      }
       return;
     }
     this.entries.set(adapter.id, {
@@ -169,10 +183,16 @@ export class PollingPool {
 
     try {
       const snapshot = await entry.adapter.pollEarnings();
+      // The pool may have been stopped, OR this entry deregistered, while
+      // the await was in flight. In either case skip notifying subscribers
+      // so UI state stays consistent with the caller's expectation that
+      // `stop()` / `deregister()` halts all side-effects.
+      if (!this.running || this.entries.get(entry.adapter.id) !== entry) return;
       for (const cb of entry.callbacks) {
         try { cb(snapshot, undefined); } catch { /* ignore subscriber errors */ }
       }
     } catch (err) {
+      if (!this.running || this.entries.get(entry.adapter.id) !== entry) return;
       const error = err instanceof Error ? err : new Error(String(err));
       for (const cb of entry.callbacks) {
         try { cb(null, error); } catch { /* ignore subscriber errors */ }

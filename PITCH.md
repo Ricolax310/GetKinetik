@@ -70,4 +70,4 @@ We want to show you the Proof of Origin live, walk you through the verify-device
 
 ---
 
-*GETKINETIK is a product of OutFromNothing LLC. All IP assigned. Not affiliated with any DePIN network unless explicitly stated.*
+*GETKINETIK is a product of OutFromNothing LLC (California). All IP assigned. Not affiliated with any DePIN network unless explicitly stated.*

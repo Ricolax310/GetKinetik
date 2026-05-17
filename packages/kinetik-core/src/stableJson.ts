@@ -13,7 +13,15 @@
 // exactly one source of truth on-device.
 //
 // Guarantees:
-//   · Keys are sorted lexicographically at every level.
+//   · Top-level keys are sorted lexicographically. Nested objects are
+//     serialized by `JSON.stringify`, which preserves the caller's
+//     insertion order — every payload that embeds a nested object
+//     (today: just the `sensors` block on v:2 heartbeats) is therefore
+//     responsible for inserting keys in canonical order. Callers should
+//     do this through `canonicalSensorBlock` (or an equivalent helper)
+//     so the bytes stay byte-for-byte identical. The verify package
+//     applies the same shallow-sort contract; the two MUST stay in
+//     lockstep, and any move to a recursive sort needs a `v` schema bump.
 //   · Values go through the platform's JSON.stringify, which is identical
 //     across Hermes, V8, JavaScriptCore for the primitive types we use
 //     (string, number, boolean, null, object, array).

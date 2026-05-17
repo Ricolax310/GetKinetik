@@ -299,4 +299,4 @@ reproducible from public information by design.
 
 ---
 
-*OutFromNothing LLC · GETKINETIK · independent trust layer for DePIN.*
+*OutFromNothing LLC (California) · GETKINETIK · independent trust layer for DePIN.*

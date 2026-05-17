@@ -194,4 +194,4 @@ MIT — see [`LICENSE`](./LICENSE).
 
 ---
 
-*GETKINETIK by OutFromNothing LLC*
+*OutFromNothing LLC (California) · GETKINETIK · evidence-mapping*

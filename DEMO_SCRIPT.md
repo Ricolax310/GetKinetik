@@ -156,7 +156,7 @@ curl -s -X POST https://getkinetik.app/api/verify-device \
 > "Test the webhook yourself — link in the description.
 > Download the app — link in the description.
 > If you're building in DePIN or investing in the space, I want to talk.
-> Eric at OutFromNothing LLC. getkinetik.app."
+> Eric at OutFromNothing LLC, California. getkinetik.app."
 
 *Hold on the site for 3 seconds. End recording.*
 
@@ -204,4 +204,4 @@ WeatherXM, Geodnet, Helium, Web3 infrastructure, angel investment
 
 ---
 
-*OutFromNothing LLC · GETKINETIK · Demo Video Script · May 2026*
+*OutFromNothing LLC (California) · GETKINETIK · Demo Video Script · May 2026*

@@ -220,4 +220,4 @@ contract bug — fix it before the next publish.
 
 ---
 
-*OutFromNothing LLC · GETKINETIK · The Bureau · 2026-05*
+*OutFromNothing LLC (California) · GETKINETIK · The Bureau · 2026-05*

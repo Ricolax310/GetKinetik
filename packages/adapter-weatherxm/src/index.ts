@@ -64,7 +64,9 @@ const WXM_CONTRACT_ADDRESS = '0xB6093B61544572Ab42A0E43AF08aBaFD41bf25A6';
 
 /** WXM has 18 decimal places (standard ERC-20). */
 const WXM_DECIMALS = 18;
-const WXM_DIVISOR = BigInt(10 ** WXM_DECIMALS);
+// 10 ** 18 in number-space is unsafe (above MAX_SAFE_INTEGER); compute
+// the divisor as a pure BigInt to keep wei→token math exact.
+const WXM_DIVISOR = BigInt(10) ** BigInt(WXM_DECIMALS);
 
 /** Public Arbitrum One RPC — no API key required for balanceOf(). */
 const ARBITRUM_RPC_URL = 'https://arb1.arbitrum.io/rpc';

@@ -370,4 +370,4 @@ When that happens, we know what to build, and we already know what
 
 ---
 
-*OutFromNothing LLC · GETKINETIK · Client SDK Design · v0.1 (DRAFT) · 2026-05*
+*OutFromNothing LLC (California) · GETKINETIK · Client SDK Design · v0.1 (DRAFT) · 2026-05*

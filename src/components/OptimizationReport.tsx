@@ -32,7 +32,7 @@
 //   the math behind the decision.
 // ============================================================================
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import {
   Modal,
   Pressable,
@@ -158,11 +158,17 @@ export function OptimizationReport({
     transform: [{ translateY: translateY.value }],
   }));
 
-  const savings = computeWeeklySavings(
-    result,
-    activeAdapterCount,
-    previousAdapterCount,
-    verifiedUserPremiumUsd,
+  // Memoize the weekly-savings calculation so re-renders triggered purely
+  // by the close-animation shared value don't recompute the entire report.
+  const savings = useMemo(
+    () =>
+      computeWeeklySavings(
+        result,
+        activeAdapterCount,
+        previousAdapterCount,
+        verifiedUserPremiumUsd,
+      ),
+    [result, activeAdapterCount, previousAdapterCount, verifiedUserPremiumUsd],
   );
 
   const isPositive = savings.extraEarningsUsd > 0;
@@ -180,7 +186,12 @@ export function OptimizationReport({
         style={[StyleSheet.absoluteFillObject, styles.backdrop, backdropStyle]}
         pointerEvents="auto"
       >
-        <Pressable style={StyleSheet.absoluteFillObject} onPress={onClose} />
+        <Pressable
+          style={StyleSheet.absoluteFillObject}
+          onPress={onClose}
+          accessibilityRole="button"
+          accessibilityLabel="Dismiss optimization report"
+        />
       </Animated.View>
 
       {/* Sheet */}

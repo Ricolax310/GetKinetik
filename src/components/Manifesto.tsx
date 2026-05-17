@@ -15,7 +15,7 @@
 // settings. Pure brand surface.
 // ============================================================================
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Pressable,
   ScrollView,
@@ -27,6 +27,7 @@ import {
 import Animated, {
   Easing,
   interpolate,
+  runOnJS,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
@@ -84,14 +85,32 @@ type ManifestoProps = {
 export function Manifesto({ visible, onClose }: ManifestoProps) {
   const { height } = useWindowDimensions();
   const progress = useSharedValue(0);
+  // Track mount independently of `visible` so we can unmount the heavy
+  // ScrollView only AFTER the slide-down animation finishes. Reading
+  // `progress.value` directly in render doesn't trigger a re-render when
+  // the timing completes — the subtree would stay mounted until something
+  // else nudged React. `mounted` flips to false via `runOnJS` from the
+  // withTiming callback, which IS a real React state update.
+  const [mounted, setMounted] = useState(visible);
 
   // Slow, weighty slide-up on show. Slightly faster slide-down on dismiss
   // so the user isn't held hostage by their own close tap.
   useEffect(() => {
-    progress.value = withTiming(visible ? 1 : 0, {
-      duration: visible ? 520 : 320,
-      easing: Easing.inOut(Easing.cubic),
-    });
+    if (visible) {
+      setMounted(true);
+      progress.value = withTiming(1, {
+        duration: 520,
+        easing: Easing.inOut(Easing.cubic),
+      });
+      return;
+    }
+    progress.value = withTiming(
+      0,
+      { duration: 320, easing: Easing.inOut(Easing.cubic) },
+      (finished) => {
+        if (finished) runOnJS(setMounted)(false);
+      },
+    );
   }, [visible, progress]);
 
   const overlayStyle = useAnimatedStyle(() => ({
@@ -101,8 +120,7 @@ export function Manifesto({ visible, onClose }: ManifestoProps) {
     ],
   }));
 
-  // Don't even mount content when fully hidden so background doesn't eat taps.
-  if (!visible && progress.value === 0) {
+  if (!mounted) {
     return (
       <Animated.View
         pointerEvents="none"

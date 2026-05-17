@@ -74,10 +74,11 @@ async function fetchGasPrice(
   rpcUrl: string,
   nativeTokenUsd: number,
 ): Promise<{ gweiPrice: number; simpleTransferUsd: number } | null> {
+  const controller = new AbortController();
+  // Same pattern as priceFeed: timer must clear on success OR failure to
+  // avoid leaking aborts onto subsequent fetches.
+  const timeout = setTimeout(() => controller.abort(), FETCH_TIMEOUT);
   try {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), FETCH_TIMEOUT);
-
     const resp = await fetch(rpcUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -89,14 +90,17 @@ async function fetchGasPrice(
       }),
       signal: controller.signal,
     });
-    clearTimeout(timeout);
 
     if (!resp.ok) return null;
 
     const json = await resp.json() as { result?: string; error?: unknown };
     if (json.error || !json.result) return null;
 
-    // result is '0x...' hex string representing wei.
+    // result is '0x...' hex string representing wei. eth_gasPrice on public
+    // mainnets fits comfortably below Number.MAX_SAFE_INTEGER (~9e15) — gas
+    // is gwei × 1e9, and even 1000 gwei (a panic spike) is 1e12 wei — so
+    // parseInt is safe here. BigInt would force a separate USD conversion
+    // path for ~zero benefit.
     const weiPrice = parseInt(json.result, 16);
     if (!Number.isFinite(weiPrice) || weiPrice <= 0) return null;
 
@@ -108,6 +112,8 @@ async function fetchGasPrice(
     return { gweiPrice, simpleTransferUsd };
   } catch {
     return null;
+  } finally {
+    clearTimeout(timeout);
   }
 }
 
@@ -118,7 +124,9 @@ export async function fetchGasPrices(): Promise<GasFeedResult> {
   const now = Date.now();
 
   if (_cache && now - _cache.fetchedAt < CACHE_TTL_MS) {
-    return { ..._cache, fromCache: true };
+    // Clear `fromFallback` on fresh cache hits so the flag never bleeds
+    // from a prior degraded fetch into a still-valid cache window.
+    return { ..._cache, fromCache: true, fromFallback: false };
   }
 
   const results = await Promise.allSettled(

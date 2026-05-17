@@ -128,17 +128,22 @@ async function fetchHoneyBalance(walletAddress: string): Promise<number | null> 
     const accounts = json.result.value;
     if (!accounts || accounts.length === 0) return 0;
 
-    // Sum all HONEY token accounts (almost always just one).
-    let totalLamports = 0;
+    // Sum all HONEY token accounts (almost always just one). We sum in
+    // BigInt so a single account holding > Number.MAX_SAFE_INTEGER raw
+    // lamports (or many accounts that collectively exceed it) doesn't
+    // silently overflow the accumulator. HONEY has 9 decimals — a balance
+    // big enough to overflow is unrealistic for one user, but the cost
+    // of the safer path is one BigInt cast, so we pay it.
+    let totalLamports = 0n;
     for (const acct of accounts) {
-      const raw = parseInt(
-        acct.account.data.parsed.info.tokenAmount.amount,
-        10,
-      );
-      if (Number.isFinite(raw)) totalLamports += raw;
+      const amountStr = acct.account.data.parsed.info.tokenAmount.amount;
+      if (typeof amountStr === 'string' && /^[0-9]+$/.test(amountStr)) {
+        totalLamports += BigInt(amountStr);
+      }
     }
 
-    return totalLamports / HONEY_DIVISOR;
+    // HONEY has 9 decimals; the divisor fits comfortably in a JS number.
+    return Number(totalLamports) / HONEY_DIVISOR;
   } catch {
     return null;
   }

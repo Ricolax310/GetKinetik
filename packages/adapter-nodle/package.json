@@ -5,6 +5,7 @@
   "description": "Nodle Network DePIN adapter for GETKINETIK (multi-network signed ledger)",
   "main": "src/index.ts",
   "dependencies": {
-    "@kinetik/core": "*"
+    "@kinetik/core": "*",
+    "@noble/hashes": "^2.2.0"
   }
 }

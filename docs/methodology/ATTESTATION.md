@@ -328,4 +328,4 @@ the bureau does not learn how a partner used an attestation.
 
 ---
 
-*OutFromNothing LLC · GETKINETIK · Bureau Attestation Methodology · v1.0 · 2026-05*
+*OutFromNothing LLC (California) · GETKINETIK · Bureau Attestation Methodology · v1.0 · 2026-05*

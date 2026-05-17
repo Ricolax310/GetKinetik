@@ -27,7 +27,9 @@ function tryLoadNative(): NativeNodle | null {
 
 const native = tryLoadNative();
 
-/** False when the Kotlin `ExpoNodleSdkModule` is linked (real BLE path). */
+/** True when the Kotlin `ExpoNodleSdkModule` is NOT linked (stub no-op
+ *  path: Expo Go, web, simulator without the dev client). When the real
+ *  BLE-attesting native module is present this resolves to false. */
 export const NODLE_SDK_IS_STUB = native == null;
 
 function ss58StartArg(addressOrKey: string): string {

@@ -162,7 +162,11 @@ export function useAdaptiveCadenceMs(
   const [, setTick] = useState(0);
   useEffect(() => {
     if (appState === 'active') return;
-    const id = setInterval(() => setTick((t) => (t + 1) & 0x3fffffff), 60_000);
+    // Increment by 1 per minute; tick is only used to force a re-render of
+    // this hook every 60s while backgrounded. Plain `t + 1` is fine —
+    // setState ignores the actual value and we'll never overflow in
+    // practice (Number.MAX_SAFE_INTEGER minutes > 17 trillion years).
+    const id = setInterval(() => setTick((t) => t + 1), 60_000);
     return () => clearInterval(id);
   }, [appState]);
 

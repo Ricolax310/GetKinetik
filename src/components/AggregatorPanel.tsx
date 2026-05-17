@@ -20,7 +20,7 @@
 
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
-  Dimensions,
+  useWindowDimensions,
   PanResponder,
   Pressable,
   ScrollView,
@@ -506,11 +506,18 @@ export function AggregatorPanel({ adapters, identity, onOpenOptimizationReport }
   // -------------------------------------------------------------------------
   // Optimizer refresh — runs after every snapshot batch to score adapters
   // and surface gas-saving recommendations.
+  //
+  // We guard against stale responses: if `snapshots` changes again before
+  // the price/gas Promises resolve, the older effect's `cancelled` flag is
+  // flipped on its cleanup, so we never overwrite a newer `optimizationResult`
+  // with an out-of-date score (which would visibly jitter the claim
+  // recommendations on slow networks).
   // -------------------------------------------------------------------------
   useEffect(() => {
     const snapshotList = Object.values(snapshots).filter(Boolean) as EarningSnapshot[];
     if (snapshotList.length === 0) return;
 
+    let cancelled = false;
     void (async () => {
       try {
         const currencies = [...new Set(snapshotList.map((s) => s.currency))];
@@ -518,12 +525,18 @@ export function AggregatorPanel({ adapters, identity, onOpenOptimizationReport }
           fetchTokenPrices(currencies),
           fetchGasPrices(),
         ]);
+        if (cancelled) return;
         const result = scoreAdapters(snapshotList, priceResult.prices, gasResult.prices);
+        if (cancelled) return;
         setOptimizationResult(result);
       } catch {
         // Non-critical — optimizer unavailable, UI degrades gracefully.
       }
     })();
+
+    return () => {
+      cancelled = true;
+    };
   }, [snapshots]);
 
   const refreshSummary = useCallback(async () => {
@@ -702,9 +715,13 @@ type EarningsDrawerProps = {
   onStatusChangeFor: Record<string, (status: AdapterStatus) => void>;
 };
 
-const SCREEN_HEIGHT = Dimensions.get('window').height;
-const DRAWER_HEIGHT = Math.round(SCREEN_HEIGHT * 0.78);
 const DRAG_DISMISS_THRESHOLD = 0.25; // 25% of drawer height
+// Drawer height as a fraction of the live window height. Previously this was
+// computed once from `Dimensions.get('window')` at module load, which left
+// the drawer mis-sized after rotation / split-screen / foldable unfold.
+// `useWindowDimensions` re-renders the component when the OS reports new
+// window metrics, so the drawer always matches the current viewport.
+const DRAWER_HEIGHT_FRACTION = 0.78;
 
 function EarningsDrawer({
   open,
@@ -715,9 +732,11 @@ function EarningsDrawer({
   onLedgerAppend,
   onStatusChangeFor,
 }: EarningsDrawerProps) {
+  const { height: windowHeight } = useWindowDimensions();
+  const drawerHeight = Math.round(windowHeight * DRAWER_HEIGHT_FRACTION);
   // progress: 0 = fully closed (offscreen), 1 = fully open (resting).
   const progress = useSharedValue(0);
-  // dragOffset: live drag delta in pixels (clamped to [0, DRAWER_HEIGHT]).
+  // dragOffset: live drag delta in pixels (clamped to [0, drawerHeight]).
   const dragOffset = useSharedValue(0);
 
   // Animate progress whenever `open` flips.
@@ -730,7 +749,7 @@ function EarningsDrawer({
   }, [open, progress, dragOffset]);
 
   const sheetStyle = useAnimatedStyle(() => {
-    const closedTranslate = DRAWER_HEIGHT;
+    const closedTranslate = drawerHeight;
     const openTranslate = 0;
     const baseTranslate =
       closedTranslate - (closedTranslate - openTranslate) * progress.value;
@@ -744,7 +763,9 @@ function EarningsDrawer({
     return { opacity };
   });
 
-  // PanResponder for drag-to-dismiss on the drag handle area.
+  // PanResponder for drag-to-dismiss on the drag handle area. Rebuilds when
+  // `drawerHeight` changes (rotation / split-screen) so the dismiss threshold
+  // matches the current sheet geometry.
   const panResponder = useMemo(
     () =>
       PanResponder.create({
@@ -752,11 +773,11 @@ function EarningsDrawer({
         onMoveShouldSetPanResponder: (_, g) => Math.abs(g.dy) > 4,
         onPanResponderMove: (_, g) => {
           if (g.dy > 0) {
-            dragOffset.value = Math.min(g.dy, DRAWER_HEIGHT);
+            dragOffset.value = Math.min(g.dy, drawerHeight);
           }
         },
         onPanResponderRelease: (_, g) => {
-          if (g.dy > DRAWER_HEIGHT * DRAG_DISMISS_THRESHOLD || g.vy > 1.2) {
+          if (g.dy > drawerHeight * DRAG_DISMISS_THRESHOLD || g.vy > 1.2) {
             // Snap closed: animate dragOffset back to 0 in parallel with the
             // parent open→closed transition.
             dragOffset.value = withTiming(0, { duration: 220 });
@@ -766,7 +787,7 @@ function EarningsDrawer({
           }
         },
       }),
-    [dragOffset, onClose],
+    [dragOffset, onClose, drawerHeight],
   );
 
   return (
@@ -787,7 +808,11 @@ function EarningsDrawer({
       </Animated.View>
 
       <Animated.View
-        style={[styles.sheet, sheetStyle]}
+        // Override the static `height` from `styles.sheet` (which fell out
+        // of date if the device rotated) with the live drawerHeight derived
+        // from useWindowDimensions above. Layer order matters: the dynamic
+        // height MUST come after the static style entry.
+        style={[styles.sheet, { height: drawerHeight }, sheetStyle]}
         pointerEvents={open ? 'auto' : 'none'}
       >
         <View {...panResponder.panHandlers} style={styles.sheetGrip}>
@@ -944,7 +969,12 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    height: DRAWER_HEIGHT,
+    // Sentinel height — overridden inline from useWindowDimensions so the
+    // drawer adapts to rotation and split-screen. This static value is the
+    // launch-time fallback; the inline `height` in the component always
+    // wins. Kept here so a misconfigured override still renders SOMETHING
+    // visible rather than a 0-height invisible sheet.
+    height: '78%',
     backgroundColor: palette.obsidian,
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,

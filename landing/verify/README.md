@@ -158,7 +158,7 @@ also works for quick offline audits.
 
 ## License / attribution
 
-Part of the GETKINETIK Sovereign Node project by OutFromNothing LLC.
+Part of the GETKINETIK Sovereign Node project by OutFromNothing LLC (California).
 The attribution string is cryptographically bound into every Proof of
 Origin payload — see `PROOF_ATTRIBUTION` in `verifier.js` and
 `packages/kinetik-core/src/proof.ts`.

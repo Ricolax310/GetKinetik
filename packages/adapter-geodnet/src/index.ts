@@ -56,7 +56,9 @@ const GEOD_CONTRACT_ADDRESS = '0xac0f66379a6d7801d7726d5a943356a172549adb';
 
 /** GEOD has 18 decimal places (standard ERC-20). */
 const GEOD_DECIMALS = 18;
-const GEOD_DIVISOR = BigInt(10 ** GEOD_DECIMALS);
+// Stay in BigInt-land for the divisor — `10 ** 18` overflows the
+// safe-integer band of a JS double before BigInt sees it.
+const GEOD_DIVISOR = BigInt(10) ** BigInt(GEOD_DECIMALS);
 
 /** Public Polygon RPC — same endpoint as DIMOAdapter, no API key required. */
 const POLYGON_RPC_URL = 'https://polygon-rpc.com/';

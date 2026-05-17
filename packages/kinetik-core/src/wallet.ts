@@ -369,9 +369,32 @@ export async function appendEarningLog(
   identity: NodeIdentity,
   params: AppendEarningParams,
 ): Promise<SignedEarning> {
+  // Reject obviously-broken adapter data BEFORE we hash + sign it.
+  // NaN, Infinity, or negative values would otherwise be permanently
+  // committed to the chain (you can't unsign a payload) and trip the
+  // verifier as `feeIntegrityOk: false` later. Catch them here at the
+  // single chokepoint, with a clear thrown error so the bug surfaces in
+  // the adapter that fed bad numbers, not at audit time.
+  const gross = params.gross;
+  if (!Number.isFinite(gross) || gross < 0) {
+    throw new Error(
+      `[wallet] gross must be a non-negative finite number (got ${gross})`,
+    );
+  }
+  // Premium fields, if provided at all, must also be finite + non-negative.
+  // They're signed in literally — bad inputs would brick the receipt.
+  if (params.standardRate != null && (!Number.isFinite(params.standardRate) || params.standardRate < 0)) {
+    throw new Error(`[wallet] standardRate must be finite and non-negative (got ${params.standardRate})`);
+  }
+  if (params.premiumRate != null && (!Number.isFinite(params.premiumRate) || params.premiumRate < 0)) {
+    throw new Error(`[wallet] premiumRate must be finite and non-negative (got ${params.premiumRate})`);
+  }
+  if (params.premiumBasisPoints != null && (!Number.isFinite(params.premiumBasisPoints) || params.premiumBasisPoints < 0)) {
+    throw new Error(`[wallet] premiumBasisPoints must be finite and non-negative (got ${params.premiumBasisPoints})`);
+  }
+
   const summary = await loadWalletSummary(identity);
 
-  const gross = params.gross;
   const fee = round8(gross * PROTOCOL_FEE_RATE);
   const net = round8(gross - fee);
 

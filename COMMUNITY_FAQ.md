@@ -26,7 +26,7 @@ Kind of, but different. Traditional crypto mining uses a lot of electricity and 
 
 **Who made this?**
 
-Eric (Kinetik_Rick), building under **OutFromNothing LLC**. Solo founder, indie project, early stage. No VC funding, no hype — just building.
+Eric (Kinetik_Rick), building under **OutFromNothing LLC** (California). Solo founder, indie project, early stage. No VC funding, no hype — just building.
 
 ---
 
@@ -42,7 +42,7 @@ Because the app isn't on the Play Store yet (that's coming). "Unknown sources" j
 
 **Is it safe to install?**
 
-Yes. The app is built by a real company (OutFromNothing LLC), the code is public on GitHub, and anyone can audit it. We also publish a "proof" with every node that anyone can mathematically verify — it's actually one of the most auditable apps in this space.
+Yes. The app is built by a real company (OutFromNothing LLC, California), the code is public on GitHub, and anyone can audit it. We also publish a "proof" with every node that anyone can mathematically verify — it's actually one of the most auditable apps in this space.
 
 **Is it on iPhone?**
 

@@ -275,4 +275,4 @@ the company.
 
 ---
 
-*OutFromNothing LLC · GETKINETIK · v1.0 · 2026-05*
+*OutFromNothing LLC (California) · GETKINETIK · v1.0 · 2026-05*

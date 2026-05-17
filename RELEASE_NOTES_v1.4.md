@@ -81,4 +81,4 @@ Source tree after release may show **`12`** in `app.json` (EAS auto-increment). 
 
 ---
 
-*Built by Eric (Kinetik_Rick) · OutFromNothing LLC · getkinetik.app*
+*Built by Eric (Kinetik_Rick) · OutFromNothing LLC (California) · getkinetik.app*

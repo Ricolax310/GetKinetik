@@ -374,4 +374,4 @@ getkinetik.app/api/verify-device
 
 ---
 
-*OutFromNothing LLC · GETKINETIK · Twitter/X Thread Templates · May 2026*
+*OutFromNothing LLC (California) · GETKINETIK · Twitter/X Thread Templates · May 2026*

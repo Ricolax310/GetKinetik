@@ -42,6 +42,7 @@ import {
 } from 'react-native';
 import Animated, {
   Easing,
+  runOnJS,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
@@ -195,11 +196,28 @@ export function ProofOfOrigin({
   // Presentation — same 360ms inOut(cubic) curve as the Manifesto so the
   // two hidden surfaces share a visual grammar on open/dismiss.
   const presence = useSharedValue(0);
+  // Mirror the Manifesto pattern: track mount independently of `visible`
+  // so the heavy ScrollView only unmounts AFTER the close animation
+  // resolves. Reading `presence.value` in render doesn't subscribe to
+  // changes; without this, the subtree would stay mounted until something
+  // else re-rendered.
+  const [mounted, setMounted] = useState(visible);
   useEffect(() => {
-    presence.value = withTiming(visible ? 1 : 0, {
-      duration: 360,
-      easing: Easing.inOut(Easing.cubic),
-    });
+    if (visible) {
+      setMounted(true);
+      presence.value = withTiming(1, {
+        duration: 360,
+        easing: Easing.inOut(Easing.cubic),
+      });
+      return;
+    }
+    presence.value = withTiming(
+      0,
+      { duration: 360, easing: Easing.inOut(Easing.cubic) },
+      (finished) => {
+        if (finished) runOnJS(setMounted)(false);
+      },
+    );
   }, [visible, presence]);
 
   const containerStyle = useAnimatedStyle(() => ({
@@ -220,7 +238,7 @@ export function ProofOfOrigin({
     onClose();
   };
 
-  if (!visible && presence.value === 0) return null;
+  if (!mounted) return null;
 
   // Derived display values. Fall back to em-dash when the data isn't
   // available yet (e.g. no heartbeats emitted on this device).

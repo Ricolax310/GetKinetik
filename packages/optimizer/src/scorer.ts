@@ -113,8 +113,15 @@ function computeGasCostUsd(
   gasPrices: GasPrice[],
   gasUnits: number,
 ): number {
+  // `chain === undefined` means the adapter isn't in ADAPTER_CHAIN at all
+  // (a new / unregistered adapter). Treat that the same as `null` —
+  // i.e. assume zero-gas / auto-deposit — only when explicitly mapped.
+  // The caller (`scoreAdapters`) handles the auto-deposit branch via
+  // `isAutoDepositOrUnknown` below; this helper just returns 0 for the
+  // gas computation in either case so we never recommend a claim that
+  // we don't know the cost of.
   const chain = ADAPTER_CHAIN[adapterId];
-  if (!chain) return 0; // auto-deposit — no gas cost
+  if (chain == null) return 0; // null (auto-deposit) or undefined (unknown)
 
   const gasEntry = gasPrices.find((g) => g.chain === chain);
   if (!gasEntry) return 0;
@@ -149,13 +156,25 @@ export function scoreAdapters(
     const gasUnits = ADAPTER_GAS_UNITS[snap.source] ?? 21_000;
     const gasCostUsd = computeGasCostUsd(snap.source, gasPrices, gasUnits);
 
+    // Chain mapping has three meaningful states:
+    //   · 'polygon' | 'base'  — known EVM chain, real claim with real gas
+    //   · null                — explicit auto-deposit (Nodle, Hivemapper)
+    //   · undefined           — adapter not registered in ADAPTER_CHAIN
+    //
+    // We treat `null` AND `undefined` as "no claim flow we know about" so
+    // that an unregistered adapter never accidentally gets a "Claim now"
+    // recommendation (which would mislead the user because gasCostUsd is
+    // 0 by virtue of us not knowing the chain, not because gas is free).
+    // The `unknown` case shows the same auto-deposit copy as `null`; if a
+    // new chain is added the dev MUST add it to ADAPTER_CHAIN explicitly,
+    // which is the safe-by-default behaviour.
     const chain = ADAPTER_CHAIN[snap.source];
-    const isAutoDeposit = chain === null;
+    const isAutoDeposit = chain == null;
 
     const gasCostRatio = gasCostUsd > 0 ? pendingUsd / gasCostUsd : Infinity;
     const shouldClaim =
       isAutoDeposit
-        ? snap.pendingGross > 0  // auto-deposit: always "active" if earning
+        ? snap.pendingGross > 0  // auto-deposit OR unknown: never recommend a manual claim
         : pendingUsd > 0 && gasCostRatio >= CLAIM_GAS_RATIO;
 
     // Score: log-scale USD pending, boosted by high ratio.

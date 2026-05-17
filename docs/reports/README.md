@@ -2,6 +2,24 @@
 
 Independent Sybil Risk Scans the bureau generates for partner DePIN networks.
 
+## Network-specific scripts
+
+| Network   | Command                               | Output |
+|-----------|---------------------------------------|--------|
+| Geodnet   | `node scripts/sybil-scan-geodnet.mjs` | `docs/reports/geodnet-sybil-report.md` |
+| WeatherXM | `node scripts/sybil-scan-weatherxm.mjs` | `docs/reports/weatherxm-sybil-report.md` |
+| Hivemapper | `node scripts/sybil-scan-hivemapper.mjs` | `docs/reports/hivemapper-sybil-report.md` |
+
+Hivemapper has **no** public unauthenticated contributor map API like the other two. `sybil-scan-hivemapper.mjs` therefore:
+
+1. **Part A (default):** pulls **HONEY** `getTokenSupply` + `getTokenLargestAccounts` + owner resolution from **Solana mainnet** (batched JSON-RPC). Public RPCs often rate-limit; set `SOLANA_RPC_URL` to your own mainnet HTTPS endpoint (Helius, QuickNode, etc.) for reliable runs.
+2. **Part B (optional):** pass `--nodes=nodes.json` (same schema as `scripts/sample-nodes.json`) to append the same **geometry** heuristics as `sybil-report.mjs` when you have a lat/lng dump from Hivemapper or another public source.
+
+```bash
+node scripts/sybil-scan-hivemapper.mjs
+node scripts/sybil-scan-hivemapper.mjs --nodes=scripts/data/hivemapper-nodes.json
+```
+
 ## How they are produced
 
 ```bash

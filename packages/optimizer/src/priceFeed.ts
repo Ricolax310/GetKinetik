@@ -75,9 +75,11 @@ export async function fetchTokenPrices(
 ): Promise<PriceFeedResult> {
   const now = Date.now();
 
-  // Return cached result if it is fresh enough.
+  // Return cached result if it is fresh enough. Explicitly clear
+  // `fromFallback` so a still-valid cache entry never inherits a stale
+  // "fallback" flag from a prior degraded fetch.
   if (_cache && now - _cache.fetchedAt < CACHE_TTL_MS) {
-    return { ..._cache, fromCache: true };
+    return { ..._cache, fromCache: true, fromFallback: false };
   }
 
   // Build the CoinGecko IDs list from the requested currencies.
@@ -98,12 +100,14 @@ export async function fetchTokenPrices(
 
   const url = `${COINGECKO_BASE}?ids=${ids.join(',')}&vs_currencies=usd`;
 
+  const controller = new AbortController();
+  // `timeout` must be cleared whether `fetch` resolves OR rejects — without
+  // the `finally` below, a thrown fetch leaks the timer and the controller's
+  // abort fires after we've already moved on, which can wreak havoc with
+  // unrelated AbortController instances on slow networks.
+  const timeout = setTimeout(() => controller.abort(), FETCH_TIMEOUT);
   try {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), FETCH_TIMEOUT);
-
     const resp = await fetch(url, { signal: controller.signal });
-    clearTimeout(timeout);
 
     if (!resp.ok) throw new Error(`CoinGecko HTTP ${resp.status}`);
 
@@ -140,6 +144,8 @@ export async function fetchTokenPrices(
       fromFallback: true,
       fetchedAt: now,
     };
+  } finally {
+    clearTimeout(timeout);
   }
 }
 

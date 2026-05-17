@@ -1,7 +1,7 @@
 # GETKINETIK — Intellectual Property Assignment
 
 > **Purpose:** This document establishes that all intellectual property in the
-> GETKINETIK project is owned by OutFromNothing LLC, not by any individual.
+> GETKINETIK project is owned by OutFromNothing LLC (California), not by any individual.
 > It is designed to be attached to a formal IP assignment agreement signed by
 > Eric Guthmann (sole founder) and notarised before any M&A transaction.
 
@@ -10,7 +10,7 @@
 ## Assignment Declaration
 
 **Assignor:** Eric Guthmann, individual
-**Assignee:** OutFromNothing LLC
+**Assignee:** OutFromNothing LLC (California LLC)
 **Date:** To be completed at time of formal signing
 
 ---
@@ -91,7 +91,7 @@ Assignor retains no rights to the assigned IP upon completion of formal assignme
 **Key steps:**
 1. Conduct a TEAS clearance search at `tmsearch.uspto.gov` — confirm "GETKINETIK" is not already registered in Class 9/42.
 2. File via `teas.uspto.gov` using TEAS Plus.
-3. Designate OutFromNothing LLC as the owner (not Eric Guthmann personally).
+3. Designate OutFromNothing LLC (California) as the owner (not Eric Guthmann personally).
 4. Use a bona fide use-in-commerce basis (you already have an app and website in use).
 
 **Why file before M&A:**
@@ -119,7 +119,7 @@ No GPL, AGPL, or SSPL licenced code is included. This is intentional — copylef
 
 ## Cap Table Principles (for future reference)
 
-- **Current ownership:** 100% Eric Guthmann / OutFromNothing LLC (sole founder)
+- **Current ownership:** 100% Eric Guthmann / OutFromNothing LLC (California), sole founder
 - **Planned approach:** Stay 100% solo until pre-seed round
 - **When raising:** Max 5 angels, proper SAFE notes, no informal equity promises
 - **Negotiation anchor:** $25M cash OR $12M cash + 2% perpetual royalty/token allocation

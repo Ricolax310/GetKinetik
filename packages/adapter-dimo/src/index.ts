@@ -52,7 +52,10 @@ const DIMO_TOKEN_ADDRESS = '0xE261D618a959aFfFd53168Cd07D12E37B26761db';
 
 /** $DIMO has 18 decimal places (standard ERC-20). */
 const DIMO_DECIMALS = 18;
-const DIMO_DIVISOR = BigInt(10 ** DIMO_DECIMALS);
+// 10 ** 18 = 1e18 sits BEYOND Number.MAX_SAFE_INTEGER (~9e15), so taking
+// the BigInt of that number can lose the bottom bits before the cast
+// happens. Compute the divisor in the BigInt domain from the start.
+const DIMO_DIVISOR = BigInt(10) ** BigInt(DIMO_DECIMALS);
 
 /** Public Polygon RPC — no API key required for balanceOf(). */
 const POLYGON_RPC_URL = 'https://polygon-rpc.com/';

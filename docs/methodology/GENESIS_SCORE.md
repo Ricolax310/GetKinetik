@@ -337,4 +337,4 @@ betting on the open one.
 
 ---
 
-*OutFromNothing LLC · GETKINETIK · Genesis Score Methodology · v2.0 · 2026-05*
+*OutFromNothing LLC (California) · GETKINETIK · Genesis Score Methodology · v2.0 · 2026-05*

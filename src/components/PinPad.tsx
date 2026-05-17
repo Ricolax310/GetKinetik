@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import * as Haptics from 'expo-haptics';
 import Animated, {
@@ -77,12 +77,23 @@ export function PinPad({ mode, onSubmit, onCancel, rejectionNonce = 0 }: Props) 
     void heavyBuzz();
   }, [rejectionNonce, triggerShake]);
 
+  // Mirror `entry` into a ref so the callbacks can read the latest length
+  // without listing `entry` in their dep arrays — otherwise every keystroke
+  // produces a fresh callback identity, which propagates a fresh prop down
+  // to every key (12 keys) on the pad and forces a re-render. This pattern
+  // keeps the keys' Pressable refs stable across all 6 digits.
+  const entryRef = useRef('');
+  useEffect(() => {
+    entryRef.current = entry;
+  }, [entry]);
+
   const handleDigit = useCallback(
     (d: string) => {
-      if (entry.length >= PIN_LENGTH) return;
+      const current = entryRef.current;
+      if (current.length >= PIN_LENGTH) return;
       setMismatch(false);
       void softBuzz();
-      const next = entry + d;
+      const next = current + d;
       setEntry(next);
       if (next.length === PIN_LENGTH) {
         if (mode === 'enter') {
@@ -107,14 +118,14 @@ export function PinPad({ mode, onSubmit, onCancel, rejectionNonce = 0 }: Props) 
         }
       }
     },
-    [entry, firstPin, mode, onSubmit, stage, triggerShake],
+    [firstPin, mode, onSubmit, stage, triggerShake],
   );
 
   const handleBackspace = useCallback(() => {
-    if (entry.length === 0) return;
+    if (entryRef.current.length === 0) return;
     void softBuzz();
     setEntry((prev) => prev.slice(0, -1));
-  }, [entry.length]);
+  }, []);
 
   const dotsStyle = useAnimatedStyle(() => ({
     transform: [{ translateX: shake.value }],

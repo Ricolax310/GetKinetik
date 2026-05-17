@@ -273,7 +273,7 @@ node landing/verify/smoketest.mjs
 
 ## License
 
-UNLICENSED — proprietary, not open source. Copyright © OutFromNothing LLC.
+UNLICENSED — proprietary, not open source. Copyright © OutFromNothing LLC (California).
 
 The verifier at `landing/verify/` is intentionally readable, auditable,
 and runs entirely in the user's browser — that's a feature, not an
@@ -286,6 +286,6 @@ invitation to fork.
 - Project: [getkinetik.app](https://getkinetik.app)
 - Email: eric@outfromnothingllc.com
 - GitHub: [@Ricolax310](https://github.com/Ricolax310)
-- Founder: Eric (Kinetik_Rick) · OutFromNothing LLC
+- Founder: Eric (Kinetik_Rick) · OutFromNothing LLC (California)
 
 A Sovereign Node Protocol artifact. Not transferable.

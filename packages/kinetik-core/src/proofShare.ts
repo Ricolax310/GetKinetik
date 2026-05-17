@@ -31,7 +31,7 @@
 // signed artifact would remain client-side.
 // ============================================================================
 
-import { Platform, Share } from 'react-native';
+import { Share } from 'react-native';
 
 import type { SignedProofOfOrigin } from './proof';
 
@@ -98,9 +98,9 @@ export const buildVerifierUrl = (proof: SignedProofOfOrigin): string => {
 // ----------------------------------------------------------------------------
 // On Android, Share.share({ message }) opens the standard chooser with the
 // JSON as a text share. On iOS the dialog key is `message` as well, though
-// iOS historically prefers `url` for rich link previews — we ship the JSON
-// as `message` on both platforms so every recipient gets the same bytes
-// regardless of how their messenger handles rich links.
+// iOS historically prefers `url` for rich link previews — we deliberately
+// ship the JSON as `message` on both platforms so every recipient gets the
+// same bytes regardless of how their messenger handles rich links.
 //
 // The caller is responsible for UI feedback. This function just wraps the
 // Share API so we can swap implementations (for example, if we later add
@@ -109,9 +109,5 @@ export const buildVerifierUrl = (proof: SignedProofOfOrigin): string => {
 export const shareProof = async (proof: SignedProofOfOrigin): Promise<void> => {
   const json = JSON.stringify(proof, null, 2);
   const title = `${proof.payload.nodeId} — Proof of Origin`;
-  await Share.share(
-    Platform.OS === 'ios'
-      ? { message: json, title }
-      : { message: json, title },
-  );
+  await Share.share({ message: json, title });
 };

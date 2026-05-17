@@ -1,5 +1,5 @@
 <!--
-This project is currently maintained by OutFromNothing LLC and is not
+This project is currently maintained by OutFromNothing LLC (California) and is not
 accepting unsolicited pull requests. We're keeping the codebase
 auditable and forkable by intent — license is UNLICENSED, proprietary,
 and the cryptographic primitives in `packages/kinetik-core/` are

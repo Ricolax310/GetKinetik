@@ -5,6 +5,8 @@
 > our grading worth trusting. Drift from these rules ends the
 > company's reason to exist.**
 
+**Publisher:** OutFromNothing LLC (California).
+
 ---
 
 ## Why this document exists
@@ -173,4 +175,4 @@ grade. That is the entire moat. Everything else is implementation.
 
 ---
 
-*OutFromNothing LLC · GETKINETIK · v1.0 · 2026-05*
+*OutFromNothing LLC (California) · GETKINETIK · v1.0 · 2026-05*

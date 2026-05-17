@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { BlurView } from 'expo-blur';
 import Animated, {
+  cancelAnimation,
   Easing,
   useAnimatedStyle,
   useSharedValue,
@@ -25,6 +26,11 @@ function Readout({ label, value, suffix, fill, pulse }: ReadoutProps) {
 
   useEffect(() => {
     if (!pulse) {
+      // Explicitly cancel the running `withRepeat` before zeroing —
+      // otherwise the previously-scheduled timing keeps animating the
+      // shared value back toward 1 even after we assign 0, producing
+      // a brief unwanted flicker when the node transitions to dormant.
+      cancelAnimation(pulseValue);
       pulseValue.value = 0;
       return;
     }
@@ -33,6 +39,9 @@ function Readout({ label, value, suffix, fill, pulse }: ReadoutProps) {
       -1,
       true,
     );
+    return () => {
+      cancelAnimation(pulseValue);
+    };
   }, [pulse, pulseValue]);
 
   const glowStyle = useAnimatedStyle(() => ({
@@ -63,15 +72,12 @@ type Props = {
    * figures can't be read until the user authenticates on the ruby.
    */
   locked?: boolean;
-  /** True when the device is plugged in — Hyper-Charge mode indicator. */
-  isCharging?: boolean;
 };
 
 export function Readouts({
   stabilityPct,
   online,
   locked = false,
-  isCharging: _isCharging = false,
 }: Props) {
   const stabilityFill = stabilityPct / 100;
 
@@ -139,11 +145,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-between',
     minHeight: 78,
-  },
-  divider: {
-    width: StyleSheet.hairlineWidth,
-    backgroundColor: palette.hairline,
-    marginHorizontal: 4,
   },
   label: {
     color: palette.graphite,
