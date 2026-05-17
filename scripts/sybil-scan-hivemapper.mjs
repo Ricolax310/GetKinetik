@@ -173,19 +173,16 @@ let top20Sum = 0;
 let top20Share = null;
 let onChainErr = null;
 
-console.error("[1/4] Fetching HONEY supply + largest accounts (batched Solana RPC) …");
+console.error("[1/4] Fetching HONEY supply + largest accounts (sequential Solana RPC) …");
 try {
-  const batchRes = await rpcWithFallback([
-    { jsonrpc: "2.0", id: 1, method: "getTokenSupply", params: [HONEY_MINT] },
-    { jsonrpc: "2.0", id: 2, method: "getTokenLargestAccounts", params: [HONEY_MINT] },
-  ]);
-  rpcUrlUsed = batchRes.rpcUrl;
-  const batchResults = batchRes.result;
-  if (!Array.isArray(batchResults) || batchResults.length !== 2) {
-    throw new Error("unexpected batch response shape");
-  }
-  const supplyResult = batchResults[0];
-  const largestWrap = batchResults[1];
+  const supplyRes = await rpcWithFallback({
+    jsonrpc: "2.0",
+    id: 1,
+    method: "getTokenSupply",
+    params: [HONEY_MINT],
+  });
+  rpcUrlUsed = supplyRes.rpcUrl;
+  const supplyResult = supplyRes.result;
 
   supplyUi = Number(supplyResult?.value?.uiAmountString ?? NaN);
   supplyRaw = supplyResult?.value?.amount;
@@ -196,6 +193,14 @@ try {
   console.error(`      → UI supply: ${supplyUi.toLocaleString()} HONEY`);
 
   console.error("[2/4] Parsing largest HONEY token accounts …");
+  const largestRes = await rpcWithFallback({
+    jsonrpc: "2.0",
+    id: 2,
+    method: "getTokenLargestAccounts",
+    params: [HONEY_MINT],
+  });
+  const largestWrap = largestRes.result;
+
   const lr = largestWrap?.value ?? largestWrap;
   const largest = Array.isArray(lr) ? lr : lr?.value;
   if (!Array.isArray(largest) || largest.length === 0) {
