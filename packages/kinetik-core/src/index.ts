@@ -24,10 +24,20 @@ export {
   IDENTITY_KEYS,
   type NodeIdentity,
   getOrCreateNodeIdentity,
+  restoreIdentityFromMnemonic,
   signMessage,
   verifyMessage,
   eraseNodeIdentity,
 } from './identity';
+
+export {
+  WORDLIST,
+  generateMnemonic,
+  validateMnemonic,
+  mnemonicToSeed,
+  mnemonicToEntropyHex,
+  entropyToMnemonic,
+} from './mnemonic';
 
 // ----- L1: canonical signing contract --------------------------------------
 export { stableStringify } from './stableJson';

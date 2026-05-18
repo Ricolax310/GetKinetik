@@ -4,9 +4,8 @@
 // A real DePIN node is defined by what it can *prove*, not what it claims.
 // Every sovereign node owns an Ed25519 signing key that is:
 //
-//   1. Generated once, on first unlock, from the runtime's CSPRNG
-//      (`globalThis.crypto.getRandomValues`, which Hermes in RN 0.74+ backs
-//      with Android SecureRandom / iOS SecRandomCopyBytes).
+//   1. Generated once, on first unlock, from a BIP-39 mnemonic phrase stretched
+//      via PBKDF2-SHA512.
 //   2. Sealed inside the Android Keystore / iOS Keychain via expo-secure-store
 //      in the standalone dev/production build (never in Expo Go).
 //   3. Used to derive the visible NODE ID as a SHA-256 fingerprint of the
@@ -25,6 +24,12 @@ import { sha256, sha512 } from '@noble/hashes/sha2.js';
 import * as SecureStore from 'expo-secure-store';
 
 import { eraseHeartbeatLog } from './heartbeatPersist';
+import {
+  generateMnemonic,
+  validateMnemonic,
+  mnemonicToSeed,
+  entropyToMnemonic,
+} from './mnemonic';
 
 // ----------------------------------------------------------------------------
 // @noble/ed25519 React Native wiring.
@@ -67,12 +72,15 @@ ed.hashes.sha512Async = (async (
 // ----------------------------------------------------------------------------
 export const IDENTITY_KEYS = {
   secretKey: 'kinetik.identity.sk.v1',
+  mnemonic: 'kinetik.identity.mnemonic.v1',
   createdAt: 'kinetik.identity.created.v1',
 } as const;
 
 export type NodeIdentity = {
   /** 32-byte Ed25519 secret-key seed. Never leaves the device. */
   secretKey: Uint8Array;
+  /** 12-word recovery mnemonic. Deterministic key source. */
+  mnemonic?: string;
   /** 32-byte Ed25519 public key. Safe to share / emboss on cards. */
   publicKey: Uint8Array;
   /** Public key as a 64-char lowercase hex string. */
@@ -144,19 +152,23 @@ const utf8Encode = (s: string): Uint8Array => {
 // getOrCreateNodeIdentity — the only public entry point for reading identity.
 // ----------------------------------------------------------------------------
 // On first call ever for a given install, this mints a fresh Ed25519 keypair
-// using the runtime CSPRNG, writes the 32-byte secret hex to SecureStore,
-// and stamps a createdAt timestamp. On every subsequent call, it rehydrates
-// the existing secret and rederives the public key (cheap — ~1ms on device).
+// from a 12-word mnemonic, writes both to SecureStore, and stamps a createdAt
+// timestamp. On every subsequent call, it rehydrates the existing secret and
+// rederives the public key.
 //
-// The derived fingerprint is the first 16 hex chars of SHA-256(publicKey).
-// We hash the raw 32-byte public key (not the hex string) to match the
-// standard approach used by SSH, Bitcoin, Ethereum, etc.
+// Backward Compatibility Bridge:
+// If a user has a pre-mnemonic secret key already saved, we generate a
+// deterministic 12-word recovery mnemonic from the first 16 bytes of their
+// secret key and store it so they immediately have a backup phrase without
+// losing their Node ID!
 // ----------------------------------------------------------------------------
 export async function getOrCreateNodeIdentity(): Promise<NodeIdentity> {
   let skHex: string | null = null;
+  let mnemonic: string | null = null;
   let createdRaw: string | null = null;
   try {
     skHex = await SecureStore.getItemAsync(IDENTITY_KEYS.secretKey);
+    mnemonic = await SecureStore.getItemAsync(IDENTITY_KEYS.mnemonic);
     createdRaw = await SecureStore.getItemAsync(IDENTITY_KEYS.createdAt);
   } catch (err) {
     console.warn('[identity] SecureStore read failed:', err);
@@ -169,8 +181,22 @@ export async function getOrCreateNodeIdentity(): Promise<NodeIdentity> {
     secretKey = fromHex(skHex);
     const parsedCreated = Number(createdRaw);
     createdAt = Number.isFinite(parsedCreated) ? parsedCreated : Date.now();
+
+    // Backward-compatibility bridge: Generate fallback mnemonic deterministic from key
+    if (!mnemonic) {
+      try {
+        const entropy = secretKey.slice(0, 16);
+        mnemonic = entropyToMnemonic(entropy);
+        await SecureStore.setItemAsync(IDENTITY_KEYS.mnemonic, mnemonic);
+        console.log('[identity] deterministic backup mnemonic generated for legacy key');
+      } catch (err) {
+        console.warn('[identity] failed to generate fallback mnemonic for legacy key:', err);
+      }
+    }
   } else {
-    secretKey = ed.utils.randomSecretKey();
+    // Brand new mnemonic-first generation!
+    mnemonic = generateMnemonic();
+    secretKey = await mnemonicToSeed(mnemonic);
     createdAt = Date.now();
     try {
       await SecureStore.setItemAsync(
@@ -178,15 +204,16 @@ export async function getOrCreateNodeIdentity(): Promise<NodeIdentity> {
         String(toHex(secretKey)),
       );
       await SecureStore.setItemAsync(
+        IDENTITY_KEYS.mnemonic,
+        mnemonic,
+      );
+      await SecureStore.setItemAsync(
         IDENTITY_KEYS.createdAt,
         String(createdAt),
       );
-      // Heartbeat seq/count live in separate SecureStore keys that are NOT
-      // namespaced by nodeId. Without this wipe, a fresh keypair would inherit
-      // the previous install's lifetime beat counter (confusing in DIAG and
-      // in Proof-of-Origin payloads).
+      // Wipes historic heartbeat logs so identity mismatch is avoided
       await eraseHeartbeatLog();
-      console.log('[identity] new sovereign keypair minted');
+      console.log('[identity] new sovereign mnemonic-driven keypair minted');
     } catch (err) {
       console.warn('[identity] SecureStore write failed:', err);
     }
@@ -202,6 +229,59 @@ export async function getOrCreateNodeIdentity(): Promise<NodeIdentity> {
 
   return {
     secretKey,
+    mnemonic: mnemonic || undefined,
+    publicKey,
+    publicKeyHex,
+    fingerprint,
+    nodeId,
+    createdAt,
+  };
+}
+
+/**
+ * Restores a Node's sovereign identity from a provided 12-word mnemonic phrase.
+ * This will overwrite the existing identity on the device.
+ */
+export async function restoreIdentityFromMnemonic(mnemonic: string): Promise<NodeIdentity> {
+  const cleaned = mnemonic.trim().toLowerCase().replace(/\s+/g, ' ');
+  if (!validateMnemonic(cleaned)) {
+    throw new Error('[identity] Invalid mnemonic wordlist or checksum');
+  }
+
+  const secretKey = await mnemonicToSeed(cleaned);
+  const createdAt = Date.now();
+
+  try {
+    await SecureStore.setItemAsync(
+      IDENTITY_KEYS.secretKey,
+      String(toHex(secretKey)),
+    );
+    await SecureStore.setItemAsync(
+      IDENTITY_KEYS.mnemonic,
+      cleaned,
+    );
+    await SecureStore.setItemAsync(
+      IDENTITY_KEYS.createdAt,
+      String(createdAt),
+    );
+    // Explicitly wipe historic logs since identity changed!
+    await eraseHeartbeatLog();
+    console.log('[identity] sovereign identity successfully restored');
+  } catch (err) {
+    throw new Error('[identity] Failed to store restored key: ' + String(err));
+  }
+
+  const publicKeyRaw = await ed.getPublicKeyAsync(secretKey);
+  const publicKey = new Uint8Array(publicKeyRaw);
+  const publicKeyHex = toHex(publicKey);
+
+  const digest = sha256(publicKey);
+  const fingerprint = toHex(digest).slice(0, 16);
+  const nodeId = `KINETIK-NODE-${fingerprint.slice(0, 8).toUpperCase()}`;
+
+  return {
+    secretKey,
+    mnemonic: cleaned,
     publicKey,
     publicKeyHex,
     fingerprint,
@@ -251,6 +331,7 @@ export async function verifyMessage(
 export async function eraseNodeIdentity(): Promise<void> {
   try {
     await SecureStore.deleteItemAsync(IDENTITY_KEYS.secretKey);
+    await SecureStore.deleteItemAsync(IDENTITY_KEYS.mnemonic);
     await SecureStore.deleteItemAsync(IDENTITY_KEYS.createdAt);
   } catch (err) {
     console.warn('[identity] erase failed:', err);

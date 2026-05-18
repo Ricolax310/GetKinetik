@@ -27,6 +27,7 @@ type Props = {
   mode: Mode;
   onSubmit: (pin: string) => void;
   onCancel: () => void;
+  onRestore?: () => void;
   /**
    * When the parent rejects a submitted PIN (ENTER mode mismatch), it
    * bumps this number. We watch for the change and clear the entry +
@@ -51,7 +52,7 @@ const heavyBuzz = async () => {
   }
 };
 
-export function PinPad({ mode, onSubmit, onCancel, rejectionNonce = 0 }: Props) {
+export function PinPad({ mode, onSubmit, onCancel, onRestore, rejectionNonce = 0 }: Props) {
   const [entry, setEntry] = useState<string>('');
   const [stage, setStage] = useState<SetStage>('initial');
   const [firstPin, setFirstPin] = useState<string>('');
@@ -199,6 +200,21 @@ export function PinPad({ mode, onSubmit, onCancel, rejectionNonce = 0 }: Props) 
           <PinKey label="⌫" variant="ghost" onPress={handleBackspace} />
         </View>
       </View>
+
+      {mode === 'enter' && onRestore && (
+        <Pressable
+          onPress={() => {
+            void softBuzz();
+            onRestore();
+          }}
+          style={styles.restoreLink}
+          hitSlop={12}
+          accessibilityRole="button"
+          accessibilityLabel="Restore sovereign identity from seed phrase"
+        >
+          <Text style={styles.restoreLinkLabel}>RESTORE FROM SEED PHRASE</Text>
+        </Pressable>
+      )}
     </View>
   );
 }
@@ -341,5 +357,17 @@ const styles = StyleSheet.create({
     fontSize: 11,
     letterSpacing: 2,
     fontWeight: '500',
+  },
+  restoreLink: {
+    marginTop: 24,
+    paddingVertical: 10,
+    alignItems: 'center',
+  },
+  restoreLinkLabel: {
+    color: palette.sapphire.glow,
+    fontFamily: typography.mono,
+    fontSize: 10,
+    letterSpacing: 2.8,
+    fontWeight: '600',
   },
 });

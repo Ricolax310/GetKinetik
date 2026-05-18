@@ -141,6 +141,7 @@ export function ProofOfOrigin({
   // until signing finishes (typically 5-10ms). signingRef protects against
   // double-signs if the modal is re-opened rapidly.
   const [proof, setProof] = useState<SignedProofOfOrigin | null>(null);
+  const [revealSeed, setRevealSeed] = useState(false);
   const signingRef = useRef(false);
 
   // --------------------------------------------------------------------------
@@ -167,6 +168,7 @@ export function ProofOfOrigin({
   useEffect(() => {
     if (!visible) {
       setProof(null);
+      setRevealSeed(false);
       return;
     }
     if (!identity || signingRef.current) return;
@@ -355,6 +357,45 @@ export function ProofOfOrigin({
           <Text style={styles.hexBlockMuted} selectable>
             {signatureBlock}
           </Text>
+
+          {/* Recovery Phrase Section */}
+          <View style={styles.divider} />
+          <Text style={styles.fieldHeader}>RECOVERY PHRASE</Text>
+          {revealSeed ? (
+            <Pressable
+              onPress={() => setRevealSeed(false)}
+              accessibilityRole="button"
+              accessibilityLabel="Hide recovery phrase"
+            >
+              <View style={styles.seedGrid}>
+                {(identity?.mnemonic || '').split(' ').map((word, idx) => (
+                  <View key={idx} style={styles.seedWordBadge}>
+                    <Text style={styles.seedIndex}>{idx + 1}</Text>
+                    <Text style={styles.seedWord}>{word}</Text>
+                  </View>
+                ))}
+              </View>
+              <Text style={styles.seedWarning}>
+                WARNING: DO NOT SHARE OR SCREENSHOT
+              </Text>
+            </Pressable>
+          ) : (
+            <Pressable
+              onPress={async () => {
+                try {
+                  await Haptics.selectionAsync();
+                } catch {
+                  // silent no-op
+                }
+                setRevealSeed(true);
+              }}
+              style={styles.revealButton}
+              accessibilityRole="button"
+              accessibilityLabel="Tap to reveal 12-word seed phrase"
+            >
+              <Text style={styles.revealButtonText}>TAP TO REVEAL SEED PHRASE</Text>
+            </Pressable>
+          )}
 
           <View style={styles.divider} />
 
@@ -652,5 +693,61 @@ const styles = StyleSheet.create({
     fontSize: 22,
     lineHeight: 24,
     fontWeight: '200',
+  },
+  seedGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 8,
+    justifyContent: 'center',
+    marginVertical: 12,
+  },
+  seedWordBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'rgba(255, 20, 48, 0.08)',
+    borderWidth: 1,
+    borderColor: 'rgba(255, 20, 48, 0.18)',
+    borderRadius: 8,
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    minWidth: 90,
+  },
+  seedIndex: {
+    color: palette.graphite,
+    fontFamily: typography.mono,
+    fontSize: 9,
+    marginRight: 6,
+  },
+  seedWord: {
+    color: palette.platinum,
+    fontFamily: typography.mono,
+    fontSize: 11,
+    fontWeight: '500',
+  },
+  seedWarning: {
+    color: palette.ruby.ember,
+    fontFamily: typography.mono,
+    fontSize: 9,
+    letterSpacing: 2,
+    textAlign: 'center',
+    marginTop: 8,
+    fontWeight: '600',
+  },
+  revealButton: {
+    paddingVertical: 14,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: 'rgba(255, 20, 48, 0.22)',
+    backgroundColor: 'rgba(160, 20, 40, 0.08)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginVertical: 8,
+  },
+  revealButtonText: {
+    color: palette.ruby.ember,
+    fontFamily: typography.mono,
+    fontSize: 10,
+    letterSpacing: 2.8,
+    fontWeight: '600',
   },
 });

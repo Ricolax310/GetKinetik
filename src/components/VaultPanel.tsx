@@ -29,6 +29,7 @@ import {
 import { Gemstone } from './Gemstone';
 import { Manifesto } from './Manifesto';
 import { PinPad } from './PinPad';
+import { RestoreNodeModal } from './RestoreNodeModal';
 import { ProofOfOrigin } from './ProofOfOrigin';
 import { Readouts } from './Readouts';
 import { AggregatorPanel, AGGREGATOR_ENABLED } from './AggregatorPanel';
@@ -116,6 +117,7 @@ export function VaultPanel() {
   const [proofOpen, setProofOpen] = useState(false);
   const [optimizationResult, setOptimizationResult] = useState<OptimizationResult | null>(null);
   const [reportOpen, setReportOpen] = useState(false);
+  const [restoreModalOpen, setRestoreModalOpen] = useState(false);
 
   const authInFlight = useRef(false);
 
@@ -705,9 +707,27 @@ export function VaultPanel() {
           mode={pinPadMode}
           onSubmit={handlePinSubmit}
           onCancel={handlePinCancel}
+          onRestore={() => setRestoreModalOpen(true)}
           rejectionNonce={pinRejectionNonce}
         />
       ) : null}
+
+      <RestoreNodeModal
+        visible={restoreModalOpen}
+        onClose={() => setRestoreModalOpen(false)}
+        onRestoreSuccess={async (newIdentity) => {
+          setIdentity(newIdentity);
+          setPinPadMode(null);
+          setIsLocked(false);
+          setOnline(true);
+          // Wipe PIN upon restoring new identity to let them configure a new credentials block
+          await secureDelete(KEY_PIN);
+          setStoredPin(null);
+          if (genesisScore?.refresh) {
+            void Promise.resolve(genesisScore.refresh()).catch(() => undefined);
+          }
+        }}
+      />
 
       <Manifesto
         visible={manifestoOpen}
