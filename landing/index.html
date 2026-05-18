@@ -2537,10 +2537,10 @@
           </p>
         </article>
 
-        <article class="partner-card">
+        <article class="partner-card" style="grid-column: span 1;">
           <span class="partner-card-num">02</span>
           <h3 class="partner-card-title">VERIFY IN ONE CALL — OR OFFLINE</h3>
-          <p class="partner-card-body">
+          <p class="partner-card-body" style="margin-bottom:1rem;">
             <strong>Path A:</strong> <code>POST /api/verify-device</code> —
             returns valid/invalid + Genesis Score (0–1000) + tamper flags +
             device age. No SDK required.<br /><br />
@@ -2548,6 +2548,22 @@
             <code>npm install @getkinetik/verify</code> — same cryptographic
             contract, air-gapped, no call back to our servers.
           </p>
+          
+          <!-- Interactive JSON Simulator Card -->
+          <div style="background:rgba(0,0,0,0.4); border:1px solid rgba(255,255,255,0.08); padding:1rem; border-radius:8px; font-family:monospace; font-size:0.8rem; color:#fff; margin-top:1rem;">
+            <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem; border-bottom:1px solid rgba(255,255,255,0.05); padding-bottom:0.25rem;">
+              <span style="color:#ffb199;">verify-response.json</span>
+              <span style="color:#00e676; cursor:pointer;" id="simulate-api-btn">▶ RUN SIMULATOR</span>
+            </div>
+            <pre style="margin:0; overflow-x:auto;" id="api-json-output">{
+  "device_id": "0x4e61...f89a",
+  "enclave_signature_valid": true,
+  "physical_coherence_verified": true,
+  "uptime_seniority_days": 184,
+  "genesis_score": 895,
+  "bureau_standing": "PREMIER"
+}</pre>
+          </div>
         </article>
 
         <article class="partner-card">
@@ -2695,8 +2711,8 @@
       </p>
 
       <div class="partner-cta-row" style="margin-top:32px;">
-        <a class="cta cta-primary" href="https://github.com/Ricolax310/GetKinetik/tree/main/docs/reports" rel="noopener" target="_blank">
-          ALL PUBLISHED SCANS →
+        <a class="cta cta-primary" href="audits.html">
+          READ CASE STUDIES & REPORTS →
         </a>
         <a class="cta cta-secondary" href="mailto:eric@outfromnothingllc.com?subject=Private%20bureau%20scan%20against%20our%20network">
           REQUEST A PRIVATE SCAN
@@ -3170,6 +3186,37 @@
       profileMobile.addEventListener('click', () => updateProfile('mobile'));
       profilePlug.addEventListener('click', () => updateProfile('plug'));
       profileHardware.addEventListener('click', () => updateProfile('hardware'));
+
+      // 3. INTERACTIVE API JSON RESPONSE SIMULATOR
+      const apiBtn = document.getElementById('simulate-api-btn');
+      const apiJson = document.getElementById('api-json-output');
+
+      if (apiBtn && apiJson) {
+        apiBtn.addEventListener('click', () => {
+          const hexChars = "0123456789abcdef";
+          let randomId = "0x";
+          for (let i = 0; i < 8; i++) {
+            randomId += hexChars[Math.floor(Math.random() * 16)];
+          }
+          randomId += "...";
+          for (let i = 0; i < 4; i++) {
+            randomId += hexChars[Math.floor(Math.random() * 16)];
+          }
+
+          const uptime = Math.floor(Math.random() * 350) + 15;
+          const score = Math.floor(Math.random() * 500) + 500;
+          
+          let standing = "WEAK";
+          if (score >= 800) standing = "PREMIER";
+          else if (score >= 600) standing = "STANDING";
+
+          apiJson.innerHTML = `{\n  "device_id": "${randomId}",\n  "enclave_signature_valid": true,\n  "physical_coherence_verified": true,\n  "uptime_seniority_days": ${uptime},\n  "genesis_score": ${score},\n  "bureau_standing": "${standing}"\n}`;
+          
+          // Flash effect
+          apiJson.style.opacity = 0.5;
+          setTimeout(() => { apiJson.style.opacity = 1; }, 80);
+        });
+      }
 
     })();
     </script>
