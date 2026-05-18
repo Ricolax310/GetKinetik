@@ -73,7 +73,7 @@ A partner network's backend verifies node integrity in a single, read-only API c
 
 ```http
 POST /api/verify-device HTTP/1.1
-Host: getkinetik.com
+Host: getkinetik.app
 Content-Type: application/json
 
 {
