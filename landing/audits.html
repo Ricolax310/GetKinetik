@@ -385,17 +385,69 @@
       <!-- WEATHERXM REPORT -->
       <article class="audit-card">
         <span class="badge-sapphire">WEATHERXM NETWORK</span>
-        <h2>2. Data Crowding & Hex Cell Coverage</h2>
+        <h2>2. H3 Cell Over-Capacity & Location Ghost Nodes</h2>
         <p>
           High-integrity meteorological networks require geographically spaced sensors to build precise grid forecasts. 
           When multiple stations are clustered in the same residential hex cell, the marginal weather coverage value is zero, 
-          yet token rewards are still distributed evenly. 
+          yet token rewards are still distributed evenly.
         </p>
         <p>
-          Our scan identified several clusters where over five sensors sit within a 50-meter radius, reporting highly redundant 
-          humidity and pressure readings. Kinetik provides a simple, neutral **Coherence Score** that quantifies the unique coverage 
-          density of each node so networks can make smarter coverage reward calculations.
+          Our independent scan analyzed 8,487 active hex cells using WeatherXM's public API. We identified **290 cells** that severely exceed designed capacity limits. Out of 112 devices inside the most over-capacity cells, **60 are flagged by the network's own pipeline as having no valid location data**, indicating virtualized or misconfigured ghost hardware.
         </p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>H3 Index Cell</th>
+              <th>Devices</th>
+              <th>Designed Capacity</th>
+              <th>Ratio</th>
+              <th>Active Nodes</th>
+              <th>Flagged Location</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>874449b31ffffff</code></td>
+              <td>10 Nodes</td>
+              <td>1 Node</td>
+              <td><span class="glow-ruby-text">10.0×</span></td>
+              <td>0 Active</td>
+              <td>10 NO_LOCATION_DATA</td>
+            </tr>
+            <tr>
+              <td><code>8726cdb66ffffff</code></td>
+              <td>10 Nodes</td>
+              <td>1 Node</td>
+              <td><span class="glow-ruby-text">10.0×</span></td>
+              <td>0 Active</td>
+              <td>10 NO_LOCATION_DATA</td>
+            </tr>
+            <tr>
+              <td><code>871eda743ffffff</code></td>
+              <td>29 Nodes</td>
+              <td>3 Nodes</td>
+              <td><span class="glow-ruby-text">9.7×</span></td>
+              <td>11 Active</td>
+              <td>18 NO_LOCATION_DATA</td>
+            </tr>
+            <tr>
+              <td><code>872b0e115ffffff</code></td>
+              <td>9 Nodes</td>
+              <td>1 Node</td>
+              <td><span class="glow-ruby-text">9.0×</span></td>
+              <td>0 Active</td>
+              <td>9 NO_LOCATION_DATA</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout" style="border-left-color: var(--sapphire);">
+          <strong>Cooperative Bureau Reference note:</strong> Instead of relying on passive location reports, 
+          WeatherXM backends can utilize Kinetik's secure edge enclaves to enforce **Proof of Origin**. 
+          By validating unique hardware-sealed keys and barometric/motion coherence in real-time, 
+          networks can automatically prevent cell crowding and token dilution.
+        </div>
       </article>
     </main>
 
