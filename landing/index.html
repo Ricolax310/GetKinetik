@@ -1790,7 +1790,193 @@
           font-size: 20px;
         }
       }
-    </style>
+    
+      /* ------------------------------------------------------------
+         Interactive Proof of Origin & Genesis Score Simulator
+         ------------------------------------------------------------ */
+      .proof-stage-grid {
+        display: grid;
+        grid-template-columns: 1fr 1.1fr;
+        gap: 48px;
+        align-items: start;
+        max-width: 1000px;
+        margin: 48px auto 0;
+      }
+      @media (max-width: 860px) {
+        .proof-stage-grid {
+          grid-template-columns: 1fr;
+          gap: 32px;
+        }
+      }
+      .poo-simulator-panel {
+        background: var(--obsidian-soft);
+        border: 1px solid var(--hairline);
+        border-radius: 20px;
+        padding: 36px 30px;
+        box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
+      }
+      .sim-title {
+        font-family: var(--sans);
+        font-size: 18px;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        color: var(--platinum);
+        margin: 0 0 8px;
+      }
+      .sim-subtitle {
+        font-family: var(--sans);
+        font-size: 13px;
+        color: var(--graphite);
+        margin: 0 0 24px;
+        line-height: 1.5;
+      }
+      .sim-control-group {
+        margin-bottom: 22px;
+      }
+      .sim-control-header {
+        display: flex;
+        justify-content: space-between;
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 2px;
+        color: var(--graphite);
+        text-transform: uppercase;
+        margin-bottom: 8px;
+      }
+      .sim-control-value {
+        color: var(--sapphire-glow);
+        font-weight: 600;
+      }
+      .sim-slider {
+        width: 100%;
+        -webkit-appearance: none;
+        appearance: none;
+        height: 6px;
+        border-radius: 3px;
+        background: var(--obsidian-edge);
+        outline: none;
+        margin: 8px 0;
+      }
+      .sim-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: var(--ruby-core);
+        cursor: pointer;
+        box-shadow: 0 0 10px rgba(255, 20, 48, 0.6);
+        transition: transform 0.1s ease;
+      }
+      .sim-slider::-webkit-slider-thumb:hover {
+        transform: scale(1.2);
+      }
+      .sim-output-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-top: 28px;
+        padding-top: 24px;
+        border-top: 1px solid var(--hairline);
+      }
+      .sim-output-card {
+        background: var(--obsidian-edge);
+        border: 1px solid var(--hairline);
+        border-radius: 12px;
+        padding: 16px;
+        text-align: center;
+      }
+      .sim-output-num {
+        font-size: 26px;
+        font-weight: 300;
+        color: var(--ruby-ember);
+        letter-spacing: 0.5px;
+        margin-bottom: 4px;
+      }
+      .sim-output-lbl {
+        font-family: var(--mono);
+        font-size: 9px;
+        letter-spacing: 2px;
+        color: var(--graphite);
+        text-transform: uppercase;
+      }
+      .sim-toggle-group {
+        display: flex;
+        gap: 8px;
+        margin-top: 4px;
+      }
+      .sim-toggle-btn {
+        flex: 1;
+        background: var(--obsidian-edge);
+        border: 1px solid var(--hairline);
+        border-radius: 8px;
+        padding: 10px;
+        color: var(--graphite);
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 1px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+      .sim-toggle-btn.active {
+        border-color: rgba(255, 20, 48, 0.4);
+        background: rgba(255, 20, 48, 0.08);
+        color: var(--ruby-ember);
+      }
+
+      /* ------------------------------------------------------------
+         Interactive DePIN Networks Calculator
+         ------------------------------------------------------------ */
+      .networks-simulator {
+        margin-top: 40px;
+        background: rgba(17, 17, 19, 0.6);
+        border: 1px solid var(--hairline);
+        border-radius: 16px;
+        padding: 24px;
+        text-align: center;
+      }
+      .net-sim-title {
+        font-family: var(--sans);
+        font-size: 14px;
+        letter-spacing: 1px;
+        color: var(--platinum);
+        margin: 0 0 16px;
+      }
+      .net-toggle-wrap {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+      .net-toggle {
+        background: var(--obsidian-soft);
+        border: 1px solid var(--hairline);
+        padding: 8px 16px;
+        border-radius: 20px;
+        color: var(--graphite);
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 2px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+      .net-toggle.active {
+        border-color: rgba(0, 123, 255, 0.4);
+        background: rgba(0, 123, 255, 0.08);
+        color: var(--sapphire-glow);
+      }
+      .net-sim-est {
+        font-size: 24px;
+        font-weight: 300;
+        color: var(--sapphire-glow);
+      }
+      .net-sim-desc {
+        font-size: 12px;
+        color: var(--graphite);
+        margin-top: 6px;
+      }
+
+      </style>
   </head>
   <body>
     <!-- ================================================== -->
@@ -1800,6 +1986,8 @@
       <span class="topbar-brand">GETKINETIK</span>
       <span class="topbar-status">v1.5.0 · BUREAU · LIVE</span>
     </div>
+
+    
 
     <!-- ================================================== -->
     <!-- HERO                                                -->
@@ -1877,8 +2065,8 @@
 
       <!-- ============================================================
            BEFORE YOU MINT — key responsibility warning.
-           Seed-phrase backup is not live yet (see release notes). This
-           block sets honest expectations before the user taps MINT.
+           Seed-phrase backup is now live in-app (Proof of Origin card).
+           This block sets honest expectations before the user taps MINT.
            ============================================================ -->
       <aside class="mint-warning" aria-labelledby="mint-warning-title">
         <span class="mint-warning-eyebrow" id="mint-warning-title">BEFORE YOU MINT</span>
@@ -1914,9 +2102,11 @@
           inconvenience.
         </p>
         <p class="mint-warning-rule">
-          <strong>One phone at a time.</strong> Seed-phrase backup
-          (write down 12 words, restore on a new device) is not available
-          in this build yet — treat this device like a hardware wallet.
+          <strong>One phone at a time.</strong> Seed-phrase backup is now
+          live — open your Proof of Origin card, tap <em>Reveal Recovery
+          Phrase</em>, write down your 12 words, and you can restore your
+          full node identity on a new device without losing seniority.
+          Treat this device like a hardware wallet.
         </p>
       </aside>
 
@@ -1941,6 +2131,379 @@
         ANDROID PREVIEW
       </p>
     </section>
+
+    
+
+    <!-- ================================================== -->
+    <!-- HOW IT WORKS                                        -->
+    <!-- ================================================== -->
+    <section>
+      <span class="section-eyebrow">HOW IT WORKS</span>
+      <h2 class="section-title">
+        One sovereign node. A hardware-sealed identity. A public bureau grade.
+      </h2>
+      <p class="section-sub">
+        Every GETKINETIK node mints a cryptographic identity, signs a
+        tamper-evident uptime record, and earns a public Genesis Score — the
+        bureau's grade on whether the device is real. One call to the verify API
+        returns it all.
+      </p>
+
+      <div class="steps">
+        <article class="step">
+          <span class="step-num">1</span>
+          <p class="step-title">MINT</p>
+          <h3 class="step-headline">A sovereign Ed25519 key is sealed inside your device.</h3>
+          <p class="step-body">
+            On first activation, the app generates a hardware-backed
+            Ed25519 keypair in your phone's secure enclave. The secret
+            never leaves the device. The public key becomes your sovereign
+            node ID — a permanent, Sybil-resistant identity that no
+            company controls.
+          </p>
+        </article>
+
+        <article class="step">
+          <span class="step-num">2</span>
+          <p class="step-title">PROVE</p>
+          <h3 class="step-headline">Every 30 seconds your node signs a tamper-evident heartbeat.</h3>
+          <p class="step-body">
+            While the node is live, it emits a signed statement: timestamp,
+            device sensors (motion, pressure, light), and battery state.
+            Each beat is hash-chained to the previous one. The chain makes
+            uptime mathematically provable — alter one beat and every
+            subsequent signature breaks.
+          </p>
+        </article>
+
+        <article class="step">
+          <span class="step-num">3</span>
+          <p class="step-title">GRADE</p>
+          <h3 class="step-headline">The bureau scores your node 0–1000 and publishes the grade.</h3>
+          <p class="step-body">
+            GETKINETIK reads your signed proof, verifies the Ed25519 chain,
+            and computes a Genesis Score — a public, non-transferable
+            reputation grade. Partner networks call our API before they pay
+            verified-user premiums. The methodology is public; the score
+            is yours forever.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    
+
+    <!-- ================================================== -->
+    <!-- DEPIN NETWORKS                                      -->
+    <!-- ================================================== -->
+    <section>
+      <span class="section-eyebrow">DEPIN NETWORKS</span>
+      <h2 class="section-title">Five graded networks. Any DePIN can call the bureau.</h2>
+      <p class="section-sub">
+        Every network adapter is a standalone TypeScript package
+        (<code style="font-family:var(--mono);font-size:13px;color:var(--ruby-ember);">@getkinetik/adapter-*</code>)
+        that feeds the same sovereign signing and verification pipeline.
+        The bureau grades nodes for each network independently —
+        one bad actor on one network doesn't contaminate another.
+      </p>
+
+      <div class="networks">
+        <article class="network">
+          <p class="network-name">NODLE</p>
+          <p class="network-meta">NODL · Polkadot</p>
+          <span class="network-status">ADAPTER · BUILT</span>
+        </article>
+
+        <article class="network">
+          <p class="network-name">DIMO</p>
+          <p class="network-meta">$DIMO · Polygon</p>
+          <span class="network-status">ADAPTER · BUILT</span>
+        </article>
+
+        <article class="network">
+          <p class="network-name">HIVEMAPPER</p>
+          <p class="network-meta">HONEY · Solana</p>
+          <span class="network-status">ADAPTER · BUILT</span>
+        </article>
+
+        <article class="network">
+          <p class="network-name">WEATHERXM</p>
+          <p class="network-meta">WXM · Arbitrum</p>
+          <span class="network-status">ADAPTER · BUILT</span>
+        </article>
+
+        <article class="network">
+          <p class="network-name">GEODNET</p>
+          <p class="network-meta">GEOD · Polygon</p>
+          <span class="network-status">ADAPTER · BUILT</span>
+        </article>
+      </div>
+
+      <p class="networks-foot">
+        MORE NETWORKS UNDER EVALUATION ·
+        IF YOU RUN A DEPIN AND WANT IN, EMAIL ERIC
+      </p>
+    </section>
+      <div class="networks-simulator">
+        <h3 class="net-sim-title">Dynamic Earning Potential by Device Profile</h3>
+        <div class="net-toggle-wrap">
+          <button class="net-toggle active" id="profile-mobile">STANDARD SMARTPHONE</button>
+          <button class="net-toggle" id="profile-plug">STATIONARY PLUG / OBD</button>
+          <button class="net-toggle" id="profile-hardware">PREMIER HARDWARE NODE</button>
+        </div>
+        <div class="net-sim-est" id="net-est-val">$18.50 – $32.40 / mo</div>
+        <p class="net-sim-desc" id="net-desc-val">Uses native mobile sensors (GPS, Accelerometer) running background PollingPool.</p>
+      </div>
+
+
+
+    
+<!-- ================================================== -->
+<!-- PROOF OF ORIGIN SHOWCASE                            -->
+<!-- ================================================== -->
+<section id="proof-origin">
+  <span class="section-eyebrow">THE ARTIFACT</span>
+  <h2 class="section-title">
+    Every active node produces a signed certificate of its own origin.
+  </h2>
+
+  <div class="proof-stage-grid">
+    <!-- Static representation of the in-app Proof of Origin card -->
+    <div class="poo-card" aria-label="Sample Proof of Origin certificate">
+      <span class="poo-eyebrow">PROOF OF ORIGIN</span>
+      <div class="poo-rule"></div>
+
+      <p class="poo-brand">GETKINETIK</p>
+      <p class="poo-subbrand">SOVEREIGN NODE · v2</p>
+
+      <div class="poo-divider"></div>
+
+      <div class="poo-row">
+        <span class="poo-label">NODE</span>
+        <span class="poo-value">KINETIK-NODE-SAMPLE0</span>
+      </div>
+      <div class="poo-row">
+        <span class="poo-label">MINTED</span>
+        <span class="poo-value">2026-04-24</span>
+      </div>
+      <div class="poo-row">
+        <span class="poo-label">BEATS</span>
+        <span class="poo-value" id="card-beats">2,880</span>
+      </div>
+      <div class="poo-row">
+        <span class="poo-label">SINCE</span>
+        <span class="poo-value">2026-04-24</span>
+      </div>
+      <div class="poo-row">
+        <span class="poo-label">CHAIN TIP</span>
+        <span class="poo-value">A3F2B71955EC4D80</span>
+      </div>
+      <div class="poo-row">
+        <span class="poo-label">ISSUED</span>
+        <span class="poo-value">2026-04-25 18:30:00Z</span>
+      </div>
+      <div class="poo-row">
+        <span class="poo-label">MOTION</span>
+        <span class="poo-value" id="card-motion">0.07 g</span>
+      </div>
+      <div class="poo-row">
+        <span class="poo-label">PRESSURE</span>
+        <span class="poo-value" id="card-pressure">1013.21 hPa</span>
+      </div>
+      <div class="poo-row">
+        <span class="poo-label">LIGHT</span>
+        <span class="poo-value" id="card-light">348 lx</span>
+      </div>
+      <div class="poo-row">
+        <span class="poo-label">HASH</span>
+        <span class="poo-value">7E2A8F1C43B9D5E0</span>
+      </div>
+      <div class="poo-row">
+        <span class="poo-label">GENESIS SCORE</span>
+        <span class="poo-value" id="card-score" style="color:var(--ruby-ember)">636 · STANDING</span>
+      </div>
+
+      <div class="poo-divider"></div>
+
+      <p class="poo-field">PUBLIC KEY</p>
+      <p class="poo-hex">
+        SAMPLE7E2A8F1C43B9D5E0<br />
+        SAMPLE1A4F6C9D8E2B3704
+      </p>
+
+      <p class="poo-field" style="margin-top: 22px">SIGNATURE</p>
+      <p class="poo-hex muted" id="card-sig">
+        · · · · · · · · · · · · · · · ·<br />
+        · · · · · · · · · · · · · · · ·<br />
+        · · · · · · · · · · · · · · · ·<br />
+        · · · · · · · · · · · · · · · ·
+      </p>
+
+      <div class="poo-divider"></div>
+
+      <p class="poo-attribution">GETKINETIK by OutFromNothing LLC</p>
+      <p class="poo-attribution-sub">
+        A Sovereign Node artifact · not transferable
+      </p>
+    </div>
+
+    <!-- Simulator panel -->
+    <div class="poo-simulator-panel">
+      <h3 class="sim-title">Genesis Score Simulator</h3>
+      <p class="sim-subtitle">See how node age, uptime, active networks, and physical sensor coherence combine into a cryptographic Genesis reputation score.</p>
+
+      <div class="sim-control-group">
+        <div class="sim-control-header">
+          <span>Node Age (Seniority)</span>
+          <span class="sim-control-value" id="sim-age-val">30 Days</span>
+        </div>
+        <input type="range" class="sim-slider" id="sim-age" min="1" max="180" value="30">
+      </div>
+
+      <div class="sim-control-group">
+        <div class="sim-control-header">
+          <span>Heartbeat Uptime</span>
+          <span class="sim-control-value" id="sim-uptime-val">90%</span>
+        </div>
+        <input type="range" class="sim-slider" id="sim-uptime" min="10" max="100" value="90">
+      </div>
+
+      <div class="sim-control-group">
+        <div class="sim-control-header">
+          <span>Active DePIN Networks</span>
+          <span class="sim-control-value" id="sim-networks-val">3 Graded</span>
+        </div>
+        <input type="range" class="sim-slider" id="sim-networks" min="1" max="5" value="3">
+      </div>
+
+      <div class="sim-control-group">
+        <div class="sim-control-header">
+          <span>Sensor Telemetry</span>
+        </div>
+        <div class="sim-toggle-group">
+          <button class="sim-toggle-btn" id="sensor-raw">RAW</button>
+          <button class="sim-toggle-btn active" id="sensor-verified">VERIFIED</button>
+          <button class="sim-toggle-btn" id="sensor-coherent">COHERENT</button>
+        </div>
+      </div>
+
+      <div class="sim-output-grid">
+        <div class="sim-output-card">
+          <div class="sim-output-num" id="sim-score-out">636</div>
+          <div class="sim-output-lbl">GENESIS SCORE</div>
+        </div>
+        <div class="sim-output-card">
+          <div class="sim-output-num" id="sim-earnings-out" style="color:var(--sapphire-glow)">$32.40</div>
+          <div class="sim-output-lbl">EST. USD / MO</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="proof-caption" style="text-align:center; max-width:800px; margin:24px auto 0;">
+    Self-auditing. Timestamped. Signed with a key that never leaves your device. Use the sliders to simulate live operations — the Genesis Score dynamically adapts based on longitudinal evidence.
+  </p>
+</section>
+
+
+    <!-- ================================================== -->
+    <!-- UNIFIED STATUS & UPTIME GUARD                       -->
+    <!-- ================================================== -->
+    <section>
+      <span class="section-eyebrow">UNIFIED STATUS DASHBOARD</span>
+      <h2 class="section-title">
+        Every active node monitored in a single, read-only pane of glass.
+      </h2>
+      <p class="section-sub">
+        GETKINETIK acts as a supportive, non-custodial status monitor. We do not
+        manage wallets, touch token flows, or manipulate reward cycles — we simply
+        help you verify that your hardware is active, healthy, and earning.
+      </p>
+
+      <div class="optimizer-grid">
+        <article class="optimizer-card">
+          <span class="optimizer-card-eyebrow">UNIFIED STATUS</span>
+          <h3 class="optimizer-card-title">See every active DePIN node in one elegant place.</h3>
+          <p class="optimizer-card-body">
+            Stop switching between five different network dashboards. Kinetik matches
+            your device's hardware keys against active Nodle, DIMO, Hivemapper, and
+            WeatherXM status logs, showing your entire DePIN footprint in a single,
+            streamlined, read-only interface.
+          </p>
+          <span class="optimizer-badge">READ ONLY</span>
+        </article>
+
+        <article class="optimizer-card">
+          <span class="optimizer-card-eyebrow">UPTIME GUARD</span>
+          <h3 class="optimizer-card-title">Get notified before you lose your seniority rank.</h3>
+          <p class="optimizer-card-body">
+            Seniority is a clock, not cash. The Uptime Guard watches local network
+            pings and sensor streams in the background, alert-notifying you if an
+            adapter drops connection or fails location validation so you can restore it
+            before your reputation clock resets.
+          </p>
+          <span class="optimizer-badge">LIVE MONITOR</span>
+        </article>
+
+        <article class="optimizer-card">
+          <span class="optimizer-card-eyebrow">DEVICE DISCOVERY</span>
+          <h3 class="optimizer-card-title">Unlock networks based on your hardware capabilities.</h3>
+          <p class="optimizer-card-body">
+            The scanner analyzes your device's physical hardware profiles (GPS,
+            motion sensors, barometer) and matches them against active DePIN specs.
+            It surfaces compatible networks you haven't joined yet, helping you
+            extend your node footprint.
+          </p>
+          <span class="optimizer-badge">AUTOMATIC</span>
+        </article>
+
+        <article class="optimizer-card">
+          <span class="optimizer-card-eyebrow">SHARED POLLING</span>
+          <h3 class="optimizer-card-title">One coordinated polling loop. 30% battery saved.</h3>
+          <p class="optimizer-card-body">
+            Instead of running five heavy network scripts in the background, a
+            single PollingPool coordinates all active adapter logs. Your battery
+            stays cool, location resources are shared, and your phone runs smoothly
+            with zero overheating.
+          </p>
+          <span class="optimizer-badge">BUILT IN</span>
+        </article>
+
+        <div class="gc-callout">
+          <div class="gc-callout-text">
+            <span class="gc-callout-eyebrow">GENESIS SCORE</span>
+            <h3 class="gc-callout-title">Your node's public reputation. A grade, not a currency.</h3>
+            <p class="gc-callout-body">
+              Genesis Score is a public, hardware-attested 0–1000 reputation
+              grade for your node — like a credit score for a sovereign
+              device. Identity integrity, uptime continuity, sensor coherence,
+              network engagement, and disclosure receipts all roll up into
+              one number partners can read before they pay a verified-user
+              premium. The score is <strong>never a token, never transferable,
+              never priced</strong> — it is the bureau publishing a grade about
+              your node, the way Equifax publishes a grade about a borrower.
+              Methodology is public and versioned (v1.1 live).
+            </p>
+          </div>
+          <div class="gc-stat-group">
+            <div class="gc-stat">
+              <p class="gc-stat-num">0–1000</p>
+              <p class="gc-stat-label">Genesis Score</p>
+            </div>
+            <div class="gc-stat">
+              <p class="gc-stat-num">5</p>
+              <p class="gc-stat-label">Graded networks</p>
+            </div>
+            <div class="gc-stat">
+              <p class="gc-stat-num">∞</p>
+              <p class="gc-stat-label">Anonymous</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
 
     <!-- ================================================== -->
     <!-- THE BUREAU (PARTNER-FIRST)                          -->
@@ -2019,6 +2582,8 @@
         </a>
       </div>
     </section>
+
+    
 
     <!-- ================================================== -->
     <!-- WHAT THE BUREAU FOUND THIS WEEK                     -->
@@ -2139,114 +2704,7 @@
       </div>
     </section>
 
-    <!-- ================================================== -->
-    <!-- HOW IT WORKS                                        -->
-    <!-- ================================================== -->
-    <section>
-      <span class="section-eyebrow">HOW IT WORKS</span>
-      <h2 class="section-title">
-        One sovereign node. A hardware-sealed identity. A public bureau grade.
-      </h2>
-      <p class="section-sub">
-        Every GETKINETIK node mints a cryptographic identity, signs a
-        tamper-evident uptime record, and earns a public Genesis Score — the
-        bureau's grade on whether the device is real. One call to the verify API
-        returns it all.
-      </p>
-
-      <div class="steps">
-        <article class="step">
-          <span class="step-num">1</span>
-          <p class="step-title">MINT</p>
-          <h3 class="step-headline">A sovereign Ed25519 key is sealed inside your device.</h3>
-          <p class="step-body">
-            On first activation, the app generates a hardware-backed
-            Ed25519 keypair in your phone's secure enclave. The secret
-            never leaves the device. The public key becomes your sovereign
-            node ID — a permanent, Sybil-resistant identity that no
-            company controls.
-          </p>
-        </article>
-
-        <article class="step">
-          <span class="step-num">2</span>
-          <p class="step-title">PROVE</p>
-          <h3 class="step-headline">Every 30 seconds your node signs a tamper-evident heartbeat.</h3>
-          <p class="step-body">
-            While the node is live, it emits a signed statement: timestamp,
-            device sensors (motion, pressure, light), and battery state.
-            Each beat is hash-chained to the previous one. The chain makes
-            uptime mathematically provable — alter one beat and every
-            subsequent signature breaks.
-          </p>
-        </article>
-
-        <article class="step">
-          <span class="step-num">3</span>
-          <p class="step-title">GRADE</p>
-          <h3 class="step-headline">The bureau scores your node 0–1000 and publishes the grade.</h3>
-          <p class="step-body">
-            GETKINETIK reads your signed proof, verifies the Ed25519 chain,
-            and computes a Genesis Score — a public, non-transferable
-            reputation grade. Partner networks call our API before they pay
-            verified-user premiums. The methodology is public; the score
-            is yours forever.
-          </p>
-        </article>
-      </div>
-    </section>
-
-    <!-- ================================================== -->
-    <!-- DEPIN NETWORKS                                      -->
-    <!-- ================================================== -->
-    <section>
-      <span class="section-eyebrow">DEPIN NETWORKS</span>
-      <h2 class="section-title">Five graded networks. Any DePIN can call the bureau.</h2>
-      <p class="section-sub">
-        Every network adapter is a standalone TypeScript package
-        (<code style="font-family:var(--mono);font-size:13px;color:var(--ruby-ember);">@getkinetik/adapter-*</code>)
-        that feeds the same sovereign signing and verification pipeline.
-        The bureau grades nodes for each network independently —
-        one bad actor on one network doesn't contaminate another.
-      </p>
-
-      <div class="networks">
-        <article class="network">
-          <p class="network-name">NODLE</p>
-          <p class="network-meta">NODL · Polkadot</p>
-          <span class="network-status">ADAPTER · BUILT</span>
-        </article>
-
-        <article class="network">
-          <p class="network-name">DIMO</p>
-          <p class="network-meta">$DIMO · Polygon</p>
-          <span class="network-status">ADAPTER · BUILT</span>
-        </article>
-
-        <article class="network">
-          <p class="network-name">HIVEMAPPER</p>
-          <p class="network-meta">HONEY · Solana</p>
-          <span class="network-status">ADAPTER · BUILT</span>
-        </article>
-
-        <article class="network">
-          <p class="network-name">WEATHERXM</p>
-          <p class="network-meta">WXM · Arbitrum</p>
-          <span class="network-status">ADAPTER · BUILT</span>
-        </article>
-
-        <article class="network">
-          <p class="network-name">GEODNET</p>
-          <p class="network-meta">GEOD · Polygon</p>
-          <span class="network-status">ADAPTER · BUILT</span>
-        </article>
-      </div>
-
-      <p class="networks-foot">
-        MORE NETWORKS UNDER EVALUATION ·
-        IF YOU RUN A DEPIN AND WANT IN, EMAIL ERIC
-      </p>
-    </section>
+    
 
     <!-- ================================================== -->
     <!-- THREE CLAIMS — THE MOAT                             -->
@@ -2297,207 +2755,7 @@
       </div>
     </section>
 
-    <!-- ================================================== -->
-    <!-- PROOF OF ORIGIN SHOWCASE                            -->
-    <!-- ================================================== -->
-    <section>
-      <span class="section-eyebrow">THE ARTIFACT</span>
-      <h2 class="section-title">
-        Every active node produces a signed certificate of its own origin.
-      </h2>
-
-      <div class="proof-stage">
-        <!-- Static representation of the in-app Proof of Origin card.
-             v:2 schema includes the L2 sensor block (motion, pressure, light).
-             Data is intentionally anonymized ("SAMPLE") so this is clearly
-             not a real node's credentials. -->
-        <div class="poo-card" aria-label="Sample Proof of Origin certificate">
-          <span class="poo-eyebrow">PROOF OF ORIGIN</span>
-          <div class="poo-rule"></div>
-
-          <p class="poo-brand">GETKINETIK</p>
-          <p class="poo-subbrand">SOVEREIGN NODE · v2</p>
-
-          <div class="poo-divider"></div>
-
-          <div class="poo-row">
-            <span class="poo-label">NODE</span>
-            <span class="poo-value">KINETIK-NODE-SAMPLE0</span>
-          </div>
-          <div class="poo-row">
-            <span class="poo-label">MINTED</span>
-            <span class="poo-value">2026-04-24</span>
-          </div>
-          <div class="poo-row">
-            <span class="poo-label">BEATS</span>
-            <span class="poo-value">2,880</span>
-          </div>
-          <div class="poo-row">
-            <span class="poo-label">SINCE</span>
-            <span class="poo-value">2026-04-24</span>
-          </div>
-          <div class="poo-row">
-            <span class="poo-label">CHAIN TIP</span>
-            <span class="poo-value">A3F2B71955EC4D80</span>
-          </div>
-          <div class="poo-row">
-            <span class="poo-label">ISSUED</span>
-            <span class="poo-value">2026-04-25 18:30:00Z</span>
-          </div>
-          <div class="poo-row">
-            <span class="poo-label">MOTION</span>
-            <span class="poo-value">0.07 g</span>
-          </div>
-          <div class="poo-row">
-            <span class="poo-label">PRESSURE</span>
-            <span class="poo-value">1013.21 hPa</span>
-          </div>
-          <div class="poo-row">
-            <span class="poo-label">LIGHT</span>
-            <span class="poo-value">348 lx</span>
-          </div>
-          <div class="poo-row">
-            <span class="poo-label">HASH</span>
-            <span class="poo-value">7E2A8F1C43B9D5E0</span>
-          </div>
-          <div class="poo-row">
-            <span class="poo-label">GENESIS SCORE</span>
-            <span class="poo-value" style="color:var(--ruby-ember)">636 · STANDING</span>
-          </div>
-
-          <div class="poo-divider"></div>
-
-          <p class="poo-field">PUBLIC KEY</p>
-          <p class="poo-hex">
-            SAMPLE7E2A8F1C43B9D5E0<br />
-            SAMPLE1A4F6C9D8E2B3704
-          </p>
-
-          <p class="poo-field" style="margin-top: 22px">SIGNATURE</p>
-          <p class="poo-hex muted">
-            · · · · · · · · · · · · · · · ·<br />
-            · · · · · · · · · · · · · · · ·<br />
-            · · · · · · · · · · · · · · · ·<br />
-            · · · · · · · · · · · · · · · ·
-          </p>
-
-          <div class="poo-divider"></div>
-
-          <p class="poo-attribution">GETKINETIK by OutFromNothing LLC</p>
-          <p class="poo-attribution-sub">
-            A Sovereign Node artifact · not transferable
-          </p>
-        </div>
-
-        <p class="proof-caption">
-          Self-auditing. Timestamped. Signed with a key that never leaves
-          your device. The card carries the on-chain sensor reading at
-          minting — motion, pressure, light — all hash-chained to the
-          heartbeat log. The Genesis Score is the bureau's live grade on
-          that proof. A screenshot of this card is a cryptographic claim
-          that anyone can verify at
-          <strong>getkinetik.app/verify</strong> — or offline via
-          <code style="font-family:var(--mono);color:var(--ruby-ember)">npm install @getkinetik/verify</code>.
-        </p>
-      </div>
-    </section>
-
-    <!-- ================================================== -->
-    <!-- OPTIMIZER ENGINE                                    -->
-    <!-- ================================================== -->
-    <section>
-      <span class="section-eyebrow">OPTIMIZER ENGINE</span>
-      <h2 class="section-title">
-        GETKINETIK makes you more than any single network alone.
-      </h2>
-      <p class="section-sub">
-        A shared intelligence layer watches gas prices, token rates, and your
-        device's earning potential in real time — and tells you exactly when
-        and what to claim to keep more of what you earn.
-      </p>
-
-      <div class="optimizer-grid">
-        <article class="optimizer-card">
-          <span class="optimizer-card-eyebrow">GAS TIMING</span>
-          <h3 class="optimizer-card-title">Claim at the right moment, not the wrong one.</h3>
-          <p class="optimizer-card-body">
-            The optimizer watches Polygon and Base gas prices every two minutes.
-            It only flags a claim as ready when the pending reward is at least
-            5× the gas cost to collect it. You stop leaving money on the table
-            one transaction at a time.
-          </p>
-          <span class="optimizer-badge">LIVE FEED</span>
-        </article>
-
-        <article class="optimizer-card">
-          <span class="optimizer-card-eyebrow">YIELD SCORING</span>
-          <h3 class="optimizer-card-title">Every network ranked by real-time dollar yield.</h3>
-          <p class="optimizer-card-body">
-            CoinGecko prices refresh every five minutes. Each adapter's pending
-            balance is converted to USD and ranked. The summary badge tells you
-            how many networks have claims ready and how much combined gas you've
-            avoided this week.
-          </p>
-          <span class="optimizer-badge">LIVE PRICES</span>
-        </article>
-
-        <article class="optimizer-card">
-          <span class="optimizer-card-eyebrow">DEVICE DISCOVERY</span>
-          <h3 class="optimizer-card-title">You may qualify for networks you haven't joined yet.</h3>
-          <p class="optimizer-card-body">
-            The optimizer reads your device's capability profile — GPS, motion,
-            camera, barometer — and matches it against every DePIN network's
-            requirements. It surfaces networks you're missing and estimates the
-            additional monthly USD you could be earning.
-          </p>
-          <span class="optimizer-badge">AUTOMATIC</span>
-        </article>
-
-        <article class="optimizer-card">
-          <span class="optimizer-card-eyebrow">SHARED POLLING</span>
-          <h3 class="optimizer-card-title">One poll loop. Five networks. 30% less battery.</h3>
-          <p class="optimizer-card-body">
-            Instead of each network adapter running its own interval, a single
-            PollingPool coordinates all five. Your battery doesn't pay the price
-            for running multiple DePIN nodes simultaneously. More networks,
-            less drain.
-          </p>
-          <span class="optimizer-badge">BUILT IN</span>
-        </article>
-
-        <div class="gc-callout">
-          <div class="gc-callout-text">
-            <span class="gc-callout-eyebrow">GENESIS SCORE</span>
-            <h3 class="gc-callout-title">Your node's public reputation. A grade, not a currency.</h3>
-            <p class="gc-callout-body">
-              Genesis Score is a public, hardware-attested 0–1000 reputation
-              grade for your node — like a credit score for a sovereign
-              device. Identity integrity, uptime continuity, sensor coherence,
-              network engagement, and disclosure receipts all roll up into
-              one number partners can read before they pay a verified-user
-              premium. The score is <strong>never a token, never transferable,
-              never priced</strong> — it is the bureau publishing a grade about
-              your node, the way Equifax publishes a grade about a borrower.
-              Methodology is public and versioned (v1.1 live).
-            </p>
-          </div>
-          <div class="gc-stat-group">
-            <div class="gc-stat">
-              <p class="gc-stat-num">0–1000</p>
-              <p class="gc-stat-label">Genesis Score</p>
-            </div>
-            <div class="gc-stat">
-              <p class="gc-stat-num">5</p>
-              <p class="gc-stat-label">Graded networks</p>
-            </div>
-            <div class="gc-stat">
-              <p class="gc-stat-num">∞</p>
-              <p class="gc-stat-label">Anonymous</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    
 
     <!-- ================================================== -->
     <!-- RECEIPTS — TRACTION TILES                           -->
@@ -2560,6 +2818,8 @@
       </div>
     </section>
 
+    
+
     <!-- ================================================== -->
     <!-- CONTINUITY + FAQ                                    -->
     <!-- ================================================== -->
@@ -2567,15 +2827,15 @@
       <span class="section-eyebrow">HONEST ON CONTINUITY</span>
       <h2 class="section-title">Your Genesis seniority lives on this phone.</h2>
       <p class="section-sub">
-        Today there is no in-app backup: your bureau grade and heartbeat
-        seniority are bound to the hardware-sealed identity on this device.
-        If the phone is gone, that reputation clock starts over on a new
-        install — your tokens on Nodle, DIMO, Hivemapper, and the rest stay
-        in <em>your</em> wallets on those networks; we never held them.
-        We are building optional <strong>seed-phrase restore</strong> so you
-        can move your node to a new phone without losing seniority; until
-        then, treat the device like something worth protecting — not because
-        we say “hardware wallet,” but because the grade really is local.
+        Your bureau grade and heartbeat seniority are bound to the
+        hardware-sealed identity on this device. Your tokens on Nodle, DIMO,
+        Hivemapper, and the rest stay in <em>your</em> wallets on those
+        networks; we never held them. <strong>Seed-phrase backup and restore
+        is now live in the app</strong> — open your Proof of Origin card, tap
+        <em>Reveal Recovery Phrase</em>, and write down your 12 words.
+        That phrase lets you move your node to a new phone without losing
+        seniority. One active device at a time; the same guarantee as every
+        hardware wallet you already trust.
       </p>
 
       <div class="faq-list">
@@ -2591,13 +2851,15 @@
         </article>
 
         <article class="faq-item">
-          <h3 class="faq-q">When can I back up or restore my node?</h3>
+          <h3 class="faq-q">How do I back up or restore my node?</h3>
           <p class="faq-a">
-            <strong>Not in the app yet.</strong> Seed-phrase style recovery (one
-            active device at a time) is on the roadmap so you can replace a
-            phone without resetting seniority. Join the email list in the app
-            flow or <a href="mailto:eric@outfromnothingllc.com">reach out</a> if
-            you are integrating and need a partner timeline.
+            <strong>Live now on Android.</strong> Open the Proof of Origin card
+            (tap the ruby PROOF chip on the main screen), scroll to
+            <em>Recovery Phrase</em>, and tap to reveal your 12 BIP-39 words.
+            Write them down offline. To restore on a new device, tap
+            <em>Restore from Seed Phrase</em> on the lock screen, enter your
+            12 words, and your node ID and seniority are back instantly —
+            one active device at a time.
           </p>
         </article>
 
@@ -2611,6 +2873,8 @@
         </article>
       </div>
     </section>
+
+    
 
     <!-- ================================================== -->
     <!-- MANIFESTO EXCERPT                                   -->
@@ -2635,6 +2899,8 @@
       </p>
       <p class="manifesto-attribution">— FROM THE SOVEREIGN MANIFESTO</p>
     </section>
+
+    
 
     <!-- ================================================== -->
     <!-- FOOTER                                              -->
@@ -2686,10 +2952,9 @@
             iOS is coming.
           </h2>
           <p class="waitlist-sub">
-            GETKINETIK is live on Android now. Leave your email and we will
-            notify you the moment iOS ships — plus when
-            <strong>secure node backup</strong> (restore on a new phone without
-            losing Genesis seniority) is ready, and other bureau updates.
+            GETKINETIK is live on Android now. 12-word seed backup and restore
+            is already live — leave your email and we’ll notify you when iOS
+            ships and when bureau updates land.
           </p>
 
           <form data-waitlist-form novalidate>
@@ -2724,7 +2989,7 @@
           <p class="waitlist-note">
             ANDROID · LIVE NOW<br />
             IOS · IN DEVELOPMENT<br />
-            NODE BACKUP / RESTORE · COMING
+            NODE BACKUP / RESTORE · LIVE ON ANDROID
           </p>
         </div>
 
@@ -2751,6 +3016,163 @@
         </div>
       </div>
     </div>
+
+    
+    <!-- ================================================== -->
+    <!-- INTERACTIVE SIMULATION & CONTROLLER SCRIPTS         -->
+    <!-- ================================================== -->
+    <script>
+    (function() {
+      "use strict";
+
+      // 1. GENESIS SCORE SIMULATOR
+      const ageSlider = document.getElementById('sim-age');
+      const uptimeSlider = document.getElementById('sim-uptime');
+      const networksSlider = document.getElementById('sim-networks');
+      
+      const ageVal = document.getElementById('sim-age-val');
+      const uptimeVal = document.getElementById('sim-uptime-val');
+      const networksVal = document.getElementById('sim-networks-val');
+      
+      const scoreOut = document.getElementById('sim-score-out');
+      const earningsOut = document.getElementById('sim-earnings-out');
+      
+      const cardBeats = document.getElementById('card-beats');
+      const cardMotion = document.getElementById('card-motion');
+      const cardPressure = document.getElementById('card-pressure');
+      const cardLight = document.getElementById('card-light');
+      const cardScore = document.getElementById('card-score');
+      const cardSig = document.getElementById('card-sig');
+
+      let telemetryMode = 'verified';
+
+      // Telemetry buttons
+      const btnRaw = document.getElementById('sensor-raw');
+      const btnVerified = document.getElementById('sensor-verified');
+      const btnCoherent = document.getElementById('sensor-coherent');
+
+      function updateTelemetry(mode) {
+        telemetryMode = mode;
+        [btnRaw, btnVerified, btnCoherent].forEach(b => b.classList.remove('active'));
+        if (mode === 'raw') {
+          btnRaw.classList.add('active');
+          cardMotion.textContent = '0.00 g';
+          cardPressure.textContent = '0.00 hPa';
+          cardLight.textContent = '0 lx';
+        } else if (mode === 'verified') {
+          btnVerified.classList.add('active');
+          cardMotion.textContent = '0.07 g';
+          cardPressure.textContent = '1013.21 hPa';
+          cardLight.textContent = '348 lx';
+        } else {
+          btnCoherent.classList.add('active');
+          cardMotion.textContent = '0.14 g';
+          cardPressure.textContent = '1013.24 hPa';
+          cardLight.textContent = '847 lx';
+        }
+        recalculate();
+      }
+
+      btnRaw.addEventListener('click', () => updateTelemetry('raw'));
+      btnVerified.addEventListener('click', () => updateTelemetry('verified'));
+      btnCoherent.addEventListener('click', () => updateTelemetry('coherent'));
+
+      function recalculate() {
+        const age = parseInt(ageSlider.value, 10);
+        const uptime = parseInt(uptimeSlider.value, 10);
+        const networks = parseInt(networksSlider.value, 10);
+
+        ageVal.textContent = age + " Days";
+        uptimeVal.textContent = uptime + "%";
+        networksVal.textContent = networks + " Graded";
+
+        // Dynamic beats counter inside Proof card
+        const beats = age * 24 * 12 * (uptime / 100); 
+        cardBeats.textContent = Math.round(beats).toLocaleString();
+
+        // Calculate Genesis Score
+        let baseScore = 300;
+        baseScore += (age / 180) * 200; // Age maps up to 200pts
+        baseScore += (uptime / 100) * 300; // Uptime maps up to 300pts
+        baseScore += (networks / 5) * 100; // Active networks map up to 100pts
+        
+        if (telemetryMode === 'verified') baseScore += 70;
+        else if (telemetryMode === 'coherent') baseScore += 100;
+
+        const score = Math.min(1000, Math.round(baseScore));
+        scoreOut.textContent = score;
+
+        // Band and color styling
+        let band = 'WEAK';
+        let color = '#FF1430'; // ruby red
+        if (score >= 800) {
+          band = 'PREMIER';
+          color = '#FFB199'; // ruby ember
+        } else if (score >= 600) {
+          band = 'STANDING';
+          color = '#3A9BFF'; // sapphire glow
+        }
+        
+        cardScore.textContent = score + " · " + band;
+        cardScore.style.color = color;
+
+        // Signature hex generation
+        const hex = "0123456789ABCDEF";
+        let sigText = "";
+        for (let i = 0; i < 4; i++) {
+          let line = "";
+          for (let j = 0; j < 16; j++) {
+            line += hex[Math.floor(Math.random() * 16)] + (j % 2 === 1 ? " " : "");
+          }
+          sigText += line + "<br>";
+        }
+        cardSig.innerHTML = sigText.toLowerCase();
+
+        // Earning prediction based on score and networks
+        const baseEarningPerNet = 8.5; // average monthly USD
+        const scoreMultiplier = 0.5 + (score / 1000) * 1.5; 
+        const earnings = networks * baseEarningPerNet * scoreMultiplier;
+        earningsOut.textContent = "$" + earnings.toFixed(2);
+      }
+
+      [ageSlider, uptimeSlider, networksSlider].forEach(slider => {
+        slider.addEventListener('input', recalculate);
+      });
+
+      // Initial run
+      updateTelemetry('verified');
+
+      // 2. DEVICE PROFILE DYNAMIC SELECTOR
+      const profileMobile = document.getElementById('profile-mobile');
+      const profilePlug = document.getElementById('profile-plug');
+      const profileHardware = document.getElementById('profile-hardware');
+      
+      const netEstVal = document.getElementById('net-est-val');
+      const netDescVal = document.getElementById('net-desc-val');
+
+      function updateProfile(profile) {
+        [profileMobile, profilePlug, profileHardware].forEach(b => b.classList.remove('active'));
+        if (profile === 'mobile') {
+          profileMobile.classList.add('active');
+          netEstVal.textContent = "$18.50 – $32.40 / mo";
+          netDescVal.textContent = "Uses native mobile sensors (GPS, Accelerometer) running background PollingPool.";
+        } else if (profile === 'plug') {
+          profilePlug.classList.add('active');
+          netEstVal.textContent = "$45.20 – $78.10 / mo";
+          netDescVal.textContent = "Obtains telemetry from vehicles (OBD-II adapters, DIMO plug) with moderate uptime.";
+        } else {
+          profileHardware.classList.add('active');
+          netEstVal.textContent = "$124.00 – $215.50 / mo";
+          netDescVal.textContent = "Physical gateway device running dedicated WeatherXM or GEODNET RTK reference station.";
+        }
+      }
+
+      profileMobile.addEventListener('click', () => updateProfile('mobile'));
+      profilePlug.addEventListener('click', () => updateProfile('plug'));
+      profileHardware.addEventListener('click', () => updateProfile('hardware'));
+
+    })();
+    </script>
 
     <script src="/app.js?v=1.5.1" defer></script>
   </body>
