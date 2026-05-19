@@ -49,6 +49,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as Haptics from 'expo-haptics';
+import * as LocalAuthentication from 'expo-local-authentication';
 
 import { palette, typography } from '../theme/palette';
 import {
@@ -325,7 +326,40 @@ export function ProofOfOrigin({
           <Text style={styles.eyebrow}>PROOF OF ORIGIN</Text>
           <View style={styles.rule} />
 
-          <Text style={styles.brand}>GETKINETIK</Text>
+          <Pressable
+            onLongPress={async () => {
+              try {
+                await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
+              } catch {
+                // silent no-op
+              }
+              try {
+                const hasHardware = await LocalAuthentication.hasHardwareAsync();
+                const isEnrolled = await LocalAuthentication.isEnrolledAsync();
+                if (hasHardware && isEnrolled) {
+                  const result = await LocalAuthentication.authenticateAsync({
+                    promptMessage: 'Confirm identity to reveal recovery phrase',
+                    fallbackLabel: 'Use Passcode',
+                    cancelLabel: 'Cancel',
+                    disableDeviceFallback: false,
+                  });
+                  if (result.success) {
+                    setRevealSeed((r) => !r);
+                  }
+                } else {
+                  setRevealSeed((r) => !r);
+                }
+              } catch (err) {
+                console.warn('[ProofOfOrigin] Easter egg reveal failed:', err);
+                setRevealSeed((r) => !r);
+              }
+            }}
+            delayLongPress={1200}
+            accessibilityRole="button"
+            accessibilityLabel="Sovereign Brand Wordmark"
+          >
+            <Text style={styles.brand}>GETKINETIK</Text>
+          </Pressable>
           <Text style={styles.subBrand}>SOVEREIGN NODE · v2</Text>
 
           <View style={styles.divider} />
@@ -358,43 +392,29 @@ export function ProofOfOrigin({
             {signatureBlock}
           </Text>
 
-          {/* Recovery Phrase Section */}
-          <View style={styles.divider} />
-          <Text style={styles.fieldHeader}>RECOVERY PHRASE</Text>
-          {revealSeed ? (
-            <Pressable
-              onPress={() => setRevealSeed(false)}
-              accessibilityRole="button"
-              accessibilityLabel="Hide recovery phrase"
-            >
-              <View style={styles.seedGrid}>
-                {(identity?.mnemonic || '').split(' ').map((word, idx) => (
-                  <View key={idx} style={styles.seedWordBadge}>
-                    <Text style={styles.seedIndex}>{idx + 1}</Text>
-                    <Text style={styles.seedWord}>{word}</Text>
-                  </View>
-                ))}
-              </View>
-              <Text style={styles.seedWarning}>
-                WARNING: DO NOT SHARE OR SCREENSHOT
-              </Text>
-            </Pressable>
-          ) : (
-            <Pressable
-              onPress={async () => {
-                try {
-                  await Haptics.selectionAsync();
-                } catch {
-                  // silent no-op
-                }
-                setRevealSeed(true);
-              }}
-              style={styles.revealButton}
-              accessibilityRole="button"
-              accessibilityLabel="Tap to reveal 12-word seed phrase"
-            >
-              <Text style={styles.revealButtonText}>TAP TO REVEAL SEED PHRASE</Text>
-            </Pressable>
+          {/* Recovery Phrase Section — Hidden Easter Egg Mode */}
+          {revealSeed && (
+            <>
+              <View style={styles.divider} />
+              <Text style={styles.fieldHeader}>RECOVERY PHRASE</Text>
+              <Pressable
+                onPress={() => setRevealSeed(false)}
+                accessibilityRole="button"
+                accessibilityLabel="Hide recovery phrase"
+              >
+                <View style={styles.seedGrid}>
+                  {(identity?.mnemonic || '').split(' ').map((word, idx) => (
+                    <View key={idx} style={styles.seedWordBadge}>
+                      <Text style={styles.seedIndex}>{idx + 1}</Text>
+                      <Text style={styles.seedWord}>{word}</Text>
+                    </View>
+                  ))}
+                </View>
+                <Text style={styles.seedWarning}>
+                  WARNING: DO NOT SHARE OR SCREENSHOT · TAP TO HIDE
+                </Text>
+              </Pressable>
+            </>
           )}
 
           <View style={styles.divider} />
