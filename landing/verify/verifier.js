@@ -456,7 +456,7 @@ function renderReport(report) {
     ),
     mkCheck(
       checks.feeIntegrityOk === true,
-      "Fee is exactly 1% of gross — net = gross − fee (earning only)",
+      "Third-party network fee math integrity (earnings receipts only)",
       checks.feeIntegrityOk === null,
     ),
     mkCheck(
