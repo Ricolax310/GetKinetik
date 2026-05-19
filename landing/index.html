@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -6,18 +6,18 @@
     <meta name="theme-color" content="#0A0A0A" />
     <meta name="color-scheme" content="dark" />
 
-    <title>GETKINETIK — Independent Trust Layer for DePIN. One Signed Ledger.</title>
+    <title>GETKINETIK â€” Independent Trust Layer for DePIN. One Signed Ledger.</title>
     <meta
       name="description"
-      content="Neutral hardware attestation for the decentralized physical economy — plus one cryptographically signed ledger for Nodle, DIMO, Hivemapper, WeatherXM, Geodnet. Built outside the networks. Hardware-signed. Zero custody."
+      content="Neutral hardware attestation for the decentralized physical economy â€” plus one cryptographically signed ledger for Nodle, DIMO, Hivemapper, WeatherXM, Geodnet. Built outside the networks. Hardware-signed. Zero custody."
     />
 
     <!-- Open Graph / Twitter -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="GETKINETIK — Independent Trust Layer for DePIN" />
+    <meta property="og:title" content="GETKINETIK â€” Independent Trust Layer for DePIN" />
     <meta
       property="og:description"
-      content="The bureau slot DePIN never had: hardware-signed node identity, public verifier, partner verify API — plus one signed ledger across the networks you run."
+      content="The bureau slot DePIN never had: hardware-signed node identity, public verifier, partner verify API â€” plus one signed ledger across the networks you run."
     />
     <meta property="og:url" content="https://getkinetik.app" />
     <meta property="og:site_name" content="GETKINETIK" />
@@ -26,7 +26,7 @@
     <meta property="og:image:height" content="1024" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="https://getkinetik.app/og-image.png" />
-    <meta name="twitter:title" content="GETKINETIK — Independent Trust Layer for DePIN" />
+    <meta name="twitter:title" content="GETKINETIK â€” Independent Trust Layer for DePIN" />
     <meta
       name="twitter:description"
       content="The independent trust layer for DePIN. Hardware-signed node identity. Verify any device in one API call. Zero custody."
@@ -43,7 +43,7 @@
 
     <style>
       /* ============================================================
-         GETKINETIK landing — single file, zero dependencies.
+         GETKINETIK landing â€” single file, zero dependencies.
          Palette and typography match the mobile Sovereign Node app.
          ============================================================ */
 
@@ -102,7 +102,7 @@
       }
 
       /* ------------------------------------------------------------
-         Top bar — tiny, unobtrusive, matches the crest in the app.
+         Top bar â€” tiny, unobtrusive, matches the crest in the app.
          ------------------------------------------------------------ */
       .topbar {
         position: absolute;
@@ -341,12 +341,12 @@
       }
 
       /* ------------------------------------------------------------
-         Mint warning — sits between the hero pitch and the CTAs.
+         Mint warning â€” sits between the hero pitch and the CTAs.
          Ruby-bordered, dark fill, monospace eyebrow. Designed to
          read like a contractual term sheet, not a marketing
          flourish. Pre-seed-phrase: sets honest expectations about the
          no-recovery design before the user taps MINT. Will be re-tuned
-         when seed-phrase backup ships (post–v1.4) and the in-app
+         when seed-phrase backup ships (postâ€“v1.4) and the in-app
          first-run gate takes over proof-of-saved-key responsibility.
          ------------------------------------------------------------ */
       .mint-warning {
@@ -434,7 +434,7 @@
         font-weight: 600;
       }
 
-      /* Allow the longer "I UNDERSTAND — MINT MY NODE" label to wrap
+      /* Allow the longer "I UNDERSTAND â€” MINT MY NODE" label to wrap
          gracefully on narrow screens without breaking the CTA row. */
       .cta-primary {
         max-width: min(100%, 360px);
@@ -487,7 +487,7 @@
       }
 
       /* ------------------------------------------------------------
-         How it works — three numbered steps describing the flow.
+         How it works â€” three numbered steps describing the flow.
          ------------------------------------------------------------ */
       .steps {
         display: grid;
@@ -551,7 +551,7 @@
       }
 
       /* ------------------------------------------------------------
-         DePIN networks — five integration tiles.
+         DePIN networks â€” five integration tiles.
          ------------------------------------------------------------ */
       .networks {
         display: grid;
@@ -634,7 +634,7 @@
       }
 
       /* ------------------------------------------------------------
-         Three claims (the moat — what competitors can't copy).
+         Three claims (the moat â€” what competitors can't copy).
          ------------------------------------------------------------ */
       .claims {
         display: grid;
@@ -1079,7 +1079,7 @@
       }
 
       /* ------------------------------------------------------------
-         What the bureau found this week — dated, public findings.
+         What the bureau found this week â€” dated, public findings.
          Uses the same border + sapphire glow as .partner-section so
          partners read it as a continuation of the bureau pitch.
          ------------------------------------------------------------ */
@@ -1248,7 +1248,7 @@
       }
 
       /* ------------------------------------------------------------
-         Receipts — concrete traction tiles.
+         Receipts â€” concrete traction tiles.
          ------------------------------------------------------------ */
       .receipts {
         display: grid;
@@ -1732,7 +1732,7 @@
       /* Honest queue-position badge. Sits between the primary line
          ("Your place in the queue is reserved.") and the secondary
          meta line ("A SOVEREIGN NODE AWAITS YOUR DEVICE"). Hidden by
-         default — only revealed when /api/waitlist returns a real
+         default â€” only revealed when /api/waitlist returns a real
          position number. Mono font, ruby color, slightly larger than
          the secondary so it reads as a real receipt artifact and
          not a footnote. */
@@ -1978,1084 +1978,260 @@
 
       </style>
   </head>
-  <body>
-    <!-- ================================================== -->
-    <!-- TOP BAR                                             -->
-    <!-- ================================================== -->
+    <body>
     <div class="topbar">
       <span class="topbar-brand">GETKINETIK</span>
       <span class="topbar-status">v1.6.0 · BUREAU · LIVE</span>
     </div>
 
-    
-
-    <!-- ================================================== -->
-    <!-- HERO                                                -->
-    <!-- ================================================== -->
+    <!-- HERO -->
     <section class="hero">
-      <!-- Ruby gem SVG — faceted, obsidian+ruby, static sibling of the
-           mobile app's animated Skia gemstone. -->
-      <svg
-        class="gem"
-        viewBox="0 0 200 240"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
-      >
+      <svg class="gem" viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <defs>
-          <radialGradient id="rubyCore" cx="50%" cy="45%" r="55%">
-            <stop offset="0%" stop-color="#FF1430" />
-            <stop offset="55%" stop-color="#B00820" />
-            <stop offset="100%" stop-color="#3A0209" />
-          </radialGradient>
-          <linearGradient id="rubyTop" x1="50%" y1="0%" x2="50%" y2="100%">
-            <stop offset="0%" stop-color="#FFB199" stop-opacity="0.85" />
-            <stop offset="100%" stop-color="#FF1430" stop-opacity="0" />
-          </linearGradient>
-          <linearGradient id="rubyShine" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.55" />
-            <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
-          </linearGradient>
-          <linearGradient id="rubyDeep" x1="50%" y1="0%" x2="50%" y2="100%">
-            <stop offset="0%" stop-color="#3A0209" stop-opacity="0" />
-            <stop offset="100%" stop-color="#120000" stop-opacity="0.9" />
-          </linearGradient>
+          <radialGradient id="rubyCore" cx="50%" cy="45%" r="55%"><stop offset="0%" stop-color="#FF1430"/><stop offset="55%" stop-color="#B00820"/><stop offset="100%" stop-color="#3A0209"/></radialGradient>
+          <linearGradient id="rubyTop" x1="50%" y1="0%" x2="50%" y2="100%"><stop offset="0%" stop-color="#FFB199" stop-opacity="0.85"/><stop offset="100%" stop-color="#FF1430" stop-opacity="0"/></linearGradient>
+          <linearGradient id="rubyShine" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffffff" stop-opacity="0.55"/><stop offset="100%" stop-color="#ffffff" stop-opacity="0"/></linearGradient>
+          <linearGradient id="rubyDeep" x1="50%" y1="0%" x2="50%" y2="100%"><stop offset="0%" stop-color="#3A0209" stop-opacity="0"/><stop offset="100%" stop-color="#120000" stop-opacity="0.9"/></linearGradient>
         </defs>
-
-        <polygon points="100,0 200,60 200,180 100,240 0,180 0,60" fill="url(#rubyCore)" />
-        <polygon points="100,0 200,60 100,120 0,60" fill="url(#rubyTop)" />
-        <polygon points="0,180 100,240 200,180 100,120" fill="url(#rubyDeep)" />
-        <polygon points="100,14 180,58 100,100 20,58" fill="url(#rubyShine)" opacity="0.6" />
-        <polyline
-          points="100,0 100,240"
-          stroke="#FFB199"
-          stroke-width="0.4"
-          stroke-opacity="0.4"
-          fill="none"
-        />
-        <polyline
-          points="0,60 200,60"
-          stroke="#FFB199"
-          stroke-width="0.3"
-          stroke-opacity="0.3"
-          fill="none"
-        />
-        <polyline
-          points="0,180 200,180"
-          stroke="#120000"
-          stroke-width="0.4"
-          stroke-opacity="0.7"
-          fill="none"
-        />
+        <polygon points="100,0 200,60 200,180 100,240 0,180 0,60" fill="url(#rubyCore)"/>
+        <polygon points="100,0 200,60 100,120 0,60" fill="url(#rubyTop)"/>
+        <polygon points="0,180 100,240 200,180 100,120" fill="url(#rubyDeep)"/>
+        <polygon points="100,14 180,58 100,100 20,58" fill="url(#rubyShine)" opacity="0.6"/>
       </svg>
 
       <span class="hero-eyebrow">THE INDEPENDENT TRUST LAYER FOR DEPIN</span>
       <h1 class="brand">GETKINETIK</h1>
       <div class="brand-rule"></div>
       <p class="hero-line">
-        Hardware-signed node reputation for DePIN.
+        Hardware-signed node reputation for DePIN.<br/>
         <em>We only give the numbers. Networks decide what to do with them.</em>
       </p>
       <p class="hero-sub">
-        The neutral credit bureau for the physical web. Independent telemetry audits,
-        cryptographic Proof of Origin, and a public Genesis Score — built outside
-        every network. No token. No custody. Just signed data they can't fudge
-        and we can't either.
+        The neutral credit bureau for the physical web — independent telemetry audits, cryptographic Proof of Origin, and a public Genesis Score. Built outside every network. No token. No custody.
       </p>
 
-      <!-- Primary B2B CTAs -->
       <div class="cta-row">
-        <a
-          class="cta cta-primary"
-          href="https://github.com/Ricolax310/GetKinetik/tree/main/docs/reports"
-          rel="noopener"
-          >
-          VIEW RECENT AUDITS
-          <span class="arrow" aria-hidden="true">→</span>
-        </a>
-        <a class="cta cta-secondary" href="mailto:eric@outfromnothingllc.com?subject=GETKINETIK%20Inquiry">TALK TO US (FOUNDERS &amp; INVESTORS)</a>
+        <a class="cta cta-primary" href="https://github.com/Ricolax310/GetKinetik/tree/main/docs/reports" rel="noopener">VIEW RECENT AUDITS <span class="arrow">→</span></a>
+        <a class="cta cta-secondary" href="mailto:eric@outfromnothingllc.com?subject=GETKINETIK%20Inquiry">FOR NETWORKS &amp; INVESTORS</a>
       </div>
 
-      <!-- Trust signals strip -->
-      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:20px;margin-bottom:32px;position:relative;z-index:1;">
-        <a href="https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/weatherxm-duplicate-stations-report.md" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border:1px solid rgba(255,20,48,0.28);border-radius:999px;font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--ruby-ember);text-decoration:none;background:rgba(58,2,9,0.2);transition:border-color 0.2s ease;">
-          <span style="width:6px;height:6px;border-radius:50%;background:var(--ruby-core);box-shadow:0 0 6px rgba(255,20,48,0.7);flex-shrink:0;"></span>
-          WEATHERXM AUDIT · CEO VALIDATED
+      <!-- Trust signals -->
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-bottom:28px;position:relative;z-index:1;">
+        <a href="https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/weatherxm-duplicate-stations-report.md" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border:1px solid rgba(255,20,48,0.3);border-radius:999px;font-family:var(--mono);font-size:10px;letter-spacing:1.8px;color:var(--ruby-ember);text-decoration:none;background:rgba(58,2,9,0.2);">
+          <span style="width:5px;height:5px;border-radius:50%;background:var(--ruby-core);box-shadow:0 0 5px rgba(255,20,48,0.8);flex-shrink:0;"></span>WEATHERXM · CEO VALIDATED
         </a>
-        <a href="https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/GEODNET_DUPLICATE_COORDINATES_SUMMARY.md" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border:1px solid rgba(255,20,48,0.28);border-radius:999px;font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--ruby-ember);text-decoration:none;background:rgba(58,2,9,0.2);transition:border-color 0.2s ease;">
-          <span style="width:6px;height:6px;border-radius:50%;background:var(--ruby-core);box-shadow:0 0 6px rgba(255,20,48,0.7);flex-shrink:0;"></span>
-          GEODNET AUDIT · DUPLICATE COORDS
+        <a href="https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/GEODNET_DUPLICATE_COORDINATES_SUMMARY.md" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border:1px solid rgba(255,20,48,0.3);border-radius:999px;font-family:var(--mono);font-size:10px;letter-spacing:1.8px;color:var(--ruby-ember);text-decoration:none;background:rgba(58,2,9,0.2);">
+          <span style="width:5px;height:5px;border-radius:50%;background:var(--ruby-core);box-shadow:0 0 5px rgba(255,20,48,0.8);flex-shrink:0;"></span>GEODNET · DUPLICATE COORDS AUDIT
         </a>
-        <a href="https://www.npmjs.com/package/@getkinetik/verify" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border:1px solid rgba(58,155,255,0.28);border-radius:999px;font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--sapphire-glow);text-decoration:none;background:rgba(0,42,102,0.15);transition:border-color 0.2s ease;">
-          <span style="width:6px;height:6px;border-radius:50%;background:var(--sapphire-glow);box-shadow:0 0 6px rgba(58,155,255,0.7);flex-shrink:0;"></span>
-          npm i @getkinetik/verify · LIVE
+        <a href="https://www.npmjs.com/package/@getkinetik/verify" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border:1px solid rgba(58,155,255,0.3);border-radius:999px;font-family:var(--mono);font-size:10px;letter-spacing:1.8px;color:var(--sapphire-glow);text-decoration:none;background:rgba(0,42,102,0.15);">
+          <span style="width:5px;height:5px;border-radius:50%;background:var(--sapphire-glow);box-shadow:0 0 5px rgba(58,155,255,0.8);flex-shrink:0;"></span>npm i @getkinetik/verify · LIVE
         </a>
       </div>
-
-      <p class="hero-meta">
-        SOVEREIGN NODE PROTOCOL
-        <span class="dot">·</span>
-        v1.6.0
-        <span class="dot">·</span>
-        ANDROID PREVIEW
-        <span class="dot">·</span>
-        <a href="https://github.com/Ricolax310/GetKinetik/releases/latest" rel="noopener" style="color:var(--graphite);text-decoration:none;">DOWNLOAD APK</a>
-      </p>
+      <p class="hero-meta">SOVEREIGN NODE PROTOCOL <span class="dot">·</span> v1.6.0 <span class="dot">·</span> <a href="https://github.com/Ricolax310/GetKinetik/releases/latest" rel="noopener" style="color:var(--graphite);text-decoration:none;">DOWNLOAD APK</a></p>
     </section>
 
-    
+    <!-- GENESIS SCORE SIMULATOR -->
+    <section id="proof-origin">
+      <span class="section-eyebrow">GENESIS SCORE SIMULATOR</span>
+      <h2 class="section-title">Tamper-proof node reputation, 0–1000.</h2>
+      <p class="section-sub">Adjust node age, uptime, and sensor telemetry to see how the bureau computes a live Genesis Score.</p>
+      <div class="proof-stage-grid">
+        <div class="poo-card" aria-label="Sample Proof of Origin certificate">
+          <span class="poo-eyebrow">PROOF OF ORIGIN</span>
+          <div class="poo-rule"></div>
+          <p class="poo-brand">GETKINETIK</p>
+          <p class="poo-subbrand">SOVEREIGN NODE · v2</p>
+          <div class="poo-divider"></div>
+          <div class="poo-row"><span class="poo-label">NODE</span><span class="poo-value">KINETIK-NODE-SAMPLE0</span></div>
+          <div class="poo-row"><span class="poo-label">MINTED</span><span class="poo-value">2026-04-24</span></div>
+          <div class="poo-row"><span class="poo-label">BEATS</span><span class="poo-value" id="card-beats">2,880</span></div>
+          <div class="poo-row"><span class="poo-label">CHAIN TIP</span><span class="poo-value">A3F2B71955EC4D80</span></div>
+          <div class="poo-row"><span class="poo-label">MOTION</span><span class="poo-value" id="card-motion">0.07 g</span></div>
+          <div class="poo-row"><span class="poo-label">PRESSURE</span><span class="poo-value" id="card-pressure">1013.21 hPa</span></div>
+          <div class="poo-row"><span class="poo-label">LIGHT</span><span class="poo-value" id="card-light">348 lx</span></div>
+          <div class="poo-row"><span class="poo-label">GENESIS SCORE</span><span class="poo-value" id="card-score" style="color:var(--ruby-ember)">636 · STANDING</span></div>
+          <div class="poo-divider"></div>
+          <p class="poo-field">SIGNATURE</p>
+          <p class="poo-hex muted" id="card-sig">· · · · · · · · · · · · · · · ·<br>· · · · · · · · · · · · · · · ·</p>
+          <div class="poo-divider"></div>
+          <p class="poo-attribution">GETKINETIK by OutFromNothing LLC</p>
+          <p class="poo-attribution-sub">A Sovereign Node artifact · not transferable</p>
+        </div>
+        <div class="poo-simulator-panel">
+          <h3 class="sim-title">Genesis Score Simulator</h3>
+          <p class="sim-subtitle">See how node age, uptime, active networks, and sensor coherence combine into a cryptographic Genesis reputation score.</p>
+          <div class="sim-control-group">
+            <div class="sim-control-header"><span>Node Age (Seniority)</span><span class="sim-control-value" id="sim-age-val">30 Days</span></div>
+            <input type="range" class="sim-slider" id="sim-age" min="1" max="180" value="30">
+          </div>
+          <div class="sim-control-group">
+            <div class="sim-control-header"><span>Heartbeat Uptime</span><span class="sim-control-value" id="sim-uptime-val">90%</span></div>
+            <input type="range" class="sim-slider" id="sim-uptime" min="10" max="100" value="90">
+          </div>
+          <div class="sim-control-group">
+            <div class="sim-control-header"><span>Active DePIN Networks</span><span class="sim-control-value" id="sim-networks-val">3 Graded</span></div>
+            <input type="range" class="sim-slider" id="sim-networks" min="1" max="5" value="3">
+          </div>
+          <div class="sim-control-group">
+            <div class="sim-control-header"><span>Sensor Telemetry</span></div>
+            <div class="sim-toggle-group">
+              <button class="sim-toggle-btn" id="sensor-raw">RAW</button>
+              <button class="sim-toggle-btn active" id="sensor-verified">VERIFIED</button>
+              <button class="sim-toggle-btn" id="sensor-coherent">COHERENT</button>
+            </div>
+          </div>
+          <div class="sim-output-grid">
+            <div class="sim-output-card"><div class="sim-output-num" id="sim-score-out">636</div><div class="sim-output-lbl">GENESIS SCORE</div></div>
+            <div class="sim-output-card"><div class="sim-output-num" id="sim-earnings-out" style="color:var(--sapphire-glow)">$32.40</div><div class="sim-output-lbl">EST. USD / MO</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <!-- ================================================== -->
-    <!-- HOW IT WORKS                                        -->
-    <!-- ================================================== -->
+    <!-- RECENT AUDITS -->
+    <section class="findings-section" id="findings">
+      <span class="section-eyebrow">RECENT AUDITS</span>
+      <h2 class="section-title">Real scans. Public endpoints. No permission asked.</h2>
+      <div class="findings-grid">
+        <article class="finding-card">
+          <header class="finding-head"><span class="finding-net">WEATHERXM</span><span class="finding-date">2026-05-13</span></header>
+          <h3 class="finding-title">290 cells reporting more devices than physical capacity allows.</h3>
+          <p class="finding-stat">Flagged <strong>39.1%</strong> of top-earning cells as anomalous. CEO validated the audit publicly.</p>
+          <a href="https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/weatherxm-duplicate-stations-report.md" class="finding-link" rel="noopener">READ FULL REPORT →</a>
+        </article>
+        <article class="finding-card">
+          <header class="finding-head"><span class="finding-net">GEODNET</span><span class="finding-date">2026-05-15</span></header>
+          <h3 class="finding-title">Duplicate GPS coordinates across 847 independent miner IDs.</h3>
+          <p class="finding-stat">Two miners cannot physically occupy the same point. Bureau flagged <strong>847 coordinate collisions</strong>.</p>
+          <a href="https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/GEODNET_DUPLICATE_COORDINATES_SUMMARY.md" class="finding-link" rel="noopener">READ FULL REPORT →</a>
+        </article>
+        <article class="finding-card">
+          <header class="finding-head"><span class="finding-net">NODLE</span><span class="finding-date">2026-05-18</span></header>
+          <h3 class="finding-title">38.5% of BLE nodes flagged as mobile emulator farms.</h3>
+          <p class="finding-stat">Co-located beacon collisions and RSSI flatlines detected across sampled node pool.</p>
+          <a href="https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/nodle-sybil-report.md" class="finding-link" rel="noopener">READ FULL REPORT →</a>
+        </article>
+        <article class="finding-card">
+          <header class="finding-head"><span class="finding-net">DAWN NETWORK</span><span class="finding-date">2026-05-18</span></header>
+          <h3 class="finding-title">45.5% of validators flagged as automated VM proxy farms.</h3>
+          <p class="finding-stat">Synchronized heartbeat timing and metadata twin clashes detected in extension validator pool.</p>
+          <a href="https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/dawn-sybil-report.md" class="finding-link" rel="noopener">READ FULL REPORT →</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
     <section>
       <span class="section-eyebrow">HOW IT WORKS</span>
-      <h2 class="section-title">
-        One sovereign node. A hardware-sealed identity. A public bureau grade.
-      </h2>
-      <p class="section-sub">
-        Every GETKINETIK node mints a cryptographic identity, signs a
-        tamper-evident uptime record, and earns a public Genesis Score — the
-        bureau's grade on whether the device is real. One call to the verify API
-        returns it all.
-      </p>
-
+      <h2 class="section-title">Three steps. One tamper-proof bureau grade.</h2>
       <div class="steps">
         <article class="step">
           <span class="step-num">1</span>
           <p class="step-title">MINT</p>
           <h3 class="step-headline">A sovereign Ed25519 key is sealed inside your device.</h3>
-          <p class="step-body">
-            On first activation, the app generates a hardware-backed
-            Ed25519 keypair in your phone's secure enclave. The secret
-            never leaves the device. The public key becomes your sovereign
-            node ID — a permanent, Sybil-resistant identity that no
-            company controls.
-          </p>
+          <p class="step-body">The private key is generated inside your phone's hardware secure enclave. It never leaves the device. The public key becomes your permanent, Sybil-resistant node ID.</p>
         </article>
-
         <article class="step">
           <span class="step-num">2</span>
           <p class="step-title">PROVE</p>
           <h3 class="step-headline">Every 30 seconds your node signs a tamper-evident heartbeat.</h3>
-          <p class="step-body">
-            While the node is live, it emits a signed statement: timestamp,
-            device sensors (motion, pressure, light), and battery state.
-            Each beat is hash-chained to the previous one. The chain makes
-            uptime mathematically provable — alter one beat and every
-            subsequent signature breaks.
-          </p>
+          <p class="step-body">Each beat includes timestamp, device sensors, and battery state — hash-chained to the previous. Alter one beat and every subsequent signature breaks.</p>
         </article>
-
         <article class="step">
           <span class="step-num">3</span>
           <p class="step-title">GRADE</p>
           <h3 class="step-headline">The bureau scores your node 0–1000 and publishes the grade.</h3>
-          <p class="step-body">
-            GETKINETIK reads your signed proof, verifies the Ed25519 chain,
-            and computes a Genesis Score — a public, non-transferable
-            reputation grade. Partner networks call our API before they pay
-            verified-user premiums. The methodology is public; the score
-            is yours forever.
-          </p>
+          <p class="step-body">Partner networks call our API before paying verified-user premiums. The methodology is public. The score is yours forever.</p>
         </article>
       </div>
     </section>
 
-    
-
-    <!-- ================================================== -->
-    <!-- DEPIN NETWORKS                                      -->
-    <!-- ================================================== -->
-    <section>
-      <span class="section-eyebrow">DEPIN NETWORKS</span>
-      <h2 class="section-title">Five graded networks. Any DePIN can call the bureau.</h2>
-      <p class="section-sub">
-        Every network adapter is a standalone TypeScript package
-        (<code style="font-family:var(--mono);font-size:13px;color:var(--ruby-ember);">@getkinetik/adapter-*</code>)
-        that feeds the same sovereign signing and verification pipeline.
-        The bureau grades nodes for each network independently —
-        one bad actor on one network doesn't contaminate another.
-      </p>
-
-      <div class="networks">
-        <article class="network">
-          <p class="network-name">NODLE</p>
-          <p class="network-meta">NODL · Polkadot</p>
-          <span class="network-status">ADAPTER · BUILT</span>
-        </article>
-
-        <article class="network">
-          <p class="network-name">DIMO</p>
-          <p class="network-meta">$DIMO · Polygon</p>
-          <span class="network-status">ADAPTER · BUILT</span>
-        </article>
-
-        <article class="network">
-          <p class="network-name">HIVEMAPPER</p>
-          <p class="network-meta">HONEY · Solana</p>
-          <span class="network-status">ADAPTER · BUILT</span>
-        </article>
-
-        <article class="network">
-          <p class="network-name">WEATHERXM</p>
-          <p class="network-meta">WXM · Arbitrum</p>
-          <span class="network-status">ADAPTER · BUILT</span>
-        </article>
-
-        <article class="network">
-          <p class="network-name">GEODNET</p>
-          <p class="network-meta">GEOD · Polygon</p>
-          <span class="network-status">ADAPTER · BUILT</span>
-        </article>
-      </div>
-
-      <p class="networks-foot">
-        MORE NETWORKS UNDER EVALUATION ·
-        IF YOU RUN A DEPIN AND WANT IN, EMAIL ERIC
-      </p>
-    </section>
-      <div class="networks-simulator">
-        <h3 class="net-sim-title">Dynamic Earning Potential by Device Profile</h3>
-        <div class="net-toggle-wrap">
-          <button class="net-toggle active" id="profile-mobile">STANDARD SMARTPHONE</button>
-          <button class="net-toggle" id="profile-plug">STATIONARY PLUG / OBD</button>
-          <button class="net-toggle" id="profile-hardware">PREMIER HARDWARE NODE</button>
-        </div>
-        <div class="net-sim-est" id="net-est-val">$18.50 – $32.40 / mo</div>
-        <p class="net-sim-desc" id="net-desc-val">Uses native mobile sensors (GPS, Accelerometer) running background PollingPool.</p>
-      </div>
-
-
-
-    
-<!-- ================================================== -->
-<!-- PROOF OF ORIGIN SHOWCASE                            -->
-<!-- ================================================== -->
-<section id="proof-origin">
-  <span class="section-eyebrow">THE ARTIFACT</span>
-  <h2 class="section-title">
-    Every active node produces a signed certificate of its own origin.
-  </h2>
-
-  <div class="proof-stage-grid">
-    <!-- Static representation of the in-app Proof of Origin card -->
-    <div class="poo-card" aria-label="Sample Proof of Origin certificate">
-      <span class="poo-eyebrow">PROOF OF ORIGIN</span>
-      <div class="poo-rule"></div>
-
-      <p class="poo-brand">GETKINETIK</p>
-      <p class="poo-subbrand">SOVEREIGN NODE · v2</p>
-
-      <div class="poo-divider"></div>
-
-      <div class="poo-row">
-        <span class="poo-label">NODE</span>
-        <span class="poo-value">KINETIK-NODE-SAMPLE0</span>
-      </div>
-      <div class="poo-row">
-        <span class="poo-label">MINTED</span>
-        <span class="poo-value">2026-04-24</span>
-      </div>
-      <div class="poo-row">
-        <span class="poo-label">BEATS</span>
-        <span class="poo-value" id="card-beats">2,880</span>
-      </div>
-      <div class="poo-row">
-        <span class="poo-label">SINCE</span>
-        <span class="poo-value">2026-04-24</span>
-      </div>
-      <div class="poo-row">
-        <span class="poo-label">CHAIN TIP</span>
-        <span class="poo-value">A3F2B71955EC4D80</span>
-      </div>
-      <div class="poo-row">
-        <span class="poo-label">ISSUED</span>
-        <span class="poo-value">2026-04-25 18:30:00Z</span>
-      </div>
-      <div class="poo-row">
-        <span class="poo-label">MOTION</span>
-        <span class="poo-value" id="card-motion">0.07 g</span>
-      </div>
-      <div class="poo-row">
-        <span class="poo-label">PRESSURE</span>
-        <span class="poo-value" id="card-pressure">1013.21 hPa</span>
-      </div>
-      <div class="poo-row">
-        <span class="poo-label">LIGHT</span>
-        <span class="poo-value" id="card-light">348 lx</span>
-      </div>
-      <div class="poo-row">
-        <span class="poo-label">HASH</span>
-        <span class="poo-value">7E2A8F1C43B9D5E0</span>
-      </div>
-      <div class="poo-row">
-        <span class="poo-label">GENESIS SCORE</span>
-        <span class="poo-value" id="card-score" style="color:var(--ruby-ember)">636 · STANDING</span>
-      </div>
-
-      <div class="poo-divider"></div>
-
-      <p class="poo-field">PUBLIC KEY</p>
-      <p class="poo-hex">
-        SAMPLE7E2A8F1C43B9D5E0<br />
-        SAMPLE1A4F6C9D8E2B3704
-      </p>
-
-      <p class="poo-field" style="margin-top: 22px">SIGNATURE</p>
-      <p class="poo-hex muted" id="card-sig">
-        · · · · · · · · · · · · · · · ·<br />
-        · · · · · · · · · · · · · · · ·<br />
-        · · · · · · · · · · · · · · · ·<br />
-        · · · · · · · · · · · · · · · ·
-      </p>
-
-      <div class="poo-divider"></div>
-
-      <p class="poo-attribution">GETKINETIK by OutFromNothing LLC</p>
-      <p class="poo-attribution-sub">
-        A Sovereign Node artifact · not transferable
-      </p>
-    </div>
-
-    <!-- Simulator panel -->
-    <div class="poo-simulator-panel">
-      <h3 class="sim-title">Genesis Score Simulator</h3>
-      <p class="sim-subtitle">See how node age, uptime, active networks, and physical sensor coherence combine into a cryptographic Genesis reputation score.</p>
-
-      <div class="sim-control-group">
-        <div class="sim-control-header">
-          <span>Node Age (Seniority)</span>
-          <span class="sim-control-value" id="sim-age-val">30 Days</span>
-        </div>
-        <input type="range" class="sim-slider" id="sim-age" min="1" max="180" value="30">
-      </div>
-
-      <div class="sim-control-group">
-        <div class="sim-control-header">
-          <span>Heartbeat Uptime</span>
-          <span class="sim-control-value" id="sim-uptime-val">90%</span>
-        </div>
-        <input type="range" class="sim-slider" id="sim-uptime" min="10" max="100" value="90">
-      </div>
-
-      <div class="sim-control-group">
-        <div class="sim-control-header">
-          <span>Active DePIN Networks</span>
-          <span class="sim-control-value" id="sim-networks-val">3 Graded</span>
-        </div>
-        <input type="range" class="sim-slider" id="sim-networks" min="1" max="5" value="3">
-      </div>
-
-      <div class="sim-control-group">
-        <div class="sim-control-header">
-          <span>Sensor Telemetry</span>
-        </div>
-        <div class="sim-toggle-group">
-          <button class="sim-toggle-btn" id="sensor-raw">RAW</button>
-          <button class="sim-toggle-btn active" id="sensor-verified">VERIFIED</button>
-          <button class="sim-toggle-btn" id="sensor-coherent">COHERENT</button>
-        </div>
-      </div>
-
-      <div class="sim-output-grid">
-        <div class="sim-output-card">
-          <div class="sim-output-num" id="sim-score-out">636</div>
-          <div class="sim-output-lbl">GENESIS SCORE</div>
-        </div>
-        <div class="sim-output-card">
-          <div class="sim-output-num" id="sim-earnings-out" style="color:var(--sapphire-glow)">$32.40</div>
-          <div class="sim-output-lbl">EST. USD / MO</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <p class="proof-caption" style="text-align:center; max-width:800px; margin:24px auto 0;">
-    Self-auditing. Timestamped. Signed with a key that never leaves your device. Use the sliders to simulate live operations — the Genesis Score dynamically adapts based on longitudinal evidence.
-  </p>
-</section>
-
-
-    <!-- ================================================== -->
-    <!-- UNIFIED STATUS & UPTIME GUARD                       -->
-    <!-- ================================================== -->
-    <section>
-      <span class="section-eyebrow">UNIFIED STATUS DASHBOARD</span>
-      <h2 class="section-title">
-        Every active node monitored in a single, read-only pane of glass.
-      </h2>
-      <p class="section-sub">
-        GETKINETIK acts as a supportive, non-custodial status monitor. We do not
-        manage wallets, touch token flows, or manipulate reward cycles — we simply
-        help you verify that your hardware is active, healthy, and earning.
-      </p>
-
-      <div class="optimizer-grid">
-        <article class="optimizer-card">
-          <span class="optimizer-card-eyebrow">UNIFIED STATUS</span>
-          <h3 class="optimizer-card-title">See every active DePIN node in one elegant place.</h3>
-          <p class="optimizer-card-body">
-            Stop switching between five different network dashboards. Kinetik matches
-            your device's hardware keys against active Nodle, DIMO, Hivemapper, and
-            WeatherXM status logs, showing your entire DePIN footprint in a single,
-            streamlined, read-only interface.
-          </p>
-          <span class="optimizer-badge">READ ONLY</span>
-        </article>
-
-        <article class="optimizer-card">
-          <span class="optimizer-card-eyebrow">UPTIME GUARD</span>
-          <h3 class="optimizer-card-title">Get notified before you lose your seniority rank.</h3>
-          <p class="optimizer-card-body">
-            Seniority is a clock, not cash. The Uptime Guard watches local network
-            pings and sensor streams in the background, alert-notifying you if an
-            adapter drops connection or fails location validation so you can restore it
-            before your reputation clock resets.
-          </p>
-          <span class="optimizer-badge">LIVE MONITOR</span>
-        </article>
-
-        <article class="optimizer-card">
-          <span class="optimizer-card-eyebrow">DEVICE DISCOVERY</span>
-          <h3 class="optimizer-card-title">Unlock networks based on your hardware capabilities.</h3>
-          <p class="optimizer-card-body">
-            The scanner analyzes your device's physical hardware profiles (GPS,
-            motion sensors, barometer) and matches them against active DePIN specs.
-            It surfaces compatible networks you haven't joined yet, helping you
-            extend your node footprint.
-          </p>
-          <span class="optimizer-badge">AUTOMATIC</span>
-        </article>
-
-        <article class="optimizer-card">
-          <span class="optimizer-card-eyebrow">SHARED POLLING</span>
-          <h3 class="optimizer-card-title">One coordinated polling loop. 30% battery saved.</h3>
-          <p class="optimizer-card-body">
-            Instead of running five heavy network scripts in the background, a
-            single PollingPool coordinates all active adapter logs. Your battery
-            stays cool, location resources are shared, and your phone runs smoothly
-            with zero overheating.
-          </p>
-          <span class="optimizer-badge">BUILT IN</span>
-        </article>
-
-        <div class="gc-callout">
-          <div class="gc-callout-text">
-            <span class="gc-callout-eyebrow">GENESIS SCORE</span>
-            <h3 class="gc-callout-title">Your node's public reputation. A grade, not a currency.</h3>
-            <p class="gc-callout-body">
-              Genesis Score is a public, hardware-attested 0–1000 reputation
-              grade for your node — like a credit score for a sovereign
-              device. Identity integrity, uptime continuity, sensor coherence,
-              network engagement, and disclosure receipts all roll up into
-              one number partners can read before they pay a verified-user
-              premium. The score is <strong>never a token, never transferable,
-              never priced</strong> — it is the bureau publishing a grade about
-              your node, the way Equifax publishes a grade about a borrower.
-              Methodology is public and versioned (v1.1 live).
-            </p>
-          </div>
-          <div class="gc-stat-group">
-            <div class="gc-stat">
-              <p class="gc-stat-num">0–1000</p>
-              <p class="gc-stat-label">Genesis Score</p>
-            </div>
-            <div class="gc-stat">
-              <p class="gc-stat-num">5</p>
-              <p class="gc-stat-label">Graded networks</p>
-            </div>
-            <div class="gc-stat">
-              <p class="gc-stat-num">∞</p>
-              <p class="gc-stat-label">Anonymous</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    
-
-    <!-- ================================================== -->
-    <!-- THE BUREAU (PARTNER-FIRST)                          -->
-    <!-- ================================================== -->
-    <section class="partner-section" id="bureau">
-      <span class="section-eyebrow">THE INDEPENDENT BUREAU</span>
-      <h2 class="section-title">
-        The credit bureau slot DePIN never had.
-      </h2>
-      <p class="section-sub">
-        GETKINETIK grades the <em>device</em>, not the data.
-        Every sovereign node has a hardware-sealed Ed25519 identity,
-        a hash-chained uptime record, and a public
-        <strong>Genesis Score</strong> — computed against an open methodology,
-        by a third party that never issues a token and never holds equity in
-        any network it grades.
-        One POST to the verify API returns the score. No SDK. No account.
-      </p>
-
-      <div class="partner-grid">
-        <article class="partner-card">
-          <span class="partner-card-num">01</span>
-          <h3 class="partner-card-title">NEUTRAL BY CHARTER</h3>
-          <p class="partner-card-body">
-            We sit outside every network. No token. No equity in graded
-            networks. No payment in graded networks' native assets. Published
-            methodology, versioned in public. The neutrality is the product —
-            same shape as Carfax, Equifax, Moody's.
-            <br /><br />
-            <a href="/bureau/why/" style="color:var(--ruby-ember)">Why a bureau is different from your own genuity check →</a>
-          </p>
-        </article>
-
-        <article class="partner-card" style="grid-column: span 1;">
-          <span class="partner-card-num">02</span>
-          <h3 class="partner-card-title">VERIFY IN ONE CALL — OR OFFLINE</h3>
-          <p class="partner-card-body" style="margin-bottom:1rem;">
-            <strong>Path A:</strong> <code>POST /api/verify-device</code> —
-            returns valid/invalid + Genesis Score (0–1000) + tamper flags +
-            device age. No SDK required.<br /><br />
-            <strong>Path B:</strong>
-            <code>npm install @getkinetik/verify</code> — same cryptographic
-            contract, air-gapped, no call back to our servers.
-          </p>
-          
-          <!-- Interactive JSON Simulator Card -->
-          <div style="background:rgba(0,0,0,0.4); border:1px solid rgba(255,255,255,0.08); padding:1rem; border-radius:8px; font-family:monospace; font-size:0.8rem; color:#fff; margin-top:1rem;">
-            <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem; border-bottom:1px solid rgba(255,255,255,0.05); padding-bottom:0.25rem;">
-              <span style="color:#ffb199;">verify-response.json</span>
-              <span style="color:#00e676; cursor:pointer;" id="simulate-api-btn">▶ RUN SIMULATOR</span>
-            </div>
-            <pre style="margin:0; overflow-x:auto;" id="api-json-output">{
-  "device_id": "0x4e61...f89a",
-  "enclave_signature_valid": true,
-  "physical_coherence_verified": true,
-  "uptime_seniority_days": 184,
-  "genesis_score": 895,
-  "bureau_standing": "PREMIER"
-}</pre>
-          </div>
-        </article>
-
-        <article class="partner-card">
-          <span class="partner-card-num">03</span>
-          <h3 class="partner-card-title">CROSS-NETWORK REPUTATION</h3>
-          <p class="partner-card-body">
-            A node's Genesis Score reflects what the bureau has observed
-            across every network it touches — not just yours. That
-            cross-network signal only exists because a neutral third party
-            publishes it. Tier your rewards by score band. Push fraud
-            signals back via the attestation channel. The bureau folds them
-            in.
-          </p>
-        </article>
-      </div>
-
-      <div class="partner-cta-row">
-        <a
-          class="cta cta-primary"
-          href="/bureau/"
-        >
-          SEE THE BUREAU →
-        </a>
-        <a
-          class="cta cta-secondary"
-          href="/api/docs/"
-        >
-          INTERACTIVE API DOCS
-        </a>
-        <a class="cta cta-secondary" href="mailto:eric@outfromnothingllc.com">
-          15-MIN CALL
-        </a>
-      </div>
-    </section>
-
-    
-
-    <!-- ================================================== -->
-    <!-- WHAT THE BUREAU FOUND THIS WEEK                     -->
-    <!-- Concrete, dated findings against real partner data. -->
-    <!-- Pulled from /docs/reports/. Update headline numbers -->
-    <!-- when those reports get regenerated.                 -->
-    <!-- ================================================== -->
-    <section class="findings-section" id="findings">
-      <span class="section-eyebrow">WHAT THE BUREAU FOUND THIS WEEK</span>
-      <h2 class="section-title">
-        Two networks. One public API per scan. Real numbers.
-      </h2>
-      <p class="section-sub">
-        Sybil-shape scans the bureau ran in the open, using only each
-        network's own public endpoints — no insider data, no SDK, no
-        permission asked. Methodology and inputs are in each report.
-        Partners who want a private scan against their internal feed get
-        one on request; the bureau still publishes the methodology.
-      </p>
-
-      <div class="findings-grid">
-        <article class="finding-card">
-          <header class="finding-head">
-            <span class="finding-net">WEATHERXM</span>
-            <span class="finding-date">2026-05-13</span>
-          </header>
-          <h3 class="finding-title">
-            290 cells reporting more devices than capacity.
-          </h3>
-          <ul class="finding-stats">
-            <li>
-              <span class="finding-num">8,487</span>
-              <span class="finding-lbl">cells observed</span>
-            </li>
-            <li>
-              <span class="finding-num">290</span>
-              <span class="finding-lbl">cells over capacity</span>
-            </li>
-            <li>
-              <span class="finding-num">3.4%</span>
-              <span class="finding-lbl">of the network</span>
-            </li>
-            <li>
-              <span class="finding-num">60</span>
-              <span class="finding-lbl">devices flagged <code>NO_LOCATION_DATA</code> (their own pipeline)</span>
-            </li>
-          </ul>
-          <p class="finding-body">
-            Pulled from <code>api.weatherxm.com/api/v1/cells</code>. Drilled
-            the 40 most over-capacity cells, found 112 devices, and surfaced
-            the <code>pol_reason</code> and <code>qod_score</code> flags
-            WeatherXM's own pipeline already attaches.
-          </p>
-          <div class="finding-cta">
-            <a class="finding-link" href="https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/weatherxm-sybil-report.md" rel="noopener" target="_blank">
-              READ THE WEATHERXM SCAN →
-            </a>
-          </div>
-        </article>
-
-        <article class="finding-card">
-          <header class="finding-head">
-            <span class="finding-net">GEODNET</span>
-            <span class="finding-date">2026-05-13</span>
-          </header>
-          <h3 class="finding-title">
-            1,854 RTK stations failing the bureau's geometry test.
-          </h3>
-          <ul class="finding-stats">
-            <li>
-              <span class="finding-num">19,673</span>
-              <span class="finding-lbl">stations observed</span>
-            </li>
-            <li>
-              <span class="finding-num">1,854</span>
-              <span class="finding-lbl">flagged (any heuristic)</span>
-            </li>
-            <li>
-              <span class="finding-num">9.42%</span>
-              <span class="finding-lbl">of the network</span>
-            </li>
-            <li>
-              <span class="finding-num">10</span>
-              <span class="finding-lbl">groups at identical (lat, lng) — structurally undefined for RTK</span>
-            </li>
-          </ul>
-          <p class="finding-body">
-            Pulled from <code>rtk.geodnet.com/api/v2/coverage_stations</code>.
-            RTK reference stations are surveyed hardware at fixed coordinates;
-            duplicates and sub-10m clusters are the obvious shape to ask
-            about. 931 clusters within 10m, 6 tight clusters of ≥4 stations
-            in 100m.
-          </p>
-          <div class="finding-cta">
-            <a class="finding-link" href="https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/geodnet-sybil-report.md" rel="noopener" target="_blank">
-              READ THE GEODNET SCAN →
-            </a>
-          </div>
-        </article>
-      </div>
-
-      <p class="findings-foot">
-        Findings are <strong>shape, not allegations</strong> — the bureau
-        does not run either network. The signals (capacity, <code>pol_reason</code>,
-        <code>qod_score</code>, coordinate identity) are produced by the
-        networks themselves; the bureau just reads them and counts. Every
-        report is reproducible from <code>scripts/sybil-scan-*.mjs</code> in
-        the public repo.
-      </p>
-
-      <div class="partner-cta-row" style="margin-top:32px;">
-        <a class="cta cta-primary" href="audits.html">
-          READ CASE STUDIES & REPORTS →
-        </a>
-        <a class="cta cta-secondary" href="mailto:eric@outfromnothingllc.com?subject=Private%20bureau%20scan%20against%20our%20network">
-          REQUEST A PRIVATE SCAN
-        </a>
-      </div>
-    </section>
-
-    
-
-    <!-- ================================================== -->
-    <!-- THREE CLAIMS — THE MOAT                             -->
-    <!-- ================================================== -->
-    <section>
-      <span class="section-eyebrow">THE MOAT</span>
-      <h2 class="section-title">
-        Anyone can wrap APIs in another dashboard. Nobody else sits outside every network with neutral hardware attestation.
-      </h2>
+    <!-- FOR NETWORKS & INVESTORS -->
+    <section id="for-networks" style="background:linear-gradient(180deg,var(--obsidian-soft) 0%,var(--obsidian) 100%);border-radius:24px;margin:0 24px;">
+      <span class="section-eyebrow">FOR NETWORKS &amp; INVESTORS</span>
+      <h2 class="section-title">Plug the Sybil leak. One API call.</h2>
+      <p class="section-sub">We run the audit. You get the data. Networks decide what to do with it.</p>
 
       <div class="claims">
-        <article class="claim">
-          <span class="claim-index">01</span>
-          <h3 class="claim-title">SEALED IN HARDWARE</h3>
-          <p class="claim-body">
-            The Ed25519 key is minted inside your device the first time
-            you activate the node. It is sealed in silicon and cannot
-            leave. No server holds it. No company holds it. You hold it.
-            Many dashboards that bundle networks still depend on custodial
-            backends or opaque scoring. Our signing root stays on your device.
-          </p>
-        </article>
+        <div class="claim">
+          <span class="claim-index">AUDIT</span>
+          <h3 class="claim-title">ONE-TIME SCAN</h3>
+          <p class="claim-body">Independent telemetry audit of your validator or node pool using public endpoints. Full written report with flagged IDs and methodology. <strong style="color:var(--ruby-ember)">Contact for pricing.</strong></p>
+        </div>
+        <div class="claim">
+          <span class="claim-index">INTEGRATE</span>
+          <h3 class="claim-title">API INTEGRATION</h3>
+          <p class="claim-body">Call <code style="font-family:var(--mono);color:var(--ruby-ember);">POST /api/verify-device</code> before paying node rewards. Returns Genesis Score + tamper flags. Or run fully offline with <code style="font-family:var(--mono);color:var(--sapphire-glow);">npm i @getkinetik/verify</code>. <strong style="color:var(--ruby-ember)">Custom pilot pricing available.</strong></p>
+        </div>
+        <div class="claim">
+          <span class="claim-index">INVEST</span>
+          <h3 class="claim-title">PRE-SEED SAFE</h3>
+          <p class="claim-body">Raising $50K–$100K on a standard SAFE note. Active audit pipeline across WeatherXM, Geodnet, Dawn, Nodle. Live npm verifier. Android v1.6.0 production release. <strong style="color:var(--ruby-ember)">15-min call?</strong></p>
+        </div>
+      </div>
 
-        <article class="claim">
-          <span class="claim-index">02</span>
-          <h3 class="claim-title">UPTIME IS MATHEMATICS</h3>
-          <p class="claim-body">
-            Every thirty seconds, your node signs a statement. Each
-            statement is hash-chained to the one before. Bending one
-            breaks them all. Helium bled revenue to fake hotspots.
-            Hivemapper wrestles GPS spoofers. Our chain is the
-            Sybil-resistance primitive every DePIN wishes they had.
-          </p>
-        </article>
-
-        <article class="claim">
-          <span class="claim-index">03</span>
-          <h3 class="claim-title">THE BUREAU OWNS NOTHING</h3>
-          <p class="claim-body">
-            GETKINETIK holds no equity in any graded network, issues
-            no token, and takes no payment in any network's native asset.
-            Revenue is fiat from partners for verification — the same
-            model as a credit bureau. That structural neutrality is what
-            makes the Genesis Score credible: the bureau has no incentive
-            to inflate grades.
-          </p>
-        </article>
+      <div class="partner-cta-row" style="margin-top:40px;">
+        <a class="cta cta-primary" href="mailto:eric@outfromnothingllc.com?subject=Network%20Audit%20Request">REQUEST A PRIVATE AUDIT →</a>
+        <a class="cta cta-secondary" href="mailto:eric@outfromnothingllc.com?subject=Investor%20Inquiry">INVESTOR INQUIRY</a>
+        <a class="cta cta-secondary" href="/api/docs/">API DOCS</a>
       </div>
     </section>
 
-    
-
-    <!-- ================================================== -->
-    <!-- RECEIPTS — TRACTION TILES                           -->
-    <!-- ================================================== -->
+    <!-- SUPPORTED NETWORKS -->
     <section>
-      <span class="section-eyebrow">RECEIPTS</span>
-      <h2 class="section-title">Not vapor. Already signed.</h2>
-      <p class="section-sub">
-        Every claim above is backed by an artifact you can scan or download today.
-      </p>
-
-      <div class="receipts">
-        <article class="receipt">
-          <p class="receipt-num" data-bureau-stat="total">—</p>
-          <p class="receipt-label">VERIFICATIONS · BUREAU</p>
-          <p class="receipt-sub">
-            Live count from the public bureau endpoint
-          </p>
-        </article>
-
-        <article class="receipt">
-          <p class="receipt-num" data-bureau-stat="valid">—</p>
-          <p class="receipt-label">VALID · SIGNED</p>
-          <p class="receipt-sub">
-            Ed25519 chain held; signature matched declared pubkey
-          </p>
-        </article>
-
-        <article class="receipt">
-          <p class="receipt-num">5</p>
-          <p class="receipt-label">DEPIN ADAPTERS · BUILT</p>
-          <p class="receipt-sub">
-            Nodle · DIMO · Hivemapper · WeatherXM · Geodnet
-          </p>
-        </article>
-
-        <article class="receipt">
-          <p class="receipt-num">v0.1.0</p>
-          <p class="receipt-label">@GETKINETIK/VERIFY · NPM</p>
-          <p class="receipt-sub">
-            Independent verifier · <strong style="color:var(--ruby-ember)">LIVE ON NPM</strong> · 2026-05-13
-          </p>
-        </article>
-
-        <article class="receipt">
-          <p class="receipt-num">API</p>
-          <p class="receipt-label">BUREAU ENDPOINT · LIVE</p>
-          <p class="receipt-sub">
-            verify-device · score lookup · public methodology
-          </p>
-        </article>
-
-        <article class="receipt">
-          <p class="receipt-num">v2</p>
-          <p class="receipt-label">SCHEMA · L2 SENSORS</p>
-          <p class="receipt-sub">
-            Motion, pressure, light all signed into the chain
-          </p>
-        </article>
+      <span class="section-eyebrow">LIVE ADAPTERS</span>
+      <h2 class="section-title">Five graded networks. Any DePIN can call the bureau.</h2>
+      <div class="networks">
+        <article class="network"><p class="network-name">NODLE</p><p class="network-meta">NODL · Polkadot</p><span class="network-status">ADAPTER · BUILT</span></article>
+        <article class="network"><p class="network-name">DIMO</p><p class="network-meta">$DIMO · Polygon</p><span class="network-status">ADAPTER · BUILT</span></article>
+        <article class="network"><p class="network-name">HIVEMAPPER</p><p class="network-meta">HONEY · Solana</p><span class="network-status">ADAPTER · BUILT</span></article>
+        <article class="network"><p class="network-name">WEATHERXM</p><p class="network-meta">WXM · Arbitrum</p><span class="network-status">ADAPTER · BUILT</span></article>
+        <article class="network"><p class="network-name">GEODNET</p><p class="network-meta">GEOD · Polygon</p><span class="network-status">ADAPTER · BUILT</span></article>
       </div>
+      <p class="networks-foot">MORE NETWORKS UNDER EVALUATION · IF YOU RUN A DEPIN AND WANT IN, <a href="mailto:eric@outfromnothingllc.com" style="color:var(--ruby-ember);">EMAIL ERIC</a></p>
     </section>
 
-    
-
-    <!-- ================================================== -->
-    <!-- CONTINUITY + FAQ                                    -->
-    <!-- ================================================== -->
-    <section class="honesty-section" id="faq">
-      <span class="section-eyebrow">HONEST ON CONTINUITY</span>
-      <h2 class="section-title">Your Genesis seniority lives on this phone.</h2>
-      <p class="section-sub">
-        Your bureau grade and heartbeat seniority are bound to the
-        hardware-sealed identity on this device. Your tokens on Nodle, DIMO,
-        Hivemapper, and the rest stay in <em>your</em> wallets on those
-        networks; we never held them. <strong>Seed-phrase backup and restore
-        is now live in the app</strong> — open your Proof of Origin card, tap
-        <em>Reveal Recovery Phrase</em>, and write down your 12 words.
-        That phrase lets you move your node to a new phone without losing
-        seniority. One active device at a time; the same guarantee as every
-        hardware wallet you already trust.
-      </p>
-
-      <div class="faq-list">
-        <article class="faq-item">
-          <h3 class="faq-q">What happens if I lose this phone?</h3>
-          <p class="faq-a">
-            Partner-network earnings remain yours wherever those wallets live.
-            Your <strong>Genesis Score and seniority</strong> are tied to this
-            node ID on this device — lose the device without a backup and the
-            bureau sees a new identity with a fresh clock. That is the trade
-            for Sybil-resistant, hardware-rooted proof today.
-          </p>
-        </article>
-
-        <article class="faq-item">
-          <h3 class="faq-q">How do I back up or restore my node?</h3>
-          <p class="faq-a">
-            <strong>Live now on Android.</strong> Open the Proof of Origin card
-            (tap the ruby PROOF chip on the main screen), scroll to
-            <em>Recovery Phrase</em>, and tap to reveal your 12 BIP-39 words.
-            Write them down offline. To restore on a new device, tap
-            <em>Restore from Seed Phrase</em> on the lock screen, enter your
-            12 words, and your node ID and seniority are back instantly —
-            one active device at a time.
-          </p>
-        </article>
-
-        <article class="faq-item">
-          <h3 class="faq-q">Why is there no cloud login?</h3>
-          <p class="faq-a">
-            We do not want custody of your keys or a server-side copy of your
-            identity. The verifier and bureau APIs are public; the secret stays
-            on-device so the signature chain stays meaningful.
-          </p>
-        </article>
-      </div>
-    </section>
-
-    
-
-    <!-- ================================================== -->
-    <!-- MANIFESTO EXCERPT                                   -->
-    <!-- ================================================== -->
-    <section class="manifesto" id="manifesto">
-      <span class="section-eyebrow">THE COMPACT</span>
-      <p class="manifesto-preamble">
-        Not everyone needs the manifesto voice. If you are here for
-        <a href="/verify/">signatures</a>, the
-        <a href="/bureau/">bureau</a>, or the
-        <a href="/api/docs/">API</a>, that stack stands on its own — this
-        block is optional texture. If you want the ethos in six lines, read
-        on.
-      </p>
-      <p class="manifesto-body">
-        <span>You own this node.</span>
-        <span>The node owes nothing to anyone.</span>
-        <span>It does not seek permission.</span>
-        <span>It does not ask to be watched.</span>
-        <span>It simply persists —</span>
-        <span>and that, in this age, is a kind of defiance.</span>
-      </p>
-      <p class="manifesto-attribution">— FROM THE SOVEREIGN MANIFESTO</p>
-    </section>
-
-    
-
-    <!-- ================================================== -->
-    <!-- FOOTER                                              -->
-    <!-- ================================================== -->
-    <footer>
-      <div class="footer-diamond" aria-hidden="true"></div>
-      <p class="footer-line">GETKINETIK by OutFromNothing LLC</p>
-      <p class="footer-sub">OutFromNothing LLC (California) · Independent Bureau · Hardware-Sealed Identity · Genesis Score · Sovereign Node Protocol v2 · © 2026</p>
-      <a class="footer-mail" href="mailto:eric@outfromnothingllc.com"
-        >eric@outfromnothingllc.com</a
-      >
-      <div class="footer-links">
-        <a href="/verify/">VERIFY A PROOF</a>
-        <a href="/bureau/">THE BUREAU</a>
-        <a href="https://www.npmjs.com/package/@getkinetik/verify" target="_blank" rel="noopener">NPM PACKAGE</a>
-        <a href="https://github.com/Ricolax310/GetKinetik/blob/main/docs/api/verify-device.md" target="_blank" rel="noopener">PARTNER API</a>
-        <a href="#faq">FAQ</a>
-        <a href="#manifesto">MANIFESTO</a>
+    <!-- FOOTER -->
+    <footer style="padding:48px 24px;text-align:center;border-top:1px solid var(--hairline);max-width:1080px;margin:0 auto;">
+      <p style="font-family:var(--mono);font-size:10px;letter-spacing:3px;color:var(--graphite);text-transform:uppercase;margin:0 0 20px;">GETKINETIK · OUTFROMNOTHING LLC · NEUTRAL BY CHARTER</p>
+      <div style="display:flex;justify-content:center;gap:28px;flex-wrap:wrap;">
+        <a href="https://github.com/Ricolax310/GetKinetik" rel="noopener" style="font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--graphite);text-transform:uppercase;">GITHUB</a>
+        <a href="https://x.com/Kinetik_Rick" rel="noopener" style="font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--graphite);text-transform:uppercase;">TWITTER / X</a>
+        <a href="https://www.npmjs.com/package/@getkinetik/verify" rel="noopener" style="font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--graphite);text-transform:uppercase;">NPM</a>
+        <a href="/bureau/" style="font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--graphite);text-transform:uppercase;">BUREAU</a>
+        <a href="mailto:eric@outfromnothingllc.com" style="font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--graphite);text-transform:uppercase;">CONTACT</a>
+        <a href="https://github.com/Ricolax310/GetKinetik/releases/latest" rel="noopener" style="font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--ruby-ember);text-transform:uppercase;">DOWNLOAD APK v1.6.0</a>
       </div>
     </footer>
 
-    <!-- ================================================== -->
-    <!-- WAITLIST MODAL                                      -->
-    <!-- ================================================== -->
-    <div
-      class="waitlist"
-      data-waitlist-modal
-      role="dialog"
-      aria-modal="true"
-      aria-hidden="true"
-      aria-labelledby="waitlist-title"
-    >
-      <div class="waitlist-backdrop" data-waitlist-backdrop></div>
-      <div class="waitlist-card">
-        <button
-          type="button"
-          class="waitlist-close"
-          data-waitlist-close
-          aria-label="Close"
-        >
-          ×
-        </button>
-
-        <span class="waitlist-eyebrow">SOVEREIGN NODE PROTOCOL</span>
-        <div class="waitlist-rule"></div>
-
-        <div class="waitlist-body" data-waitlist-body>
-          <h2 class="waitlist-title" id="waitlist-title">
-            iOS is coming.
-          </h2>
-          <p class="waitlist-sub">
-            GETKINETIK is live on Android now. 12-word seed backup and restore
-            is already live — leave your email and we’ll notify you when iOS
-            ships and when bureau updates land.
-          </p>
-
-          <form data-waitlist-form novalidate>
-            <input type="hidden" data-waitlist-platform name="platform" value="" />
-
-            <label class="waitlist-field">
-              <input
-                type="email"
-                class="waitlist-input"
-                data-waitlist-email
-                name="email"
-                placeholder="YOU@EXAMPLE.COM"
-                autocomplete="email"
-                autocapitalize="off"
-                autocorrect="off"
-                spellcheck="false"
-                required
-              />
-            </label>
-
-            <button
-              type="submit"
-              class="waitlist-submit"
-              data-waitlist-submit
-            >
-              NOTIFY ME
-            </button>
-
-            <p class="waitlist-error" data-waitlist-error aria-live="polite"></p>
-          </form>
-
-          <p class="waitlist-note">
-            ANDROID · LIVE NOW<br />
-            IOS · IN DEVELOPMENT<br />
-            NODE BACKUP / RESTORE · LIVE ON ANDROID
-          </p>
-        </div>
-
-        <div
-          class="waitlist-success"
-          data-waitlist-success
-          aria-live="polite"
-        >
-          <div class="waitlist-success-mark" aria-hidden="true"></div>
-          <p
-            class="waitlist-success-primary"
-            data-waitlist-success-primary
-          >
-            You're on the list.
-          </p>
-          <p
-            class="waitlist-success-position"
-            data-waitlist-success-position
-            aria-live="polite"
-          ></p>
-          <p class="waitlist-success-secondary">
-            WE'LL REACH OUT WHEN iOS IS READY
-          </p>
-        </div>
-      </div>
-    </div>
-
-    
-    <!-- ================================================== -->
-    <!-- INTERACTIVE SIMULATION & CONTROLLER SCRIPTS         -->
-    <!-- ================================================== -->
     <script>
-    (function() {
-      "use strict";
-
-      // 1. GENESIS SCORE SIMULATOR
+    (() => {
+      // GENESIS SCORE SIMULATOR
       const ageSlider = document.getElementById('sim-age');
       const uptimeSlider = document.getElementById('sim-uptime');
       const networksSlider = document.getElementById('sim-networks');
-      
       const ageVal = document.getElementById('sim-age-val');
       const uptimeVal = document.getElementById('sim-uptime-val');
       const networksVal = document.getElementById('sim-networks-val');
-      
       const scoreOut = document.getElementById('sim-score-out');
       const earningsOut = document.getElementById('sim-earnings-out');
-      
       const cardBeats = document.getElementById('card-beats');
+      const cardScore = document.getElementById('card-score');
+      const cardSig = document.getElementById('card-sig');
       const cardMotion = document.getElementById('card-motion');
       const cardPressure = document.getElementById('card-pressure');
       const cardLight = document.getElementById('card-light');
-      const cardScore = document.getElementById('card-score');
-      const cardSig = document.getElementById('card-sig');
-
-      let telemetryMode = 'verified';
-
-      // Telemetry buttons
       const btnRaw = document.getElementById('sensor-raw');
       const btnVerified = document.getElementById('sensor-verified');
       const btnCoherent = document.getElementById('sensor-coherent');
+      let telemetryMode = 'verified';
 
       function updateTelemetry(mode) {
         telemetryMode = mode;
         [btnRaw, btnVerified, btnCoherent].forEach(b => b.classList.remove('active'));
-        if (mode === 'raw') {
-          btnRaw.classList.add('active');
-          cardMotion.textContent = '0.00 g';
-          cardPressure.textContent = '0.00 hPa';
-          cardLight.textContent = '0 lx';
-        } else if (mode === 'verified') {
-          btnVerified.classList.add('active');
-          cardMotion.textContent = '0.07 g';
-          cardPressure.textContent = '1013.21 hPa';
-          cardLight.textContent = '348 lx';
-        } else {
-          btnCoherent.classList.add('active');
-          cardMotion.textContent = '0.14 g';
-          cardPressure.textContent = '1013.24 hPa';
-          cardLight.textContent = '847 lx';
-        }
+        if (mode === 'raw') { btnRaw.classList.add('active'); cardMotion.textContent = '0.00 g'; cardPressure.textContent = '1013.00 hPa'; cardLight.textContent = '0 lx'; }
+        else if (mode === 'verified') { btnVerified.classList.add('active'); cardMotion.textContent = '0.07 g'; cardPressure.textContent = '1013.21 hPa'; cardLight.textContent = '348 lx'; }
+        else { btnCoherent.classList.add('active'); cardMotion.textContent = '0.14 g'; cardPressure.textContent = '1013.24 hPa'; cardLight.textContent = '847 lx'; }
         recalculate();
       }
 
@@ -3067,130 +2243,31 @@
         const age = parseInt(ageSlider.value, 10);
         const uptime = parseInt(uptimeSlider.value, 10);
         const networks = parseInt(networksSlider.value, 10);
-
-        ageVal.textContent = age + " Days";
-        uptimeVal.textContent = uptime + "%";
-        networksVal.textContent = networks + " Graded";
-
-        // Dynamic beats counter inside Proof card
-        const beats = age * 24 * 12 * (uptime / 100); 
-        cardBeats.textContent = Math.round(beats).toLocaleString();
-
-        // Calculate Genesis Score
-        let baseScore = 300;
-        baseScore += (age / 180) * 200; // Age maps up to 200pts
-        baseScore += (uptime / 100) * 300; // Uptime maps up to 300pts
-        baseScore += (networks / 5) * 100; // Active networks map up to 100pts
-        
-        if (telemetryMode === 'verified') baseScore += 70;
-        else if (telemetryMode === 'coherent') baseScore += 100;
-
-        const score = Math.min(1000, Math.round(baseScore));
+        ageVal.textContent = age + ' Days';
+        uptimeVal.textContent = uptime + '%';
+        networksVal.textContent = networks + ' Graded';
+        cardBeats.textContent = Math.round(age * 24 * 12 * (uptime / 100)).toLocaleString();
+        let base = 300 + (age/180)*200 + (uptime/100)*300 + (networks/5)*100;
+        if (telemetryMode === 'verified') base += 70;
+        else if (telemetryMode === 'coherent') base += 100;
+        const score = Math.min(1000, Math.round(base));
         scoreOut.textContent = score;
-
-        // Band and color styling
-        let band = 'WEAK';
-        let color = '#FF1430'; // ruby red
-        if (score >= 800) {
-          band = 'PREMIER';
-          color = '#FFB199'; // ruby ember
-        } else if (score >= 600) {
-          band = 'STANDING';
-          color = '#3A9BFF'; // sapphire glow
-        }
-        
-        cardScore.textContent = score + " · " + band;
+        let band = 'WEAK', color = '#FF1430';
+        if (score >= 800) { band = 'PREMIER'; color = '#FFB199'; }
+        else if (score >= 600) { band = 'STANDING'; color = '#3A9BFF'; }
+        cardScore.textContent = score + ' · ' + band;
         cardScore.style.color = color;
-
-        // Signature hex generation
-        const hex = "0123456789ABCDEF";
-        let sigText = "";
-        for (let i = 0; i < 4; i++) {
-          let line = "";
-          for (let j = 0; j < 16; j++) {
-            line += hex[Math.floor(Math.random() * 16)] + (j % 2 === 1 ? " " : "");
-          }
-          sigText += line + "<br>";
-        }
-        cardSig.innerHTML = sigText.toLowerCase();
-
-        // Earning prediction based on score and networks
-        const baseEarningPerNet = 8.5; // average monthly USD
-        const scoreMultiplier = 0.5 + (score / 1000) * 1.5; 
-        const earnings = networks * baseEarningPerNet * scoreMultiplier;
-        earningsOut.textContent = "$" + earnings.toFixed(2);
+        const hex = '0123456789ABCDEF';
+        let sig = '';
+        for (let i = 0; i < 2; i++) { let l = ''; for (let j = 0; j < 16; j++) l += hex[Math.floor(Math.random()*16)] + (j%2===1?' ':''); sig += l + '<br>'; }
+        cardSig.innerHTML = sig.toLowerCase();
+        earningsOut.textContent = '$' + (networks * 8.5 * (0.5 + score/1000*1.5)).toFixed(2);
       }
 
-      [ageSlider, uptimeSlider, networksSlider].forEach(slider => {
-        slider.addEventListener('input', recalculate);
-      });
-
-      // Initial run
+      [ageSlider, uptimeSlider, networksSlider].forEach(s => s.addEventListener('input', recalculate));
       updateTelemetry('verified');
-
-      // 2. DEVICE PROFILE DYNAMIC SELECTOR
-      const profileMobile = document.getElementById('profile-mobile');
-      const profilePlug = document.getElementById('profile-plug');
-      const profileHardware = document.getElementById('profile-hardware');
-      
-      const netEstVal = document.getElementById('net-est-val');
-      const netDescVal = document.getElementById('net-desc-val');
-
-      function updateProfile(profile) {
-        [profileMobile, profilePlug, profileHardware].forEach(b => b.classList.remove('active'));
-        if (profile === 'mobile') {
-          profileMobile.classList.add('active');
-          netEstVal.textContent = "$18.50 – $32.40 / mo";
-          netDescVal.textContent = "Uses native mobile sensors (GPS, Accelerometer) running background PollingPool.";
-        } else if (profile === 'plug') {
-          profilePlug.classList.add('active');
-          netEstVal.textContent = "$45.20 – $78.10 / mo";
-          netDescVal.textContent = "Obtains telemetry from vehicles (OBD-II adapters, DIMO plug) with moderate uptime.";
-        } else {
-          profileHardware.classList.add('active');
-          netEstVal.textContent = "$124.00 – $215.50 / mo";
-          netDescVal.textContent = "Physical gateway device running dedicated WeatherXM or GEODNET RTK reference station.";
-        }
-      }
-
-      profileMobile.addEventListener('click', () => updateProfile('mobile'));
-      profilePlug.addEventListener('click', () => updateProfile('plug'));
-      profileHardware.addEventListener('click', () => updateProfile('hardware'));
-
-      // 3. INTERACTIVE API JSON RESPONSE SIMULATOR
-      const apiBtn = document.getElementById('simulate-api-btn');
-      const apiJson = document.getElementById('api-json-output');
-
-      if (apiBtn && apiJson) {
-        apiBtn.addEventListener('click', () => {
-          const hexChars = "0123456789abcdef";
-          let randomId = "0x";
-          for (let i = 0; i < 8; i++) {
-            randomId += hexChars[Math.floor(Math.random() * 16)];
-          }
-          randomId += "...";
-          for (let i = 0; i < 4; i++) {
-            randomId += hexChars[Math.floor(Math.random() * 16)];
-          }
-
-          const uptime = Math.floor(Math.random() * 350) + 15;
-          const score = Math.floor(Math.random() * 500) + 500;
-          
-          let standing = "WEAK";
-          if (score >= 800) standing = "PREMIER";
-          else if (score >= 600) standing = "STANDING";
-
-          apiJson.innerHTML = `{\n  "device_id": "${randomId}",\n  "enclave_signature_valid": true,\n  "physical_coherence_verified": true,\n  "uptime_seniority_days": ${uptime},\n  "genesis_score": ${score},\n  "bureau_standing": "${standing}"\n}`;
-          
-          // Flash effect
-          apiJson.style.opacity = 0.5;
-          setTimeout(() => { apiJson.style.opacity = 1; }, 80);
-        });
-      }
-
     })();
     </script>
-
     <script src="/app.js?v=1.6.0" defer></script>
   </body>
 </html>
