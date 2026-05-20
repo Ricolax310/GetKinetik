@@ -36,6 +36,7 @@ const METHODOLOGY_VERSION = process.env.METHODOLOGY_VERSION || "v1.1";
 const CF_ACCOUNT_ID = process.env.CF_ACCOUNT_ID;
 const D1_DATABASE_ID = process.env.D1_DATABASE_ID;
 const D1_API_TOKEN = process.env.D1_API_TOKEN;
+const PINATA_JWT = process.env.PINATA_JWT;
 
 // Today's date in ISO format: "2026-05-19"
 const TODAY = new Date().toISOString().slice(0, 10);

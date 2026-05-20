@@ -144,40 +144,44 @@ export async function signBundle(bundle, sign) {
   return bundle;
 }
 
-// ── IPFS Upload ────────────────────────────────────────────────────────────────
+// ── IPFS Upload (Pinata) ───────────────────────────────────────────────────────
 
 /**
- * Upload the signed bundle to IPFS via the web3.storage HTTP API.
+ * Upload the signed bundle to IPFS via Pinata.
  * Returns the CID string.
  *
  * Requires env vars:
- *   W3S_TOKEN  — web3.storage API token
+ *   PINATA_JWT  — Pinata API JWT token (from app.pinata.cloud → API Keys)
  *
  * @param {object} signedBundle
- * @param {string} w3sToken
+ * @param {string} pinataJwt
  * @returns {Promise<string>} CID
  */
-export async function pinToIPFS(signedBundle, w3sToken) {
+export async function pinToIPFS(signedBundle: object, pinataJwt: string): Promise<string> {
   const canonical = canonicalize(signedBundle);
-  const blob = new Blob([canonical], { type: "application/json" });
 
-  const form = new FormData();
-  form.append("file", blob, "grade-bundle.json");
-
-  const res = await fetch("https://api.web3.storage/upload", {
+  const res = await fetch("https://api.pinata.cloud/pinning/pinJSONToIPFS", {
     method: "POST",
-    headers: { Authorization: `Bearer ${w3sToken}` },
-    body: form,
+    headers: {
+      Authorization: `Bearer ${pinataJwt}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      pinataContent: JSON.parse(canonical),
+      pinataMetadata: { name: `getkinetik-grade-${Date.now()}` },
+      pinataOptions: { cidVersion: 1 },
+    }),
   });
 
   if (!res.ok) {
     const text = await res.text();
-    throw new Error(`IPFS upload failed: ${res.status} ${text}`);
+    throw new Error(`Pinata upload failed: ${res.status} ${text}`);
   }
 
-  const { cid } = await res.json();
-  return cid;
+  const { IpfsHash } = await res.json() as { IpfsHash: string };
+  return IpfsHash;
 }
+
 
 // ── CID Signing ────────────────────────────────────────────────────────────────
 
