@@ -9,6 +9,8 @@ Independent Sybil Risk Scans the bureau generates for partner DePIN networks.
 | Geodnet   | `node scripts/sybil-scan-geodnet.mjs` | `docs/reports/geodnet-sybil-report.md` |
 | WeatherXM | `node scripts/sybil-scan-weatherxm.mjs` | `docs/reports/weatherxm-sybil-report.md` |
 | Hivemapper | `node scripts/sybil-scan-hivemapper.mjs` | `docs/reports/hivemapper-sybil-report.md` |
+| Nodle     | `node scripts/sybil-scan-nodle.mjs`   | `docs/reports/nodle-sybil-report.md` |
+| Dawn      | `node scripts/sybil-scan-dawn.mjs`    | `docs/reports/dawn-sybil-report.md` |
 
 Hivemapper has **no** public unauthenticated contributor map API like the other two. `sybil-scan-hivemapper.mjs` therefore:
 
