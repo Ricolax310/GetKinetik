@@ -2194,6 +2194,144 @@
       <p class="networks-foot">MORE NETWORKS UNDER EVALUATION · IF YOU RUN A DEPIN AND WANT IN, <a href="mailto:eric@outfromnothingllc.com" style="color:var(--ruby-ember);">EMAIL ERIC</a></p>
     </section>
 
+    <!-- DAILY ON-CHAIN ANCHORS TICKER -->
+    <section id="onchain-anchors" style="padding-top:40px;padding-bottom:40px;border-top:1px solid var(--hairline);max-width:1080px;margin:0 auto;">
+      <span class="section-eyebrow">TAMPER-PROOF LEDGER</span>
+      <h2 class="section-title" style="margin-bottom:12px;">Solana &amp; IPFS Daily Anchors</h2>
+      <p class="section-sub" style="margin-bottom:32px;">Every daily Merkle root is permanently etched on Solana and pinned to IPFS, proving past node grades are cryptographically historic and immutable.</p>
+      
+      <div id="anchors-ticker-container" style="max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:16px;text-align:left;">
+        <!-- Loading state -->
+        <div id="anchors-loading" style="font-family:var(--mono);font-size:11px;letter-spacing:2px;color:var(--graphite);text-align:center;padding:40px 0;">
+          FETCHING SOLANA &amp; IPFS LEDGER STATE...
+        </div>
+      </div>
+    </section>
+
+    <style>
+      .anchor-card {
+        background: rgba(17, 17, 19, 0.65) !important;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        border-radius: 12px;
+        padding: 18px 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+      }
+      .anchor-card:hover {
+        border-color: rgba(20, 255, 147, 0.4) !important;
+        box-shadow: 0 8px 32px rgba(20, 255, 147, 0.08);
+        transform: translateY(-2px);
+      }
+      .anchor-card.expanded {
+        border-color: rgba(20, 255, 147, 0.5) !important;
+        background: rgba(17, 17, 19, 0.85) !important;
+        box-shadow: 0 12px 48px rgba(0, 0, 0, 0.4);
+      }
+      .anchor-link:hover {
+        text-decoration: underline !important;
+        color: #14ff93 !important;
+      }
+      .expand-arrow {
+        display: inline-block;
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        font-size: 10px;
+        color: var(--graphite);
+      }
+      .anchor-card.expanded .expand-arrow {
+        transform: rotate(180deg);
+        color: #14ff93;
+      }
+      .badge-tee {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-family: var(--mono);
+        font-size: 9px;
+        letter-spacing: 0.8px;
+        font-weight: bold;
+        background: rgba(58, 155, 255, 0.1);
+        border: 1px solid rgba(58, 155, 255, 0.3);
+        color: #3a9bff;
+        text-transform: uppercase;
+      }
+      .badge-strongbox {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-family: var(--mono);
+        font-size: 9px;
+        letter-spacing: 0.8px;
+        font-weight: bold;
+        background: rgba(255, 177, 153, 0.15);
+        border: 1px solid rgba(255, 177, 153, 0.35);
+        color: var(--ruby-ember);
+        text-transform: uppercase;
+      }
+      .anchor-details {
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+        margin-top: 0;
+      }
+      .anchor-card.expanded .anchor-details {
+        max-height: 2000px;
+        opacity: 1;
+        margin-top: 16px;
+        padding-top: 16px;
+        border-top: 1px solid var(--hairline);
+      }
+      .proof-code {
+        font-family: var(--mono);
+        font-size: 10px;
+        line-height: 1.5;
+        background: rgba(0, 0, 0, 0.3);
+        border: 1px solid var(--hairline);
+        border-radius: 8px;
+        padding: 12px 16px;
+        color: rgba(255, 255, 255, 0.85);
+        overflow-x: auto;
+        margin: 8px 0;
+        white-space: pre-wrap;
+        word-break: break-all;
+      }
+      .copy-btn {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--hairline);
+        border-radius: 4px;
+        color: var(--graphite);
+        font-family: var(--mono);
+        font-size: 9px;
+        padding: 4px 8px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+      }
+      .copy-btn:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: #fff;
+        border-color: rgba(255, 255, 255, 0.2);
+      }
+      .copy-btn.copied {
+        background: rgba(20, 255, 147, 0.1);
+        color: #14ff93;
+        border-color: rgba(20, 255, 147, 0.3);
+      }
+    </style>
+
     <!-- FOOTER -->
     <footer style="padding:48px 24px;text-align:center;border-top:1px solid var(--hairline);max-width:1080px;margin:0 auto;">
       <p style="font-family:var(--mono);font-size:10px;letter-spacing:3px;color:var(--graphite);text-transform:uppercase;margin:0 0 20px;">GETKINETIK · OUTFROMNOTHING LLC · NEUTRAL BY CHARTER</p>

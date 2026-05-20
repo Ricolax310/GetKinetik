@@ -1,0 +1,1 @@
+INSERT INTO grades (id, node_id, score, tier, computed_at, methodology_hash, ipfs_cid, cid_signature) VALUES ('test-uuid-1', 'test-node-key', 850, 'PREMIER', datetime('now'), 'test-hash', 'QmTestCid1234567890abcdef', 'test-sig');

@@ -1,27 +1,8 @@
-# Cloudflare Pages configuration for getkinetik.app
-#
-# This file is picked up automatically by Cloudflare Pages on every
-# deploy. It declares the static build output directory and KV bindings:
-#   WAITLIST    — waitlist (functions/api/waitlist.js)
-#   KINETIK_KV  — bureau / scores / attest / metrics / credits
-#
-# The KV namespace itself was created once in the Cloudflare dashboard
-# (Workers & Pages -> KV -> GETKINETIK_WAITLIST). Its ID is referenced
-# below and is safe to commit because it is an opaque identifier that
-# grants no access on its own - access is granted by the account's
-# credentials, not by the ID.
+name = "getkinetik-api"
+main = "src/index.ts"
+compatibility_date = "2026-05-19"
 
-name = "getkinetik"
-pages_build_output_dir = "landing"
-compatibility_date = "2026-04-24"
-
-[[kv_namespaces]]
-binding = "WAITLIST"
-id = "d17e44508afb46dda5fb3f4de650697b"
-
-# Bureau / Genesis Score / attest / metrics / credits — same physical KV as
-# WAITLIST is OK: keys use disjoint prefixes (`bureau:`, `score:`, `attest:`,
-# `waitlist:`, etc.). Split into a dedicated namespace later if you prefer.
-[[kv_namespaces]]
-binding = "KINETIK_KV"
-id = "d17e44508afb46dda5fb3f4de650697b"
+[[d1_databases]]
+binding = "DB"
+database_name = "getkinetik-db"
+database_id = "9a14967a-9317-421d-98b4-711eadc1e66e"

@@ -24,10 +24,11 @@
  *   METHODOLOGY_VERSION - e.g. "v1.1"
  */
 
+import "dotenv/config";
 import { Keypair } from "@solana/web3.js";
 import bs58 from "bs58";
-import { buildMerkleTree } from "../packages/kinetik-core/src/merkle.js";
-import { anchorOnSolana, explorerUrl } from "../packages/kinetik-core/src/solana-anchor.js";
+import { buildMerkleTree } from "../packages/kinetik-core/src/merkle";
+import { anchorOnSolana, explorerUrl } from "../packages/kinetik-core/src/solana-anchor";
 
 // ── Config ─────────────────────────────────────────────────────────────────────
 

@@ -1,0 +1,24 @@
+plugins {
+  id 'com.android.library'
+  id 'expo-module-gradle-plugin'
+}
+
+group = 'expo.modules.kinetiksdk'
+version = '0.1.0'
+
+android {
+  namespace 'expo.modules.kinetiksdk'
+  defaultConfig {
+    versionCode 1
+    versionName '0.1.0'
+  }
+}
+
+repositories {
+  google()
+  mavenCentral()
+}
+
+dependencies {
+  // Uses standard Android APIs (Android KeyStore and Security framework)
+}
