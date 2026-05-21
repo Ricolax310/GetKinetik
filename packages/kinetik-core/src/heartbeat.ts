@@ -53,6 +53,7 @@ import { sha256 } from '@noble/hashes/sha2.js';
 import * as SecureStore from 'expo-secure-store';
 
 import { type NodeIdentity, signMessage, verifyMessage } from './identity';
+import { awardCredits } from '../../../packages/credits/src';
 import {
   HEARTBEAT_KEYS,
   HEARTBEAT_CHAIN_PUBKEY_KEY,
@@ -378,6 +379,10 @@ export function useHeartbeat(
         lastSensors: sensors,
       };
       commitSummary(nextSummary);
+
+      // Award 1 Genesis Credit per signed beat. Fire-and-forget — a failed
+      // write is non-critical and must never stall the heartbeat chain.
+      void awardCredits('heartbeat');
 
       // Persist the bits that must survive a reboot. Fire-and-forget — a
       // failed write warns but does not block the next beat.

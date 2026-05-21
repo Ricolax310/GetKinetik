@@ -64,6 +64,7 @@ import {
 } from '../../packages/kinetik-core/src';
 import { ProofQr } from './ProofQr';
 import type { GenesisScoreResult } from '../hooks/useGenesisScore';
+import { awardCredits } from '../../packages/credits/src';
 
 // ----------------------------------------------------------------------------
 // Props — controlled component; VaultPanel owns the open flag and passes in
@@ -178,6 +179,8 @@ export function ProofOfOrigin({
       try {
         const p = await createProofOfOrigin(identity, statsRef.current);
         setProof(p);
+        // Award 100 Genesis Credits for minting a fresh proof. Fire-and-forget.
+        void awardCredits('proofOfOrigin');
         // Nudge the bureau chip to re-verify against the freshly-minted
         // proof. Best-effort: failures are silent so a degraded network
         // can never block the screenshot-ready card from rendering.
@@ -334,24 +337,23 @@ export function ProofOfOrigin({
                 // silent no-op
               }
               try {
-                const hasHardware = await LocalAuthentication.hasHardwareAsync();
-                const isEnrolled = await LocalAuthentication.isEnrolledAsync();
-                if (hasHardware && isEnrolled) {
-                  const result = await LocalAuthentication.authenticateAsync({
-                    promptMessage: 'Confirm identity to reveal recovery phrase',
-                    fallbackLabel: 'Use Passcode',
-                    cancelLabel: 'Cancel',
-                    disableDeviceFallback: false,
-                  });
-                  if (result.success) {
-                    setRevealSeed((r) => !r);
-                  }
-                } else {
+                // Always ask the OS to authenticate — even when biometrics
+                // are unavailable (cracked glass, not enrolled) the OS will
+                // fall back to the device passcode. If the device has NO
+                // security configured at all, authenticateAsync returns
+                // success:false and we silently block. We never bypass.
+                const result = await LocalAuthentication.authenticateAsync({
+                  promptMessage: 'Confirm identity to reveal recovery phrase',
+                  fallbackLabel: 'Use Passcode',
+                  cancelLabel: 'Cancel',
+                  disableDeviceFallback: false,
+                });
+                if (result.success) {
                   setRevealSeed((r) => !r);
                 }
               } catch (err) {
                 console.warn('[ProofOfOrigin] Easter egg reveal failed:', err);
-                setRevealSeed((r) => !r);
+                // Intentionally NOT revealing on error — fail closed.
               }
             }}
             delayLongPress={1200}
