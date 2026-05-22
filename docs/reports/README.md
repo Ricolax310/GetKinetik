@@ -11,6 +11,7 @@ Independent Sybil Risk Scans the bureau generates for partner DePIN networks.
 | Hivemapper | `node scripts/sybil-scan-hivemapper.mjs` | `docs/reports/hivemapper-sybil-report.md` |
 | Nodle     | `node scripts/sybil-scan-nodle.mjs`   | `docs/reports/nodle-sybil-report.md` |
 | Dawn      | `node scripts/sybil-scan-dawn.mjs`    | `docs/reports/dawn-sybil-report.md` |
+| Grass / Titan | `node scripts/sybil-scan-grass.mjs` | `docs/reports/grass-sybil-report.md` |
 
 Hivemapper has **no** public unauthenticated contributor map API like the other two. `sybil-scan-hivemapper.mjs` therefore:
 

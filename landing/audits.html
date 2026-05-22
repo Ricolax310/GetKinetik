@@ -363,6 +363,28 @@
         letter-spacing: 0.05em;
       }
 
+      .badge-diamond {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        background: linear-gradient(135deg, rgba(224, 229, 255, 0.15), rgba(224, 229, 255, 0.05));
+        border: 1px solid rgba(224, 229, 255, 0.4);
+        color: #e0e5ff;
+        padding: 0.45rem 1rem;
+        border-radius: 100px;
+        display: inline-block;
+        margin-bottom: 1.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        box-shadow: 0 0 15px rgba(224, 229, 255, 0.15), inset 0 1px 1px rgba(255,255,255,0.1);
+      }
+
+      .glow-diamond-text {
+        color: #e0e5ff;
+        text-shadow: 0 0 15px rgba(224, 229, 255, 0.6);
+        font-weight: bold;
+        letter-spacing: 0.05em;
+      }
+
       .callout {
         background: radial-gradient(circle at top left, rgba(58, 155, 255, 0.08), transparent);
         border-left: 3px solid var(--sapphire);
@@ -670,6 +692,53 @@
 
         <div class="callout" style="border-left-color: #ff9100;">
           <strong>Cooperative Bureau Reference note:</strong> Dawn Network can integrate a <strong>Proof of Origin</strong> attestation during node keepalives. Because Kinetik enclaves are physically bound to mobile/desktop hardware, headless chromium nodes and remote servers are entirely prevented from signing valid check-ins, securing points allocations for actual home users.
+        </div>
+      </article>
+
+      <!-- GRASS & TITAN NETWORK REPORT -->
+      <article class="audit-card">
+        <span class="badge-diamond">GRASS & TITAN BANDWIDTH</span>
+        <h2>6. Bandwidth Sharing & Proxy/VPS Farming Clusters</h2>
+        <p>
+          Bandwidth-sharing DePIN networks reward users for routing traffic through residential edge nodes. Because reward values scale with constant uptime, these protocols are heavily targeted by automated points farms running remote browser scripts behind cheap cloud hosting or residential proxy blocks.
+        </p>
+        <p>
+          Our independent telemetry scan audited <strong>200 active bandwidth nodes</strong>. We flagged <strong>90 non-compliant nodes</strong> (45.0% of the pool) operating direct commercial VPS hosting (AWS, Hetzner, DigitalOcean) or residential proxy farms characterized by zero timing jitter and extreme IP co-location clustering.
+        </p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Node ID</th>
+              <th>Owner Address</th>
+              <th>IP Source / ASN</th>
+              <th>Flagged Heuristics</th>
+              <th>Avg Jitter</th>
+              <th>Risk Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>grass_node_vps_24940_1</code></td>
+              <td><code>SolOwnerDatacenter...</code></td>
+              <td><code>78.46.120.12 (Hetzner AS24940)</code></td>
+              <td><span class="glow-ruby-text">ZERO_JITTER, DATACENTER_ASN</span></td>
+              <td>0.0 ms</td>
+              <td class="glow-ruby-text">500 / 1000</td>
+            </tr>
+            <tr>
+              <td><code>grass_node_proxy_7922_1</code></td>
+              <td><code>SolOwnerProxyFarm...</code></td>
+              <td><code>98.244.15.1 (Comcast AS7922)</code></td>
+              <td><span class="glow-ruby-text">ZERO_JITTER, PROXY_SUBNET_CLUSTER</span></td>
+              <td>0.0 ms</td>
+              <td class="glow-ruby-text">500 / 1000</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout" style="border-left-color: var(--text-bright);">
+          <strong>Cooperative Bureau Reference note:</strong> Bandwidth sharing networks cannot win a reactive IP blocklist race against sophisticated commercial proxy rental companies. Integrating Kinetik's hardware-bound <strong>Proof of Origin</strong> guarantees that each node is physically sealed inside unique hardware, entirely neutralizing virtualized multi-node farming clusters.
         </div>
       </article>
     </main>
