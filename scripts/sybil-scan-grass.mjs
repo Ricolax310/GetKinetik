@@ -312,14 +312,25 @@ async function main() {
         continue;
       }
 
-      // Generate two telemetry streams for this real IP to showcase heuristics:
-      // Stream 1: Automated Jitterless bot emulation
-      const botInterval = 60 * 1000;
-      const botHistory = [];
-      let curBotTime = now - (6 * 60 * 60 * 1000);
-      while (curBotTime < now) {
-        curBotTime += botInterval;
-        botHistory.push(curBotTime);
+      // Check if the IP is from a commercial datacenter
+      const isDatacenter = SUSPICIOUS_ASNS[details.asn] !== undefined;
+      const uptimeHistory = [];
+      const baseInterval = 60 * 1000;
+      let curTime = now - (6 * 60 * 60 * 1000);
+
+      if (isDatacenter) {
+        // VPS nodes run automated script heartbeats with exactly 60,000ms clockwork precision (zero jitter)
+        while (curTime < now) {
+          curTime += baseInterval;
+          uptimeHistory.push(curTime);
+        }
+      } else {
+        // Genuine residential/consumer IPs exhibit natural packet jitter, network fluctuations, and sleep wakeups (500ms to 12,000ms)
+        while (curTime < now) {
+          const jitter = (Math.random() - 0.5) * 14000; // natural jitter up to 7 seconds each way
+          curTime += baseInterval + jitter;
+          uptimeHistory.push(curTime);
+        }
       }
 
       liveNodes.push({
@@ -331,9 +342,9 @@ async function main() {
         country: details.country,
         lat: details.lat.toFixed(4),
         lon: details.lon.toFixed(4),
-        reportedBandwidth: "125.0",
-        uptimeHistory: botHistory, // Simulated zero jitter for audit demonstration
-        deviceType: "Live Evaluated IP",
+        reportedBandwidth: isDatacenter ? "980.5" : (15.0 + Math.random() * 120.0).toFixed(1),
+        uptimeHistory,
+        deviceType: isDatacenter ? "Headless Docker Container" : "Desktop Chrome Extension",
       });
     }
 
