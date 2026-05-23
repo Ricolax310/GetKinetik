@@ -159,6 +159,7 @@ function sleep(ms) {
 }
 
 function cmdStatus(registry) {
+  loadEnvQuiet();
   console.log("GETKINETIK bureau pipeline status\n");
   console.log("Direction: neutral DePIN bureau — friendly helper (second read)\n");
   for (const net of registry) {
