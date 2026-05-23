@@ -40,6 +40,7 @@ import {
   renderExecutiveSummary,
   renderSnapshotDeltaSection,
 } from "./bureau/report-helpers.mjs";
+import { redactSecrets } from "./bureau/lib.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, "..");
@@ -172,6 +173,7 @@ function pct(n) {
 
 // ---- 1–3. On-chain HONEY scan (optional if public RPC rate-limits) -----------
 let rpcUrlUsed = null;
+let rpcUrlPublished = null;
 let supplyUi = null;
 let supplyRaw = null;
 let rows = [];
@@ -188,6 +190,7 @@ try {
     params: [HONEY_MINT],
   });
   rpcUrlUsed = supplyRes.rpcUrl;
+  rpcUrlPublished = rpcUrlUsed ? redactSecrets(rpcUrlUsed) : null;
   const supplyResult = supplyRes.result;
 
   supplyUi = Number(supplyResult?.value?.uiAmountString ?? NaN);
@@ -195,7 +198,7 @@ try {
   if (!Number.isFinite(supplyUi) || supplyUi <= 0) {
     throw new Error("unexpected getTokenSupply shape");
   }
-  console.error(`      → RPC: ${rpcUrlUsed}`);
+  console.error(`      → RPC: ${rpcUrlPublished ?? "—"}`);
   console.error(`      → UI supply: ${supplyUi.toLocaleString()} HONEY`);
 
   console.error("[2/4] Parsing largest HONEY token accounts …");
@@ -253,7 +256,7 @@ try {
   top20Sum = rows.reduce((s, r) => s + (r.uiAmount || 0), 0);
   top20Share = top20Sum / supplyUi;
 } catch (e) {
-  onChainErr = String(e?.message || e);
+  onChainErr = redactSecrets(String(e?.message || e));
   console.error(`[warn] On-chain section skipped: ${onChainErr}`);
 }
 
@@ -311,7 +314,7 @@ const stats = {
 const snapshot = {
   generatedAt: now.toISOString(),
   honeyMint: HONEY_MINT,
-  rpcUrl: rpcUrlUsed,
+  rpcUrl: rpcUrlPublished,
   onChainError: onChainErr,
   supplyUiAmount: supplyUi,
   supplyRawAmount: supplyRaw,
@@ -363,7 +366,7 @@ lines.push(
 );
 lines.push("");
 lines.push(`- **Generated:** ${now.toISOString()}`);
-lines.push(`- **Solana RPC used:** \`${rpcUrlUsed ?? "—"}\``);
+lines.push(`- **Solana RPC used:** \`${rpcUrlPublished ?? "—"}\``);
 lines.push(`- **HONEY mint:** \`${HONEY_MINT}\``);
 if (rows.length && supplyUi != null) {
   lines.push(`- **Reported circulating / UI supply:** ${supplyUi.toLocaleString()} HONEY`);

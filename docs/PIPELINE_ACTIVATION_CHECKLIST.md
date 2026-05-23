@@ -109,7 +109,7 @@ Explorer:  https://explorer.solana.com/tx/<sig>?cluster=devnet
 
 Once devnet test passes, restore mainnet RPC in `.env`:
 ```
-SOLANA_RPC_URL=https://mainnet.helius-rpc.com/?api-key=33812505-...
+SOLANA_RPC_URL=https://mainnet.helius-rpc.com/?api-key=YOUR_KEY_HERE
 ```
 
 Run again:
