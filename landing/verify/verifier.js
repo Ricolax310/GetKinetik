@@ -361,6 +361,10 @@ function renderReport(report) {
     // ----------------------------------------------------------------------
     if (payload.sensors && typeof payload.sensors === "object") {
       const s = payload.sensors;
+      const latLabel =
+        typeof s.latitude === "number" ? `${s.latitude.toFixed(3)}°` : "—";
+      const lngLabel =
+        typeof s.longitude === "number" ? `${s.longitude.toFixed(3)}°` : "—";
       const motionLabel =
         typeof s.motionRms === "number" ? `${s.motionRms.toFixed(2)} g` : "—";
       const pressureLabel =
@@ -369,6 +373,8 @@ function renderReport(report) {
           : "—";
       const luxLabel =
         typeof s.lux === "number" ? `${Math.round(s.lux)} lx` : "—";
+      rows.push(["LATITUDE", latLabel]);
+      rows.push(["LONGITUDE", lngLabel]);
       rows.push(["MOTION", motionLabel]);
       rows.push(["PRESSURE", pressureLabel]);
       rows.push(["LIGHT", luxLabel]);
@@ -408,6 +414,10 @@ function renderReport(report) {
     // ----------------------------------------------------------------------
     if (payload.sensors && typeof payload.sensors === "object") {
       const s = payload.sensors;
+      const latLabel =
+        typeof s.latitude === "number" ? `${s.latitude.toFixed(3)}°` : "—";
+      const lngLabel =
+        typeof s.longitude === "number" ? `${s.longitude.toFixed(3)}°` : "—";
       const motionLabel =
         typeof s.motionRms === "number" ? `${s.motionRms.toFixed(2)} g` : "—";
       const pressureLabel =
@@ -416,6 +426,8 @@ function renderReport(report) {
           : "—";
       const luxLabel =
         typeof s.lux === "number" ? `${Math.round(s.lux)} lx` : "—";
+      rows.push(["LATITUDE", latLabel]);
+      rows.push(["LONGITUDE", lngLabel]);
       rows.push(["MOTION", motionLabel]);
       rows.push(["PRESSURE", pressureLabel]);
       rows.push(["LIGHT", luxLabel]);

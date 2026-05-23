@@ -38,6 +38,7 @@
 // ============================================================================
 
 import { Accelerometer, Barometer, LightSensor } from 'expo-sensors';
+import * as Location from 'expo-location';
 
 // ----------------------------------------------------------------------------
 // Tunables. Conservative on battery — these rates are deliberately low.
@@ -59,6 +60,12 @@ const ACCEL_RING_MAX = 80;
 // shape end-to-end.
 // ----------------------------------------------------------------------------
 export type SensorReadout = {
+  /** Opt-in coarse latitude, rounded to 3 decimal places (~100m precision). */
+  latitude: number | null;
+  /** Opt-in coarse longitude, rounded to 3 decimal places (~100m precision). */
+  longitude: number | null;
+  /** Last ambient light reading at aggregate time, in lux. Integer rounded. */
+  lux: number | null;
   /**
    * RMS of (|acceleration| − mean|acceleration|) over the most recent
    * window, expressed in g (gravities). Subtracting the mean removes the
@@ -68,8 +75,6 @@ export type SensorReadout = {
   motionRms: number | null;
   /** Last barometer reading at aggregate time, in hPa. Two-decimal rounded. */
   pressureHpa: number | null;
-  /** Last ambient light reading at aggregate time, in lux. Integer rounded. */
-  lux: number | null;
 };
 
 // ----------------------------------------------------------------------------
@@ -176,12 +181,14 @@ export function stopSensorSampler(): void {
 
 // ----------------------------------------------------------------------------
 // readSensorAggregate — drain the accel ring into a single RMS, snapshot
-// the latest baro + lux readings, and return all three as a SensorReadout.
+// the latest baro + lux readings, and return all as a SensorReadout.
 //
 // The ring is DRAINED on read (not just snapshotted) so each heartbeat sees
 // the motion energy from EXACTLY its own window — no double-counting, no
 // stale samples bleeding across beats. Baro + lux are snapshots because
 // pressure + ambient light are point measurements, not time integrals.
+// Location is opt-in, collected from the system's last known or coarse
+// provider if permissions are foreground-granted.
 // ----------------------------------------------------------------------------
 export async function readSensorAggregate(): Promise<SensorReadout> {
   let motionRms: number | null = null;
@@ -207,20 +214,42 @@ export async function readSensorAggregate(): Promise<SensorReadout> {
   const lux =
     lightAvailable && lastLux != null ? Math.round(lastLux) : null;
 
-  return { motionRms, pressureHpa, lux };
+  let latitude: number | null = null;
+  let longitude: number | null = null;
+
+  try {
+    const { status } = await Location.getForegroundPermissionsAsync();
+    if (status === 'granted') {
+      let loc = await Location.getLastKnownPositionAsync();
+      if (!loc) {
+        loc = await Location.getCurrentPositionAsync({
+          accuracy: Location.Accuracy.Balanced,
+        });
+      }
+      if (loc && loc.coords) {
+        latitude = Math.round(loc.coords.latitude * 1000) / 1000;
+        longitude = Math.round(loc.coords.longitude * 1000) / 1000;
+      }
+    }
+  } catch (err) {
+    console.warn('[sensors] location reading failed:', err);
+  }
+
+  return { latitude, longitude, lux, motionRms, pressureHpa };
 }
 
 // ----------------------------------------------------------------------------
 // canonicalSensorBlock — construct the sensors object with keys inserted in
-// LEXICOGRAPHIC order (lux, motionRms, pressureHpa). Critical for chain
-// integrity: stableStringify shallow-sorts top-level keys but JSON.stringify
-// preserves insertion order for nested objects. Forcing alphabetical
-// insertion here means the byte sequence is reproducible regardless of
-// where the readout came from. If/when stableStringify ever switches to
-// recursive sorting, no migration is needed.
+// LEXICOGRAPHIC order (latitude, longitude, lux, motionRms, pressureHpa).
+// Critical for chain integrity: stableStringify shallow-sorts top-level keys
+// but JSON.stringify preserves insertion order for nested objects. Forcing
+// alphabetical insertion here means the byte sequence is reproducible
+// regardless of where the readout came from.
 // ----------------------------------------------------------------------------
 export function canonicalSensorBlock(r: SensorReadout): SensorReadout {
   return {
+    latitude: r.latitude,
+    longitude: r.longitude,
     lux: r.lux,
     motionRms: r.motionRms,
     pressureHpa: r.pressureHpa,
