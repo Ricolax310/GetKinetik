@@ -962,6 +962,22 @@
         </div>
       </div>
 
+      <div
+        id="bureau-live-panel"
+        style="background: rgba(58, 155, 255, 0.06); border: 1px solid rgba(58, 155, 255, 0.2); padding: 1.25rem 1.5rem; border-radius: 12px; margin-bottom: 2rem;"
+      >
+        <div style="font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase; color: var(--sapphire); letter-spacing: 0.06em; font-weight: 700; margin-bottom: 0.75rem;">
+          Live sample-read index
+        </div>
+        <p id="bureau-live-updated" style="font-size: 0.82rem; color: #8b92a8; margin: 0 0 0.75rem 0;">
+          Loading latest public scan stats…
+        </p>
+        <div
+          id="bureau-live-grid"
+          style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 0.75rem;"
+        ></div>
+      </div>
+
       <!-- GEODNET REPORT -->
       <article class="audit-card">
         <span class="badge-ruby">GEODNET RTK NETWORK</span>
@@ -1809,6 +1825,61 @@
           `;
         });
 
+      })();
+    </script>
+    <script>
+      (function () {
+        const updatedEl = document.getElementById("bureau-live-updated");
+        const grid = document.getElementById("bureau-live-grid");
+        if (!updatedEl || !grid) return;
+        fetch("data/bureau-audit-index.json")
+          .then((r) => (r.ok ? r.json() : null))
+          .then((data) => {
+            if (!data?.networks?.length) {
+              updatedEl.textContent =
+                "Run npm run bureau:pipeline to publish live stats (or open reports below).";
+              return;
+            }
+            updatedEl.textContent =
+              "Updated " +
+              new Date(data.updatedAt).toLocaleString() +
+              " · reproducible public endpoints only";
+            grid.innerHTML = data.networks
+              .filter((n) => n.stats || n.topFinding)
+              .map((n) => {
+                const when = n.generatedAt
+                  ? new Date(n.generatedAt).toLocaleDateString()
+                  : "—";
+                const hook =
+                  n.topFinding ||
+                  (n.stats?.exactDupGroups != null
+                    ? n.stats.exactDupGroups + " exact dup groups"
+                    : n.stats?.overCapacityCells != null
+                      ? n.stats.overCapacityCells + " over-capacity cells"
+                      : n.stats?.top20ShareOfSupply != null
+                        ? (n.stats.top20ShareOfSupply * 100).toFixed(1) +
+                          "% top-20 HONEY"
+                        : "see report");
+                return (
+                  '<a href="../' +
+                  n.report +
+                  '" style="text-decoration:none;color:inherit;display:block;padding:0.85rem 1rem;background:rgba(0,0,0,0.35);border:1px solid rgba(255,255,255,0.08);border-radius:8px;">' +
+                  '<div style="font-family:var(--font-mono);font-size:0.7rem;color:var(--sapphire);margin-bottom:0.35rem;">' +
+                  n.name +
+                  "</div>" +
+                  '<div style="font-size:0.8rem;color:#c8cdd9;line-height:1.45;">' +
+                  hook +
+                  "</div>" +
+                  '<div style="font-size:0.68rem;color:#6b7280;margin-top:0.4rem;">Scan ' +
+                  when +
+                  "</div></a>"
+                );
+              })
+              .join("");
+          })
+          .catch(() => {
+            updatedEl.textContent = "Live index unavailable offline — see markdown reports below.";
+          });
       })();
     </script>
   </body>

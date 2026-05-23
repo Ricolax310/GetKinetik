@@ -19,6 +19,12 @@
 
 import fs from "node:fs";
 import path from "node:path";
+import {
+  loadPreviousStats,
+  renderCrossCheckSection,
+  renderExecutiveSummary,
+  renderSnapshotDeltaSection,
+} from "./bureau/report-helpers.mjs";
 
 const STATIONS_URL = "https://rtk.geodnet.com/api/v2/coverage_stations";
 const OUTPUT_REPORT = "docs/reports/geodnet-sybil-report.md";
@@ -163,13 +169,41 @@ for (const s of stations) {
 const exactDups = [...exactDupGroups.values()].filter((g) => g.length >= 2);
 
 // ---- 4. Snapshot ----------------------------------------------------------
+const snapAbs = path.resolve(OUTPUT_SNAPSHOT);
+const prevStats = loadPreviousStats(snapAbs);
+const stats = {
+  generatedAt: new Date().toISOString(),
+  observed: stations.length,
+  exactDupGroups: exactDups.length,
+  nearDupClusters: duplicates.size,
+  tightClusters: clusters.length,
+  lowPrecision: lowPrecision.length,
+  flaggedCount: 0, // filled after flaggedSet built
+  flaggedPct: 0,
+};
+
 fs.mkdirSync(path.dirname(OUTPUT_SNAPSHOT), { recursive: true });
+
+// ---- 5. Render report -----------------------------------------------------
+console.error("[3/3] Rendering report …");
+
+const flaggedSet = new Set();
+[...duplicates.values()].forEach((g) => g.forEach((s) => flaggedSet.add(s.name)));
+clusters.forEach((g) => g.forEach((s) => flaggedSet.add(s.name)));
+exactDups.forEach((g) => g.forEach((s) => flaggedSet.add(s.name)));
+lowPrecision.forEach((s) => flaggedSet.add(s.name));
+
+stats.flaggedCount = flaggedSet.size;
+stats.flaggedPct = stations.length ? flaggedSet.size / stations.length : 0;
+
 fs.writeFileSync(
-  OUTPUT_SNAPSHOT,
+  snapAbs,
   JSON.stringify(
     {
-      generatedAt: new Date().toISOString(),
+      generatedAt: stats.generatedAt,
       source: STATIONS_URL,
+      stats,
+      prevStats: prevStats || undefined,
       stationsTotal: stations.length,
       duplicates: [...duplicates.values()],
       clusters,
@@ -181,14 +215,19 @@ fs.writeFileSync(
   ),
 );
 
-// ---- 5. Render report -----------------------------------------------------
-console.error("[3/3] Rendering report …");
-
-const flaggedSet = new Set();
-[...duplicates.values()].forEach((g) => g.forEach((s) => flaggedSet.add(s.name)));
-clusters.forEach((g) => g.forEach((s) => flaggedSet.add(s.name)));
-exactDups.forEach((g) => g.forEach((s) => flaggedSet.add(s.name)));
-lowPrecision.forEach((s) => flaggedSet.add(s.name));
+const deltaRows = [
+  { key: "observed", label: "Stations with coordinates", value: stats.observed, lowerIsBetter: false },
+  { key: "exactDupGroups", label: "Exact (lat,lng) duplicate groups", value: stats.exactDupGroups },
+  { key: "nearDupClusters", label: `Clusters within ${DUPLICATE_RADIUS_M} m`, value: stats.nearDupClusters },
+  { key: "tightClusters", label: `Clusters ≥${CLUSTER_MIN_COUNT} within ${CLUSTER_RADIUS_M} m`, value: stats.tightClusters },
+  { key: "lowPrecision", label: "Low-precision coordinates (≤2 decimals)", value: stats.lowPrecision },
+  {
+    key: "flaggedPct",
+    label: "Fleet share flagged (any heuristic)",
+    value: stats.flaggedPct,
+    pct: true,
+  },
+];
 
 const now = new Date();
 const lines = [];
@@ -210,8 +249,24 @@ lines.push(
     `(${((flaggedSet.size / stations.length) * 100).toFixed(2)}%)`,
 );
 lines.push("");
-lines.push("---");
-lines.push("");
+lines.push(
+  ...renderExecutiveSummary([
+    `**${exactDups.length} exact (lat,lng) duplicate groups** on ${stations.length.toLocaleString()} public stations — each row in §1 is one coordinate pair your registry team can grep today.`,
+    `**${duplicates.size.toLocaleString()} ≤${DUPLICATE_RADIUS_M} m proximity clusters** — tighter than two physical RTK antennas; start with the largest counts in §2 (names + anchors included).`,
+    `**${((flaggedSet.size / stations.length) * 100).toFixed(1)}%** of the public fleet touches at least one heuristic — useful as a sampling denominator, not a verdict.`,
+  ]),
+);
+lines.push(
+  ...renderSnapshotDeltaSection(deltaRows, prevStats),
+);
+lines.push(
+  ...renderCrossCheckSection([
+    "Registry dedupe: for each §1 coordinate pair, confirm whether multiple station IDs should share one surveyed antenna location.",
+    "Field ops: spot-check §3 tight clusters (≥4 within 100 m) — industrial campus vs duplicate registrations.",
+    "Data quality: stations in §4 with ≤2 decimal places should not appear as RTK references until coordinates are re-surveyed.",
+    "Reproduce: `node scripts/sybil-scan-geodnet.mjs` — same public endpoint, no API key.",
+  ]),
+);
 
 lines.push("## Headline findings");
 lines.push("");

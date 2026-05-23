@@ -24,6 +24,12 @@
 
 import fs from "node:fs";
 import path from "node:path";
+import {
+  loadPreviousStats,
+  renderCrossCheckSection,
+  renderExecutiveSummary,
+  renderSnapshotDeltaSection,
+} from "./bureau/report-helpers.mjs";
 
 // ---- Tunables ---------------------------------------------------------------
 const CELLS_URL = "https://api.weatherxm.com/api/v1/cells";
@@ -109,22 +115,6 @@ for (let i = 0; i < drillTargets.length; i++) {
   await sleep(REQUEST_DELAY_MS);
 }
 
-// Persist raw snapshot so the report can be re-rendered without re-pulling.
-fs.mkdirSync(path.dirname(OUTPUT_SNAPSHOT), { recursive: true });
-fs.writeFileSync(
-  OUTPUT_SNAPSHOT,
-  JSON.stringify(
-    {
-      generatedAt: new Date().toISOString(),
-      cellsTotal: cells.length,
-      overCapacity: overCapacity.length,
-      drilled,
-    },
-    null,
-    2,
-  ),
-);
-
 // ---- 4. Derived metrics -----------------------------------------------------
 let totalDevicesInDrilled = 0;
 let polLocationFlags = 0;
@@ -158,6 +148,52 @@ for (const { cell, devices } of drilled) {
 const topReasons = [...polReasonHistogram.entries()].sort((a, b) => b[1] - a[1]);
 const topBundles = [...bundleHistogramGlobal.entries()].sort((a, b) => b[1] - a[1]);
 
+const snapAbs = path.resolve(OUTPUT_SNAPSHOT);
+const prevStats = loadPreviousStats(snapAbs);
+const stats = {
+  generatedAt: new Date().toISOString(),
+  observed: cells.length,
+  overCapacityCells: overCapacity.length,
+  overCapacityPct: cells.length ? overCapacity.length / cells.length : 0,
+  drilledCells: drilled.length,
+  devicesInDrilled: totalDevicesInDrilled,
+  polNoLocation: polLocationFlags,
+  polOther: polOtherFlags,
+  inactiveInDrilled: inactiveButPresent,
+  lowQodInDrilled: lowQodDevices,
+};
+
+fs.mkdirSync(path.dirname(OUTPUT_SNAPSHOT), { recursive: true });
+fs.writeFileSync(
+  snapAbs,
+  JSON.stringify(
+    {
+      generatedAt: stats.generatedAt,
+      cellsTotal: cells.length,
+      overCapacity: overCapacity.length,
+      stats,
+      prevStats: prevStats || undefined,
+      drilled,
+    },
+    null,
+    2,
+  ),
+);
+
+const deltaRows = [
+  { key: "observed", label: "Cells on public map", value: stats.observed, lowerIsBetter: false },
+  { key: "overCapacityCells", label: `Cells ≥${OVERCAPACITY_RATIO}× capacity`, value: stats.overCapacityCells },
+  {
+    key: "overCapacityPct",
+    label: "Share of map over capacity",
+    value: stats.overCapacityPct,
+    pct: true,
+    lowerIsBetter: true,
+  },
+  { key: "polNoLocation", label: "`NO_LOCATION_DATA` in drilled set", value: stats.polNoLocation },
+  { key: "lowQodInDrilled", label: `Devices with qod < ${LOW_QOD_THRESHOLD} (drilled)`, value: stats.lowQodInDrilled },
+];
+
 // ---- 5. Render markdown -----------------------------------------------------
 const now = new Date();
 const lines = [];
@@ -184,8 +220,24 @@ lines.push(
 );
 lines.push(`- **Devices observed inside drilled cells:** ${totalDevicesInDrilled.toLocaleString()}`);
 lines.push("");
-lines.push("---");
-lines.push("");
+lines.push(
+  ...renderExecutiveSummary([
+    `**${overCapacity.length.toLocaleString()} cells** exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.`,
+    `**${polLocationFlags.toLocaleString()} devices** in the hottest cells carry WeatherXM's own \`NO_LOCATION_DATA\` flag — compare to your internal pol pipeline, not ours.`,
+    `**${lowQodDevices.toLocaleString()}** drilled devices sit below qod ${LOW_QOD_THRESHOLD} while still counted toward cell saturation.`,
+  ]),
+);
+lines.push(
+  ...renderSnapshotDeltaSection(deltaRows, prevStats),
+);
+lines.push(
+  ...renderCrossCheckSection([
+    "Capacity policy: for §1 top H3 cells, confirm whether device_count should exceed capacity or inactive devices should drop off the cell tally.",
+    "Proof-of-location: reconcile §2 `pol_reason` histogram with your dashboard — we only read what the public API returns.",
+    "Hardware mix: §3 bundle counts inside over-capacity cells — popular kit vs single-operator fleet is for you to judge.",
+    "Reproduce: `node scripts/sybil-scan-weatherxm.mjs` — public cells API, no auth.",
+  ]),
+);
 
 // Headline findings -----------------------------------------------------------
 lines.push("## Headline findings");

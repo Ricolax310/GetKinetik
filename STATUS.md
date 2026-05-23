@@ -50,6 +50,7 @@ npm run bureau:outreach    # drafts only from existing reports
 - **Outreach drafts:** `docs/outreach/generated/` (human review before send)
 - **Send queue:** `docs/outreach/OUTREACH_QUEUE.md` (auto-generated)
 - **Run log:** `scripts/data/bureau-run-log.json`
+- **Live audit index:** `landing/data/bureau-audit-index.json` (also `scripts/data/`) — powers audits.html headline cards
 
 Set `SOLANA_RPC_URL` in `.env` (local) and GitHub repo **Secrets** for reliable Hivemapper on-chain reads.
 

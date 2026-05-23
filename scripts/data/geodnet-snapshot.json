@@ -1,6 +1,26 @@
 {
-  "generatedAt": "2026-05-23T16:16:01.225Z",
+  "generatedAt": "2026-05-23T16:35:42.908Z",
   "source": "https://rtk.geodnet.com/api/v2/coverage_stations",
+  "stats": {
+    "generatedAt": "2026-05-23T16:35:42.908Z",
+    "observed": 19685,
+    "exactDupGroups": 9,
+    "nearDupClusters": 933,
+    "tightClusters": 5,
+    "lowPrecision": 2,
+    "flaggedCount": 1857,
+    "flaggedPct": 0.09433578867157734
+  },
+  "prevStats": {
+    "generatedAt": "2026-05-23T16:35:22.670Z",
+    "observed": 19685,
+    "exactDupGroups": 9,
+    "nearDupClusters": 933,
+    "tightClusters": 5,
+    "lowPrecision": 2,
+    "flaggedCount": 1857,
+    "flaggedPct": 0.09433578867157734
+  },
   "stationsTotal": 19685,
   "duplicates": [
     [

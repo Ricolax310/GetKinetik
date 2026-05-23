@@ -42,6 +42,7 @@ import {
   resolveRepo,
   writePipelineSummary,
   writeDailyBrief,
+  writeAuditIndex,
 } from "./bureau/lib.mjs";
 
 const args = process.argv.slice(2);
@@ -254,6 +255,7 @@ function cmdBrief(registry) {
     }
   }
   const out = writeDailyBrief(registry, pipelineResults);
+  writeAuditIndex(REPO_ROOT, registry, resolveRepo);
   appendLog({ action: "brief", ok: true, ...out });
   console.log("GETKINETIK bureau daily brief\n");
   console.log(`  Brief:  ${out.latestBrief}`);

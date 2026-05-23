@@ -1,0 +1,76 @@
+{
+  "updatedAt": "2026-05-23T16:35:43.676Z",
+  "networks": [
+    {
+      "id": "geodnet",
+      "name": "Geodnet",
+      "report": "docs/reports/geodnet-sybil-report.md",
+      "publicSource": "https://rtk.geodnet.com/api/v2/coverage_stations",
+      "generatedAt": "2026-05-23T16:35:42.908Z",
+      "stats": {
+        "generatedAt": "2026-05-23T16:35:42.908Z",
+        "observed": 19685,
+        "exactDupGroups": 9,
+        "nearDupClusters": 933,
+        "tightClusters": 5,
+        "lowPrecision": 2,
+        "flaggedCount": 1857,
+        "flaggedPct": 0.09433578867157734
+      },
+      "topFinding": "**9 exact (lat,lng) duplicate groups** on 19,685 public stations — each row in §1 is one coordinate pair your registry team can grep today."
+    },
+    {
+      "id": "weatherxm",
+      "name": "WeatherXM",
+      "report": "docs/reports/weatherxm-sybil-report.md",
+      "publicSource": "WeatherXM public cells API",
+      "generatedAt": "2026-05-23T16:16:49.345Z",
+      "stats": {
+        "observed": 8487,
+        "overCapacityCells": 288,
+        "drilledCells": 60
+      },
+      "topFinding": null
+    },
+    {
+      "id": "hivemapper",
+      "name": "Hivemapper",
+      "report": "docs/reports/hivemapper-sybil-report.md",
+      "publicSource": "Solana mainnet HONEY SPL mint (public RPC)",
+      "generatedAt": "2026-05-17T22:09:53.401Z",
+      "stats": {
+        "top20ShareOfSupply": 0.5036105211916931,
+        "top20SumUi": 3293192697.797296,
+        "supplyUiAmount": 6539165802.185024
+      },
+      "topFinding": null
+    },
+    {
+      "id": "nodle",
+      "name": "Nodle",
+      "report": "docs/reports/nodle-sybil-report.md",
+      "publicSource": "Nodle public scan inputs (see script header)",
+      "generatedAt": null,
+      "stats": null,
+      "topFinding": null
+    },
+    {
+      "id": "dawn",
+      "name": "Dawn Network",
+      "report": "docs/reports/dawn-sybil-report.md",
+      "publicSource": "Dawn public scan inputs (see script header)",
+      "generatedAt": null,
+      "stats": null,
+      "topFinding": null
+    },
+    {
+      "id": "grass",
+      "name": "Grass / Titan",
+      "report": "docs/reports/grass-sybil-report.md",
+      "publicSource": "Grass/Titan public scan inputs (see script header)",
+      "generatedAt": null,
+      "stats": null,
+      "topFinding": null
+    }
+  ]
+}

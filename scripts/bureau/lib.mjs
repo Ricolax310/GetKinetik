@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { formatDelta, writeAuditIndex } from "./report-helpers.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export const REPO_ROOT = path.resolve(__dirname, "..", "..");
@@ -89,6 +90,45 @@ export function appendLog(entry) {
   fs.writeFileSync(LOG_PATH, JSON.stringify(log, null, 2), "utf8");
 }
 
+export function loadNetworkSnapshotStats(net) {
+  const snapPath = resolveRepo(net.snapshot);
+  if (!fs.existsSync(snapPath)) return { stats: null, prevStats: null };
+  try {
+    const snap = JSON.parse(fs.readFileSync(snapPath, "utf8"));
+    return {
+      stats: snap.stats || null,
+      prevStats: snap.prevStats || null,
+      generatedAt: snap.generatedAt || snap.stats?.generatedAt || null,
+    };
+  } catch {
+    return { stats: null, prevStats: null };
+  }
+}
+
+/** One-line delta for daily brief / outreach when snapshot has prevStats. */
+export function summarizeSnapshotDelta(net) {
+  const { stats, prevStats } = loadNetworkSnapshotStats(net);
+  if (!stats || !prevStats) return null;
+  const pairs = [
+    ["exactDupGroups", "exact dup groups", true],
+    ["nearDupClusters", "≤10m clusters", true],
+    ["overCapacityCells", "over-capacity cells", true],
+    ["top20ShareOfSupply", "top-20 HONEY share", true, true],
+    ["flaggedPct", "fleet flagged", true, true],
+  ];
+  for (const [key, label, lowerIsBetter, asPct] of pairs) {
+    if (typeof stats[key] === "number" && typeof prevStats[key] === "number") {
+      return `${label}: ${formatDelta(stats[key], prevStats[key], {
+        lowerIsBetter,
+        pct: asPct,
+      })}`;
+    }
+  }
+  return null;
+}
+
+export { writeAuditIndex };
+
 export function collectNetworkStatus(registry, pipelineResults = null) {
   const byId = new Map((pipelineResults || []).map((r) => [r.id, r]));
   return registry.map((net) => {
@@ -105,6 +145,7 @@ export function collectNetworkStatus(registry, pipelineResults = null) {
     const outreachPath =
       pipeline?.outreachPath?.replace(/\\/g, "/") ||
       (fs.existsSync(draftPath) ? relDraft : null);
+    const deltaLine = summarizeSnapshotDelta(net);
     return {
       id: net.id,
       name: net.name,
@@ -112,6 +153,7 @@ export function collectNetworkStatus(registry, pipelineResults = null) {
       reportAgeMs: ageMs,
       stale: ageMs == null || ageMs > STALE_MS,
       topFinding: findings[0] || null,
+      snapshotDelta: deltaLine,
       findings,
       outreachPath,
       report: net.report,
@@ -221,8 +263,26 @@ export function buildDailyBrief(registry, pipelineResults = null) {
 
   const statusLines = enabled.map(
     (r) =>
-      `| ${r.name} | ${r.reportAge}${r.stale ? " ⚠️" : ""} | ${r.outreachPath ? "draft ready" : "no draft"} | ${trimFinding(r.topFinding, 60) || "—"} |`,
+      `| ${r.name} | ${r.reportAge}${r.stale ? " ⚠️" : ""} | ${r.outreachPath ? "draft ready" : "no draft"} | ${trimFinding(r.topFinding, 50) || "—"} | ${r.snapshotDelta ? trimFinding(r.snapshotDelta, 40) : "—"} |`,
   );
+
+  const whyToday = [];
+  if (featured?.topFinding) {
+    whyToday.push(
+      `- **Featured read (${featured.name}):** ${trimFinding(featured.topFinding, 140)}`,
+    );
+  }
+  if (featured?.snapshotDelta) {
+    whyToday.push(`- **Trend:** ${featured.snapshotDelta}`);
+  }
+  if (staleRows.length) {
+    whyToday.push(
+      `- **Stale reports:** refresh before outreach — ${staleRows.map((r) => r.name).join(", ")}`,
+    );
+  }
+  if (!whyToday.length) {
+    whyToday.push("- Reports are current — pick one send from the queue below.");
+  }
 
   const actions = [];
   if (staleRows.length) {
@@ -246,10 +306,16 @@ export function buildDailyBrief(registry, pipelineResults = null) {
 
 ---
 
+## Why open this today
+
+${whyToday.join("\n")}
+
+---
+
 ## Today at a glance
 
-| Network | Report | Outreach | Top finding |
-|---------|--------|----------|-------------|
+| Network | Report | Outreach | Top finding | Since last run |
+|---------|--------|----------|-------------|----------------|
 ${statusLines.join("\n")}
 
 **Featured today:** ${featured?.name || "—"}  
@@ -346,6 +412,7 @@ export function writeDailyBrief(registry, pipelineResults = null) {
   fs.writeFileSync(latestPosts, posts, "utf8");
 
   writeOutreachQueue(registry.filter((n) => n.defaultEnabled !== false), pipelineResults);
+  writeAuditIndex(REPO_ROOT, registry, resolveRepo);
 
   return {
     datedBrief: path.relative(REPO_ROOT, datedBrief),
@@ -367,15 +434,24 @@ export function writePipelineSummary(results) {
 }
 
 /** Pull numbered headline bullets from bureau markdown reports. */
+function parseNumberedBullets(section) {
+  return section
+    .split("\n")
+    .map((l) => l.trim())
+    .filter((l) => /^\d+\.\s+/.test(l))
+    .slice(0, 4)
+    .map((l) => l.replace(/^\d+\.\s+/, "").replace(/\*\*/g, ""));
+}
+
 export function extractHeadlineFindings(reportMd) {
+  const exec = reportMd.match(/## Executive summary\r?\n\r?\n([\s\S]*?)\r?\n\r?\n---/);
+  if (exec) {
+    const bullets = parseNumberedBullets(exec[1]);
+    if (bullets.length) return bullets;
+  }
   const m = reportMd.match(/## Headline findings\r?\n\r?\n([\s\S]*?)\r?\n\r?\n---/);
   if (m) {
-    return m[1]
-      .split("\n")
-      .map((l) => l.trim())
-      .filter((l) => /^\d+\.\s+\*\*/.test(l))
-      .slice(0, 4)
-      .map((l) => l.replace(/^\d+\.\s+/, "").replace(/\*\*/g, ""));
+    return parseNumberedBullets(m[1]);
   }
   const bullets = reportMd
     .split("\n")
@@ -402,11 +478,16 @@ export function extractReportMeta(reportMd) {
 export function buildOutreachDraft(net, reportMd) {
   const findings = extractHeadlineFindings(reportMd);
   const meta = extractReportMeta(reportMd);
+  const deltaLine = summarizeSnapshotDelta(net);
   const reportUrl = `https://github.com/Ricolax310/GetKinetik/blob/main/${net.report.replace(/\\/g, "/")}`;
+  const leadFinding = findings[0] || null;
   const findingBlock =
     findings.length > 0
       ? findings.map((f, i) => `${i + 1}. ${f}`).join("\n")
       : "1. _(Re-run scan — headline findings section missing from report.)_";
+  const leadBlock = leadFinding
+    ? `**One pattern worth your team's time:** ${leadFinding}${deltaLine ? ` _(trend: ${deltaLine})_` : ""}`
+    : "";
 
   return `# ${net.name} — outreach draft (auto-generated)
 
@@ -427,7 +508,7 @@ Eric here — GETKINETIK is the **neutral DePIN bureau**: a friendly second read
 
 We ran a reproducible sample read against **${net.publicSource}** (${meta.generated ? `snapshot ${meta.generated}` : "see linked report"}). **No internal ${net.name} data was used.** Methodology is open; anyone can re-run it.
 
-**Patterns worth cross-checking against your analytics:**
+${leadBlock ? `${leadBlock}\n\n` : ""}**Patterns worth cross-checking against your analytics:**
 
 ${findingBlock}
 

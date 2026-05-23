@@ -34,6 +34,12 @@ import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import {
+  loadPreviousStats,
+  renderCrossCheckSection,
+  renderExecutiveSummary,
+  renderSnapshotDeltaSection,
+} from "./bureau/report-helpers.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, "..");
@@ -293,6 +299,15 @@ if (nodesArg) {
 
 // ---- 4. Snapshot + markdown -------------------------------------------------
 const now = new Date();
+const prevStats = loadPreviousStats(OUTPUT_SNAPSHOT);
+const stats = {
+  generatedAt: now.toISOString(),
+  supplyUiAmount: supplyUi,
+  top20SumUi: top20Sum,
+  top20ShareOfSupply: top20Share,
+  largestAccountsReturned: rows.length,
+  partASkipped: !(rows.length && supplyUi != null),
+};
 const snapshot = {
   generatedAt: now.toISOString(),
   honeyMint: HONEY_MINT,
@@ -304,9 +319,36 @@ const snapshot = {
   top20SumUi: top20Sum,
   top20ShareOfSupply: top20Share,
   optionalNodesFile: nodesArg,
+  stats,
+  prevStats: prevStats || undefined,
 };
 fs.mkdirSync(path.dirname(OUTPUT_SNAPSHOT), { recursive: true });
 fs.writeFileSync(OUTPUT_SNAPSHOT, JSON.stringify(snapshot, null, 2), "utf8");
+
+const deltaRows =
+  rows.length && supplyUi != null
+    ? [
+        {
+          key: "top20ShareOfSupply",
+          label: "Top-20 visible SPL accounts (% of UI supply)",
+          value: top20Share,
+          pct: true,
+          lowerIsBetter: true,
+        },
+        {
+          key: "top20SumUi",
+          label: "Sum of top-20 balances (HONEY)",
+          value: top20Sum,
+          lowerIsBetter: true,
+        },
+        {
+          key: "supplyUiAmount",
+          label: "UI-reported supply (HONEY)",
+          value: supplyUi,
+          lowerIsBetter: false,
+        },
+      ]
+    : [];
 
 const lines = [];
 lines.push("# Sybil Risk Scan — Hivemapper Network");
@@ -333,6 +375,66 @@ if (rows.length && supplyUi != null) {
   lines.push(`- **RPC error:** \`${onChainErr || "unknown"}\``);
 }
 lines.push(`- **${geoNote}**`);
+lines.push("");
+
+if (rows.length && supplyUi != null) {
+  const top5Share =
+    rows.slice(0, 5).reduce((s, r) => s + r.uiAmount, 0) / supplyUi;
+  lines.push(
+    ...renderExecutiveSummary([
+      `**${pct(top20Share)} of UI-reported HONEY** sits in the **top ${rows.length} visible SPL accounts** (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.`,
+      `**Top 5 accounts alone: ${pct(top5Share)}** of supply — see § Part A table for owner wallets to reconcile with custody labels.`,
+      nodesArg
+        ? "**Appendix** includes optional GPS/co-location heuristics on your supplied `nodes.json` — compare to internal contributor analytics."
+        : "For GPS-style reads, re-run with `--nodes=` when you can export lat/lng (schema: `scripts/sample-nodes.json`).",
+    ]),
+  );
+} else {
+  lines.push(
+    ...renderExecutiveSummary([
+      "**Part A skipped** — public Solana RPC rate-limited. Set `SOLANA_RPC_URL` and re-run for concentration metrics.",
+      "This read is still useful as a documented reproduction attempt; economics section populates once RPC succeeds.",
+      nodesArg
+        ? "**Appendix** geometry heuristics ran on supplied nodes — see bottom of report."
+        : "Optional `--nodes=` adds the same geometry pass as Geodnet/WeatherXM when you have coordinates.",
+    ]),
+  );
+}
+if (deltaRows.length) {
+  lines.push(...renderSnapshotDeltaSection(deltaRows, prevStats));
+}
+lines.push(
+  ...renderCrossCheckSection([
+    "Label top SPL owner wallets (§ Part A) against treasury, MM, exchange, and contributor custody — concentration ≠ Sybil.",
+    "Compare cumulative top-N curve to your internal float map — RPC only returns 20 largest accounts per call.",
+    "If you export contributor coordinates, re-run with `--nodes=` for co-location / birth-burst heuristics.",
+    "Reproduce: `node scripts/sybil-scan-hivemapper.mjs` with `SOLANA_RPC_URL` in env.",
+  ]),
+);
+
+lines.push("## Headline findings");
+lines.push("");
+if (rows.length && supplyUi != null) {
+  const top5Share =
+    rows.slice(0, 5).reduce((s, r) => s + r.uiAmount, 0) / supplyUi;
+  lines.push(
+    `1. **Top ${rows.length} visible SPL accounts hold ${pct(top20Share)} of UI-reported supply** (${top20Sum.toLocaleString()} HONEY).`,
+  );
+  lines.push(
+    `2. **Top 5 accounts: ${pct(top5Share)}** — worth matching to known custody before inferring contributor risk.`,
+  );
+  lines.push(
+    `3. **Methodology cap:** Solana returns at most 20 largest token accounts per mint; tail concentration is a lower bound.`,
+  );
+} else {
+  lines.push(
+    `1. **On-chain Part A did not complete** — set \`SOLANA_RPC_URL\` (Helius, QuickNode, etc.) and re-run.`,
+  );
+  lines.push(`2. **RPC error:** \`${onChainErr || "unknown"}\`.`);
+  lines.push(
+    "3. **Optional Part B:** pass `--nodes=` with lat/lng JSON for geometry heuristics.",
+  );
+}
 lines.push("");
 lines.push("---");
 lines.push("");
