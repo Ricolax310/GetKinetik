@@ -2,14 +2,22 @@
 // Drafts only; never auto-sends or auto-posts.
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import {
   REPO_ROOT,
   collectNetworkStatus,
   extractHeadlineFindings,
   extractReportMeta,
+  loadNetworkSnapshotStats,
   resolveRepo,
   summarizeSnapshotDelta,
 } from "./lib.mjs";
+import {
+  composeDeltaThread,
+  composeDeltaTweet,
+  composeNetworkTweet,
+  formatDeltaPostsMarkdown,
+} from "./tweet-compose.mjs";
 
 export const PAPERS_DIR = path.join(REPO_ROOT, "docs/bureau/papers");
 export const NETWORKS_DIR = path.join(PAPERS_DIR, "networks");
@@ -254,75 +262,24 @@ export function buildDeltaPosts(registry, pipelineResults = null) {
   const enabled = rows.filter((r) => r.defaultEnabled);
   const changed = enabled.filter((r) => hasMaterialDelta(r.snapshotDelta));
   const today = new Date().toISOString().slice(0, 10);
-
-  if (!changed.length) {
-    return `# Delta post drafts — ${today}
-
-> **No material snapshot deltas today.** Skip the sample-read post — patterns stable vs last run.
-
-Optional reuse (~1×/week):
-
-\`\`\`
-Optional trust sanity check for DePIN backends:
-
-POST getkinetik.app/api/verify-device
-→ valid/invalid + device age + signed chain
-
-Your verifier still runs. Offline: npm i @getkinetik/verify
-\`\`\`
-
-_Full rotation posts still in [latest-posts.md](./latest-posts.md)._
-`;
+  const statsMap = {};
+  for (const net of registry) {
+    if (net.defaultEnabled === false) continue;
+    statsMap[net.id] = loadNetworkSnapshotStats(net);
   }
+  const deltaTweet = changed.length ? composeDeltaTweet(changed, statsMap) : null;
+  const deltaThread = changed.length ? composeDeltaThread(changed, statsMap) : null;
+  const linkedIn = changed.length
+    ? `${deltaTweet} Neutral bureau — friendly second opinion on public data.`
+    : "";
 
-  const bullets = changed
-    .map((r) => `- **${r.name}:** ${trim(r.topFinding, 80) || "see report"} _(${r.snapshotDelta})_`)
-    .join("\n");
-
-  const tweet = changed
-    .slice(0, 2)
-    .map((r) => `${r.name}: ${trim(r.topFinding, 70)} (${r.snapshotDelta})`)
-    .join("\n");
-
-  return `# Delta post drafts — ${today}
-
-> **Post only when something moved.** ${changed.length} network(s) with material deltas.
-
----
-
-## What changed
-
-${bullets}
-
----
-
-## Twitter/X (delta thread — copy as one tweet or thread)
-
-\`\`\`
-Neutral DePIN bureau — weekly delta on public data:
-
-${tweet}
-
-Reproducible reads. Your verifier still runs.
-getkinetik.app/audits.html
-\`\`\`
-
----
-
-## LinkedIn
-
-\`\`\`
-Weekly bureau delta (${today}): ${changed.map((r) => r.name).join(", ")} — patterns worth cross-checking against your internal analytics. Friendly second read, not a verdict. getkinetik.app/audits.html
-\`\`\`
-
----
-
-## Guardrails
-
-- Pattern language only — not "fraud proved"
-- Link getkinetik.app/audits.html or GitHub report
-- **Do not auto-post**
-`;
+  return formatDeltaPostsMarkdown({
+    changed,
+    deltaTweet,
+    deltaThread,
+    linkedIn,
+    today,
+  });
 }
 
 export function writePublishingPack(registry, pipelineResults = null) {

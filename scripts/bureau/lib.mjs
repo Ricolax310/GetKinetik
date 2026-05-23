@@ -2,6 +2,14 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { formatDelta, writeAuditIndex } from "./report-helpers.mjs";
+import {
+  composeDeltaThread,
+  composeDeltaTweet,
+  composeNetworkTweet,
+  composeVerifyTweet,
+  formatDeltaPostsMarkdown,
+  formatPostsMarkdown,
+} from "./tweet-compose.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export const REPO_ROOT = path.resolve(__dirname, "..", "..");
@@ -218,38 +226,22 @@ function trimFinding(text, max = 120) {
   return t.length <= max ? t : `${t.slice(0, max - 1)}…`;
 }
 
-export function buildSocialPosts(featured, rows) {
+function snapshotStatsById(registry) {
+  const out = {};
+  for (const net of registry) {
+    const { stats, prevStats } = loadNetworkSnapshotStats(net);
+    out[net.id] = { stats, prevStats };
+  }
+  return out;
+}
+
+export function buildSocialPosts(featured, rows, registry) {
+  const net = registry.find((n) => n.id === featured?.id);
+  const { stats, prevStats } = net ? loadNetworkSnapshotStats(net) : { stats: null, prevStats: null };
+  const sampleReadTweet = composeNetworkTweet(featured || {}, stats, prevStats);
+  const verifyTweet = composeVerifyTweet();
+  const linkedIn = `${sampleReadTweet} Neutral bureau — friendly helper, not gatekeeper.`;
   const stale = rows.filter((r) => r.stale && r.defaultEnabled);
-  const reportUrl = featured
-    ? `https://github.com/Ricolax310/GetKinetik/blob/main/${featured.report.replace(/\\/g, "/")}`
-    : "https://getkinetik.app/audits.html";
-  const finding = trimFinding(featured?.topFinding, 100);
-
-  const sampleReadTweet = featured?.topFinding
-    ? `Neutral DePIN bureau update — friendly second read on ${featured.name} public data.
-
-Pattern worth cross-checking: ${finding}
-
-Reproducible methodology. Your verifier still runs.
-
-${reportUrl}`
-    : `GETKINETIK is the neutral DePIN bureau — friendly helper, second read not replacement.
-
-Reproducible public sample reads + signed device evidence. No token. No picking sides.
-
-getkinetik.app/audits.html`;
-
-  const verifyTweet = `Optional trust sanity check for DePIN backends:
-
-POST getkinetik.app/api/verify-device
-→ valid/invalid + device age + signed chain
-
-Your verifier still runs. Offline: npm i @getkinetik/verify`;
-
-  const linkedIn = featured?.topFinding
-    ? `Ran a reproducible public sample read on ${featured.name} (${featured.publicSource}). Neutral DePIN bureau — friendly helper, not gatekeeper. One pattern worth cross-checking: ${finding}. Full report: ${reportUrl}`
-    : `GETKINETIK publishes reproducible trust reads on public DePIN data and signed device evidence. Friendly helper, second read not replacement. getkinetik.app/bureau/`;
-
   return { sampleReadTweet, verifyTweet, linkedIn, staleCount: stale.length };
 }
 
@@ -354,45 +346,21 @@ export function buildDailyPosts(registry, pipelineResults = null) {
   const rows = collectNetworkStatus(registry, pipelineResults);
   const enabled = rows.filter((r) => r.defaultEnabled);
   const featured = pickFeaturedNetwork(enabled);
-  const { sampleReadTweet, verifyTweet, linkedIn } = buildSocialPosts(featured, enabled);
+  const changed = enabled.filter((r) => r.snapshotDelta && !/unchanged vs last run/i.test(r.snapshotDelta));
+  const statsMap = snapshotStatsById(registry.filter((n) => n.defaultEnabled !== false));
+  const { sampleReadTweet, verifyTweet, linkedIn } = buildSocialPosts(featured, enabled, registry);
+  const deltaTweet = changed.length ? composeDeltaTweet(changed, statsMap) : null;
+  const deltaThread = changed.length ? composeDeltaThread(changed, statsMap) : null;
   const today = new Date().toISOString().slice(0, 10);
 
-  return `# Bureau post drafts — ${today}
-
-> **Do not auto-post.** Copy, edit voice, attach image/video if needed, then post manually.
-
----
-
-## Twitter/X — sample read (rotate daily)
-
-\`\`\`
-${sampleReadTweet}
-\`\`\`
-
----
-
-## Twitter/X — verify-device (reuse ~1×/week)
-
-\`\`\`
-${verifyTweet}
-\`\`\`
-
----
-
-## LinkedIn (optional)
-
-\`\`\`
-${linkedIn}
-\`\`\`
-
----
-
-## Posting guardrails
-
-- Say **pattern** / **worth cross-checking** — not "fraud proved" or "Sybil confirmed"
-- Link report on GitHub or getkinetik.app/audits.html — not raw DM dumps
-- Friendly helper tone — second read, not replacement
-`;
+  return formatPostsMarkdown({
+    sampleTweet: sampleReadTweet,
+    verifyTweet,
+    deltaTweet,
+    deltaThread,
+    linkedIn,
+    today,
+  });
 }
 
 export function writeDailyBrief(registry, pipelineResults = null) {
