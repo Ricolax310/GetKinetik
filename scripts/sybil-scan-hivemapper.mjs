@@ -40,7 +40,9 @@ import {
   renderExecutiveSummary,
   renderSnapshotDeltaSection,
 } from "./bureau/report-helpers.mjs";
-import { redactSecrets } from "./bureau/lib.mjs";
+import { redactSecrets, loadEnvQuiet } from "./bureau/lib.mjs";
+
+loadEnvQuiet();
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, "..");
