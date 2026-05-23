@@ -1,6 +1,6 @@
-# Weekly public sample reads — refreshes bureau reports from open data.
-# Does NOT send outreach. Commits report + snapshot updates when they change.
-name: Bureau public reads
+# Weekly full bureau pipeline — public sample reads, outreach drafts, daily brief.
+# Does NOT send email/DMs or post to social. Human review required.
+name: Bureau weekly pipeline
 
 on:
   schedule:
@@ -11,7 +11,7 @@ permissions:
   contents: write
 
 jobs:
-  scan:
+  pipeline:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -20,18 +20,15 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Run bureau scans (default networks)
+      - name: Run full bureau pipeline
         env:
           SOLANA_RPC_URL: ${{ secrets.SOLANA_RPC_URL }}
-        run: node scripts/bureau-run.mjs scan all
+        run: node scripts/bureau-run.mjs pipeline --force
 
-      - name: Regenerate outreach drafts
-        run: node scripts/bureau-run.mjs outreach all --force
-
-      - name: Commit report updates
+      - name: Commit bureau updates
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/reports/*.md scripts/data/*-snapshot.json scripts/data/bureau-pipeline.json docs/outreach/OUTREACH_QUEUE.md || true
-          git diff --staged --quiet || git commit -m "chore(bureau): refresh public sample reads [automated]"
+          git add docs/reports/*.md scripts/data/*-snapshot.json scripts/data/bureau-pipeline.json docs/outreach/OUTREACH_QUEUE.md docs/bureau/daily/*.md || true
+          git diff --staged --quiet || git commit -m "chore(bureau): weekly public sample reads [automated]"
           git push || true

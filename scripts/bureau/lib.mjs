@@ -8,6 +8,8 @@ export const REGISTRY_PATH = path.join(__dirname, "networks.json");
 export const LOG_PATH = path.join(REPO_ROOT, "scripts/data/bureau-run-log.json");
 export const OUTREACH_DIR = path.join(REPO_ROOT, "docs/outreach/generated");
 export const PIPELINE_PATH = path.join(REPO_ROOT, "scripts/data/bureau-pipeline.json");
+export const DAILY_DIR = path.join(REPO_ROOT, "docs/bureau/daily");
+const STALE_MS = 7 * 24 * 3_600_000;
 
 const REDACT_PATTERNS = [
   /api-key=[^&\s"']+/gi,
@@ -87,8 +89,49 @@ export function appendLog(entry) {
   fs.writeFileSync(LOG_PATH, JSON.stringify(log, null, 2), "utf8");
 }
 
-export function writeOutreachQueue(results) {
-  const registry = loadRegistry();
+export function collectNetworkStatus(registry, pipelineResults = null) {
+  const byId = new Map((pipelineResults || []).map((r) => [r.id, r]));
+  return registry.map((net) => {
+    const reportPath = resolveRepo(net.report);
+    const ageMs = fileAgeMs(reportPath);
+    let findings = [];
+    if (fs.existsSync(reportPath)) {
+      findings = extractHeadlineFindings(fs.readFileSync(reportPath, "utf8"));
+    }
+    const date = new Date().toISOString().slice(0, 10);
+    const relDraft = `docs/outreach/generated/${net.id}-outreach-${date}.md`;
+    const draftPath = resolveRepo(relDraft);
+    const pipeline = byId.get(net.id);
+    const outreachPath =
+      pipeline?.outreachPath?.replace(/\\/g, "/") ||
+      (fs.existsSync(draftPath) ? relDraft : null);
+    return {
+      id: net.id,
+      name: net.name,
+      reportAge: formatAge(ageMs),
+      reportAgeMs: ageMs,
+      stale: ageMs == null || ageMs > STALE_MS,
+      topFinding: findings[0] || null,
+      findings,
+      outreachPath,
+      report: net.report,
+      publicSource: net.publicSource,
+      defaultEnabled: net.defaultEnabled !== false,
+      scanOk: pipeline?.scanOk ?? null,
+    };
+  });
+}
+
+export function writeOutreachQueue(resultsOrRegistry, pipelineResults = null) {
+  const registry = Array.isArray(resultsOrRegistry)
+    ? loadRegistry().filter((n) =>
+        resultsOrRegistry.some((r) => r.id === n.id),
+      )
+    : loadRegistry().filter((n) => n.defaultEnabled !== false);
+  const pipeline =
+    pipelineResults ||
+    (Array.isArray(resultsOrRegistry) ? resultsOrRegistry : null);
+  const rows = collectNetworkStatus(registry, pipeline);
   const lines = [
     "# Outreach queue (auto-generated)",
     "",
@@ -99,18 +142,11 @@ export function writeOutreachQueue(results) {
     "| Network | Report age | Draft | Top finding |",
     "|---------|------------|-------|-------------|",
   ];
-  for (const r of results) {
-    const net = registry.find((n) => n.id === r.id);
-    const reportPath = net ? resolveRepo(net.report) : "";
-    let top = "—";
-    if (reportPath && fs.existsSync(reportPath)) {
-      const findings = extractHeadlineFindings(fs.readFileSync(reportPath, "utf8"));
-      top = findings[0]?.slice(0, 80) || "—";
-    }
-    const age = reportPath ? formatAge(fileAgeMs(reportPath)) : "—";
+  for (const r of rows) {
     const draft = r.outreachPath || "_(run pipeline)_";
+    const top = r.topFinding?.slice(0, 80) || "—";
     lines.push(
-      `| ${r.name || r.id} | ${age} | \`${draft}\` | ${top.replace(/\|/g, "\\|")} |`,
+      `| ${r.name || r.id} | ${r.reportAge} | \`${draft}\` | ${top.replace(/\|/g, "\\|")} |`,
     );
   }
   lines.push(
@@ -126,6 +162,197 @@ export function writeOutreachQueue(results) {
   const queuePath = path.join(REPO_ROOT, "docs/outreach/OUTREACH_QUEUE.md");
   fs.mkdirSync(path.dirname(queuePath), { recursive: true });
   fs.writeFileSync(queuePath, lines.join("\n"), "utf8");
+}
+
+export function pickFeaturedNetwork(rows) {
+  const eligible = rows.filter((r) => r.topFinding);
+  if (!eligible.length) return rows.find((r) => r.defaultEnabled) || rows[0];
+  return eligible[new Date().getDay() % eligible.length];
+}
+
+function trimFinding(text, max = 120) {
+  if (!text) return "";
+  const t = text.replace(/\s+/g, " ").trim();
+  return t.length <= max ? t : `${t.slice(0, max - 1)}…`;
+}
+
+export function buildSocialPosts(featured, rows) {
+  const stale = rows.filter((r) => r.stale && r.defaultEnabled);
+  const reportUrl = featured
+    ? `https://github.com/Ricolax310/GetKinetik/blob/main/${featured.report.replace(/\\/g, "/")}`
+    : "https://getkinetik.app/audits.html";
+  const finding = trimFinding(featured?.topFinding, 100);
+
+  const sampleReadTweet = featured?.topFinding
+    ? `Neutral DePIN bureau update — friendly second read on ${featured.name} public data.
+
+Pattern worth cross-checking: ${finding}
+
+Reproducible methodology. Your verifier still runs.
+
+${reportUrl}`
+    : `GETKINETIK is the neutral DePIN bureau — friendly helper, second read not replacement.
+
+Reproducible public sample reads + signed device evidence. No token. No picking sides.
+
+getkinetik.app/audits.html`;
+
+  const verifyTweet = `Optional trust sanity check for DePIN backends:
+
+POST getkinetik.app/api/verify-device
+→ valid/invalid + device age + signed chain
+
+Your verifier still runs. Offline: npm i @getkinetik/verify`;
+
+  const linkedIn = featured?.topFinding
+    ? `Ran a reproducible public sample read on ${featured.name} (${featured.publicSource}). Neutral DePIN bureau — friendly helper, not gatekeeper. One pattern worth cross-checking: ${finding}. Full report: ${reportUrl}`
+    : `GETKINETIK publishes reproducible trust reads on public DePIN data and signed device evidence. Friendly helper, second read not replacement. getkinetik.app/bureau/`;
+
+  return { sampleReadTweet, verifyTweet, linkedIn, staleCount: stale.length };
+}
+
+export function buildDailyBrief(registry, pipelineResults = null) {
+  const rows = collectNetworkStatus(registry, pipelineResults);
+  const enabled = rows.filter((r) => r.defaultEnabled);
+  const featured = pickFeaturedNetwork(enabled);
+  const today = new Date().toISOString().slice(0, 10);
+  const staleRows = enabled.filter((r) => r.stale);
+  const sendCandidates = enabled.filter((r) => r.outreachPath && r.topFinding);
+
+  const statusLines = enabled.map(
+    (r) =>
+      `| ${r.name} | ${r.reportAge}${r.stale ? " ⚠️" : ""} | ${r.outreachPath ? "draft ready" : "no draft"} | ${trimFinding(r.topFinding, 60) || "—"} |`,
+  );
+
+  const actions = [];
+  if (staleRows.length) {
+    actions.push(
+      `- **Refresh scans:** ${staleRows.map((r) => r.name).join(", ")} — run \`npm run bureau:scan\` or wait for Monday weekly job`,
+    );
+  }
+  if (sendCandidates.length) {
+    actions.push(
+      `- **Review outreach:** ${sendCandidates.slice(0, 3).map((r) => `\`${r.outreachPath}\``).join(", ")}`,
+    );
+  }
+  actions.push("- **Post (manual):** review `latest-posts.md` — never auto-post");
+  if (!actions.length) actions.push("- Bureau reports fresh. Focus on sends + one social post.");
+
+  return `# Bureau daily brief — ${today}
+
+> Auto-generated by \`npm run bureau:brief\`. **Review before sending or posting.**
+
+**Direction:** neutral DePIN bureau — friendly helper, second read not replacement.
+
+---
+
+## Today at a glance
+
+| Network | Report | Outreach | Top finding |
+|---------|--------|----------|-------------|
+${statusLines.join("\n")}
+
+**Featured today:** ${featured?.name || "—"}  
+**Stale reports (>7d):** ${staleRows.length ? staleRows.map((r) => r.name).join(", ") : "none"}  
+**Win metric:** network conversations asking *"Can you run this on our data?"*
+
+---
+
+## Suggested actions
+
+${actions.join("\n")}
+
+---
+
+## Outreach send order
+
+1. Hivemapper
+2. Geodnet
+3. WeatherXM (nurture — CEO validated)
+4. Others as needed
+
+Queue: [OUTREACH_QUEUE.md](../../outreach/OUTREACH_QUEUE.md)
+
+---
+
+## Links
+
+- Audits terminal: https://getkinetik.app/audits.html
+- Bureau: https://getkinetik.app/bureau/
+- Verify API: https://getkinetik.app/api/docs/
+- Charter: https://github.com/Ricolax310/GetKinetik/blob/main/NEUTRALITY.md
+`;
+}
+
+export function buildDailyPosts(registry, pipelineResults = null) {
+  const rows = collectNetworkStatus(registry, pipelineResults);
+  const enabled = rows.filter((r) => r.defaultEnabled);
+  const featured = pickFeaturedNetwork(enabled);
+  const { sampleReadTweet, verifyTweet, linkedIn } = buildSocialPosts(featured, enabled);
+  const today = new Date().toISOString().slice(0, 10);
+
+  return `# Bureau post drafts — ${today}
+
+> **Do not auto-post.** Copy, edit voice, attach image/video if needed, then post manually.
+
+---
+
+## Twitter/X — sample read (rotate daily)
+
+\`\`\`
+${sampleReadTweet}
+\`\`\`
+
+---
+
+## Twitter/X — verify-device (reuse ~1×/week)
+
+\`\`\`
+${verifyTweet}
+\`\`\`
+
+---
+
+## LinkedIn (optional)
+
+\`\`\`
+${linkedIn}
+\`\`\`
+
+---
+
+## Posting guardrails
+
+- Say **pattern** / **worth cross-checking** — not "fraud proved" or "Sybil confirmed"
+- Link report on GitHub or getkinetik.app/audits.html — not raw DM dumps
+- Friendly helper tone — second read, not replacement
+`;
+}
+
+export function writeDailyBrief(registry, pipelineResults = null) {
+  const today = new Date().toISOString().slice(0, 10);
+  const brief = buildDailyBrief(registry, pipelineResults);
+  const posts = buildDailyPosts(registry, pipelineResults);
+  fs.mkdirSync(DAILY_DIR, { recursive: true });
+
+  const datedBrief = path.join(DAILY_DIR, `${today}-brief.md`);
+  const datedPosts = path.join(DAILY_DIR, `${today}-posts.md`);
+  const latestBrief = path.join(DAILY_DIR, "latest-brief.md");
+  const latestPosts = path.join(DAILY_DIR, "latest-posts.md");
+
+  fs.writeFileSync(datedBrief, brief, "utf8");
+  fs.writeFileSync(datedPosts, posts, "utf8");
+  fs.writeFileSync(latestBrief, brief, "utf8");
+  fs.writeFileSync(latestPosts, posts, "utf8");
+
+  writeOutreachQueue(registry.filter((n) => n.defaultEnabled !== false), pipelineResults);
+
+  return {
+    datedBrief: path.relative(REPO_ROOT, datedBrief),
+    datedPosts: path.relative(REPO_ROOT, datedPosts),
+    latestBrief: path.relative(REPO_ROOT, latestBrief),
+    latestPosts: path.relative(REPO_ROOT, latestPosts),
+  };
 }
 
 export function writePipelineSummary(results) {

@@ -8,17 +8,30 @@ From repo root:
 
 ```bash
 npm run bureau:status      # report ages + missing env (e.g. SOLANA_RPC_URL)
-npm run bureau:pipeline    # scan → validate → outreach drafts (human sends)
+npm run bureau:brief       # daily brief + post drafts + outreach queue
+npm run bureau:pipeline    # scan → validate → outreach drafts → brief
+npm run bureau:weekly      # full pipeline with --force
 npm run bureau:scan        # refresh reports only
 npm run bureau:outreach    # regenerate drafts from existing reports
 ```
 
+### Scheduled (GitHub Actions)
+
+| Job | Schedule | What it does |
+|-----|----------|--------------|
+| Daily brief | 08:00 UTC daily | `latest-brief.md`, `latest-posts.md`, outreach queue |
+| Weekly pipeline | Mon 14:00 UTC | Full public sample reads + outreach drafts + brief |
+
+Drafts only — **never auto-sent or auto-posted.**
+
 - **Registry:** `scripts/bureau/networks.json`
 - **Runner:** `scripts/bureau-run.mjs`
-- **Drafts:** `docs/outreach/generated/<network>-outreach-<date>.md` (never auto-sent)
+- **Daily brief:** `docs/bureau/daily/latest-brief.md`
+- **Post drafts:** `docs/bureau/daily/latest-posts.md`
+- **Outreach drafts:** `docs/outreach/generated/<network>-outreach-<date>.md` (never auto-sent)
 - **Status doc:** [`STATUS.md`](../../STATUS.md) at repo root
 
-Set `SOLANA_RPC_URL` in `.env` for reliable Hivemapper on-chain reads.
+Set `SOLANA_RPC_URL` in `.env` (local) and GitHub **Secrets** for reliable Hivemapper on-chain reads.
 
 ## Network-specific scripts
 

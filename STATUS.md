@@ -28,18 +28,30 @@ We publish reproducible trust reads on **public data** and **signed device evide
 
 ```bash
 npm run bureau:status      # report ages + env hints
-npm run bureau:pipeline    # scan → validate → outreach drafts
+npm run bureau:brief       # daily brief + post drafts + outreach queue
+npm run bureau:pipeline    # scan → validate → outreach drafts → brief
+npm run bureau:weekly      # full pipeline with --force (local weekly run)
 npm run bureau:scan        # scans only (default networks)
 npm run bureau:outreach    # drafts only from existing reports
 ```
 
-- **Registry:** `scripts/bureau/networks.json`
-- **Outreach drafts:** `docs/outreach/generated/` (human review before send)
-- **Send queue:** `docs/outreach/OUTREACH_QUEUE.md` (auto-generated with pipeline)
-- **Run log:** `scripts/data/bureau-run-log.json`
-- **Never auto-sends** email or DMs.
+### Scheduled (GitHub Actions)
 
-Set `SOLANA_RPC_URL` in `.env` for reliable Hivemapper on-chain reads.
+| Job | Schedule | Workflow | What it does |
+|-----|----------|----------|--------------|
+| **Daily brief** | 08:00 UTC daily | `.github/workflows/bureau-daily.yml` | Brief + post drafts + outreach queue |
+| **Weekly pipeline** | Mon 14:00 UTC | `.github/workflows/bureau-scan.yml` | Full scan → outreach → brief |
+
+**Never auto-sends** email, DMs, or social posts — drafts only.
+
+- **Registry:** `scripts/bureau/networks.json`
+- **Daily brief:** `docs/bureau/daily/latest-brief.md`
+- **Post drafts:** `docs/bureau/daily/latest-posts.md`
+- **Outreach drafts:** `docs/outreach/generated/` (human review before send)
+- **Send queue:** `docs/outreach/OUTREACH_QUEUE.md` (auto-generated)
+- **Run log:** `scripts/data/bureau-run-log.json`
+
+Set `SOLANA_RPC_URL` in `.env` (local) and GitHub repo **Secrets** for reliable Hivemapper on-chain reads.
 
 ---
 
@@ -69,4 +81,4 @@ Set `SOLANA_RPC_URL` in `.env` for reliable Hivemapper on-chain reads.
 
 **Network conversations** that say: *"Can you run this on our data?"* — not APK downloads, not adapter count.
 
-*Last updated: 2026-05-23 · reports refreshed via `npm run bureau:pipeline`*
+*Last updated: 2026-05-23 · daily brief + weekly pipeline automation live*

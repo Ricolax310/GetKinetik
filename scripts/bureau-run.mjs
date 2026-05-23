@@ -10,11 +10,13 @@
 //   node scripts/bureau-run.mjs scan [network-id|all]
 //   node scripts/bureau-run.mjs outreach [network-id|all]
 //   node scripts/bureau-run.mjs pipeline [--only=geodnet,weatherxm]
+//   node scripts/bureau-run.mjs brief
 //
 // npm shortcuts (from package.json):
 //   npm run bureau:status
 //   npm run bureau:scan
 //   npm run bureau:pipeline
+//   npm run bureau:brief
 //
 // Safety:
 //   - Never sends email/DMs — only writes files under docs/outreach/generated/
@@ -39,6 +41,7 @@ import {
   redactSecrets,
   resolveRepo,
   writePipelineSummary,
+  writeDailyBrief,
 } from "./bureau/lib.mjs";
 
 const args = process.argv.slice(2);
@@ -57,9 +60,12 @@ GETKINETIK bureau runner — neutral helper automation
   node scripts/bureau-run.mjs scan [network-id|all]
   node scripts/bureau-run.mjs outreach [network-id|all]
   node scripts/bureau-run.mjs pipeline [--only=id1,id2] [--force]
+  node scripts/bureau-run.mjs brief
 
 Registry: scripts/bureau/networks.json
 Outreach: docs/outreach/generated/<id>-outreach-<YYYY-MM-DD>.md
+Daily brief: docs/bureau/daily/latest-brief.md
+Daily posts: docs/bureau/daily/latest-posts.md
 Log:      scripts/data/bureau-run-log.json
 `);
 }
@@ -229,9 +235,31 @@ async function cmdPipeline(registry) {
     if (i < nets.length - 1) await sleep(SCAN_DELAY_MS);
   }
   writePipelineSummary(summary);
+  writeDailyBrief(registry, summary);
   console.error(`\n[pipeline] summary → scripts/data/bureau-pipeline.json`);
+  console.error(`[pipeline] brief   → docs/bureau/daily/latest-brief.md`);
   const bad = summary.filter((s) => !s.scanOk);
   if (bad.length) process.exitCode = 1;
+}
+
+function cmdBrief(registry) {
+  let pipelineResults = null;
+  if (fs.existsSync(path.join(REPO_ROOT, "scripts/data/bureau-pipeline.json"))) {
+    try {
+      pipelineResults = JSON.parse(
+        fs.readFileSync(path.join(REPO_ROOT, "scripts/data/bureau-pipeline.json"), "utf8"),
+      ).networks;
+    } catch {
+      pipelineResults = null;
+    }
+  }
+  const out = writeDailyBrief(registry, pipelineResults);
+  appendLog({ action: "brief", ok: true, ...out });
+  console.log("GETKINETIK bureau daily brief\n");
+  console.log(`  Brief:  ${out.latestBrief}`);
+  console.log(`  Posts:  ${out.latestPosts}`);
+  console.log(`  Queue:  docs/outreach/OUTREACH_QUEUE.md`);
+  console.log("\nReview before sending or posting.");
 }
 
 async function main() {
@@ -252,6 +280,9 @@ async function main() {
       break;
     case "pipeline":
       await cmdPipeline(registry);
+      break;
+    case "brief":
+      cmdBrief(registry);
       break;
     default:
       usage();

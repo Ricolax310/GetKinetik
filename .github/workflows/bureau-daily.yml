@@ -1,0 +1,31 @@
+# Daily bureau brief + social post drafts (human review before send/post).
+name: Bureau daily brief
+
+on:
+  schedule:
+    - cron: "0 8 * * *" # daily 08:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  brief:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Generate daily brief and post drafts
+        run: node scripts/bureau-run.mjs brief
+
+      - name: Commit daily outputs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/bureau/daily/*.md docs/outreach/OUTREACH_QUEUE.md || true
+          git diff --staged --quiet || git commit -m "chore(bureau): daily brief and post drafts [automated]"
+          git push || true

@@ -17,7 +17,9 @@
     "bureau:status": "node scripts/bureau-run.mjs status",
     "bureau:scan": "node scripts/bureau-run.mjs scan all",
     "bureau:outreach": "node scripts/bureau-run.mjs outreach all",
-    "bureau:pipeline": "node scripts/bureau-run.mjs pipeline"
+    "bureau:pipeline": "node scripts/bureau-run.mjs pipeline",
+    "bureau:brief": "node scripts/bureau-run.mjs brief",
+    "bureau:weekly": "node scripts/bureau-run.mjs pipeline --force"
   },
   "dependencies": {
     "@getkinetik/react-native-sdk": "file:./modules/kinetik-sdk",
