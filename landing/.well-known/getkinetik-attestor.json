@@ -1,0 +1,28 @@
+{
+  "name": "Kinetik Bureau Attestor Authority",
+  "domain": "getkinetik.app",
+  "verifiers": [
+    {
+      "id": "genesis-bureau-attestor-production",
+      "publicKeyHex": "852fbc2bdd7c0243c6ee42462f7d31274fd3be3a0f2125e8eb797b76410dfb26",
+      "publicKeyBase58": "9xuSaFHRarj7VMaqpyvLfXs9Q3VTEQiHBonjysu5Uq57",
+      "signingScheme": "ed25519",
+      "status": "active",
+      "environment": "production",
+      "mintedAt": "2026-05-13T00:00:00Z"
+    },
+    {
+      "id": "genesis-bureau-attestor-development",
+      "publicKeyHex": "53a3b40334f6146567746ce7a121ab3674bac5fde00e65c15a50266c17c74b69",
+      "publicKeyBase58": "6dVctkNUyqgJZYrFt9zkd1QfvaFdZGm5vdAPXhpLmEKJ",
+      "signingScheme": "ed25519",
+      "status": "active",
+      "environment": "development",
+      "mintedAt": "2026-05-22T00:00:00Z"
+    }
+  ],
+  "contacts": {
+    "security": "security@getkinetik.com",
+    "verification": "verify@getkinetik.com"
+  }
+}
