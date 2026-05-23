@@ -19,6 +19,7 @@
     "bureau:outreach": "node scripts/bureau-run.mjs outreach all",
     "bureau:pipeline": "node scripts/bureau-run.mjs pipeline",
     "bureau:brief": "node scripts/bureau-run.mjs brief",
+    "bureau:publish": "node scripts/bureau-run.mjs publish",
     "bureau:weekly": "node scripts/bureau-run.mjs pipeline --force"
   },
   "dependencies": {

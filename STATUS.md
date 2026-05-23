@@ -29,7 +29,8 @@ We publish reproducible trust reads on **public data** and **signed device evide
 ```bash
 npm run bureau:status      # report ages + env hints
 npm run bureau:brief       # daily brief + post drafts + outreach queue
-npm run bureau:pipeline    # scan → validate → outreach drafts → brief
+npm run bureau:publish     # weekly bulletin + network one-pagers + delta posts
+npm run bureau:pipeline    # scan → validate → outreach drafts → brief → publish
 npm run bureau:weekly      # full pipeline with --force (local weekly run)
 npm run bureau:scan        # scans only (default networks)
 npm run bureau:outreach    # drafts only from existing reports
@@ -39,14 +40,18 @@ npm run bureau:outreach    # drafts only from existing reports
 
 | Job | Schedule | Workflow | What it does |
 |-----|----------|----------|--------------|
-| **Daily brief** | 08:00 UTC daily | `.github/workflows/bureau-daily.yml` | Brief + post drafts + outreach queue |
-| **Weekly pipeline** | Mon 14:00 UTC | `.github/workflows/bureau-scan.yml` | Full scan → outreach → brief |
+| **Daily brief** | 08:00 UTC daily | `.github/workflows/bureau-daily.yml` | Brief + posts + one-pagers + delta posts |
+| **Weekly pipeline** | Mon 14:00 UTC | `.github/workflows/bureau-scan.yml` | Full scan → outreach → bulletin → publish pack |
 
-**Never auto-sends** email, DMs, or social posts — drafts only.
+**Never auto-sends** email, DMs, or social posts — drafts only. **Site deploy:** push to `main` → Cloudflare Pages rebuilds `landing/` (live audit index).
 
 - **Registry:** `scripts/bureau/networks.json`
 - **Daily brief:** `docs/bureau/daily/latest-brief.md`
+- **Delta posts:** `docs/bureau/daily/latest-delta-posts.md` (when snapshots moved)
 - **Post drafts:** `docs/bureau/daily/latest-posts.md`
+- **Weekly bulletin:** `docs/bureau/papers/latest-bulletin.md`
+- **Network one-pagers:** `docs/bureau/papers/networks/<id>-one-pager.md`
+- **Paper index:** `docs/bureau/papers/README.md`
 - **Outreach drafts:** `docs/outreach/generated/` (human review before send)
 - **Send queue:** `docs/outreach/OUTREACH_QUEUE.md` (auto-generated)
 - **Run log:** `scripts/data/bureau-run-log.json`
@@ -82,4 +87,4 @@ Set `SOLANA_RPC_URL` in `.env` (local) and GitHub repo **Secrets** for reliable 
 
 **Network conversations** that say: *"Can you run this on our data?"* — not APK downloads, not adapter count.
 
-*Last updated: 2026-05-23 · daily brief + weekly pipeline automation live*
+*Last updated: 2026-05-23 · full publishing pack (bulletin, one-pagers, delta posts) live*

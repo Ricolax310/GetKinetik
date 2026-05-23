@@ -11,6 +11,7 @@
 //   node scripts/bureau-run.mjs outreach [network-id|all]
 //   node scripts/bureau-run.mjs pipeline [--only=geodnet,weatherxm]
 //   node scripts/bureau-run.mjs brief
+//   node scripts/bureau-run.mjs publish
 //
 // npm shortcuts (from package.json):
 //   npm run bureau:status
@@ -44,6 +45,7 @@ import {
   writeDailyBrief,
   writeAuditIndex,
 } from "./bureau/lib.mjs";
+import { writePublishingPack } from "./bureau/publish.mjs";
 
 const args = process.argv.slice(2);
 const cmd = args[0] || "status";
@@ -62,11 +64,14 @@ GETKINETIK bureau runner — neutral helper automation
   node scripts/bureau-run.mjs outreach [network-id|all]
   node scripts/bureau-run.mjs pipeline [--only=id1,id2] [--force]
   node scripts/bureau-run.mjs brief
+  node scripts/bureau-run.mjs publish
 
 Registry: scripts/bureau/networks.json
 Outreach: docs/outreach/generated/<id>-outreach-<YYYY-MM-DD>.md
 Daily brief: docs/bureau/daily/latest-brief.md
-Daily posts: docs/bureau/daily/latest-posts.md
+Delta posts: docs/bureau/daily/latest-delta-posts.md
+Weekly bulletin: docs/bureau/papers/latest-bulletin.md
+One-pagers: docs/bureau/papers/networks/<id>-one-pager.md
 Log:      scripts/data/bureau-run-log.json
 `);
 }
@@ -237,9 +242,12 @@ async function cmdPipeline(registry) {
     if (i < nets.length - 1) await sleep(SCAN_DELAY_MS);
   }
   writePipelineSummary(summary);
-  writeDailyBrief(registry, summary);
+  const briefOut = writeDailyBrief(registry, summary);
+  const pubOut = writePublishingPack(registry, summary);
   console.error(`\n[pipeline] summary → scripts/data/bureau-pipeline.json`);
-  console.error(`[pipeline] brief   → docs/bureau/daily/latest-brief.md`);
+  console.error(`[pipeline] brief   → ${briefOut.latestBrief}`);
+  console.error(`[pipeline] bulletin → ${pubOut.bulletin} (${pubOut.onePagers.length} one-pagers)`);
+  console.error(`[pipeline] deltas  → ${pubOut.deltaPosts} (${pubOut.changedCount} networks moved)`);
   const bad = summary.filter((s) => !s.scanOk);
   if (bad.length) process.exitCode = 1;
 }
@@ -256,13 +264,37 @@ function cmdBrief(registry) {
     }
   }
   const out = writeDailyBrief(registry, pipelineResults);
+  const pubOut = writePublishingPack(registry, pipelineResults);
   writeAuditIndex(REPO_ROOT, registry, resolveRepo);
-  appendLog({ action: "brief", ok: true, ...out });
+  appendLog({ action: "brief", ok: true, ...out, publish: pubOut });
   console.log("GETKINETIK bureau daily brief\n");
-  console.log(`  Brief:  ${out.latestBrief}`);
-  console.log(`  Posts:  ${out.latestPosts}`);
-  console.log(`  Queue:  docs/outreach/OUTREACH_QUEUE.md`);
+  console.log(`  Brief:   ${out.latestBrief}`);
+  console.log(`  Posts:   ${out.latestPosts}`);
+  console.log(`  Deltas:  ${pubOut.deltaPosts} (${pubOut.changedCount} networks moved)`);
+  console.log(`  Queue:   docs/outreach/OUTREACH_QUEUE.md`);
   console.log("\nReview before sending or posting.");
+}
+
+function cmdPublish(registry) {
+  let pipelineResults = null;
+  if (fs.existsSync(path.join(REPO_ROOT, "scripts/data/bureau-pipeline.json"))) {
+    try {
+      pipelineResults = JSON.parse(
+        fs.readFileSync(path.join(REPO_ROOT, "scripts/data/bureau-pipeline.json"), "utf8"),
+      ).networks;
+    } catch {
+      pipelineResults = null;
+    }
+  }
+  const pubOut = writePublishingPack(registry, pipelineResults);
+  writeAuditIndex(REPO_ROOT, registry, resolveRepo);
+  appendLog({ action: "publish", ok: true, ...pubOut });
+  console.log("GETKINETIK bureau publishing pack\n");
+  console.log(`  Bulletin:  ${pubOut.bulletin}`);
+  console.log(`  Index:     ${pubOut.index}`);
+  console.log(`  One-pagers: ${pubOut.onePagers.length} files`);
+  console.log(`  Deltas:    ${pubOut.deltaPosts} (${pubOut.changedCount} networks moved)`);
+  console.log("\nAttach one-pagers to outreach. Site deploys on push to main (Cloudflare Pages).");
 }
 
 async function main() {
@@ -286,6 +318,9 @@ async function main() {
       break;
     case "brief":
       cmdBrief(registry);
+      break;
+    case "publish":
+      cmdPublish(registry);
       break;
     default:
       usage();
