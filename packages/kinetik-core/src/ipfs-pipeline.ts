@@ -12,8 +12,6 @@
  *   7. Return full bundle + CID to caller
  */
 
-import { createHash } from "node:crypto";
-
 // ── Methodology ────────────────────────────────────────────────────────────────
 
 export const METHODOLOGY_VERSION = "v1.1";
@@ -23,13 +21,64 @@ export const METHODOLOGY_VERSION = "v1.1";
 export const METHODOLOGY_HASH =
   "a3f2b71955ec4d80b1c43b9d5e07e2a8f1c43b9d5e07e2a8f1c43b9d5e07e2a8";
 
+// ── Types ──────────────────────────────────────────────────────────────────────
+
+export interface GradeInputs {
+  age_days: number;
+  uptime_pct: number;
+  network_count: number;
+  sensor_coherence: number;
+  enclave_valid: boolean;
+}
+
+export interface BundleParams {
+  node_id: string;
+  latest_heartbeat: any;
+  heartbeat_chain_root: string;
+  inputs: GradeInputs;
+  bureau_pubkey: string;
+}
+
+export interface CanonicalBundle {
+  attestation: {
+    heartbeat_chain_root: string;
+    latest_heartbeat: any;
+    report_cid: string | null;
+  };
+  grade: {
+    computed_at: string;
+    methodology_hash: string;
+    methodology_version: string;
+    score: number;
+    tier: string;
+  };
+  inputs: GradeInputs;
+  meta: {
+    bundle_version: number;
+    issuer: string;
+  };
+  node_id: string;
+  signature: {
+    algo: string;
+    public_key: string;
+    value: string | null;
+  };
+}
+
+export interface CidSignature {
+  algo: string;
+  message: string;
+  public_key: string;
+  value: string;
+}
+
 // ── Scoring ────────────────────────────────────────────────────────────────────
 
 /**
  * Compute Genesis Score deterministically from inputs.
  * Same inputs ALWAYS produce the same score (no randomness, no time dependency).
  */
-export function computeGenesisScore(inputs) {
+export function computeGenesisScore(inputs: GradeInputs): number {
   const { age_days, uptime_pct, network_count, sensor_coherence, enclave_valid } = inputs;
 
   if (!enclave_valid) return 0;
@@ -46,7 +95,7 @@ export function computeGenesisScore(inputs) {
 /**
  * Map a Genesis Score to a tier label.
  */
-export function scoreTier(score) {
+export function scoreTier(score: number): string {
   if (score >= 800) return "PREMIER";
   if (score >= 600) return "STANDING";
   if (score >= 400) return "DEVELOPING";
@@ -59,7 +108,7 @@ export function scoreTier(score) {
  * Recursively sort object keys and produce a deterministic JSON string.
  * Implements a subset of RFC 8785 sufficient for our grade bundles.
  */
-export function canonicalize(value) {
+export function canonicalize(value: any): string {
   if (Array.isArray(value)) {
     return "[" + value.map(canonicalize).join(",") + "]";
   }
@@ -67,7 +116,7 @@ export function canonicalize(value) {
     const keys = Object.keys(value).sort();
     return (
       "{" +
-      keys.map((k) => JSON.stringify(k) + ":" + canonicalize(value[k])).join(",") +
+      keys.map((k) => JSON.stringify(k) + ":" + canonicalize((value as any)[k])).join(",") +
       "}"
     );
   }
@@ -79,14 +128,8 @@ export function canonicalize(value) {
 /**
  * Build a canonical grade bundle ready for signing and IPFS upload.
  *
- * @param {object} params
- * @param {string}  params.node_id          - Ed25519 public key of the node (hex)
- * @param {object}  params.latest_heartbeat - Raw heartbeat object from the node
- * @param {string}  params.heartbeat_chain_root - SHA-256 of chain tip
- * @param {object}  params.inputs           - Grade inputs
- * @param {string}  params.bureau_pubkey    - Bureau's Ed25519 public key (hex)
- * @param {function} params.sign            - async (message: Uint8Array) => Uint8Array
- * @returns {object} Unsigned canonical bundle (call signBundle next)
+ * @param params - Bundle params
+ * @returns Unsigned canonical bundle (call signBundle next)
  */
 export function buildBundle({
   node_id,
@@ -94,11 +137,11 @@ export function buildBundle({
   heartbeat_chain_root,
   inputs,
   bureau_pubkey,
-}) {
+}: BundleParams): CanonicalBundle {
   const score = computeGenesisScore(inputs);
   const tier = scoreTier(score);
 
-  const bundle = {
+  const bundle: CanonicalBundle = {
     attestation: {
       heartbeat_chain_root,
       latest_heartbeat,
@@ -133,10 +176,13 @@ export function buildBundle({
  * Sign a canonical grade bundle with the bureau's Ed25519 key.
  * Mutates and returns the bundle with signature.value populated.
  *
- * @param {object}   bundle  - Bundle from buildBundle()
- * @param {function} sign    - async (canonicalJson: string) => hex string signature
+ * @param bundle - Bundle from buildBundle()
+ * @param sign   - async (canonicalJson: string) => hex string signature
  */
-export async function signBundle(bundle, sign) {
+export async function signBundle(
+  bundle: CanonicalBundle,
+  sign: (msg: string) => Promise<string>
+): Promise<CanonicalBundle> {
   // Temporarily null out signature value before canonicalizing for signing
   bundle.signature.value = null;
   const canonical = canonicalize(bundle);
@@ -153,11 +199,11 @@ export async function signBundle(bundle, sign) {
  * Requires env vars:
  *   PINATA_JWT  — Pinata API JWT token (from app.pinata.cloud → API Keys)
  *
- * @param {object} signedBundle
- * @param {string} pinataJwt
- * @returns {Promise<string>} CID
+ * @param signedBundle
+ * @param pinataJwt
+ * @returns CID
  */
-export async function pinToIPFS(signedBundle: object, pinataJwt: string): Promise<string> {
+export async function pinToIPFS(signedBundle: CanonicalBundle, pinataJwt: string): Promise<string> {
   const canonical = canonicalize(signedBundle);
 
   const res = await fetch("https://api.pinata.cloud/pinning/pinJSONToIPFS", {
@@ -189,13 +235,18 @@ export async function pinToIPFS(signedBundle: object, pinataJwt: string): Promis
  * Sign the CID commitment string per Section 5 of the spec.
  * String to sign: `${cid}|${node_id}|${computed_at}|${methodology_version}`
  *
- * @param {string}   cid
- * @param {object}   bundle  - Signed bundle (for node_id, computed_at, methodology_version)
- * @param {function} sign    - async (message: string) => hex string signature
- * @param {string}   bureau_pubkey
- * @returns {object} cid_signature object
+ * @param cid
+ * @param bundle - Signed bundle
+ * @param sign   - async (message: string) => hex string signature
+ * @param bureau_pubkey
+ * @returns cid_signature object
  */
-export async function signCID(cid, bundle, sign, bureau_pubkey) {
+export async function signCID(
+  cid: string,
+  bundle: CanonicalBundle,
+  sign: (msg: string) => Promise<string>,
+  bureau_pubkey: string
+): Promise<CidSignature> {
   const message = [
     cid,
     bundle.node_id,
@@ -216,14 +267,18 @@ export async function signCID(cid, bundle, sign, bureau_pubkey) {
 /**
  * End-to-end grade pipeline: build → sign → pin → sign CID → return.
  *
- * @param {object} params  - Same as buildBundle() params
- * @param {function} sign  - async (message: string) => hex signature
- * @param {string} w3sToken
- * @returns {{ bundle: object, cid: string, cid_signature: object }}
+ * @param params   - Same as buildBundle() params
+ * @param sign     - async (message: string) => hex signature
+ * @param w3sToken
+ * @returns full bundle + CID + CID signature
  */
-export async function gradeAndPin({ node_id, latest_heartbeat, heartbeat_chain_root, inputs, bureau_pubkey }, sign, w3sToken) {
+export async function gradeAndPin(
+  params: BundleParams,
+  sign: (msg: string) => Promise<string>,
+  w3sToken: string
+): Promise<{ bundle: CanonicalBundle; cid: string; cid_signature: CidSignature }> {
   // 1. Build canonical bundle
-  const bundle = buildBundle({ node_id, latest_heartbeat, heartbeat_chain_root, inputs, bureau_pubkey });
+  const bundle = buildBundle(params);
 
   // 2. Sign bundle
   await signBundle(bundle, sign);
@@ -235,7 +290,7 @@ export async function gradeAndPin({ node_id, latest_heartbeat, heartbeat_chain_r
   bundle.attestation.report_cid = cid;
 
   // 5. Sign CID commitment
-  const cid_signature = await signCID(cid, bundle, sign, bureau_pubkey);
+  const cid_signature = await signCID(cid, bundle, sign, params.bureau_pubkey);
 
   return { bundle, cid, cid_signature };
 }

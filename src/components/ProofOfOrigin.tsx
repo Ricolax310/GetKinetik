@@ -266,6 +266,14 @@ export function ProofOfOrigin({
   // proof materializes (~5-10ms), or for legacy nodes that haven't emitted
   // a heartbeat yet, every sensor row reads "—".
   const proofSensors = proof?.payload.sensors ?? null;
+  const latLabel =
+    proofSensors && typeof proofSensors.latitude === 'number'
+      ? `${proofSensors.latitude.toFixed(3)}°`
+      : '—';
+  const lngLabel =
+    proofSensors && typeof proofSensors.longitude === 'number'
+      ? `${proofSensors.longitude.toFixed(3)}°`
+      : '—';
   const motionLabel =
     proofSensors && typeof proofSensors.motionRms === 'number'
       ? `${proofSensors.motionRms.toFixed(2)} G`
@@ -373,6 +381,8 @@ export function ProofOfOrigin({
             <Row label="SINCE" value={sinceLabel} />
             <Row label="CHAIN TIP" value={chainTipLabel} />
             <Row label="ISSUED" value={issuedLabel} />
+            <Row label="LATITUDE" value={latLabel} />
+            <Row label="LONGITUDE" value={lngLabel} />
             <Row label="MOTION" value={motionLabel} />
             <Row label="PRESSURE" value={pressureLabel} />
             <Row label="LIGHT" value={lightLabel} />

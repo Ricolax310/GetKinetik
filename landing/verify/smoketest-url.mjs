@@ -145,7 +145,7 @@ async function run() {
       charging: false,
       prevHash: "0000000000000000",
       // lexicographic key order — see canonicalSensorBlock in packages/kinetik-core/src/sensors.ts
-      sensors: { lux: 412, motionRms: 0.06, pressureHpa: 1014.07 },
+      sensors: { latitude: 37.774, longitude: -122.419, lux: 412, motionRms: 0.06, pressureHpa: 1014.07 },
     };
     const beatMsg = stableStringify(beat);
     const beatSig = toHex(await ed.signAsync(utf8(beatMsg), skH));
@@ -154,6 +154,8 @@ async function run() {
     assert(
       "v:2 sensors round-trip preserves shape",
       beatDecoded.payload.sensors &&
+        beatDecoded.payload.sensors.latitude === 37.774 &&
+        beatDecoded.payload.sensors.longitude === -122.419 &&
         beatDecoded.payload.sensors.motionRms === 0.06 &&
         beatDecoded.payload.sensors.pressureHpa === 1014.07 &&
         beatDecoded.payload.sensors.lux === 412,
@@ -189,7 +191,7 @@ async function run() {
       chainTip: toHex(sha256(utf8("v2-poo-url"))).slice(0, 16),
       attribution: PROOF_ATTRIBUTION,
       // lexicographic key order — see canonicalSensorBlock in packages/kinetik-core/src/sensors.ts
-      sensors: { lux: 287, motionRms: 0.05, pressureHpa: 1012.43 },
+      sensors: { latitude: 34.052, longitude: -118.243, lux: 287, motionRms: 0.05, pressureHpa: 1012.43 },
     };
     const pooMsg = stableStringify(poo);
     const pooSig = toHex(await ed.signAsync(utf8(pooMsg), skP));
@@ -199,6 +201,8 @@ async function run() {
     assert(
       "v:2 PoO sensors round-trip preserves shape",
       pooDecoded.payload.sensors &&
+        pooDecoded.payload.sensors.latitude === 34.052 &&
+        pooDecoded.payload.sensors.longitude === -118.243 &&
         pooDecoded.payload.sensors.motionRms === 0.05 &&
         pooDecoded.payload.sensors.pressureHpa === 1012.43 &&
         pooDecoded.payload.sensors.lux === 287,

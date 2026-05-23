@@ -59,7 +59,7 @@ function loadWallet() {
 
 // ── D1 helpers ─────────────────────────────────────────────────────────────────
 
-async function d1Query(sql, params = []) {
+async function d1Query(sql: string, params: any[] = []): Promise<any[]> {
   const url = `https://api.cloudflare.com/client/v4/accounts/${CF_ACCOUNT_ID}/d1/database/${D1_DATABASE_ID}/query`;
   const res = await fetch(url, {
     method: "POST",

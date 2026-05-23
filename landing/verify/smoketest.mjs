@@ -207,7 +207,7 @@ async function run() {
       online: true,
       charging: false,
       prevHash: "0000000000000000",
-      sensors: { lux: 348, motionRms: 0.07, pressureHpa: 1013.21 },
+      sensors: { latitude: 37.774, longitude: -122.419, lux: 348, motionRms: 0.07, pressureHpa: 1013.21 },
     };
     const message = stableStringify(payload);
     const signature = toHex(await ed.signAsync(utf8(message), sk));
@@ -244,7 +244,7 @@ async function run() {
       online: true,
       charging: true,
       prevHash: "abcdef0123456789",
-      sensors: { lux: null, motionRms: 0.02, pressureHpa: null },
+      sensors: { latitude: null, longitude: null, lux: null, motionRms: 0.02, pressureHpa: null },
     };
     const message = stableStringify(payload);
     const signature = toHex(await ed.signAsync(utf8(message), sk));
@@ -277,7 +277,7 @@ async function run() {
       online: true,
       charging: false,
       prevHash: "1111222233334444",
-      sensors: { lux: 200, motionRms: 0.05, pressureHpa: 1012.5 },
+      sensors: { latitude: 37.774, longitude: -122.419, lux: 200, motionRms: 0.05, pressureHpa: 1012.5 },
     };
     const message = stableStringify(payload);
     const signature = toHex(await ed.signAsync(utf8(message), sk));
@@ -315,7 +315,7 @@ async function run() {
       firstBeatTs: Date.now() - 60000,
       chainTip: toHex(sha256(utf8("smoketest-v2-poo"))).slice(0, 16),
       attribution: PROOF_ATTRIBUTION,
-      sensors: { lux: 412, motionRms: 0.04, pressureHpa: 1013.78 },
+      sensors: { latitude: 34.052, longitude: -118.243, lux: 412, motionRms: 0.04, pressureHpa: 1013.78 },
     };
     const message = stableStringify(payload);
     const signature = toHex(await ed.signAsync(utf8(message), sk));
@@ -401,7 +401,7 @@ async function run() {
       firstBeatTs: Date.now() - 60000,
       chainTip: toHex(sha256(utf8("smoketest-tamper"))).slice(0, 16),
       attribution: PROOF_ATTRIBUTION,
-      sensors: { lux: 100, motionRms: 0.03, pressureHpa: 1014.2 },
+      sensors: { latitude: 34.052, longitude: -118.243, lux: 100, motionRms: 0.03, pressureHpa: 1014.2 },
     };
     const message = stableStringify(payload);
     const signature = toHex(await ed.signAsync(utf8(message), sk));

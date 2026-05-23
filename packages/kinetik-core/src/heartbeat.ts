@@ -337,7 +337,7 @@ export function useHeartbeat(
       // "—" and the chain stays consistent.
       const rawSensors: SensorReadout = sensorsRef.current
         ? await sensorsRef.current()
-        : { motionRms: null, pressureHpa: null, lux: null };
+        : { latitude: null, longitude: null, lux: null, motionRms: null, pressureHpa: null };
       const sensors = canonicalSensorBlock(rawSensors);
       const prev = summaryRef.current;
       const nextSeq = prev.seq + 1;

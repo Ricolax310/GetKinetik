@@ -137,10 +137,10 @@ export function VaultPanel() {
   }, [diagOpen, diagAnim]);
   const diagStyle = useAnimatedStyle(() => ({
     opacity: diagAnim.value,
-    // Sized for 16 rows (12 base + 3 L2 sensor rows + 1 Genesis Score).
+    // Sized for 18 rows (12 base + 5 L2 sensor rows + 1 Genesis Score).
     // Each row is ~22px tall (padding 4 + ~14px text); plus 28px of card
     // padding. Bump on any new row addition or this clips the bottom rows.
-    maxHeight: interpolate(diagAnim.value, [0, 1], [0, 610]),
+    maxHeight: interpolate(diagAnim.value, [0, 1], [0, 660]),
     transform: [
       { translateY: interpolate(diagAnim.value, [0, 1], [-6, 0]) },
     ],
@@ -455,6 +455,14 @@ export function VaultPanel() {
   // between beats. That keeps the DIAG card and the verifier showing the
   // same bytes. See packages/kinetik-core/src/sensors.ts for unit + rounding conventions.
   const sensors = heartbeat?.lastSensors ?? null;
+  const latLabel =
+    sensors && typeof sensors.latitude === 'number'
+      ? `${sensors.latitude.toFixed(3)}°`
+      : '—';
+  const lngLabel =
+    sensors && typeof sensors.longitude === 'number'
+      ? `${sensors.longitude.toFixed(3)}°`
+      : '—';
   const motionLabel =
     sensors && typeof sensors.motionRms === 'number'
       ? `${sensors.motionRms.toFixed(2)} G`
@@ -492,6 +500,8 @@ export function VaultPanel() {
       { label: 'SINCE', value: sinceLabel },
       { label: 'CHAIN', value: chainLabel },
       { label: 'LAST SIG', value: lastSigLabel },
+      { label: 'LATITUDE', value: latLabel },
+      { label: 'LONGITUDE', value: lngLabel },
       { label: 'MOTION', value: motionLabel },
       { label: 'PRESSURE', value: pressureLabel },
       { label: 'LIGHT', value: lightLabel },
@@ -508,6 +518,8 @@ export function VaultPanel() {
       sinceLabel,
       chainLabel,
       lastSigLabel,
+      latLabel,
+      lngLabel,
       motionLabel,
       pressureLabel,
       lightLabel,
