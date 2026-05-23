@@ -1,19 +1,21 @@
 # GETKINETIK
 
-> **Honest numbers for every DePIN you run.**
-> Built outside the networks. Owned by no one. Hardware-signed proof of
-> what your devices actually did, actually earned, and actually proved —
-> across every network paying out, in plain sight, no spin.
+> **The neutral bureau for DePIN — your friendly helper, not your gatekeeper.**
+> We publish signed evidence about devices. Networks keep their verifiers.
+> Operators get portable proof. Outsiders get a second read. No token, no
+> custody, no picking sides.
 
 GETKINETIK is the **independent trust layer for the decentralized
-physical economy** — a neutral, cryptographically-verifiable record of
-node identity, uptime, and earnings across DePIN networks (Nodle, DIMO,
+physical economy** — a neutral bureau that helps everyone make better
+trust decisions: node identity, uptime, public integrity reads, and
+hardware-signed Proof of Origin across DePIN networks (Nodle, DIMO,
 Hivemapper, WeatherXM, Geodnet, more coming).
 
-Networks can't grade themselves and stay credible. Foundations can't
-audit their own ecosystems without conflict. We're the third party that
-sits outside every network, reads what really happened, and signs it
-with hardware-rooted keys you can verify in any browser.
+Networks can't grade themselves and stay credible to outsiders.
+Foundations can't be the only voice on their own ecosystem health.
+We're the helper in the middle — outside every network, publishing
+what we observe on public data and signed proofs, verifiable in any
+browser without trusting us.
 
 **Our charter** is in [`NEUTRALITY.md`](./NEUTRALITY.md): no token, no
 equity in graded networks, no exclusive partnerships, all revenue in

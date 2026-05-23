@@ -1,7 +1,7 @@
 # GETKINETIK — Partner Pitch (One Page)
 
 **The 30-second version:**
-GETKINETIK is the **independent trust layer for the decentralized physical economy** — a neutral, hardware-attested record of node identity, uptime, and earnings across DePIN networks. We sit outside every network, we never issue a token, we never take equity in graded networks (see [`NEUTRALITY.md`](./NEUTRALITY.md)), and we publish a `verify-device` API any partner can call to confirm a user's device is real, signed, and well-graded before paying out a reward. Think Carfax for DePIN nodes, with a developer-grade API for verified-user premium offers.
+GETKINETIK is the **neutral DePIN bureau — your friendly helper, not your gatekeeper.** We publish signed evidence about devices (chain continuity, bureau-observed facts, sensor coherence, flags). Networks keep their own verifiers; we’re the **trust sanity check** — one `verify-device` call to confirm what you already think before payout, or a public sample read on open data when you’re not integrated yet. Think Carfax-shaped helper for node trust: no token, no equity in graded networks ([`NEUTRALITY.md`](./NEUTRALITY.md)), methodology public, offline verifier on npm.
 
 ---
 

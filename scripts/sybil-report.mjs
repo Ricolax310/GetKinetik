@@ -4,7 +4,7 @@
 // Takes a JSON file describing a partner network's public node set and emits
 // a markdown report flagging the nodes most likely to be Sybils, with the
 // reasoning the bureau used. The output is designed to be attached to a cold
-// outreach email — "here are nodes you appear to be paying that look fake."
+// outreach email — "here are patterns worth cross-checking on public data."
 //
 // Run:
 //   node scripts/sybil-report.mjs <input.json> [--network=NameHere] [--out=path.md]

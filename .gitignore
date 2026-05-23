@@ -48,3 +48,8 @@ secrets.json
 
 # Scratch commit-message tempfiles (used to side-step PowerShell heredoc limits)
 .git-commit-msg.tmp
+
+# Bureau automation (local runs — review before commit)
+docs/outreach/generated/*
+!docs/outreach/generated/.gitkeep
+scripts/data/bureau-run-log.json

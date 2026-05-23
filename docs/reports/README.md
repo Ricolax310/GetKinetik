@@ -1,6 +1,24 @@
 # Bureau reports
 
-Independent Sybil Risk Scans the bureau generates for partner DePIN networks.
+Independent **public sample reads** the neutral bureau generates for partner DePIN networks — friendly second opinions on open data, not accusations.
+
+## Automation (recommended)
+
+From repo root:
+
+```bash
+npm run bureau:status      # report ages + missing env (e.g. SOLANA_RPC_URL)
+npm run bureau:pipeline    # scan → validate → outreach drafts (human sends)
+npm run bureau:scan        # refresh reports only
+npm run bureau:outreach    # regenerate drafts from existing reports
+```
+
+- **Registry:** `scripts/bureau/networks.json`
+- **Runner:** `scripts/bureau-run.mjs`
+- **Drafts:** `docs/outreach/generated/<network>-outreach-<date>.md` (never auto-sent)
+- **Status doc:** [`STATUS.md`](../../STATUS.md) at repo root
+
+Set `SOLANA_RPC_URL` in `.env` for reliable Hivemapper on-chain reads.
 
 ## Network-specific scripts
 

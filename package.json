@@ -13,7 +13,11 @@
     "eas:build:dev": "npx eas-cli@latest build --profile development --platform android",
     "eas:build:preview": "npx eas-cli@latest build --profile preview --platform android",
     "eas:build:apk": "npx eas-cli@latest build --profile preview --platform android",
-    "eas:build:aab": "npx eas-cli@latest build --profile production --platform android"
+    "eas:build:aab": "npx eas-cli@latest build --profile production --platform android",
+    "bureau:status": "node scripts/bureau-run.mjs status",
+    "bureau:scan": "node scripts/bureau-run.mjs scan all",
+    "bureau:outreach": "node scripts/bureau-run.mjs outreach all",
+    "bureau:pipeline": "node scripts/bureau-run.mjs pipeline"
   },
   "dependencies": {
     "@getkinetik/react-native-sdk": "file:./modules/kinetik-sdk",

@@ -65,7 +65,7 @@ To audit networks externally prior to SDK integration, the Kinetik Bureau runs f
 
 ### 3. Empirical & Potential Findings Across Target Networks
 
-Applying Kinetik's auditing heuristics exposes systemic vulnerabilities in current DePIN deployments, highlighting the urgent need for hardware-bound Proof of Origin.
+Applying Kinetik's auditing heuristics surfaces patterns in public DePIN data that networks may want to cross-check against internal analytics — a **second read**, not a replacement for their own genuity or fraud stack.
 
 #### A. GEODNET (GNSS RTK Network)
 * **The Vulnerability:** High-precision GNSS reference stations (CORS) are physical antennas that must remain spatially isolated.

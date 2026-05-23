@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "description": "GETKINETIK neutral bureau — public read registry. Used by scripts/bureau-run.mjs.",
+  "networks": [
+    {
+      "id": "geodnet",
+      "name": "Geodnet",
+      "scanScript": "sybil-scan-geodnet.mjs",
+      "report": "docs/reports/geodnet-sybil-report.md",
+      "snapshot": "scripts/data/geodnet-snapshot.json",
+      "publicSource": "https://rtk.geodnet.com/api/v2/coverage_stations",
+      "scanNotes": "Public RTK coverage_stations JSON — no auth.",
+      "requiresEnv": [],
+      "defaultEnabled": true
+    },
+    {
+      "id": "weatherxm",
+      "name": "WeatherXM",
+      "scanScript": "sybil-scan-weatherxm.mjs",
+      "report": "docs/reports/weatherxm-sybil-report.md",
+      "snapshot": "scripts/data/weatherxm-snapshot.json",
+      "publicSource": "WeatherXM public cells API",
+      "scanNotes": "Public cells endpoint — no auth.",
+      "requiresEnv": [],
+      "defaultEnabled": true
+    },
+    {
+      "id": "hivemapper",
+      "name": "Hivemapper",
+      "scanScript": "sybil-scan-hivemapper.mjs",
+      "report": "docs/reports/hivemapper-sybil-report.md",
+      "snapshot": "scripts/data/hivemapper-snapshot.json",
+      "publicSource": "Solana mainnet HONEY SPL mint (public RPC)",
+      "scanNotes": "Set SOLANA_RPC_URL in .env for reliable on-chain Part A.",
+      "requiresEnv": ["SOLANA_RPC_URL"],
+      "defaultEnabled": true
+    },
+    {
+      "id": "nodle",
+      "name": "Nodle",
+      "scanScript": "sybil-scan-nodle.mjs",
+      "report": "docs/reports/nodle-sybil-report.md",
+      "snapshot": "scripts/data/nodle-scan-snapshot.json",
+      "publicSource": "Nodle public scan inputs (see script header)",
+      "scanNotes": "Geometry heuristics on public snapshot.",
+      "requiresEnv": [],
+      "defaultEnabled": true
+    },
+    {
+      "id": "dawn",
+      "name": "Dawn Network",
+      "scanScript": "sybil-scan-dawn.mjs",
+      "report": "docs/reports/dawn-sybil-report.md",
+      "snapshot": "scripts/data/dawn-scan-snapshot.json",
+      "publicSource": "Dawn public scan inputs (see script header)",
+      "scanNotes": "Public endpoint scan.",
+      "requiresEnv": [],
+      "defaultEnabled": true
+    },
+    {
+      "id": "grass",
+      "name": "Grass / Titan",
+      "scanScript": "sybil-scan-grass.mjs",
+      "report": "docs/reports/grass-sybil-report.md",
+      "snapshot": "scripts/data/grass-scan-snapshot.json",
+      "publicSource": "Grass/Titan public scan inputs (see script header)",
+      "scanNotes": "May require live mode flags — see sybil-scan-grass.mjs.",
+      "requiresEnv": [],
+      "defaultEnabled": false
+    }
+  ]
+}

@@ -7,6 +7,13 @@
 
 **Publisher:** OutFromNothing LLC (California).
 
+**Who we are:** The **neutral bureau** — a friendly helper for DePIN trust,
+not a network, not a token issuer, not a replacement for any network's
+own verifier. We help operators prove devices, help networks get a
+second read, and help outsiders reproduce what we observed. Partners
+adopt, fork, or ignore our reference policy; they never have to adopt us
+to stay credible.
+
 ---
 
 ## Why this document exists
