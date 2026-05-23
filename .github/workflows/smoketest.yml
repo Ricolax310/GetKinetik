@@ -6,10 +6,13 @@ on:
     paths:
       - 'landing/verify/**'
       - 'packages/kinetik-core/src/**'
+      - '.github/workflows/smoketest.yml'
   pull_request:
     paths:
       - 'landing/verify/**'
       - 'packages/kinetik-core/src/**'
+      - '.github/workflows/smoketest.yml'
+  workflow_dispatch:
 
 jobs:
   smoketest:
@@ -21,6 +24,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
 
       - name: Run verifier smoketest
         run: node landing/verify/smoketest.mjs
