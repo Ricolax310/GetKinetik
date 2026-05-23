@@ -43,7 +43,8 @@ import {
 
 const args = process.argv.slice(2);
 const cmd = args[0] || "status";
-const target = args[1] || "all";
+const positional = args.filter((a, i) => i > 0 && !a.startsWith("--"));
+const target = positional[0] || "all";
 const onlyArg = args.find((a) => a.startsWith("--only="))?.split("=")[1];
 const force = args.includes("--force");
 const SCAN_DELAY_MS = 2500;
@@ -126,7 +127,8 @@ function validateReport(net) {
   return { ok: true, findings: findings.length };
 }
 
-function runOutreach(net) {
+function runOutreach(net, opts = {}) {
+  const forceRegen = opts.force ?? force;
   const reportPath = resolveRepo(net.report);
   if (!fs.existsSync(reportPath)) {
     return { ok: false, error: "report missing — run scan first" };
@@ -134,7 +136,7 @@ function runOutreach(net) {
   const reportMd = fs.readFileSync(reportPath, "utf8");
   const date = new Date().toISOString().slice(0, 10);
   const outFile = path.join(OUTREACH_DIR, `${net.id}-outreach-${date}.md`);
-  if (fs.existsSync(outFile) && !force) {
+  if (fs.existsSync(outFile) && !forceRegen) {
     console.error(`[outreach] ${net.id}: exists ${path.relative(REPO_ROOT, outFile)} (use --force)`);
     return { ok: true, skipped: true, path: outFile };
   }
@@ -207,7 +209,7 @@ async function cmdPipeline(registry) {
     if (scan.ok) validate = validateReport(net);
     let outreach = { ok: false };
     if (scan.ok && validate.ok !== false) {
-      outreach = runOutreach(net);
+      outreach = runOutreach(net, { force });
     }
     summary.push({
       id: net.id,

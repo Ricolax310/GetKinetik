@@ -87,6 +87,47 @@ export function appendLog(entry) {
   fs.writeFileSync(LOG_PATH, JSON.stringify(log, null, 2), "utf8");
 }
 
+export function writeOutreachQueue(results) {
+  const registry = loadRegistry();
+  const lines = [
+    "# Outreach queue (auto-generated)",
+    "",
+    "> **Send manually.** Drafts from `npm run bureau:pipeline`. Friendly helper tone.",
+    "",
+    `Updated: ${new Date().toISOString()}`,
+    "",
+    "| Network | Report age | Draft | Top finding |",
+    "|---------|------------|-------|-------------|",
+  ];
+  for (const r of results) {
+    const net = registry.find((n) => n.id === r.id);
+    const reportPath = net ? resolveRepo(net.report) : "";
+    let top = "—";
+    if (reportPath && fs.existsSync(reportPath)) {
+      const findings = extractHeadlineFindings(fs.readFileSync(reportPath, "utf8"));
+      top = findings[0]?.slice(0, 80) || "—";
+    }
+    const age = reportPath ? formatAge(fileAgeMs(reportPath)) : "—";
+    const draft = r.outreachPath || "_(run pipeline)_";
+    lines.push(
+      `| ${r.name || r.id} | ${age} | \`${draft}\` | ${top.replace(/\|/g, "\\|")} |`,
+    );
+  }
+  lines.push(
+    "",
+    "## Quick send order",
+    "",
+    "1. Hivemapper",
+    "2. Geodnet",
+    "3. WeatherXM (nurture — CEO validated)",
+    "4. Others as needed",
+    "",
+  );
+  const queuePath = path.join(REPO_ROOT, "docs/outreach/OUTREACH_QUEUE.md");
+  fs.mkdirSync(path.dirname(queuePath), { recursive: true });
+  fs.writeFileSync(queuePath, lines.join("\n"), "utf8");
+}
+
 export function writePipelineSummary(results) {
   const payload = {
     updatedAt: new Date().toISOString(),
@@ -95,6 +136,7 @@ export function writePipelineSummary(results) {
   };
   fs.mkdirSync(path.dirname(PIPELINE_PATH), { recursive: true });
   fs.writeFileSync(PIPELINE_PATH, JSON.stringify(payload, null, 2), "utf8");
+  writeOutreachQueue(results);
 }
 
 /** Pull numbered headline bullets from bureau markdown reports. */

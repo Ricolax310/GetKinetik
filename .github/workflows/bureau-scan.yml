@@ -1,0 +1,37 @@
+# Weekly public sample reads — refreshes bureau reports from open data.
+# Does NOT send outreach. Commits report + snapshot updates when they change.
+name: Bureau public reads
+
+on:
+  schedule:
+    - cron: "0 14 * * 1" # Mondays 14:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run bureau scans (default networks)
+        env:
+          SOLANA_RPC_URL: ${{ secrets.SOLANA_RPC_URL }}
+        run: node scripts/bureau-run.mjs scan all
+
+      - name: Regenerate outreach drafts
+        run: node scripts/bureau-run.mjs outreach all --force
+
+      - name: Commit report updates
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/reports/*.md scripts/data/*-snapshot.json scripts/data/bureau-pipeline.json docs/outreach/OUTREACH_QUEUE.md || true
+          git diff --staged --quiet || git commit -m "chore(bureau): refresh public sample reads [automated]"
+          git push || true

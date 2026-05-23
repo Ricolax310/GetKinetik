@@ -5,9 +5,9 @@
 > Operators get portable proof. Outsiders get a second read. No token, no
 > custody, no picking sides.
 
-GETKINETIK is the **independent trust layer for the decentralized
-physical economy** — a neutral bureau that helps everyone make better
-trust decisions: node identity, uptime, public integrity reads, and
+GETKINETIK is the **neutral DePIN bureau for the decentralized
+physical economy** — a friendly helper that publishes reproducible reads
+and signed device evidence so everyone can make better trust decisions:
 hardware-signed Proof of Origin across DePIN networks (Nodle, DIMO,
 Hivemapper, WeatherXM, Geodnet, more coming).
 

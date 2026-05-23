@@ -35,6 +35,7 @@ npm run bureau:outreach    # drafts only from existing reports
 
 - **Registry:** `scripts/bureau/networks.json`
 - **Outreach drafts:** `docs/outreach/generated/` (human review before send)
+- **Send queue:** `docs/outreach/OUTREACH_QUEUE.md` (auto-generated with pipeline)
 - **Run log:** `scripts/data/bureau-run-log.json`
 - **Never auto-sends** email or DMs.
 
