@@ -1,41 +1,41 @@
 {
-  "updatedAt": "2026-05-23T17:40:27.796Z",
+  "updatedAt": "2026-05-23T22:14:03.507Z",
   "networks": [
     {
       "id": "geodnet",
       "name": "Geodnet",
       "report": "docs/reports/geodnet-sybil-report.md",
       "publicSource": "https://rtk.geodnet.com/api/v2/coverage_stations",
-      "generatedAt": "2026-05-23T17:31:20.810Z",
+      "generatedAt": "2026-05-23T22:12:58.172Z",
       "stats": {
-        "generatedAt": "2026-05-23T17:31:20.810Z",
-        "observed": 19682,
-        "exactDupGroups": 12,
-        "nearDupClusters": 933,
+        "generatedAt": "2026-05-23T22:12:58.172Z",
+        "observed": 19688,
+        "exactDupGroups": 10,
+        "nearDupClusters": 931,
         "tightClusters": 5,
-        "lowPrecision": 4,
-        "flaggedCount": 1860,
-        "flaggedPct": 0.0945025912000813
+        "lowPrecision": 5,
+        "flaggedCount": 1856,
+        "flaggedPct": 0.09427062169849655
       },
-      "topFinding": "**12 exact (lat,lng) duplicate groups** on 19,682 public stations — each row in §1 is one coordinate pair your registry team can grep today."
+      "topFinding": "**10 exact (lat,lng) duplicate groups** on 19,688 public stations — each row in §1 is one coordinate pair your registry team can grep today."
     },
     {
       "id": "weatherxm",
       "name": "WeatherXM",
       "report": "docs/reports/weatherxm-sybil-report.md",
       "publicSource": "WeatherXM public cells API",
-      "generatedAt": "2026-05-23T17:31:48.202Z",
+      "generatedAt": "2026-05-23T22:13:51.372Z",
       "stats": {
-        "generatedAt": "2026-05-23T17:31:48.202Z",
-        "observed": 8488,
+        "generatedAt": "2026-05-23T22:13:51.372Z",
+        "observed": 8490,
         "overCapacityCells": 288,
-        "overCapacityPct": 0.033930254476908575,
+        "overCapacityPct": 0.03392226148409894,
         "drilledCells": 60,
-        "devicesInDrilled": 101,
-        "polNoLocation": 55,
-        "polOther": 0,
-        "inactiveInDrilled": 65,
-        "lowQodInDrilled": 68
+        "devicesInDrilled": 154,
+        "polNoLocation": 68,
+        "polOther": 10,
+        "inactiveInDrilled": 89,
+        "lowQodInDrilled": 93
       },
       "topFinding": "**288 cells** exceed designed capacity — §1 lists H3 indices + map centers for your ops queue."
     },
@@ -44,9 +44,9 @@
       "name": "Hivemapper",
       "report": "docs/reports/hivemapper-sybil-report.md",
       "publicSource": "Solana mainnet HONEY SPL mint (public RPC)",
-      "generatedAt": "2026-05-23T17:31:54.257Z",
+      "generatedAt": "2026-05-23T22:13:58.172Z",
       "stats": {
-        "generatedAt": "2026-05-23T17:31:54.257Z",
+        "generatedAt": "2026-05-23T22:13:58.172Z",
         "supplyUiAmount": 6542148799.41067,
         "top20SumUi": 3215424456.0437484,
         "top20ShareOfSupply": 0.49149362917783224,

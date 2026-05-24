@@ -8,9 +8,9 @@
 
 ## Lead this week
 
-**Geodnet** — 12 exact (lat,lng) duplicate groups on 19,682 public stations — each row in §1 is one coordinate pair your registry team can grep today.
+**Geodnet** — 10 exact (lat,lng) duplicate groups on 19,688 public stations — each row in §1 is one coordinate pair your registry team can grep today.
 
-_Trend:_ exact dup groups: +3 (+33.3%) ↑
+_Trend:_ exact dup groups: -2 (-16.7%) ↓
 
 → [One-pager](./networks/geodnet-one-pager.md) · [Full report](https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/geodnet-sybil-report.md)
 
@@ -18,7 +18,7 @@ _Trend:_ exact dup groups: +3 (+33.3%) ↑
 
 | Network | Report age | Top finding | Since last run | Full |
 |---------|------------|-------------|----------------|------|
-| [Geodnet](./networks/geodnet-one-pager.md) | 0h ago | 12 exact (lat,lng) duplicate groups on 19,682 public s… | exact dup groups: +3 (+33.3%) ↑ | [full](https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/geodnet-sybil-report.md) |
+| [Geodnet](./networks/geodnet-one-pager.md) | 0h ago | 10 exact (lat,lng) duplicate groups on 19,688 public s… | exact dup groups: -2 (-16.7%) ↓ | [full](https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/geodnet-sybil-report.md) |
 | [WeatherXM](./networks/weatherxm-one-pager.md) | 0h ago | 288 cells exceed designed capacity — §1 lists H3 indic… | over-capacity cells: unchanged vs … | [full](https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/weatherxm-sybil-report.md) |
 | [Hivemapper](./networks/hivemapper-one-pager.md) | 0h ago | 49.15% of UI-reported HONEY sits in the top 20 visible… | top-20 HONEY share: unchanged vs l… | [full](https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/hivemapper-sybil-report.md) |
 | [Nodle](./networks/nodle-one-pager.md) | 0h ago | Co-located Beacon Collision (Crowded Rooms) 📡 | — | [full](https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/nodle-sybil-report.md) |
@@ -26,7 +26,7 @@ _Trend:_ exact dup groups: +3 (+33.3%) ↑
 
 ## What moved this week
 
-- **Geodnet:** exact dup groups: +3 (+33.3%) ↑
+- **Geodnet:** exact dup groups: -2 (-16.7%) ↓
 
 ---
 

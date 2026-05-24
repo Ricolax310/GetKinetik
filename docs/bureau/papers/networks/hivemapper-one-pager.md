@@ -3,7 +3,7 @@
 > **GETKINETIK neutral DePIN bureau** — friendly second read, not a verdict. 
 > Your verifier still runs. No internal network data used unless noted in the full report.
 
-**Generated:** 2026-05-23T17:31:54.257Z  
+**Generated:** 2026-05-23T22:13:58.172Z  
 **Public source:** https://mainnet.helius-rpc.com/?api-key=[REDACTED]  
 **Full report:** [docs/reports/hivemapper-sybil-report.md](https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/hivemapper-sybil-report.md)  
 **Live terminal:** https://getkinetik.app/audits.html  

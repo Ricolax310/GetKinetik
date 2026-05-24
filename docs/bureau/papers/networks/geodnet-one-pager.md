@@ -3,7 +3,7 @@
 > **GETKINETIK neutral DePIN bureau** — friendly second read, not a verdict. 
 > Your verifier still runs. No internal network data used unless noted in the full report.
 
-**Generated:** 2026-05-23T17:31:20.812Z  
+**Generated:** 2026-05-23T22:12:58.184Z  
 **Public source:** https://rtk.geodnet.com/api/v2/coverage_stations  
 **Full report:** [docs/reports/geodnet-sybil-report.md](https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/geodnet-sybil-report.md)  
 **Live terminal:** https://getkinetik.app/audits.html  
@@ -13,9 +13,9 @@
 
 ## Executive summary
 
-1. 12 exact (lat,lng) duplicate groups on 19,682 public stations — each row in §1 is one coordinate pair your registry team can grep today.
-2. 933 ≤10 m proximity clusters — tighter than two physical RTK antennas; start with the largest counts in §2 (names + anchors included).
-3. 9.5% of the public fleet touches at least one heuristic — useful as a sampling denominator, not a verdict.
+1. 10 exact (lat,lng) duplicate groups on 19,688 public stations — each row in §1 is one coordinate pair your registry team can grep today.
+2. 931 ≤10 m proximity clusters — tighter than two physical RTK antennas; start with the largest counts in §2 (names + anchors included).
+3. 9.4% of the public fleet touches at least one heuristic — useful as a sampling denominator, not a verdict.
 
 ---
 
@@ -23,12 +23,12 @@
 
 | Metric | This run | vs last run |
 |---|---:|---|
-| Stations with coordinates | 19,682 | -3 (-0.0%) ↑ |
-| Exact (lat,lng) duplicate groups | 12 | +3 (+33.3%) ↑ |
-| Clusters within 10 m | 933 | unchanged vs last run |
+| Stations with coordinates | 19,688 | +6 (+0.0%) ↓ |
+| Exact (lat,lng) duplicate groups | 10 | -2 (-16.7%) ↓ |
+| Clusters within 10 m | 931 | -2 (-0.2%) ↓ |
 | Clusters ≥4 within 100 m | 5 | unchanged vs last run |
-| Low-precision coordinates (≤2 decimals) | 4 | +2 (+100.0%) ↑ |
-| Fleet share flagged (any heuristic) | 9.45% | +0.02 pp (+0.2%) ↑ |
+| Low-precision coordinates (≤2 decimals) | 5 | +1 (+25.0%) ↑ |
+| Fleet share flagged (any heuristic) | 9.43% | -0.02 pp (-0.2%) ↓ |
 
 ---
 

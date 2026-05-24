@@ -3,7 +3,7 @@
 > **GETKINETIK neutral DePIN bureau** — friendly second read, not a verdict. 
 > Your verifier still runs. No internal network data used unless noted in the full report.
 
-**Generated:** 2026-05-23T17:31:56.806Z  
+**Generated:** 2026-05-23T22:14:00.792Z  
 **Public source:** Nodle public scan inputs (see script header)  
 **Full report:** [docs/reports/nodle-sybil-report.md](https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/nodle-sybil-report.md)  
 **Live terminal:** https://getkinetik.app/audits.html  
