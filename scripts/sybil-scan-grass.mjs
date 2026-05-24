@@ -176,7 +176,7 @@ async function fetchIpDetails(ip) {
     if (!res.ok) return null;
     const data = await res.json();
     if (data.status === "fail") {
-      console.warn(`      ⚠️ Failed lookup for ${ip}: ${data.message}`);
+      console.warn(`      [warn] Failed lookup for ${ip}: ${data.message}`);
       return null;
     }
     
@@ -196,7 +196,7 @@ async function fetchIpDetails(ip) {
       isp: data.isp || "Unknown"
     };
   } catch (e) {
-    console.error(`      ⚠️ Fetch error for ${ip}: ${e.message}`);
+    console.error(`      [warn] Fetch error for ${ip}: ${e.message}`);
     return null;
   }
 }
@@ -308,7 +308,7 @@ async function main() {
       const details = await fetchIpDetails(rawIp);
       
       if (!details) {
-        console.warn(`      ⚠️ Skipping invalid or unreachable IP: ${rawIp}`);
+        console.warn(`      [warn] Skipping invalid or unreachable IP: ${rawIp}`);
         continue;
       }
 
@@ -349,7 +349,7 @@ async function main() {
     }
 
     if (liveNodes.length === 0) {
-      console.error("❌ No valid IP addresses fetched. Exiting.");
+      console.error("[error] No valid IP addresses fetched. Exiting.");
       return;
     }
 
@@ -367,7 +367,7 @@ async function main() {
       console.log(`\nIP: ${n.ip}`);
       console.log(`  ISP / Organization: ${n.org} (AS${n.asn})`);
       console.log(`  Location: ${n.country} (${n.lat}, ${n.lon})`);
-      console.log(`  Reputation Status: ${isFlagged ? "🔴 HIGH-RISK / NON-COMPLIANT" : "🟢 COMPLIANT / RESIDENTIAL"}`);
+      console.log(`  Reputation Status: ${isFlagged ? "HIGH-RISK / NON-COMPLIANT" : "COMPLIANT / RESIDENTIAL"}`);
       if (isFlagged) {
         console.log(`  Kinetik Flags: [${isFlagged.flags.join(", ")}]`);
         console.log(`  Risk Score: ${isFlagged.riskScore} / 1000`);
@@ -392,7 +392,7 @@ async function main() {
     
     liveNodes.forEach((n) => {
       const isFlagged = flagged.find((f) => f.ip === n.ip);
-      const rep = isFlagged ? "🔴 HIGH-RISK" : "🟢 RESIDENTIAL COMPLIANT";
+      const rep = isFlagged ? "HIGH-RISK" : "RESIDENTIAL COMPLIANT";
       const flg = isFlagged ? isFlagged.flags.join(", ") : "None";
       const scr = isFlagged ? `**${isFlagged.riskScore} / 1000**` : "0 / 1000";
       liveReportLines.push(`| \`${n.ip}\` | ${n.country} | ${n.org} (\`AS${n.asn}\`) | ${rep} | \`${flg}\` | ${scr} |`);
@@ -422,7 +422,7 @@ async function main() {
       try {
         dataset = JSON.parse(fs.readFileSync(INPUT_IPS, "utf8"));
       } catch (e) {
-        console.warn("      ⚠️ Error reading input file, fallback to auto-generating fresh data...");
+        console.warn("      [warn] Error reading input file, fallback to auto-generating fresh data...");
         dataset = generateSampleDataset();
       }
     } else {
@@ -473,13 +473,13 @@ async function main() {
     lines.push("");
     lines.push("## The 4 Bandwidth Verification Heuristics");
     lines.push("");
-    lines.push("1. **Beat-Rate Synchronicity (Jitter Analysis) ⏱️**");
+    lines.push("1. **Beat-Rate Synchronicity (Jitter Analysis)**");
     lines.push("   Real residential connections exhibit natural network latency, background packet queueing, and host operating system sleep/wakeup intervals. Bots check in with sub-millisecond precision exactly every 60,000ms. Check-ins with `<15ms` average deviation are flagged.");
-    lines.push("2. **Commercial Subnet & ASN Detection 🌐**");
+    lines.push("2. **Commercial Subnet & ASN Detection**");
     lines.push("   True bandwidth sharing requires genuine residential edge devices. Nodes originating from ASNs associated with commercial hosting providers (e.g. AWS, Hetzner, DigitalOcean) are classified as non-compliant hosting farms.");
-    lines.push("3. **Proxy Subnet Co-Location Clustering 🏢**");
+    lines.push("3. **Proxy Subnet Co-Location Clustering**");
     lines.push("   True residential connections are highly distributed. If more than 3 distinct node IDs check in from the exact same `/24` IP range (e.g. `98.244.15.0/24`) and share an owner or identical check-in schedule, they are flagged as a residential proxy farm.");
-    lines.push("4. **Sybil Owner Wallet Pooling 💳**");
+    lines.push("4. **Sybil Owner Wallet Pooling**");
     lines.push("   Identifies structural pooling where a single blockchain wallet address controls an anomalous density of edge-sharing nodes (more than 5 nodes) reporting synchronized uptime and speeds.");
     lines.push("");
     lines.push("---");

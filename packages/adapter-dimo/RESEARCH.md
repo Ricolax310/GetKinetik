@@ -1,7 +1,7 @@
 # DIMO Adapter — Research (Session E)
 
-> **Date:** 2026-04-26
-> **Researcher:** AI agent (automated web research, DIMO developer docs, DIMO GitHub)
+> **Date:** 2026-04-26  
+> **Sources:** DIMO developer docs, DIMO GitHub, public API references
 > **Template:** Same 5 questions used for `packages/adapter-nodle/RESEARCH.md`
 
 ---

@@ -1,5 +1,3 @@
-// Twitter/X copy composer — short, post-ready tweets from bureau stats (not raw report dumps).
-
 const TWITTER_LIMIT = 280;
 const AUDITS_URL = "https://getkinetik.app/audits.html";
 
@@ -47,14 +45,14 @@ export function composeNetworkTweet(row, stats, prevStats) {
   if (stats?.exactDupGroups != null && stats.observed != null) {
     const body = `${stats.exactDupGroups} exact duplicate coordinate pairs across ${stats.observed.toLocaleString()} ${name} stations${fmtDelta(stats.exactDupGroups, prevStats?.exactDupGroups)}.`;
     return fitTweet(
-      `${name} public read (neutral bureau): ${body} Worth cross-checking vs your registry. ${AUDITS_URL}`,
+      `${name} public read: ${body} Methodology + station list on audits page. ${AUDITS_URL}`,
     );
   }
 
   if (stats?.overCapacityCells != null) {
     const body = `${stats.overCapacityCells.toLocaleString()} cells over designed capacity${fmtDelta(stats.overCapacityCells, prevStats?.overCapacityCells)}.`;
     return fitTweet(
-      `${name} public read (neutral bureau): ${body} Friendly second read on public data. ${AUDITS_URL}`,
+      `${name} public read: ${body} Cell-level detail on audits page. ${AUDITS_URL}`,
     );
   }
 
@@ -73,12 +71,12 @@ export function composeNetworkTweet(row, stats, prevStats) {
   const hook = shortenFinding(row.topFinding);
   if (hook) {
     return fitTweet(
-      `${name} public read (neutral bureau): ${hook} Reproducible methodology. Your verifier still runs. ${AUDITS_URL}`,
+      `${name} public read: ${hook} Reproducible methodology on audits page. ${AUDITS_URL}`,
     );
   }
 
   return fitTweet(
-    `GETKINETIK neutral DePIN bureau — reproducible public read on ${name}. Friendly helper, second read not replacement. ${AUDITS_URL}`,
+    `GETKINETIK public read on ${name} — reproducible methodology, open data. ${AUDITS_URL}`,
   );
 }
 
@@ -91,7 +89,7 @@ export function composeDeltaTweet(changedRows, statsById) {
     const d = stats.exactDupGroups - prevStats.exactDupGroups;
     if (d !== 0) {
       return fitTweet(
-        `Weekly ${primary.name} delta: duplicate coordinate pairs ${prevStats.exactDupGroups} → ${stats.exactDupGroups} (${d > 0 ? "+" : ""}${d}). Neutral bureau public read — worth a registry cross-check. ${AUDITS_URL}`,
+        `${primary.name} weekly: duplicate coordinate pairs ${prevStats.exactDupGroups} → ${stats.exactDupGroups} (${d > 0 ? "+" : ""}${d}). Registry teams — grep list in report. ${AUDITS_URL}`,
       );
     }
   }
@@ -100,7 +98,7 @@ export function composeDeltaTweet(changedRows, statsById) {
     const d = stats.overCapacityCells - prevStats.overCapacityCells;
     if (d !== 0) {
       return fitTweet(
-        `Weekly ${primary.name} delta: over-capacity cells ${prevStats.overCapacityCells} → ${stats.overCapacityCells} (${d > 0 ? "+" : ""}${d}). Public data read — friendly second opinion. ${AUDITS_URL}`,
+        `${primary.name} weekly: over-capacity cells ${prevStats.overCapacityCells} → ${stats.overCapacityCells} (${d > 0 ? "+" : ""}${d}). Full cell list on audits page. ${AUDITS_URL}`,
       );
     }
   }
@@ -109,7 +107,7 @@ export function composeDeltaTweet(changedRows, statsById) {
     const d = (stats.top20ShareOfSupply - prevStats.top20ShareOfSupply) * 100;
     if (Math.abs(d) >= 0.05) {
       return fitTweet(
-        `Weekly ${primary.name} delta: top-20 HONEY share ${(prevStats.top20ShareOfSupply * 100).toFixed(1)}% → ${(stats.top20ShareOfSupply * 100).toFixed(1)}%. On-chain public read. ${AUDITS_URL}`,
+        `${primary.name} weekly: top-20 HONEY share ${(prevStats.top20ShareOfSupply * 100).toFixed(1)}% → ${(stats.top20ShareOfSupply * 100).toFixed(1)}%. On-chain public read. ${AUDITS_URL}`,
       );
     }
   }
@@ -125,15 +123,15 @@ export function composeDeltaThread(changedRows, statsById) {
   const reportUrl = `https://github.com/Ricolax310/GetKinetik/blob/main/${primary.report?.replace(/\\/g, "/")}`;
   const tweet2 = fitTweet(
     hook
-      ? `Pattern worth cross-checking: ${hook}. Full methodology in report. ${reportUrl}`
-      : `Full reproducible report: ${reportUrl}`,
+      ? `${hook}. Full methodology + IDs in report. ${reportUrl}`
+      : `Full report: ${reportUrl}`,
   );
   return { tweet1, tweet2 };
 }
 
 export function composeVerifyTweet() {
   return fitTweet(
-    "Optional DePIN trust sanity check: POST getkinetik.app/api/verify-device → valid/invalid + device age + signed chain. Your verifier still runs. npm i @getkinetik/verify",
+    "Optional trust check: POST getkinetik.app/api/verify-device → valid/invalid + device age + signed chain. npm i @getkinetik/verify",
   );
 }
 
@@ -143,33 +141,29 @@ export function tweetMeta(text) {
 }
 
 function formatTweetBlock(label, text) {
-  const meta = tweetMeta(text);
-  const status = meta.ok ? `${meta.length}/280 ✓` : `${meta.length}/280 ⚠️ over by ${meta.overBy}`;
-  return `### ${label} (${status})\n\n\`\`\`\n${text}\n\`\`\``;
+  return `### ${label}\n\n\`\`\`\n${text}\n\`\`\``;
 }
 
 export function formatPostsMarkdown({ sampleTweet, verifyTweet, deltaTweet, deltaThread, linkedIn, today }) {
   const parts = [
-    `# Bureau post drafts — ${today}`,
-    "",
-    "> **Do not auto-post.** Copy the tweet block below — already sized for Twitter/X.",
+    `# Bureau posts — ${today}`,
     "",
     "---",
     "",
-    formatTweetBlock("Twitter/X — post this (sample read or daily rotation)", sampleTweet),
+    formatTweetBlock("Twitter/X — sample read", sampleTweet),
     "",
     "---",
     "",
-    formatTweetBlock("Twitter/X — verify-device (~1×/week)", verifyTweet),
+    formatTweetBlock("Twitter/X — verify-device", verifyTweet),
   ];
 
   if (deltaTweet) {
-    parts.push("", "---", "", formatTweetBlock("Twitter/X — delta post (when something moved)", deltaTweet));
+    parts.push("", "---", "", formatTweetBlock("Twitter/X — weekly delta", deltaTweet));
   }
   if (deltaThread) {
     parts.push(
       "",
-      "### Twitter/X — delta thread (optional 2-tweet version)",
+      "### Twitter/X — thread",
       "",
       "**Tweet 1**",
       "```",
@@ -187,19 +181,11 @@ export function formatPostsMarkdown({ sampleTweet, verifyTweet, deltaTweet, delt
     "",
     "---",
     "",
-    "### LinkedIn (optional)",
+    "### LinkedIn",
     "",
     "```",
     linkedIn,
     "```",
-    "",
-    "---",
-    "",
-    "## Guardrails",
-    "",
-    "- Say **pattern** / **worth cross-checking** — not \"fraud proved\"",
-    "- Link getkinetik.app/audits.html or GitHub report",
-    "- **Do not auto-post**",
     "",
   );
 
@@ -208,13 +194,13 @@ export function formatPostsMarkdown({ sampleTweet, verifyTweet, deltaTweet, delt
 
 export function formatDeltaPostsMarkdown({ changed, deltaTweet, deltaThread, linkedIn, today }) {
   if (!changed.length) {
-    return `# Delta post drafts — ${today}
+    return `# Bureau delta posts — ${today}
 
-> **No material snapshot deltas today.** Skip the sample-read post — patterns stable vs last run.
+> No material fleet changes vs last run — patterns stable.
 
-${formatTweetBlock("Optional (~1×/week)", composeVerifyTweet())}
+${formatTweetBlock("Twitter/X — verify-device", composeVerifyTweet())}
 
-_Full rotation posts in [latest-posts.md](./latest-posts.md)._
+_Rotation posts in [latest-posts.md](./latest-posts.md)._
 `;
   }
 
@@ -223,9 +209,9 @@ _Full rotation posts in [latest-posts.md](./latest-posts.md)._
     .join("\n");
 
   const parts = [
-    `# Delta post drafts — ${today}`,
+    `# Bureau delta posts — ${today}`,
     "",
-    `> **Post only when something moved.** ${changed.length} network(s) with material deltas.`,
+    `${changed.length} network(s) with material changes since last run.`,
     "",
     "## What changed",
     "",
@@ -233,13 +219,13 @@ _Full rotation posts in [latest-posts.md](./latest-posts.md)._
     "",
     "---",
     "",
-    formatTweetBlock("Twitter/X — copy this", deltaTweet || ""),
+    formatTweetBlock("Twitter/X", deltaTweet || ""),
   ];
 
   if (deltaThread) {
     parts.push(
       "",
-      "### Thread version (reply to tweet 1 with tweet 2)",
+      "### Thread",
       "",
       "**Tweet 1**",
       "```",
@@ -262,13 +248,6 @@ _Full rotation posts in [latest-posts.md](./latest-posts.md)._
     "```",
     linkedIn,
     "```",
-    "",
-    "---",
-    "",
-    "## Guardrails",
-    "",
-    "- Pattern language only — not \"fraud proved\"",
-    "- **Do not auto-post**",
     "",
   );
 

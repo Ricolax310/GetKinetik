@@ -2,6 +2,23 @@
 import fs from "node:fs";
 import path from "node:path";
 
+/** Human-readable report date (YYYY-MM-DD) from ISO string or Date. */
+export function formatAsOfDate(isoOrDate = new Date()) {
+  const s =
+    typeof isoOrDate === "string"
+      ? isoOrDate.trim()
+      : isoOrDate.toISOString();
+  return s.slice(0, 10);
+}
+
+/** Strip pictographs from report headlines (display + index). */
+export function stripEmoji(text) {
+  return String(text)
+    .replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/gu, "")
+    .replace(/\s{2,}/g, " ")
+    .trim();
+}
+
 /** @typedef {{ key: string, label: string, value: number, lowerIsBetter?: boolean, pct?: boolean }} StatRow */
 
 export function loadPreviousStats(snapshotAbsPath) {
@@ -57,11 +74,8 @@ export function formatDelta(cur, prev, { lowerIsBetter = true, pct = false } = {
       : prev !== 0
         ? ` (${sign}${((d / prev) * 100).toFixed(1)}%)`
         : "";
-  const worse =
-    (lowerIsBetter && d > 0) || (!lowerIsBetter && d < 0);
-  const arrow = worse ? "↑" : "↓";
   const plain = `${sign}${pct ? (d * 100).toFixed(2) : d.toLocaleString()}${unit}${magnitude}`;
-  return `${plain} ${arrow}`;
+  return plain;
 }
 
 /**
@@ -116,7 +130,7 @@ export function renderCrossCheckSection(items) {
   });
   lines.push("");
   lines.push(
-    "> **Methodology:** reproducible public-data read — friendly second opinion, not a verdict. Re-run: see report header for source URL and scan script in `scripts/`.",
+    "> Public-data read. Re-run: script in `scripts/`, source URL in report header.",
   );
   lines.push("");
   lines.push("---");
@@ -135,6 +149,7 @@ export function writeAuditIndex(repoRoot, registry, resolveRepo) {
         const snap = JSON.parse(fs.readFileSync(snapPath, "utf8"));
         stats = snap.stats || inferLegacyStats(snap);
         generatedAt = snap.generatedAt || snap.stats?.generatedAt || null;
+        if (generatedAt) generatedAt = formatAsOfDate(generatedAt);
       } catch {
         /* skip */
       }
@@ -150,6 +165,7 @@ export function writeAuditIndex(repoRoot, registry, resolveRepo) {
           .map((l) => l.trim())
           .find((l) => /^\d+\.\s+/.test(l))
           ?.replace(/^\d+\.\s+/, "");
+        if (topFinding) topFinding = stripEmoji(topFinding);
       }
     }
     networks.push({
@@ -163,7 +179,7 @@ export function writeAuditIndex(repoRoot, registry, resolveRepo) {
     });
   }
   const payload = {
-    updatedAt: new Date().toISOString(),
+    updatedAt: formatAsOfDate(),
     networks,
   };
   const dataPath = path.join(repoRoot, "scripts/data/bureau-audit-index.json");

@@ -950,7 +950,7 @@
       <!-- Independent Auditing Statement & Open Methodology Solution Banner -->
       <div class="methodology-banner" style="background: rgba(4, 4, 8, 0.6); border: 1px solid rgba(255, 255, 255, 0.08); padding: 1.5rem; border-radius: 12px; margin-bottom: 2.5rem; box-shadow: 0 4px 30px rgba(0,0,0,0.4); backdrop-filter: blur(10px);">
         <div style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--sapphire); letter-spacing: 0.05em; font-weight: 700; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
-          <span style="color: #3a9bff;">🛡️</span> Independent Registry Auditing Statement & Methodology
+          <span style="color: #3a9bff;">Independent Registry Auditing Statement & Methodology</span>
         </div>
         <p style="font-size: 0.88rem; color: #a0a6b8; margin: 0 0 1rem 0; line-height: 1.6;">
           The GETKINETIK bureau does not have backend access to any network's private databases. We compile these reads from public endpoints only — a second opinion you can reproduce. When you want hardware-rooted certainty on specific devices, <strong>Kinetik Proof of Origin</strong> and <code>/api/verify-device</code> are the optional next step.
@@ -1664,7 +1664,7 @@
             // Threat score & grading
             let threatScore = 0;
             let riskClass = "clean";
-            let riskBadge = "🟢 CLEAN - RESIDENTIAL";
+            let riskBadge = "CLEAN - RESIDENTIAL";
             let rec = "";
 
             if (!hostPass) {
@@ -1682,15 +1682,15 @@
 
             if (threatScore >= 750) {
               riskClass = "danger";
-              riskBadge = "🔴 HIGH RISK - DATACENTER";
+              riskBadge = "HIGH RISK - DATACENTER";
               rec = `Commercial VPS Hosting (AS${geoData.asn}) identified. Continuous, jitterless node keepalives indicate headless automation. **GETKINETIK Proof of Origin attestation required** to unlock reward structures for this node.`;
             } else if (threatScore > 0) {
               riskClass = "proxy";
-              riskBadge = "🟡 MEDIUM RISK - PROXY JITTER";
+              riskBadge = "MEDIUM RISK - PROXY JITTER";
               rec = `Co-located residential proxy or cloned browser farm heuristic triggered. Uptime intervals show perfect script synch. **Hardware-bound attestation key registry recommended** to verify contributor physical presence.`;
             } else {
               riskClass = "clean";
-              riskBadge = "🟢 CLEAN - RESIDENTIAL";
+              riskBadge = "CLEAN - RESIDENTIAL";
               rec = `Genuine residential connection confirmed (AS${geoData.asn} - ${geoData.org}). Natural telecom latency jitter and isolated subnet routing verified. Safe for raw DePIN token reward distributions.`;
             }
 
@@ -1744,19 +1744,19 @@
 
               <div class="result-heuristics">
                 <div class="heuristic-item ${hostPass ? 'pass' : 'fail'}">
-                  <span class="heuristic-icon">${hostPass ? '✓' : '✗'}</span>
+                  <span class="heuristic-icon">${hostPass ? "pass" : "fail"}</span>
                   <span>Residential ISP check</span>
                 </div>
                 <div class="heuristic-item ${jitterPass ? 'pass' : 'fail'}">
-                  <span class="heuristic-icon">${jitterPass ? '✓' : '✗'}</span>
+                  <span class="heuristic-icon">${jitterPass ? "pass" : "fail"}</span>
                   <span>Timing Jitter Validation</span>
                 </div>
                 <div class="heuristic-item ${subnetPass ? 'pass' : 'fail'}">
-                  <span class="heuristic-icon">${subnetPass ? '✓' : '✗'}</span>
+                  <span class="heuristic-icon">${subnetPass ? "pass" : "fail"}</span>
                   <span>Subnet Density Audit</span>
                 </div>
                 <div class="heuristic-item ${ownerPass ? 'pass' : 'fail'}">
-                  <span class="heuristic-icon">${ownerPass ? '✓' : '✗'}</span>
+                  <span class="heuristic-icon">${ownerPass ? "pass" : "fail"}</span>
                   <span>Owner Wallet Identity</span>
                 </div>
               </div>
@@ -1837,7 +1837,7 @@
           .then((data) => {
             if (!data?.networks?.length) {
               updatedEl.textContent =
-                "Run npm run bureau:pipeline to publish live stats (or open reports below).";
+                "Live stats unavailable — see full reports below.";
               return;
             }
             updatedEl.textContent =

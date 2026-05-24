@@ -37,25 +37,25 @@ iOS is in development; iPhone visitors can join the waitlist on the site.
 
 | Layer / Feature | Status | What it is |
 |---|---|---|
-| **L1** Sovereign Identity + Trust | ✅ Live | Ed25519 key + hash-chained heartbeat log + public Ed25519 verifier |
-| **L2** Sensor Capture + Signing | 🟡 Partial | 3 of 7 planned permission-free sensors signing into the chain |
-| **L3** DePIN Optimizer | ✅ Live | Gas-aware claim timing, shared polling pool, yield scoring, device discovery |
-| **L4** Earnings Ledger + Disclosure Fee | ✅ Live | Hardware-signed earnings receipts; optional 1% bureau fee disclosed in the signature |
-| **Partner Verification API** | ✅ Live | `POST /api/verify-device` — Proof URL in, Genesis Score + tamper flags + node age out |
-| **Genesis Score v1.1** | ✅ Live | 0–1000 public node reputation. Bureau-bounded chain age, beat-rate sanity, chain-rewind hard gate. **Not a token. Never priced.** |
-| **Public Bureau (`/bureau/`)** | ✅ Live | Score bands, input methodology, neutrality rules, sample API response, live verification ticker |
-| **Bureau Positioning Page (`/bureau/why/`)** | ✅ Live | Direct answer to the "we already do this" objection |
-| **Bureau Stats API (`/api/bureau/stats`)** | ✅ Live | Public telemetry counters: total verifications, unique nodes, last-seen timestamp |
-| **Score Lookup API (`/api/score/:nodeId`)** | ✅ Live | `GET` a cached Genesis Score for any node ID |
-| **Partner Attestation API (`/api/attest`)** | ✅ Live | Authenticated `POST` — partners push positive or negative signals; KV-persisted, `attestor` attributed |
-| **Per-Partner API Keys** | ✅ Live | `ATTEST_API_KEYS` JSON dict; each key carries a partner name for attribution |
-| **Score-Change Webhooks** | ✅ Live | `score.changed` event pushed to partners on band transitions; HMAC-SHA256 signed |
-| **OpenAPI 3.1 Spec** | ✅ Live | `/api/openapi.yaml` — machine-readable contract for all endpoints |
-| **Interactive API Docs** | ✅ Live | `/api/docs/` — RapiDoc viewer; try every endpoint in-browser |
-| **Postman Collection** | ✅ Live | `/api/postman.json` — import and run against live API in 30 seconds |
-| **Public Status Page (`/status/`)** | ✅ Live | Browser-side probes for all key endpoints; live bureau telemetry |
-| **Health Probe (`/api/health`)** | ✅ Live | Lightweight `GET` — integrates with uptime monitors |
-| **`@getkinetik/verify` NPM package** | ✅ Live | Offline, air-gapped verifier — same cryptographic contract as the hosted API |
+| **L1** Sovereign Identity + Trust | Live | Ed25519 key + hash-chained heartbeat log + public Ed25519 verifier |
+| **L2** Sensor Capture + Signing | Partial | 3 of 7 planned permission-free sensors signing into the chain |
+| **L3** DePIN Optimizer | Live | Gas-aware claim timing, shared polling pool, yield scoring, device discovery |
+| **L4** Earnings Ledger + Disclosure Fee | Live | Hardware-signed earnings receipts; optional 1% bureau fee disclosed in the signature |
+| **Partner Verification API** | Live | `POST /api/verify-device` — Proof URL in, Genesis Score + tamper flags + node age out |
+| **Genesis Score v1.1** | Live | 0–1000 public node reputation. Bureau-bounded chain age, beat-rate sanity, chain-rewind hard gate. **Not a token. Never priced.** |
+| **Public Bureau (`/bureau/`)** | Live | Score bands, input methodology, neutrality rules, sample API response, live verification ticker |
+| **Bureau Positioning Page (`/bureau/why/`)** | Live | Direct answer to the "we already do this" objection |
+| **Bureau Stats API (`/api/bureau/stats`)** | Live | Public telemetry counters: total verifications, unique nodes, last-seen timestamp |
+| **Score Lookup API (`/api/score/:nodeId`)** | Live | `GET` a cached Genesis Score for any node ID |
+| **Partner Attestation API (`/api/attest`)** | Live | Authenticated `POST` — partners push positive or negative signals; KV-persisted, `attestor` attributed |
+| **Per-Partner API Keys** | Live | `ATTEST_API_KEYS` JSON dict; each key carries a partner name for attribution |
+| **Score-Change Webhooks** | Live | `score.changed` event pushed to partners on band transitions; HMAC-SHA256 signed |
+| **OpenAPI 3.1 Spec** | Live | `/api/openapi.yaml` — machine-readable contract for all endpoints |
+| **Interactive API Docs** | Live | `/api/docs/` — RapiDoc viewer; try every endpoint in-browser |
+| **Postman Collection** | Live | `/api/postman.json` — import and run against live API in 30 seconds |
+| **Public Status Page (`/status/`)** | Live | Browser-side probes for all key endpoints; live bureau telemetry |
+| **Health Probe (`/api/health`)** | Live | Lightweight `GET` — integrates with uptime monitors |
+| **`@getkinetik/verify` NPM package** | Live | Offline, air-gapped verifier — same cryptographic contract as the hosted API |
 | **Verified-User Premium** | 🔨 Next | Partners tier rewards by Genesis Score band (requires partner activation) |
 | **Seed-phrase backup** | 🔨 Next | 12-word restore; one active device at a time; no bypass |
 

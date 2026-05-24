@@ -1,9 +1,8 @@
-# Hivemapper — Bureau sample read (one-pager)
+# Hivemapper — sample read
 
-> **GETKINETIK neutral DePIN bureau** — friendly second read, not a verdict. 
-> Your verifier still runs. No internal network data used unless noted in the full report.
+> Public endpoints only. Not a verdict.
 
-**Generated:** 2026-05-23T22:13:58.172Z  
+**As of:** 2026-05-23  
 **Public source:** https://mainnet.helius-rpc.com/?api-key=[REDACTED]  
 **Full report:** [docs/reports/hivemapper-sybil-report.md](https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/hivemapper-sybil-report.md)  
 **Live terminal:** https://getkinetik.app/audits.html  

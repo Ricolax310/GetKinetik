@@ -1,8 +1,6 @@
-# Bureau papers & one-pagers
+# Bureau papers
 
-> Reproducible public sample reads — friendly helper, not gatekeeper.
-
-Updated: 2026-05-23
+Updated: 2026-05-24
 
 ## Weekly bulletin
 
@@ -19,12 +17,5 @@ Updated: 2026-05-23
 ## Daily outputs
 
 - [Daily brief](../daily/latest-brief.md)
-- [Post drafts](../daily/latest-posts.md)
-- [Delta-only posts](../daily/latest-delta-posts.md)
-
-## Regenerate locally
-
-```bash
-npm run bureau:publish    # one-pagers + bulletin + delta posts
-npm run bureau:pipeline   # full scan + publish pack
-```
+- [Social posts](../daily/latest-posts.md)
+- [Delta posts](../daily/latest-delta-posts.md)

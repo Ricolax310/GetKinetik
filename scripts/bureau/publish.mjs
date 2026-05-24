@@ -1,5 +1,4 @@
-// Bureau publishing pack — weekly bulletin, network one-pagers, delta posts, paper index.
-// Drafts only; never auto-sends or auto-posts.
+// Weekly bulletin, one-pagers, delta posts.
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -12,6 +11,7 @@ import {
   resolveRepo,
   summarizeSnapshotDelta,
 } from "./lib.mjs";
+import { formatAsOfDate } from "./report-helpers.mjs";
 import {
   composeDeltaThread,
   composeDeltaTweet,
@@ -65,12 +65,11 @@ export function buildNetworkOnePager(net, reportMd) {
   const scanScript = net.scanScript || `sybil-scan-${net.id}.mjs`;
 
   const lines = [
-    `# ${net.name} — Bureau sample read (one-pager)`,
+    `# ${net.name} — sample read`,
     "",
-    "> **GETKINETIK neutral DePIN bureau** — friendly second read, not a verdict. ",
-    "> Your verifier still runs. No internal network data used unless noted in the full report.",
+    "> Public endpoints only. Not a verdict.",
     "",
-    `**Generated:** ${meta.generated || new Date().toISOString()}  `,
+    `**As of:** ${formatAsOfDate(meta.generated || new Date())}  `,
     `**Public source:** ${meta.source || net.publicSource}  `,
     `**Full report:** [${rel}](${reportUrl(rel)})  `,
     `**Live terminal:** https://getkinetik.app/audits.html  `,
@@ -141,11 +140,9 @@ export function buildWeeklyBulletin(registry, pipelineResults = null) {
   });
 
   const lines = [
-    `# Bureau weekly bulletin — ${today}`,
+    `# Bureau weekly — ${today}`,
     "",
-    "> Auto-generated after the weekly pipeline. **Share internally or attach to outreach** — not a verdict.",
-    "",
-    "**Direction:** neutral DePIN bureau — friendly helper, second read not replacement.",
+    "> Public sample reads attached to outreach when useful.",
     "",
     "---",
     "",
@@ -190,12 +187,11 @@ export function buildWeeklyBulletin(registry, pipelineResults = null) {
   lines.push(
     "---",
     "",
-    "## Publish checklist (manual)",
+    "## This week",
     "",
-    "1. Send outreach from `docs/outreach/generated/` (Hivemapper → Geodnet → WeatherXM)",
-    "2. Post from `docs/bureau/daily/latest-delta-posts.md` if something moved",
-    "3. Attach `./networks/<id>-one-pager.md` to DMs or emails",
-    "4. Site updates automatically on push to `main` (Cloudflare Pages → `landing/`)",
+    "1. Hivemapper → Geodnet → WeatherXM outreach (priority order)",
+    "2. Share delta posts when fleet metrics move",
+    "3. Attach network one-pagers to BD conversations",
     "",
     "---",
     "",
@@ -217,9 +213,7 @@ export function buildPaperIndex(registry) {
   const today = new Date().toISOString().slice(0, 10);
 
   const lines = [
-    "# Bureau papers & one-pagers",
-    "",
-    "> Reproducible public sample reads — friendly helper, not gatekeeper.",
+    "# Bureau papers",
     "",
     `Updated: ${today}`,
     "",
@@ -242,15 +236,8 @@ export function buildPaperIndex(registry) {
     "## Daily outputs",
     "",
     "- [Daily brief](../daily/latest-brief.md)",
-    "- [Post drafts](../daily/latest-posts.md)",
-    "- [Delta-only posts](../daily/latest-delta-posts.md)",
-    "",
-    "## Regenerate locally",
-    "",
-    "```bash",
-    "npm run bureau:publish    # one-pagers + bulletin + delta posts",
-    "npm run bureau:pipeline   # full scan + publish pack",
-    "```",
+    "- [Social posts](../daily/latest-posts.md)",
+    "- [Delta posts](../daily/latest-delta-posts.md)",
     "",
   );
 
@@ -269,9 +256,7 @@ export function buildDeltaPosts(registry, pipelineResults = null) {
   }
   const deltaTweet = changed.length ? composeDeltaTweet(changed, statsMap) : null;
   const deltaThread = changed.length ? composeDeltaThread(changed, statsMap) : null;
-  const linkedIn = changed.length
-    ? `${deltaTweet} Neutral bureau — friendly second opinion on public data.`
-    : "";
+  const linkedIn = changed.length ? deltaTweet : "";
 
   return formatDeltaPostsMarkdown({
     changed,

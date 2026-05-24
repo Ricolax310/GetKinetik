@@ -1,23 +1,4 @@
-// ============================================================================
-// GETKINETIK Bureau — BLE Telemetry Scanner: Nodle Network [NODL]
-//
-// Phone-native BLE mesh networks are highly attractive targets for emulator
-// farms. Attackers inject mock BLE beacon discovery logs into virtualized
-// environments to simulate massive urban foot-traffic and farm NODL tokens.
-//
-// This script runs GETKINETIK's 4 BLE-native integrity heuristics:
-//
-//   1. CO-LOCATED BEACON COLLISION (Shared discovery sets)
-//   2. DISCOVERY RSSI STABILITY (Zero radio attenuation jitter)
-//   3. BEAT-RATE SYNCHRONICITY (Heartbeat jitter analysis)
-//   4. HARDWARE IDENTITY CLONE DETECTOR
-//
-// Run:
-//   node scripts/sybil-scan-nodle.mjs
-//
-// Output:
-//   docs/reports/nodle-sybil-report.md
-// ============================================================================
+// Nodle BLE demo scan (synthetic fixture) → report.
 
 import fs from "node:fs";
 import path from "node:path";
@@ -232,7 +213,7 @@ async function main() {
       "heuristics to detect cloned Android emulators farming Bluetooth mesh rewards."
   );
   lines.push("");
-  lines.push(`- **Generated:** ${snapshot.scannedAt}`);
+  lines.push(`- **As of:** ${String(snapshot.scannedAt).slice(0, 10)}`);
   lines.push(`- **Total Validators Scanned:** ${stats.totalScanned}`);
   lines.push(`- **Flagged Emulator Nodes:** ${stats.flaggedCount} (${((stats.flaggedCount / stats.totalScanned) * 100).toFixed(1)}% of pool)`);
   lines.push(`- **Estimated Daily Token Leak Saved:** ${stats.totalNodlLeakedDaily.toLocaleString()} NODL`);
@@ -241,13 +222,13 @@ async function main() {
   lines.push("");
   lines.push("## The 4 BLE Telemetry Heuristics");
   lines.push("");
-  lines.push("1. **Co-located Beacon Collision (Crowded Rooms) 📡**");
+  lines.push("1. **Co-located Beacon Collision (Crowded Rooms)**");
   lines.push("   Real phones in mobile mesh networks discover unique spatial sets of BLE beacons. If multiple different nodes report discovering the *exact same* list of beacon IDs at the same microsecond, they are running inside a shared PC emulator farm.");
-  lines.push("2. **RSSI Discovery Flatline (Zero Attenuation) 🔋**");
+  lines.push("2. **RSSI Discovery Flatline (Zero Attenuation)**");
   lines.push("   Physical radio signals attenuate dynamically based on phone orientation, body blockage, and air interference. Automated virtual logs inject flat, non-deviating RSSI signal strengths (e.g. static -72.0 dBm). Flat-line telemetry triggers flags.");
-  lines.push("3. **Heartbeat Synchronicity (Jitter Analysis) ⏱️**");
+  lines.push("3. **Heartbeat Synchronicity (Jitter Analysis)**");
   lines.push("   Mobile operating systems impose natural wake-up jitter (wake locks, battery saving). Emulators running automated scripts ping at sub-millisecond precision exactly every 300,000ms. Heartbeats with `<10ms` deviation are flagged.");
-  lines.push("4. **Datacenter Subnet Co-location 🌐**");
+  lines.push("4. **Datacenter Subnet Co-location**");
   lines.push("   Checks validator IPs against global datacenters. Phones operating behind residential VPN blocks or cloud server clusters are flagged as virtual instances.");
   lines.push("");
   lines.push("---");

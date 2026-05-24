@@ -1,9 +1,8 @@
-# Nodle — Bureau sample read (one-pager)
+# Nodle — sample read
 
-> **GETKINETIK neutral DePIN bureau** — friendly second read, not a verdict. 
-> Your verifier still runs. No internal network data used unless noted in the full report.
+> Public endpoints only. Not a verdict.
 
-**Generated:** 2026-05-23T22:14:00.792Z  
+**As of:** 2026-05-24  
 **Public source:** Nodle public scan inputs (see script header)  
 **Full report:** [docs/reports/nodle-sybil-report.md](https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/nodle-sybil-report.md)  
 **Live terminal:** https://getkinetik.app/audits.html  
@@ -13,9 +12,9 @@
 
 ## Executive summary
 
-1. Co-located Beacon Collision (Crowded Rooms) 📡
-2. RSSI Discovery Flatline (Zero Attenuation) 🔋
-3. Heartbeat Synchronicity (Jitter Analysis) ⏱️
+1. Co-located Beacon Collision (Crowded Rooms)
+2. RSSI Discovery Flatline (Zero Attenuation)
+3. Heartbeat Synchronicity (Jitter Analysis)
 
 ---
 

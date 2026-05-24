@@ -1,23 +1,4 @@
-// ============================================================================
-// GETKINETIK Bureau — Heuristics Telemetry Scanner: Dawn Network (Andrena)
-//
-// Since the DAWN validator is in its pre-token points testnet phase, the
-// network is highly exposed to headless automated script farms.
-//
-// This script runs GETKINETIK's 4 telemetry validation heuristics against
-// a validator check-in payload to expose Sybil and VM-farm patterns:
-//
-//   1. BEAT-RATE SYNCHRONICITY (Jitter Analysis)
-//   2. METADATA TWINS (Hardware-AppID Clones)
-//   3. DATA CENTER / IP CO-LOCATION
-//   4. INSTANT UPTIME SENIORITY ANOMALIES
-//
-// Run:
-//   node scripts/sybil-scan-dawn.mjs
-//
-// Output:
-//   docs/reports/dawn-sybil-report.md
-// ============================================================================
+// Dawn validator demo scan (synthetic fixture) → report.
 
 import fs from "node:fs";
 import path from "node:path";
@@ -218,7 +199,7 @@ async function main() {
       "heuristics to detect headless browser/VM farms farming validator points."
   );
   lines.push("");
-  lines.push(`- **Generated:** ${snapshot.scannedAt}`);
+  lines.push(`- **As of:** ${String(snapshot.scannedAt).slice(0, 10)}`);
   lines.push(`- **Total Validators Scanned:** ${stats.totalScanned}`);
   lines.push(`- **Flagged Anomalous Nodes:** ${stats.flaggedCount} (${((stats.flaggedCount / stats.totalScanned) * 100).toFixed(1)}% of pool)`);
   lines.push(`- **Estimated Daily Points Leak Saved:** ${stats.totalPointsSaved.toLocaleString()} Points`);
@@ -227,13 +208,13 @@ async function main() {
   lines.push("");
   lines.push("## The 4 Telemetry Integrity Heuristics");
   lines.push("");
-  lines.push("1. **Beat-Rate Synchronicity (Jitter Analysis) ⏱️**");
+  lines.push("1. **Beat-Rate Synchronicity (Jitter Analysis)**");
   lines.push("   Real residential users have natural network jitter. Headless bots ping at sub-millisecond precision exactly every 120,000ms. Pings with `<10ms` deviation are flagged as automated heartbeats.");
-  lines.push("2. **Hardware AppID Metadata Twin Clashes 👯**");
+  lines.push("2. **Hardware AppID Metadata Twin Clashes**");
   lines.push("   When operators clone extension folders to run multiple validators, they copy local storage states. Multiple accounts sharing the same hardware `AppID` represents a database clone anomaly.");
-  lines.push("3. **IP Co-Location & Datacenter Sources 🌐**");
+  lines.push("3. **IP Co-Location & Datacenter Sources**");
   lines.push("   Bandwidth DePINs must verify residential origin. Multiple accounts connecting from the same IP block or known cloud provider subnets (e.g., DigitalOcean, AWS) are flagged.");
-  lines.push("4. **Seniority & Bandwidth Discrepancy 📈**");
+  lines.push("4. **Seniority & Bandwidth Discrepancy**");
   lines.push("   Newly created accounts (<1 day) that instantly report 100% stable, flawless gigabit speeds without dropouts are flagged as virtual server instances.");
   lines.push("");
   lines.push("---");

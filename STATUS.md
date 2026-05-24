@@ -24,7 +24,7 @@ We publish reproducible trust reads on **public data** and **signed device evide
 
 ---
 
-## Automation (repetitive bureau loop)
+## Local commands (bureau loop)
 
 ```bash
 npm run bureau:status      # report ages + env hints
@@ -53,7 +53,7 @@ npm run bureau:outreach    # drafts only from existing reports
 - **Network one-pagers:** `docs/bureau/papers/networks/<id>-one-pager.md`
 - **Paper index:** `docs/bureau/papers/README.md`
 - **Outreach drafts:** `docs/outreach/generated/` (human review before send)
-- **Send queue:** `docs/outreach/OUTREACH_QUEUE.md` (auto-generated)
+- **Send queue:** `docs/outreach/OUTREACH_QUEUE.md`
 - **Run log:** `scripts/data/bureau-run-log.json`
 - **Live audit index:** `landing/data/bureau-audit-index.json` (also `scripts/data/`) — powers audits.html headline cards
 

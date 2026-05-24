@@ -107,7 +107,7 @@ async function main() {
   console.log(`- **Total historic WXM earned across flagged devices:** ${totalHistoric.toFixed(2)} WXM\n`);
 
   if (earning.length > 0) {
-    console.log('## ⚠️  Devices still earning despite NO_LOCATION_DATA flag\n');
+    console.log('## Devices still earning despite NO_LOCATION_DATA flag\n');
     console.log('| Device ID | Cell | Total WXM | Latest score |');
     console.log('|---|---|---:|---:|');
     for (const r of earning) {
@@ -117,7 +117,7 @@ async function main() {
   }
 
   if (zeroed.length > 0) {
-    console.log('## ✅  Devices previously earning, now zeroed (WXM pipeline working)\n');
+    console.log('## Devices previously earning, now zeroed (WXM pipeline working)\n');
     console.log('| Device ID | Cell | Total WXM earned (historic) |');
     console.log('|---|---|---:|');
     for (const r of zeroed) {

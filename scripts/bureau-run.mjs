@@ -1,30 +1,5 @@
 #!/usr/bin/env node
-// ============================================================================
-// GETKINETIK Bureau — automation runner (neutral helper route)
-//
-// Safely automates the repetitive bureau loop:
-//   scan public data → write report → draft outreach (human sends)
-//
-// Commands:
-//   node scripts/bureau-run.mjs status
-//   node scripts/bureau-run.mjs scan [network-id|all]
-//   node scripts/bureau-run.mjs outreach [network-id|all]
-//   node scripts/bureau-run.mjs pipeline [--only=geodnet,weatherxm]
-//   node scripts/bureau-run.mjs brief
-//   node scripts/bureau-run.mjs publish
-//
-// npm shortcuts (from package.json):
-//   npm run bureau:status
-//   npm run bureau:scan
-//   npm run bureau:pipeline
-//   npm run bureau:brief
-//
-// Safety:
-//   - Never sends email/DMs — only writes files under docs/outreach/generated/
-//   - Redacts api-key=… in logs and outreach metadata
-//   - Sequential scans with delay (rate-limit friendly)
-//   - Skips networks when required env missing (warns, continues)
-// ============================================================================
+// Bureau runner: scan → report → outreach files → brief/publish.
 
 import { execFileSync } from "node:child_process";
 import fs from "node:fs";
@@ -57,7 +32,7 @@ const SCAN_DELAY_MS = 2500;
 
 function usage() {
   console.error(`
-GETKINETIK bureau runner — neutral helper automation
+GETKINETIK bureau runner
 
   node scripts/bureau-run.mjs status
   node scripts/bureau-run.mjs scan [network-id|all]
@@ -67,12 +42,6 @@ GETKINETIK bureau runner — neutral helper automation
   node scripts/bureau-run.mjs publish
 
 Registry: scripts/bureau/networks.json
-Outreach: docs/outreach/generated/<id>-outreach-<YYYY-MM-DD>.md
-Daily brief: docs/bureau/daily/latest-brief.md
-Delta posts: docs/bureau/daily/latest-delta-posts.md
-Weekly bulletin: docs/bureau/papers/latest-bulletin.md
-One-pagers: docs/bureau/papers/networks/<id>-one-pager.md
-Log:      scripts/data/bureau-run-log.json
 `);
 }
 
@@ -165,8 +134,7 @@ function sleep(ms) {
 
 function cmdStatus(registry) {
   loadEnvQuiet();
-  console.log("GETKINETIK bureau pipeline status\n");
-  console.log("Direction: neutral DePIN bureau — friendly helper (second read)\n");
+  console.log("GETKINETIK bureau status\n");
   for (const net of registry) {
     const reportPath = resolveRepo(net.report);
     const age = formatAge(fileAgeMs(reportPath));
@@ -272,7 +240,6 @@ function cmdBrief(registry) {
   console.log(`  Posts:   ${out.latestPosts}`);
   console.log(`  Deltas:  ${pubOut.deltaPosts} (${pubOut.changedCount} networks moved)`);
   console.log(`  Queue:   docs/outreach/OUTREACH_QUEUE.md`);
-  console.log("\nReview before sending or posting.");
 }
 
 function cmdPublish(registry) {
@@ -294,7 +261,6 @@ function cmdPublish(registry) {
   console.log(`  Index:     ${pubOut.index}`);
   console.log(`  One-pagers: ${pubOut.onePagers.length} files`);
   console.log(`  Deltas:    ${pubOut.deltaPosts} (${pubOut.changedCount} networks moved)`);
-  console.log("\nAttach one-pagers to outreach. Site deploys on push to main (Cloudflare Pages).");
 }
 
 async function main() {
