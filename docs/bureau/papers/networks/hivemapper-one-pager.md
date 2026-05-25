@@ -2,7 +2,7 @@
 
 > Public endpoints only. Not a verdict.
 
-**As of:** 2026-05-23  
+**As of:** 2026-05-25  
 **Public source:** https://mainnet.helius-rpc.com/?api-key=[REDACTED]  
 **Full report:** [docs/reports/hivemapper-sybil-report.md](https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/hivemapper-sybil-report.md)  
 **Live terminal:** https://getkinetik.app/audits.html  
@@ -22,9 +22,9 @@
 
 | Metric | This run | vs last run |
 |---|---:|---|
-| Top-20 visible SPL accounts (% of UI supply) | 49.15% | unchanged vs last run |
+| Top-20 visible SPL accounts (% of UI supply) | 49.15% | +0.00 pp (+0.0%) |
 | Sum of top-20 balances (HONEY) | 3,215,424,456.044 | unchanged vs last run |
-| UI-reported supply (HONEY) | 6,542,148,799.411 | unchanged vs last run |
+| UI-reported supply (HONEY) | 6,541,901,334.815 | -247,464.596 (-0.0%) |
 
 ---
 

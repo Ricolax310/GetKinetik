@@ -2,7 +2,7 @@
 
 > Public endpoints only. Not a verdict.
 
-**As of:** 2026-05-24  
+**As of:** 2026-05-25  
 **Public source:** Dawn public scan inputs (see script header)  
 **Full report:** [docs/reports/dawn-sybil-report.md](https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/dawn-sybil-report.md)  
 **Live terminal:** https://getkinetik.app/audits.html  
