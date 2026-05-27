@@ -38,7 +38,7 @@ npm run bureau:news        # RSS/news scan → LLM comment draft (review latest-
 npm run bureau:news:post   # same + auto-tweet if BUREAU_AUTO_POST=true + X API keys
 ```
 
-**News automation:** reads `scripts/bureau/gtm-context.md` + live brief/reports into the LLM. Default model `gpt-4.1` (override: `BUREAU_NEWS_MODEL`). Set `OPENAI_API_KEY` in `.env` / GitHub Secrets. LinkedIn = draft only; X auto-post is opt-in.
+**News automation:** reads `scripts/bureau/gtm-context.md` + live brief/reports into the LLM. Default model `gpt-5` (override: `BUREAU_NEWS_MODEL`). Set `OPENAI_API_KEY` in `.env` / GitHub Secrets. LinkedIn = draft only; X auto-post is opt-in.
 
 ### Scheduled (GitHub Actions)
 
@@ -51,6 +51,8 @@ npm run bureau:news:post   # same + auto-tweet if BUREAU_AUTO_POST=true + X API 
 **Never auto-sends** email, DMs, or social posts — drafts only. **Site deploy:** push to `main` → Cloudflare Pages rebuilds `landing/` (live audit index).
 
 **Git (avoid push rejected):** one-time `npm run git:hooks-install` — auto-rebase before push when bureau bots commit first. See [`docs/DEV_GIT.md`](docs/DEV_GIT.md). Or `npm run git:push` instead of raw `git push`.
+
+**Public DePIN chat:** https://getkinetik.app/bureau/ask/ — context in `landing/data/depin-chat-context.json` refreshes on daily brief, weekly scan, and news job (`npm run bureau:depin-context`).
 
 - **Registry:** `scripts/bureau/networks.json`
 - **Daily ops calendar:** https://getkinetik.app/bureau/ops/ — calendar + AI chat (see `docs/bureau/OPS_CALENDAR.md`)

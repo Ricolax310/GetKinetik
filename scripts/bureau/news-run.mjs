@@ -12,6 +12,7 @@ import {
 } from "./lib.mjs";
 import { writeOperatorBrief } from "./operator-brief.mjs";
 import { writeOpsPack } from "./ops-pack.mjs";
+import { writeDepinChatContext } from "./build-depin-chat-context.mjs";
 import {
   loadAllFeedItems,
   scoreItem,
@@ -115,7 +116,7 @@ export async function runBureauNews(opts = {}) {
     throw new Error("OPENAI_API_KEY required for bureau news (set in .env or GitHub secret)");
   }
 
-  const model = opts.model || process.env.BUREAU_NEWS_MODEL || process.env.OPENAI_MODEL || "gpt-4.1";
+  const model = opts.model || process.env.BUREAU_NEWS_MODEL || process.env.OPENAI_MODEL || "gpt-5";
   const baseUrl = process.env.OPENAI_BASE_URL;
   const minConfidence = Number(
     opts.minConfidence ?? process.env.BUREAU_NEWS_MIN_CONFIDENCE ?? 0.85,
@@ -224,7 +225,8 @@ export async function runBureauNews(opts = {}) {
     }
     writeOperatorBrief(registry, pipelineResults);
     writeOpsPack(registry, pipelineResults);
-    console.error("[news] refreshed ops calendar data");
+    const depinCtx = await writeDepinChatContext({ fetchNews: true });
+    console.error(`[news] refreshed public chat context → ${depinCtx}`);
   } catch (e) {
     console.error(`[news] operator brief refresh failed: ${redactSecrets(e.message)}`);
   }

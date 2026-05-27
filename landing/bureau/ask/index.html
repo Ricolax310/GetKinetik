@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0A0A0A" />
+    <meta name="color-scheme" content="dark" />
+    <title>Ask the Bureau — DePIN trust &amp; security</title>
+    <meta
+      name="description"
+      content="Chat with the GETKINETIK bureau about DePIN trust, registry integrity, and neutral second reads on public data."
+    />
+    <link rel="canonical" href="https://getkinetik.app/bureau/ask/" />
+    <link rel="stylesheet" href="ask.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="top">
+        <a href="/bureau/">← Bureau</a>
+        <span class="brand">Public Q&amp;A</span>
+      </header>
+
+      <h1>Ask about DePIN trust</h1>
+      <p class="lede">
+        Neutral answers on registry hygiene, signed device evidence, and why outsiders need a
+        reproducible second read — not token hype or investment advice.
+      </p>
+      <p id="context-meta" class="lede" style="font-size:12px;margin-top:-16px;margin-bottom:20px;color:var(--steel)"></p>
+
+      <div class="starter" id="starters"></div>
+
+      <div class="chat-box">
+        <div id="chat-log" class="chat-log" aria-live="polite"></div>
+        <div class="chat-form">
+          <textarea
+            id="chat-input"
+            placeholder="e.g. How does GETKINETIK check a network without private data?"
+            rows="3"
+          ></textarea>
+          <button type="button" id="chat-send">Send</button>
+          <p id="chat-error" class="err" role="alert"></p>
+        </div>
+      </div>
+
+      <p class="disclaimer">
+        AI assistant for education — not legal or financial advice. Methodology is public:
+        <a href="/audits.html">sample reads</a>,
+        <a href="/bureau/">bureau</a>,
+        <a href="/api/docs/">API</a>.
+        For partnership inquiries:
+        <a href="mailto:eric@outfromnothingllc.com">eric@outfromnothingllc.com</a>.
+      </p>
+    </div>
+    <script src="ask.js" defer></script>
+  </body>
+</html>

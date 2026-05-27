@@ -23,6 +23,7 @@ import {
 import { runBureauNews } from "./bureau/news-run.mjs";
 import { writeOperatorBrief } from "./bureau/operator-brief.mjs";
 import { writeOpsPack } from "./bureau/ops-pack.mjs";
+import { writeDepinChatContext } from "./bureau/build-depin-chat-context.mjs";
 import { writePublishingPack } from "./bureau/publish.mjs";
 
 const args = process.argv.slice(2);
@@ -217,8 +218,10 @@ async function cmdPipeline(registry) {
   const briefOut = writeDailyBrief(registry, summary);
   const operatorOut = writeOperatorBrief(registry, summary);
   const opsPackOut = writeOpsPack(registry, summary);
+  const depinChatCtx = await writeDepinChatContext();
   const pubOut = writePublishingPack(registry, summary);
   console.error(`\n[pipeline] summary → scripts/data/bureau-pipeline.json`);
+  console.error(`[pipeline] depin chat → ${depinChatCtx}`);
   console.error(`[pipeline] brief   → ${briefOut.latestBrief}`);
   console.error(`[pipeline] ops     → ${operatorOut.latest}`);
   console.error(`[pipeline] calendar → ${opsPackOut.path}`);
@@ -228,7 +231,7 @@ async function cmdPipeline(registry) {
   if (bad.length) process.exitCode = 1;
 }
 
-function cmdBrief(registry) {
+async function cmdBrief(registry) {
   let pipelineResults = null;
   if (fs.existsSync(path.join(REPO_ROOT, "scripts/data/bureau-pipeline.json"))) {
     try {
@@ -242,6 +245,7 @@ function cmdBrief(registry) {
   const out = writeDailyBrief(registry, pipelineResults);
   const operatorOut = writeOperatorBrief(registry, pipelineResults);
   const opsPackOut = writeOpsPack(registry, pipelineResults);
+  const depinChatCtx = await writeDepinChatContext();
   const pubOut = writePublishingPack(registry, pipelineResults);
   writeAuditIndex(REPO_ROOT, registry, resolveRepo);
   appendLog({
@@ -250,18 +254,20 @@ function cmdBrief(registry) {
     ...out,
     operator: operatorOut,
     opsPack: opsPackOut.path,
+    depinChat: depinChatCtx,
     publish: pubOut,
   });
   console.log("GETKINETIK bureau daily brief\n");
   console.log(`  Ops:     ${operatorOut.latest}`);
   console.log(`  Calendar: ${opsPackOut.path} → https://getkinetik.app/bureau/ops/`);
+  console.log(`  Public chat context: ${depinChatCtx} → https://getkinetik.app/bureau/ask/`);
   console.log(`  Brief:   ${out.latestBrief}`);
   console.log(`  Posts:   ${out.latestPosts}`);
   console.log(`  Deltas:  ${pubOut.deltaPosts} (${pubOut.changedCount} networks moved)`);
   console.log(`  Queue:   docs/outreach/OUTREACH_QUEUE.md`);
 }
 
-function cmdPublish(registry) {
+async function cmdPublish(registry) {
   let pipelineResults = null;
   if (fs.existsSync(path.join(REPO_ROOT, "scripts/data/bureau-pipeline.json"))) {
     try {
@@ -274,7 +280,8 @@ function cmdPublish(registry) {
   }
   const pubOut = writePublishingPack(registry, pipelineResults);
   writeAuditIndex(REPO_ROOT, registry, resolveRepo);
-  appendLog({ action: "publish", ok: true, ...pubOut });
+  const depinChatCtx = await writeDepinChatContext();
+  appendLog({ action: "publish", ok: true, depinChat: depinChatCtx, ...pubOut });
   console.log("GETKINETIK bureau publishing pack\n");
   console.log(`  Bulletin:  ${pubOut.bulletin}`);
   console.log(`  Index:     ${pubOut.index}`);
@@ -317,10 +324,10 @@ async function main() {
       await cmdPipeline(registry);
       break;
     case "brief":
-      cmdBrief(registry);
+      await cmdBrief(registry);
       break;
     case "publish":
-      cmdPublish(registry);
+      await cmdPublish(registry);
       break;
     case "news":
       await cmdNews();
