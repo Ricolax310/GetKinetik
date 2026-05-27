@@ -39,8 +39,8 @@ iOS is in development; iPhone visitors can join the waitlist on the site.
 |---|---|---|
 | **L1** Sovereign Identity + Trust | Live | Ed25519 key + hash-chained heartbeat log + public Ed25519 verifier |
 | **L2** Sensor Capture + Signing | Partial | 3 of 7 planned permission-free sensors signing into the chain |
-| **L3** DePIN Optimizer | Live | Gas-aware claim timing, shared polling pool, yield scoring, device discovery |
-| **L4** Earnings Ledger + Disclosure Fee | Live | Hardware-signed earnings receipts; optional 1% bureau fee disclosed in the signature |
+| **L3** Operator Tooling (optional) | Live | Shared polling pool, gas-aware claim timing — internal convenience, not a product headline |
+| **L4** Signed Receipts Ledger | Live | Hardware-signed read-only receipts from network adapters; optional 1% bureau fee disclosed in the signature |
 | **Partner Verification API** | Live | `POST /api/verify-device` — Proof URL in, Genesis Score + tamper flags + node age out |
 | **Genesis Score v1.1** | Live | 0–1000 public node reputation. Bureau-bounded chain age, beat-rate sanity, chain-rewind hard gate. **Not a token. Never priced.** |
 | **Public Bureau (`/bureau/`)** | Live | Score bands, input methodology, neutrality rules, sample API response, live verification ticker |
@@ -101,7 +101,7 @@ auditor, skeptic — can confirm we're not lying about what's signed.
 .
 ├── App.tsx                      # Mobile app entry (Expo / React Native)
 ├── src/
-│   ├── components/              # Vault UI, Gemstone, AggregatorPanel, etc.
+│   ├── components/              # Vault UI, Gemstone, NetworkReadsPanel, etc.
 │   └── hooks/                   # Sensor + storage glue
 │
 ├── packages/

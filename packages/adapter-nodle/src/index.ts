@@ -15,7 +15,7 @@
 //
 // EARNINGS: NODL auto-deposits to the derived address every ~2 hours. There
 // is no manual claim in v0 — pollEarnings() reads the on-chain balance via
-// the public Substrate JSON-RPC and returns a snapshot. The aggregator records
+// the public Substrate JSON-RPC and returns a snapshot. The signed ledger records
 // incremental deltas as signed EarningEntries in the wallet ledger.
 //
 // NO CUSTODY: GETKINETIK never holds NODL. Tokens live on-chain in an address
@@ -419,11 +419,11 @@ export class NodleAdapter implements DepinAdapter {
 
   // --------------------------------------------------------------------------
   // claim — undefined in v0. NODL auto-deposits every ~2 hours; no manual
-  // claim exists for SDK-mode earnings. The aggregator ledger will record
+  // claim exists for SDK-mode earnings. The signed ledger will record
   // incremental balance deltas instead.
   // --------------------------------------------------------------------------
   // claim is intentionally not implemented — omitting it signals to the
-  // aggregator UI to hide the CLAIM button for this adapter.
+  // network-reads UI to hide the CLAIM button for this adapter.
 
   // --------------------------------------------------------------------------
   // Private helpers.
@@ -449,5 +449,5 @@ export class NodleAdapter implements DepinAdapter {
   }
 }
 
-// Singleton — the aggregator panel imports this directly.
+// Singleton — imported by NetworkReadsPanel.
 export const nodleAdapter = new NodleAdapter();

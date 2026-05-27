@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0A0A0A" />
+    <meta name="color-scheme" content="dark" />
+    <title>Bureau Ops — Calendar &amp; Assistant</title>
+    <meta
+      name="description"
+      content="GETKINETIK daily ops calendar: what to do today, what ran automatically, and an AI assistant for bureau work."
+    />
+    <link rel="canonical" href="https://getkinetik.app/bureau/ops/" />
+    <link rel="stylesheet" href="ops.css" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230A0A0A'/%3E%3Cpolygon points='16,6 24,16 16,26 8,16' fill='%231565C0'/%3E%3C/svg%3E"
+    />
+  </head>
+  <body>
+    <div class="layout">
+      <header class="top">
+        <div>
+          <div class="brand">GETKINETIK Bureau</div>
+          <h1>Ops calendar</h1>
+        </div>
+        <a href="/bureau/">← Bureau</a>
+      </header>
+
+      <aside class="panel-left">
+        <p id="ops-loading" class="loading">Loading calendar…</p>
+        <div class="cal-nav">
+          <button type="button" id="cal-prev" aria-label="Previous month">←</button>
+          <h2 id="cal-title">—</h2>
+          <button type="button" id="cal-next" aria-label="Next month">→</button>
+        </div>
+        <button type="button" id="cal-today" style="width:100%;margin-top:4px">Jump to today</button>
+        <div id="cal-grid" class="cal-grid" aria-label="Calendar"></div>
+        <div class="legend">
+          <span><span class="dot brief"></span> Brief</span>
+          <span><span class="dot news"></span> News</span>
+          <span><span class="dot scan"></span> Scan</span>
+        </div>
+        <h3 style="font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--steel)">
+          Automated schedule
+        </h3>
+        <ul id="schedule-list" class="schedule-list"></ul>
+      </aside>
+
+      <div class="panel-main">
+        <section class="day-view" aria-label="Day briefing">
+          <h2 id="day-title">Today</h2>
+          <p id="day-meta" class="day-meta"></p>
+          <div id="day-tasks"></div>
+          <div id="day-wait" class="wait-box" hidden></div>
+          <div id="day-body" class="md-body"></div>
+        </section>
+
+        <section class="chat-panel" aria-label="Ops assistant">
+          <h2>Bureau ops assistant</h2>
+          <p class="chat-lede">
+            Ops coach for the weekly route: public → comment → intro → marketer → Friday nurture.
+            No cold-founder-DM advice. Uses deployed GTM brain + today’s briefing.
+          </p>
+          <div id="chat-log" class="chat-log"></div>
+          <div class="chat-form">
+            <label class="token-row">
+              <span style="font-size:12px;color:var(--steel);white-space:nowrap">Access token</span>
+              <input
+                id="chat-token"
+                type="password"
+                autocomplete="off"
+                placeholder="BUREAU_OPS_CHAT_TOKEN from Cloudflare"
+              />
+            </label>
+            <textarea
+              id="chat-input"
+              placeholder="e.g. What should I do today? Can I ping Manolis?"
+              rows="3"
+            ></textarea>
+            <button type="button" id="chat-send">Send</button>
+            <p id="chat-error" class="chat-error" role="alert"></p>
+          </div>
+        </section>
+      </div>
+    </div>
+    <script src="ops.js" defer></script>
+  </body>
+</html>

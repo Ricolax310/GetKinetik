@@ -1,6 +1,7 @@
 // ============================================================================
-// AggregatorPanel — multi-network DePIN rewards UI (signed ledger) with shared PollingPool.
-// Product positioning: independent trust layer; this panel is the L3/L4 read surface.
+// NetworkReadsPanel — optional multi-network DePIN read surface (signed ledger).
+// Bureau positioning: trust layer first; this panel is an operator convenience
+// for read-only network status and signed receipts — not a product headline.
 // ----------------------------------------------------------------------------
 // Renders one card per registered adapter. The panel is adapter-agnostic —
 // it iterates the adapter list and calls the same interface on every entry.
@@ -10,7 +11,7 @@
 // Benefits: ~30% less battery usage, coordinated back-off, deduplicated
 // network calls when multiple UI consumers watch the same adapter.
 //
-// FEATURE FLAG: set AGGREGATOR_ENABLED = true to show this panel.
+// FEATURE FLAG: set NETWORK_READS_ENABLED = true to show this panel.
 //
 // The fee is invisible at this layer — we never show "we took 1%" as a line
 // item the user has to parse on every load. It is transparent in the earnings
@@ -57,9 +58,9 @@ import {
 } from '../../packages/optimizer/src';
 
 // ----------------------------------------------------------------------------
-// Feature flag. Flip to true to show the aggregator panel in VaultPanel.
+// Feature flag. Flip to true to show the network-reads panel in VaultPanel.
 // ----------------------------------------------------------------------------
-export const AGGREGATOR_ENABLED = true;
+export const NETWORK_READS_ENABLED = true;
 
 // ----------------------------------------------------------------------------
 // Per-adapter poll cadences (ms). Driven by each network's natural update
@@ -119,8 +120,8 @@ function fmtNodl(amount: number | null | undefined): string {
   return amount.toFixed(3);
 }
 
-/** Panel title — "Earnings" reads yield-aggregator; rewards still fits DePIN without sounding like a farm. */
-const REWARDS_PANEL_TITLE = 'REWARDS';
+/** Panel title — bureau-neutral; read-only network status, not a yield headline. */
+const REWARDS_PANEL_TITLE = 'NETWORK READS';
 
 /** Inactive card hint — Nodle is participatory; other adapters track an external wallet. */
 function inactiveOptInHint(adapter: DepinAdapter): string {
@@ -242,7 +243,7 @@ async function recordEarningDelta(
     await SecureStore.setItemAsync(key, String(curr)).catch(() => {});
     return true;
   } catch (err) {
-    console.warn('[aggregator] failed to record earning delta:', err);
+    console.warn('[network-reads] failed to record earning delta:', err);
     return false;
   }
 }
@@ -435,7 +436,7 @@ function AdapterCard({
 }
 
 // ----------------------------------------------------------------------------
-// AggregatorPanel — single summary box on the home screen, plus a slide-up
+// NetworkReadsPanel — single summary box on the home screen, plus a slide-up
 // drawer that reveals one AdapterCard per registered DePIN.
 //
 // HOME SURFACE (always visible):
@@ -449,14 +450,14 @@ function AdapterCard({
 // each AdapterCard's poll interval keeps running and signed earnings keep
 // flowing into the ledger even when the user never opens the drawer.
 // ----------------------------------------------------------------------------
-type AggregatorPanelProps = {
+type NetworkReadsPanelProps = {
   adapters: DepinAdapter[];
   identity: NodeIdentity | null;
   /** Called when the user taps the optimizer badge — opens OptimizationReport. */
   onOpenOptimizationReport?: (result: OptimizationResult) => void;
 };
 
-export function AggregatorPanel({ adapters, identity, onOpenOptimizationReport }: AggregatorPanelProps) {
+export function NetworkReadsPanel({ adapters, identity, onOpenOptimizationReport }: NetworkReadsPanelProps) {
   const [summary, setSummary] = useState<WalletSummary | null>(null);
   const [statuses, setStatuses] = useState<Record<string, AdapterStatus>>({});
   const [snapshots, setSnapshots] = useState<Record<string, EarningSnapshot | null>>({});
@@ -569,14 +570,14 @@ export function AggregatorPanel({ adapters, identity, onOpenOptimizationReport }
     return map;
   }, [adapters]);
 
-  if (!AGGREGATOR_ENABLED || adapters.length === 0) return null;
+  if (!NETWORK_READS_ENABLED || adapters.length === 0) return null;
 
   const activeCount = Object.values(statuses).filter(
     (s) => s.state === 'registered' || s.state === 'earning',
   ).length;
   const entryCount = summary?.count ?? 0;
 
-  // Aggregate lifetime earnings by currency.
+  // Roll up lifetime signed receipts by currency.
   const totalsByCurrency = new Map<string, number>();
   for (const snap of Object.values(snapshots)) {
     if (!snap) continue;

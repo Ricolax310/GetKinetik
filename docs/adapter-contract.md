@@ -7,9 +7,9 @@
 
 ## The Pattern
 
-GETKINETIK uses the **Plaid pattern** for DePIN integrations. Plaid doesn't care which bank it talks to — each bank is abstracted behind the same interface. GETKINETIK does the same for DePIN networks.
+GETKINETIK uses the **adapter contract pattern** for DePIN integrations. One uniform interface — each network is abstracted behind the same read surface. GETKINETIK does not custody tokens; adapters report what the network already paid.
 
-The multi-network rewards UI (`AggregatorPanel`) iterates `adapters[]` and treats every adapter identically. It calls the same `pollEarnings()` method on Nodle as it does on DIMO. Adding a new DePIN = drop a new package that satisfies the `DepinAdapter` interface and register it in the adapter list.
+The optional multi-network read UI (`NetworkReadsPanel`) iterates `adapters[]` and treats every adapter identically. It calls the same `pollEarnings()` method on Nodle as it does on DIMO. Adding a new DePIN = drop a new package that satisfies the `DepinAdapter` interface and register it in the adapter list.
 
 ---
 
@@ -175,7 +175,7 @@ export const exampleAdapter = new ExampleAdapter();
 
 ## Registration in VaultPanel
 
-Add your adapter to the adapters array in `src/components/VaultPanel.tsx` (or wherever the adapter list is initialised). The multi-network rewards panel (`AggregatorPanel`) and `PollingPool` pick it up automatically.
+Add your adapter to the adapters array in `src/components/VaultPanel.tsx` (or wherever the adapter list is initialised). The optional network-reads panel (`NetworkReadsPanel`) and `PollingPool` pick it up automatically.
 
 ---
 

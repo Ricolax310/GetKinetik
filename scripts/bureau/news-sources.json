@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "description": "RSS + news search feeds for bureau news automation. Human review unless BUREAU_AUTO_POST is enabled with X credentials.",
+  "googleNewsQueries": [
+    "GEODNET RTK DePIN",
+    "WeatherXM DePIN",
+    "Hivemapper HONEY Solana",
+    "DePIN Solana revenue",
+    "decentralized physical infrastructure network"
+  ],
+  "rssFeeds": [
+    {
+      "id": "weatherxm-blog",
+      "label": "WeatherXM blog",
+      "url": "https://blog.weatherxm.com/feed"
+    },
+    {
+      "id": "geodnet-medium",
+      "label": "GEODNET Medium",
+      "url": "https://medium.com/feed/@geodnet"
+    }
+  ],
+  "skipTitlePatterns": [
+    "price collapse",
+    "92% drop",
+    "token price",
+    "market cap achieves",
+    "how to buy",
+    "airdrop",
+    "presale"
+  ],
+  "warmLeads": {
+    "noMention": ["mikeahorton", "mike horton", "nikil511", "manolis nikiforakis", "raziel tabib", "razielt"]
+  }
+}

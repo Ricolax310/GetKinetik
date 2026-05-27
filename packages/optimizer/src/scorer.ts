@@ -1,5 +1,5 @@
 // ============================================================================
-// scorer.ts — yield scoring + claim timing decisions.
+// scorer.ts — optional claim-timing decisions for operator tooling.
 // ----------------------------------------------------------------------------
 // Given a set of adapter snapshots, token prices, and gas prices, the scorer
 // produces a ranked list of adapters with a concrete claim recommendation for

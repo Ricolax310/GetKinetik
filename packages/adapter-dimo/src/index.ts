@@ -18,7 +18,7 @@
 // DIFFERENCE FROM NODLE: GETKINETIK is an earnings READER for DIMO, not an
 // earnings GENERATOR. The user must already have a DIMO account and a
 // connected vehicle. We read and sign what DIMO already distributes.
-// This is the Plaid pattern — Plaid reads bank balances; we read DIMO balances.
+// Read-only adapter contract — we read network balances; we never custody them.
 //
 // NO CUSTODY: $DIMO lives in the user's Polygon wallet. GETKINETIK never
 // touches it. We sign receipts for incremental balance deltas.
@@ -68,7 +68,7 @@ const POLYGON_RPC_URL = 'https://polygon-rpc.com/';
 const DIMO_AUTH_URL = 'https://login.dimo.org';
 
 /** DIMO permission template ID — controls which user data the app may read.
- *  1 = read-only (default for the Plaid-style aggregator pattern). */
+ *  1 = read-only (default for bureau read-only network adapters). */
 const DIMO_PERMISSION_TEMPLATE_ID = '1';
 
 /** SecureStore keys. */
@@ -268,7 +268,7 @@ export class DIMOAdapter implements DepinAdapter {
   // pollEarnings — reads $DIMO balance via Polygon eth_call.
   //
   // DIMO distributes weekly on Mondays. Balance is effectively stable 6 days/
-  // week and then ticks up. The 60-second poll loop in AggregatorPanel will
+  // week and then ticks up. The poll loop in NetworkReadsPanel will
   // catch the Monday distribution within one minute of it landing.
   // --------------------------------------------------------------------------
   async pollEarnings(): Promise<EarningSnapshot> {
@@ -332,5 +332,5 @@ export class DIMOAdapter implements DepinAdapter {
   }
 }
 
-// Singleton — imported by AggregatorPanel.
+// Singleton — imported by NetworkReadsPanel.
 export const dimoAdapter = new DIMOAdapter();

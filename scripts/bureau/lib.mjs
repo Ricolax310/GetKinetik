@@ -199,11 +199,13 @@ export function writeOutreachQueue(resultsOrRegistry, pipelineResults = null) {
   }
   lines.push(
     "",
-    "## Quick send order",
+    "## Nurture order (Friday follow-up only — no cold DMs)",
     "",
-    "1. Hivemapper",
-    "2. Geodnet",
-    "3. WeatherXM (nurture — CEO validated)",
+    "Weekly route: Mon public → Tue comment → Wed intro → Thu marketer → Fri nurture.",
+    "",
+    "1. Hivemapper (if engaged)",
+    "2. Geodnet (warm — Mike)",
+    "3. WeatherXM (CEO validated)",
     "4. Others as needed",
     "",
   );

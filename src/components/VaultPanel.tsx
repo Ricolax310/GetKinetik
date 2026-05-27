@@ -32,7 +32,7 @@ import { PinPad } from './PinPad';
 import { RestoreNodeModal } from './RestoreNodeModal';
 import { ProofOfOrigin } from './ProofOfOrigin';
 import { Readouts } from './Readouts';
-import { AggregatorPanel, AGGREGATOR_ENABLED } from './AggregatorPanel';
+import { NetworkReadsPanel, NETWORK_READS_ENABLED } from './NetworkReadsPanel';
 import { GenesisCreditsTicker } from './GenesisCreditsTicker';
 import { GenesisScoreTicker } from './GenesisScoreTicker';
 import { OptimizationReport } from './OptimizationReport';
@@ -45,7 +45,7 @@ import { useGenesisScore } from '../hooks/useGenesisScore';
  * attestation is the shipped path). Re-append dimoAdapter, hivemapperAdapter,
  * weatherxmAdapter, geodnetAdapter when you want the full multi-DePIN panel.
  */
-const ADAPTERS = AGGREGATOR_ENABLED ? [nodleAdapter] : [];
+const ADAPTERS = NETWORK_READS_ENABLED ? [nodleAdapter] : [];
 
 // ----------------------------------------------------------------------------
 // SecureStore keys — v1-suffixed so we can migrate cleanly in the future
@@ -98,7 +98,7 @@ const secureDelete = async (key: string): Promise<void> => {
  *   - PIN pad overlay when biometric is unavailable
  *
  * Battery level drives NODE STABILITY. Real DePIN earnings flow through the
- * AggregatorPanel (signed entries from each adapter). Tilting the device
+ * NetworkReadsPanel (signed entries from each adapter). Tilting the device
  * shifts the ruby's internal fire. PIN is persisted via expo-secure-store.
  */
 export function VaultPanel() {
@@ -705,7 +705,7 @@ export function VaultPanel() {
         </View>
       </View>
 
-      <AggregatorPanel
+      <NetworkReadsPanel
         adapters={ADAPTERS}
         identity={identity}
         onOpenOptimizationReport={(result) => {

@@ -1,0 +1,45 @@
+# Daily news scan → LLM drafts (GETKINETIK brain context). X auto-post only if secrets set.
+name: Bureau daily news
+
+on:
+  schedule:
+    - cron: "0 9 * * *" # 09:00 UTC — after bureau-daily brief (08:00)
+  workflow_dispatch:
+    inputs:
+      auto_post:
+        description: "Post to X if confidence high (requires X API secrets)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  news:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Daily news scan + LLM draft
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          BUREAU_NEWS_MODEL: ${{ vars.BUREAU_NEWS_MODEL }}
+          BUREAU_NEWS_MIN_CONFIDENCE: "0.88"
+          BUREAU_AUTO_POST: ${{ github.event_name == 'workflow_dispatch' && inputs.auto_post && 'true' || secrets.BUREAU_AUTO_POST }}
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_SECRET: ${{ secrets.X_ACCESS_SECRET }}
+        run: node scripts/bureau-run.mjs news
+
+      - name: Commit news drafts
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/bureau/daily/*-news.md docs/bureau/daily/latest-news.md docs/bureau/daily/*-operator.md docs/bureau/daily/latest-operator.md scripts/data/bureau-news-state.json landing/data/bureau-ops.json || true
+          git diff --staged --quiet || git commit -m "chore(bureau): daily news drafts [automated]"
+          git push || true

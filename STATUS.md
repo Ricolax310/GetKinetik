@@ -28,24 +28,35 @@ We publish reproducible trust reads on **public data** and **signed device evide
 
 ```bash
 npm run bureau:status      # report ages + env hints
-npm run bureau:brief       # daily brief + post drafts + outreach queue
+npm run bureau:brief       # daily ops briefing + brief + post drafts + outreach queue
 npm run bureau:publish     # weekly bulletin + network one-pagers + delta posts
 npm run bureau:pipeline    # scan → validate → outreach drafts → brief → publish
 npm run bureau:weekly      # full pipeline with --force (local weekly run)
 npm run bureau:scan        # scans only (default networks)
 npm run bureau:outreach    # drafts only from existing reports
+npm run bureau:news        # RSS/news scan → LLM comment draft (review latest-news.md)
+npm run bureau:news:post   # same + auto-tweet if BUREAU_AUTO_POST=true + X API keys
 ```
+
+**News automation:** reads `scripts/bureau/gtm-context.md` + live brief/reports into the LLM. Default model `gpt-4.1` (override: `BUREAU_NEWS_MODEL`). Set `OPENAI_API_KEY` in `.env` / GitHub Secrets. LinkedIn = draft only; X auto-post is opt-in.
 
 ### Scheduled (GitHub Actions)
 
 | Job | Schedule | Workflow | What it does |
 |-----|----------|----------|--------------|
 | **Daily brief** | 08:00 UTC daily | `.github/workflows/bureau-daily.yml` | Brief + posts + one-pagers + delta posts |
+| **Daily news** | 09:00 UTC daily | `.github/workflows/bureau-news.yml` | News scan + LLM drafts → `latest-news.md` |
 | **Weekly pipeline** | Mon 14:00 UTC | `.github/workflows/bureau-scan.yml` | Full scan → outreach → bulletin → publish pack |
 
 **Never auto-sends** email, DMs, or social posts — drafts only. **Site deploy:** push to `main` → Cloudflare Pages rebuilds `landing/` (live audit index).
 
+**Git (avoid push rejected):** one-time `npm run git:hooks-install` — auto-rebase before push when bureau bots commit first. See [`docs/DEV_GIT.md`](docs/DEV_GIT.md). Or `npm run git:push` instead of raw `git push`.
+
 - **Registry:** `scripts/bureau/networks.json`
+- **Daily ops calendar:** https://getkinetik.app/bureau/ops/ — calendar + AI chat (see `docs/bureau/OPS_CALENDAR.md`)
+- **Daily ops (markdown):** `docs/bureau/daily/latest-operator.md` — your to-do vs what ran automatically
+- **Standing tasks:** `docs/bureau/operator-tasks.md` (optional checklist merged into ops brief)
+- **Weekly GTM route:** `scripts/bureau/gtm-route.mjs` + `scripts/bureau/gtm-context.md` (Mon–Sun: public → comment → intro → marketer → nurture — no cold founder DMs)
 - **Daily brief:** `docs/bureau/daily/latest-brief.md`
 - **Delta posts:** `docs/bureau/daily/latest-delta-posts.md` (when snapshots moved)
 - **Post drafts:** `docs/bureau/daily/latest-posts.md`

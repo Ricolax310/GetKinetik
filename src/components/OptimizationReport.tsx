@@ -1,7 +1,7 @@
 // ============================================================================
 // OptimizationReport — weekly savings proof modal.
 // ----------------------------------------------------------------------------
-// Opens once per week (or on demand via the optimizer badge in AggregatorPanel)
+// Opens once per week (or on demand via the optimizer badge in NetworkReadsPanel)
 // and shows the user a concrete comparison of their earnings with vs without
 // GETKINETIK. Every number comes from real optimizer data — nothing is
 // fabricated. The modal is designed to be the single most compelling "why

@@ -1,6 +1,6 @@
 # Nodle Adapter — Research
 
-> **Session A output.** No adapter code. Five questions from `AGGREGATOR.md` answered with sources.
+> **Session A output.** No adapter code. Five questions from `NETWORK_READS_TRACK.md` answered with sources.
 > Research date: 2026-04-25. SDK latest: Android v0.0.25 (Sep 2025), iOS v0.0.24-night (Apr 2025).
 
 ---
@@ -141,7 +141,7 @@ nodleAddress = ss58Encode(
 
 `@polkadot/keyring` / `@polkadot/util-crypto` can encode this from the raw public key bytes. We only read the public key (already exposed), never touch the secret. The user's Sovereign Node IS their Nodle wallet — same key, different address encoding.
 
-**What "no custody" means here:** NODL accrues on-chain to the user's Nodle address derived from their Ed25519 public key. GETKINETIK never holds those tokens. The user controls the address (they have the private key, in hardware-backed SecureStore). GETKINETIK signs a receipt in the earnings ledger recording what landed in that address. This is exactly the "no custody" model from `AGGREGATOR.md` — we sign receipts, the network moves the tokens.
+**What "no custody" means here:** NODL accrues on-chain to the user's Nodle address derived from their Ed25519 public key. GETKINETIK never holds those tokens. The user controls the address (they have the private key, in hardware-backed SecureStore). GETKINETIK signs a receipt in the earnings ledger recording what landed in that address. This is exactly the "no custody" model from `NETWORK_READS_TRACK.md` — we sign receipts, the network moves the tokens.
 
 **Claims:** SDK-mode NODL is auto-deposited to the wallet every ~2 hours — there is no "claim" button for SDK earnings. The `claim()` method on the adapter contract should be left `undefined` / no-op in v0; the adapter just reads the growing balance and records incremental deltas as `EarningEntry` records.
 

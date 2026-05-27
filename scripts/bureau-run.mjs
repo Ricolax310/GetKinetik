@@ -20,6 +20,9 @@ import {
   writeDailyBrief,
   writeAuditIndex,
 } from "./bureau/lib.mjs";
+import { runBureauNews } from "./bureau/news-run.mjs";
+import { writeOperatorBrief } from "./bureau/operator-brief.mjs";
+import { writeOpsPack } from "./bureau/ops-pack.mjs";
 import { writePublishingPack } from "./bureau/publish.mjs";
 
 const args = process.argv.slice(2);
@@ -40,6 +43,7 @@ GETKINETIK bureau runner
   node scripts/bureau-run.mjs pipeline [--only=id1,id2] [--force]
   node scripts/bureau-run.mjs brief
   node scripts/bureau-run.mjs publish
+  node scripts/bureau-run.mjs news [--post]
 
 Registry: scripts/bureau/networks.json
 `);
@@ -211,9 +215,13 @@ async function cmdPipeline(registry) {
   }
   writePipelineSummary(summary);
   const briefOut = writeDailyBrief(registry, summary);
+  const operatorOut = writeOperatorBrief(registry, summary);
+  const opsPackOut = writeOpsPack(registry, summary);
   const pubOut = writePublishingPack(registry, summary);
   console.error(`\n[pipeline] summary → scripts/data/bureau-pipeline.json`);
   console.error(`[pipeline] brief   → ${briefOut.latestBrief}`);
+  console.error(`[pipeline] ops     → ${operatorOut.latest}`);
+  console.error(`[pipeline] calendar → ${opsPackOut.path}`);
   console.error(`[pipeline] bulletin → ${pubOut.bulletin} (${pubOut.onePagers.length} one-pagers)`);
   console.error(`[pipeline] deltas  → ${pubOut.deltaPosts} (${pubOut.changedCount} networks moved)`);
   const bad = summary.filter((s) => !s.scanOk);
@@ -232,10 +240,21 @@ function cmdBrief(registry) {
     }
   }
   const out = writeDailyBrief(registry, pipelineResults);
+  const operatorOut = writeOperatorBrief(registry, pipelineResults);
+  const opsPackOut = writeOpsPack(registry, pipelineResults);
   const pubOut = writePublishingPack(registry, pipelineResults);
   writeAuditIndex(REPO_ROOT, registry, resolveRepo);
-  appendLog({ action: "brief", ok: true, ...out, publish: pubOut });
+  appendLog({
+    action: "brief",
+    ok: true,
+    ...out,
+    operator: operatorOut,
+    opsPack: opsPackOut.path,
+    publish: pubOut,
+  });
   console.log("GETKINETIK bureau daily brief\n");
+  console.log(`  Ops:     ${operatorOut.latest}`);
+  console.log(`  Calendar: ${opsPackOut.path} → https://getkinetik.app/bureau/ops/`);
   console.log(`  Brief:   ${out.latestBrief}`);
   console.log(`  Posts:   ${out.latestPosts}`);
   console.log(`  Deltas:  ${pubOut.deltaPosts} (${pubOut.changedCount} networks moved)`);
@@ -263,6 +282,21 @@ function cmdPublish(registry) {
   console.log(`  Deltas:    ${pubOut.deltaPosts} (${pubOut.changedCount} networks moved)`);
 }
 
+async function cmdNews() {
+  const post = args.includes("--post");
+  const out = await runBureauNews({ post });
+  console.log("GETKINETIK bureau news\n");
+  console.log(`  Draft:   ${out.latest}`);
+  console.log(`  Scored:  ${out.scoredCount} articles`);
+  if (out.chosen) {
+    console.log(`  Pick:    ${out.chosen.item.title.slice(0, 70)}…`);
+    console.log(`  Action:  ${out.llm?.action} (confidence ${out.llm?.confidence})`);
+    console.log(`  Model:   ${out.llm?._model || "—"}`);
+  }
+  if (out.posted) console.log(`  Posted:  https://x.com/i/web/status/${out.posted.id}`);
+  else if (post) console.log("  Posted:  (none — low confidence, skip, or missing X keys)");
+}
+
 async function main() {
   if (args.includes("-h") || args.includes("--help")) {
     usage();
@@ -287,6 +321,9 @@ async function main() {
       break;
     case "publish":
       cmdPublish(registry);
+      break;
+    case "news":
+      await cmdNews();
       break;
     default:
       usage();

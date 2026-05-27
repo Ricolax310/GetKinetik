@@ -1,7 +1,7 @@
 // ============================================================================
 // Sovereign Earnings Wallet — address derivation + signed earnings ledger.
 // ----------------------------------------------------------------------------
-// This is L4 of the four-layer aggregator architecture. It lives in the same
+// This is L4 of the four-layer bureau architecture. It lives in the same
 // package as identity + heartbeat + proof because it shares the same
 // cryptographic primitives and the same trust model:
 //

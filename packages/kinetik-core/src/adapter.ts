@@ -1,14 +1,13 @@
 // ============================================================================
 // DepinAdapter — the single contract every DePIN integration implements.
 // ----------------------------------------------------------------------------
-// This is the L3 boundary layer. The aggregator UI iterates adapters[] and
+// This is the L3 boundary layer. The network-reads UI iterates adapters[] and
 // treats every adapter identically — it does not special-case Nodle vs DIMO
 // vs Hivemapper. Adding a new DePIN = drop in a new package that satisfies
 // this interface, register it in the adapter list.
 //
-// This is the Plaid pattern. Plaid does not care which bank it talks to; the
-// adapter abstracts the bank's quirks. This interface does the same for DePIN
-// networks.
+// This is the adapter contract pattern — one interface, many networks. The
+// adapter abstracts each network's quirks behind a uniform read surface.
 //
 // CONTRACTS:
 //   · Adapters NEVER hold user tokens. Token movement is the underlying
@@ -42,7 +41,7 @@ export type AdapterStatus =
 
 // ----------------------------------------------------------------------------
 // EarningSnapshot — a point-in-time view of what an adapter has accrued.
-// Returned by pollEarnings(). The aggregator UI renders this without knowing
+// Returned by pollEarnings(). The network-reads UI renders this without knowing
 // the underlying network.
 // ----------------------------------------------------------------------------
 export type EarningSnapshot = {
@@ -98,7 +97,7 @@ export type AdapterRateMetadata = {
 export interface DepinAdapter {
   /** Stable lowercase identifier. Used as `source` in every EarningEntry. Never rename. */
   readonly id: string;
-  /** Human-readable name for the aggregator UI. */
+  /** Human-readable name for the network-reads UI. */
   readonly displayName: string;
   /** One-line description shown in the adapter card. */
   readonly description: string;
@@ -142,7 +141,7 @@ export interface DepinAdapter {
 
   /**
    * Poll the underlying network for accrued / claimable balance.
-   * Should be cheap (cached or single RPC call). The aggregator UI
+   * Should be cheap (cached or single RPC call). The network-reads UI
    * calls this on a timer to refresh the card display.
    */
   pollEarnings(): Promise<EarningSnapshot>;

@@ -11,8 +11,8 @@ GETKINETIK is the **neutral DePIN bureau — your friendly helper, not your gate
 |---|---|
 | **Sovereign Identity** | Ed25519 keypair generated and sealed in the device's secure enclave on first activation. Never leaves the device. |
 | **Hash-Chained Heartbeats** | Every 30 seconds, the node signs a statement and chains it to the previous one. Tamper-evident uptime log. |
-| **Multi-Network Read** | 5 DePIN adapters (Nodle, DIMO, Hivemapper, WeatherXM, Geodnet) unified under one signed ledger. We *read*; we never custody. |
-| **Optimizer Engine** | Real-time CoinGecko prices + gas feeds. Ranks all pending claims by USD yield. Tells users exactly when to claim. |
+| **Multi-Network Read** | 5 DePIN adapters (Nodle, DIMO, Hivemapper, WeatherXM, Geodnet) under one signed receipt log — optional operator convenience; we *read*; we never custody. |
+| **Operator Tooling (optional)** | Gas-aware claim timing and shared polling pool for operators who want it — not a product headline. |
 | **Proof of Origin** | A signed certificate (schema v:2) carrying node ID, heartbeat count, chain tip, sensor readings, and Ed25519 signature — scannable QR, verifiable by anyone, in any browser, with no server call. |
 | **Genesis Score** | Public node reputation grade (NOT a token, NOT transferable, NEVER priced). Like Equifax for sovereign nodes — partners read it via the verify API to inform premium offers. |
 | **Partner Verification API** | `POST /api/verify-device` — one call returns valid/invalid + node age + heartbeat count + Genesis Score. Zero SDK dependency. Free during preview; paid tiers (USD/USDC) for production volume. |

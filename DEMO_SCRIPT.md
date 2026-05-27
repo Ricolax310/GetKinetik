@@ -114,16 +114,17 @@ curl -s -X POST https://getkinetik.app/api/verify-device \
 
 ---
 
-### [1:30–1:55] — THE EARNINGS DRAWER. Back to phone.
+### [1:30–1:55] — NETWORK READS (optional). Back to phone.
 
-*Go back to the app home screen. Show the EARNINGS box.*
+*Go back to the app home screen. Show the NETWORK READS box.*
 
 **SAY:**
 
-> "The app also tracks real DePIN earnings. I have five networks integrated —
-> Nodle, DIMO, Hivemapper, WeatherXM, Geodnet."
+> "The app also has optional read-only network adapters — I have five integrated —
+> Nodle, DIMO, Hivemapper, WeatherXM, Geodnet. This is operator convenience,
+> not the product headline. The bureau is verify-device and Proof of Origin."
 
-*Tap the EARNINGS box. The drawer slides up showing all 5 adapter cards.*
+*Tap the NETWORK READS box. The drawer slides up showing adapter cards.*
 
 **SAY:**
 

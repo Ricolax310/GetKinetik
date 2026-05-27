@@ -1,0 +1,200 @@
+{
+  "version": 1,
+  "updatedAt": "2026-05-27T19:49:31.963Z",
+  "today": "2026-05-27",
+  "schedule": [
+    {
+      "id": "daily-brief",
+      "label": "Daily brief + ops calendar",
+      "utcHour": 8,
+      "utcMinute": 0,
+      "daysOfWeek": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "kind": "auto",
+      "note": "latest-operator.md, posts, outreach queue"
+    },
+    {
+      "id": "daily-news",
+      "label": "News scan + LLM drafts",
+      "utcHour": 9,
+      "utcMinute": 0,
+      "daysOfWeek": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "kind": "auto",
+      "note": "latest-news.md"
+    },
+    {
+      "id": "weekly-scan",
+      "label": "Weekly public sample reads",
+      "utcHour": 14,
+      "utcMinute": 0,
+      "daysOfWeek": [
+        1
+      ],
+      "kind": "auto",
+      "note": "All enabled networks — reports + outreach drafts"
+    }
+  ],
+  "todayData": {
+    "weekday": "Wednesday",
+    "doToday": [
+      "**Your note:** Zero cold DMs to high-inbox founders this week",
+      "**Your note:** Nas / marketer partner: one touch if Thursday task not done yet",
+      "**Today’s route (Wednesday):** **One intro ask** (email or DM to a mutual): “Who’s the ONE person I should talk to for distribution / partnerships?” Not a blast.",
+      "**LinkedIn comment** (paste manually): `docs/bureau/daily/latest-news.md` → article *Developing A Truly Global RTK Network - Inside GNSS*",
+      "**Optional social — deltas moved:** Geodnet, WeatherXM, Hivemapper → `docs/bureau/daily/latest-delta-posts.md`",
+      "**Optional timeline post:** pick one draft in `docs/bureau/daily/latest-posts.md` (sample read or verify-device).",
+      "**North star:** any inbound “run this on our data?” — reply same day (this is the win, not DMs sent)."
+    ],
+    "doNot": [
+      {
+        "who": "Mike Horton",
+        "lane": "Geodnet founder",
+        "state": "Validated dup-coord read publicly (May); LinkedIn connect sent",
+        "rule": "No @Mike threads. If he accepts LI, DM CSV offer only"
+      },
+      {
+        "who": "Manolis Nikiforakis",
+        "lane": "WeatherXM CEO",
+        "state": "Validated reward zeroing; capacity gap acknowledged; follow-up sent",
+        "rule": "No third ping ~1 week"
+      },
+      {
+        "who": "Raziel Tabib",
+        "lane": "Angel / devtools",
+        "state": "LinkedIn coffee message sent",
+        "rule": "Bump only after 7 days silent"
+      }
+    ],
+    "automated": [
+      {
+        "job": "Daily ops sheet",
+        "when": "08:00 UTC daily",
+        "what": "Brief, posts, ops calendar, outreach queue",
+        "yourPart": "Read Do today"
+      },
+      {
+        "job": "News scan + LLM",
+        "when": "09:00 UTC daily",
+        "what": "latest-news.md",
+        "yourPart": "Paste LinkedIn comment if drafted"
+      },
+      {
+        "job": "Weekly scans",
+        "when": "Monday 14:00 UTC",
+        "what": "Reports, snapshots, outreach drafts",
+        "yourPart": "Review when stale"
+      },
+      {
+        "job": "Last full pipeline",
+        "when": "2026-05-25 15:14Z",
+        "what": "bureau-pipeline.json",
+        "yourPart": "—"
+      },
+      {
+        "job": "Last news run",
+        "when": "2026-05-27 10:02Z",
+        "what": "latest-news.md",
+        "yourPart": "—"
+      },
+      {
+        "job": "X auto-post",
+        "when": "—",
+        "what": "Off unless BUREAU_AUTO_POST + X keys",
+        "yourPart": "You post manually"
+      },
+      {
+        "job": "Email / LinkedIn DMs",
+        "when": "—",
+        "what": "Never automated",
+        "yourPart": "You send"
+      }
+    ],
+    "numbers": [
+      "Geodnet: 9 exact dup (lat,lng) groups, ~19,686 public stations (was 10)",
+      "WeatherXM: 288 cells over designed capacity",
+      "Hivemapper: top-20 visible SPL ≈ 49% of UI HONEY supply"
+    ],
+    "networkHealth": [
+      "Geodnet — report 0h ago · exact dup groups: -1 (-11.1%)",
+      "WeatherXM — report 0h ago · over-capacity cells: +1 (+0.3%)",
+      "Hivemapper — report 0h ago · top-20 HONEY share: +0.00 pp (+0.0%)",
+      "Nodle — report 0h ago",
+      "Dawn Network — report 0h ago"
+    ],
+    "news": {
+      "path": "docs/bureau/daily/latest-news.md",
+      "title": "Developing A Truly Global RTK Network - Inside GNSS",
+      "action": "comment",
+      "confidence": 0.9,
+      "autoPostedUrl": null,
+      "skipReason": null,
+      "newsAge": "0h ago",
+      "hasLinkedIn": true,
+      "hasTweet": false
+    },
+    "nextScanDays": 5,
+    "markdown": "# Your daily briefing — 2026-05-27 (Wednesday)\n\n> **Start here every morning.** Checkboxes are for you in Cursor/GitHub — nothing sends without you.\n\n---\n\n## Do today (you)\n\n- [ ] **Your note:** Zero cold DMs to high-inbox founders this week\n- [ ] **Your note:** Nas / marketer partner: one touch if Thursday task not done yet\n- [ ] **Today’s route (Wednesday):** **One intro ask** (email or DM to a mutual): “Who’s the ONE person I should talk to for distribution / partnerships?” Not a blast.\n- [ ] **LinkedIn comment** (paste manually): `docs/bureau/daily/latest-news.md` → article *Developing A Truly Global RTK Network - Inside GNSS*\n- [ ] **Optional social — deltas moved:** Geodnet, WeatherXM, Hivemapper → `docs/bureau/daily/latest-delta-posts.md`\n- [ ] **Optional timeline post:** pick one draft in `docs/bureau/daily/latest-posts.md` (sample read or verify-device).\n- [ ] **North star:** any inbound “run this on our data?” — reply same day (this is the win, not DMs sent).\n\n---\n\n## Do not do (wait rules)\n\n- **Mike Horton** (Geodnet founder): No @Mike threads. If he accepts LI, DM CSV offer only\n- **Manolis Nikiforakis** (WeatherXM CEO): No third ping ~1 week\n- **Raziel Tabib** (Angel / devtools): Bump only after 7 days silent\n\n---\n\n## This week’s route (not cold DMs)\n\n**North star:** Network teams reply: \"Can you run this on our data?\"\n\n**Today (Wednesday) — Intro ask:** One intro ask (email or DM to a mutual): “Who’s the ONE person I should talk to for distribution / partnerships?” Not a blast.\n\n**Guardrails:**\n- No cold DMs to founders who get thousands of messages\n- No “pick your brain” — offer one reproducible insight or ask for one intro\n- Warm leads: follow gtm-context wait rules (no @Mike, no third ping Manolis, Raziel 7-day bump)\n- Email beats cold DM when you have one specific hook\n- Win = “can you run this on our data?” — not APK installs or adapter count\n\n\n---\n\n## Already automated (GitHub Actions)\n\n| Job | When (UTC) | What ran | Your part |\n|-----|------------|----------|-------------|\n| **Daily ops sheet** | 08:00 UTC daily | Brief, posts, ops calendar, outreach queue | Read Do today |\n| **News scan + LLM** | 09:00 UTC daily | latest-news.md | Paste LinkedIn comment if drafted |\n| **Weekly scans** | Monday 14:00 UTC | Reports, snapshots, outreach drafts | Review when stale |\n| **Last full pipeline** | 2026-05-25 15:14Z | bureau-pipeline.json | — |\n| **Last news run** | 2026-05-27 10:02Z | latest-news.md | — |\n| **X auto-post** | — | Off unless BUREAU_AUTO_POST + X keys | You post manually |\n| **Email / LinkedIn DMs** | — | Never automated | You send |\n\n**Next weekly scan:** ~5 day(s) (Monday 14:00 UTC) unless you run `npm run bureau:weekly` locally.\n\n---\n\n## Numbers at a glance\n\n- Geodnet: 9 exact dup (lat,lng) groups, ~19,686 public stations (was 10)\n- WeatherXM: 288 cells over designed capacity\n- Hivemapper: top-20 visible SPL ≈ 49% of UI HONEY supply\n\n\n**News pick** (0h ago): Developing A Truly Global RTK Network - Inside GNSS → `docs/bureau/daily/latest-news.md`\n\n\n---\n\n## Network health (from last scan)\n\n- **Geodnet** — report 0h ago · exact dup groups: -1 (-11.1%)\n- **WeatherXM** — report 0h ago · over-capacity cells: +1 (+0.3%)\n- **Hivemapper** — report 0h ago · top-20 HONEY share: +0.00 pp (+0.0%)\n- **Nodle** — report 0h ago\n- **Dawn Network** — report 0h ago\n\n---\n\n## Open these files\n\n| File | Purpose |\n|------|---------|\n| [`latest-operator.md`](latest-operator.md) | This briefing (markdown) |\n| [Ops calendar + AI chat](https://getkinetik.app/bureau/ops/) | Visual calendar & bureau assistant |\n| [`latest-news.md`](latest-news.md) | Today's comment/tweet drafts |\n| [`latest-posts.md`](latest-posts.md) | Sample-read & verify tweets |\n| [`latest-delta-posts.md`](latest-delta-posts.md) | Posts when metrics moved |\n| [`latest-brief.md`](latest-brief.md) | Technical bureau table |\n| [`../../outreach/OUTREACH_QUEUE.md`](../../outreach/OUTREACH_QUEUE.md) | Send order + draft paths |\n\n**Add your own standing tasks:** edit [`docs/bureau/operator-tasks.md`](../../operator-tasks.md) (optional checklist lines).\n\n---\n\n*Generated by `scripts/bureau/operator-brief.mjs` — run `npm run bureau:brief` locally anytime.*\n"
+  },
+  "days": {
+    "2026-05-27": {
+      "hasBrief": true,
+      "hasNews": true,
+      "hasPosts": true,
+      "hasScan": false,
+      "taskCount": 7,
+      "newsTitle": "Developing A Truly Global RTK Network - Inside GNSS",
+      "summary": "Your note: Zero cold DMs to high-inbox founders this week",
+      "briefMarkdown": "# Your daily briefing — 2026-05-27 (Wednesday)\n\n> **Start here every morning.** Checkboxes are for you in Cursor/GitHub — nothing sends without you.\n\n---\n\n## Do today (you)\n\n- [ ] **Your note:** Zero cold DMs to high-inbox founders this week\n- [ ] **Your note:** Nas / marketer partner: one touch if Thursday task not done yet\n- [ ] **Today’s route (Wednesday):** **One intro ask** (email or DM to a mutual): “Who’s the ONE person I should talk to for distribution / partnerships?” Not a blast.\n- [ ] **LinkedIn comment** (paste manually): `docs/bureau/daily/latest-news.md` → article *Developing A Truly Global RTK Network - Inside GNSS*\n- [ ] **Optional social — deltas moved:** Geodnet, WeatherXM, Hivemapper → `docs/bureau/daily/latest-delta-posts.md`\n- [ ] **Optional timeline post:** pick one draft in `docs/bureau/daily/latest-posts.md` (sample read or verify-device).\n- [ ] **North star:** any inbound “run this on our data?” — reply same day (this is the win, not DMs sent).\n\n---\n\n## Do not do (wait rules)\n\n- **Mike Horton** (Geodnet founder): No @Mike threads. If he accepts LI, DM CSV offer only\n- **Manolis Nikiforakis** (WeatherXM CEO): No third ping ~1 week\n- **Raziel Tabib** (Angel / devtools): Bump only after 7 days silent\n\n---\n\n## This week’s route (not cold DMs)\n\n**North star:** Network teams reply: \"Can you run this on our data?\"\n\n**Today (Wednesday) — Intro ask:** One intro ask (email or DM to a mutual): “Who’s the ONE person I should talk to for distribution / partnerships?” Not a blast.\n\n**Guardrails:**\n- No cold DMs to founders who get thousands of messages\n- No “pick your brain” — offer one reproducible insight or ask for one intro\n- Warm leads: follow gtm-context wait rules (no @Mike, no third ping Manolis, Raziel 7-day bump)\n- Email beats cold DM when you have one specific hook\n- Win = “can you run this on our data?” — not APK installs or adapter count\n\n\n---\n\n## Already automated (GitHub Actions)\n\n| Job | When (UTC) | What ran | Your part |\n|-----|------------|----------|-------------|\n| **Daily ops sheet** | 08:00 UTC daily | Brief, posts, ops calendar, outreach queue | Read Do today |\n| **News scan + LLM** | 09:00 UTC daily | latest-news.md | Paste LinkedIn comment if drafted |\n| **Weekly scans** | Monday 14:00 UTC | Reports, snapshots, outreach drafts | Review when stale |\n| **Last full pipeline** | 2026-05-25 15:14Z | bureau-pipeline.json | — |\n| **Last news run** | 2026-05-27 10:02Z | latest-news.md | — |\n| **X auto-post** | — | Off unless BUREAU_AUTO_POST + X keys | You post manually |\n| **Email / LinkedIn DMs** | — | Never automated | You send |\n\n**Next weekly scan:** ~5 day(s) (Monday 14:00 UTC) unless you run `npm run bureau:weekly` locally.\n\n---\n\n## Numbers at a glance\n\n- Geodnet: 9 exact dup (lat,lng) groups, ~19,686 public stations (was 10)\n- WeatherXM: 288 cells over designed capacity\n- Hivemapper: top-20 visible SPL ≈ 49% of UI HONEY supply\n\n\n**News pick** (0h ago): Developing A Truly Global RTK Network - Inside GNSS → `docs/bureau/daily/latest-news.md`\n\n\n---\n\n## Network health (from last scan)\n\n- **Geodnet** — report 0h ago · exact dup groups: -1 (-11.1%)\n- **WeatherXM** — report 0h ago · over-capacity cells: +1 (+0.3%)\n- **Hivemapper** — report 0h ago · top-20 HONEY share: +0.00 pp (+0.0%)\n- **Nodle** — report 0h ago\n- **Dawn Network** — report 0h ago\n\n---\n\n## Open these files\n\n| File | Purpose |\n|------|---------|\n| [`latest-operator.md`](latest-operator.md) | This briefing (markdown) |\n| [Ops calendar + AI chat](https://getkinetik.app/bureau/ops/) | Visual calendar & bureau assistant |\n| [`latest-news.md`](latest-news.md) | Today's comment/tweet drafts |\n| [`latest-posts.md`](latest-posts.md) | Sample-read & verify tweets |\n| [`latest-delta-posts.md`](latest-delta-posts.md) | Posts when metrics moved |\n| [`latest-brief.md`](latest-brief.md) | Technical bureau table |\n| [`../../outreach/OUTREACH_QUEUE.md`](../../outreach/OUTREACH_QUEUE.md) | Send order + draft paths |\n\n**Add your own standing tasks:** edit [`docs/bureau/operator-tasks.md`](../../operator-tasks.md) (optional checklist lines).\n\n---\n\n*Generated by `scripts/bureau/operator-brief.mjs` — run `npm run bureau:brief` locally anytime.*\n",
+      "newsMarkdown": "# Bureau news — 2026-05-27\r\n\r\n> **Review before posting.** Auto-post only runs when `BUREAU_AUTO_POST=true` and X API keys are set.\r\n\r\n## Top pick\r\n\r\n**Developing A Truly Global RTK Network - Inside GNSS**\r\n- URL: https://news.google.com/rss/articles/CBMibkFVX3lxTE1FdS1xdjFYRENCVWNHNUpNQ250YWJ6aVEwaXNadzdlZ3ZnZTVrbXh4ekVXUlZHOUNPanVfMFpWemdXY0lzQ0tQZGxwZHNyX3lULVNhM0F5bXFlVXFDQnVUQkxaOVNLNE5YMWhBUzNn?oc=5\r\n- Score: 55\r\n- Networks: —\r\n- LLM action: comment (confidence 0.9)\r\n\r\nModel: gpt-5\r\n\r\n### LinkedIn comment (paste on article/post)\r\n\r\n```\r\nGlobal RTK at scale rises or falls on registry hygiene as much as reference frames. In our latest public read, we see 9 exact (lat,lng) duplicate groups across ~19,686 published base stations — not a fraud claim, just a housekeeping item that can skew coverage/uptime stats if left unreviewed. Tying registry entries to signed device evidence and running a second read that flags same-coordinate clusters keeps centimeter-grade claims reproducible. Sample reads + method: https://getkinetik.app/audits.html\r\n```\r\n\r\nInternal: Paste under Inside GNSS/RTK threads if available. No @Mike. If Geodnet folks engage, offer a private second read on their registry CSV.\r\n\r\n---\r\n\r\n## All candidates today\r\n\r\n| Score | Title | Source |\r\n|------:|-------|--------|\r\n| 55 | [Developing A Truly Global RTK Network - Inside GNSS](https://news.google.com/rss/articles/CBMibkFVX3lxTE1FdS1xdjFYRENCVWNHNUpNQ250YWJ6aVEwaXNadzdlZ3ZnZTVrbXh4ekVXUlZHOUNPanVfMFpWemdXY0lzQ0tQZGxwZHNyX3lULVNhM0F5bXFlVXFDQnVUQkxaOVNLNE5YMWhBUzNn?oc=5) | Google News: GEODNET RTK DePIN |\r\n| 48 | [Decentralized Physical Infrastructure Networks (DePIN) – Blockchain meets IoT - ](https://news.google.com/rss/articles/CBMizgFBVV95cUxOSWhYRXlvM3dQS1RpOVJ1S1pkdVZzNDlQcV91QmFXMUlFeXhVRkZiQVFxQ1BCWVpvdnBkeTlnNU5xc3p0MVB2amUySmhwaUVUNHMzSjhxeUJseG1BaEczX1hDQm9NaUNXRjlYanJjM0hvWGY3eHpfU1ZSRF95NFR0NnRlZjNGSTVfeWtZSUVvZkFRdGk2bEZpX3N2cFkzQjQ3VGg0R1R4d2NLZWxpT1ViZnZJQ0NlcG1IdDZZdzJhSmhpRTFHaDd3MkVwVWVzZw?oc=5) | Google News: WeatherXM DePIN |\r\n| 48 | [The AI Bubble and Web3: Are Tokenized AI, DePIN, and On-Chain Data Overpriced or](https://news.google.com/rss/articles/CBMinAFBVV95cUxPcGt6SlR3Q2hnNUotREpRZXJtZjQwSjlFbmROalR4OWhJZ2tQdEtXVzBldW5kb0FUdGZLQnFnaXI4bjlUS0RnOXBHSmVIZ0pBM0xuZDNuZ1FVS1hjVDRvMDcwSEhlUmlrYlg2OU1aRUtmYmRKX2lwMFJ1Ti1Zdjdfa2M3Yk1JdXJUdjI0aXdXaUtrQ1lCakNEMEFKOHE?oc=5) | Google News: decentralized physical infrastructure network |\r\n| 45 | [State of GEODNET Q3 2025 - Messari](https://news.google.com/rss/articles/CBMiX0FVX3lxTE9GQ19tN1VaUVk5blVoR1BrOE1qWHY0aTBzV09vNDJINUdlVUh4M3hGTHA2dHBTTGxpQXBMSTByaG5vYU5xa0NydVRtUHZmQVpFeWdtMmYtU0R6LWRBdXBV?oc=5) | Google News: GEODNET RTK DePIN |\r\n| 45 | [Knowledge Popularization - WEB3 RTK Network - Geodnet Disrupts Tradition with We](https://news.google.com/rss/articles/CBMiY0FVX3lxTE4yQ1lTQzNIV1BzSThoaEVBRG1NWm1YeWFaSUlMazlBS0kwSmJoYUhUXzExUG51RE14Z3pneFVpcEhYdm5SR0FuWWJFdFdMYWI2YUNZUGZ2Z0hJamFvM29SSmVhYw?oc=5) | Google News: GEODNET RTK DePIN |\r\n| 45 | [ROVR Network Raises $2.6M Seed Round Co-Led by Borderless Capital and GEODNET - ](https://news.google.com/rss/articles/CBMisAFBVV95cUxPdWwtVWRDTUlqS3ZyTl9obHFYWlJsUm5kR0xWRUdtUEdHbWQ2Nkh4eXlVOWZJVjhwR1JDc3VEMFJYSmo1VjE0Qm43WEhUanBJZ05pem56QnN4cjNMTGhsakR6TElkTlNXZ3pUeUFONmgxS3VyVFNITVp1QmhUUlY2dDc5MEVCUU8yNXo3dXNwcmxwSGFjbUFUYzZIS0pBMV90ZlptRkg3Q2F0U0JPNUNKUg?oc=5) | Google News: GEODNET RTK DePIN |\r\n| 45 | [Wingbits and GEODNET Enter Partnership to Revolutionize Global Aviation Flight-T](https://news.google.com/rss/articles/CBMi8AFBVV95cUxNLUpyX3IyanpMRzQtQmZSOUVpUm1uZ0xqY3Fkc3ctRkNzNmE0dEhmUm5tWjl5YmF0YWZaSGV5V1BoWk5KMk1GRjg1Rzh2cThPZWhpTEtsV2RGZzZVbzZQa0hXUkdZTVpwV0ZuV253Ml9MTmYzMXQxWDNRTGN3RXRPU2xiNHRHS0VNRzd5Q3J0Y3Voc2Ixc3IyblZBS2x5Nl9EeV9pc00wRXN5VE1LY2tJb1JKTHFVZXRFT0NZWXhuV0FWR1Q0b3dIUmRub1I5c2VnaUh4dnN1S2FXM2RmZVRMN0JtVG1FOUJoWGlMdW1xVnY?oc=5) | Google News: GEODNET RTK DePIN |\r\n| 45 | [DePIN: The New Industrial Revolution - panteracapital.com](https://news.google.com/rss/articles/CBMihgFBVV95cUxNOEVQMWJqckdEUDJCWVZQaXNPMDdvcE9uZm1qWVNabGdGaEZlcUNtTlB2VFNLWUlXUHQ0eFdBZzd3clV1WXhUUU16R2tnai1fM3czdEhaY0xJdDduNmJXQ2o1VjZUYzNPd2QyUDlGR2NIUXc0TVFkN1lmb19UdGNkcWtXSS1ZUQ?oc=5) | Google News: GEODNET RTK DePIN |\r\n| 45 | [The World’s Most Accurate Car GPS Navigation Device - The American Surveyor](https://news.google.com/rss/articles/CBMijAFBVV95cUxQZjZBSV84ZFlHUkhCTmVnQ1RTTXZTeklqOFNlZFVGX0dyS1ZzbzQzTmRQN3NDR0NKWWlPSncwalFPZXgyenZXZGp5YklBLUdPeW5rdjBEcFdYQ1JiaEFjSWw3MkJsNE52Uzc2NWxpbmpNemYxM1lHWV9sOVVQSDZTRDBRRUNWZmo3eDNUTQ?oc=5) | Google News: GEODNET RTK DePIN |\r\n| 45 | [Understanding GEODNET: A Comprehensive Overview - Messari](https://news.google.com/rss/articles/CBMifEFVX3lxTE84ZDNRSUpnM3NrZ2ZaeXdYcXE2dExjNUpVb3NBWmFxSm9ZbkhNR0lXRHN5WE5USW5xejFTWXlza3hNeXRKVjRJa0ZudEpxeExQaXI1OFh6aC1UTWEzbV95UFlaYXkzNWpLRktYVENYNlp2ZlY2X3R5emhpcFI?oc=5) | Google News: GEODNET RTK DePIN |\r\n| 45 | [DroneDeploy and GEODNET Foundation Announce Partnership to Provide Enterprise RT](https://news.google.com/rss/articles/CBMiiwJBVV95cUxQMktjd3J2Q3loVlFSQXlKNUZZMGowU1hhNzZZV3VYSTR0d3BHbUlSSmdxMjhSQ204NFh3LUpMTGtfY2x5TUhueEl2U0dhUXEzMlRxWWxUX19ETk4xWjl1dV9OM0JOdkhLNlEtZFphQUFjMU0wdmlMcDZ3X1llNjlBY3dkMU9LcGI2RWJtYlRpbld6REpNVWVmTEFoUkRLdHRESU0yd0c0bmRPSDhIRmhGa1pnMVc1TUFkV3hxaVB2TUpYMjV1YTZEUUltUmxORFd6LWVfWjdRaEVYZl9IYzZSUmVHQy14Yi1ENTdBZ3hIYkwxeHIxRjE3RlF0WjFsUUR4bHJLdE10eXVsemc?oc=5) | Google News: GEODNET RTK DePIN |\r\n| 41 | [Preparing for the Next Era of $WXM](https://blog.weatherxm.com/weatherxm-community-update-preparing-for-the-next-era-of-wxm-7376910c1ca4?source=rss----5190e5528ec9---4) | WeatherXM blog |\r\n| 41 | [WeatherXM price today, WXM to USD live price, marketcap and chart - CoinMarketCa](https://news.google.com/rss/articles/CBMiW0FVX3lxTE82VU44VUh2NUdVeVFpdEZyZTBuSTg3c1N6YzJPN2tRTXV6SDlZcHh4VTBabXlVTnhJMVBUbzJkTHBmYUNXejdqZ24teVdyZ19lZ1hrcWRtb1E0Z2s?oc=5) | Google News: WeatherXM DePIN |\r\n| 41 | [Top 12 Solana Mobile Seeker dApps for Passive Income – Part 1 - Binance](https://news.google.com/rss/articles/CBMiY0FVX3lxTFA3RmZxa0NseEJOQXMtbUthclE2SVpiTWpHT0ZZbXh2aDlWVDRKdUxNOFM4cG1RLU41Wm51SUVSWHpVT3ZSZ0FySllxWE5DQWFQNVpjZVhzOXJ5UC1qUllrbDhCQQ?oc=5) | Google News: WeatherXM DePIN |\r\n| 41 | [Top 12 Solana Mobile Seeker dApps for Passive Income – Part 1 - Binance](https://news.google.com/rss/articles/CBMiZ0FVX3lxTE85OW1FSzk1QW5hTlRRU3d6ODRxNUN2MW9kbll4VjBsVjZ4MWZMckpzcVZ1RUJQUDRXYU44eEloVTlIbTlpaUhKZC12bzRJUDFzbjBORmFKRkk1d2J6WnpjY2g5aFhQdEk?oc=5) | Google News: WeatherXM DePIN |\r\n| 41 | [GRASS and the Data-for-AI Narrative: Is DePIN Moving From Hype to Revenue? - Cry](https://news.google.com/rss/articles/CBMic0FVX3lxTFBRYlBoallKRWhiSDJiaDZjRk54TTFzQTFfUnphMUYta0hMR2JPMG9lUjl1cmFsTFN2cE96blZtOXlaYlFEcldpSHY4NTNUMzdHb1pveV82VGFsLWJHLTlBZENTZ0xqakxuOTA4QXBYQnJlRGs?oc=5) | Google News: DePIN Solana revenue |\r\n| 36 | [Bee Maps Raises $32M to Scale Solana-Powered Decentralized Mapping Network - Coi](https://news.google.com/rss/articles/CBMiuAFBVV95cUxNRXRKR0xwUjVQcF9WbTFsd2thbGktTEhDZmNRalhseVladEFFSDN2cUk2S2p1U1FoODZJTmw2X3k4NFIwZzdVT3JJTmo5UW82eUJUTFdSMk5PSG1ibmNNbjJTNzFSc2J6blo5UDFYd0dWN2RDc1Z5RVBPUWpfZS1xSzFNSVlyUWdvZnd2WVVFTkZBUEp6NGtyTXl6bTlSMFBOLUFlbmZnWlZ2UWtSMnVHUjNxaWN0SG5h?oc=5) | Google News: Hivemapper HONEY Solana |\r\n| 36 | [Volkswagen Taps Solana-Powered Hivemapper to Drive Robotaxi Mapping Evolution - ](https://news.google.com/rss/articles/CBMiXkFVX3lxTE5KVHA3RkJqUml3ZjhJSTRMTGx3c2t1YmYzVl9YQWRwSFp3dlpDMENUVzR5OUZZOWdfUUFmbGNTRC1SNC1BaTRtcFdGV1Y2Tkx3UHhGU0NNdk1uakJEalHSAWNBVV95cUxNR0lhT0lvZXVpV0QxYzhKSDYyeUVBd1Q1UEZUR2lxbXpRcDZRbE9feWg0VGxMYXBHY1E1Zl9LaktmR0FPR1V3dGJMOFNBYkV1d3paVUZZUEZfMkVQd21nN2wwWDA?oc=5) | Google News: Hivemapper HONEY Solana |\r\n| 36 | [Lyft Taps Solana-Powered Hivemapper for Decentralized Mapping Data - Decrypt](https://news.google.com/rss/articles/CBMikwFBVV95cUxNb01OZFVwYW4xdWU5UV9CQXJnQmsxbjRvMDF4dFF0eXRjc0p4SFdiYy1PZzljQzRwNDNFUE9iaUQyYzR2TGx1T2JmUGZ0ZFJ2OU9laDhnQnpYbEpqeW0ybWN3eGV6YkEyWi1LM0piZmpITEJVYUpwSl9RY1BHeGhTeDF5Yi1uZEpzSkM1Y096bk9kQUXSAZsBQVVfeXFMUE9jWWdQUU0zZVpLU1VCbzdUMWMzaC1Hb2FiQWsxY0s0NnpjM3ZsWmpQVUtoRjlJTDI2cjUwMk5oWmpnaElVZzlDVVg2V19EVDFvVmtLc2ZRWS1ucVpWRVo4VWc2eExBTDY3Wk45bU0wYmloZG1WajlzX2tobUxwMFM0anQzcEZwa1l1ZmZyMFE1TUFGTGRUMjhVYU0?oc=5) | Google News: Hivemapper HONEY Solana |\r\n| 36 | [Mapping Startup Hivemapper Raises $18M to Give Maps the Web 3 Treatment - CoinDe](https://news.google.com/rss/articles/CBMitgFBVV95cUxOOTFZRTJCM0gyU2tydy12Q1VUWVNNbnAxd0h0Z1dMRHY3MlFvRkxrSGlSTFZsU25HVkhNVzlJNmJMM0hBRUVhcmo2Q3pYY0d5d2x0X3luWWdkNWJaSG9YNy1fU09leWItb0o2VUhZckU1UWpEaFVma0xDV0NweGJQLU1JMVRwMzNpa1lzN3VZSFF0QktORmJTeEVCWGcyaW9RV01UZ2p3ZGx6a0duMGxYZ3Y2WUVRZw?oc=5) | Google News: Hivemapper HONEY Solana |\r\n| 36 | [The success of the mapping project increased the price of the HONEY token by 43%](https://news.google.com/rss/articles/CBMijAFBVV95cUxNZ3NRZzgxOElnbXY1S1ZZN3lkTVJOVWxKNENGTUFieXJ6QmxEcFBTV212VVBYenI5Wnpud1A4R0JjY0FZV1A0aEpYRG1NZE1XMzl2SGZFSm1NQ3dHbjFoaFYtMmk0ZFFYeDNYX3hGTGJwWGpycUhvYi0xVFVHVm1tTGs3V2ExTTUwZ1d4Qw?oc=5) | Google News: Hivemapper HONEY Solana |\r\n| 34 | [Solana DePIN revenue reaches $2.8M as data offload activity surges 17x in a year](https://news.google.com/rss/articles/CBMid0FVX3lxTE8xMllSdEVJNUs1aUZndEY4bDk0WnFFVW1xZno5dDBleEVTOFZOMk9ncG1LLUhDS2VrYTJUdkF4R2NMbXlSSnpfUU5FOTh3ZUpmbV9rQzllMkpjUHhlYm1GZjJwV21ZVTM5eVhXSUg0MjhMX1FxaEYw?oc=5) | Google News: DePIN Solana revenue |\r\n| 34 | [Data: Solana-based DePIN projects generated $2.9 million in revenue in April - B](https://news.google.com/rss/articles/CBMiZEFVX3lxTE05SkdUYjJPMWttbk82cUpDODJmbVJoaEJrZF9DSFRWU2k0NHpFR05iLTQ5UW56SGY1eURvU0U5VUdIUFNBX1ZGRTIzQm5ZOUQydk0zSzIwaDFiQ3Ftc01OQWxwRVTSAWpBVV95cUxOVmlidlltWndrR0ozTDBNU2IyZ3dNbjd2ZnBZNFJ5cXp4TnBNYlF6MVBsam1hX0JTRG8yX1lmZUhWY05Sdl9rUzZKcFF5YlVrRHBVQnZiSXBiODVjMkM4Mm5DekllWEhGS3V3?oc=5) | Google News: DePIN Solana revenue |\r\n| 34 | [SpaceX files for IPO, sparking mini-IPO boom in US markets - Crypto Briefing](https://news.google.com/rss/articles/CBMiZkFVX3lxTE9lUVQtQlFhWXVJQk9YQVNMTVFOUFhsc2tRSFhfSjI1NF9sNElCTG81b0pDX2x2bUE2NElxMEtzMklkY0ZELXhYZEVQWjN3aXdzNzhCTndjM3c1Z0lOaFZkTEhMNVBVUQ?oc=5) | Google News: DePIN Solana revenue |\r\n| 33 | [Dabba: Upcoming TGE, Adoption, and Roadmap - Messari](https://news.google.com/rss/articles/CBMic0FVX3lxTE9LeFRYUl82Y0huTmVta1FqdEw1V2Y1SXU3VWgwSFF5VEN2V0JYRFZnZXczU0oxZ25hSlZhbUh0ellmSEJta1UzelBFaFkxOHRjRkN5OHRBRGw5dXZJTTVORmstVjlHSkdJLVZGWXdGYXRaVHM?oc=5) | Google News: WeatherXM DePIN |\r\n"
+    },
+    "2026-05-26": {
+      "hasBrief": true,
+      "hasNews": false,
+      "hasPosts": true,
+      "hasScan": false,
+      "taskCount": 0,
+      "newsTitle": null,
+      "summary": null,
+      "briefMarkdown": null,
+      "newsMarkdown": null
+    },
+    "2026-05-25": {
+      "hasBrief": true,
+      "hasNews": false,
+      "hasPosts": true,
+      "hasScan": true,
+      "taskCount": 0,
+      "newsTitle": null,
+      "summary": null,
+      "briefMarkdown": null,
+      "newsMarkdown": null
+    },
+    "2026-05-24": {
+      "hasBrief": true,
+      "hasNews": false,
+      "hasPosts": true,
+      "hasScan": false,
+      "taskCount": 0,
+      "newsTitle": null,
+      "summary": null,
+      "briefMarkdown": null,
+      "newsMarkdown": null
+    }
+  },
+  "chatContext": "# GETKINETIK bureau ops context (for assistant)\n\nToday (UTC): 2026-05-27\n\n## GTM brain\n# GETKINETIK GTM brain (loaded into news AI every run)\r\n\r\n> Edit this file when outreach state changes. The news automation reads it daily.\r\n\r\n## Mission (90-day win)\r\n\r\nNetwork teams reply with: **\"Can you run this on our data?\"** — not APK downloads, not adapter count.\r\n\r\n## Outreach route (weekly — NOT cold founder DMs)\r\n\r\nDefault motion: **public work + comments + intros + marketing partners** — not blasting founders who never open DMs.\r\n\r\n| Day (UTC) | One action |\r\n|-----------|------------|\r\n| Mon | Post one audit delta or sample read (inbound pull) |\r\n| Tue | One thoughtful comment on a target post/article |\r\n| Wed | One intro ask (“who’s the ONE person for distribution?”) |\r\n| Thu | Marketing lane: micro-creator, Nas/community partner, fellowship visibility |\r\n| Fri | Follow up **one** engaged thread only (warm leads; respect wait rules) |\r\n| Sat–Sun | Inbound only or optional public snippet |\r\n\r\n**Guardrails:** No cold DMs to high-inbox founders · email with one hook > generic DM · nurture warm leads per table below · details in `scripts/bureau/gtm-route.mjs`\r\n\r\n**Partner-seeking:** Nas Solopreneur Fellowship + similar = visibility for **marketer/GTM partner**, not funding-only pitch. Keep application high-level; demo on call.\r\n\r\n## Positioning (never drift)\r\n\r\n- Neutral DePIN **bureau** — friendly helper, second read not replacement\r\n- Public sample reads on open APIs + signed device evidence + `verify-device` API\r\n- **Not** an earnings aggregator, **not** Yearn/Plaid framing, **no token**, no custody\r\n- Genesis Score = optional reference label, not headline\r\n- Never accuse fraud proved — \"patterns worth cross-checking\", registry hygiene, economic concentration\r\n\r\n## Warm leads — WAIT rules (do not @ or DM in public comments)\r\n\r\n| Who | Network / lane | State | Rule |\r\n|-----|----------------|-------|------|\r\n| Mike Horton | Geodnet founder | Validated dup-coord read publicly (May); LinkedIn connect sent | No @Mike threads. If he accepts LI, DM CSV offer only |\r\n| Manolis Nikiforakis | WeatherXM CEO | Validated reward zeroing; capacity gap acknowledged; follow-up sent | No third ping ~1 week |\r\n| Raziel Tabib | Angel / devtools | LinkedIn coffee message sent | Bump only after 7 days silent |\r\n\r\n## Current live numbers (override if stale — pipeline refreshes snapshots)\r\n\r\n- Geodnet: 9 exact dup (lat,lng) groups, ~19,686 public stations (was 10)\r\n- WeatherXM: 288 cells over designed capacity\r\n- Hivemapper: top-20 visible SPL ≈ 49% of UI HONEY supply\r\n\r\n## Comment vs post rules\r\n\r\n- **Comment** on their article/post when it fits registry, RTK trust, DePIN revenue, tokenomics redesign, mapping economics\r\n- **Skip** price hit pieces, \"92% collapse\" takedowns, generic fintech cyber spam\r\n- **Standalone tweet** only when major network news + our read adds a second lens (not duplicate of yesterday's tweet)\r\n- Max **1 auto-tweet/day** if auto-post enabled; LinkedIn always manual paste\r\n\r\n## Links\r\n\r\n- Audits: https://getkinetik.app/audits.html\r\n- Bureau: https://getkinetik.app/bureau/\r\n- Reports: https://github.com/Ricolax310/GetKinetik/tree/main/docs/reports\r\n\n\n## Outreach route\n## This week’s route (not cold DMs)\n\n**North star:** Network teams reply: \"Can you run this on our data?\"\n\n**Today (Wednesday) — Intro ask:** One intro ask (email or DM to a mutual): “Who’s the ONE person I should talk to for distribution / partnerships?” Not a blast.\n\n**Guardrails:**\n- No cold DMs to founders who get thousands of messages\n- No “pick your brain” — offer one reproducible insight or ask for one intro\n- Warm leads: follow gtm-context wait rules (no @Mike, no third ping Manolis, Raziel 7-day bump)\n- Email beats cold DM when you have one specific hook\n- Win = “can you run this on our data?” — not APK installs or adapter count\n\n\nNorth star: Network teams reply: \"Can you run this on our data?\"\n\n## Today's do list\n- **Your note:** Zero cold DMs to high-inbox founders this week\n- **Your note:** Nas / marketer partner: one touch if Thursday task not done yet\n- **Today’s route (Wednesday):** **One intro ask** (email or DM to a mutual): “Who’s the ONE person I should talk to for distribution / partnerships?” Not a blast.\n- **LinkedIn comment** (paste manually): `docs/bureau/daily/latest-news.md` → article *Developing A Truly Global RTK Network - Inside GNSS*\n- **Optional social — deltas moved:** Geodnet, WeatherXM, Hivemapper → `docs/bureau/daily/latest-delta-posts.md`\n- **Optional timeline post:** pick one draft in `docs/bureau/daily/latest-posts.md` (sample read or verify-device).\n- **North star:** any inbound “run this on our data?” — reply same day (this is the win, not DMs sent).\n\n## Wait rules\n- Mike Horton: No @Mike threads. If he accepts LI, DM CSV offer only\n- Manolis Nikiforakis: No third ping ~1 week\n- Raziel Tabib: Bump only after 7 days silent\n\n## Live numbers\nGeodnet: 9 exact dup (lat,lng) groups, ~19,686 public stations (was 10)\nWeatherXM: 288 cells over designed capacity\nHivemapper: top-20 visible SPL ≈ 49% of UI HONEY supply\n\n## Network health\nGeodnet — report 0h ago · exact dup groups: -1 (-11.1%)\nWeatherXM — report 0h ago · over-capacity cells: +1 (+0.3%)\nHivemapper — report 0h ago · top-20 HONEY share: +0.00 pp (+0.0%)\nNodle — report 0h ago\nDawn Network — report 0h ago\n\n## Automation schedule (UTC)\n- Daily brief + ops calendar: 08:00 UTC daily\n- News scan + LLM drafts: 09:00 UTC daily\n- Weekly public sample reads: 14:00 UTC Mondays\n\n## News pick: Developing A Truly Global RTK Network - Inside GNSS\n\n## Recent calendar days\n- 2026-05-27: brief, news — Your note: Zero cold DMs to high-inbox founders this week\n- 2026-05-26: brief — —\n- 2026-05-25: brief, scan — —\n- 2026-05-24: brief — —"
+}

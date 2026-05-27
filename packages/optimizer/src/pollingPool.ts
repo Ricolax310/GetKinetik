@@ -20,7 +20,7 @@
 //      for that adapter. Multiple consumers (summary box + drawer card) share
 //      one result without duplicating the network call.
 //
-// USAGE (from AggregatorPanel.tsx):
+// USAGE (from NetworkReadsPanel.tsx):
 //
 //   const pool = useMemo(() => new PollingPool(), []);
 //

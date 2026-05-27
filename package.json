@@ -20,7 +20,12 @@
     "bureau:pipeline": "node scripts/bureau-run.mjs pipeline",
     "bureau:brief": "node scripts/bureau-run.mjs brief",
     "bureau:publish": "node scripts/bureau-run.mjs publish",
-    "bureau:weekly": "node scripts/bureau-run.mjs pipeline --force"
+    "bureau:weekly": "node scripts/bureau-run.mjs pipeline --force",
+    "bureau:news": "node scripts/bureau-run.mjs news",
+    "bureau:news:post": "node scripts/bureau-run.mjs news --post",
+    "git:hooks-install": "node scripts/install-git-hooks.mjs",
+    "git:sync": "node scripts/git-sync.mjs",
+    "git:push": "node scripts/git-push.mjs"
   },
   "dependencies": {
     "@getkinetik/react-native-sdk": "file:./modules/kinetik-sdk",

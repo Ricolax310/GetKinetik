@@ -43,7 +43,7 @@ For GETKINETIK, we only need `balanceOf()` on the Polygon Rewards contract to re
 **Critical difference from Nodle:**
 DIMO is *vehicle-data monetization*, not *phone-as-a-node*. GETKINETIK cannot make a phone earn DIMO without the user already having a DIMO account and a connected vehicle. The DIMO adapter is an **earnings reader** (aggregates what DIMO already pays) rather than an earnings generator (like Nodle, where GETKINETIK initiates the earning).
 
-This is fine — it's still the Plaid pattern. Plaid doesn't generate bank deposits; it reads them. The DIMO adapter reads DIMO deposits and records them in the GETKINETIK signed earnings ledger.
+This is fine — read-only adapter contract. The DIMO adapter reads DIMO deposits and records them in the GETKINETIK signed receipt log.
 
 ---
 
@@ -155,7 +155,7 @@ Unlike Nodle (where we can *derive* a new SS58 address from the user's existing 
 
 > `partnerships@dimo.zone` or via `console.dimo.org` Developer Discord
 >
-> **Subject:** GETKINETIK × DIMO — Trust Layer + DIMO Read Integration (DePIN Plaid Thesis)
+> **Subject:** GETKINETIK × DIMO — Neutral Bureau + DIMO Read Integration
 >
 > Angle: GETKINETIK is the identity + signed earnings layer every DePIN needs. DIMO users who also earn on other DePIN networks (Nodle, WeatherXM, etc.) want one signed ledger for all earnings. GETKINETIK is that ledger. DIMO is our second integration; Nodle is first. We'd love to be listed as a DIMO ecosystem partner.
 

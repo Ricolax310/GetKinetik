@@ -7,18 +7,18 @@
 
 ## Overview
 
-GETKINETIK is the **independent trust layer for the decentralized physical economy**
-(Carfax-shaped: neutral hardware attestation + public methodology; see `NEUTRALITY.md`).
-The product ships as a Sovereign Node app that **also** participates in multiple DePIN
-networks through adapters and optimises claim timing — but the **technical moat** is
-the attestable identity + signed ledger, not routing APIs alone.
+GETKINETIK is the **neutral DePIN bureau** — friendly helper, second read not
+replacement (Carfax-shaped: neutral hardware attestation + public methodology;
+see `NEUTRALITY.md`). The product ships as a Sovereign Node app with optional
+read-only network adapters for operators who want signed receipts — but the
+**technical moat** is attestable identity + verify-device API, not routing APIs alone.
 
 The architecture is a four-layer stack:
 
 ```
 L1  Sovereign Identity + Trust Primitives
 L2  Sensor Attestation
-L3  DePIN Adapter + Optimizer Engine
+L3  DePIN Adapter + Operator Tooling (optional)
 L4  Sovereign Earnings Wallet
 ```
 
@@ -38,7 +38,7 @@ Wallet address: kn1{base32(sha256("kinetik-wallet-v1" || pubkey))[0:32]}
 Nodle address:  SS58(pubkey, prefix=37) — same key, different encoding
 ```
 
-**Why one key?** Plaid model. One identity, multiple network representations. No new secrets to back up.
+**Why one key?** One sovereign identity, multiple network representations. No new secrets to back up.
 
 **Public verifier:** `https://getkinetik.app/verify/` — any Proof of Origin can be verified by anyone, without authentication, using only the public key embedded in the proof.
 
@@ -234,7 +234,7 @@ packages/
   adapter-geodnet/    Geodnet adapter
 
 src/
-  components/       App UI (VaultPanel, AggregatorPanel, OptimizationReport, ...)
+  components/       App UI (VaultPanel, NetworkReadsPanel, OptimizationReport, ...)
   theme/            palette + typography
 
 landing/

@@ -1,8 +1,9 @@
 // ============================================================================
 // @kinetik/optimizer — public API surface.
 // ----------------------------------------------------------------------------
-// The optimizer engine: gas-aware claim timing, shared adapter polling,
-// device capability discovery, yield scoring, and weekly savings reporting.
+// The optimizer engine: optional operator tooling — gas-aware claim timing,
+// shared adapter polling, device capability discovery, and weekly savings reporting.
+// Not a public product headline; bureau positioning is verify-device + PoO.
 //
 // Everything exported from this file is part of the package's public API.
 // Internal helpers (e.g., chain-specific fetch logic) are NOT re-exported.
@@ -12,7 +13,7 @@
 //   // Price + gas feeds
 //   import { fetchTokenPrices, fetchGasPrices } from '@kinetik/optimizer';
 //
-//   // Yield scoring
+//   // Claim timing (optional operator tooling)
 //   import { scoreAdapters } from '@kinetik/optimizer';
 //
 //   // Device discovery
@@ -43,7 +44,7 @@ export {
   invalidateGasCache,
 } from './gasFeed';
 
-// ----- Yield scorer ----------------------------------------------------------
+// ----- Claim timing (optional operator tooling) ------------------------------
 export {
   CLAIM_GAS_RATIO,
   type ScoredAdapter,
