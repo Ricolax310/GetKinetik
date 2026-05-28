@@ -33,21 +33,12 @@ function json(body, status = 200) {
   });
 }
 
-function contextPackUrl(requestUrl) {
-  const u = new URL(requestUrl);
-  // Wrangler pages dev: fetching loopback /data/ from inside the same dev server can hang.
-  const isLocalDev =
-    u.hostname === "127.0.0.1" ||
-    u.hostname === "localhost" ||
-    u.hostname.endsWith(".pages.dev");
-  if (isLocalDev) {
-    return "https://getkinetik.app/data/depin-chat-context.json";
-  }
-  return new URL("/data/depin-chat-context.json", u.origin).href;
-}
+/** Public pack — always fetch deployed static JSON (avoids loopback deadlock in wrangler dev). */
+const CONTEXT_PACK_URL =
+  "https://getkinetik.app/data/depin-chat-context.json";
 
-async function loadContextPack(requestUrl) {
-  const res = await fetch(contextPackUrl(requestUrl), {
+async function loadContextPack() {
+  const res = await fetch(CONTEXT_PACK_URL, {
     headers: { accept: "application/json" },
     cf: { cacheTtl: 300 },
   });
@@ -92,7 +83,7 @@ export async function onRequestPost(ctx) {
     let meta = "";
 
     try {
-      const pack = await loadContextPack(request.url);
+      const pack = await loadContextPack();
       const rawContext =
         typeof pack.context === "string" ? pack.context : "";
       context =
