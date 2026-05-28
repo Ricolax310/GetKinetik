@@ -6,11 +6,21 @@
  *
  * Cloudflare Pages env:
  *   OPENAI_API_KEY              (required)
- *   BUREAU_DEPIN_CHAT_MODEL     (optional, default gpt-4o-mini)
+ *   BUREAU_DEPIN_CHAT_MODEL     (optional, default gpt-5)
+ *   OPENAI_MODEL                (optional fallback)
  */
+
+import {
+  chatCompletions,
+  defaultDepinChatModel,
+} from "../_lib/openaiChat.js";
 
 const MAX_MESSAGES = 16;
 const MAX_USER_CHARS = 2000;
+const MAX_OUTPUT_TOKENS = 900;
+/** Stay under Cloudflare Pages function wall-clock limit (~30s). */
+const OPENAI_TIMEOUT_MS = 28_000;
+const MAX_CONTEXT_CHARS = 12_000;
 
 function json(body, status = 200) {
   return new Response(JSON.stringify(body), {
@@ -23,57 +33,59 @@ function json(body, status = 200) {
   });
 }
 
-async function loadPublicContext(origin) {
+async function loadContextPack(origin) {
   const res = await fetch(`${origin}/data/depin-chat-context.json`, {
     cf: { cacheTtl: 300 },
   });
   if (!res.ok) throw new Error(`context ${res.status}`);
-  const data = await res.json();
-  return data.context || "";
+  return res.json();
 }
 
 export async function onRequestPost(ctx) {
-  const { request, env } = ctx;
-
-  if (!env.OPENAI_API_KEY?.trim()) {
-    return json({ error: "Chat temporarily unavailable." }, 503);
-  }
-
-  let body;
   try {
-    body = await request.json();
-  } catch {
-    return json({ error: "Invalid JSON." }, 400);
-  }
+    const { request, env } = ctx;
 
-  const raw = Array.isArray(body?.messages) ? body.messages : [];
-  const messages = raw
-    .filter((m) => m && (m.role === "user" || m.role === "assistant"))
-    .slice(-MAX_MESSAGES)
-    .map((m) => ({
-      role: m.role,
-      content: String(m.content || "").slice(0, MAX_USER_CHARS),
-    }));
+    if (!env.OPENAI_API_KEY?.trim()) {
+      return json({ error: "Chat temporarily unavailable." }, 503);
+    }
 
-  if (!messages.length || messages.at(-1).role !== "user") {
-    return json({ error: "Send a message." }, 400);
-  }
+    let body;
+    try {
+      body = await request.json();
+    } catch {
+      return json({ error: "Invalid JSON." }, 400);
+    }
 
-  const origin = new URL(request.url).origin;
-  let context;
-  try {
-    context = await loadPublicContext(origin);
-  } catch {
-    context = "GETKINETIK neutral DePIN bureau — public reads on open data, signed device evidence optional.";
-  }
+    const raw = Array.isArray(body?.messages) ? body.messages : [];
+    const messages = raw
+      .filter((m) => m && (m.role === "user" || m.role === "assistant"))
+      .slice(-MAX_MESSAGES)
+      .map((m) => ({
+        role: m.role,
+        content:
+          typeof m.content === "string"
+            ? m.content.slice(0, MAX_USER_CHARS)
+            : "",
+      }))
+      .filter((m) => m.content.trim().length > 0);
 
-  const model = (env.BUREAU_DEPIN_CHAT_MODEL || "gpt-4o-mini").trim();
+    if (!messages.length || messages[messages.length - 1].role !== "user") {
+      return json({ error: "Send a message." }, 400);
+    }
 
-  let meta = "";
-  try {
-    const res = await fetch(`${origin}/data/depin-chat-context.json`, { cf: { cacheTtl: 60 } });
-    if (res.ok) {
-      const pack = await res.json();
+    const origin = new URL(request.url).origin;
+    let context =
+      "GETKINETIK neutral DePIN bureau — public reads on open data, signed device evidence optional.";
+    let meta = "";
+
+    try {
+      const pack = await loadContextPack(origin);
+      const rawContext =
+        typeof pack.context === "string" ? pack.context : "";
+      context =
+        rawContext.length > MAX_CONTEXT_CHARS
+          ? `${rawContext.slice(0, MAX_CONTEXT_CHARS)}\n\n[context truncated for chat]`
+          : rawContext || context;
       meta = `Pack generated: ${pack.generatedAt || pack.updatedAt || "unknown"}. `;
       if (pack.news?.liveHeadlines?.length) {
         meta += `${pack.news.liveHeadlines.length} live headlines + `;
@@ -81,12 +93,14 @@ export async function onRequestPost(ctx) {
       if (pack.news?.topPick?.title) {
         meta += `today's bureau news pick: "${pack.news.topPick.title}". `;
       }
+    } catch {
+      /* use fallback context */
     }
-  } catch {
-    /* ignore */
-  }
 
-  const system = `You are the public GETKINETIK bureau assistant on getkinetik.app.
+    const primaryModel = defaultDepinChatModel(env);
+    const fallbackModel = "gpt-4o-mini";
+
+    const system = `You are the public GETKINETIK bureau assistant on getkinetik.app.
 
 You explain DePIN trust, security, and registry integrity in plain language for builders, operators, and curious visitors.
 
@@ -105,28 +119,52 @@ Rules:
 --- Public context (refreshed with bureau automation) ---
 ${context}`;
 
-  const oai = await fetch("https://api.openai.com/v1/chat/completions", {
-    method: "POST",
-    headers: {
-      authorization: `Bearer ${env.OPENAI_API_KEY}`,
-      "content-type": "application/json",
-    },
-    body: JSON.stringify({
-      model,
-      messages: [{ role: "system", content: system }, ...messages],
-      max_tokens: 900,
-    }),
-  });
+    const chatMessages = [{ role: "system", content: system }, ...messages];
+    let result = await chatCompletions({
+      apiKey: env.OPENAI_API_KEY,
+      model: primaryModel,
+      messages: chatMessages,
+      maxOutput: MAX_OUTPUT_TOKENS,
+      timeoutMs: OPENAI_TIMEOUT_MS,
+    });
 
-  if (!oai.ok) {
-    return json({ error: "Model error — try again shortly." }, 502);
+    if (
+      !result.ok &&
+      primaryModel !== fallbackModel &&
+      /model unavailable|model_not_found|does not have access/i.test(
+        result.error || "",
+      )
+    ) {
+      result = await chatCompletions({
+        apiKey: env.OPENAI_API_KEY,
+        model: fallbackModel,
+        messages: chatMessages,
+        maxOutput: MAX_OUTPUT_TOKENS,
+        timeoutMs: OPENAI_TIMEOUT_MS,
+      });
+    }
+
+    if (!result.ok) {
+      return json({ error: result.error, model: primaryModel }, result.status);
+    }
+
+    return json({ reply: result.reply, model: result.model });
+  } catch (err) {
+    console.error("[depin-chat]", err);
+    return json({ error: "Chat error — try again shortly." }, 502);
   }
+}
 
-  const data = await oai.json();
-  const reply = data.choices?.[0]?.message?.content?.trim();
-  if (!reply) return json({ error: "Empty response." }, 502);
-
-  return json({ reply, model });
+export async function onRequestGet() {
+  return json({
+    ok: true,
+    endpoint: "POST /api/bureau/depin-chat",
+    bodyExample: {
+      messages: [{ role: "user", content: "What does a neutral DePIN bureau do?" }],
+    },
+    requiresEnv: ["OPENAI_API_KEY"],
+    optionalEnv: ["BUREAU_DEPIN_CHAT_MODEL", "OPENAI_MODEL"],
+  });
 }
 
 export async function onRequestOptions() {
@@ -134,8 +172,15 @@ export async function onRequestOptions() {
     status: 204,
     headers: {
       "access-control-allow-origin": "*",
-      "access-control-allow-methods": "POST, OPTIONS",
+      "access-control-allow-methods": "GET, POST, OPTIONS",
       "access-control-allow-headers": "content-type",
     },
   });
+}
+
+export async function onRequest(ctx) {
+  if (ctx.request.method === "OPTIONS") return onRequestOptions();
+  if (ctx.request.method === "GET") return onRequestGet();
+  if (ctx.request.method === "POST") return onRequestPost(ctx);
+  return json({ error: "Method not allowed." }, 405);
 }

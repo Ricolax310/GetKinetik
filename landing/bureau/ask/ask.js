@@ -38,6 +38,29 @@
     log.scrollTop = log.scrollHeight;
   }
 
+  async function readApiJson(res) {
+    const text = await res.text();
+    const looksHtml =
+      /^\s*</.test(text) || /<!DOCTYPE/i.test(text) || /error code:\s*502/i.test(text);
+    try {
+      return JSON.parse(text);
+    } catch {
+      if (looksHtml || res.status === 404) {
+        throw new Error(
+          "Chat API returned a web page instead of JSON — deploy /api/bureau/depin-chat or use wrangler pages dev for local testing.",
+        );
+      }
+      if (res.ok) throw new Error("Invalid response from chat service.");
+      throw new Error(
+        res.status === 503
+          ? "Chat is offline — add OPENAI_API_KEY on Cloudflare Pages (Production)."
+          : res.status === 502
+            ? "Chat backend timed out or failed — check OPENAI_API_KEY and BUREAU_DEPIN_CHAT_MODEL (use gpt-5)."
+            : `Chat unavailable (HTTP ${res.status}). Try again in a minute.`,
+      );
+    }
+  }
+
   async function submit(text) {
     const t = text.trim();
     if (!t) return;
@@ -46,6 +69,9 @@
     input.value = "";
     render();
     send.disabled = true;
+    document.querySelectorAll("#starters button").forEach((b) => {
+      b.disabled = true;
+    });
 
     try {
       const res = await fetch("/api/bureau/depin-chat", {
@@ -53,8 +79,9 @@
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ messages }),
       });
-      const data = await res.json();
+      const data = await readApiJson(res);
       if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+      if (!data.reply) throw new Error("Empty reply from chat service.");
       messages.push({ role: "assistant", content: data.reply });
       render();
     } catch (e) {
@@ -63,14 +90,24 @@
       render();
     } finally {
       send.disabled = false;
+      document.querySelectorAll("#starters button").forEach((b) => {
+        b.disabled = false;
+      });
       input.focus();
     }
   }
 
-  document.getElementById("starters").addEventListener("click", (e) => {
-    const btn = e.target.closest("button[data-q]");
-    if (btn) submit(btn.getAttribute("data-q"));
-  });
+  function buildStarters() {
+    const starterEl = document.getElementById("starters");
+    starterEl.replaceChildren();
+    for (const q of starters) {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.textContent = q;
+      btn.addEventListener("click", () => submit(q));
+      starterEl.appendChild(btn);
+    }
+  }
 
   send.addEventListener("click", () => submit(input.value));
   input.addEventListener("keydown", (e) => {
@@ -80,10 +117,7 @@
     }
   });
 
-  const starterEl = document.getElementById("starters");
-  starterEl.innerHTML = starters
-    .map((q) => `<button type="button" data-q="${q.replace(/"/g, "&quot;")}">${q}</button>`)
-    .join("");
+  buildStarters();
 
   async function loadMeta() {
     if (!meta) return;

@@ -28,7 +28,13 @@
     "git:push": "node scripts/git-push.mjs",
     "bureau:depin-context": "node scripts/bureau/build-depin-chat-context.mjs",
     "bureau:ops": "node scripts/serve-bureau-ops.mjs",
-    "anchor:daily": "node scripts/anchor-daily-cids.mjs"
+    "anchor:daily": "node scripts/anchor-daily-cids.mjs",
+    "fuzz:verify-device": "node scripts/fuzz/fuzz-verify-device.mjs",
+    "smoke:depin-chat": "node scripts/smoke/depin-chat-smoke.mjs",
+    "smoke:depin-chat:live": "node scripts/smoke/depin-chat-smoke.mjs --live",
+    "fuzz:smoke": "node scripts/fuzz/fuzz-verify-device.mjs --count 250",
+    "verify:smoke": "npm --prefix packages/verify run build && node packages/verify/smoketest.mjs",
+    "verify:integrity": "npm run verify:smoke && npm run fuzz:smoke && node scripts/fuzz/regression-score-bounds.mjs"
   },
   "dependencies": {
     "@getkinetik/react-native-sdk": "file:./modules/kinetik-sdk",
