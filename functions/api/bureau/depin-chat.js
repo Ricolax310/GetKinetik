@@ -19,7 +19,7 @@ const MAX_MESSAGES = 16;
 const MAX_USER_CHARS = 2000;
 const MAX_OUTPUT_TOKENS = 900;
 /** Stay under Cloudflare Pages function wall-clock limit (~30s). */
-const OPENAI_TIMEOUT_MS = 28_000;
+const OPENAI_TIMEOUT_MS = 25_000;
 const MAX_CONTEXT_CHARS = 12_000;
 
 function json(body, status = 200) {
@@ -33,8 +33,22 @@ function json(body, status = 200) {
   });
 }
 
-async function loadContextPack(origin) {
-  const res = await fetch(`${origin}/data/depin-chat-context.json`, {
+function contextPackUrl(requestUrl) {
+  const u = new URL(requestUrl);
+  // Wrangler pages dev: fetching loopback /data/ from inside the same dev server can hang.
+  const isLocalDev =
+    u.hostname === "127.0.0.1" ||
+    u.hostname === "localhost" ||
+    u.hostname.endsWith(".pages.dev");
+  if (isLocalDev) {
+    return "https://getkinetik.app/data/depin-chat-context.json";
+  }
+  return new URL("/data/depin-chat-context.json", u.origin).href;
+}
+
+async function loadContextPack(requestUrl) {
+  const res = await fetch(contextPackUrl(requestUrl), {
+    headers: { accept: "application/json" },
     cf: { cacheTtl: 300 },
   });
   if (!res.ok) throw new Error(`context ${res.status}`);
@@ -73,13 +87,12 @@ export async function onRequestPost(ctx) {
       return json({ error: "Send a message." }, 400);
     }
 
-    const origin = new URL(request.url).origin;
     let context =
       "GETKINETIK neutral DePIN bureau — public reads on open data, signed device evidence optional.";
     let meta = "";
 
     try {
-      const pack = await loadContextPack(origin);
+      const pack = await loadContextPack(request.url);
       const rawContext =
         typeof pack.context === "string" ? pack.context : "";
       context =
