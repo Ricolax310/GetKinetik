@@ -1,12 +1,13 @@
-// Builds landing/data/bureau-ops.json for the ops calendar + chat context.
+// Builds docs/bureau/private/bureau-ops.json — local ops UI only (not deployed).
 
 import fs from "node:fs";
 import path from "node:path";
 import { REPO_ROOT, DAILY_DIR } from "./lib.mjs";
+import { PRIVATE_OPS_DIR } from "./private-paths.mjs";
 import { buildOperatorData } from "./operator-brief.mjs";
 import { formatRouteMarkdown, GTM_NORTH_STAR } from "./gtm-route.mjs";
 
-const OUT_PATH = path.join(REPO_ROOT, "landing/data/bureau-ops.json");
+const OUT_PATH = path.join(PRIVATE_OPS_DIR, "bureau-ops.json");
 const GTM_PATH = path.join(REPO_ROOT, "scripts/bureau/gtm-context.md");
 const MAX_DAY_FILES = 120;
 const MAX_MD_PER_DAY = 14_000;

@@ -54,8 +54,9 @@ npm run bureau:news:post   # same + auto-tweet if BUREAU_AUTO_POST=true + X API 
 
 **Public DePIN chat:** https://getkinetik.app/bureau/ask/ — context in `landing/data/depin-chat-context.json` refreshes on daily brief, weekly scan, and news job (`npm run bureau:depin-context`).
 
+**Private ops calendar + coach:** `npm run bureau:ops` → http://127.0.0.1:5199/ — **not on the public site.** Data in `docs/bureau/private/bureau-ops.json`. See [`docs/bureau/OPS_CALENDAR.md`](docs/bureau/OPS_CALENDAR.md).
+
 - **Registry:** `scripts/bureau/networks.json`
-- **Daily ops calendar:** https://getkinetik.app/bureau/ops/ — calendar + AI chat (see `docs/bureau/OPS_CALENDAR.md`)
 - **Daily ops (markdown):** `docs/bureau/daily/latest-operator.md` — your to-do vs what ran automatically
 - **Standing tasks:** `docs/bureau/operator-tasks.md` (optional checklist merged into ops brief)
 - **Weekly GTM route:** `scripts/bureau/gtm-route.mjs` + `scripts/bureau/gtm-context.md` (Mon–Sun: public → comment → intro → marketer → nurture — no cold founder DMs)

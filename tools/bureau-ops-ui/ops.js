@@ -1,7 +1,6 @@
 (function () {
   "use strict";
 
-  const TOKEN_KEY = "bureau_ops_chat_token";
   const DOW = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
   let pack = null;
@@ -23,7 +22,6 @@
     chatLog: document.getElementById("chat-log"),
     chatInput: document.getElementById("chat-input"),
     chatSend: document.getElementById("chat-send"),
-    chatToken: document.getElementById("chat-token"),
     chatError: document.getElementById("chat-error"),
     prevMonth: document.getElementById("cal-prev"),
     nextMonth: document.getElementById("cal-next"),
@@ -246,25 +244,15 @@
     const text = el.chatInput.value.trim();
     if (!text) return;
 
-    const token = el.chatToken.value.trim() || sessionStorage.getItem(TOKEN_KEY) || "";
-    if (!token) {
-      el.chatError.textContent = "Enter your ops access token (from Cloudflare BUREAU_OPS_CHAT_TOKEN).";
-      return;
-    }
-    sessionStorage.setItem(TOKEN_KEY, token);
-
     chatMessages.push({ role: "user", content: text });
     el.chatInput.value = "";
     renderChat();
     el.chatSend.disabled = true;
 
     try {
-      const res = await fetch("/api/bureau/ops-chat", {
+      const res = await fetch("/api/ops-chat", {
         method: "POST",
-        headers: {
-          "content-type": "application/json",
-          authorization: `Bearer ${token}`,
-        },
+        headers: { "content-type": "application/json" },
         body: JSON.stringify({ messages: chatMessages }),
       });
       const data = await res.json();
@@ -314,9 +302,6 @@
   }
 
   async function init() {
-    const saved = sessionStorage.getItem(TOKEN_KEY);
-    if (saved) el.chatToken.value = saved;
-
     try {
       const res = await fetch("/data/bureau-ops.json", { cache: "no-store" });
       if (!res.ok) throw new Error(`Could not load calendar data (${res.status})`);
@@ -335,7 +320,7 @@
       renderChat();
       bindNav();
     } catch (e) {
-      el.loading.textContent = `Failed to load: ${e.message}. Run npm run bureau:brief and deploy.`;
+      el.loading.textContent = `Failed to load: ${e.message}. Run: npm run bureau:brief && npm run bureau:ops`;
     }
   }
 

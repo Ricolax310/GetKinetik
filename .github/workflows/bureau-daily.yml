@@ -29,6 +29,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/bureau/daily/*.md docs/bureau/papers/**/*.md docs/bureau/papers/README.md docs/outreach/OUTREACH_QUEUE.md docs/bureau/operator-tasks.md scripts/data/bureau-audit-index.json landing/data/bureau-audit-index.json landing/data/bureau-ops.json landing/data/depin-chat-context.json || true
+          git add docs/bureau/daily/*.md docs/bureau/papers/**/*.md docs/bureau/papers/README.md docs/outreach/OUTREACH_QUEUE.md docs/bureau/operator-tasks.md scripts/data/bureau-audit-index.json landing/data/bureau-audit-index.json docs/bureau/private/bureau-ops.json landing/data/depin-chat-context.json || true
           git diff --staged --quiet || git commit -m "chore(bureau): daily brief and post drafts [automated]"
           git push || true

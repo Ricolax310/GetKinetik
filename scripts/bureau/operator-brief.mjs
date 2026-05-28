@@ -391,7 +391,7 @@ ${networkGlance.join("\n")}
 | File | Purpose |
 |------|---------|
 | [\`latest-operator.md\`](latest-operator.md) | This briefing (markdown) |
-| [Ops calendar + AI chat](https://getkinetik.app/bureau/ops/) | Visual calendar & bureau assistant |
+| [\`docs/bureau/private/\`](../../private/) | Private ops calendar + coach — \`npm run bureau:ops\` (localhost) |
 | [\`latest-news.md\`](latest-news.md) | Today's comment/tweet drafts |
 | [\`latest-posts.md\`](latest-posts.md) | Sample-read & verify tweets |
 | [\`latest-delta-posts.md\`](latest-delta-posts.md) | Posts when metrics moved |

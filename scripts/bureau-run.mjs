@@ -259,7 +259,7 @@ async function cmdBrief(registry) {
   });
   console.log("GETKINETIK bureau daily brief\n");
   console.log(`  Ops:     ${operatorOut.latest}`);
-  console.log(`  Calendar: ${opsPackOut.path} → https://getkinetik.app/bureau/ops/`);
+  console.log(`  Ops pack: ${opsPackOut.path} → npm run bureau:ops (localhost)`);
   console.log(`  Public chat context: ${depinChatCtx} → https://getkinetik.app/bureau/ask/`);
   console.log(`  Brief:   ${out.latestBrief}`);
   console.log(`  Posts:   ${out.latestPosts}`);

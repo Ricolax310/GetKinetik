@@ -3,29 +3,19 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="robots" content="noindex,nofollow" />
     <meta name="theme-color" content="#0A0A0A" />
-    <meta name="color-scheme" content="dark" />
-    <title>Bureau Ops — Calendar &amp; Assistant</title>
-    <meta
-      name="description"
-      content="GETKINETIK daily ops calendar: what to do today, what ran automatically, and an AI assistant for bureau work."
-    />
-    <link rel="canonical" href="https://getkinetik.app/bureau/ops/" />
+    <title>GETKINETIK Ops — private (localhost)</title>
     <link rel="stylesheet" href="ops.css" />
-    <link
-      rel="icon"
-      type="image/svg+xml"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230A0A0A'/%3E%3Cpolygon points='16,6 24,16 16,26 8,16' fill='%231565C0'/%3E%3C/svg%3E"
-    />
   </head>
   <body>
     <div class="layout">
       <header class="top">
         <div>
-          <div class="brand">GETKINETIK Bureau</div>
+          <div class="brand">GETKINETIK · private</div>
           <h1>Ops calendar</h1>
         </div>
-        <a href="/bureau/">← Bureau</a>
+        <span style="font-size:12px;color:var(--steel)">localhost only</span>
       </header>
 
       <aside class="panel-left">
@@ -58,25 +48,15 @@
         </section>
 
         <section class="chat-panel" aria-label="Ops assistant">
-          <h2>Bureau ops assistant</h2>
+          <h2>Ops assistant</h2>
           <p class="chat-lede">
-            Ops coach for the weekly route: public → comment → intro → marketer → Friday nurture.
-            No cold-founder-DM advice. Uses deployed GTM brain + today’s briefing.
+            Private coach on your machine. Uses <code>.env</code> OPENAI_API_KEY — not on the public site.
           </p>
           <div id="chat-log" class="chat-log"></div>
           <div class="chat-form">
-            <label class="token-row">
-              <span style="font-size:12px;color:var(--steel);white-space:nowrap">Access token</span>
-              <input
-                id="chat-token"
-                type="password"
-                autocomplete="off"
-                placeholder="BUREAU_OPS_CHAT_TOKEN from Cloudflare"
-              />
-            </label>
             <textarea
               id="chat-input"
-              placeholder="e.g. What should I do today? Can I ping Manolis?"
+              placeholder="What should I do today?"
               rows="3"
             ></textarea>
             <button type="button" id="chat-send">Send</button>
