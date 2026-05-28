@@ -151,6 +151,38 @@
         transform: translateY(-2px);
       }
 
+      .header-nav {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+
+      .header-nav a {
+        color: var(--text-bright);
+        text-decoration: none;
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        border: 1px solid var(--border);
+        padding: 0.55rem 1rem;
+        border-radius: 100px;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      .header-nav a:hover {
+        border-color: var(--sapphire);
+        transform: translateY(-1px);
+      }
+
+      .header-nav a.nav-accent {
+        border-color: rgba(255, 20, 48, 0.35);
+        color: #ffb199;
+      }
+
       main {
         max-width: 900px;
         margin: 0 auto;
@@ -933,11 +965,15 @@
     <div class="bg-glow-ruby"></div>
     <div class="bg-glow-sapphire"></div>
     <header>
-      <a href="index.html" class="logo">
+      <a href="/" class="logo">
         <div class="logo-dot"></div>
         GETKINETIK
       </a>
-      <a href="index.html" class="nav-back">← Back to Bureau</a>
+      <nav class="header-nav" aria-label="Site">
+        <a href="/bureau/">The Bureau</a>
+        <a href="/audits.html">Sample reads</a>
+        <a class="nav-accent" href="/bureau/ask/">Bureau AI</a>
+      </nav>
     </header>
 
     <main>
@@ -956,7 +992,7 @@
           The GETKINETIK bureau does not have backend access to any network's private databases. We compile these reads from public endpoints only — a second opinion you can reproduce. When you want hardware-rooted certainty on specific devices, <strong>Kinetik Proof of Origin</strong> and <code>/api/verify-device</code> are the optional next step.
         </p>
         <div>
-          <a href="../docs/reports/depin-integrity-audit-framework.md" style="font-family: var(--font-mono); font-size: 0.82rem; color: var(--text-bright); text-decoration: none; border-bottom: 1px dashed var(--sapphire); padding-bottom: 2px; transition: all 0.2s;" onmouseover="this.style.color='var(--sapphire)'" onmouseout="this.style.color='var(--text-bright)'">
+          <a href="https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/depin-integrity-audit-framework.md" target="_blank" rel="noopener" style="font-family: var(--font-mono); font-size: 0.82rem; color: var(--text-bright); text-decoration: none; border-bottom: 1px dashed var(--sapphire); padding-bottom: 2px; transition: all 0.2s;" onmouseover="this.style.color='var(--sapphire)'" onmouseout="this.style.color='var(--text-bright)'">
             Read Kinetik's Open Auditing Methodology & Framework Specification Paper →
           </a>
         </div>
@@ -1326,6 +1362,8 @@
 
     <footer>
       GETKINETIK Bureau · Independent Spatial Registry · California · © 2026 ·
+      <a href="/bureau/" style="color:#90CAF9;">The Bureau</a>
+      ·
       <a href="/bureau/ask/" style="color:#ffb199;">Bureau AI · Talk to us</a>
     </footer>
 
@@ -1830,6 +1868,8 @@
     </script>
     <script>
       (function () {
+        const GITHUB_BLOB =
+          "https://github.com/Ricolax310/GetKinetik/blob/main/";
         const updatedEl = document.getElementById("bureau-live-updated");
         const grid = document.getElementById("bureau-live-grid");
         if (!updatedEl || !grid) return;
@@ -1861,10 +1901,13 @@
                         ? (n.stats.top20ShareOfSupply * 100).toFixed(1) +
                           "% top-20 HONEY"
                         : "see report");
+                const reportHref = n.report
+                  ? GITHUB_BLOB + n.report.replace(/\\/g, "/")
+                  : "#";
                 return (
-                  '<a href="../' +
-                  n.report +
-                  '" style="text-decoration:none;color:inherit;display:block;padding:0.85rem 1rem;background:rgba(0,0,0,0.35);border:1px solid rgba(255,255,255,0.08);border-radius:8px;">' +
+                  '<a href="' +
+                  reportHref +
+                  '" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;display:block;padding:0.85rem 1rem;background:rgba(0,0,0,0.35);border:1px solid rgba(255,255,255,0.08);border-radius:8px;">' +
                   '<div style="font-family:var(--font-mono);font-size:0.7rem;color:var(--sapphire);margin-bottom:0.35rem;">' +
                   n.name +
                   "</div>" +
@@ -1873,7 +1916,7 @@
                   "</div>" +
                   '<div style="font-size:0.68rem;color:#6b7280;margin-top:0.4rem;">Scan ' +
                   when +
-                  "</div></a>"
+                  ' · full report on GitHub ↗</div></a>'
                 );
               })
               .join("");

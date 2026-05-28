@@ -142,6 +142,20 @@
         color: var(--platinum);
       }
 
+      .topbar-link {
+        font-family: var(--mono);
+        font-size: 9px;
+        letter-spacing: 2.2px;
+        color: var(--graphite);
+        text-transform: uppercase;
+        text-decoration: none;
+        transition: color 0.2s ease;
+      }
+
+      .topbar-link:hover {
+        color: var(--platinum);
+      }
+
       .topbar-brand {
         font-family: var(--sans);
         font-size: 12px;
@@ -2018,10 +2032,12 @@
   </head>
     <body>
     <div class="topbar">
-      <span class="topbar-brand">GETKINETIK</span>
+      <a class="topbar-brand" href="/" style="text-decoration:none;color:inherit;">GETKINETIK</a>
       <div class="topbar-right">
+        <a class="topbar-link" href="/bureau/">The Bureau</a>
+        <a class="topbar-link" href="/audits.html">Sample reads</a>
         <a class="topbar-bureau" href="/bureau/ask/">Bureau AI</a>
-        <span class="topbar-status">v1.7.0 · BUREAU · LIVE</span>
+        <span class="topbar-status">v1.7.0 · LIVE</span>
       </div>
     </div>
 
@@ -2052,14 +2068,15 @@
       </p>
 
       <div class="cta-row">
-        <a class="cta cta-primary" href="https://github.com/Ricolax310/GetKinetik/tree/main/docs/reports" rel="noopener">VIEW RECENT AUDITS <span class="arrow">→</span></a>
+        <a class="cta cta-primary" href="/bureau/">THE BUREAU <span class="arrow">→</span></a>
+        <a class="cta cta-secondary" href="/audits.html">VIEW SAMPLE READS</a>
         <a class="cta cta-secondary cta-bureau" href="/bureau/ask/">Bureau AI · Talk to us</a>
         <a class="cta cta-secondary" href="mailto:eric@outfromnothingllc.com?subject=GETKINETIK%20Inquiry">FOR NETWORKS &amp; INVESTORS</a>
       </div>
 
       <!-- Trust signals -->
       <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-bottom:28px;position:relative;z-index:1;">
-        <a href="https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/weatherxm-duplicate-stations-report.md" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border:1px solid rgba(255,20,48,0.3);border-radius:999px;font-family:var(--mono);font-size:10px;letter-spacing:1.8px;color:var(--ruby-ember);text-decoration:none;background:rgba(58,2,9,0.2);">
+        <a href="https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/weatherxm-sybil-report.md" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border:1px solid rgba(255,20,48,0.3);border-radius:999px;font-family:var(--mono);font-size:10px;letter-spacing:1.8px;color:var(--ruby-ember);text-decoration:none;background:rgba(58,2,9,0.2);">
           <span style="width:5px;height:5px;border-radius:50%;background:var(--ruby-core);box-shadow:0 0 5px rgba(255,20,48,0.8);flex-shrink:0;"></span>WEATHERXM · CEO VALIDATED
         </a>
         <a href="https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/GEODNET_DUPLICATE_COORDINATES_SUMMARY.md" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border:1px solid rgba(255,20,48,0.3);border-radius:999px;font-family:var(--mono);font-size:10px;letter-spacing:1.8px;color:var(--ruby-ember);text-decoration:none;background:rgba(58,2,9,0.2);">
@@ -2142,7 +2159,7 @@
           <header class="finding-head"><span class="finding-net">WEATHERXM</span><span class="finding-date">2026-05-13</span></header>
           <h3 class="finding-title">290 cells reporting more devices than physical capacity allows.</h3>
           <p class="finding-stat">Flagged <strong>39.1%</strong> of top-earning cells as anomalous. CEO validated the audit publicly.</p>
-          <a href="https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/weatherxm-duplicate-stations-report.md" class="finding-link" rel="noopener">READ FULL REPORT →</a>
+          <a href="https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/weatherxm-sybil-report.md" class="finding-link" rel="noopener">READ FULL REPORT →</a>
         </article>
         <article class="finding-card">
           <header class="finding-head"><span class="finding-net">GEODNET</span><span class="finding-date">2026-05-15</span></header>
@@ -2381,7 +2398,8 @@
         <a href="https://github.com/Ricolax310/GetKinetik" rel="noopener" style="font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--graphite);text-transform:uppercase;">GITHUB</a>
         <a href="https://x.com/Kinetik_Rick" rel="noopener" style="font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--graphite);text-transform:uppercase;">TWITTER / X</a>
         <a href="https://www.npmjs.com/package/@getkinetik/verify" rel="noopener" style="font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--graphite);text-transform:uppercase;">NPM</a>
-        <a href="/bureau/" style="font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--graphite);text-transform:uppercase;">BUREAU</a>
+        <a href="/audits.html" style="font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--graphite);text-transform:uppercase;">SAMPLE READS</a>
+        <a href="/bureau/" style="font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--graphite);text-transform:uppercase;">THE BUREAU</a>
         <a href="/bureau/ask/" style="font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--ruby-ember);text-transform:uppercase;">Bureau AI · Talk to us</a>
         <a href="mailto:eric@outfromnothingllc.com" style="font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--graphite);text-transform:uppercase;">CONTACT</a>
         <a href="https://github.com/Ricolax310/GetKinetik/releases/latest" rel="noopener" style="font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--ruby-ember);text-transform:uppercase;">DOWNLOAD APK v1.7.0</a>
