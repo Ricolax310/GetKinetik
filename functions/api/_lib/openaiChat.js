@@ -9,7 +9,7 @@ export function defaultDepinChatModel(env) {
   return (
     env?.BUREAU_DEPIN_CHAT_MODEL?.trim() ||
     env?.OPENAI_MODEL?.trim() ||
-    "gpt-4o-mini"
+    "gpt-5"
   );
 }
 
@@ -59,9 +59,8 @@ export async function chatCompletions({
   const url = `${baseUrl.replace(/\/$/, "")}/chat/completions`;
   const payload = buildChatPayload({ model, messages, maxOutput });
 
-  let res;
-  try {
-    res = await fetch(url, {
+  const fetchOnce = () =>
+    fetch(url, {
       method: "POST",
       headers: {
         authorization: `Bearer ${apiKey}`,
@@ -73,9 +72,23 @@ export async function chatCompletions({
           ? AbortSignal.timeout(timeoutMs)
           : undefined,
     });
+
+  let res;
+  try {
+    res = await Promise.race([
+      fetchOnce(),
+      new Promise((_, reject) => {
+        setTimeout(
+          () => reject(new Error("openai_fetch_timeout")),
+          timeoutMs + 500,
+        );
+      }),
+    ]);
   } catch (err) {
     const message =
-      err?.name === "TimeoutError" || err?.name === "AbortError"
+      err?.name === "TimeoutError" ||
+      err?.name === "AbortError" ||
+      err?.message === "openai_fetch_timeout"
         ? "Chat timed out — try a shorter question."
         : "Chat upstream unreachable — try again shortly.";
     return { ok: false, status: 502, error: message };

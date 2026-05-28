@@ -17,7 +17,7 @@ import {
 
 const MAX_MESSAGES = 16;
 const MAX_USER_CHARS = 2000;
-const MAX_OUTPUT_TOKENS = 600;
+const MAX_OUTPUT_TOKENS = 400;
 /** Stay under Cloudflare Pages function wall-clock limit (~30s). */
 const OPENAI_TIMEOUT_MS = 25_000;
 const MAX_CONTEXT_CHARS = 12_000;
@@ -101,9 +101,7 @@ export async function onRequestPost(ctx) {
       /* use fallback context */
     }
 
-    // Public chat must answer in <30s on Pages. Shared BUREAU_NEWS_MODEL=gpt-5 is too slow here.
-    const configured = defaultDepinChatModel(env);
-    const primaryModel = /^gpt-5/i.test(configured) ? "gpt-4o-mini" : configured;
+    const primaryModel = defaultDepinChatModel(env);
     const fallbackModel = "gpt-4o-mini";
 
     const system = `You are the public GETKINETIK bureau assistant on getkinetik.app.
