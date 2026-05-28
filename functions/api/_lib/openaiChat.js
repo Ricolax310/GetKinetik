@@ -6,11 +6,12 @@
 const DEFAULT_BASE = "https://api.openai.com/v1";
 
 export function defaultDepinChatModel(env) {
-  return (
+  const raw =
     env?.BUREAU_DEPIN_CHAT_MODEL?.trim() ||
     env?.OPENAI_MODEL?.trim() ||
-    "gpt-5"
-  );
+    "gpt-5";
+  if (/^gpt-4o-mini$/i.test(raw)) return "gpt-5";
+  return raw;
 }
 
 export function usesCompletionTokensParam(model) {
@@ -21,6 +22,7 @@ export function buildChatPayload({ model, messages, maxOutput = 1200 }) {
   const payload = { model, messages };
   if (usesCompletionTokensParam(model)) {
     payload.max_completion_tokens = maxOutput;
+    payload.reasoning_effort = "minimal";
   } else {
     payload.temperature = 0.4;
     payload.max_tokens = maxOutput;

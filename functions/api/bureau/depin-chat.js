@@ -101,8 +101,7 @@ export async function onRequestPost(ctx) {
       /* use fallback context */
     }
 
-    const primaryModel = defaultDepinChatModel(env);
-    const fallbackModel = "gpt-4o-mini";
+    const model = defaultDepinChatModel(env);
 
     const system = `You are the public GETKINETIK bureau assistant on getkinetik.app.
 
@@ -124,32 +123,16 @@ Rules:
 ${context}`;
 
     const chatMessages = [{ role: "system", content: system }, ...messages];
-    let result = await chatCompletions({
+    const result = await chatCompletions({
       apiKey: env.OPENAI_API_KEY,
-      model: primaryModel,
+      model,
       messages: chatMessages,
       maxOutput: MAX_OUTPUT_TOKENS,
       timeoutMs: OPENAI_TIMEOUT_MS,
     });
 
-    if (
-      !result.ok &&
-      primaryModel !== fallbackModel &&
-      /model unavailable|model_not_found|does not have access/i.test(
-        result.error || "",
-      )
-    ) {
-      result = await chatCompletions({
-        apiKey: env.OPENAI_API_KEY,
-        model: fallbackModel,
-        messages: chatMessages,
-        maxOutput: MAX_OUTPUT_TOKENS,
-        timeoutMs: OPENAI_TIMEOUT_MS,
-      });
-    }
-
     if (!result.ok) {
-      return json({ error: result.error, model: primaryModel }, result.status);
+      return json({ error: result.error, model }, result.status);
     }
 
     return json({ reply: result.reply, model: result.model });
