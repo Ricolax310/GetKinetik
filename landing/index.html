@@ -116,6 +116,32 @@
         z-index: 10;
       }
 
+      .topbar-right {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .topbar-bureau {
+        font-family: var(--mono);
+        font-size: 9px;
+        letter-spacing: 2.2px;
+        color: var(--ruby-ember);
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 8px 14px;
+        border: 1px solid rgba(255, 20, 48, 0.35);
+        border-radius: 999px;
+        background: rgba(58, 2, 9, 0.25);
+        transition: border-color 0.2s ease, background 0.2s ease;
+      }
+
+      .topbar-bureau:hover {
+        border-color: var(--ruby-core);
+        background: rgba(255, 20, 48, 0.12);
+        color: var(--platinum);
+      }
+
       .topbar-brand {
         font-family: var(--sans);
         font-size: 12px;
@@ -323,6 +349,18 @@
         border-color: var(--sapphire-deep);
         background: rgba(0, 42, 102, 0.2);
         color: var(--sapphire-glow);
+      }
+
+      .cta-bureau {
+        border-color: rgba(255, 20, 48, 0.35);
+        background: rgba(58, 2, 9, 0.2);
+        color: var(--ruby-ember);
+      }
+
+      .cta-bureau:hover {
+        border-color: var(--ruby-core);
+        background: rgba(255, 20, 48, 0.12);
+        color: var(--platinum);
       }
 
       .hero-meta {
@@ -1981,7 +2019,10 @@
     <body>
     <div class="topbar">
       <span class="topbar-brand">GETKINETIK</span>
-      <span class="topbar-status">v1.7.0 · BUREAU · LIVE</span>
+      <div class="topbar-right">
+        <a class="topbar-bureau" href="/bureau/ask/">Bureau AI</a>
+        <span class="topbar-status">v1.7.0 · BUREAU · LIVE</span>
+      </div>
     </div>
 
     <!-- HERO -->
@@ -2012,7 +2053,7 @@
 
       <div class="cta-row">
         <a class="cta cta-primary" href="https://github.com/Ricolax310/GetKinetik/tree/main/docs/reports" rel="noopener">VIEW RECENT AUDITS <span class="arrow">→</span></a>
-        <a class="cta cta-secondary" href="/bureau/ask/">ASK ABOUT DEPIN TRUST</a>
+        <a class="cta cta-secondary cta-bureau" href="/bureau/ask/">Bureau AI · Talk to us</a>
         <a class="cta cta-secondary" href="mailto:eric@outfromnothingllc.com?subject=GETKINETIK%20Inquiry">FOR NETWORKS &amp; INVESTORS</a>
       </div>
 
@@ -2341,7 +2382,7 @@
         <a href="https://x.com/Kinetik_Rick" rel="noopener" style="font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--graphite);text-transform:uppercase;">TWITTER / X</a>
         <a href="https://www.npmjs.com/package/@getkinetik/verify" rel="noopener" style="font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--graphite);text-transform:uppercase;">NPM</a>
         <a href="/bureau/" style="font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--graphite);text-transform:uppercase;">BUREAU</a>
-        <a href="/bureau/ask/" style="font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--graphite);text-transform:uppercase;">ASK BUREAU</a>
+        <a href="/bureau/ask/" style="font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--ruby-ember);text-transform:uppercase;">Bureau AI · Talk to us</a>
         <a href="mailto:eric@outfromnothingllc.com" style="font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--graphite);text-transform:uppercase;">CONTACT</a>
         <a href="https://github.com/Ricolax310/GetKinetik/releases/latest" rel="noopener" style="font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--ruby-ember);text-transform:uppercase;">DOWNLOAD APK v1.7.0</a>
       </div>

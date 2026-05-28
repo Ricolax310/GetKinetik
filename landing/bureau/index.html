@@ -297,6 +297,28 @@
 
       footer a { color: var(--silver); }
 
+      .cta-bureau {
+        display: inline-block;
+        padding: 12px 24px;
+        border-radius: 999px;
+        background: #ff1430;
+        color: #e6e8ec;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 13px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        box-shadow: 0 6px 24px rgba(255, 20, 48, 0.3);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .cta-bureau:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 8px 28px rgba(255, 20, 48, 0.45);
+        color: #fff;
+        text-decoration: none;
+      }
+
       .pill-row {
         display: flex;
         flex-wrap: wrap;
@@ -513,10 +535,7 @@
       </div>
 
       <p style="margin-bottom: 32px;">
-        <a
-          href="/bureau/ask/"
-          style="display:inline-block;padding:12px 22px;border-radius:8px;background:#1565C0;color:#fff;text-decoration:none;font-weight:600;font-size:14px;letter-spacing:0.02em;"
-        >Ask about DePIN trust &amp; security →</a>
+        <a class="cta-bureau" href="/bureau/ask/">Bureau AI · Talk to us →</a>
       </p>
 
       <div class="ticker" id="ticker">
@@ -805,7 +824,7 @@
         <span>
           <a href="/status/">Status</a>
           ·
-          <a href="/bureau/ask/">Ask the bureau</a>
+          <a href="/bureau/ask/">Bureau AI · Talk to us</a>
           ·
           <a href="/verify/">Public verifier</a>
           ·

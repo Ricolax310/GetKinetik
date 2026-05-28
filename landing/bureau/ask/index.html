@@ -5,27 +5,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#0A0A0A" />
     <meta name="color-scheme" content="dark" />
-    <title>Ask the Bureau — DePIN trust &amp; security</title>
+    <title>GETKINETIK Bureau AI — Talk to us</title>
     <meta
       name="description"
-      content="Chat with the GETKINETIK bureau about DePIN trust, registry integrity, and neutral second reads on public data."
+      content="Talk to the GETKINETIK bureau AI about DePIN trust, registry integrity, and neutral second reads on public data."
     />
     <link rel="canonical" href="https://getkinetik.app/bureau/ask/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="GETKINETIK Bureau AI — Talk to us" />
+    <meta
+      property="og:description"
+      content="Neutral DePIN trust Q&amp;A — registry hygiene, signed device evidence, reproducible public reads. Not investment advice."
+    />
+    <meta property="og:url" content="https://getkinetik.app/bureau/ask/" />
+    <meta property="og:site_name" content="GETKINETIK" />
+    <meta property="og:image" content="https://getkinetik.app/og-image.png" />
+    <meta property="og:image:width" content="1024" />
+    <meta property="og:image:height" content="1024" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://getkinetik.app/og-image.png" />
+    <meta name="twitter:title" content="GETKINETIK Bureau AI — Talk to us" />
+    <meta
+      name="twitter:description"
+      content="Neutral DePIN trust Q&amp;A — registry hygiene, signed device evidence, reproducible public reads."
+    />
+
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230A0A0A'/%3E%3Cpolygon points='16,6 24,16 16,26 8,16' fill='%23FF1430'/%3E%3Cpolygon points='16,6 24,16 16,14 8,16' fill='%23FFB199' opacity='0.6'/%3E%3C/svg%3E"
+    />
+
     <link rel="stylesheet" href="ask.css" />
   </head>
   <body>
     <div class="wrap">
       <header class="top">
-        <a href="/bureau/">← Bureau</a>
-        <span class="brand">Public Q&amp;A</span>
+        <a class="home" href="/">← getkinetik.app</a>
+        <span class="brand">Bureau AI</span>
       </header>
 
-      <h1>Ask about DePIN trust</h1>
+      <section class="hero-band" aria-hidden="true">
+        <svg class="gem" viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="rubyCore" cx="50%" cy="45%" r="55%">
+              <stop offset="0%" stop-color="#FF1430" />
+              <stop offset="55%" stop-color="#B00820" />
+              <stop offset="100%" stop-color="#3A0209" />
+            </radialGradient>
+            <linearGradient id="rubyTop" x1="50%" y1="0%" x2="50%" y2="100%">
+              <stop offset="0%" stop-color="#FFB199" stop-opacity="0.85" />
+              <stop offset="100%" stop-color="#FF1430" stop-opacity="0" />
+            </linearGradient>
+            <linearGradient id="rubyDeep" x1="50%" y1="0%" x2="50%" y2="100%">
+              <stop offset="0%" stop-color="#3A0209" stop-opacity="0" />
+              <stop offset="100%" stop-color="#120000" stop-opacity="0.9" />
+            </linearGradient>
+            <linearGradient id="rubyShine" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.55" />
+              <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+            </linearGradient>
+          </defs>
+          <polygon points="100,0 200,60 200,180 100,240 0,180 0,60" fill="url(#rubyCore)" />
+          <polygon points="100,0 200,60 100,120 0,60" fill="url(#rubyTop)" />
+          <polygon points="0,180 100,240 200,180 100,120" fill="url(#rubyDeep)" />
+          <polygon points="100,14 180,58 100,100 20,58" fill="url(#rubyShine)" opacity="0.6" />
+        </svg>
+      </section>
+
+      <p class="eyebrow">Bureau AI · Public Q&amp;A</p>
+      <h1>Talk to the bureau</h1>
       <p class="lede">
         Neutral answers on registry hygiene, signed device evidence, and why outsiders need a
         reproducible second read — not token hype or investment advice.
       </p>
-      <p id="context-meta" class="lede" style="font-size:12px;margin-top:-16px;margin-bottom:20px;color:var(--steel)"></p>
+      <p id="context-meta" class="context-meta"></p>
 
       <div class="starter" id="starters"></div>
 
