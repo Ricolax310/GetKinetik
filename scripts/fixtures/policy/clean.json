@@ -1,0 +1,34 @@
+{
+  "_description": "Clean long-running, fully sensor-coherent node, no flags → PREMIER. Fixed timestamps for determinism (no Date.now).",
+  "v": 1,
+  "kind": "attestation",
+  "attribution": "GETKINETIK by OutFromNothing LLC",
+  "pubkey": "0000000000000000000000000000000000000000000000000000000000000000",
+  "bureauTs": 1700000000000,
+  "subject": {
+    "chainTip": null,
+    "mintedAt": 1700000000000,
+    "nodeId": "KINETIK-NODE-A3F2B719",
+    "pubkey": "1111111111111111111111111111111111111111111111111111111111111111"
+  },
+  "bureauObserved": {
+    "firstSeenMs": 1684448000000,
+    "lastSeenMs": 1700000000000,
+    "peakLifetimeBeats": 250000
+  },
+  "chainClaim": {
+    "firstBeatTs": 1684448000000,
+    "lifetimeBeats": 250000,
+    "schema": "proof-of-origin:v2"
+  },
+  "sensorCoherence": {
+    "luxObserved": true,
+    "luxPlausible": true,
+    "motionRmsObserved": true,
+    "motionRmsPlausible": true,
+    "pressureHpaObserved": true,
+    "pressureHpaPlausible": true
+  },
+  "flags": [],
+  "witnesses": []
+}

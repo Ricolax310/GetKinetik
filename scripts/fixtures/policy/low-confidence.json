@@ -1,0 +1,34 @@
+{
+  "_description": "Low-confidence node — short 2d observed window, few beats, one sensor observed-but-implausible (no flag in fixture), no tamper flags → low score, tier NEW, flagged=false.",
+  "v": 1,
+  "kind": "attestation",
+  "attribution": "GETKINETIK by OutFromNothing LLC",
+  "pubkey": "0000000000000000000000000000000000000000000000000000000000000000",
+  "bureauTs": 1700000000000,
+  "subject": {
+    "chainTip": null,
+    "mintedAt": 1700000000000,
+    "nodeId": "KINETIK-NODE-99CC88DD",
+    "pubkey": "5555555555555555555555555555555555555555555555555555555555555555"
+  },
+  "bureauObserved": {
+    "firstSeenMs": 1699827200000,
+    "lastSeenMs": 1700000000000,
+    "peakLifetimeBeats": 100
+  },
+  "chainClaim": {
+    "firstBeatTs": 1699827200000,
+    "lifetimeBeats": 100,
+    "schema": "proof-of-origin:v2"
+  },
+  "sensorCoherence": {
+    "luxObserved": true,
+    "luxPlausible": true,
+    "motionRmsObserved": true,
+    "motionRmsPlausible": false,
+    "pressureHpaObserved": false,
+    "pressureHpaPlausible": null
+  },
+  "flags": [],
+  "witnesses": []
+}

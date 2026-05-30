@@ -79,6 +79,10 @@
  */
 
 import { loadBureauSigner, signAttestation } from "./_lib/bureauSign.js";
+import {
+  DEFAULT_POLICY,
+  attestationToTier,
+} from "./_lib/evidence-mapping.js";
 
 // ── Constants ────────────────────────────────────────────────────────────────
 const PROOF_ATTRIBUTION = "GETKINETIK by OutFromNothing LLC";
@@ -249,116 +253,10 @@ async function persistBureauContext(env, nodeId, prior, observed) {
   return next;
 }
 
-// ── Reference policy (mirror of @getkinetik/evidence-mapping DEFAULT_POLICY) ─
+// ── Reference policy ─────────────────────────────────────────────────────────
 //
-// This is duplicated here on purpose: the worker is a CF Pages Function that
-// can't easily import a TS package, and we want the `derived` block in the
-// response to use the same math partners will run on the signed attestation
-// via @getkinetik/evidence-mapping. The two implementations are kept in
-// lockstep — if you change one, change the other in the same commit.
-//
-// THE SOURCE OF TRUTH is @getkinetik/evidence-mapping. This worker copy
-// exists for response convenience only; partners doing real integration
-// run the package against the signed attestation themselves.
-
-const POLICY_VERSION = "v2.0.2";
-const DEFAULT_POLICY = {
-  maxBeatRatePerMs: 1 / 25_000,
-  fullAgeCreditDays: 180,
-  beatsLogMultiplier: 50,
-  beatsScoreCap: 300,
-  ageScoreCap: 300,
-  baseline: 200,
-  sensorBaseline: 50,
-  sensorPerFieldPoints: 50,
-  flaggedScoreCeiling: 199,
-  tierBands: {
-    PREMIER: { min: 900 },
-    STRONG: { min: 750 },
-    STANDING: { min: 500 },
-    NEW: { min: 0 },
-  },
-};
-
-function attestationToTier(att, policy = DEFAULT_POLICY) {
-  let score = policy.baseline;
-  const flags = Array.isArray(att.flags) ? att.flags : [];
-  /** Flags that inform partners but must not imply tamper / TAMPERED tier. */
-  const informational = new Set(["first_sighting"]);
-  const flagged = flags.filter((f) => !informational.has(f)).length > 0;
-
-  const observedWindowMs = Math.max(
-    0,
-    att.bureauObserved.lastSeenMs - att.bureauObserved.firstSeenMs,
-  );
-  const ageDays = observedWindowMs / 86_400_000;
-  const bureauObservedAge = Math.min(
-    policy.ageScoreCap,
-    Math.max(0, Math.round((ageDays / policy.fullAgeCreditDays) * policy.ageScoreCap)),
-  );
-  score += bureauObservedAge;
-
-  const claimedBeats =
-    typeof att.chainClaim.lifetimeBeats === "number" &&
-    att.chainClaim.lifetimeBeats >= 0
-      ? att.chainClaim.lifetimeBeats
-      : 0;
-  const lifetimeBeats =
-    claimedBeats > 0
-      ? Math.min(
-          policy.beatsScoreCap,
-          Math.round(Math.log10(claimedBeats + 1) * policy.beatsLogMultiplier),
-        )
-      : 0;
-  score += lifetimeBeats;
-
-  const sc = att.sensorCoherence;
-  let sensorCoherence = 0;
-  if (sc) {
-    const anyObserved =
-      sc.luxObserved || sc.motionRmsObserved || sc.pressureHpaObserved;
-    if (anyObserved) sensorCoherence += policy.sensorBaseline;
-    if (sc.luxObserved && sc.luxPlausible === true) {
-      sensorCoherence += policy.sensorPerFieldPoints;
-    }
-    if (sc.motionRmsObserved && sc.motionRmsPlausible === true) {
-      sensorCoherence += policy.sensorPerFieldPoints;
-    }
-    if (sc.pressureHpaObserved && sc.pressureHpaPlausible === true) {
-      sensorCoherence += policy.sensorPerFieldPoints;
-    }
-  }
-  score += sensorCoherence;
-
-  score = Math.max(0, Math.min(1000, score));
-  if (flagged) {
-    score = Math.min(score, policy.flaggedScoreCeiling);
-  }
-
-  const tier = flagged
-    ? "TAMPERED"
-    : score >= policy.tierBands.PREMIER.min
-      ? "PREMIER"
-      : score >= policy.tierBands.STRONG.min
-        ? "STRONG"
-        : score >= policy.tierBands.STANDING.min
-          ? "STANDING"
-          : "NEW";
-
-  return {
-    tier,
-    score,
-    flagged,
-    contributingFactors: {
-      baseline: policy.baseline,
-      bureauObservedAge,
-      lifetimeBeats,
-      sensorCoherence,
-    },
-    flags: flags.slice(),
-    policyVersion: POLICY_VERSION,
-  };
-}
+// DEFAULT_POLICY and attestationToTier are imported from ./_lib/evidence-mapping.js
+// (generated mirror of packages/evidence-mapping). Regenerate: npm run policy:sync
 
 // ── Core verification + attestation pipeline ─────────────────────────────────
 

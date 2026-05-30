@@ -6,11 +6,23 @@ on:
     paths:
       - 'landing/verify/**'
       - 'packages/kinetik-core/src/**'
+      - 'packages/evidence-mapping/**'
+      - 'functions/api/verify-device.js'
+      - 'functions/api/_lib/evidence-mapping.js'
+      - 'scripts/sync-worker-policy.mjs'
+      - 'scripts/test-policy-parity.mjs'
+      - 'scripts/fixtures/policy/**'
       - '.github/workflows/smoketest.yml'
   pull_request:
     paths:
       - 'landing/verify/**'
       - 'packages/kinetik-core/src/**'
+      - 'packages/evidence-mapping/**'
+      - 'functions/api/verify-device.js'
+      - 'functions/api/_lib/evidence-mapping.js'
+      - 'scripts/sync-worker-policy.mjs'
+      - 'scripts/test-policy-parity.mjs'
+      - 'scripts/fixtures/policy/**'
       - '.github/workflows/smoketest.yml'
   workflow_dispatch:
 
@@ -31,3 +43,31 @@ jobs:
 
       - name: Run verifier smoketest
         run: node landing/verify/smoketest.mjs
+
+  policy-parity:
+    name: Genesis Score policy parity check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build evidence-mapping (single source of truth)
+        run: npm run policy:build
+
+      - name: Verify committed worker mirror is up to date
+        run: |
+          node scripts/sync-worker-policy.mjs
+          git diff --exit-code functions/api/_lib/evidence-mapping.js
+
+      - name: evidence-mapping package smoketest
+        run: node packages/evidence-mapping/smoketest.mjs
+
+      - name: Worker / package policy parity
+        run: node scripts/test-policy-parity.mjs

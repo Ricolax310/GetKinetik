@@ -1,0 +1,34 @@
+{
+  "_description": "Non-informational tamper flag (chain_rewind) on an otherwise PREMIER-grade node → score floored to flaggedScoreCeiling, tier TAMPERED.",
+  "v": 1,
+  "kind": "attestation",
+  "attribution": "GETKINETIK by OutFromNothing LLC",
+  "pubkey": "0000000000000000000000000000000000000000000000000000000000000000",
+  "bureauTs": 1700000000000,
+  "subject": {
+    "chainTip": "abc123",
+    "mintedAt": 1700000000000,
+    "nodeId": "KINETIK-NODE-DEADBEEF",
+    "pubkey": "2222222222222222222222222222222222222222222222222222222222222222"
+  },
+  "bureauObserved": {
+    "firstSeenMs": 1668464000000,
+    "lastSeenMs": 1700000000000,
+    "peakLifetimeBeats": 500000
+  },
+  "chainClaim": {
+    "firstBeatTs": 1668464000000,
+    "lifetimeBeats": 500000,
+    "schema": "proof-of-origin:v2"
+  },
+  "sensorCoherence": {
+    "luxObserved": true,
+    "luxPlausible": true,
+    "motionRmsObserved": true,
+    "motionRmsPlausible": true,
+    "pressureHpaObserved": true,
+    "pressureHpaPlausible": true
+  },
+  "flags": ["chain_rewind"],
+  "witnesses": []
+}

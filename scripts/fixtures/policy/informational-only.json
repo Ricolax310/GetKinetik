@@ -1,0 +1,34 @@
+{
+  "_description": "Only an informational flag (first_sighting) present → must NOT flip to TAMPERED. 30d observed, 100k beats, lux coherent → STANDING, flagged=false.",
+  "v": 1,
+  "kind": "attestation",
+  "attribution": "GETKINETIK by OutFromNothing LLC",
+  "pubkey": "0000000000000000000000000000000000000000000000000000000000000000",
+  "bureauTs": 1700000000000,
+  "subject": {
+    "chainTip": null,
+    "mintedAt": 1700000000000,
+    "nodeId": "KINETIK-NODE-11AA22BB",
+    "pubkey": "4444444444444444444444444444444444444444444444444444444444444444"
+  },
+  "bureauObserved": {
+    "firstSeenMs": 1697408000000,
+    "lastSeenMs": 1700000000000,
+    "peakLifetimeBeats": 100000
+  },
+  "chainClaim": {
+    "firstBeatTs": 1697408000000,
+    "lifetimeBeats": 100000,
+    "schema": "proof-of-origin:v2"
+  },
+  "sensorCoherence": {
+    "luxObserved": true,
+    "luxPlausible": true,
+    "motionRmsObserved": false,
+    "motionRmsPlausible": null,
+    "pressureHpaObserved": false,
+    "pressureHpaPlausible": null
+  },
+  "flags": ["first_sighting"],
+  "witnesses": []
+}

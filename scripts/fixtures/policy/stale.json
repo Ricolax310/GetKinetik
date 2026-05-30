@@ -1,0 +1,34 @@
+{
+  "_description": "Stale / brand-new node — zero observed window, no beats, no sensors, no flags → baseline only, tier NEW.",
+  "v": 1,
+  "kind": "attestation",
+  "attribution": "GETKINETIK by OutFromNothing LLC",
+  "pubkey": "0000000000000000000000000000000000000000000000000000000000000000",
+  "bureauTs": 1700000000000,
+  "subject": {
+    "chainTip": null,
+    "mintedAt": 1700000000000,
+    "nodeId": "KINETIK-NODE-0000FACE",
+    "pubkey": "3333333333333333333333333333333333333333333333333333333333333333"
+  },
+  "bureauObserved": {
+    "firstSeenMs": 1700000000000,
+    "lastSeenMs": 1700000000000,
+    "peakLifetimeBeats": 0
+  },
+  "chainClaim": {
+    "firstBeatTs": null,
+    "lifetimeBeats": 0,
+    "schema": "proof-of-origin:v2"
+  },
+  "sensorCoherence": {
+    "luxObserved": false,
+    "luxPlausible": null,
+    "motionRmsObserved": false,
+    "motionRmsPlausible": null,
+    "pressureHpaObserved": false,
+    "pressureHpaPlausible": null
+  },
+  "flags": [],
+  "witnesses": []
+}
