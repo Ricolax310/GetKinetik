@@ -1,263 +1,312 @@
-// ============================================================================
-// GETKINETIK Sovereign Verifier — browser-side Ed25519 proof auditor.
-// ----------------------------------------------------------------------------
-// This file is the single source of verification truth outside the app.
-// It intentionally mirrors packages/kinetik-core/src/proof.ts and packages/kinetik-core/src/heartbeat.ts from
-// the mobile codebase at the byte level:
+// -----------------------------------------------------------------------------
+// GENERATED FILE — DO NOT EDIT
 //
-//   · stableStringify()    — identical shallow lex-sorted serializer
-//   · sha256(message)[:16] — identical hash-truncation for the embedded `hash`
-//   · ed25519.verifyAsync  — identical signature scheme + SHA-512 wiring
-//   · PROOF_ATTRIBUTION    — identical ownership stamp check
+// Source of truth:
+// packages/verify/src/index.ts
 //
-// If any of those four constants drift between this file and the app,
-// previously-minted proofs will silently fail to verify. Treat both
-// sides as a single cryptographic contract. The version of this file is
-// stamped at the bottom — bump it on any serialization change and
-// include a migration note in CHANGELOG.
-//
-// Runtime dependencies are VENDORED in ./vendor/. These are the exact
-// ES-module bundles published by @noble/ed25519@3.1.0 and @noble/hashes@2.2.0
-// — the same pinned versions the mobile app ships — fetched once from
-// esm.sh and committed to this repo. The verifier therefore performs ZERO
-// external network fetches at verify time:
-//
-//   · deploys cleanly under the landing site's strict CSP (`script-src 'self'`)
-//   · verifies offline if the page is loaded from a saved bundle
-//   · cannot be silently rotated by a third-party CDN
-//
-// To refresh the vendored crypto, re-run the fetch commands documented in
-// README.md. After any refresh, run `node landing/verify/smoketest.mjs` to
-// confirm byte-for-byte contract parity with the app's signing pipeline.
-// ============================================================================
+// Regenerate:
+// npm run verifier:sync
+// -----------------------------------------------------------------------------
 
+// ============================================================================
+// @getkinetik/verify — independent verifier for GETKINETIK signed artifacts.
+// ----------------------------------------------------------------------------
+// This package is the byte-for-byte equivalent of the verifier shipped at
+// https://getkinetik.app/verify/. It exists so partner networks, lenders,
+// auditors, and any third-party integrator can confirm a Proof of Origin,
+// signed heartbeat, or signed earning *without ever calling our servers* and
+// without copying source files into their own repo.
+//
+// CONTRACT — must match packages/kinetik-core/src/proof.ts and
+// packages/kinetik-core/src/heartbeat.ts in the GETKINETIK app, AND
+// landing/verify/verifier.js for the public web verifier:
+//
+//   · stableStringify()    — shallow lex-sorted serializer
+//   · sha256(message)[:16] — embedded `hash` truncation
+//   · ed25519.verifyAsync  — Ed25519 signature scheme + SHA-512 wiring
+//   · PROOF_ATTRIBUTION    — ownership stamp constant
+//
+// If any of those four constants drift between this package and the app,
+// previously-minted artifacts will silently fail to verify. Bump VERSION
+// below + add a CHANGELOG entry on any serialization change.
+//
+// ZERO RUNTIME NETWORK CALLS. ZERO HIDDEN STATE. PURE FUNCTION OF INPUT.
+// ============================================================================
 import * as ed from "./vendor/ed25519.js";
 import { sha256, sha512 } from "./vendor/sha2.js";
-
-// ----------------------------------------------------------------------------
-// @noble/ed25519 v3 freezes `ed.hashes`, but the fields themselves are
-// writable properties. The library's default sha512Async tries crypto.subtle
-// first, which works in modern browsers but we wire the pure-JS path too so
-// the verifier works over file:// and inside older WebViews — the exact
-// same override the mobile app uses in packages/kinetik-core/src/identity.ts.
-// ----------------------------------------------------------------------------
+// stableStringify is the single canonical serializer. This is a GENERATED
+// mirror of the SSOT (packages/kinetik-core/src/stableJson.ts), produced by
+// `npm run canonical:sync` and drift-guarded in CI. It is compiled into this
+// package's dist so the published SDK stays self-contained (no runtime
+// dependency on the private, unbuilt @kinetik/core package).
+import { stableStringify } from "./stable-json.js";
+// @noble/ed25519 v3 freezes `ed.hashes` but the fields are writable. We
+// override sha512 + sha512Async with the pure-JS @noble/hashes implementation
+// so the verifier works in any runtime — Node, browser, edge worker — without
+// depending on WebCrypto's `crypto.subtle.digest` being available.
 ed.hashes.sha512 = sha512;
-ed.hashes.sha512Async = async (msg) => sha512(msg);
-
+ed.hashes.sha512Async = (async (msg) => sha512(msg));
 // ----------------------------------------------------------------------------
-// The attribution string below is part of every Proof of Origin payload. A
-// valid signature requires that this exact bytes were signed, so a proof
-// whose attribution has been altered will fail at step 4 (signature
-// verification) even before this explicit check. The explicit check gives
-// us a clearer failure mode for a tampered-but-re-signed forgery attempt.
+// Constants — the cryptographic ownership stamp and protocol fee rate.
+// These ARE part of every Proof of Origin / Signed Earning payload, so a
+// valid signature already requires that the exact bytes were signed. The
+// explicit checks below give clearer failure modes for tampered-but-resigned
+// forgery attempts.
 // ----------------------------------------------------------------------------
-const PROOF_ATTRIBUTION = "GETKINETIK by OutFromNothing LLC";
-
+export const PROOF_ATTRIBUTION = 'GETKINETIK by OutFromNothing LLC';
+export const PROTOCOL_FEE_RATE = 0.01;
 // ----------------------------------------------------------------------------
-// stableStringify — byte-for-byte equivalent of packages/kinetik-core/src/stableJson.ts. It
-// sorts the top-level keys lexicographically and delegates value
-// serialization to JSON.stringify, which is spec-stable across engines for
-// the primitive types used in our payloads (string, number, boolean, null).
-// All Sovereign Node payloads are flat, so the shallow sort is sufficient.
-// If future payloads ever embed nested objects, BOTH this file and the
-// app-side stableJson must switch to a recursive sort in the same commit.
+// BUREAU_PUBKEY — the Genesis Bureau's published Ed25519 verification key.
+// Every bureau-signed attestation MUST verify against this exact pubkey for
+// `report.checks.bureauOk` to pass. A different valid signature (from any
+// other Ed25519 key) will still verify cryptographically — `signatureOk` —
+// but fails the `bureauOk` check, surfacing forgery attempts where someone
+// tries to mint attestations under a non-bureau key.
+//
+// PLACEHOLDER: this constant is 64 zero hex chars until the bureau key
+// ceremony has been performed (see scripts/mint-bureau-key.mjs). While
+// the placeholder is in effect, every attestation's `bureauOk` is false
+// because no real bureau pubkey has been published yet. Cryptographic
+// verification (`signatureOk`) still works against whatever pubkey is
+// embedded in the payload — so test harnesses that mint ephemeral bureau
+// keys can exercise the full pipeline.
+//
+// After the ceremony:
+//   1. Replace the constant below with the 64-char hex pubkey output by
+//      scripts/mint-bureau-key.mjs.
+//   2. Bump VERSION (this is a contract change for every downstream
+//      consumer of the verify package).
+//   3. Add a CHANGELOG entry noting the bureau key fingerprint and the
+//      date of the ceremony.
 // ----------------------------------------------------------------------------
-const stableStringify = (obj) => {
-  const keys = Object.keys(obj).sort();
-  const parts = [];
-  for (const k of keys) {
-    parts.push(`${JSON.stringify(k)}:${JSON.stringify(obj[k])}`);
-  }
-  return `{${parts.join(",")}}`;
-};
-
+export const BUREAU_PUBKEY = '852fbc2bdd7c0243c6ee42462f7d31274fd3be3a0f2125e8eb797b76410dfb26';
+/** Package version. Bump this on any change to the contract constants
+ *  above (stableStringify shape, sha256 truncation, signature scheme,
+ *  attribution string, or the bureau pubkey). Stays in lockstep with
+ *  landing/verify/verifier.js.
+ *
+ *  v0.2.1 (2026-05-13) — Genesis Bureau key minted and published. The
+ *  BUREAU_PUBKEY constant above is no longer a placeholder; every
+ *  attestation signed by `functions/api/_lib/bureauSign.js` in
+ *  production verifies against this exact key. */
+export const VERSION = '0.2.1';
+// stableStringify is re-exported so existing consumers of `@getkinetik/verify`
+// (and the package smoketest) keep importing it from the package root. The
+// implementation now lives in the generated ./stableJson mirror — see the
+// import at the top of this file.
+export { stableStringify };
 // ----------------------------------------------------------------------------
-// Byte/hex helpers. Kept local so the file is self-contained — a user who
-// wants to audit the verifier never has to follow a chain of imports.
+// Byte / hex / base64url helpers. Local so the package has no dependency
+// on the host's helper landscape.
 // ----------------------------------------------------------------------------
-const toHex = (bytes) =>
-  Array.from(bytes, (b) => b.toString(16).padStart(2, "0")).join("");
-
+const toHex = (bytes) => Array.from(bytes, (b) => b.toString(16).padStart(2, '0')).join('');
 const fromHex = (hex) => {
-  const clean = hex.toLowerCase();
-  if (!/^[0-9a-f]*$/.test(clean) || clean.length % 2 !== 0) {
-    throw new Error(`invalid hex string (length ${hex.length})`);
-  }
-  const out = new Uint8Array(clean.length / 2);
-  for (let i = 0; i < out.length; i++) {
-    out[i] = parseInt(clean.slice(i * 2, i * 2 + 2), 16);
-  }
-  return out;
+    const clean = hex.toLowerCase();
+    if (!/^[0-9a-f]*$/.test(clean) || clean.length % 2 !== 0) {
+        throw new Error(`invalid hex string (length ${hex.length})`);
+    }
+    const out = new Uint8Array(clean.length / 2);
+    for (let i = 0; i < out.length; i++) {
+        out[i] = parseInt(clean.slice(i * 2, i * 2 + 2), 16);
+    }
+    return out;
 };
-
 const utf8 = (s) => new TextEncoder().encode(s);
-
 // base64url decode, for `#proof=...` URL fragments.
 //
-// Defensive against the most common real-world failure mode: a user
-// copy-pasting a display-truncated URL where the terminal / email client
-// / chat app rendered the middle as literal "..." (or the Unicode
-// horizontal ellipsis "…"). Without this guard, atob throws
-// "InvalidCharacterError: The string to be decoded contains characters
-// outside of the Latin1 range" or similar, with no hint that the user's
-// input was actually truncated rather than corrupt.
-//
-// The fix is two layers:
-//   1. EXPLICIT ellipsis detection — fail FAST with a clear message
-//      pointing at the most likely cause. Catches the v1.3.x partner-
-//      outreach bug where a verify URL was clicked from an email that
-//      had wrapped+truncated it.
-//   2. SILENT alphabet filter — strip any character not in the
-//      base64url alphabet (A-Z, a-z, 0-9, '-', '_'). This catches stray
-//      whitespace, line breaks from word-wrap, and zero-width junk from
-//      rich-text paste pipelines. Padding ('=') is added back below.
-//
-// If either guard activates and the result still doesn't decode to a
-// valid JSON artifact, the existing JSON.parse-then-verify pipeline
-// surfaces that with its own error message — no silent corruption.
+// Defensive against the most common real-world failure mode: a user copy-
+// pasting a display-truncated URL where the terminal / email client / chat
+// app rendered the middle as literal "..." (or the Unicode horizontal
+// ellipsis "…"). Without this guard, atob throws an opaque
+// "InvalidCharacterError" with no hint that the input was truncated rather
+// than corrupt.
 const fromBase64Url = (s) => {
-  if (typeof s !== "string" || s.length === 0) {
-    throw new Error("Empty or non-string base64url payload");
-  }
-  if (s.includes("...") || s.includes("\u2026")) {
-    throw new Error(
-      "URL appears truncated — paste the full link (no '...' / '\u2026'), or scan the QR code instead"
-    );
-  }
-  const cleaned = s.replace(/[^A-Za-z0-9_\-]/g, "");
-  if (cleaned.length === 0) {
-    throw new Error("No base64url-shaped data found in fragment");
-  }
-  const pad = cleaned.length % 4 === 0 ? "" : "=".repeat(4 - (cleaned.length % 4));
-  const b64 = cleaned.replace(/-/g, "+").replace(/_/g, "/") + pad;
-  let bin;
-  try {
-    bin = atob(b64);
-  } catch (err) {
-    throw new Error(
-      `base64url decode failed: ${err && err.message ? err.message : String(err)}`
-    );
-  }
-  const out = new Uint8Array(bin.length);
-  for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
-  return new TextDecoder().decode(out);
+    if (typeof s !== 'string' || s.length === 0) {
+        throw new Error('Empty or non-string base64url payload');
+    }
+    if (s.includes('...') || s.includes('\u2026')) {
+        throw new Error("URL appears truncated — paste the full link (no '...' / '\u2026'), or scan the QR code instead");
+    }
+    const cleaned = s.replace(/[^A-Za-z0-9_\-]/g, '');
+    if (cleaned.length === 0) {
+        throw new Error('No base64url-shaped data found in fragment');
+    }
+    const pad = cleaned.length % 4 === 0 ? '' : '='.repeat(4 - (cleaned.length % 4));
+    const b64 = cleaned.replace(/-/g, '+').replace(/_/g, '/') + pad;
+    let bin;
+    if (typeof globalThis.atob === 'function') {
+        try {
+            bin = globalThis.atob(b64);
+        }
+        catch (err) {
+            const message = err instanceof Error ? err.message : String(err);
+            throw new Error(`base64url decode failed: ${message}`);
+        }
+    }
+    else if (typeof Buffer !== 'undefined') {
+        bin = Buffer.from(b64, 'base64').toString('binary');
+    }
+    else {
+        throw new Error('No base64 decoder available (need atob or Node Buffer in this runtime)');
+    }
+    const out = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++)
+        out[i] = bin.charCodeAt(i);
+    return new TextDecoder().decode(out);
 };
-
+const round8 = (n) => Math.round(n * 1e8) / 1e8;
 // ----------------------------------------------------------------------------
-// verifyArtifact — runs all four checks, returns a structured report the
-// UI can render without re-running any crypto. The report is intentionally
-// verbose: each check's pass/fail + observed/expected values are exposed
-// so a user can trace EXACTLY why an invalid proof was rejected.
+// verifyArtifact — runs all five checks and returns a structured report.
 //
-// Input shape: the artifact minted by packages/kinetik-core/src/proof.ts createProofOfOrigin
-// (or packages/kinetik-core/src/heartbeat.ts emit). Two forms are accepted:
-//
-//   FULL:    { payload, message, signature, hash }   — as minted
-//   COMPACT: { payload, signature }                  — QR/URL friendly;
-//                                                      message + hash are
-//                                                      re-derived from payload
+// Throws ONLY on structurally-invalid input (missing payload, malformed
+// signature hex, malformed pubkey hex). Any cryptographic or content-level
+// failure is reflected in `report.checks.*` and `report.valid`, never as
+// an exception — this lets the caller render a clear "what failed and why"
+// without having to wrap every call in a try/catch.
 // ----------------------------------------------------------------------------
-async function verifyArtifact(raw) {
-  if (!raw || typeof raw !== "object") {
-    throw new Error("artifact must be a JSON object");
-  }
-  const { payload, signature } = raw;
-  if (!payload || typeof payload !== "object") {
-    throw new Error("artifact missing `payload` object");
-  }
-  if (typeof signature !== "string" || !/^[0-9a-f]{128}$/i.test(signature)) {
-    throw new Error("artifact `signature` must be 128-char lowercase hex");
-  }
-  if (typeof payload.pubkey !== "string" || !/^[0-9a-f]{64}$/i.test(payload.pubkey)) {
-    throw new Error("payload.pubkey must be 64-char lowercase hex");
-  }
-
-  // Canonical message — what the signing key actually committed to.
-  const canonicalMessage = stableStringify(payload);
-  const canonicalHashFull = toHex(sha256(utf8(canonicalMessage)));
-  const canonicalHash = canonicalHashFull.slice(0, 16);
-
-  // Claimed message + hash from the artifact, with fallbacks for COMPACT form.
-  const claimedMessage =
-    typeof raw.message === "string" ? raw.message : canonicalMessage;
-  const claimedHash =
-    typeof raw.hash === "string" ? raw.hash.toLowerCase() : canonicalHash;
-
-  // ---- Check 1: canonical payload → claimed message byte equality. --------
-  const canonicalMatches = claimedMessage === canonicalMessage;
-
-  // ---- Check 2: sha256(message)[:16] === claimed hash. --------------------
-  const hashMatches = claimedHash === canonicalHash;
-
-  // ---- Check 3: attribution intact (proof-of-origin and earning). ----------
-  // Earnings carry the same attribution stamp as PoOs. Heartbeats carry none.
-  const isProofOfOrigin = payload.kind === "proof-of-origin";
-  const isEarning = payload.kind === "earning";
-  const attributionOk =
-    isProofOfOrigin || isEarning
-      ? payload.attribution === PROOF_ATTRIBUTION
-      : null; // N/A for heartbeats
-
-  // ---- Check 3b: fee integrity (earning only). ----------------------------
-  // The 1% protocol fee is baked into the signed payload. verifyArtifact
-  // confirms the fee and net math to detect any retroactive tampering.
-  // feeIntegrityOk is null for non-earning kinds (rendered as "skipped").
-  const PROTOCOL_FEE_RATE = 0.01;
-  const round8 = (n) => Math.round(n * 1e8) / 1e8;
-  let feeIntegrityOk = null;
-  if (isEarning) {
-    const expectedFee = round8((payload.gross ?? 0) * PROTOCOL_FEE_RATE);
-    const expectedNet = round8((payload.gross ?? 0) - expectedFee);
-    feeIntegrityOk =
-      typeof payload.fee === "number" &&
-      typeof payload.net === "number" &&
-      Math.abs(payload.fee - expectedFee) < 1e-9 &&
-      Math.abs(payload.net - expectedNet) < 1e-9;
-  }
-
-  // ---- Check 4: Ed25519 signature verifies against message + pubkey. ------
-  // We verify against the CANONICAL message, not the claimed one. If the
-  // claimed message has been altered to match a different payload, check 1
-  // catches it; the signature verify should still pass against canonical,
-  // unless the payload itself was re-signed by a different key (in which
-  // case check 4 also fails because pubkey won't match the signer).
-  let signatureOk = false;
-  let signatureError = null;
-  try {
-    const sigBytes = fromHex(signature);
-    const pubBytes = fromHex(payload.pubkey);
-    const msgBytes = utf8(canonicalMessage);
-    signatureOk = await ed.verifyAsync(sigBytes, msgBytes, pubBytes);
-  } catch (err) {
-    signatureError = err?.message ?? String(err);
-  }
-
-  const valid =
-    canonicalMatches &&
-    hashMatches &&
-    (attributionOk === true || attributionOk === null) &&
-    (feeIntegrityOk === true || feeIntegrityOk === null) &&
-    signatureOk;
-
-  return {
-    valid,
-    kind: payload.kind ?? "unknown",
-    payload,
-    signature,
-    canonicalMessage,
-    canonicalHash,
-    canonicalHashFull,
-    claimedMessage,
-    claimedHash,
-    checks: {
-      canonicalMatches,
-      hashMatches,
-      attributionOk,
-      feeIntegrityOk,
-      signatureOk,
-      signatureError,
-    },
-  };
+export async function verifyArtifact(raw) {
+    if (!raw || typeof raw !== 'object') {
+        throw new Error('artifact must be a JSON object');
+    }
+    const { payload, signature: rawSignature } = raw;
+    if (!payload || typeof payload !== 'object') {
+        throw new Error('artifact missing `payload` object');
+    }
+    if (typeof rawSignature !== 'string' ||
+        !/^[0-9a-f]{128}$/i.test(rawSignature)) {
+        throw new Error('artifact `signature` must be 128-char hex');
+    }
+    // Canonicalize signature to lowercase so the rest of the pipeline (and
+    // the returned report) always reflect the contract documented above.
+    // Uppercase hex is structurally valid Ed25519 input but historically we
+    // emit lowercase from the app, so callers can use string equality on
+    // report.signature without surprise normalization.
+    const signature = rawSignature.toLowerCase();
+    const pubkey = payload.pubkey;
+    if (typeof pubkey !== 'string' || !/^[0-9a-f]{64}$/i.test(pubkey)) {
+        throw new Error('payload.pubkey must be 64-char hex');
+    }
+    const canonicalMessage = stableStringify(payload);
+    const canonicalHashFull = toHex(sha256(utf8(canonicalMessage)));
+    const canonicalHash = canonicalHashFull.slice(0, 16);
+    const claimedMessage = typeof raw.message === 'string' ? raw.message : canonicalMessage;
+    const claimedHash = typeof raw.hash === 'string' ? raw.hash.toLowerCase() : canonicalHash;
+    const canonicalMatches = claimedMessage === canonicalMessage;
+    const hashMatches = claimedHash === canonicalHash;
+    const kindRaw = payload.kind;
+    const isProofOfOrigin = kindRaw === 'proof-of-origin';
+    const isEarning = kindRaw === 'earning';
+    const isAttestation = kindRaw === 'attestation';
+    // Attribution is carried on every artifact kind except heartbeats. The
+    // bureau attestation kind embeds the same PROOF_ATTRIBUTION string so a
+    // partner can grep for it without knowing the kind in advance.
+    const attributionOk = isProofOfOrigin || isEarning || isAttestation
+        ? payload.attribution ===
+            PROOF_ATTRIBUTION
+        : null;
+    let feeIntegrityOk = null;
+    if (isEarning) {
+        const grossRaw = payload.gross;
+        const feeRaw = payload.fee;
+        const netRaw = payload.net;
+        const gross = typeof grossRaw === 'number' ? grossRaw : 0;
+        const expectedFee = round8(gross * PROTOCOL_FEE_RATE);
+        const expectedNet = round8(gross - expectedFee);
+        feeIntegrityOk =
+            typeof feeRaw === 'number' &&
+                typeof netRaw === 'number' &&
+                Math.abs(feeRaw - expectedFee) < 1e-9 &&
+                Math.abs(netRaw - expectedNet) < 1e-9;
+    }
+    // bureauOk: payload.pubkey is the BUREAU's pubkey (signer), not the
+    // device's. We confirm it equals the published BUREAU_PUBKEY constant —
+    // this is what prevents a forger from minting attestations under their
+    // own key and having partners accept them.
+    //
+    // Case insensitivity: BUREAU_PUBKEY is stored lowercase, payload pubkey
+    // is normalized lowercase by the caller before signing, but compare
+    // case-insensitively for defensive robustness.
+    const bureauOk = isAttestation
+        ? pubkey.toLowerCase() === BUREAU_PUBKEY.toLowerCase()
+        : null;
+    // We verify against the CANONICAL message, not the claimed one. If the
+    // claimed message has been altered to match a different payload,
+    // canonicalMatches catches it; the signature verify still passes against
+    // canonical — unless the payload itself was re-signed by a different key
+    // (in which case signatureOk also fails because pubkey won't match the
+    // signer).
+    let signatureOk = false;
+    let signatureError = null;
+    try {
+        const sigBytes = fromHex(signature);
+        const pubBytes = fromHex(pubkey);
+        const msgBytes = utf8(canonicalMessage);
+        signatureOk = await ed.verifyAsync(sigBytes, msgBytes, pubBytes);
+    }
+    catch (err) {
+        signatureError = err instanceof Error ? err.message : String(err);
+    }
+    const valid = canonicalMatches &&
+        hashMatches &&
+        (attributionOk === true || attributionOk === null) &&
+        (feeIntegrityOk === true || feeIntegrityOk === null) &&
+        (bureauOk === true || bureauOk === null) &&
+        signatureOk;
+    const kind = kindRaw === 'proof-of-origin' ||
+        kindRaw === 'heartbeat' ||
+        kindRaw === 'earning' ||
+        kindRaw === 'attestation'
+        ? kindRaw
+        : 'unknown';
+    return {
+        valid,
+        kind,
+        payload,
+        signature,
+        canonicalMessage,
+        canonicalHash,
+        canonicalHashFull,
+        claimedMessage,
+        claimedHash,
+        checks: {
+            canonicalMatches,
+            hashMatches,
+            attributionOk,
+            feeIntegrityOk,
+            bureauOk,
+            signatureOk,
+            signatureError,
+        },
+    };
+}
+// ----------------------------------------------------------------------------
+// decodeProofUrl — convenience for the QR / URL flow. Given a full verifier
+// URL (e.g. https://getkinetik.app/verify/#proof=<base64url>), decode the
+// fragment back to the SignedArtifact JSON object the verify pipeline
+// accepts. Defensive against truncated / wrapped URLs (see fromBase64Url).
+// ----------------------------------------------------------------------------
+export function decodeProofUrl(url) {
+    if (typeof url !== 'string' || url.length === 0) {
+        throw new Error('decodeProofUrl: url must be a non-empty string');
+    }
+    const fragment = url.includes('#') ? url.slice(url.indexOf('#') + 1) : url;
+    const match = fragment.match(/(?:^|&)proof=([^&]+)/);
+    if (!match) {
+        throw new Error('URL has no #proof= fragment');
+    }
+    const json = fromBase64Url(decodeURIComponent(match[1]));
+    let parsed;
+    try {
+        parsed = JSON.parse(json);
+    }
+    catch (err) {
+        const message = err instanceof Error ? err.message : String(err);
+        throw new Error(`#proof= fragment is not valid JSON: ${message}`);
+    }
+    if (!parsed || typeof parsed !== 'object') {
+        throw new Error('#proof= fragment did not decode to an object');
+    }
+    return parsed;
 }
 
 // ----------------------------------------------------------------------------
@@ -656,6 +705,8 @@ if (tryLoadFromHash()) {
 window.__kinetikVerifier = {
   version: "1.3.3",
   verifyArtifact,
+  decodeProofUrl,
   stableStringify,
   PROOF_ATTRIBUTION,
+  BUREAU_PUBKEY,
 };

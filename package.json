@@ -34,6 +34,8 @@
     "smoke:depin-chat:live": "node scripts/smoke/depin-chat-smoke.mjs --live",
     "fuzz:smoke": "node scripts/fuzz/fuzz-verify-device.mjs --count 250",
     "verify:smoke": "npm --prefix packages/verify run build && node packages/verify/smoketest.mjs",
+    "verifier:sync": "npm --prefix packages/verify run build && node scripts/sync-verifier.mjs",
+    "verifier:parity": "npm run verifier:sync && node scripts/test-verifier-parity.mjs",
     "verify:integrity": "npm run verify:smoke && npm run fuzz:smoke && node scripts/fuzz/regression-score-bounds.mjs",
     "policy:build": "tsc -p packages/evidence-mapping/tsconfig.json",
     "policy:sync": "npm run policy:build && node scripts/sync-worker-policy.mjs",

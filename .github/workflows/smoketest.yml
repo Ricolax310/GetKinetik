@@ -16,6 +16,8 @@ on:
       - 'scripts/test-policy-parity.mjs'
       - 'scripts/sync-canonicalizer.mjs'
       - 'scripts/test-canonicalizer-parity.mjs'
+      - 'scripts/sync-verifier.mjs'
+      - 'scripts/test-verifier-parity.mjs'
       - 'scripts/fixtures/policy/**'
       - 'scripts/fixtures/canonicalizer/**'
       - '.github/workflows/smoketest.yml'
@@ -33,6 +35,8 @@ on:
       - 'scripts/test-policy-parity.mjs'
       - 'scripts/sync-canonicalizer.mjs'
       - 'scripts/test-canonicalizer-parity.mjs'
+      - 'scripts/sync-verifier.mjs'
+      - 'scripts/test-verifier-parity.mjs'
       - 'scripts/fixtures/policy/**'
       - 'scripts/fixtures/canonicalizer/**'
       - '.github/workflows/smoketest.yml'
@@ -53,8 +57,13 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run verifier smoketest
-        run: node landing/verify/smoketest.mjs
+      - name: Verifier drift guard + parity + smoke
+        run: |
+          npm --prefix packages/verify run build
+          node scripts/sync-verifier.mjs
+          git diff --exit-code landing/verify/verifier.js
+          node scripts/test-verifier-parity.mjs
+          node landing/verify/smoketest.mjs
 
   policy-parity:
     name: Genesis Score policy parity check
