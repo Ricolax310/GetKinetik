@@ -95,7 +95,7 @@ The `proofUrl` is what the GETKINETIK app generates when the user taps **Share P
     "score":         812,
     "flagged":       false,
     "flags":         [],
-    "policyVersion": "v2.0.0",
+    "policyVersion": "v2.0.2",
     "contributingFactors": {
       "baseline":          200,
       "bureauObservedAge": 280,
@@ -315,7 +315,7 @@ Register a receiver URL with GETKINETIK and you'll receive a signed POST wheneve
   "toTier":   "TAMPERED",
   "score":    199,
   "flags":    ["chain_rewind"],
-  "policyVersion": "v2.0.0",
+  "policyVersion": "v2.0.2",
   "attestation": { /* full signed attestation */ },
   "asOf": "2026-05-13T13:34:22.674Z",
   "delivery": "<uuid>"

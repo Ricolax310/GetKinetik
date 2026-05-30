@@ -41,15 +41,15 @@ iOS is in development; iPhone visitors can join the waitlist on the site.
 | **L2** Sensor Capture + Signing | Partial | 3 of 7 planned permission-free sensors signing into the chain |
 | **L3** Operator Tooling (optional) | Live | Shared polling pool, gas-aware claim timing — internal convenience, not a product headline |
 | **L4** Signed Receipts Ledger | Live | Hardware-signed read-only receipts from network adapters; optional 1% bureau fee disclosed in the signature |
-| **Partner Verification API** | Live | `POST /api/verify-device` — Proof URL in, Genesis Score + tamper flags + node age out |
-| **Genesis Score v1.1** | Live | 0–1000 public node reputation. Bureau-bounded chain age, beat-rate sanity, chain-rewind hard gate. **Not a token. Never priced.** |
+| **Partner Verification API** | Live | `POST /api/verify-device` — Proof URL in, bureau-signed attestation + `derived` tier out (verifiable offline via `@getkinetik/verify`) |
+| **Genesis Score (derived tier)** | Live | 0–1000 convenience tier derived from the signed attestation via `@getkinetik/evidence-mapping`. Bureau ships evidence, not verdicts. **Not a token. Never priced.** |
 | **Public Bureau (`/bureau/`)** | Live | Score bands, input methodology, neutrality rules, sample API response, live verification ticker |
 | **Bureau Positioning Page (`/bureau/why/`)** | Live | Direct answer to the "we already do this" objection |
 | **Bureau Stats API (`/api/bureau/stats`)** | Live | Public telemetry counters: total verifications, unique nodes, last-seen timestamp |
 | **Score Lookup API (`/api/score/:nodeId`)** | Live | `GET` a cached Genesis Score for any node ID |
 | **Partner Attestation API (`/api/attest`)** | Live | Authenticated `POST` — partners push positive or negative signals; KV-persisted, `attestor` attributed |
 | **Per-Partner API Keys** | Live | `ATTEST_API_KEYS` JSON dict; each key carries a partner name for attribution |
-| **Score-Change Webhooks** | Live | `score.changed` event pushed to partners on band transitions; HMAC-SHA256 signed |
+| **Tier-Change Webhooks** | Live | `tier.changed` event (with embedded signed attestation) pushed to partners on tier transitions; HMAC-SHA256 signed |
 | **OpenAPI 3.1 Spec** | Live | `/api/openapi.yaml` — machine-readable contract for all endpoints |
 | **Interactive API Docs** | Live | `/api/docs/` — RapiDoc viewer; try every endpoint in-browser |
 | **Postman Collection** | Live | `/api/postman.json` — import and run against live API in 30 seconds |

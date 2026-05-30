@@ -32,24 +32,35 @@ You'll get back:
   "valid": true,
   "nodeId": "KINETIK-NODE-CDC262E7",
   "pubkey": "ff07e53d...",
-  "mintedAt": 1777863288998,
   "schema": "proof-of-origin:v2",
-  "attribution": "GETKINETIK by OutFromNothing LLC",
-  "lifetimeBeats": 25847,
-  "firstBeatTs": 1777086288998,
-  "genesisScore": 636,
-  "scoreBand": "STANDING",
-  "methodologyVersion": "v1.0",
-  "tamperFlags": [],
+  "attestation": {
+    "payload": { "v": 1, "kind": "attestation", "...": "..." },
+    "message": "<canonical bytes that were signed>",
+    "signature": "<128-char hex bureau Ed25519 signature>",
+    "hash": "<16-char hex sha256(message)[:16]>"
+  },
+  "derived": {
+    "tier": "STANDING",
+    "score": 636,
+    "flagged": false,
+    "flags": [],
+    "policyVersion": "v2.0.2",
+    "contributingFactors": {
+      "baseline": 200,
+      "bureauObservedAge": 204,
+      "lifetimeBeats": 232,
+      "sensorCoherence": 0
+    }
+  },
   "asOf": "2026-05-13T03:00:00.000Z"
 }
 ```
 
-**That's a real cryptographic verification plus a bureau-grade reputation score.** No server state on your side — the signature in the URL is the proof, and the score is computed deterministically from its contents per the [published methodology](./methodology/GENESIS_SCORE.md).
+**That's a real cryptographic verification plus a bureau-signed evidence bundle.** No server state on your side — the signature in the URL is the proof, and the bureau-signed `attestation` is verifiable offline with [`@getkinetik/verify`](https://npmjs.com/package/@getkinetik/verify). The `derived` block is a convenience tier computed with the default policy from [`@getkinetik/evidence-mapping`](https://npmjs.com/package/@getkinetik/evidence-mapping) per the [published methodology](./methodology/GENESIS_SCORE.md). **The bureau ships evidence, not verdicts** — partners run their own policy against `attestation.payload`.
 
-### What the score means
+### What the tier means
 
-| Band | Score | Use |
+| Tier | Score | Use |
 |---|---|---|
 | `NEW` | 0–499 | Insufficient evidence yet. New nodes start here. |
 | `STANDING` | 500–749 | Sufficient evidence of real-device operation. Reasonable pay threshold. |
@@ -95,17 +106,23 @@ async function getDeviceTier(proofUrl: string) {
 }
 
 const v = await getDeviceTier(user.kinetikProofUrl);
+const tier = v.derived?.tier;
 
-if (!v.valid || v.scoreBand === 'TAMPERED') {
+if (!v.valid || tier === 'TAMPERED') {
   reward = 0; // don't pay
-} else if (v.scoreBand === 'STRONG' || v.scoreBand === 'PREMIER') {
+} else if (tier === 'STRONG' || tier === 'PREMIER') {
   reward = baseReward * 1.15; // premium tier
-} else if (v.scoreBand === 'STANDING') {
+} else if (tier === 'STANDING') {
   reward = baseReward; // standard rate
 } else {
   reward = baseReward * 0.5; // new — half rate until established
 }
 ```
+
+> **Production note:** for real payout decisions, re-verify `v.attestation`
+> offline with `@getkinetik/verify` and run your own policy against
+> `attestation.payload` rather than trusting `derived` from the server. See the
+> [full spec](./api/verify-device.md) steps 3–5.
 
 ### Python
 
@@ -144,9 +161,9 @@ func isDeviceVerified(proofURL string) (bool, error) {
 ## What to store per user
 
 ```
-nodeId    — stable identity key. Use as GETKINETIK identifier in your DB.
-pubkey    — Ed25519 public key. Cache it; it never changes for a given node.
-mintedAt  — when the node was born. Use for age-based gating (e.g. > 7 days old).
+nodeId       — stable identity key. Use as GETKINETIK identifier in your DB.
+pubkey       — Ed25519 public key. Cache it; it never changes for a given node.
+attestation  — the full bureau-signed evidence bundle. Cache + re-verify offline.
 ```
 
 ---

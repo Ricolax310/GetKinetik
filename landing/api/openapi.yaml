@@ -2,20 +2,21 @@ openapi: 3.1.0
 
 info:
   title: GETKINETIK Bureau API
-  summary: The independent grading bureau for DePIN — public Genesis Score, hardware-rooted device verification, partner attestation channel.
+  summary: The independent evidence bureau for DePIN — bureau-signed device attestations, offline verification, partner attestation channel.
   description: |
-    GETKINETIK is the **independent grading bureau** for the decentralized
+    GETKINETIK is the **independent evidence bureau** for the decentralized
     physical economy. Every sovereign node carries a hardware-sealed Ed25519
-    identity. Every uptime claim is hash-chained and signed. Every grade is
-    computed against the published methodology at
+    identity. Every uptime claim is hash-chained and signed. The bureau ships
+    **signed evidence, not verdicts** — partners map evidence to reward tiers
+    with their own policy. Reference policy + methodology:
     https://github.com/Ricolax310/GetKinetik/blob/main/docs/methodology/GENESIS_SCORE.md.
 
     Four public endpoints:
 
-    - `POST /api/verify-device` — verify a Proof-of-Origin URL and return
-      the live Genesis Score.
-    - `GET  /api/score/{nodeId}` — look up the most recent Genesis Score for
-      a node without supplying a fresh proof.
+    - `POST /api/verify-device` — verify a Proof-of-Origin URL and return a
+      bureau-signed attestation (plus a convenience `derived` tier).
+    - `GET  /api/score/{nodeId}` — look up the most recent cached attestation
+      for a node without supplying a fresh proof.
     - `POST /api/attest` — partner attestation channel (Bearer auth) for
       signalling cross-network observations into the bureau.
     - `GET  /api/bureau/stats` — public bureau telemetry powering the live
@@ -24,7 +25,7 @@ info:
     **Neutrality.** GETKINETIK never issues a token, never holds equity in
     a graded network, and never accepts payment in a graded network's
     native asset. Charter: https://github.com/Ricolax310/GetKinetik/blob/main/NEUTRALITY.md.
-  version: "1.1.0"
+  version: "2.0.0"
   contact:
     name: Eric · GETKINETIK
     email: eric@outfromnothingllc.com
@@ -58,13 +59,14 @@ paths:
   /api/verify-device:
     post:
       tags: [Verification]
-      summary: Verify a Proof of Origin and return its Genesis Score
+      summary: Verify a Proof of Origin and return a bureau-signed attestation
       operationId: verifyDevice
       description: |
         Posts a Proof-of-Origin URL (from the GETKINETIK app's **Share**
         action, or a partner SDK) and returns whether the proof is valid,
-        plus the live Genesis Score. No authentication required — anyone
-        can verify any proof.
+        plus a bureau-signed `attestation` (verifiable offline via
+        `@getkinetik/verify`) and a convenience `derived` tier. No
+        authentication required — anyone can verify any proof.
       requestBody:
         required: true
         content:
@@ -87,20 +89,28 @@ paths:
                   - $ref: "#/components/schemas/VerifyDeviceInvalid"
               examples:
                 valid:
-                  summary: Valid signature, scored node
+                  summary: Valid signature, bureau-signed attestation
                   value:
                     valid: true
                     nodeId: "KINETIK-NODE-A49C9E14"
                     pubkey: "3062f3ba272db9204afe1fe11dd3cb086e06a3292e299e33f0450bcf30434c22"
-                    mintedAt: 1778679227172
                     schema: "proof-of-origin:v2"
-                    attribution: "GETKINETIK by OutFromNothing LLC"
-                    lifetimeBeats: 25847
-                    firstBeatTs: 1777901632172
-                    genesisScore: 636
-                    scoreBand: "STANDING"
-                    methodologyVersion: "v1.1"
-                    tamperFlags: []
+                    attestation:
+                      payload: { v: 1, kind: "attestation" }
+                      message: "<canonical bytes that were signed>"
+                      signature: "<128-char hex bureau Ed25519 signature>"
+                      hash: "<16-char hex sha256(message)[:16]>"
+                    derived:
+                      tier: "STANDING"
+                      score: 636
+                      flagged: false
+                      flags: []
+                      policyVersion: "v2.0.2"
+                      contributingFactors:
+                        baseline: 200
+                        bureauObservedAge: 204
+                        lifetimeBeats: 232
+                        sensorCoherence: 0
                     asOf: "2026-05-13T13:34:22.674Z"
                 invalid:
                   summary: Signature mismatch
@@ -130,13 +140,14 @@ paths:
   /api/score/{nodeId}:
     get:
       tags: [Score]
-      summary: Look up the most recent Genesis Score for a node
+      summary: Look up the most recent cached attestation for a node
       operationId: getScore
       description: |
-        Returns the cached Genesis Score from the bureau's last verification
-        of this node. If no partner has ever called `verify-device` for this
-        nodeId, the bureau has no record and returns 404. Scores are cached
-        for 30 days after the last verification.
+        Returns the cached bureau-signed attestation from the bureau's last
+        verification of this node (same `attestation` + `derived` shape as
+        `verify-device`). If no partner has ever called `verify-device` for
+        this nodeId, the bureau has no record and returns 404. Attestations
+        are cached for 30 days after the last verification.
       parameters:
         - name: nodeId
           in: path
@@ -228,7 +239,7 @@ paths:
             application/json:
               schema: { $ref: "#/components/schemas/ApiError" }
 
-  /api/webhooks/score-changed:
+  /api/webhooks/tier-changed:
     x-webhook-direction: outbound
     description: |
       **Outbound webhook (bureau → partner).** Documented here as a path
@@ -238,16 +249,17 @@ paths:
       registration, signature verification, and delivery semantics.
     post:
       tags: [Verification]
-      summary: Outbound — score.changed event the bureau POSTs to your URL
-      operationId: scoreChangedWebhook
+      summary: Outbound — tier.changed event the bureau POSTs to your URL
+      operationId: tierChangedWebhook
       description: |
-        Fired when a node's `scoreBand` transitions. Best-effort delivery
-        with HMAC-SHA256 signature in `X-GETKINETIK-Signature`.
+        Fired when a node's derived `tier` transitions. Embeds the full
+        bureau-signed attestation. Best-effort delivery with HMAC-SHA256
+        signature in `X-GETKINETIK-Signature`.
       requestBody:
         required: true
         content:
           application/json:
-            schema: { $ref: "#/components/schemas/ScoreChangedEvent" }
+            schema: { $ref: "#/components/schemas/TierChangedEvent" }
       responses:
         "200":
           description: Partner acknowledged delivery.
@@ -318,34 +330,66 @@ components:
             bare base64url payload. Both `https://getkinetik.app/verify/#proof=...`
             and the raw fragment are accepted.
 
-    VerifyDeviceValid:
+    Attestation:
       type: object
-      required: [valid, nodeId, pubkey, mintedAt, schema, attribution, genesisScore, scoreBand, methodologyVersion, tamperFlags, asOf]
+      description: |
+        Bureau-signed evidence bundle. A standard `SignedArtifact` shape,
+        verifiable offline with `@getkinetik/verify`. **This is the
+        authoritative output partners should integrate against.** Null when
+        the bureau signing key is not configured on the deployment.
+      required: [payload, message, signature, hash]
       properties:
-        valid:        { type: boolean, enum: [true] }
-        nodeId:       { $ref: "#/components/schemas/NodeId" }
-        pubkey:       { type: string, pattern: "^[0-9a-f]{64}$" }
-        mintedAt:     { type: integer, description: "Unix ms — when the proof was minted." }
-        schema:       { type: string, enum: ["proof-of-origin:v2"] }
-        attribution:  { type: string, enum: ["GETKINETIK by OutFromNothing LLC"] }
-        lifetimeBeats:
-          type: integer
-          minimum: 0
-          description: Claimed heartbeats over the node's lifetime.
-        firstBeatTs:
-          type: integer
-          description: Unix ms — node's claimed first heartbeat (bureau-bounded).
-        genesisScore:
-          type: integer
-          minimum: 0
-          maximum: 1000
-        scoreBand: { $ref: "#/components/schemas/ScoreBand" }
-        methodologyVersion:
+        payload:
+          type: object
+          description: The typed AttestationPayload (subject, bureauObserved, chainClaim, sensorCoherence, flags, witnesses).
+        message:
           type: string
-          example: "v1.1"
-        tamperFlags:
+          description: The canonical bytes that were signed.
+        signature:
+          type: string
+          pattern: "^[0-9a-f]{128}$"
+          description: 128-char hex bureau Ed25519 signature.
+        hash:
+          type: string
+          pattern: "^[0-9a-f]{16}$"
+          description: 16-char hex sha256(message)[:16].
+
+    Derived:
+      type: object
+      description: |
+        Convenience tier computed with the default policy from
+        `@getkinetik/evidence-mapping`. Partners running custom policy should
+        ignore this and map `attestation.payload` themselves.
+      required: [tier, score, flagged, flags, policyVersion, contributingFactors]
+      properties:
+        tier:    { $ref: "#/components/schemas/ScoreBand" }
+        score:   { type: integer, minimum: 0, maximum: 1000 }
+        flagged: { type: boolean, description: "True if any flag was present; forces tier to TAMPERED." }
+        flags:
           type: array
           items: { $ref: "#/components/schemas/TamperFlag" }
+        policyVersion:
+          type: string
+          example: "v2.0.2"
+          description: Pin when caching to detect policy upgrades that would shift tiers.
+        contributingFactors:
+          type: object
+          description: "Audit breakdown — baseline + bureauObservedAge + lifetimeBeats + sensorCoherence = score (before flag floor)."
+
+    VerifyDeviceValid:
+      type: object
+      required: [valid, nodeId, pubkey, schema, derived, asOf]
+      properties:
+        valid:  { type: boolean, enum: [true] }
+        nodeId: { $ref: "#/components/schemas/NodeId" }
+        pubkey: { type: string, pattern: "^[0-9a-f]{64}$" }
+        schema: { type: string, enum: ["proof-of-origin:v2"] }
+        attestation:
+          oneOf:
+            - { $ref: "#/components/schemas/Attestation" }
+            - { type: "null" }
+          description: Bureau-signed attestation, or null when signing key unconfigured.
+        derived: { $ref: "#/components/schemas/Derived" }
         asOf:
           type: string
           format: date-time
@@ -369,20 +413,20 @@ components:
 
     CachedScore:
       type: object
-      required: [nodeId, genesisScore, scoreBand, methodologyVersion, asOf, source]
+      required: [nodeId, derived, asOf, source]
       properties:
-        nodeId:             { $ref: "#/components/schemas/NodeId" }
-        genesisScore:       { type: integer, minimum: 0, maximum: 1000 }
-        scoreBand:          { $ref: "#/components/schemas/ScoreBand" }
-        methodologyVersion: { type: string, example: "v1.1" }
-        tamperFlags:
-          type: array
-          items: { $ref: "#/components/schemas/TamperFlag" }
-        lifetimeBeats:      { type: integer, minimum: 0 }
-        firstBeatTs:        { type: integer }
-        asOf:               { type: string, format: date-time }
-        cachedAt:           { type: string, format: date-time }
-        source:             { type: string, enum: [kv] }
+        nodeId: { $ref: "#/components/schemas/NodeId" }
+        attestation:
+          oneOf:
+            - { $ref: "#/components/schemas/Attestation" }
+            - { type: "null" }
+        derived:
+          oneOf:
+            - { $ref: "#/components/schemas/Derived" }
+            - { type: "null" }
+        asOf:     { type: string, format: date-time }
+        cachedAt: { type: string, format: date-time }
+        source:   { type: string, enum: [kv] }
 
     AttestRequest:
       type: object
@@ -466,7 +510,7 @@ components:
             lastVerifyAt:
               type: [string, "null"]
               format: date-time
-        methodologyVersion: { type: string, example: "v1.1" }
+        methodologyVersion: { type: string, example: "v2.0.2" }
         asOf:               { type: string, format: date-time }
 
     EndpointDiscovery:
@@ -479,23 +523,28 @@ components:
         bodyExample:   { type: object }
         spec:          { type: string, format: uri }
 
-    ScoreChangedEvent:
+    TierChangedEvent:
       type: object
-      required: [event, nodeId, toBand, toScore, methodologyVersion, asOf, delivery]
+      required: [event, nodeId, toTier, score, policyVersion, asOf, delivery]
       properties:
-        event:    { type: string, enum: [score.changed] }
+        event:    { type: string, enum: [tier.changed] }
         nodeId:   { $ref: "#/components/schemas/NodeId" }
-        fromBand:
+        fromTier:
           oneOf:
             - { $ref: "#/components/schemas/ScoreBand" }
             - { type: "null" }
-          description: Previous band, or `null` on first sighting.
-        toBand:   { $ref: "#/components/schemas/ScoreBand" }
-        toScore:  { type: integer, minimum: 0, maximum: 1000 }
-        tamperFlags:
+          description: Previous tier, or `null` on first sighting.
+        toTier:   { $ref: "#/components/schemas/ScoreBand" }
+        score:    { type: integer, minimum: 0, maximum: 1000 }
+        flags:
           type: array
           items: { $ref: "#/components/schemas/TamperFlag" }
-        methodologyVersion: { type: string, example: "v1.1" }
+        policyVersion: { type: string, example: "v2.0.2" }
+        attestation:
+          oneOf:
+            - { $ref: "#/components/schemas/Attestation" }
+            - { type: "null" }
+          description: Full bureau-signed attestation — re-verify offline before trusting the transition.
         asOf:     { type: string, format: date-time }
         delivery:
           type: string
