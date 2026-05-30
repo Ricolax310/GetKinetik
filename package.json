@@ -38,7 +38,9 @@
     "policy:build": "tsc -p packages/evidence-mapping/tsconfig.json",
     "policy:sync": "npm run policy:build && node scripts/sync-worker-policy.mjs",
     "policy:parity": "npm run policy:build && node scripts/test-policy-parity.mjs",
-    "policy:smoke": "npm run policy:build && node packages/evidence-mapping/smoketest.mjs"
+    "policy:smoke": "npm run policy:build && node packages/evidence-mapping/smoketest.mjs",
+    "canonical:sync": "node scripts/sync-canonicalizer.mjs",
+    "canonical:parity": "npm --prefix packages/verify run build && node scripts/test-canonicalizer-parity.mjs"
   },
   "dependencies": {
     "@getkinetik/react-native-sdk": "file:./modules/kinetik-sdk",

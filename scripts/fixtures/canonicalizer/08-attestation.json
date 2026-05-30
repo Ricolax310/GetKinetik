@@ -1,0 +1,33 @@
+{
+  "v": 1,
+  "kind": "attestation",
+  "attribution": "GETKINETIK by OutFromNothing LLC",
+  "pubkey": "852fbc2bdd7c0243c6ee42462f7d31274fd3be3a0f2125e8eb797b76410dfb26",
+  "bureauTs": 1700000000000,
+  "subject": {
+    "chainTip": "a1b2c3d4e5f60718",
+    "mintedAt": 1699000000000,
+    "nodeId": "KINETIK-NODE-A3F2B719",
+    "pubkey": "1111111111111111111111111111111111111111111111111111111111111111"
+  },
+  "bureauObserved": {
+    "firstSeenMs": 1684448000000,
+    "lastSeenMs": 1700000000000,
+    "peakLifetimeBeats": 250000
+  },
+  "chainClaim": {
+    "firstBeatTs": 1684448000000,
+    "lifetimeBeats": 250000,
+    "schema": "proof-of-origin:v2"
+  },
+  "sensorCoherence": {
+    "luxObserved": true,
+    "luxPlausible": true,
+    "motionRmsObserved": true,
+    "motionRmsPlausible": true,
+    "pressureHpaObserved": true,
+    "pressureHpaPlausible": true
+  },
+  "flags": [],
+  "witnesses": []
+}

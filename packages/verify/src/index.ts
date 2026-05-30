@@ -25,6 +25,12 @@
 
 import * as ed from '@noble/ed25519';
 import { sha256, sha512 } from '@noble/hashes/sha2.js';
+// stableStringify is the single canonical serializer. This is a GENERATED
+// mirror of the SSOT (packages/kinetik-core/src/stableJson.ts), produced by
+// `npm run canonical:sync` and drift-guarded in CI. It is compiled into this
+// package's dist so the published SDK stays self-contained (no runtime
+// dependency on the private, unbuilt @kinetik/core package).
+import { stableStringify } from './stableJson.js';
 
 // @noble/ed25519 v3 freezes `ed.hashes` but the fields are writable. We
 // override sha512 + sha512Async with the pure-JS @noble/hashes implementation
@@ -81,29 +87,11 @@ export const BUREAU_PUBKEY = '852fbc2bdd7c0243c6ee42462f7d31274fd3be3a0f2125e8eb
  *  production verifies against this exact key. */
 export const VERSION = '0.2.1';
 
-// ----------------------------------------------------------------------------
-// stableStringify — byte-for-byte equivalent of
-// packages/kinetik-core/src/stableJson.ts. Sorts top-level keys
-// lexicographically and delegates value serialization to JSON.stringify,
-// which is spec-stable across engines for the primitive types used in our
-// payloads (string, number, boolean, null) — and for the small structured
-// `sensors` object the v:2 schema introduced.
-//
-// All Sovereign Node payloads are flat at the top level, so the shallow
-// sort is sufficient. If future payloads ever embed a deeper nested
-// object (other than the existing `sensors` block, whose insertion order
-// is enforced by canonicalSensorBlock at sign time), this function AND
-// the app-side stableJson must switch to a recursive sort in the same
-// commit, with a `v` schema bump.
-// ----------------------------------------------------------------------------
-export const stableStringify = (obj: Record<string, unknown>): string => {
-  const keys = Object.keys(obj).sort();
-  const parts: string[] = [];
-  for (const k of keys) {
-    parts.push(`${JSON.stringify(k)}:${JSON.stringify(obj[k])}`);
-  }
-  return `{${parts.join(',')}}`;
-};
+// stableStringify is re-exported so existing consumers of `@getkinetik/verify`
+// (and the package smoketest) keep importing it from the package root. The
+// implementation now lives in the generated ./stableJson mirror — see the
+// import at the top of this file.
+export { stableStringify };
 
 // ----------------------------------------------------------------------------
 // Byte / hex / base64url helpers. Local so the package has no dependency

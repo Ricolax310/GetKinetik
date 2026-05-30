@@ -102,19 +102,14 @@ async function sha256Bytes(message) {
 }
 
 // ----------------------------------------------------------------------------
-// stableStringify — byte-for-byte equivalent of packages/kinetik-core's
-// stableJson.ts and packages/verify's stableStringify. CRITICAL: this must
-// stay in lockstep with both. Any future move to a recursive sort needs to
-// land in all three files in the same commit, with a schema version bump.
+// stableStringify — the single canonical serializer. Imported from the
+// GENERATED worker mirror (./stable-json.js) of the SSOT
+// (packages/kinetik-core/src/stableJson.ts). Regenerate with
+// `npm run canonical:sync`; CI drift-guards the mirror. Re-exported so the
+// module's public surface is unchanged.
 // ----------------------------------------------------------------------------
-export function stableStringify(obj) {
-  const keys = Object.keys(obj).sort();
-  const parts = [];
-  for (const k of keys) {
-    parts.push(`${JSON.stringify(k)}:${JSON.stringify(obj[k])}`);
-  }
-  return `{${parts.join(",")}}`;
-}
+import { stableStringify } from "./stable-json.js";
+export { stableStringify };
 
 // ----------------------------------------------------------------------------
 // loadBureauSigner — returns a signer interface backed by env vars, or

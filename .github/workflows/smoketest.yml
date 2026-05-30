@@ -7,22 +7,34 @@ on:
       - 'landing/verify/**'
       - 'packages/kinetik-core/src/**'
       - 'packages/evidence-mapping/**'
+      - 'packages/verify/**'
       - 'functions/api/verify-device.js'
       - 'functions/api/_lib/evidence-mapping.js'
+      - 'functions/api/_lib/bureauSign.js'
+      - 'functions/api/_lib/stable-json.js'
       - 'scripts/sync-worker-policy.mjs'
       - 'scripts/test-policy-parity.mjs'
+      - 'scripts/sync-canonicalizer.mjs'
+      - 'scripts/test-canonicalizer-parity.mjs'
       - 'scripts/fixtures/policy/**'
+      - 'scripts/fixtures/canonicalizer/**'
       - '.github/workflows/smoketest.yml'
   pull_request:
     paths:
       - 'landing/verify/**'
       - 'packages/kinetik-core/src/**'
       - 'packages/evidence-mapping/**'
+      - 'packages/verify/**'
       - 'functions/api/verify-device.js'
       - 'functions/api/_lib/evidence-mapping.js'
+      - 'functions/api/_lib/bureauSign.js'
+      - 'functions/api/_lib/stable-json.js'
       - 'scripts/sync-worker-policy.mjs'
       - 'scripts/test-policy-parity.mjs'
+      - 'scripts/sync-canonicalizer.mjs'
+      - 'scripts/test-canonicalizer-parity.mjs'
       - 'scripts/fixtures/policy/**'
+      - 'scripts/fixtures/canonicalizer/**'
       - '.github/workflows/smoketest.yml'
   workflow_dispatch:
 
@@ -71,3 +83,28 @@ jobs:
 
       - name: Worker / package policy parity
         run: node scripts/test-policy-parity.mjs
+
+  canonicalizer-parity:
+    name: Canonicalizer (stableStringify) parity check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build the verify SDK (compiles the generated canonicalizer mirror)
+        run: npm --prefix packages/verify run build
+
+      - name: Verify committed canonicalizer mirrors are up to date
+        run: |
+          node scripts/sync-canonicalizer.mjs
+          git diff --exit-code functions/api/_lib/stable-json.js landing/verify/stable-json.js packages/verify/src/stableJson.ts
+
+      - name: Canonicalizer byte-parity (SSOT vs every mirror)
+        run: node scripts/test-canonicalizer-parity.mjs
