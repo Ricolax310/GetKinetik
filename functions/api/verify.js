@@ -1,8 +1,16 @@
 /**
  * POST /api/verify — Secure Hardware Attestation & Telemetry Verification API
  *
- * Verifies standard and Pro secp256r1 ECDSA hardware signatures generated
- * by GETKINETIK's secure enclave SDK, and computes the node's Genesis reputation score.
+ * ⚠️ DEPRECATED — secp256r1 hardware-attestation path.
+ *
+ * This endpoint verifies standard and Pro secp256r1 ECDSA hardware signatures
+ * and is retained for backward compatibility only. New integrations MUST use
+ * the Ed25519 Proof-of-Origin attestation rail:
+ *
+ *     POST /api/verify-device   (bureau-signed attestation, offline-verifiable)
+ *
+ * Behavior here is unchanged; responses carry Deprecation / Link headers
+ * pointing at the successor endpoint. See docs/api/verify-device.md.
  */
 
 // ── CORS Response Helper ─────────────────────────────────────────────────────
@@ -15,6 +23,10 @@ function json(body, status = 200) {
       "access-control-allow-origin": "*",
       "access-control-allow-methods": "GET, POST, OPTIONS",
       "access-control-allow-headers": "content-type",
+      // Soft-deprecation signals (RFC 8594 style). Behavior is unchanged.
+      "deprecation": "true",
+      "link": '</api/verify-device>; rel="successor-version"',
+      "warning": '299 - "Deprecated: use POST /api/verify-device (Ed25519 Proof-of-Origin attestation rail)."',
     },
   });
 }
@@ -99,7 +111,11 @@ export async function onRequestOptions() {
 export async function onRequestGet() {
   return json({
     service: "GETKINETIK Bureau Verification API (Standard & Pro)",
-    status: "Operational",
+    status: "Deprecated",
+    deprecated: true,
+    successor: "POST /api/verify-device",
+    documentation: "https://github.com/Ricolax310/GetKinetik/blob/main/docs/api/verify-device.md",
+    notice: "This secp256r1 hardware-attestation endpoint is retained for backward compatibility only. New integrations must use the Ed25519 Proof-of-Origin attestation rail at POST /api/verify-device, which returns a bureau-signed attestation verifiable offline with @getkinetik/verify.",
     version: "2.0.0",
     specification: "Allows third-party DePIN integrators to verify standard Android TEE attestations and premium KinetikProSession telemetry-bound enclaves."
   });
