@@ -24,7 +24,7 @@
  *     "firstVerifyAt": "2026-05-13T03:00:00.000Z",
  *     "lastVerifyAt":  "2026-05-13T13:34:22.674Z"
  *   },
- *   "methodologyVersion": "v1.1",
+ *   "methodologyVersion": "v2.0.2",
  *   "asOf": "2026-05-13T13:35:00.000Z"
  * }
  *
@@ -38,7 +38,7 @@
  */
 
 const STATS_KEY = "stats:bureau:v2";
-const METHODOLOGY_VERSION = "v1.1";
+const METHODOLOGY_VERSION = "v2.0.2";
 
 function json(body, status = 200, extraHeaders = {}) {
   return new Response(JSON.stringify(body), {

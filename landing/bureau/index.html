@@ -28,7 +28,7 @@
     <meta name="twitter:title" content="GETKINETIK Bureau — Genesis Score" />
     <meta
       name="twitter:description"
-      content="The independent grading bureau for DePIN. 0–1000 reputation grade per device. Live."
+      content="The independent evidence bureau for DePIN. Bureau-signed device attestations, verifiable offline. No token. No custody."
     />
 
     <link rel="canonical" href="https://getkinetik.app/bureau/" />
@@ -557,9 +557,9 @@
       </p>
 
       <div class="pill-row">
-        <span class="pill"><strong>LIVE</strong> · v1.1 in production</span>
-        <span class="pill">Methodology <strong>public</strong></span>
-        <span class="pill">Cross-network <strong>scoring</strong></span>
+        <span class="pill"><strong>LIVE</strong> · v2 attestation rail</span>
+        <span class="pill">Bureau-signed <strong>evidence</strong></span>
+        <span class="pill">Offline <strong>verifiable</strong></span>
         <span class="pill">No token, ever</span>
         <span class="pill">No equity in graded networks</span>
       </div>
@@ -589,7 +589,7 @@
           </div>
         </div>
         <div class="foot">
-          <span data-stat="version">v1.1</span>
+          <span data-stat="version">v2.0.2</span>
           · last verification <span data-stat="last">—</span>
           · refreshes every 30s
         </div>
@@ -745,8 +745,10 @@
 
       <h2>What partners get on every call</h2>
       <p>
-        One <code>POST /api/verify-device</code> returns identity fields
-        plus the bureau's live grade for that node:
+        One <code>POST /api/verify-device</code> returns identity fields plus a
+        <strong>bureau-signed attestation</strong> (verifiable offline with
+        <code>@getkinetik/verify</code>) and a convenience <code>derived</code>
+        tier. The bureau ships evidence, not verdicts:
       </p>
 
       <div class="card">
@@ -754,12 +756,19 @@
   <span class="k">"valid"</span>: <span class="b">true</span>,
   <span class="k">"nodeId"</span>: <span class="s">"KINETIK-NODE-CDC262E7"</span>,
   <span class="k">"pubkey"</span>: <span class="s">"ff07e53d…"</span>,
-  <span class="k">"lifetimeBeats"</span>: <span class="n">25847</span>,
-  <span class="k">"firstBeatTs"</span>: <span class="n">1777086288998</span>,
-  <span class="k">"genesisScore"</span>: <span class="n">636</span>,
-  <span class="k">"scoreBand"</span>: <span class="s">"STANDING"</span>,
-  <span class="k">"methodologyVersion"</span>: <span class="s">"v1.0"</span>,
-  <span class="k">"tamperFlags"</span>: [],
+  <span class="k">"schema"</span>: <span class="s">"proof-of-origin:v2"</span>,
+  <span class="k">"attestation"</span>: {
+    <span class="k">"payload"</span>: { <span class="k">"v"</span>: <span class="n">1</span>, <span class="k">"kind"</span>: <span class="s">"attestation"</span>, <span class="k">"…"</span>: <span class="s">"…"</span> },
+    <span class="k">"signature"</span>: <span class="s">"&lt;128-char hex bureau Ed25519&gt;"</span>,
+    <span class="k">"hash"</span>: <span class="s">"&lt;16-char hex&gt;"</span>
+  },
+  <span class="k">"derived"</span>: {
+    <span class="k">"tier"</span>: <span class="s">"STANDING"</span>,
+    <span class="k">"score"</span>: <span class="n">636</span>,
+    <span class="k">"flagged"</span>: <span class="b">false</span>,
+    <span class="k">"flags"</span>: [],
+    <span class="k">"policyVersion"</span>: <span class="s">"v2.0.2"</span>
+  },
   <span class="k">"asOf"</span>: <span class="s">"2026-05-13T03:00:00.000Z"</span>
 }</pre>
       </div>
@@ -850,7 +859,7 @@
       </p>
 
       <footer>
-        <span>OutFromNothing LLC (California) · GETKINETIK · The Bureau · v1.1</span>
+        <span>OutFromNothing LLC (California) · GETKINETIK · The Bureau · v2.0.2</span>
         <span>
           <a href="/status/">Status</a>
           ·
