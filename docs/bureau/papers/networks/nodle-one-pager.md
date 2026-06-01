@@ -2,7 +2,7 @@
 
 > Public endpoints only. Not a verdict.
 
-**As of:** 2026-05-25  
+**As of:** 2026-06-01  
 **Public source:** Nodle public scan inputs (see script header)  
 **Full report:** [docs/reports/nodle-sybil-report.md](https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/nodle-sybil-report.md)  
 **Live terminal:** https://getkinetik.app/audits.html  
