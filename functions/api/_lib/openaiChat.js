@@ -61,8 +61,9 @@ export async function chatCompletions({
   const url = `${baseUrl.replace(/\/$/, "")}/chat/completions`;
   const payload = buildChatPayload({ model, messages, maxOutput });
 
-  const fetchOnce = () =>
-    fetch(url, {
+  let res;
+  try {
+    res = await fetch(url, {
       method: "POST",
       headers: {
         authorization: `Bearer ${apiKey}`,
@@ -74,26 +75,12 @@ export async function chatCompletions({
           ? AbortSignal.timeout(timeoutMs)
           : undefined,
     });
-
-  let res;
-  try {
-    res = await Promise.race([
-      fetchOnce(),
-      new Promise((_, reject) => {
-        setTimeout(
-          () => reject(new Error("openai_fetch_timeout")),
-          timeoutMs + 500,
-        );
-      }),
-    ]);
   } catch (err) {
     const message =
-      err?.name === "TimeoutError" ||
-      err?.name === "AbortError" ||
-      err?.message === "openai_fetch_timeout"
+      err?.name === "TimeoutError" || err?.name === "AbortError"
         ? "Chat timed out — try a shorter question."
         : "Chat upstream unreachable — try again shortly.";
-    return { ok: false, status: 502, error: message };
+    return { ok: false, status: 502, error: message, debug: `fetch:${err?.name || ""}:${String(err?.message || err).slice(0, 120)}` };
   }
 
   let body;

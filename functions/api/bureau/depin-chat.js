@@ -22,7 +22,7 @@ const MAX_OUTPUT_TOKENS = 400;
  *  Context fetch is bounded separately, so 20s here keeps worst-case total safe. */
 const OPENAI_TIMEOUT_MS = 20_000;
 const MAX_CONTEXT_CHARS = 6_000;
-const BUILD_MARKER = "chat-resilience-3";
+const BUILD_MARKER = "chat-resilience-4";
 
 function json(body, status = 200) {
   return new Response(JSON.stringify(body), {
@@ -167,13 +167,20 @@ ${context}`;
     });
 
     if (!result.ok) {
-      return json({ error: result.error, model }, result.status);
+      return json({ error: result.error, model, debug: result.debug || null }, result.status);
     }
 
     return json({ reply: result.reply, model: result.model });
   } catch (err) {
     console.error("[depin-chat]", err);
-    return json({ error: "Chat error — try again shortly." }, 502);
+    return json(
+      {
+        error: "Chat error — try again shortly.",
+        debug: String(err?.message || err).slice(0, 200),
+        where: "outer-catch",
+      },
+      502,
+    );
   }
 }
 
