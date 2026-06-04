@@ -1,0 +1,44 @@
+# DePIN Signal Distribution Engine — daily drip (X thread + daily.md + API).
+name: Drip daily
+
+on:
+  schedule:
+    - cron: "0 17 * * *" # 09:00 America/Los_Angeles (PST, UTC-8); 08:00 during PDT
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: drip-daily
+  cancel-in-progress: false
+
+jobs:
+  drip:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22" # required for native TypeScript execution
+
+      - name: Refresh signals (snapshot mode)
+        run: node scripts/signal-pipeline/pipeline.mjs daily
+
+      - name: Run daily drip
+        env:
+          X_API_BEARER: ${{ secrets.X_API_BEARER }}
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_SECRET: ${{ secrets.X_ACCESS_SECRET }}
+        run: node drip-engine/run.ts daily
+
+      - name: Commit drip outputs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add signals landing/public/drip landing/api/drip landing/api/signals/latest.json docs/reports/daily landing/public/daily.html logs/daily || true
+          git diff --staged --quiet || git commit -m "chore(drip): daily distribution [automated]"
+          git push || true

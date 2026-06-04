@@ -1,0 +1,47 @@
+# Automated daily DePIN signal pipeline (cross-network first).
+name: Daily signal pipeline
+
+on:
+  schedule:
+    - cron: "0 9 * * *" # every day 09:00 UTC
+  workflow_dispatch:
+    inputs:
+      live:
+        description: "Run live network scans (otherwise reuse snapshots)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: signal-daily
+  cancel-in-progress: false
+
+jobs:
+  daily:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run daily_signal_pipeline
+        env:
+          SOLANA_RPC_URL: ${{ secrets.SOLANA_RPC_URL }}
+        run: |
+          if [ "${{ github.event.inputs.live }}" = "true" ]; then
+            node scripts/signal-pipeline/pipeline.mjs daily --live
+          else
+            node scripts/signal-pipeline/pipeline.mjs daily
+          fi
+
+      - name: Commit signal outputs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add signals/daily docs/reports/daily landing/api/signals/latest.json landing/public/daily.html logs/daily scripts/data/bureau-audit-index.json landing/data/bureau-audit-index.json || true
+          git diff --staged --quiet || git commit -m "chore(signals): daily signal pipeline [automated]"
+          git push || true

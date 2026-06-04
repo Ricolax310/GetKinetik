@@ -1,6 +1,50 @@
 {
-  "version": 1,
-  "description": "GETKINETIK neutral bureau — public read registry. Used by scripts/bureau-run.mjs.",
+  "version": 2,
+  "description": "GETKINETIK neutral bureau — public read registry. Used by scripts/bureau-run.mjs. Routing is a policy engine over anomaly primitives (anomalyTaxonomy), not a per-network mapping. Networks declare an anomalyType + a concrete action (verificationCall for verify-device routes, clarificationRequest for clarify routes); the generator derives assetClass, verificationEligible, and route from the taxonomy. Routes: monitor (no action / economic-only), clarify (bounded reality-check with the operator required before any device test — observed at aggregate level, no device axis yet), verify-device (per-device ground truth exists and is device-verifiable).",
+  "anomalyTaxonomy": {
+    "duplication_cluster": {
+      "assetClass": "spatial_distribution",
+      "verificationEligible": true,
+      "route": "verify-device",
+      "note": "Co-located / duplicate coordinates — sample entities and confirm distinct real device identities."
+    },
+    "capacity_violation": {
+      "assetClass": "device_identity",
+      "verificationEligible": true,
+      "route": "verify-device",
+      "note": "More devices claimed than a region should hold — attest active, signed device presence."
+    },
+    "identity_collision": {
+      "assetClass": "device_identity",
+      "verificationEligible": true,
+      "route": "verify-device",
+      "note": "Shared/duplicated device identifiers — confirm hardware-distinct identities."
+    },
+    "inactivity_anomaly": {
+      "assetClass": "telemetry_integrity",
+      "verificationEligible": true,
+      "route": "verify-device",
+      "note": "Counted-but-inactive devices where a per-device axis already exists — conditional verification of signed heartbeat continuity. Aggregate-only observations must first pass through telemetry_discontinuity → clarify before they qualify here."
+    },
+    "telemetry_discontinuity": {
+      "assetClass": "telemetry_integrity",
+      "verificationEligible": false,
+      "route": "clarify",
+      "note": "Aggregate time-series flatline / discontinuity observed via a public feed, with no per-device ground truth yet. Requires a bounded reality-check with the operator (ETL/display freeze vs real activity change?) before any device-level verification. Not verify-device-eligible on its own — verify-device only applies once confirmation establishes a real per-device change."
+    },
+    "economic_concentration": {
+      "assetClass": "economic_layer",
+      "verificationEligible": false,
+      "route": "monitor",
+      "note": "On-chain holder/economic shape — NOT a device-level claim. verify-device cannot link holders to operators; monitor only."
+    },
+    "scaffold": {
+      "assetClass": "none",
+      "verificationEligible": false,
+      "route": "monitor",
+      "note": "Scan scaffolding not yet producing a validated finding."
+    }
+  },
   "networks": [
     {
       "id": "geodnet",
@@ -11,7 +55,11 @@
       "publicSource": "https://rtk.geodnet.com/api/v2/coverage_stations",
       "scanNotes": "Public RTK coverage_stations JSON — no auth.",
       "requiresEnv": [],
-      "defaultEnabled": true
+      "defaultEnabled": true,
+      "routing": {
+        "anomalyType": "duplication_cluster",
+        "verificationCall": "Sample station IDs that share an exact coordinate pair in §1 and run POST /api/verify-device on each operator's Proof of Origin to confirm whether they resolve to distinct, real device identities."
+      }
     },
     {
       "id": "weatherxm",
@@ -22,7 +70,11 @@
       "publicSource": "WeatherXM public cells API",
       "scanNotes": "Public cells endpoint — no auth.",
       "requiresEnv": [],
-      "defaultEnabled": true
+      "defaultEnabled": true,
+      "routing": {
+        "anomalyType": "capacity_violation",
+        "verificationCall": "For operators in the over-capacity H3 cells in §1, run POST /api/verify-device to attest active, signed device presence over time and compare against the public cell tally."
+      }
     },
     {
       "id": "hivemapper",
@@ -33,7 +85,26 @@
       "publicSource": "Solana mainnet HONEY SPL mint (public RPC)",
       "scanNotes": "Set SOLANA_RPC_URL in .env for reliable on-chain Part A.",
       "requiresEnv": ["SOLANA_RPC_URL"],
-      "defaultEnabled": true
+      "defaultEnabled": true,
+      "routing": {
+        "anomalyType": "economic_concentration",
+        "verificationCall": null
+      }
+    },
+    {
+      "id": "natix",
+      "name": "Natix Network",
+      "scanScript": "sybil-scan-natix.mjs",
+      "report": "docs/reports/natix-sybil-report.md",
+      "snapshot": "scripts/data/natix-snapshot.json",
+      "publicSource": "Natix Coverage Map metrics feed (coverage.natix.network/coverage/v1/metrics) + Solana NATIX SPL mint",
+      "scanNotes": "Part A reads the public Coverage Map metrics (no auth) and flags frozen cumulative output metrics vs moving driver count. Part B reads on-chain concentration (SOLANA_RPC_URL). Optional --nodes= geometry pass if a contributor snapshot is shared.",
+      "requiresEnv": ["SOLANA_RPC_URL"],
+      "defaultEnabled": true,
+      "routing": {
+        "anomalyType": "telemetry_discontinuity",
+        "clarificationRequest": "Sanity-check (not a test request): ask whether the public Coverage Map metrics feed (/coverage/v1/metrics/global) is expected to stay flat in production — KM mapped / detections plateaued ~2026-05-01 while driver registrations kept rising. Offer the exact change-point timestamps + requests. verify-device only becomes relevant if confirmation establishes a real per-device activity change rather than an ETL/display freeze."
+      }
     },
     {
       "id": "nodle",
@@ -42,9 +113,13 @@
       "report": "docs/reports/nodle-sybil-report.md",
       "snapshot": "scripts/data/nodle-scan-snapshot.json",
       "publicSource": "Nodle public scan inputs (see script header)",
-      "scanNotes": "Geometry heuristics on public snapshot.",
+      "scanNotes": "Geometry heuristics on public snapshot. Flags beacon collision clusters and zero-jitter heartbeats.",
       "requiresEnv": [],
-      "defaultEnabled": true
+      "defaultEnabled": true,
+      "routing": {
+        "anomalyType": "identity_collision",
+        "verificationCall": "Sample flagged node IDs showing BEACON_COLLISION_CLUSTER from §1 and run POST /api/verify-device to confirm whether co-located nodes resolve to distinct, real device identities."
+      }
     },
     {
       "id": "dawn",
@@ -53,9 +128,13 @@
       "report": "docs/reports/dawn-sybil-report.md",
       "snapshot": "scripts/data/dawn-scan-snapshot.json",
       "publicSource": "Dawn public scan inputs (see script header)",
-      "scanNotes": "Public endpoint scan.",
+      "scanNotes": "Public endpoint scan. Flags hardware/appId clone twins and datacenter IP sources.",
       "requiresEnv": [],
-      "defaultEnabled": true
+      "defaultEnabled": true,
+      "routing": {
+        "anomalyType": "identity_collision",
+        "verificationCall": "Sample flagged app IDs showing HARDWARE_APPID_CLONE_TWIN from §1 and run POST /api/verify-device to confirm whether cloned app instances resolve to distinct, real device identities."
+      }
     },
     {
       "id": "grass",
@@ -66,7 +145,11 @@
       "publicSource": "Grass/Titan public scan inputs (see script header)",
       "scanNotes": "May require live mode flags — see sybil-scan-grass.mjs.",
       "requiresEnv": [],
-      "defaultEnabled": false
+      "defaultEnabled": false,
+      "routing": {
+        "anomalyType": "scaffold",
+        "verificationCall": null
+      }
     }
   ]
 }

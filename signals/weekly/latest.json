@@ -1,0 +1,204 @@
+{
+  "schema": "getkinetik.signal-feed/v1",
+  "cadence": "weekly",
+  "mode": "cross-network-first",
+  "generatedAt": "2026-06-02T16:47:25.700Z",
+  "sectorSummary": [
+    {
+      "type": "integrity",
+      "label": "Registry & identity integrity",
+      "signalCount": 1,
+      "networks": [
+        "Geodnet"
+      ],
+      "topSeverity": "medium",
+      "whatWeDontKnow": "Whether shared/duplicated identifiers are legitimate co-located installs or registry artifacts — only operator confirmation settles it."
+    },
+    {
+      "type": "health",
+      "label": "Network health & capacity",
+      "signalCount": 5,
+      "networks": [
+        "Natix Network",
+        "WeatherXM"
+      ],
+      "topSeverity": "high",
+      "whatWeDontKnow": "Whether capacity or telemetry anomalies reflect real on-the-ground activity, ETL/display behavior, or registry double-counting — the public feed alone can't say."
+    },
+    {
+      "type": "economics",
+      "label": "Token economics",
+      "signalCount": 1,
+      "networks": [
+        "Hivemapper"
+      ],
+      "topSeverity": "medium",
+      "whatWeDontKnow": "Whether the largest visible accounts are treasury, market-maker, exchange custody, or operators — on-chain shape doesn't label holder intent."
+    }
+  ],
+  "totals": {
+    "networks": 5,
+    "activeNetworks": 4,
+    "signals": 7,
+    "byType": {
+      "integrity": 1,
+      "health": 5,
+      "economics": 1
+    },
+    "bySeverity": {
+      "medium": 3,
+      "high": 4
+    }
+  },
+  "networks": [
+    {
+      "network": "Geodnet",
+      "networkId": "geodnet",
+      "status": "active",
+      "signals": [
+        {
+          "network": "Geodnet",
+          "type": "integrity",
+          "metric": "exactDupGroups",
+          "value": 10,
+          "previous": 10,
+          "delta": 0,
+          "message": "10 exact (lat,lng) duplicate groups on 19,612 public stations — each row in §1 is one coordinate pair your registry team can grep today.",
+          "severity": "medium",
+          "confidence": 0.7,
+          "anomalyType": "duplication_cluster",
+          "kind": "headline",
+          "metricKey": null,
+          "timestamp": "2026-06-02",
+          "asOf": "2026-06-02"
+        }
+      ]
+    },
+    {
+      "network": "WeatherXM",
+      "networkId": "weatherxm",
+      "status": "active",
+      "signals": [
+        {
+          "network": "WeatherXM",
+          "type": "health",
+          "metric": "overCapacityCells",
+          "value": 288,
+          "previous": 288,
+          "delta": 0,
+          "message": "288 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.",
+          "severity": "medium",
+          "confidence": 0.7,
+          "anomalyType": "capacity_violation",
+          "kind": "headline",
+          "metricKey": null,
+          "timestamp": "2026-06-02",
+          "asOf": "2026-06-02"
+        }
+      ]
+    },
+    {
+      "network": "Hivemapper",
+      "networkId": "hivemapper",
+      "status": "active",
+      "signals": [
+        {
+          "network": "Hivemapper",
+          "type": "economics",
+          "metric": "top20ShareOfSupply",
+          "value": 0.49132376917049303,
+          "previous": 0.4913237676565912,
+          "delta": 1.5139018372245516e-9,
+          "message": "49.13% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.",
+          "severity": "medium",
+          "confidence": 0.7,
+          "anomalyType": "economic_concentration",
+          "kind": "headline",
+          "metricKey": null,
+          "timestamp": "2026-06-02",
+          "asOf": "2026-06-02"
+        }
+      ]
+    },
+    {
+      "network": "Natix Network",
+      "networkId": "natix",
+      "status": "active",
+      "signals": [
+        {
+          "network": "Natix Network",
+          "type": "health",
+          "metric": "kmFrozenDays",
+          "value": 33,
+          "previous": 33,
+          "delta": 0,
+          "message": "KM mapped frozen 33 days at 254,808,022 (no change since 2026-05-01) while registered drivers kept moving (+61 over the same window) — the cumulative coverage counter has stalled even as registrations advance.",
+          "severity": "high",
+          "confidence": 0.7,
+          "anomalyType": "telemetry_discontinuity",
+          "kind": "headline",
+          "metricKey": null,
+          "timestamp": "2026-06-02",
+          "asOf": "2026-06-02"
+        },
+        {
+          "network": "Natix Network",
+          "type": "health",
+          "metric": "top20ShareOfSupply",
+          "value": 0.7238792865537902,
+          "previous": 0.7239140857670007,
+          "delta": -0.000034799213210479074,
+          "message": "top-20 SPL share of UI supply: 72.39% (-0.00 pp (-0.0%))",
+          "severity": "high",
+          "confidence": 0.85,
+          "anomalyType": "telemetry_discontinuity",
+          "kind": "metric",
+          "metricKey": "top20ShareOfSupply",
+          "timestamp": "2026-06-02",
+          "asOf": "2026-06-02"
+        },
+        {
+          "network": "Natix Network",
+          "type": "health",
+          "metric": "detectionsZeroDays",
+          "value": 33,
+          "previous": 32,
+          "delta": 1,
+          "message": "days detections at zero: 33 (+1 (+3.1%))",
+          "severity": "high",
+          "confidence": 0.85,
+          "anomalyType": "telemetry_discontinuity",
+          "kind": "metric",
+          "metricKey": "detectionsZeroDays",
+          "timestamp": "2026-06-02",
+          "asOf": "2026-06-02"
+        },
+        {
+          "network": "Natix Network",
+          "type": "health",
+          "metric": "drivers",
+          "value": 271401,
+          "previous": 271400,
+          "delta": 1,
+          "message": "registered drivers: 271,401 (+1 (+0.0%))",
+          "severity": "high",
+          "confidence": 0.85,
+          "anomalyType": "telemetry_discontinuity",
+          "kind": "metric",
+          "metricKey": "drivers",
+          "timestamp": "2026-06-02",
+          "asOf": "2026-06-02"
+        }
+      ]
+    },
+    {
+      "network": "DIMO",
+      "networkId": "dimo",
+      "status": "pending",
+      "note": "No public scanner wired yet — included for cross-network coverage.",
+      "signals": []
+    }
+  ],
+  "weekId": "2026-W23",
+  "range": "2026-06-01 → 2026-06-02"
+}
