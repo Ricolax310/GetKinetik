@@ -4,15 +4,16 @@
 
 ## Today's Read
 
-• Natix Network zero-detection days rose from 32 to 33.
-• Natix Network public coverage metrics remain unchanged for 33 days while registrations continue to rise.
-• Geodnet duplicate-coordinate groups unchanged at 10.
-• WeatherXM over-capacity cells unchanged at 288.
+• Geodnet duplicate-coordinate groups rose from 8 to 11.
+• WeatherXM over-capacity cells declined from 289 to 288.
+• Nodle duplicate-coordinate groups unchanged at 15.
+• Dawn Network duplicate-coordinate groups unchanged at 15.
+• Grass / Titan duplicate-coordinate groups unchanged at 0.
 
 ## Why It Matters
 
-Today's signals show movement in registry, capacity, telemetry, and concentration metrics, with at least one high-severity read observable on public data.
-The observed changes are reproducible from public endpoints and remain non-conclusive without operator confirmation.
+Today's signals show modest movement in registry, capacity, and concentration metrics. Telemetry and concentration readings are largely unchanged.
+The observed changes are incremental rather than structural and remain reproducible from public data sources.
 Observations span 6 networks — no single network dominates the index.
 
 ## Full Evidence

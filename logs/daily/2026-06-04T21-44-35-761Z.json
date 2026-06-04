@@ -1,0 +1,27 @@
+{
+  "job": "daily_signal_pipeline",
+  "cadence": "daily",
+  "timestamp": "2026-06-04T21:44:35.761Z",
+  "networksProcessed": [
+    "geodnet",
+    "weatherxm",
+    "hivemapper",
+    "natix",
+    "nodle",
+    "dawn",
+    "dimo"
+  ],
+  "signalsGenerated": 22,
+  "reportsPublished": [
+    "signals/daily/2026-06-04.json",
+    "signals/daily/latest.json",
+    "signals/latest.json",
+    "signals/history.json",
+    "landing/api/signals/latest.json",
+    "docs/reports/daily/2026-06-04-signal-brief.md",
+    "docs/reports/daily/latest.md",
+    "landing/public/daily.html"
+  ],
+  "errors": [],
+  "ok": true
+}

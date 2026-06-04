@@ -1,192 +1,63 @@
 {
-  "generatedAt": "2026-06-04T21:38:48.609Z",
+  "generatedAt": "2026-06-04T21:44:35.956Z",
   "schema": "getkinetik.drip/v2",
   "date": "2026-06-04",
   "minConfidence": 0.6,
   "daily": [
+    "Dawn Network: 15 duplicate coordinate clusters (unchanged)",
+    "Dawn Network: 45.5% flagged pct (unchanged)",
     "Dawn Network: 55 entities on public map (unchanged)",
-    "Geodnet: 10 duplicate coordinate clusters (unchanged)",
-    "Hivemapper: 49.1% top-holder concentration (+1.5139018372245516e-9)",
-    "Natix Network: 33 detections zero days (+1)",
-    "Natix Network: 271,401 drivers (+1)",
-    "Natix Network: 33 flat cumulative coverage counter (unchanged)",
-    "Natix Network: 72.4% top-holder concentration (−0.000034799213210479074)",
+    "Geodnet: 11 duplicate coordinate clusters (+3)",
+    "Geodnet: 9.3% flagged pct (−0.000019991480250863836)",
+    "Grass / Titan: 0 duplicate coordinate clusters (unchanged)",
+    "Grass / Titan: 45% flagged pct (unchanged)",
+    "Grass / Titan: 200 entities on public map (unchanged)",
+    "Hivemapper: 49.1% top-holder concentration (−0.0001884535774536178)",
+    "Nodle: 15 duplicate coordinate clusters (unchanged)",
+    "Nodle: 38.5% flagged pct (unchanged)",
     "Nodle: 65 entities on public map (unchanged)",
-    "WeatherXM: 288 capacity exceedances (unchanged)"
+    "WeatherXM: 288 capacity exceedances (−1)",
+    "WeatherXM: 3.4% over capacity pct (−0.00012978475871936596)"
   ],
   "weekly": [
-    "Cross-network infrastructure coverage stress observed across multiple networks. Observed Cross-network infrastructure coverage stress observed across multiple networks (Dawn Network, Natix Network, Nodle).",
-    "Natix Network: repeated drivers observation. Observed Natix Network drivers on 3 of 3 recorded days.",
-    "Nodle: repeated observed observation. Observed Nodle observed on 2 of 3 recorded days.",
-    "Dawn Network: repeated observed observation. Observed Dawn Network observed on 2 of 3 recorded days.",
-    "Grass / Titan: repeated observed observation. Observed Grass / Titan observed on 2 of 3 recorded days.",
-    "Natix Network: repeated kmFrozenDays observation. Observed Natix Network kmFrozenDays on 3 of 3 recorded days.",
-    "Natix Network: repeated detectionsZeroDays observation. Observed Natix Network detectionsZeroDays on 3 of 3 recorded days.",
-    "Hivemapper: repeated top20ShareOfSupply observation. Observed Hivemapper top20ShareOfSupply on 3 of 3 recorded days.",
-    "Natix Network: repeated top20ShareOfSupply observation. Observed Natix Network top20ShareOfSupply on 3 of 3 recorded days.",
-    "Cross-network economic distribution shape observed across multiple networks. Observed Cross-network economic distribution shape observed across multiple networks (Hivemapper, Natix Network).",
-    "Divergence: ECONOMICS metrics split across networks. Opposing metric drift — Hivemapper rising while Natix Network declining.",
-    "Economic concentration shape on public ledgers. Observed holder/supply concentration metrics from public on-chain reads.",
+    "Cross-network identity registry stress observed across multiple networks. Observed Cross-network identity registry stress observed across multiple networks (Dawn Network, Geodnet, Grass / Titan, Nodle).",
     "Geodnet: repeated exactDupGroups observation. Observed Geodnet exactDupGroups on 3 of 3 recorded days.",
-    "WeatherXM: repeated overCapacityCells observation. Observed WeatherXM overCapacityCells on 3 of 3 recorded days.",
     "Nodle: repeated exactDupGroups observation. Observed Nodle exactDupGroups on 2 of 3 recorded days.",
     "Nodle: repeated flaggedPct observation. Observed Nodle flaggedPct on 2 of 3 recorded days.",
     "Dawn Network: repeated exactDupGroups observation. Observed Dawn Network exactDupGroups on 2 of 3 recorded days.",
     "Dawn Network: repeated flaggedPct observation. Observed Dawn Network flaggedPct on 2 of 3 recorded days.",
     "Grass / Titan: repeated exactDupGroups observation. Observed Grass / Titan exactDupGroups on 2 of 3 recorded days.",
     "Grass / Titan: repeated flaggedPct observation. Observed Grass / Titan flaggedPct on 2 of 3 recorded days.",
-    "Natix Network: metric consistency stress signal detected. Observed consistency signal on Natix Network (kmFrozenDays).",
+    "Divergence: IDENTITY metrics split across networks. Opposing metric drift — Geodnet rising while Geodnet declining.",
+    "Cross-network infrastructure coverage stress observed across multiple networks. Observed Cross-network infrastructure coverage stress observed across multiple networks (Dawn Network, Grass / Titan, Nodle).",
+    "Stability: INFRASTRUCTURE metrics unchanged across networks. No delta movement recorded for INFRASTRUCTURE metrics this window.",
+    "Natix Network: repeated drivers observation. Observed Natix Network drivers on 2 of 3 recorded days.",
+    "Nodle: repeated observed observation. Observed Nodle observed on 2 of 3 recorded days.",
+    "Dawn Network: repeated observed observation. Observed Dawn Network observed on 2 of 3 recorded days.",
+    "Grass / Titan: repeated observed observation. Observed Grass / Titan observed on 2 of 3 recorded days.",
+    "WeatherXM: repeated overCapacityCells observation. Observed WeatherXM overCapacityCells on 3 of 3 recorded days.",
+    "Hivemapper: repeated top20ShareOfSupply observation. Observed Hivemapper top20ShareOfSupply on 3 of 3 recorded days.",
+    "Natix Network: repeated top20ShareOfSupply observation. Observed Natix Network top20ShareOfSupply on 2 of 3 recorded days.",
+    "Natix Network: repeated kmFrozenDays observation. Observed Natix Network kmFrozenDays on 2 of 3 recorded days.",
+    "Natix Network: repeated detectionsZeroDays observation. Observed Natix Network detectionsZeroDays on 2 of 3 recorded days.",
     "WeatherXM: capacity pressure signal detected. Observed capacity signal on WeatherXM (overCapacityCells).",
-    "Geodnet: identity registry stress signal detected. Observed identity signal on Geodnet (exactDupGroups)."
+    "Hivemapper: economic distribution shape signal detected. Observed economics signal on Hivemapper (top20ShareOfSupply).",
+    "Economic concentration shape on public ledgers. Observed holder/supply concentration metrics from public on-chain reads."
   ],
   "patterns": [
     {
       "scope": "systemic",
       "classification": "convergence",
-      "headline": "Cross-network infrastructure coverage stress observed across multiple networks",
-      "pattern": "CROSS_NETWORK_INFRASTRUCTURE",
+      "headline": "Cross-network identity registry stress observed across multiple networks",
+      "pattern": "CROSS_NETWORK_IDENTITY",
       "networks": [
         "Dawn Network",
-        "Natix Network",
+        "Geodnet",
+        "Grass / Titan",
         "Nodle"
       ],
-      "category": "INFRASTRUCTURE",
-      "description": "Observed Cross-network infrastructure coverage stress observed across multiple networks (Dawn Network, Natix Network, Nodle).",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Natix Network: repeated drivers observation",
-      "pattern": "REPEATED_INFRASTRUCTURE",
-      "networks": [
-        "Natix Network"
-      ],
-      "category": "INFRASTRUCTURE",
-      "description": "Observed Natix Network drivers on 3 of 3 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Nodle: repeated observed observation",
-      "pattern": "REPEATED_INFRASTRUCTURE",
-      "networks": [
-        "Nodle"
-      ],
-      "category": "INFRASTRUCTURE",
-      "description": "Observed Nodle observed on 2 of 3 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Dawn Network: repeated observed observation",
-      "pattern": "REPEATED_INFRASTRUCTURE",
-      "networks": [
-        "Dawn Network"
-      ],
-      "category": "INFRASTRUCTURE",
-      "description": "Observed Dawn Network observed on 2 of 3 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Grass / Titan: repeated observed observation",
-      "pattern": "REPEATED_INFRASTRUCTURE",
-      "networks": [
-        "Grass / Titan"
-      ],
-      "category": "INFRASTRUCTURE",
-      "description": "Observed Grass / Titan observed on 2 of 3 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Natix Network: repeated kmFrozenDays observation",
-      "pattern": "REPEATED_CONSISTENCY",
-      "networks": [
-        "Natix Network"
-      ],
-      "category": "CONSISTENCY",
-      "description": "Observed Natix Network kmFrozenDays on 3 of 3 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Natix Network: repeated detectionsZeroDays observation",
-      "pattern": "REPEATED_CONSISTENCY",
-      "networks": [
-        "Natix Network"
-      ],
-      "category": "CONSISTENCY",
-      "description": "Observed Natix Network detectionsZeroDays on 3 of 3 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Hivemapper: repeated top20ShareOfSupply observation",
-      "pattern": "REPEATED_ECONOMICS",
-      "networks": [
-        "Hivemapper"
-      ],
-      "category": "ECONOMICS",
-      "description": "Observed Hivemapper top20ShareOfSupply on 3 of 3 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Natix Network: repeated top20ShareOfSupply observation",
-      "pattern": "REPEATED_ECONOMICS",
-      "networks": [
-        "Natix Network"
-      ],
-      "category": "ECONOMICS",
-      "description": "Observed Natix Network top20ShareOfSupply on 3 of 3 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "cross-network",
-      "classification": "convergence",
-      "headline": "Cross-network economic distribution shape observed across multiple networks",
-      "pattern": "CROSS_NETWORK_ECONOMICS",
-      "networks": [
-        "Hivemapper",
-        "Natix Network"
-      ],
-      "category": "ECONOMICS",
-      "description": "Observed Cross-network economic distribution shape observed across multiple networks (Hivemapper, Natix Network).",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "cross-network",
-      "classification": "divergence",
-      "headline": "Divergence: ECONOMICS metrics split across networks",
-      "pattern": "DIVERGENCE_ECONOMICS",
-      "networks": [
-        "Hivemapper",
-        "Natix Network"
-      ],
-      "category": "ECONOMICS",
-      "description": "Opposing metric drift — Hivemapper rising while Natix Network declining.",
-      "patternType": "divergence"
-    },
-    {
-      "scope": "cross-network",
-      "classification": "concentration",
-      "headline": "Economic concentration shape on public ledgers",
-      "pattern": "ECONOMICS_CONCENTRATION",
-      "networks": [
-        "Hivemapper",
-        "Natix Network"
-      ],
-      "category": "ECONOMICS",
-      "description": "Observed holder/supply concentration metrics from public on-chain reads.",
+      "category": "IDENTITY",
+      "description": "Observed Cross-network identity registry stress observed across multiple networks (Dawn Network, Geodnet, Grass / Titan, Nodle).",
       "patternType": "cross-network"
     },
     {
@@ -199,18 +70,6 @@
       ],
       "category": "IDENTITY",
       "description": "Observed Geodnet exactDupGroups on 3 of 3 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "WeatherXM: repeated overCapacityCells observation",
-      "pattern": "REPEATED_CAPACITY",
-      "networks": [
-        "WeatherXM"
-      ],
-      "category": "CAPACITY",
-      "description": "Observed WeatherXM overCapacityCells on 3 of 3 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -287,19 +146,155 @@
     },
     {
       "scope": "localized",
+      "classification": "divergence",
+      "headline": "Divergence: IDENTITY metrics split across networks",
+      "pattern": "DIVERGENCE_IDENTITY",
+      "networks": [
+        "Geodnet"
+      ],
+      "category": "IDENTITY",
+      "description": "Opposing metric drift — Geodnet rising while Geodnet declining.",
+      "patternType": "divergence"
+    },
+    {
+      "scope": "systemic",
+      "classification": "convergence",
+      "headline": "Cross-network infrastructure coverage stress observed across multiple networks",
+      "pattern": "CROSS_NETWORK_INFRASTRUCTURE",
+      "networks": [
+        "Dawn Network",
+        "Grass / Titan",
+        "Nodle"
+      ],
+      "category": "INFRASTRUCTURE",
+      "description": "Observed Cross-network infrastructure coverage stress observed across multiple networks (Dawn Network, Grass / Titan, Nodle).",
+      "patternType": "cross-network"
+    },
+    {
+      "scope": "systemic",
       "classification": "stability",
-      "headline": "Natix Network: metric consistency stress signal detected",
-      "pattern": "LOCAL_CONSISTENCY",
+      "headline": "Stability: INFRASTRUCTURE metrics unchanged across networks",
+      "pattern": "STABILITY_INFRASTRUCTURE",
+      "networks": [
+        "Dawn Network",
+        "Grass / Titan",
+        "Nodle"
+      ],
+      "category": "INFRASTRUCTURE",
+      "description": "No delta movement recorded for INFRASTRUCTURE metrics this window.",
+      "patternType": "cross-network"
+    },
+    {
+      "scope": "systemic",
+      "classification": "repetition",
+      "headline": "Natix Network: repeated drivers observation",
+      "pattern": "REPEATED_INFRASTRUCTURE",
+      "networks": [
+        "Natix Network"
+      ],
+      "category": "INFRASTRUCTURE",
+      "description": "Observed Natix Network drivers on 2 of 3 recorded days.",
+      "patternType": "cross-network"
+    },
+    {
+      "scope": "systemic",
+      "classification": "repetition",
+      "headline": "Nodle: repeated observed observation",
+      "pattern": "REPEATED_INFRASTRUCTURE",
+      "networks": [
+        "Nodle"
+      ],
+      "category": "INFRASTRUCTURE",
+      "description": "Observed Nodle observed on 2 of 3 recorded days.",
+      "patternType": "cross-network"
+    },
+    {
+      "scope": "systemic",
+      "classification": "repetition",
+      "headline": "Dawn Network: repeated observed observation",
+      "pattern": "REPEATED_INFRASTRUCTURE",
+      "networks": [
+        "Dawn Network"
+      ],
+      "category": "INFRASTRUCTURE",
+      "description": "Observed Dawn Network observed on 2 of 3 recorded days.",
+      "patternType": "cross-network"
+    },
+    {
+      "scope": "systemic",
+      "classification": "repetition",
+      "headline": "Grass / Titan: repeated observed observation",
+      "pattern": "REPEATED_INFRASTRUCTURE",
+      "networks": [
+        "Grass / Titan"
+      ],
+      "category": "INFRASTRUCTURE",
+      "description": "Observed Grass / Titan observed on 2 of 3 recorded days.",
+      "patternType": "cross-network"
+    },
+    {
+      "scope": "systemic",
+      "classification": "repetition",
+      "headline": "WeatherXM: repeated overCapacityCells observation",
+      "pattern": "REPEATED_CAPACITY",
+      "networks": [
+        "WeatherXM"
+      ],
+      "category": "CAPACITY",
+      "description": "Observed WeatherXM overCapacityCells on 3 of 3 recorded days.",
+      "patternType": "cross-network"
+    },
+    {
+      "scope": "systemic",
+      "classification": "repetition",
+      "headline": "Hivemapper: repeated top20ShareOfSupply observation",
+      "pattern": "REPEATED_ECONOMICS",
+      "networks": [
+        "Hivemapper"
+      ],
+      "category": "ECONOMICS",
+      "description": "Observed Hivemapper top20ShareOfSupply on 3 of 3 recorded days.",
+      "patternType": "cross-network"
+    },
+    {
+      "scope": "systemic",
+      "classification": "repetition",
+      "headline": "Natix Network: repeated top20ShareOfSupply observation",
+      "pattern": "REPEATED_ECONOMICS",
+      "networks": [
+        "Natix Network"
+      ],
+      "category": "ECONOMICS",
+      "description": "Observed Natix Network top20ShareOfSupply on 2 of 3 recorded days.",
+      "patternType": "cross-network"
+    },
+    {
+      "scope": "systemic",
+      "classification": "repetition",
+      "headline": "Natix Network: repeated kmFrozenDays observation",
+      "pattern": "REPEATED_CONSISTENCY",
       "networks": [
         "Natix Network"
       ],
       "category": "CONSISTENCY",
-      "description": "Observed consistency signal on Natix Network (kmFrozenDays).",
-      "patternType": "single-network"
+      "description": "Observed Natix Network kmFrozenDays on 2 of 3 recorded days.",
+      "patternType": "cross-network"
+    },
+    {
+      "scope": "systemic",
+      "classification": "repetition",
+      "headline": "Natix Network: repeated detectionsZeroDays observation",
+      "pattern": "REPEATED_CONSISTENCY",
+      "networks": [
+        "Natix Network"
+      ],
+      "category": "CONSISTENCY",
+      "description": "Observed Natix Network detectionsZeroDays on 2 of 3 recorded days.",
+      "patternType": "cross-network"
     },
     {
       "scope": "localized",
-      "classification": "stability",
+      "classification": "drift",
       "headline": "WeatherXM: capacity pressure signal detected",
       "pattern": "LOCAL_CAPACITY",
       "networks": [
@@ -311,90 +306,111 @@
     },
     {
       "scope": "localized",
-      "classification": "stability",
-      "headline": "Geodnet: identity registry stress signal detected",
-      "pattern": "LOCAL_IDENTITY",
+      "classification": "drift",
+      "headline": "Hivemapper: economic distribution shape signal detected",
+      "pattern": "LOCAL_ECONOMICS",
       "networks": [
-        "Geodnet"
+        "Hivemapper"
       ],
-      "category": "IDENTITY",
-      "description": "Observed identity signal on Geodnet (exactDupGroups).",
+      "category": "ECONOMICS",
+      "description": "Observed economics signal on Hivemapper (top20ShareOfSupply).",
+      "patternType": "single-network"
+    },
+    {
+      "scope": "localized",
+      "classification": "concentration",
+      "headline": "Economic concentration shape on public ledgers",
+      "pattern": "ECONOMICS_CONCENTRATION",
+      "networks": [
+        "Hivemapper"
+      ],
+      "category": "ECONOMICS",
+      "description": "Observed holder/supply concentration metrics from public on-chain reads.",
       "patternType": "single-network"
     }
   ],
   "implication": [
-    "Signal divergence between reported and operational metrics is increasing across multiple DePIN sensor networks (infrastructure, consistency, economics, identity, capacity categories observed concurrently)."
+    "Signal divergence between reported and operational metrics is increasing across multiple DePIN sensor networks (identity, infrastructure, capacity, economics, consistency categories observed concurrently)."
   ],
   "signals": [
     {
       "network": "Geodnet",
       "metric": "exactDupGroups",
-      "value": 10,
-      "delta": 0,
-      "timestamp": "2026-06-02",
+      "value": 11,
+      "delta": 3,
+      "timestamp": "2026-06-01",
       "severity": "medium",
       "feedConfidence": 0.7
+    },
+    {
+      "network": "Geodnet",
+      "metric": "flaggedPct",
+      "value": 0.09344412724306689,
+      "delta": -0.000019991480250863836,
+      "timestamp": "2026-06-01",
+      "severity": "low",
+      "feedConfidence": 0.85
     },
     {
       "network": "WeatherXM",
       "metric": "overCapacityCells",
       "value": 288,
-      "delta": 0,
-      "timestamp": "2026-06-02",
+      "delta": -1,
+      "timestamp": "2026-06-01",
       "severity": "medium",
       "feedConfidence": 0.7
+    },
+    {
+      "network": "WeatherXM",
+      "metric": "overCapacityPct",
+      "value": 0.03391427225624117,
+      "delta": -0.00012978475871936596,
+      "timestamp": "2026-06-01",
+      "severity": "low",
+      "feedConfidence": 0.85
     },
     {
       "network": "Hivemapper",
       "metric": "top20ShareOfSupply",
-      "value": 0.49132376917049303,
-      "delta": 1.5139018372245516e-9,
-      "timestamp": "2026-06-02",
+      "value": 0.49132376763747454,
+      "delta": -0.0001884535774536178,
+      "timestamp": "2026-06-01",
       "severity": "medium",
       "feedConfidence": 0.7
     },
     {
-      "network": "Natix Network",
-      "metric": "kmFrozenDays",
-      "value": 33,
+      "network": "Nodle",
+      "metric": "exactDupGroups",
+      "value": 15,
       "delta": 0,
-      "timestamp": "2026-06-02",
-      "severity": "high",
-      "feedConfidence": 0.7
-    },
-    {
-      "network": "Natix Network",
-      "metric": "top20ShareOfSupply",
-      "value": 0.7238792865537902,
-      "delta": -0.000034799213210479074,
-      "timestamp": "2026-06-02",
-      "severity": "high",
-      "feedConfidence": 0.85
-    },
-    {
-      "network": "Natix Network",
-      "metric": "detectionsZeroDays",
-      "value": 33,
-      "delta": 1,
-      "timestamp": "2026-06-02",
-      "severity": "high",
-      "feedConfidence": 0.85
-    },
-    {
-      "network": "Natix Network",
-      "metric": "drivers",
-      "value": 271401,
-      "delta": 1,
-      "timestamp": "2026-06-02",
-      "severity": "high",
-      "feedConfidence": 0.85
+      "timestamp": "2026-06-01",
+      "severity": "low",
+      "feedConfidence": 0.55
     },
     {
       "network": "Nodle",
       "metric": "observed",
       "value": 65,
       "delta": 0,
-      "timestamp": "2026-05-25",
+      "timestamp": "2026-06-01",
+      "severity": "low",
+      "feedConfidence": 0.55
+    },
+    {
+      "network": "Nodle",
+      "metric": "flaggedPct",
+      "value": 0.38461538461538464,
+      "delta": 0,
+      "timestamp": "2026-06-01",
+      "severity": "low",
+      "feedConfidence": 0.55
+    },
+    {
+      "network": "Dawn Network",
+      "metric": "exactDupGroups",
+      "value": 15,
+      "delta": 0,
+      "timestamp": "2026-06-01",
       "severity": "low",
       "feedConfidence": 0.55
     },
@@ -403,7 +419,43 @@
       "metric": "observed",
       "value": 55,
       "delta": 0,
-      "timestamp": "2026-05-25",
+      "timestamp": "2026-06-01",
+      "severity": "low",
+      "feedConfidence": 0.55
+    },
+    {
+      "network": "Dawn Network",
+      "metric": "flaggedPct",
+      "value": 0.45454545454545453,
+      "delta": 0,
+      "timestamp": "2026-06-01",
+      "severity": "low",
+      "feedConfidence": 0.55
+    },
+    {
+      "network": "Grass / Titan",
+      "metric": "exactDupGroups",
+      "value": 0,
+      "delta": 0,
+      "timestamp": "2026-05-22",
+      "severity": "low",
+      "feedConfidence": 0.55
+    },
+    {
+      "network": "Grass / Titan",
+      "metric": "observed",
+      "value": 200,
+      "delta": 0,
+      "timestamp": "2026-05-22",
+      "severity": "low",
+      "feedConfidence": 0.55
+    },
+    {
+      "network": "Grass / Titan",
+      "metric": "flaggedPct",
+      "value": 0.45,
+      "delta": 0,
+      "timestamp": "2026-05-22",
       "severity": "low",
       "feedConfidence": 0.55
     }
@@ -413,13 +465,27 @@
       {
         "network": "Geodnet",
         "metric": "exactDupGroups",
-        "confidence": 0.73,
+        "confidence": 0.682,
+        "flags": []
+      },
+      {
+        "network": "Geodnet",
+        "metric": "flaggedPct",
+        "confidence": 0.64,
         "flags": []
       },
       {
         "network": "WeatherXM",
         "metric": "overCapacityCells",
-        "confidence": 0.73,
+        "confidence": 0.682,
+        "flags": [
+          "isolated"
+        ]
+      },
+      {
+        "network": "WeatherXM",
+        "metric": "overCapacityPct",
+        "confidence": 0.64,
         "flags": [
           "isolated"
         ]
@@ -427,91 +493,77 @@
       {
         "network": "Hivemapper",
         "metric": "top20ShareOfSupply",
-        "confidence": 0.79,
-        "flags": []
-      },
-      {
-        "network": "Natix Network",
-        "metric": "kmFrozenDays",
-        "confidence": 0.73,
+        "confidence": 0.682,
         "flags": [
           "isolated"
         ]
       },
       {
-        "network": "Natix Network",
-        "metric": "top20ShareOfSupply",
-        "confidence": 0.723,
-        "flags": []
-      },
-      {
-        "network": "Natix Network",
-        "metric": "detectionsZeroDays",
-        "confidence": 0.79,
-        "flags": [
-          "isolated"
-        ]
-      },
-      {
-        "network": "Natix Network",
-        "metric": "drivers",
-        "confidence": 0.79,
+        "network": "Nodle",
+        "metric": "exactDupGroups",
+        "confidence": 0.636,
         "flags": []
       },
       {
         "network": "Nodle",
         "metric": "observed",
-        "confidence": 0.688,
+        "confidence": 0.748,
+        "flags": []
+      },
+      {
+        "network": "Nodle",
+        "metric": "flaggedPct",
+        "confidence": 0.636,
+        "flags": []
+      },
+      {
+        "network": "Dawn Network",
+        "metric": "exactDupGroups",
+        "confidence": 0.636,
         "flags": []
       },
       {
         "network": "Dawn Network",
         "metric": "observed",
-        "confidence": 0.688,
+        "confidence": 0.748,
+        "flags": []
+      },
+      {
+        "network": "Dawn Network",
+        "metric": "flaggedPct",
+        "confidence": 0.636,
+        "flags": []
+      },
+      {
+        "network": "Grass / Titan",
+        "metric": "exactDupGroups",
+        "confidence": 0.636,
+        "flags": []
+      },
+      {
+        "network": "Grass / Titan",
+        "metric": "observed",
+        "confidence": 0.636,
+        "flags": []
+      },
+      {
+        "network": "Grass / Titan",
+        "metric": "flaggedPct",
+        "confidence": 0.636,
         "flags": []
       }
     ],
     "heldBack": [
       {
-        "network": "Nodle",
-        "metric": "exactDupGroups",
-        "confidence": 0.534,
-        "flags": []
-      },
-      {
-        "network": "Nodle",
-        "metric": "flaggedPct",
-        "confidence": 0.534,
-        "flags": []
-      },
-      {
-        "network": "Dawn Network",
-        "metric": "exactDupGroups",
-        "confidence": 0.534,
-        "flags": []
-      },
-      {
-        "network": "Dawn Network",
-        "metric": "flaggedPct",
-        "confidence": 0.534,
-        "flags": []
-      },
-      {
-        "network": "Grass / Titan",
-        "metric": "exactDupGroups",
-        "confidence": 0.534,
-        "flags": []
-      },
-      {
-        "network": "Grass / Titan",
+        "network": "Geodnet",
         "metric": "observed",
-        "confidence": 0.585,
+        "confidence": 0.595,
         "flags": []
       },
       {
-        "network": "Grass / Titan",
-        "metric": "flaggedPct",
-        "confidence": 0.534,
+        "network": "WeatherXM",
+        "metric": "observed",
+        "confidence": 0.595,
         "flags": []
       }
     ]

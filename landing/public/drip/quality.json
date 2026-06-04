@@ -13,13 +13,27 @@
       {
         "network": "Geodnet",
         "metric": "exactDupGroups",
-        "confidence": 0.73,
+        "confidence": 0.682,
+        "flags": []
+      },
+      {
+        "network": "Geodnet",
+        "metric": "flaggedPct",
+        "confidence": 0.64,
         "flags": []
       },
       {
         "network": "WeatherXM",
         "metric": "overCapacityCells",
-        "confidence": 0.73,
+        "confidence": 0.682,
+        "flags": [
+          "isolated"
+        ]
+      },
+      {
+        "network": "WeatherXM",
+        "metric": "overCapacityPct",
+        "confidence": 0.64,
         "flags": [
           "isolated"
         ]
@@ -27,91 +41,77 @@
       {
         "network": "Hivemapper",
         "metric": "top20ShareOfSupply",
-        "confidence": 0.79,
-        "flags": []
-      },
-      {
-        "network": "Natix Network",
-        "metric": "kmFrozenDays",
-        "confidence": 0.73,
+        "confidence": 0.682,
         "flags": [
           "isolated"
         ]
       },
       {
-        "network": "Natix Network",
-        "metric": "top20ShareOfSupply",
-        "confidence": 0.723,
-        "flags": []
-      },
-      {
-        "network": "Natix Network",
-        "metric": "detectionsZeroDays",
-        "confidence": 0.79,
-        "flags": [
-          "isolated"
-        ]
-      },
-      {
-        "network": "Natix Network",
-        "metric": "drivers",
-        "confidence": 0.79,
+        "network": "Nodle",
+        "metric": "exactDupGroups",
+        "confidence": 0.636,
         "flags": []
       },
       {
         "network": "Nodle",
         "metric": "observed",
-        "confidence": 0.688,
+        "confidence": 0.748,
+        "flags": []
+      },
+      {
+        "network": "Nodle",
+        "metric": "flaggedPct",
+        "confidence": 0.636,
+        "flags": []
+      },
+      {
+        "network": "Dawn Network",
+        "metric": "exactDupGroups",
+        "confidence": 0.636,
         "flags": []
       },
       {
         "network": "Dawn Network",
         "metric": "observed",
-        "confidence": 0.688,
+        "confidence": 0.748,
+        "flags": []
+      },
+      {
+        "network": "Dawn Network",
+        "metric": "flaggedPct",
+        "confidence": 0.636,
+        "flags": []
+      },
+      {
+        "network": "Grass / Titan",
+        "metric": "exactDupGroups",
+        "confidence": 0.636,
+        "flags": []
+      },
+      {
+        "network": "Grass / Titan",
+        "metric": "observed",
+        "confidence": 0.636,
+        "flags": []
+      },
+      {
+        "network": "Grass / Titan",
+        "metric": "flaggedPct",
+        "confidence": 0.636,
         "flags": []
       }
     ],
     "heldBack": [
       {
-        "network": "Nodle",
-        "metric": "exactDupGroups",
-        "confidence": 0.534,
-        "flags": []
-      },
-      {
-        "network": "Nodle",
-        "metric": "flaggedPct",
-        "confidence": 0.534,
-        "flags": []
-      },
-      {
-        "network": "Dawn Network",
-        "metric": "exactDupGroups",
-        "confidence": 0.534,
-        "flags": []
-      },
-      {
-        "network": "Dawn Network",
-        "metric": "flaggedPct",
-        "confidence": 0.534,
-        "flags": []
-      },
-      {
-        "network": "Grass / Titan",
-        "metric": "exactDupGroups",
-        "confidence": 0.534,
-        "flags": []
-      },
-      {
-        "network": "Grass / Titan",
+        "network": "Geodnet",
         "metric": "observed",
-        "confidence": 0.585,
+        "confidence": 0.595,
         "flags": []
       },
       {
-        "network": "Grass / Titan",
-        "metric": "flaggedPct",
-        "confidence": 0.534,
+        "network": "WeatherXM",
+        "metric": "observed",
+        "confidence": 0.595,
         "flags": []
       }
     ]
