@@ -22,7 +22,7 @@ const MAX_OUTPUT_TOKENS = 400;
  *  Context fetch is bounded separately, so 20s here keeps worst-case total safe. */
 const OPENAI_TIMEOUT_MS = 20_000;
 const MAX_CONTEXT_CHARS = 6_000;
-const BUILD_MARKER = "chat-resilience-5";
+const BUILD_MARKER = "chat-resilience-6";
 
 function json(body, status = 200) {
   return new Response(JSON.stringify(body), {
@@ -136,7 +136,8 @@ export async function onRequestPost(ctx) {
       /* use fallback context */
     }
 
-    const model = defaultDepinChatModel(env);
+    const modelOverride = new URL(request.url).searchParams.get("model");
+    const model = modelOverride || defaultDepinChatModel(env);
 
     const system = `You are the public GETKINETIK bureau assistant on getkinetik.app.
 
