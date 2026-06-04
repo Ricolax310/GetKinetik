@@ -22,7 +22,7 @@ const MAX_OUTPUT_TOKENS = 400;
  *  Context fetch is bounded separately, so 20s here keeps worst-case total safe. */
 const OPENAI_TIMEOUT_MS = 20_000;
 const MAX_CONTEXT_CHARS = 6_000;
-const BUILD_MARKER = "chat-resilience-2";
+const BUILD_MARKER = "chat-resilience-3";
 
 function json(body, status = 200) {
   return new Response(JSON.stringify(body), {
@@ -78,6 +78,12 @@ async function loadContextPack(env, request) {
 export async function onRequestPost(ctx) {
   try {
     const { request, env } = ctx;
+
+    // Diagnostic probe: POST ?ping returns immediately (no context, no OpenAI).
+    // Isolates whether platform 502s originate before or during the model call.
+    if (new URL(request.url).searchParams.has("ping")) {
+      return json({ ok: true, build: BUILD_MARKER, pong: true, hasKey: Boolean(env.OPENAI_API_KEY?.trim()) });
+    }
 
     if (!env.OPENAI_API_KEY?.trim()) {
       return json({ error: "Chat temporarily unavailable." }, 503);
