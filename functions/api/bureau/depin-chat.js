@@ -21,7 +21,8 @@ const MAX_OUTPUT_TOKENS = 400;
 /** Stay under Cloudflare Pages function wall-clock limit (~30s).
  *  Context fetch is bounded separately, so 20s here keeps worst-case total safe. */
 const OPENAI_TIMEOUT_MS = 20_000;
-const MAX_CONTEXT_CHARS = 12_000;
+const MAX_CONTEXT_CHARS = 6_000;
+const BUILD_MARKER = "chat-resilience-2";
 
 function json(body, status = 200) {
   return new Response(JSON.stringify(body), {
@@ -173,6 +174,7 @@ ${context}`;
 export async function onRequestGet() {
   return json({
     ok: true,
+    build: BUILD_MARKER,
     endpoint: "POST /api/bureau/depin-chat",
     bodyExample: {
       messages: [{ role: "user", content: "What does a neutral DePIN bureau do?" }],
