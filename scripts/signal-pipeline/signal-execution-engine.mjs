@@ -84,6 +84,8 @@ function processSignals(networks, grammarVersion) {
       const suppression = renderSuppression(signal);
       const category = assignCategory(signal, grammarVersion);
       const structure = classifyStructure(signal, suppression.suppressed);
+      const delta = renderDelta(signal);
+      const stability = renderStability(signal);
       processed.push({
         network: net.network,
         networkId: net.networkId,
@@ -92,8 +94,8 @@ function processSignals(networks, grammarVersion) {
         structure,
         suppressed: suppression.suppressed,
         suppressionReason: suppression.reason,
-        deltaPhrase: renderDelta(signal),
-        stabilityPhrase: renderStability(signal),
+        deltaPhrase: delta,
+        stabilityPhrase: stability === delta ? null : stability,
         metric: signal.metric || signal.metricKey || signal.anomalyType || "signal",
         value: typeof signal.value === "number" ? signal.value : null,
         previous: typeof signal.previous === "number" ? signal.previous : null,
@@ -123,7 +125,7 @@ function processPatterns(visible, grammar) {
       signalLines: items
         .slice()
         .sort(sortBySeverityThenName)
-        .map((p) => `${p.network}: ${p.stabilityPhrase}`),
+        .map((p) => `${p.network}: ${p.stabilityPhrase || p.deltaPhrase}`),
     });
   }
   return patterns;
@@ -150,7 +152,10 @@ function renderTodaysRead(visible, grammar) {
   const ordered = visible.slice().sort(sortBySeverityThenName).slice(0, limit);
   const lines = ["## Today's Read", ""];
   if (!ordered.length) lines.push("- No visible signals after suppression.");
-  else for (const p of ordered) lines.push(`- ${p.network}: ${p.deltaPhrase}; ${p.stabilityPhrase}.`);
+  else for (const p of ordered) {
+    const phrase = p.stabilityPhrase ? `${p.deltaPhrase}; ${p.stabilityPhrase}` : p.deltaPhrase;
+    lines.push(`- ${p.network}: ${phrase}.`);
+  }
   return lines;
 }
 
@@ -186,7 +191,10 @@ function renderNetworkWatch(visible, grammar) {
       .sort(sortBySeverityThenName)
       .slice(0, limit);
     lines.push(`### ${network}`);
-    for (const p of items) lines.push(`- [${p.category}] ${p.deltaPhrase}; ${p.stabilityPhrase}.`);
+    for (const p of items) {
+      const phrase = p.stabilityPhrase ? `${p.deltaPhrase}; ${p.stabilityPhrase}` : p.deltaPhrase;
+      lines.push(`- [${p.category}] ${phrase}.`);
+    }
     lines.push("");
   }
   return lines;

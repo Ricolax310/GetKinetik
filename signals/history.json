@@ -1,0 +1,887 @@
+[
+  {
+    "date": "2026-06-02",
+    "generatedAt": "2026-06-02T16:34:55.703Z",
+    "networks": [
+      {
+        "network": "Geodnet",
+        "networkId": "geodnet",
+        "status": "active",
+        "signals": [
+          {
+            "network": "Geodnet",
+            "type": "integrity",
+            "metric": "exactDupGroups",
+            "value": 10,
+            "previous": 10,
+            "delta": 0,
+            "message": "10 exact (lat,lng) duplicate groups on 19,612 public stations — each row in §1 is one coordinate pair your registry team can grep today.",
+            "severity": "medium",
+            "confidence": 0.7,
+            "anomalyType": "duplication_cluster",
+            "kind": "headline",
+            "metricKey": null,
+            "timestamp": "2026-06-02",
+            "asOf": "2026-06-02"
+          }
+        ]
+      },
+      {
+        "network": "WeatherXM",
+        "networkId": "weatherxm",
+        "status": "active",
+        "signals": [
+          {
+            "network": "WeatherXM",
+            "type": "health",
+            "metric": "overCapacityCells",
+            "value": 288,
+            "previous": 288,
+            "delta": 0,
+            "message": "288 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.",
+            "severity": "medium",
+            "confidence": 0.7,
+            "anomalyType": "capacity_violation",
+            "kind": "headline",
+            "metricKey": null,
+            "timestamp": "2026-06-02",
+            "asOf": "2026-06-02"
+          }
+        ]
+      },
+      {
+        "network": "Hivemapper",
+        "networkId": "hivemapper",
+        "status": "active",
+        "signals": [
+          {
+            "network": "Hivemapper",
+            "type": "economics",
+            "metric": "top20ShareOfSupply",
+            "value": 0.49132376917049303,
+            "previous": 0.4913237676565912,
+            "delta": 1.5139018372245516e-9,
+            "message": "49.13% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.",
+            "severity": "medium",
+            "confidence": 0.7,
+            "anomalyType": "economic_concentration",
+            "kind": "headline",
+            "metricKey": null,
+            "timestamp": "2026-06-02",
+            "asOf": "2026-06-02"
+          }
+        ]
+      },
+      {
+        "network": "Natix Network",
+        "networkId": "natix",
+        "status": "active",
+        "signals": [
+          {
+            "network": "Natix Network",
+            "type": "health",
+            "metric": "kmFrozenDays",
+            "value": 33,
+            "previous": 33,
+            "delta": 0,
+            "message": "KM mapped frozen 33 days at 254,808,022 (no change since 2026-05-01) while registered drivers kept moving (+61 over the same window) — the cumulative coverage counter has stalled even as registrations advance.",
+            "severity": "high",
+            "confidence": 0.7,
+            "anomalyType": "telemetry_discontinuity",
+            "kind": "headline",
+            "metricKey": null,
+            "timestamp": "2026-06-02",
+            "asOf": "2026-06-02"
+          },
+          {
+            "network": "Natix Network",
+            "type": "health",
+            "metric": "top20ShareOfSupply",
+            "value": 0.7238792865537902,
+            "previous": 0.7239140857670007,
+            "delta": -0.000034799213210479074,
+            "message": "top-20 SPL share of UI supply: 72.39% (-0.00 pp (-0.0%))",
+            "severity": "high",
+            "confidence": 0.85,
+            "anomalyType": "telemetry_discontinuity",
+            "kind": "metric",
+            "metricKey": "top20ShareOfSupply",
+            "timestamp": "2026-06-02",
+            "asOf": "2026-06-02"
+          },
+          {
+            "network": "Natix Network",
+            "type": "health",
+            "metric": "detectionsZeroDays",
+            "value": 33,
+            "previous": 32,
+            "delta": 1,
+            "message": "days detections at zero: 33 (+1 (+3.1%))",
+            "severity": "high",
+            "confidence": 0.85,
+            "anomalyType": "telemetry_discontinuity",
+            "kind": "metric",
+            "metricKey": "detectionsZeroDays",
+            "timestamp": "2026-06-02",
+            "asOf": "2026-06-02"
+          },
+          {
+            "network": "Natix Network",
+            "type": "health",
+            "metric": "drivers",
+            "value": 271401,
+            "previous": 271400,
+            "delta": 1,
+            "message": "registered drivers: 271,401 (+1 (+0.0%))",
+            "severity": "high",
+            "confidence": 0.85,
+            "anomalyType": "telemetry_discontinuity",
+            "kind": "metric",
+            "metricKey": "drivers",
+            "timestamp": "2026-06-02",
+            "asOf": "2026-06-02"
+          }
+        ]
+      },
+      {
+        "network": "DIMO",
+        "networkId": "dimo",
+        "status": "pending",
+        "note": "No public scanner wired yet — included for cross-network coverage.",
+        "signals": []
+      }
+    ]
+  },
+  {
+    "date": "2026-06-03",
+    "generatedAt": "2026-06-03T06:03:20.977Z",
+    "networks": [
+      {
+        "network": "Geodnet",
+        "networkId": "geodnet",
+        "status": "active",
+        "signals": [
+          {
+            "network": "Geodnet",
+            "type": "integrity",
+            "metric": "exactDupGroups",
+            "value": 10,
+            "previous": 10,
+            "delta": 0,
+            "message": "10 exact (lat,lng) duplicate groups on 19,612 public stations — each row in §1 is one coordinate pair your registry team can grep today.",
+            "severity": "medium",
+            "confidence": 0.7,
+            "anomalyType": "duplication_cluster",
+            "kind": "headline",
+            "metricKey": null,
+            "timestamp": "2026-06-02",
+            "asOf": "2026-06-02"
+          }
+        ]
+      },
+      {
+        "network": "WeatherXM",
+        "networkId": "weatherxm",
+        "status": "active",
+        "signals": [
+          {
+            "network": "WeatherXM",
+            "type": "health",
+            "metric": "overCapacityCells",
+            "value": 288,
+            "previous": 288,
+            "delta": 0,
+            "message": "288 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.",
+            "severity": "medium",
+            "confidence": 0.7,
+            "anomalyType": "capacity_violation",
+            "kind": "headline",
+            "metricKey": null,
+            "timestamp": "2026-06-02",
+            "asOf": "2026-06-02"
+          }
+        ]
+      },
+      {
+        "network": "Hivemapper",
+        "networkId": "hivemapper",
+        "status": "active",
+        "signals": [
+          {
+            "network": "Hivemapper",
+            "type": "economics",
+            "metric": "top20ShareOfSupply",
+            "value": 0.49132376917049303,
+            "previous": 0.4913237676565912,
+            "delta": 1.5139018372245516e-9,
+            "message": "49.13% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.",
+            "severity": "medium",
+            "confidence": 0.7,
+            "anomalyType": "economic_concentration",
+            "kind": "headline",
+            "metricKey": null,
+            "timestamp": "2026-06-02",
+            "asOf": "2026-06-02"
+          }
+        ]
+      },
+      {
+        "network": "Natix Network",
+        "networkId": "natix",
+        "status": "active",
+        "signals": [
+          {
+            "network": "Natix Network",
+            "type": "health",
+            "metric": "kmFrozenDays",
+            "value": 33,
+            "previous": 33,
+            "delta": 0,
+            "message": "KM mapped frozen 33 days at 254,808,022 (no change since 2026-05-01) while registered drivers kept moving (+61 over the same window) — the cumulative coverage counter has stalled even as registrations advance.",
+            "severity": "high",
+            "confidence": 0.7,
+            "anomalyType": "telemetry_discontinuity",
+            "kind": "headline",
+            "metricKey": null,
+            "timestamp": "2026-06-02",
+            "asOf": "2026-06-02"
+          },
+          {
+            "network": "Natix Network",
+            "type": "health",
+            "metric": "top20ShareOfSupply",
+            "value": 0.7238792865537902,
+            "previous": 0.7239140857670007,
+            "delta": -0.000034799213210479074,
+            "message": "top-20 SPL share of UI supply: 72.39% (-0.00 pp (-0.0%))",
+            "severity": "high",
+            "confidence": 0.85,
+            "anomalyType": "telemetry_discontinuity",
+            "kind": "metric",
+            "metricKey": "top20ShareOfSupply",
+            "timestamp": "2026-06-02",
+            "asOf": "2026-06-02"
+          },
+          {
+            "network": "Natix Network",
+            "type": "health",
+            "metric": "detectionsZeroDays",
+            "value": 33,
+            "previous": 32,
+            "delta": 1,
+            "message": "days detections at zero: 33 (+1 (+3.1%))",
+            "severity": "high",
+            "confidence": 0.85,
+            "anomalyType": "telemetry_discontinuity",
+            "kind": "metric",
+            "metricKey": "detectionsZeroDays",
+            "timestamp": "2026-06-02",
+            "asOf": "2026-06-02"
+          },
+          {
+            "network": "Natix Network",
+            "type": "health",
+            "metric": "drivers",
+            "value": 271401,
+            "previous": 271400,
+            "delta": 1,
+            "message": "registered drivers: 271,401 (+1 (+0.0%))",
+            "severity": "high",
+            "confidence": 0.85,
+            "anomalyType": "telemetry_discontinuity",
+            "kind": "metric",
+            "metricKey": "drivers",
+            "timestamp": "2026-06-02",
+            "asOf": "2026-06-02"
+          }
+        ]
+      },
+      {
+        "network": "Nodle",
+        "networkId": "nodle",
+        "status": "active",
+        "signals": [
+          {
+            "network": "Nodle",
+            "type": "integrity",
+            "metric": "identityCollisions",
+            "value": null,
+            "previous": null,
+            "delta": 0,
+            "message": "Flagged Emulator Nodes: 25 (38.5% of pool)",
+            "severity": "medium",
+            "confidence": 0.7,
+            "anomalyType": "identity_collision",
+            "kind": "headline",
+            "metricKey": null,
+            "timestamp": "2026-05-25",
+            "asOf": "2026-05-25"
+          },
+          {
+            "network": "Nodle",
+            "type": "integrity",
+            "metric": "exactDupGroups",
+            "value": 15,
+            "previous": null,
+            "delta": 0,
+            "message": "exact (lat,lng) duplicate groups: 15 (_(first snapshot — baseline recorded)_)",
+            "severity": "low",
+            "confidence": 0.55,
+            "anomalyType": "identity_collision",
+            "kind": "metric",
+            "metricKey": "exactDupGroups",
+            "timestamp": "2026-05-25",
+            "asOf": "2026-05-25"
+          },
+          {
+            "network": "Nodle",
+            "type": "integrity",
+            "metric": "observed",
+            "value": 65,
+            "previous": null,
+            "delta": 0,
+            "message": "entities on public map: 65 (_(first snapshot — baseline recorded)_)",
+            "severity": "low",
+            "confidence": 0.55,
+            "anomalyType": "identity_collision",
+            "kind": "metric",
+            "metricKey": "observed",
+            "timestamp": "2026-05-25",
+            "asOf": "2026-05-25"
+          },
+          {
+            "network": "Nodle",
+            "type": "integrity",
+            "metric": "flaggedPct",
+            "value": 0.38461538461538464,
+            "previous": null,
+            "delta": 0,
+            "message": "fleet share flagged (any heuristic): 38.46% (_(first snapshot — baseline recorded)_)",
+            "severity": "low",
+            "confidence": 0.55,
+            "anomalyType": "identity_collision",
+            "kind": "metric",
+            "metricKey": "flaggedPct",
+            "timestamp": "2026-05-25",
+            "asOf": "2026-05-25"
+          }
+        ]
+      },
+      {
+        "network": "Dawn Network",
+        "networkId": "dawn",
+        "status": "active",
+        "signals": [
+          {
+            "network": "Dawn Network",
+            "type": "integrity",
+            "metric": "identityCollisions",
+            "value": null,
+            "previous": null,
+            "delta": 0,
+            "message": "Flagged Anomalous Nodes: 25 (45.5% of pool)",
+            "severity": "medium",
+            "confidence": 0.7,
+            "anomalyType": "identity_collision",
+            "kind": "headline",
+            "metricKey": null,
+            "timestamp": "2026-05-25",
+            "asOf": "2026-05-25"
+          },
+          {
+            "network": "Dawn Network",
+            "type": "integrity",
+            "metric": "exactDupGroups",
+            "value": 15,
+            "previous": null,
+            "delta": 0,
+            "message": "exact (lat,lng) duplicate groups: 15 (_(first snapshot — baseline recorded)_)",
+            "severity": "low",
+            "confidence": 0.55,
+            "anomalyType": "identity_collision",
+            "kind": "metric",
+            "metricKey": "exactDupGroups",
+            "timestamp": "2026-05-25",
+            "asOf": "2026-05-25"
+          },
+          {
+            "network": "Dawn Network",
+            "type": "integrity",
+            "metric": "observed",
+            "value": 55,
+            "previous": null,
+            "delta": 0,
+            "message": "entities on public map: 55 (_(first snapshot — baseline recorded)_)",
+            "severity": "low",
+            "confidence": 0.55,
+            "anomalyType": "identity_collision",
+            "kind": "metric",
+            "metricKey": "observed",
+            "timestamp": "2026-05-25",
+            "asOf": "2026-05-25"
+          },
+          {
+            "network": "Dawn Network",
+            "type": "integrity",
+            "metric": "flaggedPct",
+            "value": 0.45454545454545453,
+            "previous": null,
+            "delta": 0,
+            "message": "fleet share flagged (any heuristic): 45.45% (_(first snapshot — baseline recorded)_)",
+            "severity": "low",
+            "confidence": 0.55,
+            "anomalyType": "identity_collision",
+            "kind": "metric",
+            "metricKey": "flaggedPct",
+            "timestamp": "2026-05-25",
+            "asOf": "2026-05-25"
+          }
+        ]
+      },
+      {
+        "network": "DIMO",
+        "networkId": "dimo",
+        "status": "pending",
+        "note": "No public scanner wired yet — included for cross-network coverage.",
+        "signals": []
+      },
+      {
+        "network": "Grass / Titan",
+        "networkId": "grass",
+        "status": "active",
+        "signals": [
+          {
+            "network": "Grass / Titan",
+            "type": "health",
+            "metric": "scaffold",
+            "value": null,
+            "previous": null,
+            "delta": 0,
+            "message": "Flagged Anomalies: 1 (16.7%)",
+            "severity": "medium",
+            "confidence": 0.7,
+            "anomalyType": "scaffold",
+            "kind": "headline",
+            "metricKey": null,
+            "timestamp": "2026-05-22",
+            "asOf": "2026-05-22"
+          },
+          {
+            "network": "Grass / Titan",
+            "type": "health",
+            "metric": "exactDupGroups",
+            "value": 0,
+            "previous": null,
+            "delta": 0,
+            "message": "exact (lat,lng) duplicate groups: 0 (_(first snapshot — baseline recorded)_)",
+            "severity": "low",
+            "confidence": 0.55,
+            "anomalyType": "scaffold",
+            "kind": "metric",
+            "metricKey": "exactDupGroups",
+            "timestamp": "2026-05-22",
+            "asOf": "2026-05-22"
+          },
+          {
+            "network": "Grass / Titan",
+            "type": "health",
+            "metric": "observed",
+            "value": 200,
+            "previous": null,
+            "delta": 0,
+            "message": "entities on public map: 200 (_(first snapshot — baseline recorded)_)",
+            "severity": "low",
+            "confidence": 0.55,
+            "anomalyType": "scaffold",
+            "kind": "metric",
+            "metricKey": "observed",
+            "timestamp": "2026-05-22",
+            "asOf": "2026-05-22"
+          },
+          {
+            "network": "Grass / Titan",
+            "type": "health",
+            "metric": "flaggedPct",
+            "value": 0.45,
+            "previous": null,
+            "delta": 0,
+            "message": "fleet share flagged (any heuristic): 45.00% (_(first snapshot — baseline recorded)_)",
+            "severity": "low",
+            "confidence": 0.55,
+            "anomalyType": "scaffold",
+            "kind": "metric",
+            "metricKey": "flaggedPct",
+            "timestamp": "2026-05-22",
+            "asOf": "2026-05-22"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "date": "2026-06-04",
+    "generatedAt": "2026-06-04T21:38:37.417Z",
+    "networks": [
+      {
+        "network": "Geodnet",
+        "networkId": "geodnet",
+        "status": "active",
+        "signals": [
+          {
+            "network": "Geodnet",
+            "type": "integrity",
+            "metric": "exactDupGroups",
+            "value": 10,
+            "previous": 10,
+            "delta": 0,
+            "message": "10 exact (lat,lng) duplicate groups on 19,612 public stations — each row in §1 is one coordinate pair your registry team can grep today.",
+            "severity": "medium",
+            "confidence": 0.7,
+            "anomalyType": "duplication_cluster",
+            "kind": "headline",
+            "metricKey": null,
+            "timestamp": "2026-06-02",
+            "asOf": "2026-06-02"
+          }
+        ]
+      },
+      {
+        "network": "WeatherXM",
+        "networkId": "weatherxm",
+        "status": "active",
+        "signals": [
+          {
+            "network": "WeatherXM",
+            "type": "health",
+            "metric": "overCapacityCells",
+            "value": 288,
+            "previous": 288,
+            "delta": 0,
+            "message": "288 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.",
+            "severity": "medium",
+            "confidence": 0.7,
+            "anomalyType": "capacity_violation",
+            "kind": "headline",
+            "metricKey": null,
+            "timestamp": "2026-06-02",
+            "asOf": "2026-06-02"
+          }
+        ]
+      },
+      {
+        "network": "Hivemapper",
+        "networkId": "hivemapper",
+        "status": "active",
+        "signals": [
+          {
+            "network": "Hivemapper",
+            "type": "economics",
+            "metric": "top20ShareOfSupply",
+            "value": 0.49132376917049303,
+            "previous": 0.4913237676565912,
+            "delta": 1.5139018372245516e-9,
+            "message": "49.13% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.",
+            "severity": "medium",
+            "confidence": 0.7,
+            "anomalyType": "economic_concentration",
+            "kind": "headline",
+            "metricKey": null,
+            "timestamp": "2026-06-02",
+            "asOf": "2026-06-02"
+          }
+        ]
+      },
+      {
+        "network": "Natix Network",
+        "networkId": "natix",
+        "status": "active",
+        "signals": [
+          {
+            "network": "Natix Network",
+            "type": "health",
+            "metric": "kmFrozenDays",
+            "value": 33,
+            "previous": 33,
+            "delta": 0,
+            "message": "KM mapped frozen 33 days at 254,808,022 (no change since 2026-05-01) while registered drivers kept moving (+61 over the same window) — the cumulative coverage counter has stalled even as registrations advance.",
+            "severity": "high",
+            "confidence": 0.7,
+            "anomalyType": "telemetry_discontinuity",
+            "kind": "headline",
+            "metricKey": null,
+            "timestamp": "2026-06-02",
+            "asOf": "2026-06-02"
+          },
+          {
+            "network": "Natix Network",
+            "type": "health",
+            "metric": "top20ShareOfSupply",
+            "value": 0.7238792865537902,
+            "previous": 0.7239140857670007,
+            "delta": -0.000034799213210479074,
+            "message": "top-20 SPL share of UI supply: 72.39% (-0.00 pp (-0.0%))",
+            "severity": "high",
+            "confidence": 0.85,
+            "anomalyType": "telemetry_discontinuity",
+            "kind": "metric",
+            "metricKey": "top20ShareOfSupply",
+            "timestamp": "2026-06-02",
+            "asOf": "2026-06-02"
+          },
+          {
+            "network": "Natix Network",
+            "type": "health",
+            "metric": "detectionsZeroDays",
+            "value": 33,
+            "previous": 32,
+            "delta": 1,
+            "message": "days detections at zero: 33 (+1 (+3.1%))",
+            "severity": "high",
+            "confidence": 0.85,
+            "anomalyType": "telemetry_discontinuity",
+            "kind": "metric",
+            "metricKey": "detectionsZeroDays",
+            "timestamp": "2026-06-02",
+            "asOf": "2026-06-02"
+          },
+          {
+            "network": "Natix Network",
+            "type": "health",
+            "metric": "drivers",
+            "value": 271401,
+            "previous": 271400,
+            "delta": 1,
+            "message": "registered drivers: 271,401 (+1 (+0.0%))",
+            "severity": "high",
+            "confidence": 0.85,
+            "anomalyType": "telemetry_discontinuity",
+            "kind": "metric",
+            "metricKey": "drivers",
+            "timestamp": "2026-06-02",
+            "asOf": "2026-06-02"
+          }
+        ]
+      },
+      {
+        "network": "Nodle",
+        "networkId": "nodle",
+        "status": "active",
+        "signals": [
+          {
+            "network": "Nodle",
+            "type": "integrity",
+            "metric": "identityCollisions",
+            "value": null,
+            "previous": null,
+            "delta": 0,
+            "message": "Flagged Emulator Nodes: 25 (38.5% of pool)",
+            "severity": "medium",
+            "confidence": 0.7,
+            "anomalyType": "identity_collision",
+            "kind": "headline",
+            "metricKey": null,
+            "timestamp": "2026-05-25",
+            "asOf": "2026-05-25"
+          },
+          {
+            "network": "Nodle",
+            "type": "integrity",
+            "metric": "exactDupGroups",
+            "value": 15,
+            "previous": null,
+            "delta": 0,
+            "message": "exact (lat,lng) duplicate groups: 15 (_(first snapshot — baseline recorded)_)",
+            "severity": "low",
+            "confidence": 0.55,
+            "anomalyType": "identity_collision",
+            "kind": "metric",
+            "metricKey": "exactDupGroups",
+            "timestamp": "2026-05-25",
+            "asOf": "2026-05-25"
+          },
+          {
+            "network": "Nodle",
+            "type": "integrity",
+            "metric": "observed",
+            "value": 65,
+            "previous": null,
+            "delta": 0,
+            "message": "entities on public map: 65 (_(first snapshot — baseline recorded)_)",
+            "severity": "low",
+            "confidence": 0.55,
+            "anomalyType": "identity_collision",
+            "kind": "metric",
+            "metricKey": "observed",
+            "timestamp": "2026-05-25",
+            "asOf": "2026-05-25"
+          },
+          {
+            "network": "Nodle",
+            "type": "integrity",
+            "metric": "flaggedPct",
+            "value": 0.38461538461538464,
+            "previous": null,
+            "delta": 0,
+            "message": "fleet share flagged (any heuristic): 38.46% (_(first snapshot — baseline recorded)_)",
+            "severity": "low",
+            "confidence": 0.55,
+            "anomalyType": "identity_collision",
+            "kind": "metric",
+            "metricKey": "flaggedPct",
+            "timestamp": "2026-05-25",
+            "asOf": "2026-05-25"
+          }
+        ]
+      },
+      {
+        "network": "Dawn Network",
+        "networkId": "dawn",
+        "status": "active",
+        "signals": [
+          {
+            "network": "Dawn Network",
+            "type": "integrity",
+            "metric": "identityCollisions",
+            "value": null,
+            "previous": null,
+            "delta": 0,
+            "message": "Flagged Anomalous Nodes: 25 (45.5% of pool)",
+            "severity": "medium",
+            "confidence": 0.7,
+            "anomalyType": "identity_collision",
+            "kind": "headline",
+            "metricKey": null,
+            "timestamp": "2026-05-25",
+            "asOf": "2026-05-25"
+          },
+          {
+            "network": "Dawn Network",
+            "type": "integrity",
+            "metric": "exactDupGroups",
+            "value": 15,
+            "previous": null,
+            "delta": 0,
+            "message": "exact (lat,lng) duplicate groups: 15 (_(first snapshot — baseline recorded)_)",
+            "severity": "low",
+            "confidence": 0.55,
+            "anomalyType": "identity_collision",
+            "kind": "metric",
+            "metricKey": "exactDupGroups",
+            "timestamp": "2026-05-25",
+            "asOf": "2026-05-25"
+          },
+          {
+            "network": "Dawn Network",
+            "type": "integrity",
+            "metric": "observed",
+            "value": 55,
+            "previous": null,
+            "delta": 0,
+            "message": "entities on public map: 55 (_(first snapshot — baseline recorded)_)",
+            "severity": "low",
+            "confidence": 0.55,
+            "anomalyType": "identity_collision",
+            "kind": "metric",
+            "metricKey": "observed",
+            "timestamp": "2026-05-25",
+            "asOf": "2026-05-25"
+          },
+          {
+            "network": "Dawn Network",
+            "type": "integrity",
+            "metric": "flaggedPct",
+            "value": 0.45454545454545453,
+            "previous": null,
+            "delta": 0,
+            "message": "fleet share flagged (any heuristic): 45.45% (_(first snapshot — baseline recorded)_)",
+            "severity": "low",
+            "confidence": 0.55,
+            "anomalyType": "identity_collision",
+            "kind": "metric",
+            "metricKey": "flaggedPct",
+            "timestamp": "2026-05-25",
+            "asOf": "2026-05-25"
+          }
+        ]
+      },
+      {
+        "network": "DIMO",
+        "networkId": "dimo",
+        "status": "pending",
+        "note": "No public scanner wired yet — included for cross-network coverage.",
+        "signals": []
+      },
+      {
+        "network": "Grass / Titan",
+        "networkId": "grass",
+        "status": "active",
+        "signals": [
+          {
+            "network": "Grass / Titan",
+            "type": "health",
+            "metric": "scaffold",
+            "value": null,
+            "previous": null,
+            "delta": 0,
+            "message": "Flagged Anomalies: 1 (16.7%)",
+            "severity": "medium",
+            "confidence": 0.7,
+            "anomalyType": "scaffold",
+            "kind": "headline",
+            "metricKey": null,
+            "timestamp": "2026-05-22",
+            "asOf": "2026-05-22"
+          },
+          {
+            "network": "Grass / Titan",
+            "type": "health",
+            "metric": "exactDupGroups",
+            "value": 0,
+            "previous": null,
+            "delta": 0,
+            "message": "exact (lat,lng) duplicate groups: 0 (_(first snapshot — baseline recorded)_)",
+            "severity": "low",
+            "confidence": 0.55,
+            "anomalyType": "scaffold",
+            "kind": "metric",
+            "metricKey": "exactDupGroups",
+            "timestamp": "2026-05-22",
+            "asOf": "2026-05-22"
+          },
+          {
+            "network": "Grass / Titan",
+            "type": "health",
+            "metric": "observed",
+            "value": 200,
+            "previous": null,
+            "delta": 0,
+            "message": "entities on public map: 200 (_(first snapshot — baseline recorded)_)",
+            "severity": "low",
+            "confidence": 0.55,
+            "anomalyType": "scaffold",
+            "kind": "metric",
+            "metricKey": "observed",
+            "timestamp": "2026-05-22",
+            "asOf": "2026-05-22"
+          },
+          {
+            "network": "Grass / Titan",
+            "type": "health",
+            "metric": "flaggedPct",
+            "value": 0.45,
+            "previous": null,
+            "delta": 0,
+            "message": "fleet share flagged (any heuristic): 45.00% (_(first snapshot — baseline recorded)_)",
+            "severity": "low",
+            "confidence": 0.55,
+            "anomalyType": "scaffold",
+            "kind": "metric",
+            "metricKey": "flaggedPct",
+            "timestamp": "2026-05-22",
+            "asOf": "2026-05-22"
+          }
+        ]
+      }
+    ]
+  }
+]

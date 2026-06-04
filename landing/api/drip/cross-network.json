@@ -1,0 +1,22 @@
+{
+  "generatedAt": "2026-06-02T05:04:39.107Z",
+  "patterns": [
+    {
+      "pattern": "shared-coverage",
+      "networks": [
+        "Geodnet",
+        "Natix Network",
+        "WeatherXM"
+      ],
+      "description": "coverage signals detected across 3 networks (Geodnet, Natix Network, WeatherXM)."
+    },
+    {
+      "pattern": "divergence-coverage",
+      "networks": [
+        "Geodnet",
+        "WeatherXM"
+      ],
+      "description": "coverage metric drift indicates divergence: WeatherXM rising while Geodnet declining."
+    }
+  ]
+}

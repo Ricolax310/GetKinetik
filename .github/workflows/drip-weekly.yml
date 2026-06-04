@@ -1,0 +1,41 @@
+# DePIN Signal Distribution Engine — weekly drip (Substack + X thread + API).
+name: Drip weekly
+
+on:
+  schedule:
+    - cron: "0 18 * * SUN" # Sunday 10:00 America/Los_Angeles (PST, UTC-8); 09:00 during PDT
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: drip-weekly
+  cancel-in-progress: false
+
+jobs:
+  drip:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22" # required for native TypeScript execution
+
+      - name: Refresh signals (snapshot mode)
+        run: node scripts/signal-pipeline/pipeline.mjs daily
+
+      - name: Run weekly drip
+        env:
+          SUBSTACK_API_KEY: ${{ secrets.SUBSTACK_API_KEY }}
+          SUBSTACK_BLOG_ID: ${{ secrets.SUBSTACK_BLOG_ID }}
+        run: node drip-engine/run.ts weekly
+
+      - name: Commit drip outputs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add signals landing/public/drip landing/api/drip || true
+          git diff --staged --quiet || git commit -m "chore(drip): weekly distribution [automated]"
+          git push || true

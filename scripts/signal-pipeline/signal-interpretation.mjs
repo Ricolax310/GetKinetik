@@ -63,9 +63,11 @@ export function renderStability(signal) {
   const curr = asNumber(signal.value);
   const d = asNumber(signal.delta) ?? 0;
   const key = String(signal.metric || signal.metricKey || "");
-  if (d === 0 && key === "kmFrozenDays" && curr != null) return `unchanged for ${curr} days`;
-  if (d === 0 && /share|pct/i.test(key) && curr != null) return `remains near ${fmtMetricValue(signal, curr)}`;
-  if (d === 0 && curr != null) return `unchanged at ${fmtMetricValue(signal, curr)}`;
+  // If delta is non-zero, delta phrase already expresses the change — suppress echo.
+  if (d !== 0) return renderDelta(signal);
+  if (key === "kmFrozenDays" && curr != null) return `unchanged for ${curr} days`;
+  if (/share|pct/i.test(key) && curr != null) return `remains near ${fmtMetricValue(signal, curr)}`;
+  if (curr != null) return `unchanged at ${fmtMetricValue(signal, curr)}`;
   return renderDelta(signal);
 }
 

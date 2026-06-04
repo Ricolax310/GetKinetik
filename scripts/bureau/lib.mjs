@@ -1,7 +1,13 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { formatDelta, writeAuditIndex, formatAsOfDate, stripEmoji } from "./report-helpers.mjs";
+import {
+  formatDelta,
+  writeAuditIndex,
+  formatAsOfDate,
+  stripEmoji,
+  resolveRouting,
+} from "./report-helpers.mjs";
 import {
   composeDeltaThread,
   composeDeltaTweet,
@@ -40,6 +46,11 @@ export function loadRegistry() {
     throw new Error("networks.json: missing networks array");
   }
   return raw.networks;
+}
+
+export function loadAnomalyTaxonomy() {
+  const raw = JSON.parse(fs.readFileSync(REGISTRY_PATH, "utf8"));
+  return raw.anomalyTaxonomy || {};
 }
 
 export function resolveRepo(rel) {
@@ -138,6 +149,7 @@ export function summarizeSnapshotDelta(net) {
 export { writeAuditIndex };
 
 export function collectNetworkStatus(registry, pipelineResults = null) {
+  const taxonomy = loadAnomalyTaxonomy();
   const byId = new Map((pipelineResults || []).map((r) => [r.id, r]));
   return registry.map((net) => {
     const reportPath = resolveRepo(net.report);
@@ -154,13 +166,15 @@ export function collectNetworkStatus(registry, pipelineResults = null) {
       pipeline?.outreachPath?.replace(/\\/g, "/") ||
       (fs.existsSync(draftPath) ? relDraft : null);
     const deltaLine = summarizeSnapshotDelta(net);
+    const topFinding = findings[0] ? stripEmoji(findings[0]) : null;
+    const routed = resolveRouting(net.routing, taxonomy, Boolean(topFinding));
     return {
       id: net.id,
       name: net.name,
       reportAge: formatAge(ageMs),
       reportAgeMs: ageMs,
       stale: ageMs == null || ageMs > STALE_MS,
-      topFinding: findings[0] ? stripEmoji(findings[0]) : null,
+      topFinding,
       snapshotDelta: deltaLine,
       findings,
       outreachPath,
@@ -168,6 +182,13 @@ export function collectNetworkStatus(registry, pipelineResults = null) {
       publicSource: net.publicSource,
       defaultEnabled: net.defaultEnabled !== false,
       scanOk: pipeline?.scanOk ?? null,
+      anomalyType: routed.anomalyType,
+      assetClass: routed.assetClass,
+      verificationEligible: routed.verificationEligible,
+      route: routed.route,
+      reason: routed.reason,
+      verificationCall: routed.verificationCall,
+      clarificationRequest: routed.clarificationRequest,
     };
   });
 }
@@ -187,14 +208,20 @@ export function writeOutreachQueue(resultsOrRegistry, pipelineResults = null) {
     "",
     `Updated: ${formatAsOfDate()}`,
     "",
-    "| Network | Report age | Draft | Top finding |",
-    "|---------|------------|-------|-------------|",
+    "| Network | Report age | Route | Next action | Draft | Top finding |",
+    "|---------|------------|-------|-------------|-------|-------------|",
   ];
   for (const r of rows) {
     const draft = r.outreachPath || "_(run pipeline)_";
     const top = r.topFinding?.slice(0, 80) || "—";
+    const action =
+      r.route === "verify-device"
+        ? (r.verificationCall || "Run verify-device on sampled entities.").slice(0, 80)
+        : r.route === "clarify"
+          ? (r.clarificationRequest || "Send a bounded reality-check before any device test.").slice(0, 80)
+          : r.reason || "Monitor only";
     lines.push(
-      `| ${r.name || r.id} | ${r.reportAge} | \`${draft}\` | ${top.replace(/\|/g, "\\|")} |`,
+      `| ${r.name || r.id} | ${r.reportAge} | ${r.route} | ${action.replace(/\|/g, "\\|")} | \`${draft}\` | ${top.replace(/\|/g, "\\|")} |`,
     );
   }
   lines.push(
@@ -263,6 +290,17 @@ export function buildDailyBrief(registry, pipelineResults = null) {
     whyToday.push(
       `- **Featured read (${featured.name}):** ${trimFinding(featured.topFinding, 140)}`,
     );
+    if (featured.route === "verify-device") {
+      whyToday.push(
+        `- **Resolution route:** verify-device · ${trimFinding(featured.verificationCall, 160)}`,
+      );
+    } else if (featured.route === "clarify") {
+      whyToday.push(
+        `- **Clarify first:** ${trimFinding(featured.clarificationRequest || featured.reason, 160)}`,
+      );
+    } else if (featured.reason) {
+      whyToday.push(`- **Monitor route:** ${trimFinding(featured.reason, 160)}`);
+    }
   }
   if (featured?.snapshotDelta) {
     whyToday.push(`- **Trend:** ${featured.snapshotDelta}`);
@@ -368,7 +406,7 @@ export function writeDailyBrief(registry, pipelineResults = null) {
   fs.writeFileSync(latestPosts, posts, "utf8");
 
   writeOutreachQueue(registry.filter((n) => n.defaultEnabled !== false), pipelineResults);
-  writeAuditIndex(REPO_ROOT, registry, resolveRepo);
+  writeAuditIndex(REPO_ROOT, registry, resolveRepo, loadAnomalyTaxonomy());
 
   return {
     datedBrief: path.relative(REPO_ROOT, datedBrief),
@@ -435,6 +473,11 @@ export function buildOutreachDraft(net, reportMd) {
   const findings = extractHeadlineFindings(reportMd).map((f) => stripEmoji(f));
   const meta = extractReportMeta(reportMd);
   const deltaLine = summarizeSnapshotDelta(net);
+  const routed = resolveRouting(
+    net.routing,
+    loadAnomalyTaxonomy(),
+    Boolean(findings[0]),
+  );
   const reportUrl = `https://github.com/Ricolax310/GetKinetik/blob/main/${net.report.replace(/\\/g, "/")}`;
   const leadFinding = findings[0] || null;
   const findingBlock =
@@ -460,6 +503,13 @@ Source: ${net.publicSource}${meta.generated ? ` · as of ${meta.generated}` : ""
 ${leadBlock ? `${leadBlock}\n\n` : ""}Headlines:
 
 ${findingBlock}
+
+Resolution route: ${routed.route}
+${routed.route === "verify-device"
+    ? `Verification action: ${routed.verificationCall || "Run POST /api/verify-device on sampled entities from §1."}`
+    : routed.route === "clarify"
+      ? `Clarify first (bounded reality-check, not a test): ${routed.clarificationRequest || routed.reason || "Confirm whether the observed discontinuity is expected in production before any device verification."}`
+      : `Monitor reason: ${routed.reason || "This anomaly class is not device-verifiable by policy."}`}
 
 Report: ${reportUrl}
 
