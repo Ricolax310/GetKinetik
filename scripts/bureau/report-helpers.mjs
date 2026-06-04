@@ -33,6 +33,22 @@ export function loadPreviousStats(snapshotAbsPath) {
 }
 
 function inferLegacyStats(snap) {
+  // Nodle / Dawn format: summary.totalScanned + summary.flaggedCount + findings[]
+  if (snap.summary?.totalScanned != null && snap.summary?.flaggedCount != null) {
+    const flagged = snap.summary.flaggedCount;
+    const total = snap.summary.totalScanned;
+    const pct = total > 0 ? flagged / total : 0;
+    return {
+      observed: total,
+      flaggedCount: flagged,
+      flaggedPct: pct,
+      exactDupGroups: Array.isArray(snap.findings)
+        ? snap.findings.filter((f) =>
+            (f.flags || []).some((fl) => /COLLISION|TWIN|CLONE|DUPLICATE/i.test(fl))
+          ).length
+        : null,
+    };
+  }
   if (snap.stationsTotal != null) {
     return {
       observed: snap.stationsTotal,
@@ -138,7 +154,53 @@ export function renderCrossCheckSection(items) {
   return lines;
 }
 
-export function writeAuditIndex(repoRoot, registry, resolveRepo) {
+/**
+ * Resolve a network's anomaly primitive against the shared taxonomy into a
+ * deterministic route. Routing is policy over primitives, not per-network
+ * hardcoding: network supplies anomalyType + concrete verificationCall, the
+ * taxonomy supplies assetClass / verificationEligible / route.
+ */
+export function resolveRouting(routing, taxonomy = {}, hasFinding = false) {
+  const anomalyType = routing?.anomalyType || (hasFinding ? "uncategorized" : "scaffold");
+  const primitive = taxonomy[anomalyType] || null;
+  const verificationEligible = hasFinding ? Boolean(primitive?.verificationEligible) : false;
+  const route = !hasFinding ? "monitor" : primitive?.route || "monitor";
+
+  // verify-device emits a concrete verificationCall; clarify emits a bounded
+  // clarificationRequest (a reality-check, not a test). The clarify route is the
+  // mandatory gate for anomalies observed only at the aggregate level — there is
+  // no per-device axis yet, so a device test would overstep.
+  const verificationCall =
+    verificationEligible && route === "verify-device"
+      ? routing?.verificationCall || null
+      : null;
+  const clarificationRequest =
+    route === "clarify" ? routing?.clarificationRequest || null : null;
+
+  let reason = null;
+  if (!hasFinding) {
+    reason = "No qualifying headline finding extracted from report yet.";
+  } else if (!primitive) {
+    reason = `No taxonomy rule found for anomalyType '${anomalyType}', defaulting to monitor.`;
+  } else if (route === "verify-device" && verificationEligible) {
+    reason = null;
+  } else {
+    // monitor + clarify both carry the policy note as their reason.
+    reason = primitive.note || "This anomaly class is not device-verifiable by policy.";
+  }
+
+  return {
+    anomalyType,
+    assetClass: primitive?.assetClass || "none",
+    verificationEligible,
+    route,
+    reason,
+    verificationCall,
+    clarificationRequest,
+  };
+}
+
+export function writeAuditIndex(repoRoot, registry, resolveRepo, taxonomy = {}) {
   const networks = [];
   for (const net of registry) {
     const snapPath = resolveRepo(net.snapshot);
@@ -148,7 +210,7 @@ export function writeAuditIndex(repoRoot, registry, resolveRepo) {
       try {
         const snap = JSON.parse(fs.readFileSync(snapPath, "utf8"));
         stats = snap.stats || inferLegacyStats(snap);
-        generatedAt = snap.generatedAt || snap.stats?.generatedAt || null;
+        generatedAt = snap.generatedAt || snap.stats?.generatedAt || snap.scannedAt || null;
         if (generatedAt) generatedAt = formatAsOfDate(generatedAt);
       } catch {
         /* skip */
@@ -160,14 +222,21 @@ export function writeAuditIndex(repoRoot, registry, resolveRepo) {
       const md = fs.readFileSync(reportPath, "utf8");
       const exec = md.match(/## Executive summary\r?\n\r?\n([\s\S]*?)\r?\n\r?\n---/);
       if (exec) {
-        topFinding = exec[1]
-          .split("\n")
-          .map((l) => l.trim())
-          .find((l) => /^\d+\.\s+/.test(l))
-          ?.replace(/^\d+\.\s+/, "");
+        const lines = exec[1].split("\n").map((l) => l.trim());
+        const line = lines.find((l) => /^\d+\.\s+/.test(l)) || lines.find((l) => /^[-*]\s+/.test(l));
+        topFinding = line?.replace(/^(\d+\.|[-*])\s+/, "") || null;
         if (topFinding) topFinding = stripEmoji(topFinding);
       }
+      // Fallback: full bullet line containing flagged/anomalous count (Nodle/Dawn format).
+      if (!topFinding) {
+        const flagLine = md.match(/^-\s+\*\*[^*]*(?:Flagged|Anomalous)[^*]*\*\*[^\n]*/im);
+        if (flagLine) {
+          topFinding = stripEmoji(flagLine[0].replace(/^-\s+/, "").replace(/\*\*/g, "").trim());
+        }
+      }
     }
+    const hasFinding = Boolean(topFinding);
+    const routed = resolveRouting(net.routing, taxonomy, hasFinding);
     networks.push({
       id: net.id,
       name: net.name,
@@ -176,6 +245,13 @@ export function writeAuditIndex(repoRoot, registry, resolveRepo) {
       generatedAt,
       stats,
       topFinding,
+      anomalyType: routed.anomalyType,
+      assetClass: routed.assetClass,
+      verificationEligible: routed.verificationEligible,
+      route: routed.route,
+      reason: routed.reason,
+      verificationCall: routed.verificationCall,
+      clarificationRequest: routed.clarificationRequest,
     });
   }
   const payload = {
