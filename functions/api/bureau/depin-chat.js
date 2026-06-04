@@ -18,8 +18,9 @@ import {
 const MAX_MESSAGES = 16;
 const MAX_USER_CHARS = 2000;
 const MAX_OUTPUT_TOKENS = 400;
-/** Stay under Cloudflare Pages function wall-clock limit (~30s). */
-const OPENAI_TIMEOUT_MS = 25_000;
+/** Stay under Cloudflare Pages function wall-clock limit (~30s).
+ *  Context fetch is bounded separately, so 20s here keeps worst-case total safe. */
+const OPENAI_TIMEOUT_MS = 20_000;
 const MAX_CONTEXT_CHARS = 12_000;
 
 function json(body, status = 200) {
@@ -33,14 +34,41 @@ function json(body, status = 200) {
   });
 }
 
-/** Public pack — always fetch deployed static JSON (avoids loopback deadlock in wrangler dev). */
-const CONTEXT_PACK_URL =
-  "https://getkinetik.app/data/depin-chat-context.json";
+/** Public pack location (static asset shipped with the Pages deploy). */
+const CONTEXT_PACK_PATH = "/data/depin-chat-context.json";
+const CONTEXT_PACK_URL = "https://getkinetik.app/data/depin-chat-context.json";
+const CONTEXT_FETCH_TIMEOUT_MS = 4000;
 
-async function loadContextPack() {
+function withTimeout(ms) {
+  return typeof AbortSignal !== "undefined" && AbortSignal.timeout
+    ? AbortSignal.timeout(ms)
+    : undefined;
+}
+
+/**
+ * Load the public context pack WITHOUT a same-zone loopback hang.
+ * 1. Prefer the Pages ASSETS binding (reads the bundled static file directly —
+ *    no network round-trip, cannot loop back through this Function).
+ * 2. Fall back to an external fetch with a hard timeout so it can never stall
+ *    the request long enough for Cloudflare to 502 the whole Function.
+ */
+async function loadContextPack(env, request) {
+  if (env?.ASSETS?.fetch && request?.url) {
+    try {
+      const assetUrl = new URL(CONTEXT_PACK_PATH, request.url);
+      const res = await env.ASSETS.fetch(
+        new Request(assetUrl, { headers: { accept: "application/json" } }),
+      );
+      if (res.ok) return await res.json();
+    } catch {
+      /* fall through to external fetch */
+    }
+  }
+
   const res = await fetch(CONTEXT_PACK_URL, {
     headers: { accept: "application/json" },
     cf: { cacheTtl: 300 },
+    signal: withTimeout(CONTEXT_FETCH_TIMEOUT_MS),
   });
   if (!res.ok) throw new Error(`context ${res.status}`);
   return res.json();
@@ -83,7 +111,7 @@ export async function onRequestPost(ctx) {
     let meta = "";
 
     try {
-      const pack = await loadContextPack();
+      const pack = await loadContextPack(env, request);
       const rawContext =
         typeof pack.context === "string" ? pack.context : "";
       context =
