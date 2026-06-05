@@ -1,11 +1,12 @@
-# DePIN Signal Brief — 2026-06-04
+# DePIN Signal Brief — 2026-06-05
 
-> 2026-06-04 · machine-driven signal publication · evidence first
+> 2026-06-05 · machine-driven signal publication · evidence first
 
 ## Today's Read
 
 • Geodnet duplicate-coordinate groups rose from 8 to 11.
 • WeatherXM over-capacity cells declined from 289 to 288.
+• Geodnet entities on public map declined from 19,676 to 19,616.
 • Nodle duplicate-coordinate groups unchanged at 15.
 • Dawn Network duplicate-coordinate groups unchanged at 15.
 • Grass / Titan duplicate-coordinate groups unchanged at 0.
