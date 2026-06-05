@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-04",
+  "updatedAt": "2026-06-05",
   "networks": [
     {
       "id": "geodnet",
@@ -17,7 +17,14 @@
         "flaggedCount": 1833,
         "flaggedPct": 0.09344412724306689
       },
-      "topFinding": "**11 exact (lat,lng) duplicate groups** on 19,616 public stations — each row in §1 is one coordinate pair your registry team can grep today."
+      "topFinding": "**11 exact (lat,lng) duplicate groups** on 19,616 public stations — each row in §1 is one coordinate pair your registry team can grep today.",
+      "anomalyType": "duplication_cluster",
+      "assetClass": "none",
+      "verificationEligible": false,
+      "route": "monitor",
+      "reason": "No taxonomy rule found for anomalyType 'duplication_cluster', defaulting to monitor.",
+      "verificationCall": null,
+      "clarificationRequest": null
     },
     {
       "id": "weatherxm",
@@ -37,7 +44,14 @@
         "inactiveInDrilled": 60,
         "lowQodInDrilled": 61
       },
-      "topFinding": "**288 cells** exceed designed capacity — §1 lists H3 indices + map centers for your ops queue."
+      "topFinding": "**288 cells** exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.",
+      "anomalyType": "capacity_violation",
+      "assetClass": "none",
+      "verificationEligible": false,
+      "route": "monitor",
+      "reason": "No taxonomy rule found for anomalyType 'capacity_violation', defaulting to monitor.",
+      "verificationCall": null,
+      "clarificationRequest": null
     },
     {
       "id": "hivemapper",
@@ -53,34 +67,106 @@
         "largestAccountsReturned": 20,
         "partASkipped": false
       },
-      "topFinding": "**49.13% of UI-reported HONEY** sits in the **top 20 visible SPL accounts** (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read."
+      "topFinding": "**49.13% of UI-reported HONEY** sits in the **top 20 visible SPL accounts** (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.",
+      "anomalyType": "economic_concentration",
+      "assetClass": "none",
+      "verificationEligible": false,
+      "route": "monitor",
+      "reason": "No taxonomy rule found for anomalyType 'economic_concentration', defaulting to monitor.",
+      "verificationCall": null,
+      "clarificationRequest": null
+    },
+    {
+      "id": "natix",
+      "name": "Natix Network",
+      "report": "docs/reports/natix-sybil-report.md",
+      "publicSource": "Natix Coverage Map metrics feed (coverage.natix.network/coverage/v1/metrics) + Solana NATIX SPL mint",
+      "generatedAt": "2026-06-02",
+      "stats": {
+        "generatedAt": "2026-06-02T16:20:16.064Z",
+        "drivers": 271401,
+        "kmMapped": 254808022,
+        "detections": 0,
+        "natixBurned": 707071138.3503113,
+        "kmFrozenDays": 33,
+        "detectionsZeroDays": 33,
+        "burnFrozenDays": 90,
+        "supplyUiAmount": 99292928861.64969,
+        "top20SumUi": 71876094504.20721,
+        "top20ShareOfSupply": 0.7238792865537902,
+        "largestAccountsReturned": 20
+      },
+      "topFinding": null,
+      "anomalyType": "telemetry_discontinuity",
+      "assetClass": "none",
+      "verificationEligible": false,
+      "route": "monitor",
+      "reason": "No qualifying headline finding extracted from report yet.",
+      "verificationCall": null,
+      "clarificationRequest": null
     },
     {
       "id": "nodle",
       "name": "Nodle",
       "report": "docs/reports/nodle-sybil-report.md",
       "publicSource": "Nodle public scan inputs (see script header)",
-      "generatedAt": null,
-      "stats": null,
-      "topFinding": null
+      "generatedAt": "2026-06-01",
+      "stats": {
+        "observed": 65,
+        "flaggedCount": 25,
+        "flaggedPct": 0.38461538461538464,
+        "exactDupGroups": 15
+      },
+      "topFinding": "Flagged Emulator Nodes: 25 (38.5% of pool)",
+      "anomalyType": "identity_collision",
+      "assetClass": "none",
+      "verificationEligible": false,
+      "route": "monitor",
+      "reason": "No taxonomy rule found for anomalyType 'identity_collision', defaulting to monitor.",
+      "verificationCall": null,
+      "clarificationRequest": null
     },
     {
       "id": "dawn",
       "name": "Dawn Network",
       "report": "docs/reports/dawn-sybil-report.md",
       "publicSource": "Dawn public scan inputs (see script header)",
-      "generatedAt": null,
-      "stats": null,
-      "topFinding": null
+      "generatedAt": "2026-06-01",
+      "stats": {
+        "observed": 55,
+        "flaggedCount": 25,
+        "flaggedPct": 0.45454545454545453,
+        "exactDupGroups": 15
+      },
+      "topFinding": "Flagged Anomalous Nodes: 25 (45.5% of pool)",
+      "anomalyType": "identity_collision",
+      "assetClass": "none",
+      "verificationEligible": false,
+      "route": "monitor",
+      "reason": "No taxonomy rule found for anomalyType 'identity_collision', defaulting to monitor.",
+      "verificationCall": null,
+      "clarificationRequest": null
     },
     {
       "id": "grass",
       "name": "Grass / Titan",
       "report": "docs/reports/grass-sybil-report.md",
       "publicSource": "Grass/Titan public scan inputs (see script header)",
-      "generatedAt": null,
-      "stats": null,
-      "topFinding": null
+      "generatedAt": "2026-05-22",
+      "stats": {
+        "observed": 200,
+        "flaggedCount": 90,
+        "flaggedPct": 0.45,
+        "exactDupGroups": 0
+      },
+      "topFinding": "Flagged Anomalies: 1 (16.7%)",
+      "anomalyType": "scaffold",
+      "assetClass": "none",
+      "verificationEligible": false,
+      "route": "monitor",
+      "reason": "No taxonomy rule found for anomalyType 'scaffold', defaulting to monitor.",
+      "verificationCall": null,
+      "clarificationRequest": null
     }
   ]
 }
