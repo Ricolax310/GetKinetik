@@ -129,6 +129,21 @@ export function buildXThreadTweets(
   return [assertClean(head, "x-tweet 1"), assertClean(tail, "x-tweet 2")].slice(0, MAX_FEED_TWEETS);
 }
 
+/** Short caption for image posts — hook + link, details live in the chart. */
+export function buildXImageCaption(
+  signals: Signal[],
+  patterns: Pattern[],
+  label: string,
+): string {
+  const hook = strongestHook(patterns, signals);
+  const date = formatDateLabel(label);
+  const nets = [...new Set(signals.map((s) => s.network.replace(/ Network$/i, "")))].slice(0, 4);
+  const line1 = `DePIN index · ${date}`;
+  const line2 = hook.length <= 120 ? hook : `${hook.slice(0, 117)}…`;
+  const line3 = `${nets.join(" · ")} · https://${SITE_URL}/`;
+  return trimTweet([line1, line2, line3].join("\n"));
+}
+
 export function buildXThread(
   signals: Signal[],
   patterns: Pattern[],

@@ -2,7 +2,7 @@
 
 | Publisher | File | Env | Behavior |
 |-----------|------|-----|----------|
-| X (Twitter) | `x-publisher.ts` | `X_API_BEARER` or OAuth quartet | One feed-first tweet (bullets inline); max 2 if overflow |
+| X (Twitter) | `x-publisher.ts` + `chart-card.ts` | OAuth + `sharp` | PNG chart card + short caption |
 | Substack | `substack-publisher.ts` | `SUBSTACK_API_KEY`, `SUBSTACK_BLOG_ID` | Draft only — never auto-publish |
 
 Set `DRIP_DRY_RUN=true` to skip live API calls (files still written).

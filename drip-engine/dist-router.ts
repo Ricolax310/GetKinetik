@@ -8,10 +8,11 @@ import type { ScoredSignal } from "./signal-confidence.ts";
 import type { NarrativeLayers } from "./narrative-builder.ts";
 import { PATHS, REPO_ROOT, SITE_URL } from "./paths.ts";
 import { formatApiBundle, formatPatternsOnly } from "./api-formatter.ts";
-import { buildXThread, buildXThreadTweets } from "./x-thread.ts";
+import { buildXThread, buildXThreadTweets, buildXImageCaption } from "./x-thread.ts";
 import { buildDailyEditorial } from "../editorial-engine/daily.ts";
 import { buildWeeklyEditorial } from "../editorial-engine/weekly.ts";
 import { publishXThread } from "./publishers/x-publisher.ts";
+import { renderDailyCardPng, buildDailyCardSvg } from "./chart-card.ts";
 import { publishSubstackDraft } from "./publishers/substack-publisher.ts";
 import { DAILY_CONFIDENCE_MIN, WEEKLY_CONFIDENCE_MIN, heldBackSignals } from "./signal-confidence.ts";
 
@@ -121,7 +122,7 @@ export function planDistribution(ctx: DistributionContext): DistributionPlan {
       {
         channel: "x",
         enabled: isDaily,
-        outputs: ["landing/public/drip/x-thread.md", "landing/public/drip/daily-x-thread.txt"],
+        outputs: ["landing/public/drip/x-thread.md", "landing/public/drip/daily-x-thread.txt", "landing/public/drip/daily-card.png"],
         livePublish: isDaily,
       },
       {
@@ -192,13 +193,29 @@ export async function executeDistribution(ctx: DistributionContext): Promise<Dis
 
     const thread = buildXThread(ctx.signals, ctx.patterns, ctx.date);
     const tweets = buildXThreadTweets(ctx.signals, ctx.patterns, ctx.date);
+    const caption = buildXImageCaption(ctx.signals, ctx.patterns, ctx.date);
     write(path.join(PATHS.publicDrip, "x-thread.md"), thread);
     write(path.join(PATHS.publicDrip, "daily-x-thread.txt"), thread);
-    written.push("landing/public/drip/x-thread.md");
+    write(path.join(PATHS.publicDrip, "daily-card.svg"), buildDailyCardSvg(ctx.signals, ctx.patterns, ctx.date));
+    written.push("landing/public/drip/x-thread.md", "landing/public/drip/daily-card.svg");
+
+    let cardPng: Buffer | undefined;
+    try {
+      cardPng = await renderDailyCardPng(ctx.signals, ctx.patterns, ctx.date);
+      fs.writeFileSync(path.join(PATHS.publicDrip, "daily-card.png"), cardPng);
+      written.push("landing/public/drip/daily-card.png");
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : String(e);
+      publish.x = `Card render skipped: ${msg}`;
+    }
 
     const xPlan = plan.channels.find((c) => c.channel === "x");
     if (xPlan?.livePublish) {
-      const xResult = await publishXThread(thread, { tweets });
+      const xResult = await publishXThread(thread, {
+        tweets,
+        caption,
+        imagePng: cardPng,
+      });
       publish.x = xResult.message;
     }
   } else {
