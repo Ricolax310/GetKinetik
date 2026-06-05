@@ -24,10 +24,22 @@ function fmtValue(metric: string, value: number): string {
 
 function fmtDelta(metric: string, delta: number): string {
   if (delta === 0) return "unchanged";
-  const sign = delta > 0 ? "+" : "−";
   const abs = Math.abs(delta);
-  const v = /share|pct/i.test(metric) ? `${abs}` : abs.toLocaleString();
-  return `${sign}${v}`;
+  if (/share|pct/i.test(metric)) {
+    if (abs < 0.0001) return "unchanged";
+    const pp = Math.round(abs * 1000) / 10;
+    return delta > 0 ? `+${pp} pp` : `−${pp} pp`;
+  }
+  const sign = delta > 0 ? "+" : "−";
+  return `${sign}${abs.toLocaleString()}`;
+}
+
+/** Short line for X — network first, readable delta. */
+export function compactFactLine(s: Signal): string {
+  const net = s.network.replace(/ Network$/i, "");
+  return neutralize(
+    `${net}: ${fmtValue(s.metric, s.value)} ${humanizeMetric(s.metric)} (${fmtDelta(s.metric, s.delta)})`,
+  );
 }
 
 /** Layer A — daily facts only (no interpretation). */

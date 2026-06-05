@@ -108,7 +108,7 @@ export function detectPatterns(
           pattern: `CROSS_NETWORK_${category}`,
           networks,
           category,
-          description: `Observed ${categoryHeadlinePhrase(category, true)} (${networks.join(", ")}).`,
+          description: `${categoryHeadlinePhrase(category, true)} (${networks.join(", ")}).`,
         }),
       );
     } else if (networks.length === 1) {
