@@ -5,6 +5,7 @@ import type { Pattern } from "./cross-network-aggregator.ts";
 import { compactFactLine } from "./narrative-builder.ts";
 import { assertClean, neutralize } from "./sanitize.ts";
 import { SITE_URL } from "./paths.ts";
+import { appendHashtags, featuredNetworkNames } from "./hashtags.ts";
 
 const SEV_RANK: Record<string, number> = { high: 3, medium: 2, low: 1 };
 const MAX_TWEET_LEN = 280;
@@ -109,19 +110,21 @@ export function buildXThreadTweets(
   patterns: Pattern[],
   label: string,
 ): string[] {
+  const tagNets = featuredNetworkNames(signals, 2);
   let root = trimTweet(composeFeedTweet(signals, patterns, label, FEED_BULLETS));
+  root = appendHashtags(root, tagNets);
 
   if (root.length <= MAX_TWEET_LEN) {
     return [assertClean(root, "x-tweet 1")];
   }
 
-  root = trimTweet(composeFeedTweet(signals, patterns, label, 2));
+  root = appendHashtags(trimTweet(composeFeedTweet(signals, patterns, label, 2)), tagNets);
   if (root.length <= MAX_TWEET_LEN) {
     return [assertClean(root, "x-tweet 1")];
   }
 
   const overflowPick = selectFeedSignals(signals, FEED_BULLETS)[2];
-  const head = trimTweet(composeFeedTweet(signals, patterns, label, 2));
+  const head = appendHashtags(trimTweet(composeFeedTweet(signals, patterns, label, 2)), tagNets);
   const tail = overflowPick
     ? trimTweet(`• ${compactFactLine(overflowPick)}\n\nhttps://${SITE_URL}/`)
     : trimTweet(`More signals → https://${SITE_URL}/`);
@@ -139,9 +142,10 @@ export function buildXImageCaption(
   const date = formatDateLabel(label);
   const nets = [...new Set(signals.map((s) => s.network.replace(/ Network$/i, "")))].slice(0, 4);
   const line1 = `DePIN index · ${date}`;
-  const line2 = hook.length <= 120 ? hook : `${hook.slice(0, 117)}…`;
+  const line2 = hook.length <= 100 ? hook : `${hook.slice(0, 97)}…`;
   const line3 = `${nets.join(" · ")} · https://${SITE_URL}/`;
-  return trimTweet([line1, line2, line3].join("\n"));
+  const body = [line1, line2, line3].join("\n");
+  return appendHashtags(body, featuredNetworkNames(signals, 2));
 }
 
 export function buildXThread(

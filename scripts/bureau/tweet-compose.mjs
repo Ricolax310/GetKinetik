@@ -140,6 +140,71 @@ export function tweetMeta(text) {
   return { length: len, ok: len <= TWITTER_LIMIT, overBy: Math.max(0, len - TWITTER_LIMIT) };
 }
 
+const HASHTAG_MAX = 5;
+const HASHTAG_CORE_START = ["DePIN"];
+const HASHTAG_CORE_END = ["Crypto"];
+
+function normalizeNetworkTag(name) {
+  const base = String(name || "")
+    .replace(/ Network$/i, "")
+    .replace(/\s*\/.*$/, "")
+    .trim();
+  const token = base.replace(/[^a-zA-Z0-9]/g, "");
+  return token.length >= 2 ? token : "";
+}
+
+/** Build hashtag line: #DePIN + optional network tags + #Crypto. */
+export function buildHashtags(networks = [], max = HASHTAG_MAX) {
+  const tags = [];
+  const seen = new Set();
+  const add = (label) => {
+    const key = String(label).toLowerCase();
+    if (!label || seen.has(key) || tags.length >= max) return;
+    seen.add(key);
+    tags.push(`#${label}`);
+  };
+
+  for (const c of HASHTAG_CORE_START) add(c);
+  const moverLimit = Math.max(0, max - HASHTAG_CORE_START.length - HASHTAG_CORE_END.length);
+  let movers = 0;
+  for (const n of networks) {
+    if (movers >= moverLimit) break;
+    const t = normalizeNetworkTag(n);
+    if (!t || seen.has(t.toLowerCase())) continue;
+    add(t);
+    movers += 1;
+  }
+  for (const c of HASHTAG_CORE_END) add(c);
+  return tags.join(" ");
+}
+
+/** Append hashtags to tweet text, trimming body to fit Twitter limit. */
+export function appendHashtags(text, networks = [], maxLen = TWITTER_LIMIT) {
+  const tagLine = buildHashtags(networks);
+  if (!tagLine) return fitTweet(text, maxLen);
+
+  const suffix = `\n\n${tagLine}`;
+  let body = String(text).trimEnd();
+
+  if (body.length + suffix.length <= maxLen) return body + suffix;
+
+  const budget = maxLen - suffix.length;
+  if (budget < 24) {
+    return fitTweet(`${body.slice(0, maxLen - tagLine.length - 3).trim()}…\n\n${tagLine}`, maxLen);
+  }
+
+  body = body.slice(0, budget).trimEnd();
+  const lastBreak = body.lastIndexOf("\n");
+  if (lastBreak > budget * 0.45) {
+    body = body.slice(0, lastBreak).trimEnd();
+  } else {
+    const lastSpace = body.lastIndexOf(" ");
+    body = `${(lastSpace > budget * 0.5 ? body.slice(0, lastSpace) : body).trimEnd()}…`;
+  }
+
+  return `${body}${suffix}`;
+}
+
 function formatTweetBlock(label, text) {
   return `### ${label}\n\n\`\`\`\n${text}\n\`\`\``;
 }
