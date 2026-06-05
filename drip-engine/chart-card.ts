@@ -1,37 +1,68 @@
-// Daily DePIN index card — SVG chart → PNG for X image posts.
+// DePIN index cards — each cadence uses a visualization method suited to its data:
+//   daily   → per-network mini-viz (dup / capacity / economics / telemetry) + category stack
+//   weekly  → pattern hub + delta-direction matrix (aggregated window)
+//   monthly → sector stack + summary table + headline cards (sector narrative)
 
-import type { Signal } from "./signal-loader.ts";
+import { loadFeedBundle, type Signal, type SectorSummary } from "./signal-loader.ts";
 import type { Pattern } from "./cross-network-aggregator.ts";
-import { categoryForSignal } from "./taxonomy.ts";
-import { compactFactLine } from "./narrative-builder.ts";
+import { categoryForSignal, TAXONOMY_V2_CATEGORIES } from "./taxonomy.ts";
+import {
+  buildTodaysReadFromDrip,
+  buildDailyWhyItMatters,
+  buildWeeklyExecutiveBullets,
+} from "../editorial-engine/executive.mjs";
 
 const W = 1200;
 const H = 675;
+export type CardMode = "daily" | "weekly" | "monthly";
 
 const C = {
-  bg: "#09090b",
-  panel: "#18181b",
-  border: "#27272a",
-  text: "#fafafa",
-  muted: "#a1a1aa",
-  dim: "#52525b",
-  accent: "#e11d48",
-  accentSoft: "#881337",
-  up: "#34d399",
-  down: "#f87171",
-  flat: "#71717a",
+  obsidian: "#0A0A0A",
+  obsidianSoft: "#111113",
+  obsidianEdge: "#1A1A1D",
+  rubyCore: "#FF1430",
+  rubyMid: "#B00820",
+  sapphireCore: "#007BFF",
+  sapphireGlow: "#3A9BFF",
+  platinum: "#E6E8EC",
+  graphite: "#6A6C72",
+  muted: "#9AA0A8",
+  hairline: "rgba(230, 232, 236, 0.10)",
+  neonYellow: "#E8FF3B",
 };
 
+const FONT = "Segoe UI, system-ui, -apple-system, sans-serif";
+
 const CAT_COLOR: Record<string, string> = {
-  IDENTITY: "#fb923c",
-  INFRASTRUCTURE: "#22d3ee",
-  ECONOMICS: "#a78bfa",
-  CAPACITY: "#f472b6",
-  CONSISTENCY: "#facc15",
-  BEHAVIORAL: "#4ade80",
+  IDENTITY: C.rubyCore,
+  INFRASTRUCTURE: C.sapphireCore,
+  ECONOMICS: "#7FA8FF",
+  CAPACITY: C.neonYellow,
+  CONSISTENCY: "#BFD14A",
+  BEHAVIORAL: "#8AB7E8",
 };
 
 const SEV_RANK: Record<string, number> = { high: 3, medium: 2, low: 1 };
+
+const SECTOR_COLOR: Record<string, string> = {
+  integrity: C.rubyCore,
+  health: C.sapphireCore,
+  growth: C.neonYellow,
+  economics: "#7FA8FF",
+};
+
+const METRIC_LABELS: Record<string, string> = {
+  exactDupGroups: "duplicate coordinate groups",
+  observed: "observed entities",
+  flaggedPct: "flagged share",
+  overCapacityCells: "over-capacity cells",
+  overCapacityPct: "over-capacity share",
+  top20ShareOfSupply: "top 20 holder share",
+  identityCollisions: "identity collisions",
+  scaffold: "scaffold score",
+  kmFrozenDays: "flat coverage days",
+  drivers: "drivers",
+};
 
 function esc(s: string): string {
   return s
@@ -45,67 +76,185 @@ function shortNet(name: string): string {
   return name.replace(/ Network$/i, "");
 }
 
-function formatDateLabel(label: string): string {
-  const m = label.match(/^(\d{4})-(\d{2})-(\d{2})$/);
-  if (!m) return label;
-  const d = new Date(`${m[1]}-${m[2]}-${m[3]}T12:00:00Z`);
-  return d.toLocaleDateString("en-US", {
-    weekday: "short",
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-    timeZone: "UTC",
-  });
+function shortLabel(s: string, max = 20): string {
+  return s.length > max ? `${s.slice(0, max - 1)}…` : s;
 }
 
-function headline(patterns: Pattern[], signals: Signal[]): string {
-  const cross = patterns.filter((p) => p.scope === "cross-network" || p.scope === "systemic");
-  if (cross.length) {
-    return cross.sort((a, b) => b.networks.length - a.networks.length)[0].headline;
+/** Word-wrap for SVG text lines (no mid-word breaks). */
+function wrapLines(s: string, maxChars: number, maxLines: number): string[] {
+  const words = s.replace(/\s+/g, " ").trim().split(" ");
+  const lines: string[] = [];
+  let current = "";
+  for (const w of words) {
+    const next = current ? `${current} ${w}` : w;
+    if (next.length > maxChars && current) {
+      lines.push(current);
+      current = w;
+      if (lines.length >= maxLines) break;
+    } else {
+      current = next;
+    }
   }
-  return signals.length ? "Cross-network DePIN signal snapshot" : "DePIN signal index";
-}
-
-function pickChartSignals(signals: Signal[], max = 6): Signal[] {
-  const ranked = signals.slice().sort((a, b) => {
-    const movedA = a.delta !== 0 ? 1 : 0;
-    const movedB = b.delta !== 0 ? 1 : 0;
-    if (movedB !== movedA) return movedB - movedA;
-    return SEV_RANK[b.severity] - SEV_RANK[a.severity] || Math.abs(b.delta) - Math.abs(a.delta);
-  });
-  const picked: Signal[] = [];
-  const seen = new Set<string>();
-  for (const s of ranked) {
-    if (seen.has(s.network)) continue;
-    seen.add(s.network);
-    picked.push(s);
-    if (picked.length >= max) break;
+  if (current && lines.length < maxLines) lines.push(current);
+  if (lines.length === maxLines) {
+    const used = lines.join(" ").length;
+    if (used < s.replace(/\s+/g, " ").trim().length) {
+      lines[maxLines - 1] = shortLabel(lines[maxLines - 1], maxChars);
+    }
   }
-  return picked;
+  return lines;
 }
 
-function deltaLabel(s: Signal): { text: string; color: string } {
-  if (s.delta > 0) return { text: `+${fmtNum(s.delta, s.metric)}`, color: C.up };
-  if (s.delta < 0) return { text: `−${fmtNum(Math.abs(s.delta), s.metric)}`, color: C.down };
-  return { text: "—", color: C.flat };
+function svgTextBlock(
+  x: number,
+  y: number,
+  text: string,
+  opts: { maxChars: number; maxLines: number; lineHeight: number; fill: string; size: number; weight?: number },
+): string {
+  return wrapLines(text, opts.maxChars, opts.maxLines)
+    .map(
+      (line, i) =>
+        `<text x="${x}" y="${y + i * opts.lineHeight}" fill="${opts.fill}" font-family="${FONT}" font-size="${opts.size}"${opts.weight ? ` font-weight="${opts.weight}"` : ""}>${esc(line)}</text>`,
+    )
+    .join("");
 }
 
-function fmtNum(n: number, metric: string): string {
-  if (/share|pct/i.test(metric)) return `${(Math.abs(n) * 100).toFixed(1)}pp`;
-  if (Math.abs(n) >= 1000) return n.toLocaleString(undefined, { maximumFractionDigits: 0 });
-  return String(Math.round(n * 100) / 100);
+function sectionTitle(x: number, y: number, label: string): string {
+  return `<text x="${x}" y="${y}" fill="${C.muted}" font-family="${FONT}" font-size="12" font-weight="700">${esc(label)}</text>`;
 }
 
-function displayValue(s: Signal): string {
+function humanCategory(cat: string): string {
+  return cat.charAt(0) + cat.slice(1).toLowerCase().replace(/_/g, " ");
+}
+
+function metricShort(metric: string): string {
+  const short: Record<string, string> = {
+    exactDupGroups: "dup groups",
+    observed: "entities",
+    overCapacityCells: "hot cells",
+    overCapacityPct: "over cap",
+    top20ShareOfSupply: "top 20%",
+    kmFrozenDays: "flat days",
+    drivers: "drivers",
+    flaggedPct: "flagged",
+    detectionsZeroDays: "zero days",
+  };
+  return short[metric] || shortLabel(metricLabel(metric), 11);
+}
+
+function metricLabel(metric: string): string {
+  if (METRIC_LABELS[metric]) return METRIC_LABELS[metric];
+  return metric
+    .replace(/([a-z])([A-Z])/g, "$1 $2")
+    .replace(/top20/gi, "top 20")
+    .replace(/20share/gi, "20 share")
+    .replace(/pct/gi, "%")
+    .toLowerCase();
+}
+
+interface NetworkBundle {
+  network: string;
+  metrics: Signal[];
+}
+
+function fmtValue(s: Signal): string {
   if (/share|pct/i.test(s.metric)) return `${(s.value * 100).toFixed(1)}%`;
   if (s.value >= 1000) return s.value.toLocaleString(undefined, { maximumFractionDigits: 0 });
-  return String(s.value);
+  return String(Math.round(s.value * 100) / 100);
 }
 
-function barWidth(s: Signal): number {
-  const base = SEV_RANK[s.severity] === 3 ? 0.88 : SEV_RANK[s.severity] === 2 ? 0.62 : 0.42;
-  const moved = s.delta !== 0 ? 0.06 : 0;
-  return Math.min(0.92, base + moved);
+function deltaText(s: Signal): string {
+  if (s.delta === 0) return "unchanged";
+  const sign = s.delta > 0 ? "+" : "−";
+  const abs = Math.abs(s.delta);
+  if (/share|pct/i.test(s.metric)) return `${sign}${(abs * 100).toFixed(1)} pp`;
+  if (abs >= 1000) return `${sign}${abs.toLocaleString()}`;
+  return `${sign}${Math.round(abs * 100) / 100}`;
+}
+
+function deltaColor(s: Signal): string {
+  if (s.delta > 0) return C.neonYellow;
+  if (s.delta < 0) return C.rubyCore;
+  return C.graphite;
+}
+
+function formatDateLabel(label: string): string {
+  const m = label.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (m) {
+    const d = new Date(`${m[1]}-${m[2]}-${m[3]}T12:00:00Z`);
+    return d.toLocaleDateString("en-US", {
+      weekday: "short",
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+      timeZone: "UTC",
+    });
+  }
+  const week = label.match(/Week\s+(\d+)/i);
+  if (week) return `Week ${week[1]} · rolling 7-day window`;
+  const month = label.match(/^(\d{4})-(\d{2})$/);
+  if (month) {
+    const d = new Date(`${month[1]}-${month[2]}-01T12:00:00Z`);
+    return d.toLocaleDateString("en-US", { month: "long", year: "numeric", timeZone: "UTC" });
+  }
+  return label;
+}
+
+function facetedRectPath(x: number, y: number, w: number, h: number, cut = 10): string {
+  return [
+    `M ${x + cut} ${y}`,
+    `L ${x + w - cut} ${y}`,
+    `L ${x + w} ${y + cut}`,
+    `L ${x + w} ${y + h - cut}`,
+    `L ${x + w - cut} ${y + h}`,
+    `L ${x + cut} ${y + h}`,
+    `L ${x} ${y + h - cut}`,
+    `L ${x} ${y + cut}`,
+    "Z",
+  ].join(" ");
+}
+
+const DAILY_FEATURED_MAX = 3;
+
+function signalImportance(s: Signal): number {
+  const moved = s.delta !== 0 ? 50 : 0;
+  return (SEV_RANK[s.severity] || 0) * 100 + moved + Math.abs(s.delta || 0) * 20;
+}
+
+/** Daily card — only networks worth highlighting (movement + severity), not the full fleet. */
+function pickNetworkBundles(signals: Signal[], max = DAILY_FEATURED_MAX): NetworkBundle[] {
+  const ranked = signals.slice().sort(
+    (a, b) => signalImportance(b) - signalImportance(a) || shortNet(a.network).localeCompare(shortNet(b.network)),
+  );
+
+  const byNetwork = new Map<string, Signal[]>();
+  for (const s of ranked) {
+    const k = shortNet(s.network);
+    const list = byNetwork.get(k) || [];
+    list.push(s);
+    byNetwork.set(k, list);
+  }
+
+  return [...byNetwork.entries()]
+    .map(([network, all]) => {
+      const picked: Signal[] = [];
+      const seenMetric = new Set<string>();
+      for (const s of all) {
+        if (seenMetric.has(s.metric)) continue;
+        seenMetric.add(s.metric);
+        picked.push(s);
+        if (picked.length >= 2) break;
+      }
+      const hasMovement = all.some((s) => s.delta !== 0);
+      const score = Math.max(...all.map(signalImportance));
+      return { network, metrics: picked, hasMovement, score };
+    })
+    .sort((a, b) => {
+      if (a.hasMovement !== b.hasMovement) return a.hasMovement ? -1 : 1;
+      return b.score - a.score;
+    })
+    .slice(0, max)
+    .map(({ network, metrics }) => ({ network, metrics }));
 }
 
 function categoryCounts(signals: Signal[]): { cat: string; n: number }[] {
@@ -116,8 +265,7 @@ function categoryCounts(signals: Signal[]): { cat: string; n: number }[] {
   }
   return [...m.entries()]
     .map(([cat, n]) => ({ cat, n }))
-    .sort((a, b) => b.n - a.n)
-    .slice(0, 5);
+    .sort((a, b) => b.n - a.n);
 }
 
 function movedCount(signals: Signal[]): { up: number; down: number; flat: number } {
@@ -132,97 +280,651 @@ function movedCount(signals: Signal[]): { up: number; down: number; flat: number
   return { up, down, flat };
 }
 
-/** SVG string for the daily index card. */
-export function buildDailyCardSvg(
-  signals: Signal[],
-  patterns: Pattern[],
-  dateLabel: string,
+function groupByNetwork(signals: Signal[]): { network: string; signals: Signal[] }[] {
+  const m = new Map<string, Signal[]>();
+  for (const s of signals) {
+    const arr = m.get(s.network) || [];
+    arr.push(s);
+    m.set(s.network, arr);
+  }
+  return [...m.entries()]
+    .sort((a, b) => a[0].localeCompare(b[0]))
+    .map(([network, netSignals]) => ({ network, signals: netSignals }));
+}
+
+function networkTrend(signals: Signal[]): string {
+  const deltas = signals.filter((s) => s.delta !== 0).length;
+  if (!deltas) return "flat readings";
+  if (deltas === 1) return "single delta observed";
+  return "multiple deltas observed";
+}
+
+function sevColor(sev: string): string {
+  if (sev === "high") return C.rubyCore;
+  if (sev === "medium") return C.neonYellow;
+  return C.graphite;
+}
+
+function weekNumberFromLabel(label: string): string {
+  const m = label.match(/Week\s+(\d+)/i);
+  return m ? m[1] : label;
+}
+
+/** Daily viz — vertical movement bars (up / down / flat counts). */
+function renderMovementBars(move: { up: number; down: number; flat: number }, x: number, y: number, w: number, h: number): string {
+  const max = Math.max(1, move.up, move.down, move.flat);
+  const barW = Math.floor((w - 24) / 3);
+  const items = [
+    { key: "up", n: move.up, color: C.neonYellow, label: "up" },
+    { key: "down", n: move.down, color: C.rubyCore, label: "down" },
+    { key: "flat", n: move.flat, color: C.graphite, label: "flat" },
+  ];
+  return items
+    .map((item, i) => {
+      const bx = x + i * (barW + 8);
+      const bh = Math.max(8, Math.round((item.n / max) * (h - 36)));
+      const by = y + h - 16 - bh;
+      return `
+      <rect x="${bx}" y="${y + 8}" width="${barW}" height="${h - 24}" fill="${C.obsidian}" stroke="${C.hairline}"/>
+      <rect x="${bx + 3}" y="${by}" width="${barW - 6}" height="${bh}" fill="${item.color}"/>
+      <text x="${bx + barW / 2}" y="${y + h - 2}" fill="${C.graphite}" font-family="system-ui,sans-serif" font-size="10" text-anchor="middle">${item.label}</text>
+      <text x="${bx + barW / 2}" y="${by - 4}" fill="${item.color}" font-family="system-ui,sans-serif" font-size="12" font-weight="700" text-anchor="middle">${item.n}</text>`;
+    })
+    .join("");
+}
+
+/** Weekly viz — pattern hub linking one pattern to affected networks. */
+function renderPatternHub(patterns: Pattern[], cx: number, cy: number): string {
+  const p = patterns[0];
+  if (!p) return "";
+  const nets = [...new Set(p.networks.map(shortNet))].slice(0, 5);
+  const r = 78;
+  let svg = `
+    <circle cx="${cx}" cy="${cy}" r="34" fill="${C.obsidianSoft}" stroke="${C.rubyCore}" stroke-width="2"/>
+    <text x="${cx}" y="${cy - 6}" fill="${C.platinum}" font-family="system-ui,sans-serif" font-size="9" font-weight="700" text-anchor="middle">PATTERN</text>
+    <text x="${cx}" y="${cy + 10}" fill="${C.graphite}" font-family="system-ui,sans-serif" font-size="8" text-anchor="middle">${esc(shortLabel(p.category, 12))}</text>`;
+  nets.forEach((net, i) => {
+    const angle = (i / nets.length) * Math.PI * 2 - Math.PI / 2;
+    const nx = cx + Math.cos(angle) * r;
+    const ny = cy + Math.sin(angle) * r;
+    svg += `
+      <line x1="${cx}" y1="${cy}" x2="${nx}" y2="${ny}" stroke="${C.sapphireGlow}" stroke-width="1" opacity="0.7"/>
+      <rect x="${nx - 38}" y="${ny - 11}" width="76" height="22" fill="${C.obsidianSoft}" stroke="${C.hairline}"/>
+      <text x="${nx}" y="${ny + 4}" fill="${C.platinum}" font-family="system-ui,sans-serif" font-size="10" font-weight="700" text-anchor="middle">${esc(shortLabel(net, 10))}</text>`;
+  });
+  return svg;
+}
+
+/** Weekly viz — per-network delta direction matrix (↑ / ↓ / — per metric). */
+function renderDeltaMatrix(
+  nets: { network: string; signals: Signal[] }[],
+  x: number,
+  y: number,
 ): string {
-  const rows = pickChartSignals(signals, 6);
-  const hook = headline(patterns, signals);
-  const cats = categoryCounts(signals);
-  const move = movedCount(signals);
-  const networks = [...new Set(signals.map((s) => shortNet(s.network)))];
-  const rowH = 52;
-  const chartTop = 200;
-  const chartLeft = 56;
-  const chartW = W - chartLeft * 2;
-
-  let bars = "";
-  rows.forEach((s, i) => {
-    const y = chartTop + i * rowH;
-    const net = shortNet(s.network);
-    const cat = categoryForSignal(s.metric);
-    const color = CAT_COLOR[cat] || C.accent;
-    const w = Math.round(chartW * 0.55 * barWidth(s));
-    const d = deltaLabel(s);
-    const label = compactFactLine(s);
-    const metricShort = label.slice(net.length + 2, net.length + 42);
-
-    bars += `
-      <text x="${chartLeft}" y="${y + 22}" fill="${C.text}" font-family="system-ui,sans-serif" font-size="18" font-weight="600">${esc(net)}</text>
-      <rect x="${chartLeft + 130}" y="${y + 6}" width="${chartW - 130}" height="34" rx="8" fill="${C.panel}" stroke="${C.border}"/>
-      <rect x="${chartLeft + 134}" y="${y + 10}" width="${w}" height="26" rx="6" fill="${color}" opacity="0.85"/>
-      <text x="${chartLeft + 144}" y="${y + 28}" fill="${C.bg}" font-family="system-ui,sans-serif" font-size="13" font-weight="600">${esc(displayValue(s))}</text>
-      <text x="${chartLeft + 280}" y="${y + 28}" fill="${C.muted}" font-family="system-ui,sans-serif" font-size="12">${esc(metricShort)}</text>
-      <text x="${chartLeft + chartW - 8}" y="${y + 28}" fill="${d.color}" font-family="system-ui,sans-serif" font-size="15" font-weight="700" text-anchor="end">${esc(d.text)}</text>
-    `;
+  const rowH = 58;
+  const labelW = 118;
+  const cellW = 62;
+  const maxMetrics = 4;
+  let svg = `<text x="${x + labelW}" y="${y}" fill="${C.muted}" font-family="${FONT}" font-size="10">Each cell is one metric — arrow shows direction of change</text>`;
+  nets.slice(0, 4).forEach((block, ri) => {
+    const ry = y + 18 + ri * rowH;
+    svg += `<text x="${x}" y="${ry + 28}" fill="${C.platinum}" font-family="${FONT}" font-size="13" font-weight="700">${esc(shortLabel(shortNet(block.network), 14))}</text>`;
+    svg += `<text x="${x + labelW + maxMetrics * (cellW + 6) + 12}" y="${ry + 28}" fill="${C.muted}" font-family="${FONT}" font-size="11">${esc(networkTrend(block.signals))}</text>`;
+    block.signals.slice(0, maxMetrics).forEach((s, ci) => {
+      const cx = x + labelW + ci * (cellW + 6);
+      const fill = s.delta > 0 ? C.neonYellow : s.delta < 0 ? C.rubyCore : C.obsidianEdge;
+      const glyph = s.delta > 0 ? "↑" : s.delta < 0 ? "↓" : "—";
+      svg += `
+        <rect x="${cx}" y="${ry + 4}" width="${cellW}" height="44" fill="${C.obsidianSoft}" stroke="${C.hairline}"/>
+        <text x="${cx + cellW / 2}" y="${ry + 20}" fill="${C.muted}" font-family="${FONT}" font-size="10" text-anchor="middle">${esc(metricShort(s.metric))}</text>
+        <text x="${cx + cellW / 2}" y="${ry + 40}" fill="${fill}" font-family="${FONT}" font-size="18" font-weight="700" text-anchor="middle">${glyph}</text>`;
+    });
   });
+  return svg;
+}
 
-  let catChips = "";
-  cats.forEach((c, i) => {
-    const x = chartLeft + i * 148;
-    const color = CAT_COLOR[c.cat] || C.accent;
-    catChips += `
-      <rect x="${x}" y="518" width="136" height="44" rx="10" fill="${C.panel}" stroke="${color}" stroke-width="1.5"/>
-      <circle cx="${x + 18}" cy="540" r="6" fill="${color}"/>
-      <text x="${x + 32}" y="536" fill="${C.muted}" font-family="system-ui,sans-serif" font-size="11">${esc(c.cat.slice(0, 12))}</text>
-      <text x="${x + 32}" y="554" fill="${C.text}" font-family="system-ui,sans-serif" font-size="16" font-weight="700">${c.n}</text>
-    `;
-  });
+/** Monthly viz — horizontal sector composition bar from accumulated signal counts. */
+function renderSectorStackBar(sectors: SectorSummary[], x: number, y: number, w: number): string {
+  const total = Math.max(1, sectors.reduce((sum, s) => sum + s.signalCount, 0));
+  let cursor = x;
+  const segments = sectors
+    .map((sec) => {
+      const segW = Math.max(14, Math.round((sec.signalCount / total) * w));
+      const color = SECTOR_COLOR[sec.type] || C.sapphireCore;
+      const seg = `<rect x="${cursor}" y="${y}" width="${segW}" height="22" fill="${color}"/>`;
+      cursor += segW;
+      return seg;
+    })
+    .join("");
+  return `
+    <rect x="${x}" y="${y}" width="${w}" height="22" fill="${C.obsidian}" stroke="${C.hairline}"/>
+    ${segments}
+    <text x="${x}" y="${y + 40}" fill="${C.muted}" font-family="${FONT}" font-size="11">${total} signals across ${sectors.length} sectors</text>`;
+}
 
-  const patternNets =
-    patterns.find((p) => p.scope === "cross-network" || p.scope === "systemic")?.networks.slice(0, 4) ||
-    networks.slice(0, 4);
+/** Monthly viz — faceted headline read cards (one per network). */
+function renderHeadlineCards(headlines: { network: string; message: string }[], x: number, y: number, w: number): string {
+  const cardW = Math.floor((w - 24) / 3);
+  const cardH = 96;
+  return headlines
+    .slice(0, 3)
+    .map((h, i) => {
+      const cx = x + i * (cardW + 12);
+      const color = [C.rubyCore, C.sapphireGlow, C.neonYellow][i % 3];
+      const path = facetedRectPath(cx, y, cardW, cardH, 8);
+      const msgBlock = svgTextBlock(cx + 12, y + 46, h.message.replace(/\s+/g, " "), {
+        maxChars: 34,
+        maxLines: 3,
+        lineHeight: 14,
+        fill: C.muted,
+        size: 11,
+      });
+      return `
+        <path d="${path}" fill="${C.obsidianSoft}" stroke="${C.hairline}"/>
+        <path d="M ${cx + 1} ${y + 1} L ${cx + cardW - 14} ${y + 1} L ${cx + cardW - 8} ${y + 7} L ${cx + 8} ${y + 7} Z" fill="${color}"/>
+        <text x="${cx + 12}" y="${y + 28}" fill="${C.platinum}" font-family="${FONT}" font-size="14" font-weight="700">${esc(shortNet(h.network))}</text>
+        ${msgBlock}`;
+    })
+    .join("");
+}
 
+type NetworkVizKind = "dup" | "capacity" | "economics" | "telemetry" | "identity" | "default";
+
+const VIZ_LABEL: Record<NetworkVizKind, string> = {
+  dup: "Registry",
+  capacity: "Capacity",
+  economics: "Supply",
+  telemetry: "Telemetry",
+  identity: "Identity",
+  default: "Metrics",
+};
+
+function metricByKey(metrics: Signal[], key: string): Signal | undefined {
+  return metrics.find((m) => m.metric === key);
+}
+
+/** Pick the chart type that best fits this network's public signal shape. */
+function inferNetworkVizKind(network: string, metrics: Signal[]): NetworkVizKind {
+  const keys = new Set(metrics.map((s) => s.metric));
+  if (keys.has("exactDupGroups")) return "dup";
+  if (keys.has("overCapacityCells") || keys.has("overCapacityPct")) return "capacity";
+  if (keys.has("top20ShareOfSupply")) return "economics";
+  if (keys.has("kmFrozenDays") || keys.has("drivers") || keys.has("detectionsZeroDays")) return "telemetry";
+  if (keys.has("flaggedPct") || keys.has("identityCollisions")) return "identity";
+  const n = network.toLowerCase();
+  if (/geodnet|dawn|nodle|grass/.test(n)) return "dup";
+  if (/weatherxm/.test(n)) return "capacity";
+  if (/hivemapper/.test(n)) return "economics";
+  if (/natix/.test(n)) return "telemetry";
+  return "default";
+}
+
+/** Geodnet / Dawn / Nodle — dup groups vs fleet size (ratio bar, not a rank). */
+function renderDupViz(x: number, y: number, w: number, metrics: Signal[]): string {
+  const dup = metricByKey(metrics, "exactDupGroups");
+  const obs = metricByKey(metrics, "observed");
+  const dupN = dup?.value ?? 0;
+  const obsN = obs?.value ?? 1;
+  const ratio = Math.min(1, dupN / Math.max(1, obsN));
+  const barW = w - 24;
+  const fillW = Math.max(6, Math.round(ratio * barW));
+  return `
+    <text x="${x + 12}" y="${y + 14}" fill="${C.muted}" font-family="${FONT}" font-size="10">Duplicate groups vs fleet</text>
+    <rect x="${x + 12}" y="${y + 22}" width="${barW}" height="10" fill="${C.obsidian}" stroke="${C.hairline}"/>
+    <rect x="${x + 12}" y="${y + 22}" width="${fillW}" height="10" fill="${C.rubyCore}"/>
+    <text x="${x + 12}" y="${y + 48}" fill="${C.platinum}" font-family="system-ui,sans-serif" font-size="18" font-weight="700">${esc(fmtValue(dup || { metric: "exactDupGroups", value: dupN, delta: 0 } as Signal))}</text>
+    <text x="${x + 12 + barW}" y="${y + 48}" fill="${dup ? deltaColor(dup) : C.graphite}" font-family="system-ui,sans-serif" font-size="10" font-weight="700" text-anchor="end">${esc(dup ? deltaText(dup) : "")}</text>
+    <text x="${x + 12}" y="${y + 64}" fill="${C.muted}" font-family="${FONT}" font-size="10">Fleet ${esc(obs ? fmtValue(obs) : "—")}</text>
+    <text x="${x + 12 + barW}" y="${y + 64}" fill="${obs ? deltaColor(obs) : C.graphite}" font-family="system-ui,sans-serif" font-size="10" text-anchor="end">${esc(obs ? deltaText(obs) : "")}</text>`;
+}
+
+/** WeatherXM — over-capacity cells as a coverage grid snapshot. */
+function renderCapacityViz(x: number, y: number, w: number, metrics: Signal[]): string {
+  const cells = metricByKey(metrics, "overCapacityCells");
+  const pct = metricByKey(metrics, "overCapacityPct");
+  const hot = cells?.value ?? 0;
+  const share = pct?.value ?? 0.03;
+  const cols = 10;
+  const rows = 4;
+  const cell = 14;
+  const gap = 2;
+  let grid = "";
+  const hotCells = Math.min(cols * rows, Math.max(1, Math.round(share * cols * rows * 3)));
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      const idx = r * cols + c;
+      const cx = x + 12 + c * (cell + gap);
+      const cy = y + 20 + r * (cell + gap);
+      const fill = idx < hotCells ? C.neonYellow : C.obsidianEdge;
+      grid += `<rect x="${cx}" y="${cy}" width="${cell}" height="${cell}" fill="${fill}" stroke="${C.hairline}"/>`;
+    }
+  }
+  return `
+    ${grid}
+    <text x="${x + 12}" y="${y + 86}" fill="${C.platinum}" font-family="system-ui,sans-serif" font-size="16" font-weight="700">${esc(fmtValue(cells || { metric: "overCapacityCells", value: hot, delta: 0 } as Signal))} hot cells</text>
+    <text x="${x + w - 12}" y="${y + 86}" fill="${cells ? deltaColor(cells) : C.graphite}" font-family="system-ui,sans-serif" font-size="10" font-weight="700" text-anchor="end">${esc(cells ? deltaText(cells) : "")}</text>
+    <text x="${x + 12}" y="${y + 100}" fill="${C.muted}" font-family="${FONT}" font-size="10">${esc(pct ? `${fmtValue(pct)} of map over capacity` : "Capacity stress")}</text>`;
+}
+
+/** Hivemapper — top-holder concentration arc (supply shape, not a leaderboard). */
+function renderEconomicsViz(x: number, y: number, w: number, metrics: Signal[]): string {
+  const top = metricByKey(metrics, "top20ShareOfSupply") || metrics[0];
+  const share = Math.min(1, Math.max(0, top.value));
+  const cx = x + w / 2;
+  const cy = y + 54;
+  const r = 34;
+  const endAngle = Math.PI * (1 - share);
+  const ex = cx + Math.cos(endAngle) * r;
+  const ey = cy - Math.sin(endAngle) * r;
+  const large = share > 0.5 ? 1 : 0;
+  return `
+    <path d="M ${cx - r} ${cy} A ${r} ${r} 0 0 1 ${cx + r} ${cy}" fill="none" stroke="${C.obsidianEdge}" stroke-width="7"/>
+    <path d="M ${cx - r} ${cy} A ${r} ${r} 0 ${large} 1 ${ex} ${ey}" fill="none" stroke="#7FA8FF" stroke-width="7"/>
+    <text x="${cx}" y="${cy - 8}" fill="${C.platinum}" font-family="system-ui,sans-serif" font-size="20" font-weight="700" text-anchor="middle">${esc(fmtValue(top))}</text>
+    <text x="${cx}" y="${cy + 10}" fill="${C.muted}" font-family="${FONT}" font-size="10" text-anchor="middle">Top 20 holder share</text>
+    <text x="${cx}" y="${cy + 26}" fill="${deltaColor(top)}" font-family="system-ui,sans-serif" font-size="10" font-weight="700" text-anchor="middle">${esc(deltaText(top))}</text>`;
+}
+
+/** Natix — frozen telemetry counter + driver momentum lane. */
+function renderTelemetryViz(x: number, y: number, w: number, metrics: Signal[]): string {
+  const frozen = metricByKey(metrics, "kmFrozenDays") || metrics.find((m) => /frozen/i.test(m.metric));
+  const drivers = metricByKey(metrics, "drivers");
+  const laneW = Math.floor((w - 36) / 2);
+  const driverH = drivers ? Math.min(40, Math.max(8, Math.round(Math.abs(drivers.delta) / 10))) : 8;
+  return `
+    <rect x="${x + 12}" y="${y + 18}" width="${laneW}" height="58" fill="${C.obsidian}" stroke="${C.hairline}"/>
+    <text x="${x + 12 + laneW / 2}" y="${y + 38}" fill="${C.sapphireGlow}" font-family="system-ui,sans-serif" font-size="22" font-weight="700" text-anchor="middle">${frozen ? Math.round(frozen.value) : "—"}</text>
+    <text x="${x + 12 + laneW / 2}" y="${y + 54}" fill="${C.graphite}" font-family="system-ui,sans-serif" font-size="9" text-anchor="middle">flat days</text>
+    <text x="${x + 12 + laneW / 2}" y="${y + 68}" fill="${frozen ? deltaColor(frozen) : C.graphite}" font-family="system-ui,sans-serif" font-size="9" text-anchor="middle">${frozen ? deltaText(frozen) : ""}</text>
+    <rect x="${x + 24 + laneW}" y="${y + 18}" width="${laneW}" height="58" fill="${C.obsidian}" stroke="${C.hairline}"/>
+    <text x="${x + 24 + laneW + laneW / 2}" y="${y + 34}" fill="${C.graphite}" font-family="system-ui,sans-serif" font-size="9" text-anchor="middle">drivers</text>
+    <rect x="${x + 32 + laneW}" y="${y + 68 - driverH}" width="${laneW - 16}" height="${driverH}" fill="${drivers && drivers.delta >= 0 ? C.neonYellow : C.rubyCore}"/>
+    <text x="${x + 24 + laneW + laneW / 2}" y="${y + 54}" fill="${C.platinum}" font-family="system-ui,sans-serif" font-size="14" font-weight="700" text-anchor="middle">${drivers ? fmtValue(drivers) : "—"}</text>
+    <text x="${x + 24 + laneW + laneW / 2}" y="${y + 68}" fill="${drivers ? deltaColor(drivers) : C.graphite}" font-family="system-ui,sans-serif" font-size="9" text-anchor="middle">${drivers ? deltaText(drivers) : ""}</text>`;
+}
+
+/** Identity-heavy networks — flagged share bar. */
+function renderIdentityViz(x: number, y: number, w: number, metrics: Signal[]): string {
+  const flagged = metricByKey(metrics, "flaggedPct") || metrics[0];
+  const obs = metricByKey(metrics, "observed");
+  const share = Math.min(1, Math.max(0, flagged.value));
+  const barW = w - 24;
+  return `
+    <text x="${x + 12}" y="${y + 14}" fill="${C.graphite}" font-family="system-ui,sans-serif" font-size="9">flagged fleet share</text>
+    <rect x="${x + 12}" y="${y + 22}" width="${barW}" height="12" fill="${C.obsidian}" stroke="${C.hairline}"/>
+    <rect x="${x + 12}" y="${y + 22}" width="${Math.max(4, Math.round(share * barW))}" height="12" fill="${C.rubyCore}"/>
+    <text x="${x + 12}" y="${y + 52}" fill="${C.platinum}" font-family="system-ui,sans-serif" font-size="18" font-weight="700">${esc(fmtValue(flagged))}</text>
+    <text x="${x + 12 + barW}" y="${y + 52}" fill="${deltaColor(flagged)}" font-family="system-ui,sans-serif" font-size="10" font-weight="700" text-anchor="end">${esc(deltaText(flagged))}</text>
+    <text x="${x + 12}" y="${y + 68}" fill="${C.graphite}" font-family="system-ui,sans-serif" font-size="10">${obs ? `${fmtValue(obs)} entities mapped` : "identity read"}</text>`;
+}
+
+function renderDefaultMetricViz(x: number, y: number, w: number, metrics: Signal[]): string {
+  const primary = metrics[0];
+  const secondary = metrics[1];
+  if (!primary) return "";
+  const pMetric = metricLabel(primary.metric);
+  const sMetric = secondary ? metricLabel(secondary.metric) : "";
+  return `
+    <text x="${x + 14}" y="${y + 20}" fill="${C.graphite}" font-family="system-ui,sans-serif" font-size="10">${esc(shortLabel(pMetric, 28))}</text>
+    <text x="${x + 14}" y="${y + 42}" fill="${C.platinum}" font-family="system-ui,sans-serif" font-size="17" font-weight="700">${esc(fmtValue(primary))}</text>
+    <text x="${x + w - 14}" y="${y + 42}" fill="${deltaColor(primary)}" font-family="system-ui,sans-serif" font-size="10" font-weight="700" text-anchor="end">${esc(deltaText(primary))}</text>
+    ${secondary ? `<text x="${x + 14}" y="${y + 62}" fill="${C.graphite}" font-family="system-ui,sans-serif" font-size="10">${esc(shortLabel(sMetric, 28))}</text>
+    <text x="${x + 14}" y="${y + 78}" fill="${C.platinum}" font-family="system-ui,sans-serif" font-size="13" font-weight="700">${esc(fmtValue(secondary))}</text>
+    <text x="${x + w - 14}" y="${y + 78}" fill="${deltaColor(secondary)}" font-family="system-ui,sans-serif" font-size="10" font-weight="700" text-anchor="end">${esc(deltaText(secondary))}</text>` : ""}`;
+}
+
+function renderNetworkCardInner(b: NetworkBundle, x: number, y: number, cardW: number, accent: string): string {
+  const kind = inferNetworkVizKind(b.network, b.metrics);
+  const innerY = y + 34;
+  let viz = "";
+  if (kind === "dup") viz = renderDupViz(x, innerY, cardW, b.metrics);
+  else if (kind === "capacity") viz = renderCapacityViz(x, innerY, cardW, b.metrics);
+  else if (kind === "economics") viz = renderEconomicsViz(x, innerY, cardW, b.metrics);
+  else if (kind === "telemetry") viz = renderTelemetryViz(x, innerY, cardW, b.metrics);
+  else if (kind === "identity") viz = renderIdentityViz(x, innerY, cardW, b.metrics);
+  else viz = renderDefaultMetricViz(x, innerY, cardW, b.metrics);
+  return `
+    <text x="${x + 14}" y="${y + 26}" fill="${C.platinum}" font-family="${FONT}" font-size="17" font-weight="700">${esc(shortLabel(b.network, 18))}</text>
+    <text x="${x + cardW - 14}" y="${y + 26}" fill="${accent}" font-family="${FONT}" font-size="10" font-weight="600" text-anchor="end">${VIZ_LABEL[kind]}</text>
+    ${viz}`;
+}
+
+function svgShell(gradId: string, topStops: [string, string, string], body: string, accent?: string): string {
+  const accentSvg = accent || `<rect x="0" y="0" width="${W}" height="4" fill="url(#topline)"/>`;
   return `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#0c0c10"/>
-      <stop offset="100%" stop-color="#09090b"/>
+      <stop offset="0%" stop-color="${C.obsidianSoft}"/>
+      <stop offset="100%" stop-color="${C.obsidian}"/>
     </linearGradient>
-    <linearGradient id="accentBar" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="${C.accent}"/>
-      <stop offset="100%" stop-color="${C.accentSoft}"/>
+    <linearGradient id="${gradId}" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="${topStops[0]}"/>
+      <stop offset="60%" stop-color="${topStops[1]}"/>
+      <stop offset="100%" stop-color="${topStops[2]}"/>
     </linearGradient>
   </defs>
   <rect width="${W}" height="${H}" fill="url(#bg)"/>
-  <rect x="0" y="0" width="${W}" height="6" fill="url(#accentBar)"/>
-
-  <text x="56" y="58" fill="${C.accent}" font-family="system-ui,sans-serif" font-size="14" font-weight="700" letter-spacing="3">GETKINETIK</text>
-  <text x="56" y="92" fill="${C.text}" font-family="system-ui,sans-serif" font-size="32" font-weight="700">DePIN Signal Index</text>
-  <text x="56" y="124" fill="${C.muted}" font-family="system-ui,sans-serif" font-size="16">${esc(formatDateLabel(dateLabel))}</text>
-  <text x="${W - 56}" y="92" fill="${C.text}" font-family="system-ui,sans-serif" font-size="22" font-weight="600" text-anchor="end">${signals.length} signals</text>
-  <text x="${W - 56}" y="120" fill="${C.muted}" font-family="system-ui,sans-serif" font-size="14" text-anchor="end">${networks.length} networks · public reads</text>
-
-  <rect x="56" y="140" width="${W - 112}" height="44" rx="10" fill="${C.panel}" stroke="${C.border}"/>
-  <text x="72" y="168" fill="${C.text}" font-family="system-ui,sans-serif" font-size="15">${esc(hook.slice(0, 95))}${hook.length > 95 ? "…" : ""}</text>
-
-  <text x="${chartLeft}" y="${chartTop - 12}" fill="${C.muted}" font-family="system-ui,sans-serif" font-size="12" font-weight="600" letter-spacing="1">NETWORK SIGNALS</text>
-  ${bars}
-
-  <text x="${chartLeft}" y="502" fill="${C.muted}" font-family="system-ui,sans-serif" font-size="12" font-weight="600" letter-spacing="1">CATEGORIES</text>
-  ${catChips}
-
-  <rect x="56" y="578" width="${W - 112}" height="72" rx="12" fill="${C.panel}" stroke="${C.border}"/>
-  <text x="72" y="608" fill="${C.muted}" font-family="system-ui,sans-serif" font-size="12">Δ movement today</text>
-  <text x="72" y="634" fill="${C.up}" font-family="system-ui,sans-serif" font-size="22" font-weight="700">↑ ${move.up}</text>
-  <text x="160" y="634" fill="${C.down}" font-family="system-ui,sans-serif" font-size="22" font-weight="700">↓ ${move.down}</text>
-  <text x="248" y="634" fill="${C.flat}" font-family="system-ui,sans-serif" font-size="22" font-weight="700">— ${move.flat}</text>
-  <text x="380" y="634" fill="${C.muted}" font-family="system-ui,sans-serif" font-size="14">Active: ${esc(patternNets.join(" · "))}</text>
-  <text x="${W - 72}" y="634" fill="${C.text}" font-family="system-ui,sans-serif" font-size="16" font-weight="600" text-anchor="end">getkinetik.app/site</text>
+  ${accentSvg}
+  ${body}
 </svg>`;
+}
+
+/** Daily — mirrors Daily Signal Brief: Today's Read → network evidence → movement. */
+function renderDailySvg(signals: Signal[], _patterns: Pattern[], dateLabel: string): string {
+  const bundles = pickNetworkBundles(signals);
+  const featuredNets = new Set(bundles.map((b) => b.network));
+  const otherCount = [...new Set(signals.map((s) => shortNet(s.network)))].filter((n) => !featuredNets.has(n)).length;
+  const cats = categoryCounts(signals);
+  const move = movedCount(signals);
+  const todaysRead = buildTodaysReadFromDrip(signals).slice(0, 2);
+  const whyItMatters = buildDailyWhyItMatters({
+    categories: [...new Set(signals.map((s) => categoryForSignal(s.metric)))],
+    networkCount: new Set(signals.map((s) => s.network)).size,
+    signalCount: signals.length,
+    signals,
+  });
+  const nets = [...new Set(signals.map((s) => shortNet(s.network)))];
+
+  const readBullets = todaysRead
+    .map((line, i) => {
+      const y = 178 + i * 28;
+      const color = i === 0 ? C.sapphireGlow : C.neonYellow;
+      return `<polygon points="72,${y - 6} 80,${y} 72,${y + 6} 64,${y}" fill="${color}"/><text x="94" y="${y + 5}" fill="${C.platinum}" font-family="${FONT}" font-size="14">${esc(shortLabel(line, 96))}</text>`;
+    })
+    .join("");
+
+  const cardsX = 56;
+  const cardsY = 252;
+  const cardsW = 756;
+  const cardsH = 210;
+  const cardW = 236;
+  const cardH = 138;
+  const gapX = 16;
+  const cardStartY = cardsY + 52;
+  const rowWidth = bundles.length * cardW + Math.max(0, bundles.length - 1) * gapX;
+  const rowOffsetX = cardsX + 18 + Math.max(0, Math.floor((cardsW - 36 - rowWidth) / 2));
+
+  let cardSvg = "";
+  bundles.forEach((b, i) => {
+    const x = rowOffsetX + i * (cardW + gapX);
+    const y = cardStartY;
+    const path = facetedRectPath(x, y, cardW, cardH, 10);
+    const primary = b.metrics[0];
+    const cat = categoryForSignal(primary.metric);
+    const color = CAT_COLOR[cat] || C.sapphireCore;
+    cardSvg += `
+      <path d="${path}" fill="${C.obsidianSoft}" stroke="${C.hairline}"/>
+      <path d="M ${x + 1} ${y + 1} L ${x + cardW - 20} ${y + 1} L ${x + cardW - 11} ${y + 10} L ${x + 10} ${y + 10} Z" fill="${color}"/>
+      ${renderNetworkCardInner(b, x, y, cardW, color)}
+    `;
+  });
+  const otherNetworksNote =
+    otherCount > 0
+      ? `<text x="${cardsX + cardsW / 2}" y="${cardStartY + cardH + 22}" fill="${C.graphite}" font-family="${FONT}" font-size="11" text-anchor="middle">${otherCount} other network${otherCount === 1 ? "" : "s"} unchanged today</text>`
+      : "";
+
+  const catX = 836;
+  const catY = cardsY;
+  const catW = 308;
+  const catH = 222;
+  const totalCats = Math.max(1, cats.reduce((sum, c) => sum + c.n, 0));
+  const stackX = catX + 18;
+  const stackY = catY + 60;
+  const stackW = catW - 36;
+  const stackH = 26;
+  let cursor = stackX;
+  let catStack = "";
+  cats.forEach((c, i) => {
+    const segW = Math.max(10, Math.round((c.n / totalCats) * stackW));
+    const color = CAT_COLOR[c.cat] || C.sapphireCore;
+    catStack += `<rect x="${cursor}" y="${stackY}" width="${segW}" height="${stackH}" fill="${color}" ${i === 0 ? `stroke="${C.obsidianEdge}"` : ""}/>`;
+    cursor += segW;
+  });
+  let catLegend = "";
+  cats.forEach((c, i) => {
+    const y = catY + 108 + i * 26;
+    const color = CAT_COLOR[c.cat] || C.sapphireCore;
+    catLegend += `
+      <rect x="${catX + 18}" y="${y - 10}" width="10" height="10" fill="${color}"/>
+      <text x="${catX + 36}" y="${y}" fill="${C.muted}" font-family="${FONT}" font-size="12">${esc(humanCategory(c.cat))}</text>
+      <text x="${catX + catW - 16}" y="${y}" fill="${C.platinum}" font-family="system-ui,sans-serif" font-size="12" font-weight="700" text-anchor="end">${c.n}</text>
+    `;
+  });
+  const movementBars = renderMovementBars(move, catX + 18, catY + 238, catW - 36, 46);
+
+  const body = `
+  <text x="56" y="54" fill="${C.sapphireGlow}" font-family="${FONT}" font-size="13" font-weight="700" letter-spacing="2">GETKINETIK</text>
+  <text x="56" y="90" fill="${C.platinum}" font-family="${FONT}" font-size="42" font-weight="700">Daily Signal Brief</text>
+  <text x="56" y="114" fill="${C.muted}" font-family="${FONT}" font-size="14">What changed across DePIN networks today</text>
+  <text x="56" y="136" fill="${C.muted}" font-family="${FONT}" font-size="15">${esc(formatDateLabel(dateLabel))}</text>
+  <text x="${W - 56}" y="88" fill="${C.platinum}" font-family="${FONT}" font-size="38" font-weight="700" text-anchor="end">${signals.length}</text>
+  <text x="${W - 56}" y="118" fill="${C.muted}" font-family="${FONT}" font-size="13" text-anchor="end">${nets.length} networks tracked</text>
+
+  <path d="${facetedRectPath(56, 148, 1088, 92, 8)}" fill="${C.obsidianSoft}" stroke="${C.hairline}"/>
+  ${sectionTitle(72, 168, "Today's read")}
+  ${readBullets}
+
+  <path d="${facetedRectPath(cardsX, cardsY + 12, cardsW, cardsH, 12)}" fill="${C.obsidianSoft}" stroke="${C.hairline}"/>
+  ${sectionTitle(cardsX + 16, cardsY + 36, "Today's movers")}
+  ${cardSvg}
+  ${otherNetworksNote}
+
+  <path d="${facetedRectPath(catX, catY + 12, catW, catH, 12)}" fill="${C.obsidianSoft}" stroke="${C.hairline}"/>
+  ${sectionTitle(catX + 16, catY + 36, "Signal mix")}
+  <rect x="${stackX}" y="${stackY + 12}" width="${stackW}" height="${stackH}" fill="${C.obsidian}" stroke="${C.hairline}"/>
+  ${catStack}
+  ${catLegend}
+  ${sectionTitle(catX + 16, catY + 228, "Movement today")}
+  ${movementBars}
+
+  <path d="${facetedRectPath(56, 492, 1088, 108, 12)}" fill="${C.obsidianSoft}" stroke="${C.hairline}"/>
+  <text x="72" y="528" fill="${C.neonYellow}" font-family="${FONT}" font-size="28" font-weight="700">↑ ${move.up}</text>
+  <text x="158" y="528" fill="${C.rubyCore}" font-family="${FONT}" font-size="28" font-weight="700">↓ ${move.down}</text>
+  <text x="244" y="528" fill="${C.muted}" font-family="${FONT}" font-size="28" font-weight="700">— ${move.flat}</text>
+  <text x="72" y="546" fill="${C.muted}" font-family="${FONT}" font-size="11">metrics up · down · unchanged</text>
+  <text x="380" y="516" fill="${C.muted}" font-family="${FONT}" font-size="12" font-weight="600">Why it matters</text>
+  ${svgTextBlock(380, 532, whyItMatters[0] || "", { maxChars: 72, maxLines: 1, lineHeight: 14, fill: C.platinum, size: 12 })}
+  ${svgTextBlock(380, 550, whyItMatters[1] || "", { maxChars: 72, maxLines: 2, lineHeight: 14, fill: C.muted, size: 12 })}
+  ${whyItMatters[2] ? svgTextBlock(380, 580, whyItMatters[2], { maxChars: 72, maxLines: 1, lineHeight: 14, fill: C.muted, size: 11 }) : ""}
+  <text x="${W - 72}" y="586" fill="${C.platinum}" font-family="${FONT}" font-size="18" font-weight="700" text-anchor="end">getkinetik.app/site</text>`;
+
+  return svgShell("topline", [C.sapphireCore, C.rubyCore, C.sapphireGlow], body);
+}
+
+/** Weekly — pattern hub + delta matrix (best for aggregated window data). */
+function renderWeeklySvg(signals: Signal[], patterns: Pattern[], dateLabel: string): string {
+  const weekNum = weekNumberFromLabel(dateLabel);
+  const nets = groupByNetwork(signals);
+  const executive = buildWeeklyExecutiveBullets({
+    signalCount: signals.length,
+    networkCount: nets.length,
+    patterns,
+    weekLabel: weekNum,
+  }).slice(0, 2);
+  const tagged = patterns.filter((p) => p.scope === "cross-network" || p.scope === "systemic");
+
+  const execSvg = executive
+    .map((line, i) => {
+      const y = 172 + i * 26;
+      return `<text x="72" y="${y}" fill="${C.platinum}" font-family="${FONT}" font-size="13">• ${esc(shortLabel(line, 95))}</text>`;
+    })
+    .join("");
+
+  const patternPanelX = 56;
+  const patternPanelW = 520;
+  const patternPanelY = 256;
+  const patternPanelH = 384;
+
+  let patternContent = "";
+  if (tagged.length) {
+    patternContent = renderPatternHub(tagged, patternPanelX + patternPanelW / 2, patternPanelY + 168);
+    patternContent += svgTextBlock(patternPanelX + 24, patternPanelY + 268, tagged[0].headline, {
+      maxChars: 58,
+      maxLines: 2,
+      lineHeight: 16,
+      fill: C.platinum,
+      size: 12,
+      weight: 700,
+    });
+    if (tagged.length > 1) {
+      patternContent += tagged
+        .slice(1, 3)
+        .map((p, i) => {
+          const y = patternPanelY + 308 + i * 20;
+          return `<text x="${patternPanelX + 24}" y="${y}" fill="${C.muted}" font-family="${FONT}" font-size="11">• ${esc(shortLabel(p.headline, 64))}</text>`;
+        })
+        .join("");
+    }
+  } else {
+    patternContent = `
+      <text x="${patternPanelX + 24}" y="${patternPanelY + 72}" fill="${C.graphite}" font-family="system-ui,sans-serif" font-size="13">No cross-network patterns tagged this week.</text>
+      <text x="${patternPanelX + 24}" y="${patternPanelY + 100}" fill="${C.graphite}" font-family="system-ui,sans-serif" font-size="10" font-weight="700">TAXONOMY V2</text>
+      <text x="${patternPanelX + 24}" y="${patternPanelY + 120}" fill="${C.graphite}" font-family="system-ui,sans-serif" font-size="11">${esc(TAXONOMY_V2_CATEGORIES.slice(0, 3).join(" · "))}</text>
+      <text x="${patternPanelX + 24}" y="${patternPanelY + 140}" fill="${C.graphite}" font-family="system-ui,sans-serif" font-size="11">${esc(TAXONOMY_V2_CATEGORIES.slice(3).join(" · "))}</text>`;
+  }
+
+  const watchX = 600;
+  const watchW = 544;
+  const deltaMatrix = renderDeltaMatrix(nets, watchX + 16, 292);
+
+  const body = `
+  <text x="56" y="54" fill="${C.rubyCore}" font-family="${FONT}" font-size="13" font-weight="700" letter-spacing="2">GETKINETIK · WEEKLY</text>
+  <text x="56" y="90" fill="${C.platinum}" font-family="${FONT}" font-size="38" font-weight="700">Weekly DePIN Signal Report</text>
+  <text x="56" y="114" fill="${C.muted}" font-family="${FONT}" font-size="14">Patterns and network movement this week</text>
+  <text x="56" y="136" fill="${C.muted}" font-family="${FONT}" font-size="15">${esc(formatDateLabel(dateLabel))}</text>
+  <text x="${W - 56}" y="90" fill="${C.platinum}" font-family="${FONT}" font-size="34" font-weight="700" text-anchor="end">${signals.length}</text>
+  <text x="${W - 56}" y="118" fill="${C.muted}" font-family="${FONT}" font-size="13" text-anchor="end">${nets.length} networks tracked</text>
+
+  ${sectionTitle(72, 158, "Summary")}
+  ${execSvg}
+
+  <path d="${facetedRectPath(patternPanelX, patternPanelY, patternPanelW, patternPanelH, 12)}" fill="${C.obsidianSoft}" stroke="${C.hairline}"/>
+  ${sectionTitle(patternPanelX + 16, patternPanelY + 28, "Cross-network patterns")}
+  ${patternContent}
+
+  <path d="${facetedRectPath(watchX, 256, watchW, 384, 12)}" fill="${C.obsidianSoft}" stroke="${C.hairline}"/>
+  ${sectionTitle(watchX + 16, 280, "Network watch")}
+  ${deltaMatrix}
+
+  <text x="${W - 72}" y="648" fill="${C.platinum}" font-family="${FONT}" font-size="18" font-weight="700" text-anchor="end">getkinetik.app/site</text>`;
+
+  return svgShell("topline", [C.rubyCore, C.sapphireGlow, C.sapphireCore], body);
+}
+
+function renderSectorTable(sectors: SectorSummary[], startY: number): string {
+  const cols = [
+    { x: 88, label: "Sector", w: 360 },
+    { x: 456, label: "Signals", w: 80 },
+    { x: 548, label: "Networks", w: 360 },
+    { x: 916, label: "Severity", w: 100 },
+  ];
+  let svg = cols
+    .map(
+      (c) =>
+        `<text x="${c.x}" y="${startY}" fill="${C.muted}" font-family="${FONT}" font-size="11" font-weight="700">${c.label}</text>`,
+    )
+    .join("");
+  sectors.slice(0, 4).forEach((sec, i) => {
+    const y = startY + 24 + i * 36;
+    const color = SECTOR_COLOR[sec.type] || C.sapphireCore;
+    svg += `
+      <rect x="88" y="${y - 14}" width="4" height="28" fill="${color}"/>
+      <text x="104" y="${y + 4}" fill="${C.platinum}" font-family="${FONT}" font-size="13" font-weight="700">${esc(shortLabel(sec.label, 44))}</text>
+      <text x="456" y="${y + 4}" fill="${C.platinum}" font-family="${FONT}" font-size="14" font-weight="700">${sec.signalCount}</text>
+      <text x="548" y="${y + 4}" fill="${C.muted}" font-family="${FONT}" font-size="12">${esc(shortLabel(sec.networks.map(shortNet).join(", "), 44))}</text>
+      <text x="916" y="${y + 4}" fill="${sevColor(sec.topSeverity)}" font-family="${FONT}" font-size="12" font-weight="700">${esc(sec.topSeverity)}</text>`;
+  });
+  return svg;
+}
+
+/** Monthly — sector stack + table + uncertainty callouts + headline cards. */
+function renderMonthlySvg(signals: Signal[], _patterns: Pattern[], dateLabel: string): string {
+  const bundle = loadFeedBundle("monthly");
+  const sectors = bundle.sectorSummary.length ? bundle.sectorSummary : [];
+  const totals = bundle.totals;
+  const multi = sectors.filter((s) => s.networks.length >= 2);
+  const totalSignals = totals.signals ?? signals.length;
+  const totalNetworks = totals.activeNetworks ?? totals.networks ?? new Set(signals.map((s) => s.network)).size;
+
+  const sectorBar = sectors.length ? renderSectorStackBar(sectors, 88, 152, 1000) : "";
+
+  const midY = 388;
+  const patternLines = multi.length
+    ? multi
+        .slice(0, 2)
+        .map((sec, i) => {
+          const py = midY + 36 + i * 56;
+          const color = SECTOR_COLOR[sec.type] || C.sapphireGlow;
+          return `
+          <rect x="96" y="${py}" width="480" height="44" fill="${C.obsidianSoft}" stroke="${color}" stroke-width="1"/>
+          <text x="110" y="${py + 18}" fill="${color}" font-family="${FONT}" font-size="11" font-weight="700">${esc(shortLabel(sec.label, 44))}</text>
+          <text x="110" y="${py + 34}" fill="${C.muted}" font-family="${FONT}" font-size="11">Spans ${sec.networks.map(shortNet).join(", ")}</text>`;
+        })
+        .join("")
+    : `<text x="96" y="${midY + 52}" fill="${C.muted}" font-family="${FONT}" font-size="12">No theme spans two or more networks yet.</text>`;
+
+  const unknownLines = sectors
+    .slice(0, 2)
+    .map((sec, i) => {
+      const py = midY + 36 + i * 60;
+      const color = SECTOR_COLOR[sec.type] || C.graphite;
+      const body = svgTextBlock(646, py + 32, sec.whatWeDontKnow || "", {
+        maxChars: 58,
+        maxLines: 2,
+        lineHeight: 14,
+        fill: C.platinum,
+        size: 11,
+      });
+      return `
+      <rect x="632" y="${py}" width="480" height="52" fill="${C.obsidianSoft}" stroke="${color}" stroke-width="1"/>
+      <text x="646" y="${py + 16}" fill="${color}" font-family="${FONT}" font-size="11" font-weight="700">${esc(shortLabel(sec.label, 40))}</text>
+      ${body}`;
+    })
+    .join("");
+
+  const headlineCards = renderHeadlineCards(bundle.networkHeadlines, 88, 556, 1000);
+
+  const leftAccent = `<rect x="0" y="0" width="10" height="${H}" fill="url(#topline)"/>`;
+  const body = `
+  <text x="88" y="54" fill="${C.neonYellow}" font-family="${FONT}" font-size="13" font-weight="700" letter-spacing="2">GETKINETIK · MONTHLY</text>
+  <text x="88" y="90" fill="${C.platinum}" font-family="${FONT}" font-size="38" font-weight="700">State of DePIN</text>
+  <text x="88" y="114" fill="${C.muted}" font-family="${FONT}" font-size="14">Month in review across the sector</text>
+  <text x="88" y="136" fill="${C.muted}" font-family="${FONT}" font-size="15">${esc(formatDateLabel(dateLabel))}</text>
+  <text x="${W - 72}" y="90" fill="${C.platinum}" font-family="${FONT}" font-size="34" font-weight="700" text-anchor="end">${totalSignals}</text>
+  <text x="${W - 72}" y="118" fill="${C.muted}" font-family="${FONT}" font-size="13" text-anchor="end">${totalNetworks} networks tracked</text>
+
+  ${sectionTitle(88, 148, "Sector composition")}
+  ${sectorBar}
+
+  <path d="${facetedRectPath(72, 196, 1056, 172, 10)}" fill="${C.obsidianSoft}" stroke="${C.hairline}"/>
+  ${sectionTitle(88, 220, "Cross-network summary")}
+  ${renderSectorTable(sectors, 240)}
+
+  <path d="${facetedRectPath(72, midY, 1056, 156, 10)}" fill="${C.obsidianSoft}" stroke="${C.hairline}"/>
+  ${sectionTitle(88, midY + 24, "Patterns")}
+  ${patternLines}
+  ${sectionTitle(632, midY + 24, "What we don't know")}
+  ${unknownLines || `<text x="646" y="${midY + 52}" fill="${C.muted}" font-family="${FONT}" font-size="12">No open observations to bound this month.</text>`}
+
+  ${sectionTitle(88, 536, "Network snapshot")}
+  ${headlineCards || `<text x="104" y="568" fill="${C.muted}" font-family="${FONT}" font-size="12">No headline reads in latest monthly snapshot.</text>`}
+
+  <text x="${W - 72}" y="656" fill="${C.platinum}" font-family="${FONT}" font-size="18" font-weight="700" text-anchor="end">getkinetik.app/site</text>`;
+
+  return svgShell("topline", [C.sapphireCore, C.neonYellow, C.rubyCore], body, leftAccent);
+}
+
+/** SVG string for the card (dispatches to cadence-specific layout). */
+export function buildDailyCardSvg(
+  signals: Signal[],
+  patterns: Pattern[],
+  dateLabel: string,
+  mode: CardMode = "daily",
+): string {
+  if (mode === "weekly") return renderWeeklySvg(signals, patterns, dateLabel);
+  if (mode === "monthly") return renderMonthlySvg(signals, patterns, dateLabel);
+  return renderDailySvg(signals, patterns, dateLabel);
 }
 
 /** Render PNG buffer from signals (requires sharp). */
@@ -230,8 +932,9 @@ export async function renderDailyCardPng(
   signals: Signal[],
   patterns: Pattern[],
   dateLabel: string,
+  mode: CardMode = "daily",
 ): Promise<Buffer> {
-  const svg = buildDailyCardSvg(signals, patterns, dateLabel);
+  const svg = buildDailyCardSvg(signals, patterns, dateLabel, mode);
   let sharp: typeof import("sharp");
   try {
     sharp = (await import("sharp")).default;

@@ -7,6 +7,7 @@ import type { Pattern } from "./cross-network-aggregator.ts";
 import type { ScoredSignal } from "./signal-confidence.ts";
 import type { NarrativeLayers } from "./narrative-builder.ts";
 import { PATHS, REPO_ROOT, SITE_URL } from "./paths.ts";
+import { loadCadenceSignals } from "./signal-loader.ts";
 import { formatApiBundle, formatPatternsOnly } from "./api-formatter.ts";
 import { buildXThread, buildXThreadTweets, buildXImageCaption } from "./x-thread.ts";
 import { buildDailyEditorial } from "../editorial-engine/daily.ts";
@@ -38,6 +39,27 @@ function loadFullEvidenceMarkdown(cadence: "daily" | "weekly"): string | undefin
     if (aidx >= 0) return raw.slice(aidx + appendix.length).trim();
   }
   return undefined;
+}
+
+async function writeCardArtifacts(
+  prefix: "daily" | "weekly" | "monthly",
+  signals: Signal[],
+  patterns: Pattern[],
+  label: string,
+  written: string[],
+): Promise<{ png?: Buffer; error?: string }> {
+  if (!signals.length) return { error: `No ${prefix} signals available for card` };
+  write(path.join(PATHS.publicDrip, `${prefix}-card.svg`), buildDailyCardSvg(signals, patterns, label, prefix));
+  written.push(`landing/public/drip/${prefix}-card.svg`);
+  try {
+    const png = await renderDailyCardPng(signals, patterns, label, prefix);
+    fs.writeFileSync(path.join(PATHS.publicDrip, `${prefix}-card.png`), png);
+    written.push(`landing/public/drip/${prefix}-card.png`);
+    return { png };
+  } catch (e) {
+    const msg = e instanceof Error ? e.message : String(e);
+    return { error: msg };
+  }
 }
 
 export type DistributionChannel = "x" | "substack" | "api" | "site";
@@ -196,18 +218,13 @@ export async function executeDistribution(ctx: DistributionContext): Promise<Dis
     const caption = buildXImageCaption(ctx.signals, ctx.patterns, ctx.date);
     write(path.join(PATHS.publicDrip, "x-thread.md"), thread);
     write(path.join(PATHS.publicDrip, "daily-x-thread.txt"), thread);
-    write(path.join(PATHS.publicDrip, "daily-card.svg"), buildDailyCardSvg(ctx.signals, ctx.patterns, ctx.date));
-    written.push("landing/public/drip/x-thread.md", "landing/public/drip/daily-card.svg");
+    written.push("landing/public/drip/x-thread.md");
 
-    let cardPng: Buffer | undefined;
-    try {
-      cardPng = await renderDailyCardPng(ctx.signals, ctx.patterns, ctx.date);
-      fs.writeFileSync(path.join(PATHS.publicDrip, "daily-card.png"), cardPng);
-      written.push("landing/public/drip/daily-card.png");
-    } catch (e) {
-      const msg = e instanceof Error ? e.message : String(e);
-      publish.x = `Card render skipped: ${msg}`;
-    }
+    const dailyCard = await writeCardArtifacts("daily", ctx.signals, ctx.patterns, ctx.date, written);
+    let cardPng = dailyCard.png;
+    if (dailyCard.error) publish.x = `Daily card render skipped: ${dailyCard.error}`;
+
+    // Daily run only renders daily card. Weekly/monthly are rendered on their own cadence runs.
 
     const xPlan = plan.channels.find((c) => c.channel === "x");
     if (xPlan?.livePublish) {
@@ -233,6 +250,10 @@ export async function executeDistribution(ctx: DistributionContext): Promise<Dis
     const thread = buildXThread(ctx.signals, ctx.patterns, `Week ${week}`);
     write(path.join(PATHS.publicDrip, "weekly-x-thread.txt"), thread);
     written.push("landing/public/drip/weekly-x-thread.txt");
+
+    const weeklyCardSignals = ctx.signals.length ? ctx.signals : loadCadenceSignals("weekly");
+    const weeklyCard = await writeCardArtifacts("weekly", weeklyCardSignals, ctx.patterns, `Week ${week}`, written);
+    if (weeklyCard.error) publish.weekly = `Weekly card render skipped: ${weeklyCard.error}`;
 
     const subPlan = plan.channels.find((c) => c.channel === "substack");
     if (subPlan?.livePublish) {

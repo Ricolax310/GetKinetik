@@ -19,6 +19,8 @@ export const PATHS = {
     path.join(REPO_ROOT, "landing/api/signals/latest.json"),
   ),
   signalsHistory: path.join(REPO_ROOT, "signals/history.json"),
+  signalsWeekly: path.join(REPO_ROOT, "signals/weekly/latest.json"),
+  signalsMonthly: path.join(REPO_ROOT, "signals/monthly/latest.json"),
   signalsDailyDir: path.join(REPO_ROOT, "signals/daily"),
   publicDrip: path.join(REPO_ROOT, "landing/public/drip"),
   apiDrip: path.join(REPO_ROOT, "landing/api/drip"),

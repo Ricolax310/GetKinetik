@@ -122,29 +122,25 @@
       {
         "network": "Geodnet",
         "metric": "exactDupGroups",
-        "confidence": 0.67,
-        "flags": [
-          "isolated"
-        ]
+        "confidence": 0.682,
+        "flags": []
       },
       {
         "network": "Geodnet",
         "metric": "observed",
-        "confidence": 0.672,
+        "confidence": 0.595,
         "flags": []
       },
       {
         "network": "Geodnet",
         "metric": "flaggedPct",
-        "confidence": 0.73,
-        "flags": [
-          "isolated"
-        ]
+        "confidence": 0.64,
+        "flags": []
       },
       {
         "network": "WeatherXM",
         "metric": "overCapacityCells",
-        "confidence": 0.67,
+        "confidence": 0.682,
         "flags": [
           "isolated"
         ]
@@ -152,13 +148,13 @@
       {
         "network": "WeatherXM",
         "metric": "observed",
-        "confidence": 0.672,
+        "confidence": 0.595,
         "flags": []
       },
       {
         "network": "WeatherXM",
         "metric": "overCapacityPct",
-        "confidence": 0.73,
+        "confidence": 0.64,
         "flags": [
           "isolated"
         ]
@@ -166,18 +162,64 @@
       {
         "network": "Hivemapper",
         "metric": "top20ShareOfSupply",
-        "confidence": 0.67,
+        "confidence": 0.682,
         "flags": [
           "isolated"
         ]
       },
       {
-        "network": "Natix Network",
-        "metric": "kmFrozenDays",
-        "confidence": 0.7,
-        "flags": [
-          "isolated"
-        ]
+        "network": "Nodle",
+        "metric": "exactDupGroups",
+        "confidence": 0.636,
+        "flags": []
+      },
+      {
+        "network": "Nodle",
+        "metric": "observed",
+        "confidence": 0.748,
+        "flags": []
+      },
+      {
+        "network": "Nodle",
+        "metric": "flaggedPct",
+        "confidence": 0.636,
+        "flags": []
+      },
+      {
+        "network": "Dawn Network",
+        "metric": "exactDupGroups",
+        "confidence": 0.636,
+        "flags": []
+      },
+      {
+        "network": "Dawn Network",
+        "metric": "observed",
+        "confidence": 0.748,
+        "flags": []
+      },
+      {
+        "network": "Dawn Network",
+        "metric": "flaggedPct",
+        "confidence": 0.636,
+        "flags": []
+      },
+      {
+        "network": "Grass / Titan",
+        "metric": "exactDupGroups",
+        "confidence": 0.636,
+        "flags": []
+      },
+      {
+        "network": "Grass / Titan",
+        "metric": "observed",
+        "confidence": 0.636,
+        "flags": []
+      },
+      {
+        "network": "Grass / Titan",
+        "metric": "flaggedPct",
+        "confidence": 0.636,
+        "flags": []
       }
     ]
   }

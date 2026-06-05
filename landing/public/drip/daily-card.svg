@@ -2,99 +2,115 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#0c0c10"/>
-      <stop offset="100%" stop-color="#09090b"/>
+      <stop offset="0%" stop-color="#111113"/>
+      <stop offset="100%" stop-color="#0A0A0A"/>
     </linearGradient>
-    <linearGradient id="accentBar" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#e11d48"/>
-      <stop offset="100%" stop-color="#881337"/>
+    <linearGradient id="topline" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#007BFF"/>
+      <stop offset="60%" stop-color="#FF1430"/>
+      <stop offset="100%" stop-color="#3A9BFF"/>
     </linearGradient>
   </defs>
   <rect width="1200" height="675" fill="url(#bg)"/>
-  <rect x="0" y="0" width="1200" height="6" fill="url(#accentBar)"/>
-
-  <text x="56" y="58" fill="#e11d48" font-family="system-ui,sans-serif" font-size="14" font-weight="700" letter-spacing="3">GETKINETIK</text>
-  <text x="56" y="92" fill="#fafafa" font-family="system-ui,sans-serif" font-size="32" font-weight="700">DePIN Signal Index</text>
-  <text x="56" y="124" fill="#a1a1aa" font-family="system-ui,sans-serif" font-size="16">Fri, Jun 5, 2026</text>
-  <text x="1144" y="92" fill="#fafafa" font-family="system-ui,sans-serif" font-size="22" font-weight="600" text-anchor="end">16 signals</text>
-  <text x="1144" y="120" fill="#a1a1aa" font-family="system-ui,sans-serif" font-size="14" text-anchor="end">6 networks · public reads</text>
-
-  <rect x="56" y="140" width="1088" height="44" rx="10" fill="#18181b" stroke="#27272a"/>
-  <text x="72" y="168" fill="#fafafa" font-family="system-ui,sans-serif" font-size="15">Cross-network infrastructure coverage stress observed across multiple networks</text>
-
-  <text x="56" y="188" fill="#a1a1aa" font-family="system-ui,sans-serif" font-size="12" font-weight="600" letter-spacing="1">NETWORK SIGNALS</text>
+  <rect x="0" y="0" width="1200" height="4" fill="url(#topline)"/>
   
-      <text x="56" y="222" fill="#fafafa" font-family="system-ui,sans-serif" font-size="18" font-weight="600">Geodnet</text>
-      <rect x="186" y="206" width="958" height="34" rx="8" fill="#18181b" stroke="#27272a"/>
-      <rect x="190" y="210" width="407" height="26" rx="6" fill="#fb923c" opacity="0.85"/>
-      <text x="200" y="228" fill="#09090b" font-family="system-ui,sans-serif" font-size="13" font-weight="600">11</text>
-      <text x="336" y="228" fill="#a1a1aa" font-family="system-ui,sans-serif" font-size="12">11 duplicate coordinate clusters (+3)</text>
-      <text x="1136" y="228" fill="#34d399" font-family="system-ui,sans-serif" font-size="15" font-weight="700" text-anchor="end">+3</text>
-    
-      <text x="56" y="274" fill="#fafafa" font-family="system-ui,sans-serif" font-size="18" font-weight="600">WeatherXM</text>
-      <rect x="186" y="258" width="958" height="34" rx="8" fill="#18181b" stroke="#27272a"/>
-      <rect x="190" y="262" width="407" height="26" rx="6" fill="#f472b6" opacity="0.85"/>
-      <text x="200" y="280" fill="#09090b" font-family="system-ui,sans-serif" font-size="13" font-weight="600">288</text>
-      <text x="336" y="280" fill="#a1a1aa" font-family="system-ui,sans-serif" font-size="12">288 capacity exceedances (−1)</text>
-      <text x="1136" y="280" fill="#f87171" font-family="system-ui,sans-serif" font-size="15" font-weight="700" text-anchor="end">−1</text>
-    
-      <text x="56" y="326" fill="#fafafa" font-family="system-ui,sans-serif" font-size="18" font-weight="600">Hivemapper</text>
-      <rect x="186" y="310" width="958" height="34" rx="8" fill="#18181b" stroke="#27272a"/>
-      <rect x="190" y="314" width="407" height="26" rx="6" fill="#a78bfa" opacity="0.85"/>
-      <text x="200" y="332" fill="#09090b" font-family="system-ui,sans-serif" font-size="13" font-weight="600">49.1%</text>
-      <text x="336" y="332" fill="#a1a1aa" font-family="system-ui,sans-serif" font-size="12">49.1% top-holder concentration (−0 pp)</text>
-      <text x="1136" y="332" fill="#f87171" font-family="system-ui,sans-serif" font-size="15" font-weight="700" text-anchor="end">−0.0pp</text>
-    
-      <text x="56" y="378" fill="#fafafa" font-family="system-ui,sans-serif" font-size="18" font-weight="600">Nodle</text>
-      <rect x="186" y="362" width="958" height="34" rx="8" fill="#18181b" stroke="#27272a"/>
-      <rect x="190" y="366" width="251" height="26" rx="6" fill="#fb923c" opacity="0.85"/>
-      <text x="200" y="384" fill="#09090b" font-family="system-ui,sans-serif" font-size="13" font-weight="600">15</text>
-      <text x="336" y="384" fill="#a1a1aa" font-family="system-ui,sans-serif" font-size="12">15 duplicate coordinate clusters (unchan</text>
-      <text x="1136" y="384" fill="#71717a" font-family="system-ui,sans-serif" font-size="15" font-weight="700" text-anchor="end">—</text>
-    
-      <text x="56" y="430" fill="#fafafa" font-family="system-ui,sans-serif" font-size="18" font-weight="600">Dawn</text>
-      <rect x="186" y="414" width="958" height="34" rx="8" fill="#18181b" stroke="#27272a"/>
-      <rect x="190" y="418" width="251" height="26" rx="6" fill="#fb923c" opacity="0.85"/>
-      <text x="200" y="436" fill="#09090b" font-family="system-ui,sans-serif" font-size="13" font-weight="600">15</text>
-      <text x="336" y="436" fill="#a1a1aa" font-family="system-ui,sans-serif" font-size="12">15 duplicate coordinate clusters (unchan</text>
-      <text x="1136" y="436" fill="#71717a" font-family="system-ui,sans-serif" font-size="15" font-weight="700" text-anchor="end">—</text>
-    
-      <text x="56" y="482" fill="#fafafa" font-family="system-ui,sans-serif" font-size="18" font-weight="600">Grass / Titan</text>
-      <rect x="186" y="466" width="958" height="34" rx="8" fill="#18181b" stroke="#27272a"/>
-      <rect x="190" y="470" width="251" height="26" rx="6" fill="#fb923c" opacity="0.85"/>
-      <text x="200" y="488" fill="#09090b" font-family="system-ui,sans-serif" font-size="13" font-weight="600">0</text>
-      <text x="336" y="488" fill="#a1a1aa" font-family="system-ui,sans-serif" font-size="12">0 duplicate coordinate clusters (unchang</text>
-      <text x="1136" y="488" fill="#71717a" font-family="system-ui,sans-serif" font-size="15" font-weight="700" text-anchor="end">—</text>
-    
+  <text x="56" y="54" fill="#3A9BFF" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="13" font-weight="700" letter-spacing="2">GETKINETIK</text>
+  <text x="56" y="90" fill="#E6E8EC" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="42" font-weight="700">Daily Signal Brief</text>
+  <text x="56" y="114" fill="#9AA0A8" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="14">What changed across DePIN networks today</text>
+  <text x="56" y="136" fill="#9AA0A8" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="15">Fri, Jun 5, 2026</text>
+  <text x="1144" y="88" fill="#E6E8EC" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="38" font-weight="700" text-anchor="end">14</text>
+  <text x="1144" y="118" fill="#9AA0A8" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="13" text-anchor="end">6 networks tracked</text>
 
-  <text x="56" y="502" fill="#a1a1aa" font-family="system-ui,sans-serif" font-size="12" font-weight="600" letter-spacing="1">CATEGORIES</text>
+  <path d="M 64 148 L 1136 148 L 1144 156 L 1144 232 L 1136 240 L 64 240 L 56 232 L 56 156 Z" fill="#111113" stroke="rgba(230, 232, 236, 0.10)"/>
+  <text x="72" y="168" fill="#9AA0A8" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" font-weight="700">Today's read</text>
+  <polygon points="72,172 80,178 72,184 64,178" fill="#3A9BFF"/><text x="94" y="183" fill="#E6E8EC" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="14">Geodnet duplicate-coordinate groups rose from 8 to 11.</text><polygon points="72,200 80,206 72,212 64,206" fill="#E8FF3B"/><text x="94" y="211" fill="#E6E8EC" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="14">WeatherXM over-capacity cells declined from 289 to 288.</text>
+
+  <path d="M 68 264 L 800 264 L 812 276 L 812 462 L 800 474 L 68 474 L 56 462 L 56 276 Z" fill="#111113" stroke="rgba(230, 232, 236, 0.10)"/>
+  <text x="72" y="288" fill="#9AA0A8" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" font-weight="700">Today's movers</text>
   
-      <rect x="56" y="518" width="136" height="44" rx="10" fill="#18181b" stroke="#fb923c" stroke-width="1.5"/>
-      <circle cx="74" cy="540" r="6" fill="#fb923c"/>
-      <text x="88" y="536" fill="#a1a1aa" font-family="system-ui,sans-serif" font-size="11">IDENTITY</text>
-      <text x="88" y="554" fill="#fafafa" font-family="system-ui,sans-serif" font-size="16" font-weight="700">8</text>
+      <path d="M 84 304 L 300 304 L 310 314 L 310 432 L 300 442 L 84 442 L 74 432 L 74 314 Z" fill="#111113" stroke="rgba(230, 232, 236, 0.10)"/>
+      <path d="M 75 305 L 290 305 L 299 314 L 84 314 Z" fill="#FF1430"/>
+      
+    <text x="88" y="330" fill="#E6E8EC" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="17" font-weight="700">Geodnet</text>
+    <text x="296" y="330" fill="#FF1430" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="10" font-weight="600" text-anchor="end">Registry</text>
     
-      <rect x="204" y="518" width="136" height="44" rx="10" fill="#18181b" stroke="#22d3ee" stroke-width="1.5"/>
-      <circle cx="222" cy="540" r="6" fill="#22d3ee"/>
-      <text x="236" y="536" fill="#a1a1aa" font-family="system-ui,sans-serif" font-size="11">INFRASTRUCTU</text>
-      <text x="236" y="554" fill="#fafafa" font-family="system-ui,sans-serif" font-size="16" font-weight="700">5</text>
+    <text x="86" y="352" fill="#9AA0A8" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="10">Duplicate groups vs fleet</text>
+    <rect x="86" y="360" width="212" height="10" fill="#0A0A0A" stroke="rgba(230, 232, 236, 0.10)"/>
+    <rect x="86" y="360" width="212" height="10" fill="#FF1430"/>
+    <text x="86" y="386" fill="#E6E8EC" font-family="system-ui,sans-serif" font-size="18" font-weight="700">11</text>
+    <text x="298" y="386" fill="#E8FF3B" font-family="system-ui,sans-serif" font-size="10" font-weight="700" text-anchor="end">+3</text>
+    <text x="86" y="402" fill="#9AA0A8" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="10">Fleet —</text>
+    <text x="298" y="402" fill="#6A6C72" font-family="system-ui,sans-serif" font-size="10" text-anchor="end"></text>
     
-      <rect x="352" y="518" width="136" height="44" rx="10" fill="#18181b" stroke="#f472b6" stroke-width="1.5"/>
-      <circle cx="370" cy="540" r="6" fill="#f472b6"/>
-      <text x="384" y="536" fill="#a1a1aa" font-family="system-ui,sans-serif" font-size="11">CAPACITY</text>
-      <text x="384" y="554" fill="#fafafa" font-family="system-ui,sans-serif" font-size="16" font-weight="700">2</text>
+      <path d="M 336 304 L 552 304 L 562 314 L 562 432 L 552 442 L 336 442 L 326 432 L 326 314 Z" fill="#111113" stroke="rgba(230, 232, 236, 0.10)"/>
+      <path d="M 327 305 L 542 305 L 551 314 L 336 314 Z" fill="#E8FF3B"/>
+      
+    <text x="340" y="330" fill="#E6E8EC" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="17" font-weight="700">WeatherXM</text>
+    <text x="548" y="330" fill="#E8FF3B" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="10" font-weight="600" text-anchor="end">Capacity</text>
     
-      <rect x="500" y="518" width="136" height="44" rx="10" fill="#18181b" stroke="#a78bfa" stroke-width="1.5"/>
-      <circle cx="518" cy="540" r="6" fill="#a78bfa"/>
-      <text x="532" y="536" fill="#a1a1aa" font-family="system-ui,sans-serif" font-size="11">ECONOMICS</text>
-      <text x="532" y="554" fill="#fafafa" font-family="system-ui,sans-serif" font-size="16" font-weight="700">1</text>
+    <rect x="338" y="358" width="14" height="14" fill="#E8FF3B" stroke="rgba(230, 232, 236, 0.10)"/><rect x="354" y="358" width="14" height="14" fill="#E8FF3B" stroke="rgba(230, 232, 236, 0.10)"/><rect x="370" y="358" width="14" height="14" fill="#E8FF3B" stroke="rgba(230, 232, 236, 0.10)"/><rect x="386" y="358" width="14" height="14" fill="#E8FF3B" stroke="rgba(230, 232, 236, 0.10)"/><rect x="402" y="358" width="14" height="14" fill="#1A1A1D" stroke="rgba(230, 232, 236, 0.10)"/><rect x="418" y="358" width="14" height="14" fill="#1A1A1D" stroke="rgba(230, 232, 236, 0.10)"/><rect x="434" y="358" width="14" height="14" fill="#1A1A1D" stroke="rgba(230, 232, 236, 0.10)"/><rect x="450" y="358" width="14" height="14" fill="#1A1A1D" stroke="rgba(230, 232, 236, 0.10)"/><rect x="466" y="358" width="14" height="14" fill="#1A1A1D" stroke="rgba(230, 232, 236, 0.10)"/><rect x="482" y="358" width="14" height="14" fill="#1A1A1D" stroke="rgba(230, 232, 236, 0.10)"/><rect x="338" y="374" width="14" height="14" fill="#1A1A1D" stroke="rgba(230, 232, 236, 0.10)"/><rect x="354" y="374" width="14" height="14" fill="#1A1A1D" stroke="rgba(230, 232, 236, 0.10)"/><rect x="370" y="374" width="14" height="14" fill="#1A1A1D" stroke="rgba(230, 232, 236, 0.10)"/><rect x="386" y="374" width="14" height="14" fill="#1A1A1D" stroke="rgba(230, 232, 236, 0.10)"/><rect x="402" y="374" width="14" height="14" fill="#1A1A1D" stroke="rgba(230, 232, 236, 0.10)"/><rect x="418" y="374" width="14" height="14" fill="#1A1A1D" stroke="rgba(230, 232, 236, 0.10)"/><rect x="434" y="374" width="14" height="14" fill="#1A1A1D" stroke="rgba(230, 232, 236, 0.10)"/><rect x="450" y="374" width="14" height="14" fill="#1A1A1D" stroke="rgba(230, 232, 236, 0.10)"/><rect x="466" y="374" width="14" height="14" fill="#1A1A1D" stroke="rgba(230, 232, 236, 0.10)"/><rect x="482" y="374" width="14" height="14" fill="#1A1A1D" stroke="rgba(230, 232, 236, 0.10)"/><rect x="338" y="390" width="14" height="14" fill="#1A1A1D" stroke="rgba(230, 232, 236, 0.10)"/><rect x="354" y="390" width="14" height="14" fill="#1A1A1D" stroke="rgba(230, 232, 236, 0.10)"/><rect x="370" y="390" width="14" height="14" fill="#1A1A1D" stroke="rgba(230, 232, 236, 0.10)"/><rect x="386" y="390" width="14" height="14" fill="#1A1A1D" stroke="rgba(230, 232, 236, 0.10)"/><rect x="402" y="390" width="14" height="14" fill="#1A1A1D" stroke="rgba(230, 232, 236, 0.10)"/><rect x="418" y="390" width="14" height="14" fill="#1A1A1D" stroke="rgba(230, 232, 236, 0.10)"/><rect x="434" y="390" width="14" height="14" fill="#1A1A1D" stroke="rgba(230, 232, 236, 0.10)"/><rect x="450" y="390" width="14" height="14" fill="#1A1A1D" stroke="rgba(230, 232, 236, 0.10)"/><rect x="466" y="390" width="14" height="14" fill="#1A1A1D" stroke="rgba(230, 232, 236, 0.10)"/><rect x="482" y="390" width="14" height="14" fill="#1A1A1D" stroke="rgba(230, 232, 236, 0.10)"/><rect x="338" y="406" width="14" height="14" fill="#1A1A1D" stroke="rgba(230, 232, 236, 0.10)"/><rect x="354" y="406" width="14" height="14" fill="#1A1A1D" stroke="rgba(230, 232, 236, 0.10)"/><rect x="370" y="406" width="14" height="14" fill="#1A1A1D" stroke="rgba(230, 232, 236, 0.10)"/><rect x="386" y="406" width="14" height="14" fill="#1A1A1D" stroke="rgba(230, 232, 236, 0.10)"/><rect x="402" y="406" width="14" height="14" fill="#1A1A1D" stroke="rgba(230, 232, 236, 0.10)"/><rect x="418" y="406" width="14" height="14" fill="#1A1A1D" stroke="rgba(230, 232, 236, 0.10)"/><rect x="434" y="406" width="14" height="14" fill="#1A1A1D" stroke="rgba(230, 232, 236, 0.10)"/><rect x="450" y="406" width="14" height="14" fill="#1A1A1D" stroke="rgba(230, 232, 236, 0.10)"/><rect x="466" y="406" width="14" height="14" fill="#1A1A1D" stroke="rgba(230, 232, 236, 0.10)"/><rect x="482" y="406" width="14" height="14" fill="#1A1A1D" stroke="rgba(230, 232, 236, 0.10)"/>
+    <text x="338" y="424" fill="#E6E8EC" font-family="system-ui,sans-serif" font-size="16" font-weight="700">288 hot cells</text>
+    <text x="550" y="424" fill="#FF1430" font-family="system-ui,sans-serif" font-size="10" font-weight="700" text-anchor="end">−1</text>
+    <text x="338" y="438" fill="#9AA0A8" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="10">3.4% of map over capacity</text>
     
+      <path d="M 588 304 L 804 304 L 814 314 L 814 432 L 804 442 L 588 442 L 578 432 L 578 314 Z" fill="#111113" stroke="rgba(230, 232, 236, 0.10)"/>
+      <path d="M 579 305 L 794 305 L 803 314 L 588 314 Z" fill="#7FA8FF"/>
+      
+    <text x="592" y="330" fill="#E6E8EC" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="17" font-weight="700">Hivemapper</text>
+    <text x="800" y="330" fill="#7FA8FF" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="10" font-weight="600" text-anchor="end">Supply</text>
+    
+    <path d="M 662 392 A 34 34 0 0 1 730 392" fill="none" stroke="#1A1A1D" stroke-width="7"/>
+    <path d="M 662 392 A 34 34 0 0 1 695.0733703635913 358.0126294409684" fill="none" stroke="#7FA8FF" stroke-width="7"/>
+    <text x="696" y="384" fill="#E6E8EC" font-family="system-ui,sans-serif" font-size="20" font-weight="700" text-anchor="middle">49.1%</text>
+    <text x="696" y="402" fill="#9AA0A8" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="10" text-anchor="middle">Top 20 holder share</text>
+    <text x="696" y="418" fill="#FF1430" font-family="system-ui,sans-serif" font-size="10" font-weight="700" text-anchor="middle">−0.0 pp</text>
+    
+  <text x="434" y="464" fill="#6A6C72" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="11" text-anchor="middle">3 other networks unchanged today</text>
 
-  <rect x="56" y="578" width="1088" height="72" rx="12" fill="#18181b" stroke="#27272a"/>
-  <text x="72" y="608" fill="#a1a1aa" font-family="system-ui,sans-serif" font-size="12">Δ movement today</text>
-  <text x="72" y="634" fill="#34d399" font-family="system-ui,sans-serif" font-size="22" font-weight="700">↑ 2</text>
-  <text x="160" y="634" fill="#f87171" font-family="system-ui,sans-serif" font-size="22" font-weight="700">↓ 5</text>
-  <text x="248" y="634" fill="#71717a" font-family="system-ui,sans-serif" font-size="22" font-weight="700">— 9</text>
-  <text x="380" y="634" fill="#a1a1aa" font-family="system-ui,sans-serif" font-size="14">Active: Dawn Network · Geodnet · Grass / Titan · Nodle</text>
-  <text x="1128" y="634" fill="#fafafa" font-family="system-ui,sans-serif" font-size="16" font-weight="600" text-anchor="end">getkinetik.app/site</text>
+  <path d="M 848 264 L 1132 264 L 1144 276 L 1144 474 L 1132 486 L 848 486 L 836 474 L 836 276 Z" fill="#111113" stroke="rgba(230, 232, 236, 0.10)"/>
+  <text x="852" y="288" fill="#9AA0A8" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" font-weight="700">Signal mix</text>
+  <rect x="854" y="324" width="272" height="26" fill="#0A0A0A" stroke="rgba(230, 232, 236, 0.10)"/>
+  <rect x="854" y="312" width="155" height="26" fill="#FF1430" stroke="#1A1A1D"/><rect x="1009" y="312" width="58" height="26" fill="#007BFF" /><rect x="1067" y="312" width="39" height="26" fill="#E8FF3B" /><rect x="1106" y="312" width="19" height="26" fill="#7FA8FF" />
+  
+      <rect x="854" y="350" width="10" height="10" fill="#FF1430"/>
+      <text x="872" y="360" fill="#9AA0A8" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12">Identity</text>
+      <text x="1128" y="360" fill="#E6E8EC" font-family="system-ui,sans-serif" font-size="12" font-weight="700" text-anchor="end">8</text>
+    
+      <rect x="854" y="376" width="10" height="10" fill="#007BFF"/>
+      <text x="872" y="386" fill="#9AA0A8" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12">Infrastructure</text>
+      <text x="1128" y="386" fill="#E6E8EC" font-family="system-ui,sans-serif" font-size="12" font-weight="700" text-anchor="end">3</text>
+    
+      <rect x="854" y="402" width="10" height="10" fill="#E8FF3B"/>
+      <text x="872" y="412" fill="#9AA0A8" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12">Capacity</text>
+      <text x="1128" y="412" fill="#E6E8EC" font-family="system-ui,sans-serif" font-size="12" font-weight="700" text-anchor="end">2</text>
+    
+      <rect x="854" y="428" width="10" height="10" fill="#7FA8FF"/>
+      <text x="872" y="438" fill="#9AA0A8" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12">Economics</text>
+      <text x="1128" y="438" fill="#E6E8EC" font-family="system-ui,sans-serif" font-size="12" font-weight="700" text-anchor="end">1</text>
+    
+  <text x="852" y="480" fill="#9AA0A8" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" font-weight="700">Movement today</text>
+  
+      <rect x="854" y="498" width="82" height="22" fill="#0A0A0A" stroke="rgba(230, 232, 236, 0.10)"/>
+      <rect x="857" y="512" width="76" height="8" fill="#E8FF3B"/>
+      <text x="895" y="534" fill="#6A6C72" font-family="system-ui,sans-serif" font-size="10" text-anchor="middle">up</text>
+      <text x="895" y="508" fill="#E8FF3B" font-family="system-ui,sans-serif" font-size="12" font-weight="700" text-anchor="middle">1</text>
+      <rect x="944" y="498" width="82" height="22" fill="#0A0A0A" stroke="rgba(230, 232, 236, 0.10)"/>
+      <rect x="947" y="512" width="76" height="8" fill="#FF1430"/>
+      <text x="985" y="534" fill="#6A6C72" font-family="system-ui,sans-serif" font-size="10" text-anchor="middle">down</text>
+      <text x="985" y="508" fill="#FF1430" font-family="system-ui,sans-serif" font-size="12" font-weight="700" text-anchor="middle">4</text>
+      <rect x="1034" y="498" width="82" height="22" fill="#0A0A0A" stroke="rgba(230, 232, 236, 0.10)"/>
+      <rect x="1037" y="510" width="76" height="10" fill="#6A6C72"/>
+      <text x="1075" y="534" fill="#6A6C72" font-family="system-ui,sans-serif" font-size="10" text-anchor="middle">flat</text>
+      <text x="1075" y="506" fill="#6A6C72" font-family="system-ui,sans-serif" font-size="12" font-weight="700" text-anchor="middle">9</text>
+
+  <path d="M 68 492 L 1132 492 L 1144 504 L 1144 588 L 1132 600 L 68 600 L 56 588 L 56 504 Z" fill="#111113" stroke="rgba(230, 232, 236, 0.10)"/>
+  <text x="72" y="528" fill="#E8FF3B" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="28" font-weight="700">↑ 1</text>
+  <text x="158" y="528" fill="#FF1430" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="28" font-weight="700">↓ 4</text>
+  <text x="244" y="528" fill="#9AA0A8" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="28" font-weight="700">— 9</text>
+  <text x="72" y="546" fill="#9AA0A8" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="11">metrics up · down · unchanged</text>
+  <text x="380" y="516" fill="#9AA0A8" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" font-weight="600">Why it matters</text>
+  <text x="380" y="532" fill="#E6E8EC" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12">Today's signals show modest movement in registry, capacity, and</text>
+  <text x="380" y="550" fill="#9AA0A8" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12">The observed changes are incremental rather than structural and remain</text><text x="380" y="564" fill="#9AA0A8" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12">reproducible from public data sources.</text>
+  <text x="380" y="580" fill="#9AA0A8" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="11">Observations span 6 networks — no single network dominates the index.</text>
+  <text x="1128" y="586" fill="#E6E8EC" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="18" font-weight="700" text-anchor="end">getkinetik.app/site</text>
 </svg>
