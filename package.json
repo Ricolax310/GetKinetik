@@ -39,6 +39,7 @@
     "drip:daily": "node drip-engine/run.ts daily",
     "drip:weekly": "node drip-engine/run.ts weekly",
     "drip:monthly": "node drip-engine/run.ts monthly",
+    "drip:intro": "node scripts/drip/post-intro.mjs",
     "drip:all": "node drip-engine/run.ts all",
     "command-center:morning": "node scripts/command-center/build.mjs",
     "command-center": "node scripts/serve-command-center.mjs",
