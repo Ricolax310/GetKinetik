@@ -7,7 +7,8 @@ import type { Pattern } from "./cross-network-aggregator.ts";
 import type { ScoredSignal } from "./signal-confidence.ts";
 import type { NarrativeLayers } from "./narrative-builder.ts";
 import { PATHS, REPO_ROOT, SITE_URL } from "./paths.ts";
-import { loadCadenceSignals } from "./signal-loader.ts";
+import { loadCadenceSignals, loadLatestSignals, loadRecentHistory } from "./signal-loader.ts";
+import { detectPatterns } from "./cross-network-aggregator.ts";
 import { formatApiBundle, formatPatternsOnly } from "./api-formatter.ts";
 import { buildXThread, buildXThreadTweets, buildXImageCaption } from "./x-thread.ts";
 import { buildDailyEditorial } from "../editorial-engine/daily.ts";
@@ -255,6 +256,16 @@ export async function executeDistribution(ctx: DistributionContext): Promise<Dis
     const weeklyCard = await writeCardArtifacts("weekly", weeklyCardSignals, ctx.patterns, `Week ${week}`, written);
     if (weeklyCard.error) publish.weekly = `Weekly card render skipped: ${weeklyCard.error}`;
 
+    const weeklyCaption = buildXImageCaption(weeklyCardSignals, ctx.patterns, `Week ${week}`);
+    write(path.join(PATHS.publicDrip, "weekly-x-caption.txt"), weeklyCaption);
+    if (weeklyCard.png) {
+      const xResult = await publishXThread("", {
+        caption: weeklyCaption,
+        imagePng: weeklyCard.png,
+      });
+      publish.x = xResult.message;
+    }
+
     const subPlan = plan.channels.find((c) => c.channel === "substack");
     if (subPlan?.livePublish) {
       const subResult = await publishSubstackDraft(weeklyEd.markdown, {
@@ -265,4 +276,38 @@ export async function executeDistribution(ctx: DistributionContext): Promise<Dis
   }
 
   return { plan, written, publish };
+}
+
+/** Monthly card + X image post (state report cadence). */
+export async function executeMonthly(): Promise<DistributionResult> {
+  const month = new Date().toISOString().slice(0, 7);
+  const written: string[] = [];
+  const publish: Record<string, string> = {};
+  const signals = loadCadenceSignals("monthly");
+  const cardSignals = signals.length ? signals : loadLatestSignals();
+  const history = loadRecentHistory(30);
+  const patterns = detectPatterns(cardSignals, history);
+
+  const monthlyCard = await writeCardArtifacts("monthly", cardSignals, patterns, month, written);
+  if (monthlyCard.error) publish.x = `Monthly card render skipped: ${monthlyCard.error}`;
+
+  const caption = buildXImageCaption(cardSignals, patterns, month);
+  write(path.join(PATHS.publicDrip, "monthly-x-caption.txt"), caption);
+
+  if (monthlyCard.png) {
+    const xResult = await publishXThread("", {
+      caption,
+      imagePng: monthlyCard.png,
+    });
+    publish.x = xResult.message;
+  }
+
+  return {
+    plan: {
+      cadence: "weekly",
+      channels: [{ channel: "x", enabled: true, outputs: ["landing/public/drip/monthly-card.png"], livePublish: true }],
+    },
+    written,
+    publish,
+  };
 }

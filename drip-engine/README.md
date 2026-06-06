@@ -24,10 +24,35 @@ signals/latest.json
 npm run signal:daily
 npm run drip:daily
 npm run drip:weekly
+npm run drip:monthly
 npm run drip:all
 ```
 
 Requires Node 22+.
+
+## Automation (@kinetiksignal on X)
+
+GitHub Actions posts **image + caption** automatically when X API secrets are set:
+
+| Workflow | Schedule | Posts to X |
+|----------|----------|------------|
+| `drip-daily.yml` | Every day ~9am PT | Daily card |
+| `drip-weekly.yml` | Sunday ~10am PT | Weekly case file card |
+| `drip-monthly.yml` | 1st of month ~10am PT | Monthly state card |
+
+No manual posting needed for the signal cards. Avoid re-triggering `drip-daily` on the same day (causes duplicates). Bureau news X auto-post stays off unless `BUREAU_AUTO_POST` is enabled.
+
+## Card cadences (design principle)
+
+Each cadence **answers a different question** — not just shows different data.
+
+| Cadence | Question | Identity |
+|---------|----------|----------|
+| Daily | What changed today? | Market close |
+| Weekly | What kept showing up? | Case file / intelligence briefing |
+| Monthly | What does the ecosystem look like? | State report (archive cover) |
+
+Cards live in `chart-card.ts`. Daily highlights movers; weekly observes persistent changes; monthly shows composition — none list every network on the card (header counts reflect the full observatory).
 
 ## Taxonomy v2 (locked)
 

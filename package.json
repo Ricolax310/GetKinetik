@@ -38,6 +38,7 @@
     "signal:replay": "node -e \"import('./scripts/signal-pipeline/tracer.mjs').then(async ({replayTrace,listTraces})=>{ const id=process.argv[2]; if(!id){console.log(JSON.stringify(listTraces(),null,2));process.exit(0);} const {runCompiler}=await import('./scripts/signal-pipeline/engine.mjs'); const r=await replayTrace(id,runCompiler); console.log(JSON.stringify(r,null,2)); }).catch(e=>{console.error(e.message);process.exit(1);})\" --",
     "drip:daily": "node drip-engine/run.ts daily",
     "drip:weekly": "node drip-engine/run.ts weekly",
+    "drip:monthly": "node drip-engine/run.ts monthly",
     "drip:all": "node drip-engine/run.ts all",
     "command-center:morning": "node scripts/command-center/build.mjs",
     "command-center": "node scripts/serve-command-center.mjs",

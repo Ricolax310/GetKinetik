@@ -1,16 +1,16 @@
-# DePIN Signal Distribution Engine — weekly drip (Substack + X thread + API).
-name: Drip weekly
+# DePIN Signal Distribution Engine — monthly drip (X state report card).
+name: Drip monthly
 
 on:
   schedule:
-    - cron: "0 18 * * SUN" # Sunday 10:00 America/Los_Angeles (PST, UTC-8); 09:00 during PDT
+    - cron: "0 18 1 * *" # 1st of month 10:00 America/Los_Angeles (PST, UTC-8)
   workflow_dispatch:
 
 permissions:
   contents: write
 
 concurrency:
-  group: drip-weekly
+  group: drip-monthly
   cancel-in-progress: false
 
 jobs:
@@ -21,26 +21,27 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: "22" # required for native TypeScript execution
+          node-version: "22"
+
+      - name: Install drip-engine deps (sharp for chart cards)
+        run: npm install --prefix drip-engine
 
       - name: Refresh signals (snapshot mode)
-        run: node scripts/signal-pipeline/pipeline.mjs weekly
+        run: node scripts/signal-pipeline/pipeline.mjs monthly
 
-      - name: Run weekly drip
+      - name: Run monthly drip
         env:
           X_API_BEARER: ${{ secrets.X_API_BEARER }}
           X_API_KEY: ${{ secrets.X_API_KEY }}
           X_API_SECRET: ${{ secrets.X_API_SECRET }}
           X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
           X_ACCESS_SECRET: ${{ secrets.X_ACCESS_SECRET }}
-          SUBSTACK_API_KEY: ${{ secrets.SUBSTACK_API_KEY }}
-          SUBSTACK_BLOG_ID: ${{ secrets.SUBSTACK_BLOG_ID }}
-        run: node drip-engine/run.ts weekly
+        run: node drip-engine/run.ts monthly
 
       - name: Commit drip outputs
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add signals landing/public/drip landing/api/drip || true
-          git diff --staged --quiet || git commit -m "chore(drip): weekly distribution [automated]"
+          git add signals/monthly landing/public/drip/monthly-card.* landing/public/drip/monthly-x-caption.txt docs/reports/monthly logs/monthly || true
+          git diff --staged --quiet || git commit -m "chore(drip): monthly distribution [automated]"
           git push || true
