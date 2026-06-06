@@ -80,4 +80,4 @@ See [docs/TAXONOMY_V2.md](../docs/TAXONOMY_V2.md).
 
 ## Env
 
-`X_API_*` (OAuth 1.0a), `SUBSTACK_API_KEY`, `SUBSTACK_BLOG_ID`, `DRIP_DRY_RUN=true` for local file-only runs.
+`X_API_*` (OAuth 1.0a), `SUBSTACK_API_KEY`, `SUBSTACK_BLOG_ID`, `DRIP_DRY_RUN=true` for local file-only runs. `DRIP_FORCE_X_POST=true` bypasses the per-cadence X post ledger (see `landing/public/drip/x-post-ledger.json`).

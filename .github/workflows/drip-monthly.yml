@@ -42,6 +42,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add signals/monthly landing/public/drip/monthly-card.* landing/public/drip/monthly-x-caption.txt docs/reports/monthly logs/monthly || true
+          git add signals/monthly landing/public/drip/monthly-card.* landing/public/drip/monthly-x-caption.txt landing/public/drip/x-post-ledger.json docs/reports/monthly logs/monthly || true
           git diff --staged --quiet || git commit -m "chore(drip): monthly distribution [automated]"
           git push || true

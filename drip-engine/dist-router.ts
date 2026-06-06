@@ -14,6 +14,7 @@ import { buildXThread, buildXThreadTweets, buildXImageCaption } from "./x-thread
 import { buildDailyEditorial } from "../editorial-engine/daily.ts";
 import { buildWeeklyEditorial } from "../editorial-engine/weekly.ts";
 import { publishXThread } from "./publishers/x-publisher.ts";
+import { xPostAlreadyDone, recordXPost, skipXPostMessage } from "./x-post-ledger.ts";
 import { renderDailyCardPng, buildDailyCardSvg } from "./chart-card.ts";
 import { publishSubstackDraft } from "./publishers/substack-publisher.ts";
 import { DAILY_CONFIDENCE_MIN, WEEKLY_CONFIDENCE_MIN, heldBackSignals } from "./signal-confidence.ts";
@@ -229,12 +230,17 @@ export async function executeDistribution(ctx: DistributionContext): Promise<Dis
 
     const xPlan = plan.channels.find((c) => c.channel === "x");
     if (xPlan?.livePublish) {
-      const xResult = await publishXThread(thread, {
-        tweets,
-        caption,
-        imagePng: cardPng,
-      });
-      publish.x = xResult.message;
+      if (xPostAlreadyDone("daily", ctx.date)) {
+        publish.x = skipXPostMessage("daily", ctx.date);
+      } else {
+        const xResult = await publishXThread(thread, {
+          tweets,
+          caption,
+          imagePng: cardPng,
+        });
+        publish.x = xResult.message;
+        if (xResult.ok) recordXPost("daily", ctx.date);
+      }
     }
   } else {
     writeJson(path.join(PATHS.apiDrip, "weekly.json"), apiBundle);
@@ -259,11 +265,17 @@ export async function executeDistribution(ctx: DistributionContext): Promise<Dis
     const weeklyCaption = buildXImageCaption(weeklyCardSignals, ctx.patterns, `Week ${week}`);
     write(path.join(PATHS.publicDrip, "weekly-x-caption.txt"), weeklyCaption);
     if (weeklyCard.png) {
-      const xResult = await publishXThread("", {
-        caption: weeklyCaption,
-        imagePng: weeklyCard.png,
-      });
-      publish.x = xResult.message;
+      const weekKey = `W${week}`;
+      if (xPostAlreadyDone("weekly", weekKey)) {
+        publish.x = skipXPostMessage("weekly", weekKey);
+      } else {
+        const xResult = await publishXThread("", {
+          caption: weeklyCaption,
+          imagePng: weeklyCard.png,
+        });
+        publish.x = xResult.message;
+        if (xResult.ok) recordXPost("weekly", weekKey);
+      }
     }
 
     const subPlan = plan.channels.find((c) => c.channel === "substack");
@@ -295,11 +307,16 @@ export async function executeMonthly(): Promise<DistributionResult> {
   write(path.join(PATHS.publicDrip, "monthly-x-caption.txt"), caption);
 
   if (monthlyCard.png) {
-    const xResult = await publishXThread("", {
-      caption,
-      imagePng: monthlyCard.png,
-    });
-    publish.x = xResult.message;
+    if (xPostAlreadyDone("monthly", month)) {
+      publish.x = skipXPostMessage("monthly", month);
+    } else {
+      const xResult = await publishXThread("", {
+        caption,
+        imagePng: monthlyCard.png,
+      });
+      publish.x = xResult.message;
+      if (xResult.ok) recordXPost("monthly", month);
+    }
   }
 
   return {
