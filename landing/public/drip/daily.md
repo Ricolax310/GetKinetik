@@ -1,6 +1,6 @@
-# DePIN Signal Brief — 2026-06-05
+# DePIN Signal Brief — 2026-06-06
 
-> 2026-06-05 · machine-driven signal publication · evidence first
+> 2026-06-06 · machine-driven signal publication · evidence first
 
 ## Today's Read
 
