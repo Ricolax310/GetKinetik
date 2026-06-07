@@ -1,21 +1,6 @@
 {
-  "generatedAt": "2026-06-07T17:32:03.106Z",
+  "generatedAt": "2026-06-07T18:36:03.649Z",
   "patterns": [
-    {
-      "scope": "systemic",
-      "classification": "convergence",
-      "headline": "Cross-network identity registry stress observed across multiple networks",
-      "pattern": "CROSS_NETWORK_IDENTITY",
-      "networks": [
-        "Dawn Network",
-        "Geodnet",
-        "Grass / Titan",
-        "Nodle"
-      ],
-      "category": "IDENTITY",
-      "description": "Cross-network identity registry stress observed across multiple networks (Dawn Network, Geodnet, Grass / Titan, Nodle).",
-      "patternType": "cross-network"
-    },
     {
       "scope": "systemic",
       "classification": "repetition",
@@ -31,6 +16,30 @@
     {
       "scope": "systemic",
       "classification": "repetition",
+      "headline": "WeatherXM: repeated overCapacityCells observation",
+      "pattern": "REPEATED_CAPACITY",
+      "networks": [
+        "WeatherXM"
+      ],
+      "category": "CAPACITY",
+      "description": "Observed WeatherXM overCapacityCells on 6 of 6 recorded days.",
+      "patternType": "cross-network"
+    },
+    {
+      "scope": "systemic",
+      "classification": "repetition",
+      "headline": "Hivemapper: repeated top20ShareOfSupply observation",
+      "pattern": "REPEATED_ECONOMICS",
+      "networks": [
+        "Hivemapper"
+      ],
+      "category": "ECONOMICS",
+      "description": "Observed Hivemapper top20ShareOfSupply on 6 of 6 recorded days.",
+      "patternType": "cross-network"
+    },
+    {
+      "scope": "systemic",
+      "classification": "repetition",
       "headline": "Nodle: repeated exactDupGroups observation",
       "pattern": "REPEATED_IDENTITY",
       "networks": [
@@ -38,6 +47,18 @@
       ],
       "category": "IDENTITY",
       "description": "Observed Nodle exactDupGroups on 5 of 6 recorded days.",
+      "patternType": "cross-network"
+    },
+    {
+      "scope": "systemic",
+      "classification": "repetition",
+      "headline": "Nodle: repeated observed observation",
+      "pattern": "REPEATED_INFRASTRUCTURE",
+      "networks": [
+        "Nodle"
+      ],
+      "category": "INFRASTRUCTURE",
+      "description": "Observed Nodle observed on 5 of 6 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -67,6 +88,18 @@
     {
       "scope": "systemic",
       "classification": "repetition",
+      "headline": "Dawn Network: repeated observed observation",
+      "pattern": "REPEATED_INFRASTRUCTURE",
+      "networks": [
+        "Dawn Network"
+      ],
+      "category": "INFRASTRUCTURE",
+      "description": "Observed Dawn Network observed on 5 of 6 recorded days.",
+      "patternType": "cross-network"
+    },
+    {
+      "scope": "systemic",
+      "classification": "repetition",
       "headline": "Dawn Network: repeated flaggedPct observation",
       "pattern": "REPEATED_IDENTITY",
       "networks": [
@@ -91,70 +124,6 @@
     {
       "scope": "systemic",
       "classification": "repetition",
-      "headline": "Grass / Titan: repeated flaggedPct observation",
-      "pattern": "REPEATED_IDENTITY",
-      "networks": [
-        "Grass / Titan"
-      ],
-      "category": "IDENTITY",
-      "description": "Observed Grass / Titan flaggedPct on 5 of 6 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Geodnet: repeated flaggedPct observation",
-      "pattern": "REPEATED_IDENTITY",
-      "networks": [
-        "Geodnet"
-      ],
-      "category": "IDENTITY",
-      "description": "Observed Geodnet flaggedPct on 4 of 6 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "convergence",
-      "headline": "Cross-network infrastructure coverage stress observed across multiple networks",
-      "pattern": "CROSS_NETWORK_INFRASTRUCTURE",
-      "networks": [
-        "Dawn Network",
-        "Geodnet",
-        "Grass / Titan",
-        "Nodle",
-        "WeatherXM"
-      ],
-      "category": "INFRASTRUCTURE",
-      "description": "Cross-network infrastructure coverage stress observed across multiple networks (Dawn Network, Geodnet, Grass / Titan, Nodle, WeatherXM).",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Nodle: repeated observed observation",
-      "pattern": "REPEATED_INFRASTRUCTURE",
-      "networks": [
-        "Nodle"
-      ],
-      "category": "INFRASTRUCTURE",
-      "description": "Observed Nodle observed on 5 of 6 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Dawn Network: repeated observed observation",
-      "pattern": "REPEATED_INFRASTRUCTURE",
-      "networks": [
-        "Dawn Network"
-      ],
-      "category": "INFRASTRUCTURE",
-      "description": "Observed Dawn Network observed on 5 of 6 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
       "headline": "Grass / Titan: repeated observed observation",
       "pattern": "REPEATED_INFRASTRUCTURE",
       "networks": [
@@ -162,6 +131,18 @@
       ],
       "category": "INFRASTRUCTURE",
       "description": "Observed Grass / Titan observed on 5 of 6 recorded days.",
+      "patternType": "cross-network"
+    },
+    {
+      "scope": "systemic",
+      "classification": "repetition",
+      "headline": "Grass / Titan: repeated flaggedPct observation",
+      "pattern": "REPEATED_IDENTITY",
+      "networks": [
+        "Grass / Titan"
+      ],
+      "category": "IDENTITY",
+      "description": "Observed Grass / Titan flaggedPct on 5 of 6 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -179,6 +160,18 @@
     {
       "scope": "systemic",
       "classification": "repetition",
+      "headline": "Geodnet: repeated flaggedPct observation",
+      "pattern": "REPEATED_IDENTITY",
+      "networks": [
+        "Geodnet"
+      ],
+      "category": "IDENTITY",
+      "description": "Observed Geodnet flaggedPct on 4 of 6 recorded days.",
+      "patternType": "cross-network"
+    },
+    {
+      "scope": "systemic",
+      "classification": "repetition",
       "headline": "WeatherXM: repeated observed observation",
       "pattern": "REPEATED_INFRASTRUCTURE",
       "networks": [
@@ -186,43 +179,6 @@
       ],
       "category": "INFRASTRUCTURE",
       "description": "Observed WeatherXM observed on 4 of 6 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "localized",
-      "classification": "divergence",
-      "headline": "Divergence: IDENTITY metrics split across networks",
-      "pattern": "DIVERGENCE_IDENTITY",
-      "networks": [
-        "Geodnet"
-      ],
-      "category": "IDENTITY",
-      "description": "Opposing metric drift — Geodnet rising while Geodnet declining.",
-      "patternType": "divergence"
-    },
-    {
-      "scope": "cross-network",
-      "classification": "divergence",
-      "headline": "Divergence: INFRASTRUCTURE metrics split across networks",
-      "pattern": "DIVERGENCE_INFRASTRUCTURE",
-      "networks": [
-        "Geodnet",
-        "WeatherXM"
-      ],
-      "category": "INFRASTRUCTURE",
-      "description": "Opposing metric drift — WeatherXM rising while Geodnet declining.",
-      "patternType": "divergence"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "WeatherXM: repeated overCapacityCells observation",
-      "pattern": "REPEATED_CAPACITY",
-      "networks": [
-        "WeatherXM"
-      ],
-      "category": "CAPACITY",
-      "description": "Observed WeatherXM overCapacityCells on 6 of 6 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -236,54 +192,6 @@
       "category": "CAPACITY",
       "description": "Observed WeatherXM overCapacityPct on 4 of 6 recorded days.",
       "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Hivemapper: repeated top20ShareOfSupply observation",
-      "pattern": "REPEATED_ECONOMICS",
-      "networks": [
-        "Hivemapper"
-      ],
-      "category": "ECONOMICS",
-      "description": "Observed Hivemapper top20ShareOfSupply on 6 of 6 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "localized",
-      "classification": "drift",
-      "headline": "WeatherXM: capacity pressure signal detected",
-      "pattern": "LOCAL_CAPACITY",
-      "networks": [
-        "WeatherXM"
-      ],
-      "category": "CAPACITY",
-      "description": "Observed capacity signal on WeatherXM (overCapacityCells).",
-      "patternType": "single-network"
-    },
-    {
-      "scope": "localized",
-      "classification": "drift",
-      "headline": "Hivemapper: economic distribution shape signal detected",
-      "pattern": "LOCAL_ECONOMICS",
-      "networks": [
-        "Hivemapper"
-      ],
-      "category": "ECONOMICS",
-      "description": "Observed economics signal on Hivemapper (top20ShareOfSupply).",
-      "patternType": "single-network"
-    },
-    {
-      "scope": "localized",
-      "classification": "concentration",
-      "headline": "Economic concentration shape on public ledgers",
-      "pattern": "ECONOMICS_CONCENTRATION",
-      "networks": [
-        "Hivemapper"
-      ],
-      "category": "ECONOMICS",
-      "description": "Observed holder/supply concentration metrics from public on-chain reads.",
-      "patternType": "single-network"
     }
   ]
 }
