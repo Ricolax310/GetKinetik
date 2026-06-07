@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-06",
+  "updatedAt": "2026-06-07",
   "networks": [
     {
       "id": "geodnet",
@@ -19,11 +19,11 @@
       },
       "topFinding": "**11 exact (lat,lng) duplicate groups** on 19,616 public stations — each row in §1 is one coordinate pair your registry team can grep today.",
       "anomalyType": "duplication_cluster",
-      "assetClass": "spatial_distribution",
-      "verificationEligible": true,
-      "route": "verify-device",
-      "reason": null,
-      "verificationCall": "Sample station IDs that share an exact coordinate pair in §1 and run POST /api/verify-device on each operator's Proof of Origin to confirm whether they resolve to distinct, real device identities.",
+      "assetClass": "none",
+      "verificationEligible": false,
+      "route": "monitor",
+      "reason": "No taxonomy rule found for anomalyType 'duplication_cluster', defaulting to monitor.",
+      "verificationCall": null,
       "clarificationRequest": null
     },
     {
@@ -46,11 +46,11 @@
       },
       "topFinding": "**288 cells** exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.",
       "anomalyType": "capacity_violation",
-      "assetClass": "device_identity",
-      "verificationEligible": true,
-      "route": "verify-device",
-      "reason": null,
-      "verificationCall": "For operators in the over-capacity H3 cells in §1, run POST /api/verify-device to attest active, signed device presence over time and compare against the public cell tally.",
+      "assetClass": "none",
+      "verificationEligible": false,
+      "route": "monitor",
+      "reason": "No taxonomy rule found for anomalyType 'capacity_violation', defaulting to monitor.",
+      "verificationCall": null,
       "clarificationRequest": null
     },
     {
@@ -69,10 +69,10 @@
       },
       "topFinding": "**49.13% of UI-reported HONEY** sits in the **top 20 visible SPL accounts** (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.",
       "anomalyType": "economic_concentration",
-      "assetClass": "economic_layer",
+      "assetClass": "none",
       "verificationEligible": false,
       "route": "monitor",
-      "reason": "On-chain holder/economic shape — NOT a device-level claim. verify-device cannot link holders to operators; monitor only.",
+      "reason": "No taxonomy rule found for anomalyType 'economic_concentration', defaulting to monitor.",
       "verificationCall": null,
       "clarificationRequest": null
     },
@@ -98,7 +98,7 @@
       },
       "topFinding": null,
       "anomalyType": "telemetry_discontinuity",
-      "assetClass": "telemetry_integrity",
+      "assetClass": "none",
       "verificationEligible": false,
       "route": "monitor",
       "reason": "No qualifying headline finding extracted from report yet.",
@@ -119,11 +119,11 @@
       },
       "topFinding": "Flagged Emulator Nodes: 25 (38.5% of pool)",
       "anomalyType": "identity_collision",
-      "assetClass": "device_identity",
-      "verificationEligible": true,
-      "route": "verify-device",
-      "reason": null,
-      "verificationCall": "Sample flagged node IDs showing BEACON_COLLISION_CLUSTER from §1 and run POST /api/verify-device to confirm whether co-located nodes resolve to distinct, real device identities.",
+      "assetClass": "none",
+      "verificationEligible": false,
+      "route": "monitor",
+      "reason": "No taxonomy rule found for anomalyType 'identity_collision', defaulting to monitor.",
+      "verificationCall": null,
       "clarificationRequest": null
     },
     {
@@ -140,11 +140,11 @@
       },
       "topFinding": "Flagged Anomalous Nodes: 25 (45.5% of pool)",
       "anomalyType": "identity_collision",
-      "assetClass": "device_identity",
-      "verificationEligible": true,
-      "route": "verify-device",
-      "reason": null,
-      "verificationCall": "Sample flagged app IDs showing HARDWARE_APPID_CLONE_TWIN from §1 and run POST /api/verify-device to confirm whether cloned app instances resolve to distinct, real device identities.",
+      "assetClass": "none",
+      "verificationEligible": false,
+      "route": "monitor",
+      "reason": "No taxonomy rule found for anomalyType 'identity_collision', defaulting to monitor.",
+      "verificationCall": null,
       "clarificationRequest": null
     },
     {
@@ -164,7 +164,7 @@
       "assetClass": "none",
       "verificationEligible": false,
       "route": "monitor",
-      "reason": "Scan scaffolding not yet producing a validated finding.",
+      "reason": "No taxonomy rule found for anomalyType 'scaffold', defaulting to monitor.",
       "verificationCall": null,
       "clarificationRequest": null
     }
