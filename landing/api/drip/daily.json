@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-06-07T17:32:03.107Z",
+  "generatedAt": "2026-06-08T18:01:38.568Z",
   "schema": "getkinetik.drip/v2",
-  "date": "2026-06-07",
+  "date": "2026-06-08",
   "minConfidence": 0.6,
   "daily": [
     "Dawn Network: 15 duplicate coordinate clusters (unchanged)",
@@ -23,25 +23,25 @@
   ],
   "weekly": [
     "Cross-network identity registry stress observed across multiple networks. Cross-network identity registry stress observed across multiple networks (Dawn Network, Geodnet, Grass / Titan, Nodle).",
-    "Geodnet: repeated exactDupGroups observation. Observed Geodnet exactDupGroups on 6 of 6 recorded days.",
-    "Nodle: repeated exactDupGroups observation. Observed Nodle exactDupGroups on 5 of 6 recorded days.",
-    "Nodle: repeated flaggedPct observation. Observed Nodle flaggedPct on 5 of 6 recorded days.",
-    "Dawn Network: repeated exactDupGroups observation. Observed Dawn Network exactDupGroups on 5 of 6 recorded days.",
-    "Dawn Network: repeated flaggedPct observation. Observed Dawn Network flaggedPct on 5 of 6 recorded days.",
-    "Grass / Titan: repeated exactDupGroups observation. Observed Grass / Titan exactDupGroups on 5 of 6 recorded days.",
-    "Grass / Titan: repeated flaggedPct observation. Observed Grass / Titan flaggedPct on 5 of 6 recorded days.",
-    "Geodnet: repeated flaggedPct observation. Observed Geodnet flaggedPct on 4 of 6 recorded days.",
+    "Geodnet: repeated exactDupGroups observation. Observed Geodnet exactDupGroups on 7 of 7 recorded days.",
+    "Nodle: repeated exactDupGroups observation. Observed Nodle exactDupGroups on 6 of 7 recorded days.",
+    "Nodle: repeated flaggedPct observation. Observed Nodle flaggedPct on 6 of 7 recorded days.",
+    "Dawn Network: repeated exactDupGroups observation. Observed Dawn Network exactDupGroups on 6 of 7 recorded days.",
+    "Dawn Network: repeated flaggedPct observation. Observed Dawn Network flaggedPct on 6 of 7 recorded days.",
+    "Grass / Titan: repeated exactDupGroups observation. Observed Grass / Titan exactDupGroups on 6 of 7 recorded days.",
+    "Grass / Titan: repeated flaggedPct observation. Observed Grass / Titan flaggedPct on 6 of 7 recorded days.",
+    "Geodnet: repeated flaggedPct observation. Observed Geodnet flaggedPct on 5 of 7 recorded days.",
     "Cross-network infrastructure coverage stress observed across multiple networks. Cross-network infrastructure coverage stress observed across multiple networks (Dawn Network, Geodnet, Grass / Titan, Nodle, WeatherXM).",
-    "Nodle: repeated observed observation. Observed Nodle observed on 5 of 6 recorded days.",
-    "Dawn Network: repeated observed observation. Observed Dawn Network observed on 5 of 6 recorded days.",
-    "Grass / Titan: repeated observed observation. Observed Grass / Titan observed on 5 of 6 recorded days.",
-    "Geodnet: repeated observed observation. Observed Geodnet observed on 4 of 6 recorded days.",
-    "WeatherXM: repeated observed observation. Observed WeatherXM observed on 4 of 6 recorded days.",
+    "Nodle: repeated observed observation. Observed Nodle observed on 6 of 7 recorded days.",
+    "Dawn Network: repeated observed observation. Observed Dawn Network observed on 6 of 7 recorded days.",
+    "Grass / Titan: repeated observed observation. Observed Grass / Titan observed on 6 of 7 recorded days.",
+    "Geodnet: repeated observed observation. Observed Geodnet observed on 5 of 7 recorded days.",
+    "WeatherXM: repeated observed observation. Observed WeatherXM observed on 5 of 7 recorded days.",
     "Divergence: IDENTITY metrics split across networks. Opposing metric drift — Geodnet rising while Geodnet declining.",
     "Divergence: INFRASTRUCTURE metrics split across networks. Opposing metric drift — WeatherXM rising while Geodnet declining.",
-    "WeatherXM: repeated overCapacityCells observation. Observed WeatherXM overCapacityCells on 6 of 6 recorded days.",
-    "WeatherXM: repeated overCapacityPct observation. Observed WeatherXM overCapacityPct on 4 of 6 recorded days.",
-    "Hivemapper: repeated top20ShareOfSupply observation. Observed Hivemapper top20ShareOfSupply on 6 of 6 recorded days.",
+    "WeatherXM: repeated overCapacityCells observation. Observed WeatherXM overCapacityCells on 7 of 7 recorded days.",
+    "WeatherXM: repeated overCapacityPct observation. Observed WeatherXM overCapacityPct on 5 of 7 recorded days.",
+    "Hivemapper: repeated top20ShareOfSupply observation. Observed Hivemapper top20ShareOfSupply on 7 of 7 recorded days.",
     "WeatherXM: capacity pressure signal detected. Observed capacity signal on WeatherXM (overCapacityCells).",
     "Hivemapper: economic distribution shape signal detected. Observed economics signal on Hivemapper (top20ShareOfSupply).",
     "Economic concentration shape on public ledgers. Observed holder/supply concentration metrics from public on-chain reads."
@@ -71,7 +71,7 @@
         "Geodnet"
       ],
       "category": "IDENTITY",
-      "description": "Observed Geodnet exactDupGroups on 6 of 6 recorded days.",
+      "description": "Observed Geodnet exactDupGroups on 7 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -83,7 +83,7 @@
         "Nodle"
       ],
       "category": "IDENTITY",
-      "description": "Observed Nodle exactDupGroups on 5 of 6 recorded days.",
+      "description": "Observed Nodle exactDupGroups on 6 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -95,7 +95,7 @@
         "Nodle"
       ],
       "category": "IDENTITY",
-      "description": "Observed Nodle flaggedPct on 5 of 6 recorded days.",
+      "description": "Observed Nodle flaggedPct on 6 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -107,7 +107,7 @@
         "Dawn Network"
       ],
       "category": "IDENTITY",
-      "description": "Observed Dawn Network exactDupGroups on 5 of 6 recorded days.",
+      "description": "Observed Dawn Network exactDupGroups on 6 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -119,7 +119,7 @@
         "Dawn Network"
       ],
       "category": "IDENTITY",
-      "description": "Observed Dawn Network flaggedPct on 5 of 6 recorded days.",
+      "description": "Observed Dawn Network flaggedPct on 6 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -131,7 +131,7 @@
         "Grass / Titan"
       ],
       "category": "IDENTITY",
-      "description": "Observed Grass / Titan exactDupGroups on 5 of 6 recorded days.",
+      "description": "Observed Grass / Titan exactDupGroups on 6 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -143,7 +143,7 @@
         "Grass / Titan"
       ],
       "category": "IDENTITY",
-      "description": "Observed Grass / Titan flaggedPct on 5 of 6 recorded days.",
+      "description": "Observed Grass / Titan flaggedPct on 6 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -155,7 +155,7 @@
         "Geodnet"
       ],
       "category": "IDENTITY",
-      "description": "Observed Geodnet flaggedPct on 4 of 6 recorded days.",
+      "description": "Observed Geodnet flaggedPct on 5 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -183,7 +183,7 @@
         "Nodle"
       ],
       "category": "INFRASTRUCTURE",
-      "description": "Observed Nodle observed on 5 of 6 recorded days.",
+      "description": "Observed Nodle observed on 6 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -195,7 +195,7 @@
         "Dawn Network"
       ],
       "category": "INFRASTRUCTURE",
-      "description": "Observed Dawn Network observed on 5 of 6 recorded days.",
+      "description": "Observed Dawn Network observed on 6 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -207,7 +207,7 @@
         "Grass / Titan"
       ],
       "category": "INFRASTRUCTURE",
-      "description": "Observed Grass / Titan observed on 5 of 6 recorded days.",
+      "description": "Observed Grass / Titan observed on 6 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -219,7 +219,7 @@
         "Geodnet"
       ],
       "category": "INFRASTRUCTURE",
-      "description": "Observed Geodnet observed on 4 of 6 recorded days.",
+      "description": "Observed Geodnet observed on 5 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -231,7 +231,7 @@
         "WeatherXM"
       ],
       "category": "INFRASTRUCTURE",
-      "description": "Observed WeatherXM observed on 4 of 6 recorded days.",
+      "description": "Observed WeatherXM observed on 5 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -268,7 +268,7 @@
         "WeatherXM"
       ],
       "category": "CAPACITY",
-      "description": "Observed WeatherXM overCapacityCells on 6 of 6 recorded days.",
+      "description": "Observed WeatherXM overCapacityCells on 7 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -280,7 +280,7 @@
         "WeatherXM"
       ],
       "category": "CAPACITY",
-      "description": "Observed WeatherXM overCapacityPct on 4 of 6 recorded days.",
+      "description": "Observed WeatherXM overCapacityPct on 5 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -292,7 +292,7 @@
         "Hivemapper"
       ],
       "category": "ECONOMICS",
-      "description": "Observed Hivemapper top20ShareOfSupply on 6 of 6 recorded days.",
+      "description": "Observed Hivemapper top20ShareOfSupply on 7 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -492,13 +492,13 @@
       {
         "network": "Geodnet",
         "metric": "observed",
-        "confidence": 0.687,
+        "confidence": 0.723,
         "flags": []
       },
       {
         "network": "Geodnet",
         "metric": "flaggedPct",
-        "confidence": 0.748,
+        "confidence": 0.79,
         "flags": []
       },
       {
@@ -512,13 +512,13 @@
       {
         "network": "WeatherXM",
         "metric": "observed",
-        "confidence": 0.687,
+        "confidence": 0.723,
         "flags": []
       },
       {
         "network": "WeatherXM",
         "metric": "overCapacityPct",
-        "confidence": 0.748,
+        "confidence": 0.79,
         "flags": [
           "isolated"
         ]
