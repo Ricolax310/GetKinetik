@@ -18,7 +18,12 @@
 
 ## Since last snapshot
 
-_No prior snapshot on disk — deltas appear after the second weekly run._
+| Metric | This run | vs last run |
+|---|---:|---|
+| Hotspots with asserted coordinates | 1,008,019 | unchanged vs last run |
+| Single-coordinate stacks (≥10 hotspots) | 4,855 | unchanged vs last run |
+| Largest single-coordinate stack | 501 | unchanged vs last run |
+| Fleet share flagged (any heuristic) | 6.91% | unchanged vs last run |
 
 ## What to cross-check this week
 

@@ -15,14 +15,16 @@ import path from "node:path";
 import { collectPublicSignals } from "../command-center/signal-publication.mjs";
 import { PIPELINE_NETWORKS, SIGNAL_TYPE_BY_ANOMALY, REPO_ROOT } from "./config.mjs";
 
-// Canonical numeric anchor for headline-only findings, so every signal in the
+// Canonical numeric anchors for headline-only findings, so every signal in the
 // feed carries a value/delta the distribution engine can normalize.
-const CANONICAL_METRIC = {
-  duplication_cluster: "exactDupGroups",
-  identity_collision: "identityCollisions",
-  capacity_violation: "overCapacityCells",
-  telemetry_discontinuity: "kmFrozenDays",
-  economic_concentration: "top20ShareOfSupply",
+// Listed in priority order — first key present in the network's stats wins
+// (e.g. Helium has no exactDupGroups; its dup anchor is stackedSpots).
+const CANONICAL_METRICS = {
+  duplication_cluster: ["exactDupGroups", "stackedSpots"],
+  identity_collision: ["identityCollisions", "flaggedPct"],
+  capacity_violation: ["overCapacityCells"],
+  telemetry_discontinuity: ["kmFrozenDays"],
+  economic_concentration: ["top20ShareOfSupply"],
 };
 
 let _statsCache = null;
@@ -105,9 +107,10 @@ function valueDeltaFor(rawSignal, networkId) {
     const delta = value != null && previous != null ? value - previous : 0;
     return { metric: rawSignal.metricKey || rawSignal.anomalyType, value, previous, delta };
   }
-  // Headline: anchor to the canonical metric from the snapshot.
-  const key = CANONICAL_METRIC[rawSignal.anomalyType];
+  // Headline: anchor to the first canonical metric the snapshot actually has.
+  const candidates = CANONICAL_METRICS[rawSignal.anomalyType] || [];
   const s = statsByNetwork()[networkId];
+  const key = candidates.find((k) => typeof s?.stats?.[k] === "number") || candidates[0] || null;
   const value = key && typeof s?.stats?.[key] === "number" ? s.stats[key] : null;
   const previous = key && typeof s?.prevStats?.[key] === "number" ? s.prevStats[key] : null;
   const delta = value != null && previous != null ? value - previous : 0;

@@ -9,7 +9,7 @@ on:
       live:
         description: "Run live network scans (otherwise reuse snapshots)"
         type: boolean
-        default: false
+        default: true
 
 permissions:
   contents: write
@@ -28,14 +28,16 @@ jobs:
         with:
           node-version: "22" # required for signal-engine TypeScript imports
 
-      - name: Run daily_signal_pipeline
+      - name: Run daily_signal_pipeline (live scans — fresh deltas every day)
         env:
           SOLANA_RPC_URL: ${{ secrets.SOLANA_RPC_URL }}
         run: |
-          if [ "${{ github.event.inputs.live }}" = "true" ]; then
-            node scripts/signal-pipeline/pipeline.mjs daily --live
-          else
+          # Scheduled runs scan live so the brief reports real day-over-day movement.
+          # Failed scans fall back to the last snapshot (ingest is resilient by design).
+          if [ "${{ github.event.inputs.live }}" = "false" ]; then
             node scripts/signal-pipeline/pipeline.mjs daily
+          else
+            node scripts/signal-pipeline/pipeline.mjs daily --live
           fi
 
       - name: Refresh command center (before daily brief lands in drip)
@@ -45,6 +47,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add signals/daily docs/reports/daily landing/api/signals/latest.json landing/public/daily.html logs/daily scripts/data/bureau-audit-index.json landing/data/bureau-audit-index.json || true
+          # Snapshots must be committed so tomorrow's deltas compare against today, not the last manual scan.
+          git add signals/daily docs/reports/daily landing/api/signals/latest.json landing/public/daily.html logs/daily scripts/data/*-snapshot.json scripts/data/bureau-audit-index.json landing/data/bureau-audit-index.json || true
           git diff --staged --quiet || git commit -m "chore(signals): daily signal pipeline [automated]"
           git push || true

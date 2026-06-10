@@ -4,13 +4,13 @@
 
 - **As of:** 2026-06-10
 - **Public source:** `https://entities.nft.helium.io/v2/hotspots?subnetwork=mobile`
-- **Hotspots observed (with coordinates):** 54,682
+- **Hotspots observed (with coordinates):** 54,683
 - **Hotspots without asserted location:** 1,903
-- **Hotspots flagged (any heuristic):** 11,252 (20.58%)
+- **Hotspots flagged (any heuristic):** 11,250 (20.57%)
 
 ## Executive summary
 
-1. **529 single-coordinate stacks of ≥10 hotspots** on 54,682 located units — the largest stack holds **497 hotspots on one coordinate** (§1 lists keys your registry team can grep today).
+1. **529 single-coordinate stacks of ≥10 hotspots** on 54,683 located units — the largest stack holds **497 hotspots on one coordinate** (§1 lists keys your registry team can grep today).
 2. **1,903 hotspots exist on-chain with no asserted location** — on the registry but not on the map.
 3. Stacks are *expected* at small sizes (H3 snapping, dense buildings) — only review-worthy at this threshold; every number reproduces from the free public endpoint with no API key.
 
@@ -20,10 +20,10 @@
 
 | Metric | This run | vs last run |
 |---|---:|---|
-| Hotspots with asserted coordinates | 54,682 | unchanged vs last run |
+| Hotspots with asserted coordinates | 54,683 | +1 (+0.0%) |
 | Single-coordinate stacks (≥10 hotspots) | 529 | unchanged vs last run |
 | Largest single-coordinate stack | 497 | unchanged vs last run |
-| Fleet share flagged (any heuristic) | 20.58% | unchanged vs last run |
+| Fleet share flagged (any heuristic) | 20.57% | -0.00 pp (-0.0%) |
 
 ## What to cross-check this week
 

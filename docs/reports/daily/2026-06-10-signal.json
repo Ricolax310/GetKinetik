@@ -10,10 +10,10 @@
       "label": "headline finding",
       "current": null,
       "previous": null,
-      "deltaText": "11 exact (lat,lng) duplicate groups on 19,616 public stations — each row in §1 is one coordinate pair your registry team can grep today.",
+      "deltaText": "8 exact (lat,lng) duplicate groups on 19,604 public stations — each row in §1 is one coordinate pair your registry team can grep today.",
       "report": "docs/reports/geodnet-sybil-report.md",
       "publicSource": "https://rtk.geodnet.com/api/v2/coverage_stations",
-      "asOf": "2026-06-01"
+      "asOf": "2026-06-10"
     },
     {
       "network": "Geodnet",
@@ -23,12 +23,12 @@
       "kind": "metric",
       "label": "exact (lat,lng) duplicate groups",
       "metricKey": "exactDupGroups",
-      "current": 11,
-      "previous": 8,
-      "deltaText": "+3 (+37.5%)",
+      "current": 8,
+      "previous": 11,
+      "deltaText": "-3 (-27.3%)",
       "report": "docs/reports/geodnet-sybil-report.md",
       "publicSource": "https://rtk.geodnet.com/api/v2/coverage_stations",
-      "asOf": "2026-06-01"
+      "asOf": "2026-06-10"
     },
     {
       "network": "Geodnet",
@@ -38,12 +38,12 @@
       "kind": "metric",
       "label": "entities on public map",
       "metricKey": "observed",
-      "current": 19616,
-      "previous": 19676,
-      "deltaText": "-60 (-0.3%)",
+      "current": 19604,
+      "previous": 19616,
+      "deltaText": "-12 (-0.1%)",
       "report": "docs/reports/geodnet-sybil-report.md",
       "publicSource": "https://rtk.geodnet.com/api/v2/coverage_stations",
-      "asOf": "2026-06-01"
+      "asOf": "2026-06-10"
     },
     {
       "network": "Geodnet",
@@ -53,12 +53,12 @@
       "kind": "metric",
       "label": "fleet share flagged (any heuristic)",
       "metricKey": "flaggedPct",
-      "current": 0.09344412724306689,
-      "previous": 0.09346411872331775,
+      "current": 0.09339930626402775,
+      "previous": 0.09344412724306689,
       "deltaText": "-0.00 pp (-0.0%)",
       "report": "docs/reports/geodnet-sybil-report.md",
       "publicSource": "https://rtk.geodnet.com/api/v2/coverage_stations",
-      "asOf": "2026-06-01"
+      "asOf": "2026-06-10"
     },
     {
       "network": "WeatherXM",
@@ -69,10 +69,10 @@
       "label": "headline finding",
       "current": null,
       "previous": null,
-      "deltaText": "288 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.",
+      "deltaText": "286 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.",
       "report": "docs/reports/weatherxm-sybil-report.md",
       "publicSource": "WeatherXM public cells API",
-      "asOf": "2026-06-01"
+      "asOf": "2026-06-10"
     },
     {
       "network": "WeatherXM",
@@ -82,12 +82,12 @@
       "kind": "metric",
       "label": "entities on public map",
       "metricKey": "observed",
-      "current": 8492,
-      "previous": 8489,
-      "deltaText": "+3 (+0.0%)",
+      "current": 8498,
+      "previous": 8492,
+      "deltaText": "+6 (+0.1%)",
       "report": "docs/reports/weatherxm-sybil-report.md",
       "publicSource": "WeatherXM public cells API",
-      "asOf": "2026-06-01"
+      "asOf": "2026-06-10"
     },
     {
       "network": "WeatherXM",
@@ -97,12 +97,12 @@
       "kind": "metric",
       "label": "cells over designed capacity",
       "metricKey": "overCapacityCells",
-      "current": 288,
-      "previous": 289,
-      "deltaText": "-1 (-0.3%)",
+      "current": 286,
+      "previous": 288,
+      "deltaText": "-2 (-0.7%)",
       "report": "docs/reports/weatherxm-sybil-report.md",
       "publicSource": "WeatherXM public cells API",
-      "asOf": "2026-06-01"
+      "asOf": "2026-06-10"
     },
     {
       "network": "WeatherXM",
@@ -112,12 +112,12 @@
       "kind": "metric",
       "label": "share of map over capacity",
       "metricKey": "overCapacityPct",
-      "current": 0.03391427225624117,
-      "previous": 0.034044057014960535,
-      "deltaText": "-0.01 pp (-0.4%)",
+      "current": 0.03365497764179807,
+      "previous": 0.03391427225624117,
+      "deltaText": "-0.03 pp (-0.8%)",
       "report": "docs/reports/weatherxm-sybil-report.md",
       "publicSource": "WeatherXM public cells API",
-      "asOf": "2026-06-01"
+      "asOf": "2026-06-10"
     },
     {
       "network": "Hivemapper",
@@ -128,10 +128,10 @@
       "label": "headline finding",
       "current": null,
       "previous": null,
-      "deltaText": "49.13% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.",
+      "deltaText": "49.20% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.",
       "report": "docs/reports/hivemapper-sybil-report.md",
       "publicSource": "Solana mainnet HONEY SPL mint (public RPC)",
-      "asOf": "2026-06-01"
+      "asOf": "2026-06-10"
     },
     {
       "network": "Hivemapper",
@@ -141,12 +141,12 @@
       "kind": "metric",
       "label": "top-20 SPL share of UI supply",
       "metricKey": "top20ShareOfSupply",
-      "current": 0.49132376763747454,
-      "previous": 0.49151222121492816,
-      "deltaText": "-0.02 pp (-0.0%)",
+      "current": 0.49199459791417277,
+      "previous": 0.49132376763747454,
+      "deltaText": "+0.07 pp (+0.1%)",
       "report": "docs/reports/hivemapper-sybil-report.md",
       "publicSource": "Solana mainnet HONEY SPL mint (public RPC)",
-      "asOf": "2026-06-01"
+      "asOf": "2026-06-10"
     },
     {
       "network": "Helium IoT",
@@ -163,66 +163,6 @@
       "asOf": "2026-06-10"
     },
     {
-      "network": "Helium IoT",
-      "networkId": "helium-iot",
-      "anomalyType": "duplication_cluster",
-      "narrative": "registry quality",
-      "kind": "metric",
-      "label": "entities on public map",
-      "metricKey": "observed",
-      "current": 1008019,
-      "previous": null,
-      "deltaText": "_(first snapshot — baseline recorded)_",
-      "report": "docs/reports/helium-iot-sybil-report.md",
-      "publicSource": "https://entities.nft.helium.io/v2/hotspots?subnetwork=iot",
-      "asOf": "2026-06-10"
-    },
-    {
-      "network": "Helium IoT",
-      "networkId": "helium-iot",
-      "anomalyType": "duplication_cluster",
-      "narrative": "registry quality",
-      "kind": "metric",
-      "label": "single-coordinate stacks (≥10 hotspots)",
-      "metricKey": "stackedSpots",
-      "current": 4855,
-      "previous": null,
-      "deltaText": "_(first snapshot — baseline recorded)_",
-      "report": "docs/reports/helium-iot-sybil-report.md",
-      "publicSource": "https://entities.nft.helium.io/v2/hotspots?subnetwork=iot",
-      "asOf": "2026-06-10"
-    },
-    {
-      "network": "Helium IoT",
-      "networkId": "helium-iot",
-      "anomalyType": "duplication_cluster",
-      "narrative": "registry quality",
-      "kind": "metric",
-      "label": "largest single-coordinate stack",
-      "metricKey": "largestStack",
-      "current": 501,
-      "previous": null,
-      "deltaText": "_(first snapshot — baseline recorded)_",
-      "report": "docs/reports/helium-iot-sybil-report.md",
-      "publicSource": "https://entities.nft.helium.io/v2/hotspots?subnetwork=iot",
-      "asOf": "2026-06-10"
-    },
-    {
-      "network": "Helium IoT",
-      "networkId": "helium-iot",
-      "anomalyType": "duplication_cluster",
-      "narrative": "registry quality",
-      "kind": "metric",
-      "label": "fleet share flagged (any heuristic)",
-      "metricKey": "flaggedPct",
-      "current": 0.06906417438560186,
-      "previous": null,
-      "deltaText": "_(first snapshot — baseline recorded)_",
-      "report": "docs/reports/helium-iot-sybil-report.md",
-      "publicSource": "https://entities.nft.helium.io/v2/hotspots?subnetwork=iot",
-      "asOf": "2026-06-10"
-    },
-    {
       "network": "Helium Mobile",
       "networkId": "helium-mobile",
       "anomalyType": "duplication_cluster",
@@ -231,7 +171,37 @@
       "label": "headline finding",
       "current": null,
       "previous": null,
-      "deltaText": "529 single-coordinate stacks of ≥10 hotspots on 54,682 located units — the largest stack holds 497 hotspots on one coordinate (§1 lists keys your registry team can grep today).",
+      "deltaText": "529 single-coordinate stacks of ≥10 hotspots on 54,683 located units — the largest stack holds 497 hotspots on one coordinate (§1 lists keys your registry team can grep today).",
+      "report": "docs/reports/helium-mobile-sybil-report.md",
+      "publicSource": "https://entities.nft.helium.io/v2/hotspots?subnetwork=mobile",
+      "asOf": "2026-06-10"
+    },
+    {
+      "network": "Helium Mobile",
+      "networkId": "helium-mobile",
+      "anomalyType": "duplication_cluster",
+      "narrative": "geographic expansion",
+      "kind": "metric",
+      "label": "entities on public map",
+      "metricKey": "observed",
+      "current": 54683,
+      "previous": 54682,
+      "deltaText": "+1 (+0.0%)",
+      "report": "docs/reports/helium-mobile-sybil-report.md",
+      "publicSource": "https://entities.nft.helium.io/v2/hotspots?subnetwork=mobile",
+      "asOf": "2026-06-10"
+    },
+    {
+      "network": "Helium Mobile",
+      "networkId": "helium-mobile",
+      "anomalyType": "duplication_cluster",
+      "narrative": "registry quality",
+      "kind": "metric",
+      "label": "fleet share flagged (any heuristic)",
+      "metricKey": "flaggedPct",
+      "current": 0.20573121445421794,
+      "previous": 0.20577155188178925,
+      "deltaText": "-0.00 pp (-0.0%)",
       "report": "docs/reports/helium-mobile-sybil-report.md",
       "publicSource": "https://entities.nft.helium.io/v2/hotspots?subnetwork=mobile",
       "asOf": "2026-06-10"
@@ -244,5 +214,5 @@
     "Does the public read for Helium IoT match what your team sees internally, or is the public feed expected to look this way?",
     "Does the public read for Helium Mobile match what your team sees internally, or is the public feed expected to look this way?"
   ],
-  "threadSeed": "Public read on Geodnet: 11 exact (lat,lng) duplicate groups on 19,616 public stations — each row in §1 is one coordinate pai — does that match your internal view, or is the public feed expected to behave this way?"
+  "threadSeed": "Public read on Geodnet: 8 exact (lat,lng) duplicate groups on 19,604 public stations — each row in §1 is one coordinate pair — does that match your internal view, or is the public feed expected to behave this way?"
 }

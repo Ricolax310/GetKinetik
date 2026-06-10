@@ -21,6 +21,8 @@ const TRIVIAL_ABS = {
   drivers: 10,                // +1 driver out of 270k = skip
   detections: 50,
   detectionsZeroDays: 0,      // any zero-day extension is meaningful
+  stackedSpots: 5,            // ±5 stacks on a 1M fleet = noise
+  largestStack: 0,            // the max stack changing is always notable
 };
 
 const METRIC_SHORT = {
@@ -34,6 +36,8 @@ const METRIC_SHORT = {
   detections: "detections",
   detectionsZeroDays: "zero-detection days",
   drivers: "registered drivers",
+  stackedSpots: "single-coordinate hotspot stacks",
+  largestStack: "largest hotspot stack",
 };
 
 // Supplementary cross-metric context appended when a flat metric has a rising
@@ -99,8 +103,13 @@ export function dripSignalBullet(s) {
 export function buildTodaysReadFromDrip(signals) {
   const SEV = { high: 3, medium: 2, low: 1 };
 
-  // Filter trivial-delta signals before ranking.
-  const meaningful = signals.filter((s) => !isTrivial(s) || s.metric === "kmFrozenDays" || s.metric === "exactDupGroups" || s.metric === "overCapacityCells");
+  // Filter trivial-delta signals before ranking. Signals with no numeric value
+  // (headline anchors a metric the network doesn't have) can't make a bullet.
+  const meaningful = signals.filter(
+    (s) =>
+      typeof s.value === "number" &&
+      (!isTrivial(s) || s.metric === "kmFrozenDays" || s.metric === "exactDupGroups" || s.metric === "overCapacityCells"),
+  );
 
   const sorted = [...meaningful].sort(
     (a, b) => (SEV[b.severity] || 0) - (SEV[a.severity] || 0) || Math.abs(b.delta) - Math.abs(a.delta),
@@ -114,9 +123,10 @@ export function buildTodaysReadFromDrip(signals) {
     bullets.push(dripSignalBullet(s));
     if (bullets.length >= MAX_TODAY_READ) break;
   }
-  // Pad with full signal list if too few meaningful ones.
+  // Pad with full signal list if too few meaningful ones (numeric values only).
   if (bullets.length < MIN_TODAY_READ) {
     for (const s of signals) {
+      if (typeof s.value !== "number") continue;
       const key = `${s.network}::${s.metric}`;
       if (seen.has(key)) continue;
       seen.add(key);
