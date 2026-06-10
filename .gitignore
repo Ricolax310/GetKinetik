@@ -53,3 +53,9 @@ secrets.json
 docs/outreach/generated/*
 !docs/outreach/generated/.gitkeep
 scripts/data/bureau-run-log.json
+
+# Command center local agent state (sqlite store + feed cache)
+docs/bureau/private/command-center.db
+docs/bureau/private/command-center.db-shm
+docs/bureau/private/command-center.db-wal
+docs/bureau/private/imports/

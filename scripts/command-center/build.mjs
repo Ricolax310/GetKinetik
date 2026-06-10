@@ -4,19 +4,12 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { OUT_JSON, REPO_ROOT, PRIVATE_DIR } from "./config.mjs";
+import { OUT_JSON, REPO_ROOT, PRIVATE_DIR, todayUtc } from "./config.mjs";
 import { ensureImportDirs } from "./ingest.mjs";
 import { openAgentStore } from "./sqlite-store.mjs";
 import { buildReplyBrief, writeReplyBriefMarkdown } from "./reply-brief.mjs";
 import { buildReadingFeed } from "./reading-feed.mjs";
 import { publishSignalReports } from "./signal-publication.mjs";
-
-const args = process.argv.slice(2);
-const fetchRss = args.includes("--fetch-rss");
-
-function todayUtc() {
-  return new Date().toISOString().slice(0, 10);
-}
 
 function weekdayUtc(iso) {
   return new Date(`${iso}T12:00:00Z`).toLocaleDateString("en-US", {
@@ -34,7 +27,7 @@ export async function buildCommandCenter(options = {}) {
     const weekday = weekdayUtc(today);
     const replyBrief = buildReplyBrief(today);
     const readingFeed = await buildReadingFeed({
-      fetchRss: options.fetchRss ?? fetchRss,
+      fetchRss: options.fetchRss ?? false,
     });
 
     const payload = {
@@ -79,7 +72,8 @@ const isMain =
   path.resolve(process.argv[1]) === path.resolve(fileURLToPath(import.meta.url));
 
 if (isMain) {
-  buildCommandCenter()
+  const fetchRss = process.argv.includes("--fetch-rss");
+  buildCommandCenter({ fetchRss })
     .then((p) => {
       console.log(`
 GetKinetik Command Center — built (v${p.version})

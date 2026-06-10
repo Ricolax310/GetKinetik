@@ -6,6 +6,11 @@ import { fileURLToPath } from "node:url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export const REPO_ROOT = path.resolve(__dirname, "..", "..");
 
+/** UTC calendar day — matches build.mjs and signal pipeline dates. */
+export function todayUtc() {
+  return new Date().toISOString().slice(0, 10);
+}
+
 export const PRIVATE_DIR = path.join(REPO_ROOT, "docs/bureau/private");
 export const IMPORTS_DIR = path.join(PRIVATE_DIR, "imports");
 export const X_IMPORT_DIR = path.join(IMPORTS_DIR, "x");

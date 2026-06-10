@@ -1,0 +1,35 @@
+# Rebuild local Command Center payload after signal + bureau dailies.
+name: Command center daily
+
+on:
+  schedule:
+    - cron: "0 16 * * *" # 16:00 UTC — after signal/bureau (09:00), before drip (~17:00 / 9am PT)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: command-center-daily
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Build command center brief
+        run: node scripts/command-center/build.mjs --fetch-rss
+
+      - name: Commit command center outputs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/bureau/private/command-center.json docs/command-center/daily docs/reports/daily docs/reports/weekly docs/reports/monthly || true
+          git diff --staged --quiet || git commit -m "chore(command-center): daily brief [automated]"
+          git push || true

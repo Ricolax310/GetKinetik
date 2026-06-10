@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta name="theme-color" content="#0A0A0A" />
+    <title>GETKINETIK Command Center</title>
+    <link rel="stylesheet" href="center.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <header class="top">
+        <div>
+          <p class="brand">GETKINETIK · command center</p>
+          <h1 id="headline">Today</h1>
+        </div>
+        <div class="top-actions">
+          <span id="meta-updated" class="meta"></span>
+          <button type="button" id="btn-refresh" class="btn">Refresh brief</button>
+        </div>
+      </header>
+
+      <p id="load-error" class="banner error" hidden></p>
+      <p id="load-status" class="banner" hidden></p>
+
+      <main class="grid">
+        <section class="panel">
+          <h2>Daily briefing</h2>
+          <div id="brief-body" class="md-body"></div>
+        </section>
+
+        <section class="panel">
+          <h2>Live threads</h2>
+          <ul id="live-threads" class="list"></ul>
+          <h2 class="sub">Thread seeds</h2>
+          <ul id="thread-seeds" class="list"></ul>
+        </section>
+
+        <section class="panel wide">
+          <h2>Reading feed</h2>
+          <div id="reading-feed"></div>
+        </section>
+
+        <section class="panel wide">
+          <h2>Signal reports</h2>
+          <div id="publication" class="pub-links"></div>
+        </section>
+      </main>
+    </div>
+    <script src="center.js" type="module"></script>
+  </body>
+</html>

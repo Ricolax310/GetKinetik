@@ -1,6 +1,9 @@
 // Background jobs for local command-center agent.
 // Jobs refresh local intelligence and generate the morning brief daily.
 
+import fs from "node:fs";
+import { OUT_JSON, todayUtc } from "./config.mjs";
+
 function msUntilNextLocalHour(hour = 7, minute = 0) {
   const now = new Date();
   const next = new Date(now);
@@ -9,11 +12,13 @@ function msUntilNextLocalHour(hour = 7, minute = 0) {
   return next.getTime() - now.getTime();
 }
 
-function toDateStringLocal(d = new Date()) {
-  const y = d.getFullYear();
-  const m = String(d.getMonth() + 1).padStart(2, "0");
-  const day = String(d.getDate()).padStart(2, "0");
-  return `${y}-${m}-${day}`;
+function payloadDate() {
+  if (!fs.existsSync(OUT_JSON)) return null;
+  try {
+    return JSON.parse(fs.readFileSync(OUT_JSON, "utf8")).today || null;
+  } catch {
+    return null;
+  }
 }
 
 export function startAgentJobs({
@@ -45,9 +50,10 @@ export function startAgentJobs({
   }
 
   async function ensureDailyMorningBrief() {
-    const today = toDateStringLocal();
+    const today = todayUtc();
+    const built = payloadDate() === today;
     const latest = store?.latestMorningBrief();
-    if (!latest || latest.briefDate !== today) {
+    if (!built || !latest || latest.briefDate !== today) {
       await run("morning-brief", {
         fetchRss: process.env.COMMAND_CENTER_FETCH_RSS_AUTO === "1",
         refreshGh: false,

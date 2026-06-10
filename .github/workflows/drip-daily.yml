@@ -29,6 +29,9 @@ jobs:
       - name: Refresh signals (snapshot mode)
         run: node scripts/signal-pipeline/pipeline.mjs daily
 
+      - name: Refresh command center (before daily drip post)
+        run: node scripts/command-center/build.mjs --fetch-rss
+
       - name: Run daily drip
         env:
           X_API_BEARER: ${{ secrets.X_API_BEARER }}

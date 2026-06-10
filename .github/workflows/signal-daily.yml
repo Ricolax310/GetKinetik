@@ -38,10 +38,13 @@ jobs:
             node scripts/signal-pipeline/pipeline.mjs daily
           fi
 
+      - name: Refresh command center (before daily brief lands in drip)
+        run: node scripts/command-center/build.mjs --fetch-rss
+
       - name: Commit signal outputs
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add signals/daily docs/reports/daily landing/api/signals/latest.json landing/public/daily.html logs/daily scripts/data/bureau-audit-index.json landing/data/bureau-audit-index.json || true
+          git add signals/daily docs/reports/daily landing/api/signals/latest.json landing/public/daily.html logs/daily scripts/data/bureau-audit-index.json landing/data/bureau-audit-index.json docs/bureau/private/command-center.json docs/command-center/daily || true
           git diff --staged --quiet || git commit -m "chore(signals): daily signal pipeline [automated]"
           git push || true
