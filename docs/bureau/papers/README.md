@@ -12,8 +12,6 @@ Updated: 2026-06-10
 - **WeatherXM** — [one-pager](./networks/weatherxm-one-pager.md) · [full report](https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/weatherxm-sybil-report.md)
 - **Hivemapper** — [one-pager](./networks/hivemapper-one-pager.md) · [full report](https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/hivemapper-sybil-report.md)
 - **Natix Network** — [one-pager](./networks/natix-one-pager.md) · [full report](https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/natix-sybil-report.md)
-- **Nodle** — [one-pager](./networks/nodle-one-pager.md) · [full report](https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/nodle-sybil-report.md)
-- **Dawn Network** — [one-pager](./networks/dawn-one-pager.md) · [full report](https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/dawn-sybil-report.md)
 
 ## Daily outputs
 

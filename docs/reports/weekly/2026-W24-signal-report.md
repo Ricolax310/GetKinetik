@@ -5,7 +5,7 @@
 ## Executive Summary
 
 - Week 2026-W24: cross-network signal index updated from public infrastructure reads.
-- 16 publishable signal(s) across 6 network(s) met the weekly confidence gate.
+- 11 publishable signal(s) across 5 network(s) met the weekly confidence gate.
 - 1 cross-network pattern(s) tagged: IDENTITY.
 - 1 systemic-scope pattern(s) recorded with multi-network support.
 
@@ -30,8 +30,8 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 
 **Observed in:**
 - Geodnet
-- Nodle
-- Dawn Network
+- Helium IoT
+- Helium Mobile
 
 **Signal:** Exact coordinate-duplicate groups rose from 8 to 11 on Geodnet.
 
@@ -115,62 +115,42 @@ _No public signal this week — scan not run or no headline finding._
 **What we don't know**
 - Whether the largest visible accounts are treasury, market-maker, exchange custody, or operators — on-chain shape doesn't label holder intent.
 
-### Nodle
+### Helium IoT
 
 **What changed**
-- exact (lat,lng) duplicate groups: 15 (_(first snapshot — baseline recorded)_)
-- entities on public map: 65 (_(first snapshot — baseline recorded)_)
-- fleet share flagged (any heuristic): 38.46% (_(first snapshot — baseline recorded)_)
+- entities on public map: 1,008,019 (_(first snapshot — baseline recorded)_)
+- single-coordinate stacks (≥10 hotspots): 4,855 (_(first snapshot — baseline recorded)_)
+- largest single-coordinate stack: 501 (_(first snapshot — baseline recorded)_)
+- fleet share flagged (any heuristic): 6.91% (_(first snapshot — baseline recorded)_)
 
 **Signal type**
-- Identity collision (`identity_collision`)
+- Registry duplication (`duplication_cluster`)
 
 **Trend**
 - flat week
 
 **Open question**
-- Does the public read for Nodle match what your team sees internally, or is the public feed expected to look this way?
+- Does the public read for Helium IoT match what your team sees internally, or is the public feed expected to look this way?
 
 **What we don't know**
-- Whether colliding identifiers are distinct physical devices or one identity reused — public maps don't expose device-level attestation.
+- Whether shared coordinates are legitimate co-located installs, shared-mount sites, or registry artifacts — public data can't tell without operator confirmation.
 
-### Dawn Network
+### Helium Mobile
 
 **What changed**
-- exact (lat,lng) duplicate groups: 15 (_(first snapshot — baseline recorded)_)
-- entities on public map: 55 (_(first snapshot — baseline recorded)_)
-- fleet share flagged (any heuristic): 45.45% (_(first snapshot — baseline recorded)_)
+- 529 single-coordinate stacks of ≥10 hotspots on 54,682 located units — the largest stack holds 497 hotspots on one coordinate (§1 lists keys your registry team can grep today).
 
 **Signal type**
-- Identity collision (`identity_collision`)
+- Registry duplication (`duplication_cluster`)
 
 **Trend**
-- flat week
+- insufficient history
 
 **Open question**
-- Does the public read for Dawn Network match what your team sees internally, or is the public feed expected to look this way?
+- Does the public read for Helium Mobile match what your team sees internally, or is the public feed expected to look this way?
 
 **What we don't know**
-- Whether colliding identifiers are distinct physical devices or one identity reused — public maps don't expose device-level attestation.
-
-### Grass / Titan
-
-**What changed**
-- exact (lat,lng) duplicate groups: 0 (_(first snapshot — baseline recorded)_)
-- entities on public map: 200 (_(first snapshot — baseline recorded)_)
-- fleet share flagged (any heuristic): 45.00% (_(first snapshot — baseline recorded)_)
-
-**Signal type**
-- Uncategorized public observation (`scaffold`)
-
-**Trend**
-- flat week
-
-**Open question**
-- Does the public read for Grass / Titan match what your team sees internally, or is the public feed expected to look this way?
-
-**What we don't know**
-- What the public feed cannot disambiguate without operator confirmation.
+- Whether shared coordinates are legitimate co-located installs, shared-mount sites, or registry artifacts — public data can't tell without operator confirmation.
 
 ## Data Appendix
 
@@ -185,24 +165,19 @@ _Latest reading: 2026-06-10_
 - **WeatherXM** — cells over designed capacity: 288 (-1 (-0.3%))
 - **WeatherXM** — share of map over capacity: 3.39% (-0.01 pp (-0.4%))
 - **Hivemapper** — top-20 SPL share of UI supply: 49.13% (-0.02 pp (-0.0%))
-- **Nodle** — exact (lat,lng) duplicate groups: 15 (_(first snapshot — baseline recorded)_)
-- **Nodle** — entities on public map: 65 (_(first snapshot — baseline recorded)_)
-- **Nodle** — fleet share flagged (any heuristic): 38.46% (_(first snapshot — baseline recorded)_)
-- **Dawn Network** — exact (lat,lng) duplicate groups: 15 (_(first snapshot — baseline recorded)_)
-- **Dawn Network** — entities on public map: 55 (_(first snapshot — baseline recorded)_)
-- **Dawn Network** — fleet share flagged (any heuristic): 45.45% (_(first snapshot — baseline recorded)_)
-- **Grass / Titan** — exact (lat,lng) duplicate groups: 0 (_(first snapshot — baseline recorded)_)
-- **Grass / Titan** — entities on public map: 200 (_(first snapshot — baseline recorded)_)
-- **Grass / Titan** — fleet share flagged (any heuristic): 45.00% (_(first snapshot — baseline recorded)_)
+- **Helium IoT** — entities on public map: 1,008,019 (_(first snapshot — baseline recorded)_)
+- **Helium IoT** — single-coordinate stacks (≥10 hotspots): 4,855 (_(first snapshot — baseline recorded)_)
+- **Helium IoT** — largest single-coordinate stack: 501 (_(first snapshot — baseline recorded)_)
+- **Helium IoT** — fleet share flagged (any heuristic): 6.91% (_(first snapshot — baseline recorded)_)
 
 ### Signals To Watch
 
 - On the public cells view, do over-capacity H3 counts match your internal registry and rewards model?
 - For stations sharing an exact coordinate pair on the public registry, is that expected registration behavior or a dedupe gap worth reconciling?
 - Do the largest visible SPL accounts map to known treasury or market-maker custody labels on your side?
-- Does the public read for Nodle match what your team sees internally, or is the public feed expected to look this way?
-- Does the public read for Dawn Network match what your team sees internally, or is the public feed expected to look this way?
-- Does the public read for Grass / Titan match what your team sees internally, or is the public feed expected to look this way?
+- Does the public read for Helium IoT match what your team sees internally, or is the public feed expected to look this way?
+- Does the public read for Helium Mobile match what your team sees internally, or is the public feed expected to look this way?
+- Is the public Coverage Map metrics feed expected to show flat KM mapped / zero detections while driver registrations keep rising?
 
 ### Sources & Methodology
 

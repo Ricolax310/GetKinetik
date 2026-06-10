@@ -54,6 +54,8 @@ const METRIC_LABELS = {
   detectionsZeroDays: "days detections at zero",
   drivers: "registered drivers",
   burnFrozenDays: "days $NATIX burned flat",
+  stackedSpots: "single-coordinate stacks (≥10 hotspots)",
+  largestStack: "largest single-coordinate stack",
   flaggedPct: "fleet share flagged (any heuristic)",
 };
 

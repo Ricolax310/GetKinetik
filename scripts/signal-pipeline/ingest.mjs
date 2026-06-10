@@ -17,7 +17,7 @@ import {
 } from "../bureau/lib.mjs";
 import { REPO_ROOT, PIPELINE_NETWORKS } from "./config.mjs";
 
-const SCAN_TIMEOUT_MS = 180_000;
+const SCAN_TIMEOUT_MS = 600_000; // helium-iot paginates ~104 pages (~2.5 min)
 
 function missingEnv(net) {
   return (net.requiresEnv || []).filter((k) => !process.env[k]?.trim());

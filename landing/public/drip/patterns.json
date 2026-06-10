@@ -7,13 +7,10 @@
       "headline": "Cross-network identity registry stress observed across multiple networks",
       "pattern": "CROSS_NETWORK_IDENTITY",
       "networks": [
-        "Dawn Network",
-        "Geodnet",
-        "Grass / Titan",
-        "Nodle"
+        "Geodnet"
       ],
       "category": "IDENTITY",
-      "description": "Cross-network identity registry stress observed across multiple networks (Dawn Network, Geodnet, Grass / Titan, Nodle).",
+      "description": "Cross-network identity registry stress observed across multiple networks ( Geodnet).",
       "patternType": "cross-network"
     },
     {
@@ -26,78 +23,6 @@
       ],
       "category": "IDENTITY",
       "description": "Observed Geodnet exactDupGroups on 7 of 7 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Nodle: repeated exactDupGroups observation",
-      "pattern": "REPEATED_IDENTITY",
-      "networks": [
-        "Nodle"
-      ],
-      "category": "IDENTITY",
-      "description": "Observed Nodle exactDupGroups on 7 of 7 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Nodle: repeated flaggedPct observation",
-      "pattern": "REPEATED_IDENTITY",
-      "networks": [
-        "Nodle"
-      ],
-      "category": "IDENTITY",
-      "description": "Observed Nodle flaggedPct on 7 of 7 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Dawn Network: repeated exactDupGroups observation",
-      "pattern": "REPEATED_IDENTITY",
-      "networks": [
-        "Dawn Network"
-      ],
-      "category": "IDENTITY",
-      "description": "Observed Dawn Network exactDupGroups on 7 of 7 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Dawn Network: repeated flaggedPct observation",
-      "pattern": "REPEATED_IDENTITY",
-      "networks": [
-        "Dawn Network"
-      ],
-      "category": "IDENTITY",
-      "description": "Observed Dawn Network flaggedPct on 7 of 7 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Grass / Titan: repeated exactDupGroups observation",
-      "pattern": "REPEATED_IDENTITY",
-      "networks": [
-        "Grass / Titan"
-      ],
-      "category": "IDENTITY",
-      "description": "Observed Grass / Titan exactDupGroups on 7 of 7 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Grass / Titan: repeated flaggedPct observation",
-      "pattern": "REPEATED_IDENTITY",
-      "networks": [
-        "Grass / Titan"
-      ],
-      "category": "IDENTITY",
-      "description": "Observed Grass / Titan flaggedPct on 7 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -118,50 +43,11 @@
       "headline": "Cross-network infrastructure coverage stress observed across multiple networks",
       "pattern": "CROSS_NETWORK_INFRASTRUCTURE",
       "networks": [
-        "Dawn Network",
         "Geodnet",
-        "Grass / Titan",
-        "Nodle",
         "WeatherXM"
       ],
       "category": "INFRASTRUCTURE",
-      "description": "Cross-network infrastructure coverage stress observed across multiple networks (Dawn Network, Geodnet, Grass / Titan, Nodle, WeatherXM).",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Nodle: repeated observed observation",
-      "pattern": "REPEATED_INFRASTRUCTURE",
-      "networks": [
-        "Nodle"
-      ],
-      "category": "INFRASTRUCTURE",
-      "description": "Observed Nodle observed on 7 of 7 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Dawn Network: repeated observed observation",
-      "pattern": "REPEATED_INFRASTRUCTURE",
-      "networks": [
-        "Dawn Network"
-      ],
-      "category": "INFRASTRUCTURE",
-      "description": "Observed Dawn Network observed on 7 of 7 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Grass / Titan: repeated observed observation",
-      "pattern": "REPEATED_INFRASTRUCTURE",
-      "networks": [
-        "Grass / Titan"
-      ],
-      "category": "INFRASTRUCTURE",
-      "description": "Observed Grass / Titan observed on 7 of 7 recorded days.",
+      "description": "Cross-network infrastructure coverage stress observed across multiple networks ( Geodnet, , WeatherXM).",
       "patternType": "cross-network"
     },
     {

@@ -70,25 +70,30 @@ Applying Kinetik's auditing heuristics surfaces patterns in public DePIN data th
 #### A. GEODNET (GNSS RTK Network)
 * **The Vulnerability:** High-precision GNSS reference stations (CORS) are physical antennas that must remain spatially isolated.
 * **Expected Heuristic Findings:** Analyzing public node coordinates reveals instances of multiple stations reporting coordinates that match exactly down to the six-decimal meter level (e.g., `51.986433, 4.385757` in the Netherlands).
-* **The Audit Verdict:** These duplicates represent upstream database syncing clashes or multi-device virtualization behind a single GNSS receiver. 
+* **The Expected Attack Pattern:** These duplicates represent upstream database syncing clashes or multi-device virtualization behind a single GNSS receiver. 
 * **Kinetik Solution:** Integrating Kinetik registry binds each physical antenna to a unique hardware-attested key pair, ensuring a 1:1 relationship between the coordinate registration and the physical device.
 
 #### B. WeatherXM (Weather Station DePIN)
 * **The Vulnerability:** Weather data rewards depend on physical atmospheric measurement coherence within a specific local area.
 * **Expected Heuristic Findings:** Identification of cloned metadata twins—distinct device IDs reporting identical relative humidity, temperature, and barometric trends down to three decimal places while routing through cloud hosting subnets.
-* **The Audit Verdict:** Virtualized scripts reproducing identical mock telemetry packets to farm weather-data tokens.
+* **The Expected Attack Pattern:** Virtualized scripts reproducing identical mock telemetry packets to farm weather-data tokens.
 * **Kinetik Solution:** Direct integration of secure elements ($1 hardware chips like Microchip ATECC608) inside weather station boards, signing atmospheric data directly at the hardware layer.
+
+> **Note (2026-06-10):** Sections C and D describe *threat-model archetypes* — what these
+> attack patterns would look like — not published scan findings. GETKINETIK has not run a
+> live public-data scan against Nodle, Dawn, or Grass/Titan; earlier demo fixtures were
+> synthetic and have been retired from all published surfaces.
 
 #### C. Nodle (Bluetooth Spatial Network)
 * **The Vulnerability:** Uptime rewards are issued for mobile nodes scanning local Bluetooth Low Energy (BLE) beacons.
 * **Expected Heuristic Findings:** Zero timing jitter in beacon heartbeats, coupled with commercial datacenter IP routing (AS24940 - Hetzner).
-* **The Audit Verdict:** Device emulator farms running headless Android instances on cloud servers, simulating BLE beacons using mock location APIs.
+* **The Expected Attack Pattern:** Device emulator farms running headless Android instances on cloud servers, simulating BLE beacons using mock location APIs.
 * **Kinetik Solution:** Enforcing strict StrongBox HSM presence checking within the mobile client. Because virtualized emulators lack physically bound hardware enclaves, they are instantly locked out of signature challenges.
 
 #### D. Dawn Network & Grass / Titan (Bandwidth-Sharing DePINs)
 * **The Vulnerability:** Uptime rewards scale with residential bandwidth sharing.
 * **Expected Heuristic Findings:** Co-location of multiple nodes behind a single residential proxy block or commercial cloud datacenter (AS16509 - AWS), routing heartbeats with clockwork timing precision.
-* **The Audit Verdict:** Automated points-farming clusters routing virtual browsers through cheap VPS hosting, draining daily reward pools meant for home consumers.
+* **The Expected Attack Pattern:** Automated points-farming clusters routing virtual browsers through cheap VPS hosting, draining daily reward pools meant for home consumers.
 * **Kinetik Solution:** A dynamic keepalive attestation challenge. By validating that keepalive packets are signed by keys resident inside hardware enclaves, headless cloud scripts and remote residential proxy nodes are entirely neutralized.
 
 ---

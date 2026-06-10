@@ -44,87 +44,6 @@ Observed WeatherXM overCapacityCells on 6 of 6 recorded days.
 
 Observed Hivemapper top20ShareOfSupply on 6 of 6 recorded days.
 
-### Nodle: repeated exactDupGroups observation
-
-- **Category:** IDENTITY
-- **Scope:** systemic
-- **Classification:** repetition
-- **Networks:** Nodle
-
-Observed Nodle exactDupGroups on 5 of 6 recorded days.
-
-### Nodle: repeated observed observation
-
-- **Category:** INFRASTRUCTURE
-- **Scope:** systemic
-- **Classification:** repetition
-- **Networks:** Nodle
-
-Observed Nodle observed on 5 of 6 recorded days.
-
-### Nodle: repeated flaggedPct observation
-
-- **Category:** IDENTITY
-- **Scope:** systemic
-- **Classification:** repetition
-- **Networks:** Nodle
-
-Observed Nodle flaggedPct on 5 of 6 recorded days.
-
-### Dawn Network: repeated exactDupGroups observation
-
-- **Category:** IDENTITY
-- **Scope:** systemic
-- **Classification:** repetition
-- **Networks:** Dawn Network
-
-Observed Dawn Network exactDupGroups on 5 of 6 recorded days.
-
-### Dawn Network: repeated observed observation
-
-- **Category:** INFRASTRUCTURE
-- **Scope:** systemic
-- **Classification:** repetition
-- **Networks:** Dawn Network
-
-Observed Dawn Network observed on 5 of 6 recorded days.
-
-### Dawn Network: repeated flaggedPct observation
-
-- **Category:** IDENTITY
-- **Scope:** systemic
-- **Classification:** repetition
-- **Networks:** Dawn Network
-
-Observed Dawn Network flaggedPct on 5 of 6 recorded days.
-
-### Grass / Titan: repeated exactDupGroups observation
-
-- **Category:** IDENTITY
-- **Scope:** systemic
-- **Classification:** repetition
-- **Networks:** Grass / Titan
-
-Observed Grass / Titan exactDupGroups on 5 of 6 recorded days.
-
-### Grass / Titan: repeated observed observation
-
-- **Category:** INFRASTRUCTURE
-- **Scope:** systemic
-- **Classification:** repetition
-- **Networks:** Grass / Titan
-
-Observed Grass / Titan observed on 5 of 6 recorded days.
-
-### Grass / Titan: repeated flaggedPct observation
-
-- **Category:** IDENTITY
-- **Scope:** systemic
-- **Classification:** repetition
-- **Networks:** Grass / Titan
-
-Observed Grass / Titan flaggedPct on 5 of 6 recorded days.
-
 ### Geodnet: repeated observed observation
 
 - **Category:** INFRASTRUCTURE
@@ -168,15 +87,6 @@ Observed WeatherXM overCapacityPct on 4 of 6 recorded days.
 - Geodnet: repeated exactDupGroups observation: Observed Geodnet exactDupGroups on 6 of 6 recorded days.
 - WeatherXM: repeated overCapacityCells observation: Observed WeatherXM overCapacityCells on 6 of 6 recorded days.
 - Hivemapper: repeated top20ShareOfSupply observation: Observed Hivemapper top20ShareOfSupply on 6 of 6 recorded days.
-- Nodle: repeated exactDupGroups observation: Observed Nodle exactDupGroups on 5 of 6 recorded days.
-- Nodle: repeated observed observation: Observed Nodle observed on 5 of 6 recorded days.
-- Nodle: repeated flaggedPct observation: Observed Nodle flaggedPct on 5 of 6 recorded days.
-- Dawn Network: repeated exactDupGroups observation: Observed Dawn Network exactDupGroups on 5 of 6 recorded days.
-- Dawn Network: repeated observed observation: Observed Dawn Network observed on 5 of 6 recorded days.
-- Dawn Network: repeated flaggedPct observation: Observed Dawn Network flaggedPct on 5 of 6 recorded days.
-- Grass / Titan: repeated exactDupGroups observation: Observed Grass / Titan exactDupGroups on 5 of 6 recorded days.
-- Grass / Titan: repeated observed observation: Observed Grass / Titan observed on 5 of 6 recorded days.
-- Grass / Titan: repeated flaggedPct observation: Observed Grass / Titan flaggedPct on 5 of 6 recorded days.
 - Geodnet: repeated observed observation: Observed Geodnet observed on 4 of 6 recorded days.
 - Geodnet: repeated flaggedPct observation: Observed Geodnet flaggedPct on 4 of 6 recorded days.
 - WeatherXM: repeated observed observation: Observed WeatherXM observed on 4 of 6 recorded days.
@@ -189,8 +99,6 @@ Observed WeatherXM overCapacityPct on 4 of 6 recorded days.
 
 | Sector | Signals | Networks | Top severity |
 |---|---:|---|---|
-| Registry & identity integrity | 12 | Dawn Network, Geodnet, Nodle | high |
-| Network health & capacity | 7 | Grass / Titan, WeatherXM | medium |
 | Coverage growth | 1 | WeatherXM | low |
 | Token economics | 2 | Hivemapper | medium |
 
@@ -201,23 +109,11 @@ Observed WeatherXM overCapacityPct on 4 of 6 recorded days.
 - **Geodnet** — exact (lat,lng) duplicate groups: 11 (+3 (+37.5%)) _(high · conf 0.85)_
 - **Geodnet** — entities on public map: 19,616 (-60 (-0.3%)) _(low · conf 0.85)_
 - **Geodnet** — fleet share flagged (any heuristic): 9.34% (-0.00 pp (-0.0%)) _(low · conf 0.85)_
-- **Nodle** — Flagged Emulator Nodes: 25 (38.5% of pool) _(medium · conf 0.70)_
-- **Nodle** — exact (lat,lng) duplicate groups: 15 (_(first snapshot — baseline recorded)_) _(low · conf 0.55)_
-- **Nodle** — entities on public map: 65 (_(first snapshot — baseline recorded)_) _(low · conf 0.55)_
-- **Nodle** — fleet share flagged (any heuristic): 38.46% (_(first snapshot — baseline recorded)_) _(low · conf 0.55)_
-- **Dawn Network** — Flagged Anomalous Nodes: 25 (45.5% of pool) _(medium · conf 0.70)_
-- **Dawn Network** — exact (lat,lng) duplicate groups: 15 (_(first snapshot — baseline recorded)_) _(low · conf 0.55)_
-- **Dawn Network** — entities on public map: 55 (_(first snapshot — baseline recorded)_) _(low · conf 0.55)_
-- **Dawn Network** — fleet share flagged (any heuristic): 45.45% (_(first snapshot — baseline recorded)_) _(low · conf 0.55)_
 
 **Network health & capacity**
 - **WeatherXM** — 288 cells exceed designed capacity — §1 lists H3 indices + map centers for your review queue. _(medium · conf 0.70)_
 - **WeatherXM** — cells over designed capacity: 288 (-1 (-0.3%)) _(low · conf 0.85)_
 - **WeatherXM** — share of map over capacity: 3.39% (-0.01 pp (-0.4%)) _(low · conf 0.85)_
-- **Grass / Titan** — Flagged Anomalies: 1 (16.7%) _(medium · conf 0.70)_
-- **Grass / Titan** — exact (lat,lng) duplicate groups: 0 (_(first snapshot — baseline recorded)_) _(low · conf 0.55)_
-- **Grass / Titan** — entities on public map: 200 (_(first snapshot — baseline recorded)_) _(low · conf 0.55)_
-- **Grass / Titan** — fleet share flagged (any heuristic): 45.00% (_(first snapshot — baseline recorded)_) _(low · conf 0.55)_
 
 **Coverage growth**
 - **WeatherXM** — entities on public map: 8,492 (+3 (+0.0%)) _(low · conf 0.85)_
@@ -237,8 +133,6 @@ _Comparing 2026-06-02 → 2026-06-07 (6 runs)._
 
 ### Signal Type
 
-- **Registry & identity integrity** (`integrity`) — 12 signal(s) across 3 network(s): Dawn Network, Geodnet, Nodle
-- **Network health & capacity** (`health`) — 7 signal(s) across 2 network(s): Grass / Titan, WeatherXM
 - **Coverage growth** (`growth`) — 1 signal(s) across 1 network(s): WeatherXM
 - **Token economics** (`economics`) — 2 signal(s) across 1 network(s): Hivemapper
 
@@ -270,30 +164,6 @@ _Comparing 2026-06-02 → 2026-06-07 (6 runs)._
 ### NATIX
 - _No qualifying public finding in latest snapshot._
 
-### Nodle
-- [integrity] Flagged Emulator Nodes: 25 (38.5% of pool) _(medium · conf 0.70)_
-- [integrity] exact (lat,lng) duplicate groups: 15 (_(first snapshot — baseline recorded)_) _(low · conf 0.55)_
-- [integrity] entities on public map: 65 (_(first snapshot — baseline recorded)_) _(low · conf 0.55)_
-- [integrity] fleet share flagged (any heuristic): 38.46% (_(first snapshot — baseline recorded)_) _(low · conf 0.55)_
-
-### Dawn Network
-- [integrity] Flagged Anomalous Nodes: 25 (45.5% of pool) _(medium · conf 0.70)_
-- [integrity] exact (lat,lng) duplicate groups: 15 (_(first snapshot — baseline recorded)_) _(low · conf 0.55)_
-- [integrity] entities on public map: 55 (_(first snapshot — baseline recorded)_) _(low · conf 0.55)_
-- [integrity] fleet share flagged (any heuristic): 45.45% (_(first snapshot — baseline recorded)_) _(low · conf 0.55)_
-
 ### DIMO
 - _No public scanner wired yet — included for cross-network coverage._
 
-### Grass / Titan
-- [health] Flagged Anomalies: 1 (16.7%) _(medium · conf 0.70)_
-- [health] exact (lat,lng) duplicate groups: 0 (_(first snapshot — baseline recorded)_) _(low · conf 0.55)_
-- [health] entities on public map: 200 (_(first snapshot — baseline recorded)_) _(low · conf 0.55)_
-- [health] fleet share flagged (any heuristic): 45.00% (_(first snapshot — baseline recorded)_) _(low · conf 0.55)_
-
-## Methodology
-
-- Automated pipeline: ingest public data → detect standardized signals → cross-network aggregate → publish.
-- Cross-network first by contract; per-network breakdown is secondary and never volume-ranked.
-- Signals are reproducible public reads (`scripts/duplication-scan-*.mjs`). Evidence, not verdicts.
-- Feed JSON: `signals/<cadence>/latest.json` · API: `/api/signals/latest.json`

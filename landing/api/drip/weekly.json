@@ -9,15 +9,6 @@
     "Geodnet: repeated exactDupGroups observation. Observed Geodnet exactDupGroups on 6 of 6 recorded days.",
     "WeatherXM: repeated overCapacityCells observation. Observed WeatherXM overCapacityCells on 6 of 6 recorded days.",
     "Hivemapper: repeated top20ShareOfSupply observation. Observed Hivemapper top20ShareOfSupply on 6 of 6 recorded days.",
-    "Nodle: repeated exactDupGroups observation. Observed Nodle exactDupGroups on 5 of 6 recorded days.",
-    "Nodle: repeated observed observation. Observed Nodle observed on 5 of 6 recorded days.",
-    "Nodle: repeated flaggedPct observation. Observed Nodle flaggedPct on 5 of 6 recorded days.",
-    "Dawn Network: repeated exactDupGroups observation. Observed Dawn Network exactDupGroups on 5 of 6 recorded days.",
-    "Dawn Network: repeated observed observation. Observed Dawn Network observed on 5 of 6 recorded days.",
-    "Dawn Network: repeated flaggedPct observation. Observed Dawn Network flaggedPct on 5 of 6 recorded days.",
-    "Grass / Titan: repeated exactDupGroups observation. Observed Grass / Titan exactDupGroups on 5 of 6 recorded days.",
-    "Grass / Titan: repeated observed observation. Observed Grass / Titan observed on 5 of 6 recorded days.",
-    "Grass / Titan: repeated flaggedPct observation. Observed Grass / Titan flaggedPct on 5 of 6 recorded days.",
     "Geodnet: repeated observed observation. Observed Geodnet observed on 4 of 6 recorded days.",
     "Geodnet: repeated flaggedPct observation. Observed Geodnet flaggedPct on 4 of 6 recorded days.",
     "WeatherXM: repeated observed observation. Observed WeatherXM observed on 4 of 6 recorded days.",
@@ -58,114 +49,6 @@
       ],
       "category": "ECONOMICS",
       "description": "Observed Hivemapper top20ShareOfSupply on 6 of 6 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Nodle: repeated exactDupGroups observation",
-      "pattern": "REPEATED_IDENTITY",
-      "networks": [
-        "Nodle"
-      ],
-      "category": "IDENTITY",
-      "description": "Observed Nodle exactDupGroups on 5 of 6 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Nodle: repeated observed observation",
-      "pattern": "REPEATED_INFRASTRUCTURE",
-      "networks": [
-        "Nodle"
-      ],
-      "category": "INFRASTRUCTURE",
-      "description": "Observed Nodle observed on 5 of 6 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Nodle: repeated flaggedPct observation",
-      "pattern": "REPEATED_IDENTITY",
-      "networks": [
-        "Nodle"
-      ],
-      "category": "IDENTITY",
-      "description": "Observed Nodle flaggedPct on 5 of 6 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Dawn Network: repeated exactDupGroups observation",
-      "pattern": "REPEATED_IDENTITY",
-      "networks": [
-        "Dawn Network"
-      ],
-      "category": "IDENTITY",
-      "description": "Observed Dawn Network exactDupGroups on 5 of 6 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Dawn Network: repeated observed observation",
-      "pattern": "REPEATED_INFRASTRUCTURE",
-      "networks": [
-        "Dawn Network"
-      ],
-      "category": "INFRASTRUCTURE",
-      "description": "Observed Dawn Network observed on 5 of 6 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Dawn Network: repeated flaggedPct observation",
-      "pattern": "REPEATED_IDENTITY",
-      "networks": [
-        "Dawn Network"
-      ],
-      "category": "IDENTITY",
-      "description": "Observed Dawn Network flaggedPct on 5 of 6 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Grass / Titan: repeated exactDupGroups observation",
-      "pattern": "REPEATED_IDENTITY",
-      "networks": [
-        "Grass / Titan"
-      ],
-      "category": "IDENTITY",
-      "description": "Observed Grass / Titan exactDupGroups on 5 of 6 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Grass / Titan: repeated observed observation",
-      "pattern": "REPEATED_INFRASTRUCTURE",
-      "networks": [
-        "Grass / Titan"
-      ],
-      "category": "INFRASTRUCTURE",
-      "description": "Observed Grass / Titan observed on 5 of 6 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Grass / Titan: repeated flaggedPct observation",
-      "pattern": "REPEATED_IDENTITY",
-      "networks": [
-        "Grass / Titan"
-      ],
-      "category": "IDENTITY",
-      "description": "Observed Grass / Titan flaggedPct on 5 of 6 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -271,60 +154,6 @@
         "flags": [
           "isolated"
         ]
-      },
-      {
-        "network": "Nodle",
-        "metric": "exactDupGroups",
-        "confidence": 0.672,
-        "flags": []
-      },
-      {
-        "network": "Nodle",
-        "metric": "observed",
-        "confidence": 0.79,
-        "flags": []
-      },
-      {
-        "network": "Nodle",
-        "metric": "flaggedPct",
-        "confidence": 0.672,
-        "flags": []
-      },
-      {
-        "network": "Dawn Network",
-        "metric": "exactDupGroups",
-        "confidence": 0.672,
-        "flags": []
-      },
-      {
-        "network": "Dawn Network",
-        "metric": "observed",
-        "confidence": 0.79,
-        "flags": []
-      },
-      {
-        "network": "Dawn Network",
-        "metric": "flaggedPct",
-        "confidence": 0.672,
-        "flags": []
-      },
-      {
-        "network": "Grass / Titan",
-        "metric": "exactDupGroups",
-        "confidence": 0.672,
-        "flags": []
-      },
-      {
-        "network": "Grass / Titan",
-        "metric": "observed",
-        "confidence": 0.672,
-        "flags": []
-      },
-      {
-        "network": "Grass / Titan",
-        "metric": "flaggedPct",
-        "confidence": 0.672,
-        "flags": []
       }
     ]
   }

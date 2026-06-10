@@ -1,4 +1,10 @@
 // ============================================================================
+// ⚠️ SYNTHETIC DEMO FIXTURE — NOT REAL GRASS/TITAN DATA. ⚠️
+// The default "Mock/Dataset Mode" generates nodes with Math.random(); it
+// exists only to illustrate the heuristics pipeline shape. Its output MUST
+// NEVER be wired into the bureau registry, audit index, signal pipeline, or
+// any published surface. See NEUTRALITY.md.
+// ============================================================================
 // GETKINETIK Bureau — Heuristics Telemetry Scanner: Grass & Titan Network
 //
 // Bandwidth-sharing DePIN networks (like Grass and Titan) are highly targeted

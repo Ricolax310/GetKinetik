@@ -4,37 +4,17 @@
   "date": "2026-06-09",
   "minConfidence": 0.6,
   "daily": [
-    "Dawn Network: 15 duplicate coordinate clusters (unchanged)",
-    "Dawn Network: 45.5% flagged pct (unchanged)",
-    "Dawn Network: 55 entities on public map (unchanged)",
     "Geodnet: 11 duplicate coordinate clusters (+3)",
     "Geodnet: 9.3% flagged pct (unchanged)",
     "Geodnet: 19,616 entities on public map (−60)",
-    "Grass / Titan: 0 duplicate coordinate clusters (unchanged)",
-    "Grass / Titan: 45% flagged pct (unchanged)",
-    "Grass / Titan: 200 entities on public map (unchanged)",
     "Hivemapper: 49.1% top-holder concentration (−0 pp)",
-    "Nodle: 15 duplicate coordinate clusters (unchanged)",
-    "Nodle: 38.5% flagged pct (unchanged)",
-    "Nodle: 65 entities on public map (unchanged)",
     "WeatherXM: 8,492 entities on public map (+3)",
     "WeatherXM: 288 capacity exceedances (−1)",
     "WeatherXM: 3.4% over capacity pct (−0 pp)"
   ],
   "weekly": [
-    "Cross-network identity registry stress observed across multiple networks. Cross-network identity registry stress observed across multiple networks (Dawn Network, Geodnet, Grass / Titan, Nodle).",
     "Geodnet: repeated exactDupGroups observation. Observed Geodnet exactDupGroups on 7 of 7 recorded days.",
-    "Nodle: repeated exactDupGroups observation. Observed Nodle exactDupGroups on 7 of 7 recorded days.",
-    "Nodle: repeated flaggedPct observation. Observed Nodle flaggedPct on 7 of 7 recorded days.",
-    "Dawn Network: repeated exactDupGroups observation. Observed Dawn Network exactDupGroups on 7 of 7 recorded days.",
-    "Dawn Network: repeated flaggedPct observation. Observed Dawn Network flaggedPct on 7 of 7 recorded days.",
-    "Grass / Titan: repeated exactDupGroups observation. Observed Grass / Titan exactDupGroups on 7 of 7 recorded days.",
-    "Grass / Titan: repeated flaggedPct observation. Observed Grass / Titan flaggedPct on 7 of 7 recorded days.",
     "Geodnet: repeated flaggedPct observation. Observed Geodnet flaggedPct on 6 of 7 recorded days.",
-    "Cross-network infrastructure coverage stress observed across multiple networks. Cross-network infrastructure coverage stress observed across multiple networks (Dawn Network, Geodnet, Grass / Titan, Nodle, WeatherXM).",
-    "Nodle: repeated observed observation. Observed Nodle observed on 7 of 7 recorded days.",
-    "Dawn Network: repeated observed observation. Observed Dawn Network observed on 7 of 7 recorded days.",
-    "Grass / Titan: repeated observed observation. Observed Grass / Titan observed on 7 of 7 recorded days.",
     "Geodnet: repeated observed observation. Observed Geodnet observed on 6 of 7 recorded days.",
     "WeatherXM: repeated observed observation. Observed WeatherXM observed on 6 of 7 recorded days.",
     "Divergence: IDENTITY metrics split across networks. Opposing metric drift — Geodnet rising while Geodnet declining.",
@@ -53,13 +33,10 @@
       "headline": "Cross-network identity registry stress observed across multiple networks",
       "pattern": "CROSS_NETWORK_IDENTITY",
       "networks": [
-        "Dawn Network",
-        "Geodnet",
-        "Grass / Titan",
-        "Nodle"
+        "Geodnet"
       ],
       "category": "IDENTITY",
-      "description": "Cross-network identity registry stress observed across multiple networks (Dawn Network, Geodnet, Grass / Titan, Nodle).",
+      "description": "Cross-network identity registry stress observed across multiple networks ( Geodnet).",
       "patternType": "cross-network"
     },
     {
@@ -72,78 +49,6 @@
       ],
       "category": "IDENTITY",
       "description": "Observed Geodnet exactDupGroups on 7 of 7 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Nodle: repeated exactDupGroups observation",
-      "pattern": "REPEATED_IDENTITY",
-      "networks": [
-        "Nodle"
-      ],
-      "category": "IDENTITY",
-      "description": "Observed Nodle exactDupGroups on 7 of 7 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Nodle: repeated flaggedPct observation",
-      "pattern": "REPEATED_IDENTITY",
-      "networks": [
-        "Nodle"
-      ],
-      "category": "IDENTITY",
-      "description": "Observed Nodle flaggedPct on 7 of 7 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Dawn Network: repeated exactDupGroups observation",
-      "pattern": "REPEATED_IDENTITY",
-      "networks": [
-        "Dawn Network"
-      ],
-      "category": "IDENTITY",
-      "description": "Observed Dawn Network exactDupGroups on 7 of 7 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Dawn Network: repeated flaggedPct observation",
-      "pattern": "REPEATED_IDENTITY",
-      "networks": [
-        "Dawn Network"
-      ],
-      "category": "IDENTITY",
-      "description": "Observed Dawn Network flaggedPct on 7 of 7 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Grass / Titan: repeated exactDupGroups observation",
-      "pattern": "REPEATED_IDENTITY",
-      "networks": [
-        "Grass / Titan"
-      ],
-      "category": "IDENTITY",
-      "description": "Observed Grass / Titan exactDupGroups on 7 of 7 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Grass / Titan: repeated flaggedPct observation",
-      "pattern": "REPEATED_IDENTITY",
-      "networks": [
-        "Grass / Titan"
-      ],
-      "category": "IDENTITY",
-      "description": "Observed Grass / Titan flaggedPct on 7 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -164,50 +69,11 @@
       "headline": "Cross-network infrastructure coverage stress observed across multiple networks",
       "pattern": "CROSS_NETWORK_INFRASTRUCTURE",
       "networks": [
-        "Dawn Network",
         "Geodnet",
-        "Grass / Titan",
-        "Nodle",
         "WeatherXM"
       ],
       "category": "INFRASTRUCTURE",
-      "description": "Cross-network infrastructure coverage stress observed across multiple networks (Dawn Network, Geodnet, Grass / Titan, Nodle, WeatherXM).",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Nodle: repeated observed observation",
-      "pattern": "REPEATED_INFRASTRUCTURE",
-      "networks": [
-        "Nodle"
-      ],
-      "category": "INFRASTRUCTURE",
-      "description": "Observed Nodle observed on 7 of 7 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Dawn Network: repeated observed observation",
-      "pattern": "REPEATED_INFRASTRUCTURE",
-      "networks": [
-        "Dawn Network"
-      ],
-      "category": "INFRASTRUCTURE",
-      "description": "Observed Dawn Network observed on 7 of 7 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Grass / Titan: repeated observed observation",
-      "pattern": "REPEATED_INFRASTRUCTURE",
-      "networks": [
-        "Grass / Titan"
-      ],
-      "category": "INFRASTRUCTURE",
-      "description": "Observed Grass / Titan observed on 7 of 7 recorded days.",
+      "description": "Cross-network infrastructure coverage stress observed across multiple networks ( Geodnet, , WeatherXM).",
       "patternType": "cross-network"
     },
     {
@@ -398,87 +264,6 @@
       "timestamp": "2026-06-01",
       "severity": "medium",
       "feedConfidence": 0.7
-    },
-    {
-      "network": "Nodle",
-      "metric": "exactDupGroups",
-      "value": 15,
-      "delta": 0,
-      "timestamp": "2026-06-01",
-      "severity": "low",
-      "feedConfidence": 0.55
-    },
-    {
-      "network": "Nodle",
-      "metric": "observed",
-      "value": 65,
-      "delta": 0,
-      "timestamp": "2026-06-01",
-      "severity": "low",
-      "feedConfidence": 0.55
-    },
-    {
-      "network": "Nodle",
-      "metric": "flaggedPct",
-      "value": 0.38461538461538464,
-      "delta": 0,
-      "timestamp": "2026-06-01",
-      "severity": "low",
-      "feedConfidence": 0.55
-    },
-    {
-      "network": "Dawn Network",
-      "metric": "exactDupGroups",
-      "value": 15,
-      "delta": 0,
-      "timestamp": "2026-06-01",
-      "severity": "low",
-      "feedConfidence": 0.55
-    },
-    {
-      "network": "Dawn Network",
-      "metric": "observed",
-      "value": 55,
-      "delta": 0,
-      "timestamp": "2026-06-01",
-      "severity": "low",
-      "feedConfidence": 0.55
-    },
-    {
-      "network": "Dawn Network",
-      "metric": "flaggedPct",
-      "value": 0.45454545454545453,
-      "delta": 0,
-      "timestamp": "2026-06-01",
-      "severity": "low",
-      "feedConfidence": 0.55
-    },
-    {
-      "network": "Grass / Titan",
-      "metric": "exactDupGroups",
-      "value": 0,
-      "delta": 0,
-      "timestamp": "2026-05-22",
-      "severity": "low",
-      "feedConfidence": 0.55
-    },
-    {
-      "network": "Grass / Titan",
-      "metric": "observed",
-      "value": 200,
-      "delta": 0,
-      "timestamp": "2026-05-22",
-      "severity": "low",
-      "feedConfidence": 0.55
-    },
-    {
-      "network": "Grass / Titan",
-      "metric": "flaggedPct",
-      "value": 0.45,
-      "delta": 0,
-      "timestamp": "2026-05-22",
-      "severity": "low",
-      "feedConfidence": 0.55
     }
   ],
   "quality": {
@@ -530,60 +315,6 @@
         "flags": [
           "isolated"
         ]
-      },
-      {
-        "network": "Nodle",
-        "metric": "exactDupGroups",
-        "confidence": 0.672,
-        "flags": []
-      },
-      {
-        "network": "Nodle",
-        "metric": "observed",
-        "confidence": 0.79,
-        "flags": []
-      },
-      {
-        "network": "Nodle",
-        "metric": "flaggedPct",
-        "confidence": 0.672,
-        "flags": []
-      },
-      {
-        "network": "Dawn Network",
-        "metric": "exactDupGroups",
-        "confidence": 0.672,
-        "flags": []
-      },
-      {
-        "network": "Dawn Network",
-        "metric": "observed",
-        "confidence": 0.79,
-        "flags": []
-      },
-      {
-        "network": "Dawn Network",
-        "metric": "flaggedPct",
-        "confidence": 0.672,
-        "flags": []
-      },
-      {
-        "network": "Grass / Titan",
-        "metric": "exactDupGroups",
-        "confidence": 0.672,
-        "flags": []
-      },
-      {
-        "network": "Grass / Titan",
-        "metric": "observed",
-        "confidence": 0.672,
-        "flags": []
-      },
-      {
-        "network": "Grass / Titan",
-        "metric": "flaggedPct",
-        "confidence": 0.672,
-        "flags": []
       }
     ],
     "heldBack": []

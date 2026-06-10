@@ -26,7 +26,7 @@ GETKINETIK is a **neutral DePIN bureau**: reproducible public reads on open netw
 
 **Eric owns:** methodology, scripts, API, app, reports, site deploys.
 
-**Open on product (not blocking first deals):** iOS, Nodle/Dawn real public feeds (demo scans today), full IPFS/Solana anchor product path.
+**Open on product (not blocking first deals):** iOS, additional real public network feeds (Helium IoT/Mobile live as of 2026-06-10; synthetic demo scans fully retired), full IPFS/Solana anchor product path.
 
 ---
 

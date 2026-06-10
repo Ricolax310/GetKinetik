@@ -15,15 +15,10 @@ _Latest reading: 2026-06-10_
 - **WeatherXM** — cells over designed capacity: 288 (-1 (-0.3%))
 - **WeatherXM** — share of map over capacity: 3.39% (-0.01 pp (-0.4%))
 - **Hivemapper** — top-20 SPL share of UI supply: 49.13% (-0.02 pp (-0.0%))
-- **Nodle** — exact (lat,lng) duplicate groups: 15 (_(first snapshot — baseline recorded)_)
-- **Nodle** — entities on public map: 65 (_(first snapshot — baseline recorded)_)
-- **Nodle** — fleet share flagged (any heuristic): 38.46% (_(first snapshot — baseline recorded)_)
-- **Dawn Network** — exact (lat,lng) duplicate groups: 15 (_(first snapshot — baseline recorded)_)
-- **Dawn Network** — entities on public map: 55 (_(first snapshot — baseline recorded)_)
-- **Dawn Network** — fleet share flagged (any heuristic): 45.45% (_(first snapshot — baseline recorded)_)
-- **Grass / Titan** — exact (lat,lng) duplicate groups: 0 (_(first snapshot — baseline recorded)_)
-- **Grass / Titan** — entities on public map: 200 (_(first snapshot — baseline recorded)_)
-- **Grass / Titan** — fleet share flagged (any heuristic): 45.00% (_(first snapshot — baseline recorded)_)
+- **Helium IoT** — entities on public map: 1,008,019 (_(first snapshot — baseline recorded)_)
+- **Helium IoT** — single-coordinate stacks (≥10 hotspots): 4,855 (_(first snapshot — baseline recorded)_)
+- **Helium IoT** — largest single-coordinate stack: 501 (_(first snapshot — baseline recorded)_)
+- **Helium IoT** — fleet share flagged (any heuristic): 6.91% (_(first snapshot — baseline recorded)_)
 
 ## Capacity pressure
 
@@ -39,14 +34,12 @@ _Latest reading: 2026-06-10_
 - Geodnet: exact (lat,lng) duplicate groups 11 (+3 (+37.5%))
 - Geodnet: entities on public map 19,616 (-60 (-0.3%))
 - Geodnet: fleet share flagged (any heuristic) 9.34% (-0.00 pp (-0.0%))
-- Nodle: Flagged Emulator Nodes: 25 (38.5% of pool)
-- Nodle: exact (lat,lng) duplicate groups 15 (_(first snapshot — baseline recorded)_)
-- Nodle: entities on public map 65 (_(first snapshot — baseline recorded)_)
-- Nodle: fleet share flagged (any heuristic) 38.46% (_(first snapshot — baseline recorded)_)
-- Dawn Network: Flagged Anomalous Nodes: 25 (45.5% of pool)
-- Dawn Network: exact (lat,lng) duplicate groups 15 (_(first snapshot — baseline recorded)_)
-- Dawn Network: entities on public map 55 (_(first snapshot — baseline recorded)_)
-- Dawn Network: fleet share flagged (any heuristic) 45.45% (_(first snapshot — baseline recorded)_)
+- Helium IoT: 4,855 single-coordinate stacks of ≥10 hotspots on 1,008,019 located units — the largest stack holds 501 hotspots on one coordinate (§1 lists keys your registry team can grep today).
+- Helium IoT: entities on public map 1,008,019 (_(first snapshot — baseline recorded)_)
+- Helium IoT: single-coordinate stacks (≥10 hotspots) 4,855 (_(first snapshot — baseline recorded)_)
+- Helium IoT: largest single-coordinate stack 501 (_(first snapshot — baseline recorded)_)
+- Helium IoT: fleet share flagged (any heuristic) 6.91% (_(first snapshot — baseline recorded)_)
+- Helium Mobile: 529 single-coordinate stacks of ≥10 hotspots on 54,682 located units — the largest stack holds 497 hotspots on one coordinate (§1 lists keys your registry team can grep today).
 
 ## Geographic expansion
 
@@ -64,9 +57,8 @@ _Latest reading: 2026-06-10_
 - **WeatherXM** — Capacity pressure (`capacity_violation`)
 - **Geodnet** — Registry duplication (`duplication_cluster`)
 - **Hivemapper** — Economic concentration (`economic_concentration`)
-- **Nodle** — Identity collision (`identity_collision`)
-- **Dawn Network** — Identity collision (`identity_collision`)
-- **Grass / Titan** — Uncategorized public observation (`scaffold`)
+- **Helium IoT** — Registry duplication (`duplication_cluster`)
+- **Helium Mobile** — Registry duplication (`duplication_cluster`)
 
 ## Network snapshot (public reads)
 
@@ -79,23 +71,19 @@ _Latest reading: 2026-06-10_
 ### Hivemapper
 - 49.13% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
 
-### Nodle
-- Flagged Emulator Nodes: 25 (38.5% of pool)
+### Helium IoT
+- 4,855 single-coordinate stacks of ≥10 hotspots on 1,008,019 located units — the largest stack holds 501 hotspots on one coordinate (§1 lists keys your registry team can grep today).
 
-### Dawn Network
-- Flagged Anomalous Nodes: 25 (45.5% of pool)
-
-### Grass / Titan
-- Flagged Anomalies: 1 (16.7%)
+### Helium Mobile
+- 529 single-coordinate stacks of ≥10 hotspots on 54,682 located units — the largest stack holds 497 hotspots on one coordinate (§1 lists keys your registry team can grep today).
 
 ## What We Don't Know
 
 - **WeatherXM** — Whether over-capacity cells reflect real device density, registry double-counting, or expected reward-zone behavior — only the operator's internal registry settles it.
 - **Geodnet** — Whether shared coordinates are legitimate co-located installs, shared-mount sites, or registry artifacts — public data can't tell without operator confirmation.
 - **Hivemapper** — Whether the largest visible accounts are treasury, market-maker, exchange custody, or operators — on-chain shape doesn't label holder intent.
-- **Nodle** — Whether colliding identifiers are distinct physical devices or one identity reused — public maps don't expose device-level attestation.
-- **Dawn Network** — Whether colliding identifiers are distinct physical devices or one identity reused — public maps don't expose device-level attestation.
-- **Grass / Titan** — What the public feed cannot disambiguate without operator confirmation.
+- **Helium IoT** — Whether shared coordinates are legitimate co-located installs, shared-mount sites, or registry artifacts — public data can't tell without operator confirmation.
+- **Helium Mobile** — Whether shared coordinates are legitimate co-located installs, shared-mount sites, or registry artifacts — public data can't tell without operator confirmation.
 
 ## Methodology
 

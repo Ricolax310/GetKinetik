@@ -82,9 +82,12 @@ Set `SOLANA_RPC_URL` in `.env` (local) and GitHub repo **Secrets** for reliable 
 | WeatherXM | [report](./docs/reports/weatherxm-sybil-report.md) | generated via `bureau:outreach` | CEO validated — nurture |
 | Geodnet | [report](./docs/reports/geodnet-sybil-report.md) | generated via `bureau:outreach` | follow up |
 | Hivemapper | [report](./docs/reports/hivemapper-sybil-report.md) | generated via `bureau:outreach` | send |
-| Nodle | [report](./docs/reports/nodle-sybil-report.md) | optional read-only | parked (no integration ask) |
-| Dawn | [report](./docs/reports/dawn-sybil-report.md) | generated via `bureau:outreach` | optional |
-| Grass/Titan | [report](./docs/reports/grass-sybil-report.md) | off by default in pipeline | optional |
+| Helium IoT | [report](./docs/reports/helium-iot-sybil-report.md) | generated via `bureau:outreach` | new — real Entity API scan |
+| Helium Mobile | [report](./docs/reports/helium-mobile-sybil-report.md) | generated via `bureau:outreach` | new — real Entity API scan |
+
+> **Removed 2026-06-10:** Nodle, Dawn, and Grass/Titan scans were synthetic demo fixtures
+> (`scripts/fixtures/demo-scan-*.mjs`) and have been purged from every published surface.
+> Only real public-endpoint scans are allowed in the registry. See NEUTRALITY.md.
 
 ---
 

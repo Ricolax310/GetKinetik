@@ -9,9 +9,7 @@
       "label": "Registry & identity integrity",
       "signalCount": 12,
       "networks": [
-        "Dawn Network",
-        "Geodnet",
-        "Nodle"
+        "Geodnet"
       ],
       "topSeverity": "high",
       "whatWeDontKnow": "Whether shared/duplicated identifiers are legitimate co-located installs or registry artifacts — only operator confirmation settles it."
@@ -21,7 +19,6 @@
       "label": "Network health & capacity",
       "signalCount": 7,
       "networks": [
-        "Grass / Titan",
         "WeatherXM"
       ],
       "topSeverity": "medium",
@@ -254,224 +251,11 @@
       "signals": []
     },
     {
-      "network": "Nodle",
-      "networkId": "nodle",
-      "status": "active",
-      "signals": [
-        {
-          "network": "Nodle",
-          "type": "integrity",
-          "metric": "identityCollisions",
-          "value": null,
-          "previous": null,
-          "delta": 0,
-          "message": "Flagged Emulator Nodes: 25 (38.5% of pool)",
-          "severity": "medium",
-          "confidence": 0.7,
-          "anomalyType": "identity_collision",
-          "kind": "headline",
-          "metricKey": null,
-          "timestamp": "2026-06-01",
-          "asOf": "2026-06-01"
-        },
-        {
-          "network": "Nodle",
-          "type": "integrity",
-          "metric": "exactDupGroups",
-          "value": 15,
-          "previous": null,
-          "delta": 0,
-          "message": "exact (lat,lng) duplicate groups: 15 (_(first snapshot — baseline recorded)_)",
-          "severity": "low",
-          "confidence": 0.55,
-          "anomalyType": "identity_collision",
-          "kind": "metric",
-          "metricKey": "exactDupGroups",
-          "timestamp": "2026-06-01",
-          "asOf": "2026-06-01"
-        },
-        {
-          "network": "Nodle",
-          "type": "integrity",
-          "metric": "observed",
-          "value": 65,
-          "previous": null,
-          "delta": 0,
-          "message": "entities on public map: 65 (_(first snapshot — baseline recorded)_)",
-          "severity": "low",
-          "confidence": 0.55,
-          "anomalyType": "identity_collision",
-          "kind": "metric",
-          "metricKey": "observed",
-          "timestamp": "2026-06-01",
-          "asOf": "2026-06-01"
-        },
-        {
-          "network": "Nodle",
-          "type": "integrity",
-          "metric": "flaggedPct",
-          "value": 0.38461538461538464,
-          "previous": null,
-          "delta": 0,
-          "message": "fleet share flagged (any heuristic): 38.46% (_(first snapshot — baseline recorded)_)",
-          "severity": "low",
-          "confidence": 0.55,
-          "anomalyType": "identity_collision",
-          "kind": "metric",
-          "metricKey": "flaggedPct",
-          "timestamp": "2026-06-01",
-          "asOf": "2026-06-01"
-        }
-      ]
-    },
-    {
-      "network": "Dawn Network",
-      "networkId": "dawn",
-      "status": "active",
-      "signals": [
-        {
-          "network": "Dawn Network",
-          "type": "integrity",
-          "metric": "identityCollisions",
-          "value": null,
-          "previous": null,
-          "delta": 0,
-          "message": "Flagged Anomalous Nodes: 25 (45.5% of pool)",
-          "severity": "medium",
-          "confidence": 0.7,
-          "anomalyType": "identity_collision",
-          "kind": "headline",
-          "metricKey": null,
-          "timestamp": "2026-06-01",
-          "asOf": "2026-06-01"
-        },
-        {
-          "network": "Dawn Network",
-          "type": "integrity",
-          "metric": "exactDupGroups",
-          "value": 15,
-          "previous": null,
-          "delta": 0,
-          "message": "exact (lat,lng) duplicate groups: 15 (_(first snapshot — baseline recorded)_)",
-          "severity": "low",
-          "confidence": 0.55,
-          "anomalyType": "identity_collision",
-          "kind": "metric",
-          "metricKey": "exactDupGroups",
-          "timestamp": "2026-06-01",
-          "asOf": "2026-06-01"
-        },
-        {
-          "network": "Dawn Network",
-          "type": "integrity",
-          "metric": "observed",
-          "value": 55,
-          "previous": null,
-          "delta": 0,
-          "message": "entities on public map: 55 (_(first snapshot — baseline recorded)_)",
-          "severity": "low",
-          "confidence": 0.55,
-          "anomalyType": "identity_collision",
-          "kind": "metric",
-          "metricKey": "observed",
-          "timestamp": "2026-06-01",
-          "asOf": "2026-06-01"
-        },
-        {
-          "network": "Dawn Network",
-          "type": "integrity",
-          "metric": "flaggedPct",
-          "value": 0.45454545454545453,
-          "previous": null,
-          "delta": 0,
-          "message": "fleet share flagged (any heuristic): 45.45% (_(first snapshot — baseline recorded)_)",
-          "severity": "low",
-          "confidence": 0.55,
-          "anomalyType": "identity_collision",
-          "kind": "metric",
-          "metricKey": "flaggedPct",
-          "timestamp": "2026-06-01",
-          "asOf": "2026-06-01"
-        }
-      ]
-    },
-    {
       "network": "DIMO",
       "networkId": "dimo",
       "status": "pending",
       "note": "No public scanner wired yet — included for cross-network coverage.",
       "signals": []
-    },
-    {
-      "network": "Grass / Titan",
-      "networkId": "grass",
-      "status": "active",
-      "signals": [
-        {
-          "network": "Grass / Titan",
-          "type": "health",
-          "metric": "scaffold",
-          "value": null,
-          "previous": null,
-          "delta": 0,
-          "message": "Flagged Anomalies: 1 (16.7%)",
-          "severity": "medium",
-          "confidence": 0.7,
-          "anomalyType": "scaffold",
-          "kind": "headline",
-          "metricKey": null,
-          "timestamp": "2026-05-22",
-          "asOf": "2026-05-22"
-        },
-        {
-          "network": "Grass / Titan",
-          "type": "health",
-          "metric": "exactDupGroups",
-          "value": 0,
-          "previous": null,
-          "delta": 0,
-          "message": "exact (lat,lng) duplicate groups: 0 (_(first snapshot — baseline recorded)_)",
-          "severity": "low",
-          "confidence": 0.55,
-          "anomalyType": "scaffold",
-          "kind": "metric",
-          "metricKey": "exactDupGroups",
-          "timestamp": "2026-05-22",
-          "asOf": "2026-05-22"
-        },
-        {
-          "network": "Grass / Titan",
-          "type": "health",
-          "metric": "observed",
-          "value": 200,
-          "previous": null,
-          "delta": 0,
-          "message": "entities on public map: 200 (_(first snapshot — baseline recorded)_)",
-          "severity": "low",
-          "confidence": 0.55,
-          "anomalyType": "scaffold",
-          "kind": "metric",
-          "metricKey": "observed",
-          "timestamp": "2026-05-22",
-          "asOf": "2026-05-22"
-        },
-        {
-          "network": "Grass / Titan",
-          "type": "health",
-          "metric": "flaggedPct",
-          "value": 0.45,
-          "previous": null,
-          "delta": 0,
-          "message": "fleet share flagged (any heuristic): 45.00% (_(first snapshot — baseline recorded)_)",
-          "severity": "low",
-          "confidence": 0.55,
-          "anomalyType": "scaffold",
-          "kind": "metric",
-          "metricKey": "flaggedPct",
-          "timestamp": "2026-05-22",
-          "asOf": "2026-05-22"
-        }
-      ]
     }
   ],
   "date": "2026-06-08",
@@ -503,22 +287,6 @@
     {
       "id": "natix",
       "name": "Natix Network",
-      "status": "snapshot",
-      "scanned": false,
-      "reason": "snapshot reuse (offline mode)",
-      "snapshotAgeDays": 0
-    },
-    {
-      "id": "nodle",
-      "name": "Nodle",
-      "status": "snapshot",
-      "scanned": false,
-      "reason": "snapshot reuse (offline mode)",
-      "snapshotAgeDays": 0
-    },
-    {
-      "id": "dawn",
-      "name": "Dawn Network",
       "status": "snapshot",
       "scanned": false,
       "reason": "snapshot reuse (offline mode)",

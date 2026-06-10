@@ -21,13 +21,13 @@ export const PATHS = {
 // Canonical cross-network processing order. DIMO is included even before a
 // public scanner is wired, so the sector view is never single-network framed.
 export const PIPELINE_NETWORKS = [
-  { id: "geodnet",   name: "GEODNET",      scanScript: "sybil-scan-geodnet.mjs" },
-  { id: "weatherxm", name: "WeatherXM",   scanScript: "sybil-scan-weatherxm.mjs" },
-  { id: "hivemapper", name: "Hivemapper", scanScript: "sybil-scan-hivemapper.mjs" },
-  { id: "natix",     name: "NATIX",        scanScript: "sybil-scan-natix.mjs" },
-  { id: "nodle",     name: "Nodle",        scanScript: "sybil-scan-nodle.mjs" },
-  { id: "dawn",      name: "Dawn Network", scanScript: "sybil-scan-dawn.mjs" },
-  { id: "dimo",      name: "DIMO",         scanScript: null },
+  { id: "geodnet",       name: "GEODNET",       scanScript: "sybil-scan-geodnet.mjs" },
+  { id: "weatherxm",     name: "WeatherXM",     scanScript: "sybil-scan-weatherxm.mjs" },
+  { id: "hivemapper",    name: "Hivemapper",    scanScript: "sybil-scan-hivemapper.mjs" },
+  { id: "natix",         name: "NATIX",         scanScript: "sybil-scan-natix.mjs" },
+  { id: "helium-iot",    name: "Helium IoT",    scanScript: "sybil-scan-helium-iot.mjs" },
+  { id: "helium-mobile", name: "Helium Mobile", scanScript: "sybil-scan-helium-mobile.mjs" },
+  { id: "dimo",          name: "DIMO",          scanScript: null },
 ];
 
 // Standardized signal type per anomaly primitive.

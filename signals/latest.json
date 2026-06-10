@@ -2,16 +2,16 @@
   "schema": "getkinetik.signal-feed/v1",
   "cadence": "daily",
   "mode": "cross-network-first",
-  "generatedAt": "2026-06-09T17:42:58.695Z",
+  "generatedAt": "2026-06-10T11:21:54.588Z",
   "sectorSummary": [
     {
       "type": "integrity",
       "label": "Registry & identity integrity",
-      "signalCount": 12,
+      "signalCount": 10,
       "networks": [
-        "Dawn Network",
         "Geodnet",
-        "Nodle"
+        "Helium IoT",
+        "Helium Mobile"
       ],
       "topSeverity": "high",
       "whatWeDontKnow": "Whether shared/duplicated identifiers are legitimate co-located installs or registry artifacts — only operator confirmation settles it."
@@ -19,9 +19,8 @@
     {
       "type": "health",
       "label": "Network health & capacity",
-      "signalCount": 7,
+      "signalCount": 3,
       "networks": [
-        "Grass / Titan",
         "WeatherXM"
       ],
       "topSeverity": "medium",
@@ -49,19 +48,19 @@
     }
   ],
   "totals": {
-    "networks": 8,
-    "activeNetworks": 6,
-    "signals": 22,
+    "networks": 7,
+    "activeNetworks": 5,
+    "signals": 16,
     "byType": {
-      "integrity": 12,
-      "health": 7,
+      "integrity": 10,
+      "health": 3,
       "growth": 1,
       "economics": 2
     },
     "bySeverity": {
-      "medium": 6,
+      "medium": 5,
       "high": 1,
-      "low": 15
+      "low": 10
     }
   },
   "networks": [
@@ -254,144 +253,112 @@
       "signals": []
     },
     {
-      "network": "Nodle",
-      "networkId": "nodle",
+      "network": "Helium IoT",
+      "networkId": "helium-iot",
       "status": "active",
       "signals": [
         {
-          "network": "Nodle",
+          "network": "Helium IoT",
           "type": "integrity",
-          "metric": "identityCollisions",
+          "metric": "exactDupGroups",
           "value": null,
           "previous": null,
           "delta": 0,
-          "message": "Flagged Emulator Nodes: 25 (38.5% of pool)",
+          "message": "4,855 single-coordinate stacks of ≥10 hotspots on 1,008,019 located units — the largest stack holds 501 hotspots on one coordinate (§1 lists keys your registry team can grep today).",
           "severity": "medium",
           "confidence": 0.7,
-          "anomalyType": "identity_collision",
+          "anomalyType": "duplication_cluster",
           "kind": "headline",
           "metricKey": null,
-          "timestamp": "2026-06-01",
-          "asOf": "2026-06-01"
+          "timestamp": "2026-06-10",
+          "asOf": "2026-06-10"
         },
         {
-          "network": "Nodle",
-          "type": "integrity",
-          "metric": "exactDupGroups",
-          "value": 15,
-          "previous": null,
-          "delta": 0,
-          "message": "exact (lat,lng) duplicate groups: 15 (_(first snapshot — baseline recorded)_)",
-          "severity": "low",
-          "confidence": 0.55,
-          "anomalyType": "identity_collision",
-          "kind": "metric",
-          "metricKey": "exactDupGroups",
-          "timestamp": "2026-06-01",
-          "asOf": "2026-06-01"
-        },
-        {
-          "network": "Nodle",
+          "network": "Helium IoT",
           "type": "integrity",
           "metric": "observed",
-          "value": 65,
+          "value": 1008019,
           "previous": null,
           "delta": 0,
-          "message": "entities on public map: 65 (_(first snapshot — baseline recorded)_)",
+          "message": "entities on public map: 1,008,019 (_(first snapshot — baseline recorded)_)",
           "severity": "low",
           "confidence": 0.55,
-          "anomalyType": "identity_collision",
+          "anomalyType": "duplication_cluster",
           "kind": "metric",
           "metricKey": "observed",
-          "timestamp": "2026-06-01",
-          "asOf": "2026-06-01"
+          "timestamp": "2026-06-10",
+          "asOf": "2026-06-10"
         },
         {
-          "network": "Nodle",
+          "network": "Helium IoT",
           "type": "integrity",
-          "metric": "flaggedPct",
-          "value": 0.38461538461538464,
+          "metric": "stackedSpots",
+          "value": 4855,
           "previous": null,
           "delta": 0,
-          "message": "fleet share flagged (any heuristic): 38.46% (_(first snapshot — baseline recorded)_)",
+          "message": "single-coordinate stacks (≥10 hotspots): 4,855 (_(first snapshot — baseline recorded)_)",
           "severity": "low",
           "confidence": 0.55,
-          "anomalyType": "identity_collision",
+          "anomalyType": "duplication_cluster",
+          "kind": "metric",
+          "metricKey": "stackedSpots",
+          "timestamp": "2026-06-10",
+          "asOf": "2026-06-10"
+        },
+        {
+          "network": "Helium IoT",
+          "type": "integrity",
+          "metric": "largestStack",
+          "value": 501,
+          "previous": null,
+          "delta": 0,
+          "message": "largest single-coordinate stack: 501 (_(first snapshot — baseline recorded)_)",
+          "severity": "low",
+          "confidence": 0.55,
+          "anomalyType": "duplication_cluster",
+          "kind": "metric",
+          "metricKey": "largestStack",
+          "timestamp": "2026-06-10",
+          "asOf": "2026-06-10"
+        },
+        {
+          "network": "Helium IoT",
+          "type": "integrity",
+          "metric": "flaggedPct",
+          "value": 0.06906417438560186,
+          "previous": null,
+          "delta": 0,
+          "message": "fleet share flagged (any heuristic): 6.91% (_(first snapshot — baseline recorded)_)",
+          "severity": "low",
+          "confidence": 0.55,
+          "anomalyType": "duplication_cluster",
           "kind": "metric",
           "metricKey": "flaggedPct",
-          "timestamp": "2026-06-01",
-          "asOf": "2026-06-01"
+          "timestamp": "2026-06-10",
+          "asOf": "2026-06-10"
         }
       ]
     },
     {
-      "network": "Dawn Network",
-      "networkId": "dawn",
+      "network": "Helium Mobile",
+      "networkId": "helium-mobile",
       "status": "active",
       "signals": [
         {
-          "network": "Dawn Network",
+          "network": "Helium Mobile",
           "type": "integrity",
-          "metric": "identityCollisions",
+          "metric": "exactDupGroups",
           "value": null,
           "previous": null,
           "delta": 0,
-          "message": "Flagged Anomalous Nodes: 25 (45.5% of pool)",
+          "message": "529 single-coordinate stacks of ≥10 hotspots on 54,682 located units — the largest stack holds 497 hotspots on one coordinate (§1 lists keys your registry team can grep today).",
           "severity": "medium",
           "confidence": 0.7,
-          "anomalyType": "identity_collision",
+          "anomalyType": "duplication_cluster",
           "kind": "headline",
           "metricKey": null,
-          "timestamp": "2026-06-01",
-          "asOf": "2026-06-01"
-        },
-        {
-          "network": "Dawn Network",
-          "type": "integrity",
-          "metric": "exactDupGroups",
-          "value": 15,
-          "previous": null,
-          "delta": 0,
-          "message": "exact (lat,lng) duplicate groups: 15 (_(first snapshot — baseline recorded)_)",
-          "severity": "low",
-          "confidence": 0.55,
-          "anomalyType": "identity_collision",
-          "kind": "metric",
-          "metricKey": "exactDupGroups",
-          "timestamp": "2026-06-01",
-          "asOf": "2026-06-01"
-        },
-        {
-          "network": "Dawn Network",
-          "type": "integrity",
-          "metric": "observed",
-          "value": 55,
-          "previous": null,
-          "delta": 0,
-          "message": "entities on public map: 55 (_(first snapshot — baseline recorded)_)",
-          "severity": "low",
-          "confidence": 0.55,
-          "anomalyType": "identity_collision",
-          "kind": "metric",
-          "metricKey": "observed",
-          "timestamp": "2026-06-01",
-          "asOf": "2026-06-01"
-        },
-        {
-          "network": "Dawn Network",
-          "type": "integrity",
-          "metric": "flaggedPct",
-          "value": 0.45454545454545453,
-          "previous": null,
-          "delta": 0,
-          "message": "fleet share flagged (any heuristic): 45.45% (_(first snapshot — baseline recorded)_)",
-          "severity": "low",
-          "confidence": 0.55,
-          "anomalyType": "identity_collision",
-          "kind": "metric",
-          "metricKey": "flaggedPct",
-          "timestamp": "2026-06-01",
-          "asOf": "2026-06-01"
+          "timestamp": "2026-06-10",
+          "asOf": "2026-06-10"
         }
       ]
     },
@@ -401,80 +368,9 @@
       "status": "pending",
       "note": "No public scanner wired yet — included for cross-network coverage.",
       "signals": []
-    },
-    {
-      "network": "Grass / Titan",
-      "networkId": "grass",
-      "status": "active",
-      "signals": [
-        {
-          "network": "Grass / Titan",
-          "type": "health",
-          "metric": "scaffold",
-          "value": null,
-          "previous": null,
-          "delta": 0,
-          "message": "Flagged Anomalies: 1 (16.7%)",
-          "severity": "medium",
-          "confidence": 0.7,
-          "anomalyType": "scaffold",
-          "kind": "headline",
-          "metricKey": null,
-          "timestamp": "2026-05-22",
-          "asOf": "2026-05-22"
-        },
-        {
-          "network": "Grass / Titan",
-          "type": "health",
-          "metric": "exactDupGroups",
-          "value": 0,
-          "previous": null,
-          "delta": 0,
-          "message": "exact (lat,lng) duplicate groups: 0 (_(first snapshot — baseline recorded)_)",
-          "severity": "low",
-          "confidence": 0.55,
-          "anomalyType": "scaffold",
-          "kind": "metric",
-          "metricKey": "exactDupGroups",
-          "timestamp": "2026-05-22",
-          "asOf": "2026-05-22"
-        },
-        {
-          "network": "Grass / Titan",
-          "type": "health",
-          "metric": "observed",
-          "value": 200,
-          "previous": null,
-          "delta": 0,
-          "message": "entities on public map: 200 (_(first snapshot — baseline recorded)_)",
-          "severity": "low",
-          "confidence": 0.55,
-          "anomalyType": "scaffold",
-          "kind": "metric",
-          "metricKey": "observed",
-          "timestamp": "2026-05-22",
-          "asOf": "2026-05-22"
-        },
-        {
-          "network": "Grass / Titan",
-          "type": "health",
-          "metric": "flaggedPct",
-          "value": 0.45,
-          "previous": null,
-          "delta": 0,
-          "message": "fleet share flagged (any heuristic): 45.00% (_(first snapshot — baseline recorded)_)",
-          "severity": "low",
-          "confidence": 0.55,
-          "anomalyType": "scaffold",
-          "kind": "metric",
-          "metricKey": "flaggedPct",
-          "timestamp": "2026-05-22",
-          "asOf": "2026-05-22"
-        }
-      ]
     }
   ],
-  "date": "2026-06-09",
+  "date": "2026-06-10",
   "ingest": [
     {
       "id": "geodnet",
@@ -482,7 +378,7 @@
       "status": "snapshot",
       "scanned": false,
       "reason": "snapshot reuse (offline mode)",
-      "snapshotAgeDays": 0
+      "snapshotAgeDays": 6
     },
     {
       "id": "weatherxm",
@@ -490,7 +386,7 @@
       "status": "snapshot",
       "scanned": false,
       "reason": "snapshot reuse (offline mode)",
-      "snapshotAgeDays": 0
+      "snapshotAgeDays": 6
     },
     {
       "id": "hivemapper",
@@ -498,7 +394,7 @@
       "status": "snapshot",
       "scanned": false,
       "reason": "snapshot reuse (offline mode)",
-      "snapshotAgeDays": 0
+      "snapshotAgeDays": 6
     },
     {
       "id": "natix",
@@ -506,19 +402,19 @@
       "status": "snapshot",
       "scanned": false,
       "reason": "snapshot reuse (offline mode)",
-      "snapshotAgeDays": 0
+      "snapshotAgeDays": 6
     },
     {
-      "id": "nodle",
-      "name": "Nodle",
+      "id": "helium-iot",
+      "name": "Helium IoT",
       "status": "snapshot",
       "scanned": false,
       "reason": "snapshot reuse (offline mode)",
       "snapshotAgeDays": 0
     },
     {
-      "id": "dawn",
-      "name": "Dawn Network",
+      "id": "helium-mobile",
+      "name": "Helium Mobile",
       "status": "snapshot",
       "scanned": false,
       "reason": "snapshot reuse (offline mode)",

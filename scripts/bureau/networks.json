@@ -107,48 +107,33 @@
       }
     },
     {
-      "id": "nodle",
-      "name": "Nodle",
-      "scanScript": "sybil-scan-nodle.mjs",
-      "report": "docs/reports/nodle-sybil-report.md",
-      "snapshot": "scripts/data/nodle-scan-snapshot.json",
-      "publicSource": "Nodle public scan inputs (see script header)",
-      "scanNotes": "Geometry heuristics on public snapshot. Flags beacon collision clusters and zero-jitter heartbeats.",
+      "id": "helium-iot",
+      "name": "Helium IoT",
+      "scanScript": "sybil-scan-helium-iot.mjs",
+      "report": "docs/reports/helium-iot-sybil-report.md",
+      "snapshot": "scripts/data/helium-iot-snapshot.json",
+      "publicSource": "https://entities.nft.helium.io/v2/hotspots?subnetwork=iot",
+      "scanNotes": "Helium Entity API (free, no auth). Asserted locations snap to H3 hexes, so single-coordinate stacks — not pairwise duplicates — are the meaningful unit. Flags large same-coordinate stacks and reports inactive share.",
       "requiresEnv": [],
       "defaultEnabled": true,
       "routing": {
-        "anomalyType": "identity_collision",
-        "verificationCall": "Sample flagged node IDs showing BEACON_COLLISION_CLUSTER from §1 and run POST /api/verify-device to confirm whether co-located nodes resolve to distinct, real device identities."
+        "anomalyType": "duplication_cluster",
+        "verificationCall": "Sample hotspot keys from the largest same-coordinate stacks in §1 and run POST /api/verify-device to confirm whether stacked asserted locations resolve to distinct, physically separate radios."
       }
     },
     {
-      "id": "dawn",
-      "name": "Dawn Network",
-      "scanScript": "sybil-scan-dawn.mjs",
-      "report": "docs/reports/dawn-sybil-report.md",
-      "snapshot": "scripts/data/dawn-scan-snapshot.json",
-      "publicSource": "Dawn public scan inputs (see script header)",
-      "scanNotes": "Public endpoint scan. Flags hardware/appId clone twins and datacenter IP sources.",
+      "id": "helium-mobile",
+      "name": "Helium Mobile",
+      "scanScript": "sybil-scan-helium-mobile.mjs",
+      "report": "docs/reports/helium-mobile-sybil-report.md",
+      "snapshot": "scripts/data/helium-mobile-snapshot.json",
+      "publicSource": "https://entities.nft.helium.io/v2/hotspots?subnetwork=mobile",
+      "scanNotes": "Helium Entity API (free, no auth). Same heuristics as helium-iot on the mobile subnetwork.",
       "requiresEnv": [],
       "defaultEnabled": true,
       "routing": {
-        "anomalyType": "identity_collision",
-        "verificationCall": "Sample flagged app IDs showing HARDWARE_APPID_CLONE_TWIN from §1 and run POST /api/verify-device to confirm whether cloned app instances resolve to distinct, real device identities."
-      }
-    },
-    {
-      "id": "grass",
-      "name": "Grass / Titan",
-      "scanScript": "sybil-scan-grass.mjs",
-      "report": "docs/reports/grass-sybil-report.md",
-      "snapshot": "scripts/data/grass-scan-snapshot.json",
-      "publicSource": "Grass/Titan public scan inputs (see script header)",
-      "scanNotes": "May require live mode flags — see sybil-scan-grass.mjs.",
-      "requiresEnv": [],
-      "defaultEnabled": false,
-      "routing": {
-        "anomalyType": "scaffold",
-        "verificationCall": null
+        "anomalyType": "duplication_cluster",
+        "verificationCall": "Sample hotspot keys from the largest same-coordinate stacks in §1 and run POST /api/verify-device to confirm whether stacked asserted locations resolve to distinct, physically separate radios."
       }
     }
   ]
