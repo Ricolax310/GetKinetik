@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-06-09T17:42:58.844Z",
+  "generatedAt": "2026-06-10T18:02:14.059Z",
   "schema": "getkinetik.drip/v2",
-  "date": "2026-06-09",
+  "date": "2026-06-10",
   "minConfidence": 0.6,
   "daily": [
     "Geodnet: 11 duplicate coordinate clusters (+3)",
@@ -14,31 +14,21 @@
   ],
   "weekly": [
     "Geodnet: repeated exactDupGroups observation. Observed Geodnet exactDupGroups on 7 of 7 recorded days.",
-    "Geodnet: repeated flaggedPct observation. Observed Geodnet flaggedPct on 6 of 7 recorded days.",
-    "Geodnet: repeated observed observation. Observed Geodnet observed on 6 of 7 recorded days.",
-    "WeatherXM: repeated observed observation. Observed WeatherXM observed on 6 of 7 recorded days.",
-    "Divergence: IDENTITY metrics split across networks. Opposing metric drift — Geodnet rising while Geodnet declining.",
-    "Divergence: INFRASTRUCTURE metrics split across networks. Opposing metric drift — WeatherXM rising while Geodnet declining.",
+    "Geodnet: repeated flaggedPct observation. Observed Geodnet flaggedPct on 7 of 7 recorded days.",
     "WeatherXM: repeated overCapacityCells observation. Observed WeatherXM overCapacityCells on 7 of 7 recorded days.",
-    "WeatherXM: repeated overCapacityPct observation. Observed WeatherXM overCapacityPct on 6 of 7 recorded days.",
+    "WeatherXM: repeated overCapacityPct observation. Observed WeatherXM overCapacityPct on 7 of 7 recorded days.",
+    "Geodnet: repeated observed observation. Observed Geodnet observed on 7 of 7 recorded days.",
+    "WeatherXM: repeated observed observation. Observed WeatherXM observed on 7 of 7 recorded days.",
+    "Cross-network infrastructure coverage stress observed across multiple networks. Cross-network infrastructure coverage stress observed across multiple networks (Geodnet, WeatherXM).",
+    "Divergence: INFRASTRUCTURE metrics split across networks. Opposing metric drift — WeatherXM rising while Geodnet declining.",
     "Hivemapper: repeated top20ShareOfSupply observation. Observed Hivemapper top20ShareOfSupply on 7 of 7 recorded days.",
     "WeatherXM: capacity pressure signal detected. Observed capacity signal on WeatherXM (overCapacityCells).",
+    "Geodnet: identity registry stress signal detected. Observed identity signal on Geodnet (exactDupGroups).",
+    "Divergence: IDENTITY metrics split across networks. Opposing metric drift — Geodnet rising while Geodnet declining.",
     "Hivemapper: economic distribution shape signal detected. Observed economics signal on Hivemapper (top20ShareOfSupply).",
     "Economic concentration shape on public ledgers. Observed holder/supply concentration metrics from public on-chain reads."
   ],
   "patterns": [
-    {
-      "scope": "systemic",
-      "classification": "convergence",
-      "headline": "Cross-network identity registry stress observed across multiple networks",
-      "pattern": "CROSS_NETWORK_IDENTITY",
-      "networks": [
-        "Geodnet"
-      ],
-      "category": "IDENTITY",
-      "description": "Cross-network identity registry stress observed across multiple networks ( Geodnet).",
-      "patternType": "cross-network"
-    },
     {
       "scope": "systemic",
       "classification": "repetition",
@@ -60,70 +50,8 @@
         "Geodnet"
       ],
       "category": "IDENTITY",
-      "description": "Observed Geodnet flaggedPct on 6 of 7 recorded days.",
+      "description": "Observed Geodnet flaggedPct on 7 of 7 recorded days.",
       "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "convergence",
-      "headline": "Cross-network infrastructure coverage stress observed across multiple networks",
-      "pattern": "CROSS_NETWORK_INFRASTRUCTURE",
-      "networks": [
-        "Geodnet",
-        "WeatherXM"
-      ],
-      "category": "INFRASTRUCTURE",
-      "description": "Cross-network infrastructure coverage stress observed across multiple networks ( Geodnet, , WeatherXM).",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Geodnet: repeated observed observation",
-      "pattern": "REPEATED_INFRASTRUCTURE",
-      "networks": [
-        "Geodnet"
-      ],
-      "category": "INFRASTRUCTURE",
-      "description": "Observed Geodnet observed on 6 of 7 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "WeatherXM: repeated observed observation",
-      "pattern": "REPEATED_INFRASTRUCTURE",
-      "networks": [
-        "WeatherXM"
-      ],
-      "category": "INFRASTRUCTURE",
-      "description": "Observed WeatherXM observed on 6 of 7 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "localized",
-      "classification": "divergence",
-      "headline": "Divergence: IDENTITY metrics split across networks",
-      "pattern": "DIVERGENCE_IDENTITY",
-      "networks": [
-        "Geodnet"
-      ],
-      "category": "IDENTITY",
-      "description": "Opposing metric drift — Geodnet rising while Geodnet declining.",
-      "patternType": "divergence"
-    },
-    {
-      "scope": "cross-network",
-      "classification": "divergence",
-      "headline": "Divergence: INFRASTRUCTURE metrics split across networks",
-      "pattern": "DIVERGENCE_INFRASTRUCTURE",
-      "networks": [
-        "Geodnet",
-        "WeatherXM"
-      ],
-      "category": "INFRASTRUCTURE",
-      "description": "Opposing metric drift — WeatherXM rising while Geodnet declining.",
-      "patternType": "divergence"
     },
     {
       "scope": "systemic",
@@ -146,8 +74,58 @@
         "WeatherXM"
       ],
       "category": "CAPACITY",
-      "description": "Observed WeatherXM overCapacityPct on 6 of 7 recorded days.",
+      "description": "Observed WeatherXM overCapacityPct on 7 of 7 recorded days.",
       "patternType": "cross-network"
+    },
+    {
+      "scope": "systemic",
+      "classification": "repetition",
+      "headline": "Geodnet: repeated observed observation",
+      "pattern": "REPEATED_INFRASTRUCTURE",
+      "networks": [
+        "Geodnet"
+      ],
+      "category": "INFRASTRUCTURE",
+      "description": "Observed Geodnet observed on 7 of 7 recorded days.",
+      "patternType": "cross-network"
+    },
+    {
+      "scope": "systemic",
+      "classification": "repetition",
+      "headline": "WeatherXM: repeated observed observation",
+      "pattern": "REPEATED_INFRASTRUCTURE",
+      "networks": [
+        "WeatherXM"
+      ],
+      "category": "INFRASTRUCTURE",
+      "description": "Observed WeatherXM observed on 7 of 7 recorded days.",
+      "patternType": "cross-network"
+    },
+    {
+      "scope": "cross-network",
+      "classification": "convergence",
+      "headline": "Cross-network infrastructure coverage stress observed across multiple networks",
+      "pattern": "CROSS_NETWORK_INFRASTRUCTURE",
+      "networks": [
+        "Geodnet",
+        "WeatherXM"
+      ],
+      "category": "INFRASTRUCTURE",
+      "description": "Cross-network infrastructure coverage stress observed across multiple networks (Geodnet, WeatherXM).",
+      "patternType": "cross-network"
+    },
+    {
+      "scope": "cross-network",
+      "classification": "divergence",
+      "headline": "Divergence: INFRASTRUCTURE metrics split across networks",
+      "pattern": "DIVERGENCE_INFRASTRUCTURE",
+      "networks": [
+        "Geodnet",
+        "WeatherXM"
+      ],
+      "category": "INFRASTRUCTURE",
+      "description": "Opposing metric drift — WeatherXM rising while Geodnet declining.",
+      "patternType": "divergence"
     },
     {
       "scope": "systemic",
@@ -176,6 +154,30 @@
     {
       "scope": "localized",
       "classification": "drift",
+      "headline": "Geodnet: identity registry stress signal detected",
+      "pattern": "LOCAL_IDENTITY",
+      "networks": [
+        "Geodnet"
+      ],
+      "category": "IDENTITY",
+      "description": "Observed identity signal on Geodnet (exactDupGroups).",
+      "patternType": "single-network"
+    },
+    {
+      "scope": "localized",
+      "classification": "divergence",
+      "headline": "Divergence: IDENTITY metrics split across networks",
+      "pattern": "DIVERGENCE_IDENTITY",
+      "networks": [
+        "Geodnet"
+      ],
+      "category": "IDENTITY",
+      "description": "Opposing metric drift — Geodnet rising while Geodnet declining.",
+      "patternType": "divergence"
+    },
+    {
+      "scope": "localized",
+      "classification": "drift",
       "headline": "Hivemapper: economic distribution shape signal detected",
       "pattern": "LOCAL_ECONOMICS",
       "networks": [
@@ -199,7 +201,7 @@
     }
   ],
   "implication": [
-    "Signal divergence between reported and operational metrics is increasing across multiple DePIN sensor networks (identity, infrastructure, capacity, economics categories observed concurrently)."
+    "Signal divergence between reported and operational metrics is increasing across multiple DePIN sensor networks (identity, capacity, infrastructure, economics categories observed concurrently)."
   ],
   "signals": [
     {
@@ -317,6 +319,39 @@
         ]
       }
     ],
-    "heldBack": []
+    "heldBack": [
+      {
+        "network": "Helium IoT",
+        "metric": "observed",
+        "confidence": 0.544,
+        "flags": [
+          "unverified"
+        ]
+      },
+      {
+        "network": "Helium IoT",
+        "metric": "stackedSpots",
+        "confidence": 0.544,
+        "flags": [
+          "unverified"
+        ]
+      },
+      {
+        "network": "Helium IoT",
+        "metric": "largestStack",
+        "confidence": 0.544,
+        "flags": [
+          "unverified"
+        ]
+      },
+      {
+        "network": "Helium IoT",
+        "metric": "flaggedPct",
+        "confidence": 0.544,
+        "flags": [
+          "unverified"
+        ]
+      }
+    ]
   }
 }

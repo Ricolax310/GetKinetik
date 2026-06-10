@@ -2,7 +2,7 @@
   "schema": "getkinetik.signal-feed/v1",
   "cadence": "daily",
   "mode": "cross-network-first",
-  "generatedAt": "2026-06-10T11:21:54.588Z",
+  "generatedAt": "2026-06-10T18:02:13.426Z",
   "sectorSummary": [
     {
       "type": "integrity",
@@ -378,7 +378,7 @@
       "status": "snapshot",
       "scanned": false,
       "reason": "snapshot reuse (offline mode)",
-      "snapshotAgeDays": 6
+      "snapshotAgeDays": 0
     },
     {
       "id": "weatherxm",
@@ -386,7 +386,7 @@
       "status": "snapshot",
       "scanned": false,
       "reason": "snapshot reuse (offline mode)",
-      "snapshotAgeDays": 6
+      "snapshotAgeDays": 0
     },
     {
       "id": "hivemapper",
@@ -394,7 +394,7 @@
       "status": "snapshot",
       "scanned": false,
       "reason": "snapshot reuse (offline mode)",
-      "snapshotAgeDays": 6
+      "snapshotAgeDays": 0
     },
     {
       "id": "natix",
@@ -402,7 +402,7 @@
       "status": "snapshot",
       "scanned": false,
       "reason": "snapshot reuse (offline mode)",
-      "snapshotAgeDays": 6
+      "snapshotAgeDays": 0
     },
     {
       "id": "helium-iot",

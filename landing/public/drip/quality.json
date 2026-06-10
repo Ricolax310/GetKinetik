@@ -59,7 +59,40 @@
         ]
       }
     ],
-    "heldBack": []
+    "heldBack": [
+      {
+        "network": "Helium IoT",
+        "metric": "observed",
+        "confidence": 0.544,
+        "flags": [
+          "unverified"
+        ]
+      },
+      {
+        "network": "Helium IoT",
+        "metric": "stackedSpots",
+        "confidence": 0.544,
+        "flags": [
+          "unverified"
+        ]
+      },
+      {
+        "network": "Helium IoT",
+        "metric": "largestStack",
+        "confidence": 0.544,
+        "flags": [
+          "unverified"
+        ]
+      },
+      {
+        "network": "Helium IoT",
+        "metric": "flaggedPct",
+        "confidence": 0.544,
+        "flags": [
+          "unverified"
+        ]
+      }
+    ]
   },
   "weekly": {
     "minConfidence": 0.8,
