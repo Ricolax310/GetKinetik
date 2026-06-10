@@ -1,134 +1,89 @@
-# Daily DePIN Signal Brief
+# Daily Signal Brief
 
-> 2026-06-07 · automated cross-network pipeline · evidence not verdicts
+> 2026-06-07 · derived from public audit snapshots only. Signals → report (not narrative-first).
 
 ## Today's Read
 
+• Dawn Network duplicate-coordinate groups unchanged at 15.
 • Geodnet duplicate-coordinate groups rose from 8 to 11.
+• Grass / Titan duplicate-coordinate groups unchanged at 0.
+• Nodle duplicate-coordinate groups unchanged at 15.
 • WeatherXM over-capacity cells declined from 289 to 288.
 • Geodnet entities on public map declined from 19,676 to 19,616.
-• Nodle duplicate-coordinate groups unchanged at 15.
-• Dawn Network duplicate-coordinate groups unchanged at 15.
-• Grass / Titan duplicate-coordinate groups unchanged at 0.
 
 ## Why It Matters
 
-Today's signals show movement in concentration metrics, with at least one high-severity read observable on public data.
-The observed changes are reproducible from public endpoints and remain non-conclusive without operator confirmation.
+Today's signals show modest movement in infrastructure metrics. Telemetry and concentration readings are largely unchanged.
+The observed changes are incremental rather than structural and remain reproducible from public data sources.
 Observations span 6 networks — no single network dominates the index.
 
 ## Full Evidence
 
-### Cross-Network Summary
-
-| Sector | Signals | Networks | Top severity |
-|---|---:|---|---|
-| Registry & identity integrity | 12 | Dawn Network, Geodnet, Nodle | high |
-| Network health & capacity | 7 | Grass / Titan, WeatherXM | medium |
-| Coverage growth | 1 | WeatherXM | low |
-| Token economics | 2 | Hivemapper | medium |
-
-_Totals: 22 signal(s) across 6/8 networks._
-
 ### What Changed Today
 
-**Registry & identity integrity**
-- **Geodnet** — 11 exact (lat,lng) duplicate groups on 19,616 public stations — each row in §1 is one coordinate pair your registry team can grep today. _(medium · conf 0.70)_
-- **Geodnet** — exact (lat,lng) duplicate groups: 11 (+3 (+37.5%)) _(high · conf 0.85)_
-- **Geodnet** — entities on public map: 19,616 (-60 (-0.3%)) _(low · conf 0.85)_
-- **Geodnet** — fleet share flagged (any heuristic): 9.34% (-0.00 pp (-0.0%)) _(low · conf 0.85)_
-- **Nodle** — Flagged Emulator Nodes: 25 (38.5% of pool) _(medium · conf 0.70)_
-- **Nodle** — exact (lat,lng) duplicate groups: 15 (_(first snapshot — baseline recorded)_) _(low · conf 0.55)_
-- **Nodle** — entities on public map: 65 (_(first snapshot — baseline recorded)_) _(low · conf 0.55)_
-- **Nodle** — fleet share flagged (any heuristic): 38.46% (_(first snapshot — baseline recorded)_) _(low · conf 0.55)_
-- **Dawn Network** — Flagged Anomalous Nodes: 25 (45.5% of pool) _(medium · conf 0.70)_
-- **Dawn Network** — exact (lat,lng) duplicate groups: 15 (_(first snapshot — baseline recorded)_) _(low · conf 0.55)_
-- **Dawn Network** — entities on public map: 55 (_(first snapshot — baseline recorded)_) _(low · conf 0.55)_
-- **Dawn Network** — fleet share flagged (any heuristic): 45.45% (_(first snapshot — baseline recorded)_) _(low · conf 0.55)_
-
-**Network health & capacity**
-- **WeatherXM** — 288 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue. _(medium · conf 0.70)_
-- **WeatherXM** — cells over designed capacity: 288 (-1 (-0.3%)) _(low · conf 0.85)_
-- **WeatherXM** — share of map over capacity: 3.39% (-0.01 pp (-0.4%)) _(low · conf 0.85)_
-- **Grass / Titan** — Flagged Anomalies: 1 (16.7%) _(medium · conf 0.70)_
-- **Grass / Titan** — exact (lat,lng) duplicate groups: 0 (_(first snapshot — baseline recorded)_) _(low · conf 0.55)_
-- **Grass / Titan** — entities on public map: 200 (_(first snapshot — baseline recorded)_) _(low · conf 0.55)_
-- **Grass / Titan** — fleet share flagged (any heuristic): 45.00% (_(first snapshot — baseline recorded)_) _(low · conf 0.55)_
-
-**Coverage growth**
-- **WeatherXM** — entities on public map: 8,492 (+3 (+0.0%)) _(low · conf 0.85)_
-
-**Token economics**
-- **Hivemapper** — 49.13% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read. _(medium · conf 0.70)_
-- **Hivemapper** — top-20 SPL share of UI supply: 49.13% (-0.02 pp (-0.0%)) _(low · conf 0.85)_
+- **Geodnet** — exact (lat,lng) duplicate groups: 11 (+3 (+37.5%))
+- **Geodnet** — entities on public map: 19,616 (-60 (-0.3%))
+- **Geodnet** — fleet share flagged (any heuristic): 9.34% (-0.00 pp (-0.0%))
+- **WeatherXM** — entities on public map: 8,492 (+3 (+0.0%))
+- **WeatherXM** — cells over designed capacity: 288 (-1 (-0.3%))
+- **WeatherXM** — share of map over capacity: 3.39% (-0.01 pp (-0.4%))
+- **Hivemapper** — top-20 SPL share of UI supply: 49.13% (-0.02 pp (-0.0%))
+- **Nodle** — exact (lat,lng) duplicate groups: 15 (_(first snapshot — baseline recorded)_)
+- **Nodle** — entities on public map: 65 (_(first snapshot — baseline recorded)_)
+- **Nodle** — fleet share flagged (any heuristic): 38.46% (_(first snapshot — baseline recorded)_)
+- **Dawn Network** — exact (lat,lng) duplicate groups: 15 (_(first snapshot — baseline recorded)_)
+- **Dawn Network** — entities on public map: 55 (_(first snapshot — baseline recorded)_)
+- **Dawn Network** — fleet share flagged (any heuristic): 45.45% (_(first snapshot — baseline recorded)_)
+- **Grass / Titan** — exact (lat,lng) duplicate groups: 0 (_(first snapshot — baseline recorded)_)
+- **Grass / Titan** — entities on public map: 200 (_(first snapshot — baseline recorded)_)
+- **Grass / Titan** — fleet share flagged (any heuristic): 45.00% (_(first snapshot — baseline recorded)_)
 
 ### Signal Type
 
-- **Registry & identity integrity** (`integrity`) — 12 signal(s) across 3 network(s): Dawn Network, Geodnet, Nodle
-- **Network health & capacity** (`health`) — 7 signal(s) across 2 network(s): Grass / Titan, WeatherXM
-- **Coverage growth** (`growth`) — 1 signal(s) across 1 network(s): WeatherXM
-- **Token economics** (`economics`) — 2 signal(s) across 1 network(s): Hivemapper
+- **Geodnet** — Registry duplication (`duplication_cluster`)
+- **WeatherXM** — Capacity pressure (`capacity_violation`)
+- **Hivemapper** — Economic concentration (`economic_concentration`)
+- **Nodle** — Identity collision (`identity_collision`)
+- **Dawn Network** — Identity collision (`identity_collision`)
+- **Grass / Titan** — Uncategorized public observation (`scaffold`)
 
 ### Signal Context
 
-_Operational context for observed metrics — not verdicts._
-- **Registry & identity integrity** — public integrity signals across Dawn Network, Geodnet, Nodle.
-- **Network health & capacity** — public health signals across Grass / Titan, WeatherXM.
-- **Coverage growth** — public growth signals across WeatherXM.
-- **Token economics** — public economics signals across Hivemapper.
+- Geodnet: duplicate or inconsistent registry entries are grep-able from public data alone.
+- WeatherXM: public cell capacity counts are a reproducible registry-pressure signal.
+- Hivemapper: visible on-chain concentration is economic shape only — useful for custody reconciliation, not device claims.
+- Nodle: duplicate or inconsistent registry entries are grep-able from public data alone.
+- Dawn Network: duplicate or inconsistent registry entries are grep-able from public data alone.
+- Grass / Titan: measurable public-data delta worth cross-checking with internal ops.
 
 ### What We Don't Know
 
-- **Registry & identity integrity** — Whether shared/duplicated identifiers are legitimate co-located installs or registry artifacts — only operator confirmation settles it.
-- **Network health & capacity** — Whether capacity or telemetry anomalies reflect real on-the-ground activity, ETL/display behavior, or registry double-counting — the public feed alone can't say.
-- **Coverage growth** — Whether registry growth reflects new physical deployments or registration churn — counts alone don't prove device reality.
-- **Token economics** — Whether the largest visible accounts are treasury, market-maker, exchange custody, or operators — on-chain shape doesn't label holder intent.
+- **Geodnet** — Whether shared coordinates are legitimate co-located installs, shared-mount sites, or registry artifacts — public data can't tell without operator confirmation.
+- **WeatherXM** — Whether over-capacity cells reflect real device density, registry double-counting, or expected reward-zone behavior — only the operator's internal registry settles it.
+- **Hivemapper** — Whether the largest visible accounts are treasury, market-maker, exchange custody, or operators — on-chain shape doesn't label holder intent.
+- **Nodle** — Whether colliding identifiers are distinct physical devices or one identity reused — public maps don't expose device-level attestation.
+- **Dawn Network** — Whether colliding identifiers are distinct physical devices or one identity reused — public maps don't expose device-level attestation.
+- **Grass / Titan** — What the public feed cannot disambiguate without operator confirmation.
 
-### Network Breakdown
+### Questions Worth Asking
 
-### Geodnet
-- [integrity] 11 exact (lat,lng) duplicate groups on 19,616 public stations — each row in §1 is one coordinate pair your registry team can grep today. _(medium · conf 0.70)_
-- [integrity] exact (lat,lng) duplicate groups: 11 (+3 (+37.5%)) _(high · conf 0.85)_
-- [integrity] entities on public map: 19,616 (-60 (-0.3%)) _(low · conf 0.85)_
-- [integrity] fleet share flagged (any heuristic): 9.34% (-0.00 pp (-0.0%)) _(low · conf 0.85)_
+- On the public cells view, do over-capacity H3 counts match your internal registry and rewards model?
+- For stations sharing an exact coordinate pair on the public registry, is that expected registration behavior or a dedupe gap worth reconciling?
+- Do the largest visible SPL accounts map to known treasury or market-maker custody labels on your side?
+- Does the public read for Nodle match what your team sees internally, or is the public feed expected to look this way?
+- Does the public read for Dawn Network match what your team sees internally, or is the public feed expected to look this way?
 
-### WeatherXM
-- [health] 288 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue. _(medium · conf 0.70)_
-- [growth] entities on public map: 8,492 (+3 (+0.0%)) _(low · conf 0.85)_
-- [health] cells over designed capacity: 288 (-1 (-0.3%)) _(low · conf 0.85)_
-- [health] share of map over capacity: 3.39% (-0.01 pp (-0.4%)) _(low · conf 0.85)_
+### Thread Seed
 
-### Hivemapper
-- [economics] 49.13% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read. _(medium · conf 0.70)_
-- [economics] top-20 SPL share of UI supply: 49.13% (-0.02 pp (-0.0%)) _(low · conf 0.85)_
+Public read on Geodnet: 11 exact (lat,lng) duplicate groups on 19,616 public stations — each row in §1 is one coordinate pai — does that match your internal view, or is the public feed expected to behave this way?
 
-### NATIX
-- _No qualifying public finding in latest snapshot._
+### Sources & Methodology
 
-### Nodle
-- [integrity] Flagged Emulator Nodes: 25 (38.5% of pool) _(medium · conf 0.70)_
-- [integrity] exact (lat,lng) duplicate groups: 15 (_(first snapshot — baseline recorded)_) _(low · conf 0.55)_
-- [integrity] entities on public map: 65 (_(first snapshot — baseline recorded)_) _(low · conf 0.55)_
-- [integrity] fleet share flagged (any heuristic): 38.46% (_(first snapshot — baseline recorded)_) _(low · conf 0.55)_
-
-### Dawn Network
-- [integrity] Flagged Anomalous Nodes: 25 (45.5% of pool) _(medium · conf 0.70)_
-- [integrity] exact (lat,lng) duplicate groups: 15 (_(first snapshot — baseline recorded)_) _(low · conf 0.55)_
-- [integrity] entities on public map: 55 (_(first snapshot — baseline recorded)_) _(low · conf 0.55)_
-- [integrity] fleet share flagged (any heuristic): 45.45% (_(first snapshot — baseline recorded)_) _(low · conf 0.55)_
-
-### DIMO
-- _No public scanner wired yet — included for cross-network coverage._
-
-### Grass / Titan
-- [health] Flagged Anomalies: 1 (16.7%) _(medium · conf 0.70)_
-- [health] exact (lat,lng) duplicate groups: 0 (_(first snapshot — baseline recorded)_) _(low · conf 0.55)_
-- [health] entities on public map: 200 (_(first snapshot — baseline recorded)_) _(low · conf 0.55)_
-- [health] fleet share flagged (any heuristic): 45.00% (_(first snapshot — baseline recorded)_) _(low · conf 0.55)_
-
-## Methodology
-
-- Automated pipeline: ingest public data → detect standardized signals → cross-network aggregate → publish.
-- Cross-network first by contract; per-network breakdown is secondary and never volume-ranked.
-- Signals are reproducible public reads (`scripts/sybil-scan-*.mjs`). Evidence, not verdicts.
-- Feed JSON: `signals/<cadence>/latest.json` · API: `/api/signals/latest.json`
+- Public signal views: [getkinetik.app/signals](https://getkinetik.app/signals/)
+- Reproduce scans: `node scripts/sybil-scan-<network>.mjs` (see each report header)
+- **Geodnet:** `docs/reports/geodnet-sybil-report.md` · https://rtk.geodnet.com/api/v2/coverage_stations
+- **WeatherXM:** `docs/reports/weatherxm-sybil-report.md` · WeatherXM public cells API
+- **Hivemapper:** `docs/reports/hivemapper-sybil-report.md` · Solana mainnet HONEY SPL mint (public RPC)
+- **Nodle:** `docs/reports/nodle-sybil-report.md` · Nodle public scan inputs (see script header)
+- **Dawn Network:** `docs/reports/dawn-sybil-report.md` · Dawn public scan inputs (see script header)
+- **Grass / Titan:** `docs/reports/grass-sybil-report.md` · Grass/Titan public scan inputs (see script header)
