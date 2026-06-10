@@ -29,6 +29,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/reports/*.md scripts/data/*-snapshot.json scripts/data/bureau-audit-index.json landing/data/bureau-audit-index.json docs/bureau/private/bureau-ops.json landing/data/depin-chat-context.json scripts/data/bureau-pipeline.json docs/outreach/OUTREACH_QUEUE.md docs/bureau/daily/*.md docs/bureau/operator-tasks.md docs/bureau/papers/**/*.md docs/bureau/papers/README.md docs/outreach/generated/*.md || true
+          # Private ops outputs (briefs, outreach, ops pack) are gitignored — see getkinetik-ops repo.
+          git add docs/reports/*.md scripts/data/*-snapshot.json scripts/data/bureau-audit-index.json landing/data/bureau-audit-index.json landing/data/depin-chat-context.json scripts/data/bureau-pipeline.json docs/bureau/papers/**/*.md docs/bureau/papers/README.md || true
           git diff --staged --quiet || git commit -m "chore(bureau): weekly public sample reads [automated]"
           git push || true

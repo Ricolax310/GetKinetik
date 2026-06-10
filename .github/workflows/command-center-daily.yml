@@ -30,6 +30,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/bureau/private/command-center.json docs/command-center/daily docs/reports/daily docs/reports/weekly docs/reports/monthly || true
+          # Private payload + briefs are gitignored (see getkinetik-ops repo) — only public reports get committed.
+          git add docs/reports/daily docs/reports/weekly docs/reports/monthly || true
           git diff --staged --quiet || git commit -m "chore(command-center): daily brief [automated]"
           git push || true

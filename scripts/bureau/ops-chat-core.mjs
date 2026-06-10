@@ -11,7 +11,7 @@ OUTREACH ROUTE (never contradict):
 - Outreach drafts in repo = Friday nurture IF they engaged — not cold sends.
 
 Other rules:
-- Respect warm-lead wait rules in context (no @Mike, Manolis cooldown, Raziel 7-day bump).
+- Respect warm-lead wait rules in context (per-contact cooldowns live in the private GTM brain).
 - Never claim fraud proved — "patterns worth cross-checking", registry hygiene.
 - Neutral bureau only — not aggregator / Yearn / token pitch.
 - Split "automated (GitHub)" vs "you must paste/send manually".

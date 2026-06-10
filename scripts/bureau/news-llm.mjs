@@ -16,7 +16,7 @@ TODAY'S ROUTE SLOT: comments fit Tuesday; public posts fit Monday/Saturday; skip
 HARD RULES:
 - Neutral bureau only. Never aggregator / Yearn / Plaid / "maximize earnings" framing.
 - Never accuse Sybil/fraud proved. Use registry hygiene, economic concentration, second read.
-- Respect WAIT rules in GTM brain — no @Mike, no @Manolis, no pitching Raziel a SAFE in comments.
+- Respect WAIT rules in GTM brain (private gtm-context.md) — never tag or pitch wait-listed contacts in public comments.
 - Skip price-hit pieces and takedown articles on partners we're nurturing.
 - Comments must add ONE concrete insight (data lens, registry vs rewards, attestation at scale) — this is the Tuesday motion when the article fits.
 - Do not repeat tweets/posts listed in recent automation or latest-posts drafts.

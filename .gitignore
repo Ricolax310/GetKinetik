@@ -54,8 +54,22 @@ docs/outreach/generated/*
 !docs/outreach/generated/.gitkeep
 scripts/data/bureau-run-log.json
 
-# Command center local agent state (sqlite store + feed cache)
-docs/bureau/private/command-center.db
-docs/bureau/private/command-center.db-shm
-docs/bureau/private/command-center.db-wal
-docs/bureau/private/imports/
+# Private ops — lives in the private getkinetik-ops repo, never committed here.
+# Local tooling still reads/writes these paths; they just stay out of git.
+docs/bureau/private/
+docs/bureau/daily/
+docs/bureau/operator-tasks.md
+docs/bureau/OPS_CALENDAR.md
+docs/outreach/
+docs/funding/
+docs/command-center/
+scripts/bureau/gtm-context.md
+INVESTOR_PITCH.md
+PITCH_DECK.md
+OUTREACH_MESSAGES.md
+OUTREACH_SENDLIST.md
+PARTNER_EMAILS.md
+FUNDING_TEMPLATES.md
+FUNDING.json
+GRANT_APPLICATIONS_READY.md
+NETWORK_READS_TRACK.md

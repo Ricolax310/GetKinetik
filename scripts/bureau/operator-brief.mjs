@@ -25,7 +25,7 @@ const MANUAL_TASKS_PATH = path.join(REPO_ROOT, "docs/bureau/operator-tasks.md");
 /** Friday only — nurture paths, not daily cold send. */
 const NURTURE_LANES = [
   { id: "hivemapper", label: "Hivemapper", note: "only if they engaged this week" },
-  { id: "geodnet", label: "Geodnet", note: "warm — Mike; LI connect only, no @Mike" },
+  { id: "geodnet", label: "Geodnet", note: "warm — see gtm-context.md (private) for contact rules" },
   { id: "weatherxm", label: "WeatherXM", note: "CEO validated; no third ping" },
 ];
 

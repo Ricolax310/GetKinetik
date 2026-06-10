@@ -45,7 +45,7 @@ const WEEKLY_ROUTE = {
 export const OUTREACH_GUARDRAILS = [
   "No cold DMs to founders who get thousands of messages",
   "No “pick your brain” — offer one reproducible insight or ask for one intro",
-  "Warm leads: follow gtm-context wait rules (no @Mike, no third ping Manolis, Raziel 7-day bump)",
+  "Warm leads: follow the wait rules in gtm-context.md (private) — no third pings on wait-list contacts",
   "Email beats cold DM when you have one specific hook",
   "Win = “can you run this on our data?” — not APK installs or adapter count",
 ];
@@ -81,6 +81,6 @@ Weekly rhythm (UTC):
 - Friday: follow up ONE engaged warm thread only; no new cold outreach
 - Sat–Sun: inbound only or optional public snippet
 
-Never recommend: cold DMs to founders with huge inboxes; "pick your brain"; blasting outreach drafts daily; third pings on wait-list contacts (@Mike, Manolis ~1wk, Raziel 7-day rule).
+Never recommend: cold DMs to founders with huge inboxes; "pick your brain"; blasting outreach drafts daily; third pings on wait-list contacts (per-contact wait rules live in gtm-context.md, private).
 Win metric is inbound "run on our data?" — NOT DMs sent, APK downloads, or adapter count.
 Outreach draft files are for Friday nurture IF they engaged — not for cold sends.`;

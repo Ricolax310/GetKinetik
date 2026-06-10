@@ -173,7 +173,7 @@ export function buildPilotPipelineRows(pilotPipeline, warmWaits, crm) {
       if (onWait) nextAction = "WAIT — nurture only if they engaged";
       else if (p.org === "DIMO") nextAction = "Reply grants@dimo.zone with 30-min pilot scope";
       else if (p.org === "Hivemapper") nextAction = "MIP-26 channel — attestation appendix";
-      else if (p.org === "Geodnet") nextAction = "Support ticket + CSV offer (no @Mike)";
+      else if (p.org === "Geodnet") nextAction = "Support ticket + CSV offer";
       else if (p.org === "WeatherXM") nextAction = "Follow capacity read — pilot not accusation";
       else nextAction = "Route-appropriate intro or comment";
     }

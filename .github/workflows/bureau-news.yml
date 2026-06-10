@@ -40,6 +40,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/bureau/daily/*-news.md docs/bureau/daily/latest-news.md docs/bureau/daily/*-operator.md docs/bureau/daily/latest-operator.md scripts/data/bureau-news-state.json docs/bureau/private/bureau-ops.json landing/data/depin-chat-context.json || true
+          # News/operator drafts are private ops (gitignored) — see getkinetik-ops repo. Run bureau:news locally for drafts.
+          git add scripts/data/bureau-news-state.json landing/data/depin-chat-context.json || true
           git diff --staged --quiet || git commit -m "chore(bureau): daily news drafts [automated]"
           git push || true
