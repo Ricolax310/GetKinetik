@@ -247,6 +247,73 @@ h1 {
   cursor: not-allowed;
 }
 
+.chat-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.chat-actions #chat-send {
+  align-self: auto;
+}
+
+.icon-btn,
+.chat-form .icon-btn {
+  align-self: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border-radius: 999px;
+  background: rgba(255, 20, 48, 0.06);
+  border: 1px solid rgba(255, 20, 48, 0.22);
+  color: var(--silver);
+  box-shadow: none;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.icon-btn:hover:not(:disabled) {
+  border-color: var(--ruby-core);
+  color: var(--platinum);
+  background: rgba(255, 20, 48, 0.12);
+  transform: none;
+  box-shadow: none;
+}
+
+.icon-btn.on {
+  background: rgba(255, 20, 48, 0.18);
+  border-color: var(--ruby-core);
+  color: var(--ruby-ember);
+}
+
+.icon-btn.listening {
+  background: var(--ruby-core);
+  border-color: var(--ruby-core);
+  color: var(--platinum);
+  animation: mic-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes mic-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 20, 48, 0.45);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(255, 20, 48, 0);
+  }
+}
+
+.mic-status {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ruby-ember);
+}
+
 .disclaimer {
   margin-top: 20px;
   font-size: 12px;

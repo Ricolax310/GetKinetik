@@ -6,6 +6,9 @@
   const input = document.getElementById("chat-input");
   const send = document.getElementById("chat-send");
   const err = document.getElementById("chat-error");
+  const micBtn = document.getElementById("chat-mic");
+  const voiceBtn = document.getElementById("chat-voice");
+  const micStatus = document.getElementById("mic-status");
   const messages = [];
 
   const starters = [
@@ -64,6 +67,7 @@
   async function submit(text) {
     const t = text.trim();
     if (!t) return;
+    if ("speechSynthesis" in window) window.speechSynthesis.cancel();
     err.textContent = "";
     messages.push({ role: "user", content: t });
     input.value = "";
@@ -87,6 +91,7 @@
       if (!data.reply) throw new Error("Empty reply from chat service.");
       messages.push({ role: "assistant", content: data.reply });
       render();
+      speak(data.reply);
     } catch (e) {
       err.textContent = e.message || "Something went wrong.";
       messages.pop();
@@ -121,6 +126,124 @@
   });
 
   buildStarters();
+
+  // ── Voice input (speech-to-text, browser Web Speech API — no server) ────────
+  const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+  let recognition = null;
+  let listening = false;
+
+  function stopListening() {
+    listening = false;
+    micBtn?.classList.remove("listening");
+    if (micStatus) micStatus.textContent = "";
+    try {
+      recognition?.stop();
+    } catch {
+      /* already stopped */
+    }
+  }
+
+  if (micBtn && SpeechRec) {
+    micBtn.hidden = false;
+    micBtn.addEventListener("click", () => {
+      if (listening) {
+        stopListening();
+        return;
+      }
+      err.textContent = "";
+      recognition = new SpeechRec();
+      recognition.lang = navigator.language || "en-US";
+      recognition.interimResults = true;
+      recognition.continuous = false;
+
+      let finalText = "";
+      recognition.onresult = (e) => {
+        let interim = "";
+        for (const r of e.results) {
+          if (r.isFinal) finalText += r[0].transcript;
+          else interim += r[0].transcript;
+        }
+        input.value = (finalText + interim).trim();
+      };
+      recognition.onend = () => {
+        const wasListening = listening;
+        stopListening();
+        // Hands-free flow: a final transcript sends itself.
+        if (wasListening && finalText.trim()) submit(finalText);
+      };
+      recognition.onerror = (e) => {
+        stopListening();
+        if (e.error === "not-allowed" || e.error === "service-not-allowed") {
+          err.textContent = "Microphone blocked — allow mic access for this site and try again.";
+        } else if (e.error !== "aborted" && e.error !== "no-speech") {
+          err.textContent = `Voice input error (${e.error}). Type your question instead.`;
+        }
+      };
+
+      listening = true;
+      micBtn.classList.add("listening");
+      if (micStatus) micStatus.textContent = "listening…";
+      try {
+        recognition.start();
+      } catch {
+        stopListening();
+      }
+    });
+  }
+
+  // ── Voice output (text-to-speech, browser speechSynthesis — no server) ──────
+  const ttsSupported = "speechSynthesis" in window && "SpeechSynthesisUtterance" in window;
+  let speakReplies = false;
+  try {
+    speakReplies = localStorage.getItem("bureau-chat-speak") === "1";
+  } catch {
+    /* private mode */
+  }
+
+  function setVoiceUi() {
+    voiceBtn.classList.toggle("on", speakReplies);
+    voiceBtn.setAttribute("aria-pressed", String(speakReplies));
+    voiceBtn.title = speakReplies ? "Stop reading replies aloud" : "Read replies aloud";
+  }
+
+  function ttsClean(text) {
+    return String(text)
+      .replace(/```[\s\S]*?```/g, " code block omitted. ")
+      .replace(/`([^`]+)`/g, "$1")
+      .replace(/[*_#>]/g, "")
+      .replace(/https?:\/\/\S+/g, " link ")
+      .replace(/\s{2,}/g, " ")
+      .trim();
+  }
+
+  function speak(text) {
+    if (!ttsSupported || !speakReplies) return;
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(ttsClean(text));
+    u.lang = navigator.language || "en-US";
+    u.rate = 1.05;
+    window.speechSynthesis.speak(u);
+  }
+
+  if (voiceBtn && ttsSupported) {
+    voiceBtn.hidden = false;
+    setVoiceUi();
+    voiceBtn.addEventListener("click", () => {
+      speakReplies = !speakReplies;
+      if (!speakReplies) window.speechSynthesis.cancel();
+      try {
+        localStorage.setItem("bureau-chat-speak", speakReplies ? "1" : "0");
+      } catch {
+        /* private mode */
+      }
+      setVoiceUi();
+      // Immediate feedback: read the last bureau reply when switching on.
+      if (speakReplies) {
+        const last = [...messages].reverse().find((m) => m.role === "assistant");
+        if (last) speak(last.content);
+      }
+    });
+  }
 
   async function loadMeta() {
     if (!meta) return;
