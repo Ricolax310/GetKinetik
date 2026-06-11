@@ -17,12 +17,14 @@ import {
 
 const MAX_MESSAGES = 16;
 const MAX_USER_CHARS = 2000;
-const MAX_OUTPUT_TOKENS = 400;
+// gpt-5 spends reasoning tokens from this same budget even at minimal effort —
+// 400 left zero tokens for the visible answer ("Empty reply from chat service").
+const MAX_OUTPUT_TOKENS = 1500;
 /** Stay under Cloudflare Pages function wall-clock limit (~30s).
  *  Context fetch is bounded separately, so 20s here keeps worst-case total safe. */
 const OPENAI_TIMEOUT_MS = 20_000;
 const MAX_CONTEXT_CHARS = 6_000;
-const BUILD_MARKER = "chat-resilience-8";
+const BUILD_MARKER = "chat-resilience-9";
 
 function json(body, status = 200) {
   return new Response(JSON.stringify(body), {
