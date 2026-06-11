@@ -22,7 +22,7 @@ const MAX_OUTPUT_TOKENS = 400;
  *  Context fetch is bounded separately, so 20s here keeps worst-case total safe. */
 const OPENAI_TIMEOUT_MS = 20_000;
 const MAX_CONTEXT_CHARS = 6_000;
-const BUILD_MARKER = "chat-resilience-6";
+const BUILD_MARKER = "chat-resilience-7";
 
 function json(body, status = 200) {
   return new Response(JSON.stringify(body), {
@@ -83,6 +83,23 @@ export async function onRequestPost(ctx) {
     // Isolates whether platform 502s originate before or during the model call.
     if (new URL(request.url).searchParams.has("ping")) {
       return json({ ok: true, build: BUILD_MARKER, pong: true, hasKey: Boolean(env.OPENAI_API_KEY?.trim()) });
+    }
+
+    // Diagnostic probe: POST ?probe makes a minimal outbound OpenAI request
+    // (GET /models) and reports every stage — isolates platform egress kills.
+    if (new URL(request.url).searchParams.has("probe")) {
+      const stages = { build: BUILD_MARKER, hasKey: Boolean(env.OPENAI_API_KEY?.trim()) };
+      try {
+        const r = await fetch("https://api.openai.com/v1/models?limit=1", {
+          headers: { authorization: `Bearer ${env.OPENAI_API_KEY}` },
+          signal: withTimeout(8000),
+        });
+        stages.status = r.status;
+        stages.body = (await r.text()).slice(0, 140);
+      } catch (e) {
+        stages.fetchError = `${e?.name || "Error"}: ${String(e?.message || e).slice(0, 160)}`;
+      }
+      return json(stages);
     }
 
     if (!env.OPENAI_API_KEY?.trim()) {
