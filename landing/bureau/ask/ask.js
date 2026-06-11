@@ -80,7 +80,10 @@
         body: JSON.stringify({ messages }),
       });
       const data = await readApiJson(res);
-      if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+      // Backend reports failures as 200 + { ok:false, error } so Cloudflare
+      // can't replace the body (it rewrites 502s with a plaintext error page).
+      if (data.error) throw new Error(data.error);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
       if (!data.reply) throw new Error("Empty reply from chat service.");
       messages.push({ role: "assistant", content: data.reply });
       render();
