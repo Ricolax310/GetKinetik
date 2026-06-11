@@ -1,28 +1,43 @@
 {
-  "generatedAt": "2026-06-10T18:02:14.059Z",
+  "generatedAt": "2026-06-11T18:04:49.485Z",
   "patterns": [
     {
       "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Geodnet: repeated exactDupGroups observation",
-      "pattern": "REPEATED_IDENTITY",
+      "classification": "convergence",
+      "headline": "Cross-network infrastructure coverage stress observed across multiple networks",
+      "pattern": "CROSS_NETWORK_INFRASTRUCTURE",
       "networks": [
-        "Geodnet"
+        "Geodnet",
+        "Helium IoT",
+        "Helium Mobile",
+        "WeatherXM"
       ],
-      "category": "IDENTITY",
-      "description": "Observed Geodnet exactDupGroups on 7 of 7 recorded days.",
+      "category": "INFRASTRUCTURE",
+      "description": "Cross-network infrastructure coverage stress observed across multiple networks (Geodnet, Helium IoT, Helium Mobile, WeatherXM).",
       "patternType": "cross-network"
     },
     {
       "scope": "systemic",
       "classification": "repetition",
-      "headline": "Geodnet: repeated flaggedPct observation",
-      "pattern": "REPEATED_IDENTITY",
+      "headline": "Geodnet: repeated observed observation",
+      "pattern": "REPEATED_INFRASTRUCTURE",
       "networks": [
         "Geodnet"
       ],
-      "category": "IDENTITY",
-      "description": "Observed Geodnet flaggedPct on 7 of 7 recorded days.",
+      "category": "INFRASTRUCTURE",
+      "description": "Observed Geodnet observed on 7 of 7 recorded days.",
+      "patternType": "cross-network"
+    },
+    {
+      "scope": "systemic",
+      "classification": "repetition",
+      "headline": "WeatherXM: repeated observed observation",
+      "pattern": "REPEATED_INFRASTRUCTURE",
+      "networks": [
+        "WeatherXM"
+      ],
+      "category": "INFRASTRUCTURE",
+      "description": "Observed WeatherXM observed on 7 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -52,52 +67,26 @@
     {
       "scope": "systemic",
       "classification": "repetition",
-      "headline": "Geodnet: repeated observed observation",
-      "pattern": "REPEATED_INFRASTRUCTURE",
+      "headline": "Geodnet: repeated exactDupGroups observation",
+      "pattern": "REPEATED_IDENTITY",
       "networks": [
         "Geodnet"
       ],
-      "category": "INFRASTRUCTURE",
-      "description": "Observed Geodnet observed on 7 of 7 recorded days.",
+      "category": "IDENTITY",
+      "description": "Observed Geodnet exactDupGroups on 7 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
       "scope": "systemic",
       "classification": "repetition",
-      "headline": "WeatherXM: repeated observed observation",
-      "pattern": "REPEATED_INFRASTRUCTURE",
+      "headline": "Geodnet: repeated flaggedPct observation",
+      "pattern": "REPEATED_IDENTITY",
       "networks": [
-        "WeatherXM"
+        "Geodnet"
       ],
-      "category": "INFRASTRUCTURE",
-      "description": "Observed WeatherXM observed on 7 of 7 recorded days.",
+      "category": "IDENTITY",
+      "description": "Observed Geodnet flaggedPct on 6 of 7 recorded days.",
       "patternType": "cross-network"
-    },
-    {
-      "scope": "cross-network",
-      "classification": "convergence",
-      "headline": "Cross-network infrastructure coverage stress observed across multiple networks",
-      "pattern": "CROSS_NETWORK_INFRASTRUCTURE",
-      "networks": [
-        "Geodnet",
-        "WeatherXM"
-      ],
-      "category": "INFRASTRUCTURE",
-      "description": "Cross-network infrastructure coverage stress observed across multiple networks (Geodnet, WeatherXM).",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "cross-network",
-      "classification": "divergence",
-      "headline": "Divergence: INFRASTRUCTURE metrics split across networks",
-      "pattern": "DIVERGENCE_INFRASTRUCTURE",
-      "networks": [
-        "Geodnet",
-        "WeatherXM"
-      ],
-      "category": "INFRASTRUCTURE",
-      "description": "Opposing metric drift — WeatherXM rising while Geodnet declining.",
-      "patternType": "divergence"
     },
     {
       "scope": "systemic",
@@ -125,7 +114,7 @@
     },
     {
       "scope": "localized",
-      "classification": "drift",
+      "classification": "stability",
       "headline": "Geodnet: identity registry stress signal detected",
       "pattern": "LOCAL_IDENTITY",
       "networks": [
@@ -134,18 +123,6 @@
       "category": "IDENTITY",
       "description": "Observed identity signal on Geodnet (exactDupGroups).",
       "patternType": "single-network"
-    },
-    {
-      "scope": "localized",
-      "classification": "divergence",
-      "headline": "Divergence: IDENTITY metrics split across networks",
-      "pattern": "DIVERGENCE_IDENTITY",
-      "networks": [
-        "Geodnet"
-      ],
-      "category": "IDENTITY",
-      "description": "Opposing metric drift — Geodnet rising while Geodnet declining.",
-      "patternType": "divergence"
     },
     {
       "scope": "localized",

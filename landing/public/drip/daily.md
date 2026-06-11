@@ -1,55 +1,50 @@
-# DePIN Signal Brief — 2026-06-10
+# DePIN Signal Brief — 2026-06-11
 
-> 2026-06-10 · machine-driven signal publication · evidence first
+> 2026-06-11 · machine-driven signal publication · evidence first
 
 ## Today's Read
 
-• Geodnet duplicate-coordinate groups rose from 8 to 11.
-• WeatherXM over-capacity cells declined from 289 to 288.
-• Geodnet entities on public map declined from 19,676 to 19,616.
+• WeatherXM over-capacity cells rose from 286 to 290.
+• Geodnet duplicate-coordinate groups unchanged at 8.
+• Geodnet entities on public map declined from 19,604 to 19,595.
 
 ## Why It Matters
 
 Today's signals show modest movement in registry, capacity, and concentration metrics. Telemetry and concentration readings are largely unchanged.
 The observed changes are incremental rather than structural and remain reproducible from public data sources.
-Observations span 3 networks — no single network dominates the index.
+Observations span 5 networks — no single network dominates the index.
 
 ## Full Evidence
 
 ### What Changed Today
 
-- **Geodnet** — exact (lat,lng) duplicate groups: 11 (+3 (+37.5%))
-- **Geodnet** — entities on public map: 19,616 (-60 (-0.3%))
-- **Geodnet** — fleet share flagged (any heuristic): 9.34% (-0.00 pp (-0.0%))
-- **WeatherXM** — entities on public map: 8,492 (+3 (+0.0%))
-- **WeatherXM** — cells over designed capacity: 288 (-1 (-0.3%))
-- **WeatherXM** — share of map over capacity: 3.39% (-0.01 pp (-0.4%))
-- **Hivemapper** — top-20 SPL share of UI supply: 49.13% (-0.02 pp (-0.0%))
-- **Helium IoT** — entities on public map: 1,008,019 (_(first snapshot — baseline recorded)_)
-- **Helium IoT** — single-coordinate stacks (≥10 hotspots): 4,855 (_(first snapshot — baseline recorded)_)
-- **Helium IoT** — largest single-coordinate stack: 501 (_(first snapshot — baseline recorded)_)
-- **Helium IoT** — fleet share flagged (any heuristic): 6.91% (_(first snapshot — baseline recorded)_)
+- **Geodnet** — entities on public map: 19,595 (-9 (-0.0%))
+- **WeatherXM** — entities on public map: 8,495 (-3 (-0.0%))
+- **WeatherXM** — cells over designed capacity: 290 (+4 (+1.4%))
+- **WeatherXM** — share of map over capacity: 3.41% (+0.05 pp (+1.4%))
+- **Hivemapper** — top-20 SPL share of UI supply: 49.21% (+0.01 pp (+0.0%))
+- **Helium Mobile** — fleet share flagged (any heuristic): 20.57% (-0.00 pp (-0.0%))
 
 ### Signal Type
 
 - **Geodnet** — Registry duplication (`duplication_cluster`)
 - **WeatherXM** — Capacity pressure (`capacity_violation`)
 - **Hivemapper** — Economic concentration (`economic_concentration`)
-- **Helium IoT** — Registry duplication (`duplication_cluster`)
+- **Helium Mobile** — Registry duplication (`duplication_cluster`)
 
 ### Signal Context
 
 - Geodnet: duplicate or inconsistent registry entries are review-able from public data alone.
 - WeatherXM: public cell capacity counts are a reproducible registry-pressure signal.
 - Hivemapper: visible on-chain concentration is economic shape only — useful for custody reconciliation, not device claims.
-- Helium IoT: duplicate or inconsistent registry entries are review-able from public data alone.
+- Helium Mobile: duplicate or inconsistent registry entries are review-able from public data alone.
 
 ### What We Don't Know
 
 - **Geodnet** — Whether shared coordinates are legitimate co-located installs, shared-mount sites, or registry artifacts — public data can't tell without operator confirmation.
 - **WeatherXM** — Whether over-capacity cells reflect real device density, registry double-counting, or expected reward-zone behavior — only the operator's internal registry settles it.
 - **Hivemapper** — Whether the largest visible accounts are treasury, market-maker, exchange custody, or operators — on-chain shape doesn't label holder intent.
-- **Helium IoT** — Whether shared coordinates are legitimate co-located installs, shared-mount sites, or registry artifacts — public data can't tell without operator confirmation.
+- **Helium Mobile** — Whether shared coordinates are legitimate co-located installs, shared-mount sites, or registry artifacts — public data can't tell without operator confirmation.
 
 ### Questions Worth Asking
 
@@ -61,7 +56,7 @@ Observations span 3 networks — no single network dominates the index.
 
 ### Thread Seed
 
-Public read on Geodnet: 11 exact (lat,lng) duplicate groups on 19,616 public stations — each row in §1 is one coordinate pai — does that match your internal view, or is the public feed expected to behave this way?
+Public read on Geodnet: 8 exact (lat,lng) duplicate groups on 19,604 public stations — each row in §1 is one coordinate pair — does that match your internal view, or is the public feed expected to behave this way?
 
 ### Sources & Methodology
 
@@ -70,4 +65,4 @@ Public read on Geodnet: 11 exact (lat,lng) duplicate groups on 19,616 public sta
 - **Geodnet:** `docs/reports/geodnet-duplication-report.md` · https://rtk.geodnet.com/api/v2/coverage_stations
 - **WeatherXM:** `docs/reports/weatherxm-duplication-report.md` · WeatherXM public cells API
 - **Hivemapper:** `docs/reports/hivemapper-duplication-report.md` · Solana mainnet HONEY SPL mint (public RPC)
-- **Helium IoT:** `docs/reports/helium-iot-duplication-report.md` · https://entities.nft.helium.io/v2/hotspots?subnetwork=iot
+- **Helium Mobile:** `docs/reports/helium-mobile-duplication-report.md` · https://entities.nft.helium.io/v2/hotspots?subnetwork=mobile
