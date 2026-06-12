@@ -1,7 +1,16 @@
 {
-  "generatedAt": "2026-06-11T10:31:56.856Z",
+  "generatedAt": "2026-06-12T10:30:37.729Z",
   "source": "https://entities.nft.helium.io/v2/hotspots?subnetwork=mobile",
   "stats": {
+    "generatedAt": "2026-06-12T10:30:37.729Z",
+    "observed": 54688,
+    "unasserted": 1903,
+    "stackedSpots": 529,
+    "largestStack": 497,
+    "flaggedCount": 11248,
+    "flaggedPct": 0.20567583382094792
+  },
+  "prevStats": {
     "generatedAt": "2026-06-11T10:31:56.856Z",
     "observed": 54683,
     "unasserted": 1903,
@@ -10,16 +19,7 @@
     "flaggedCount": 11249,
     "flaggedPct": 0.20571292723515536
   },
-  "prevStats": {
-    "generatedAt": "2026-06-10T21:11:53.030Z",
-    "observed": 54683,
-    "unasserted": 1903,
-    "stackedSpots": 529,
-    "largestStack": 497,
-    "flaggedCount": 11250,
-    "flaggedPct": 0.20573121445421794
-  },
-  "hotspotsTotal": 56586,
+  "hotspotsTotal": 56591,
   "topStacks": [
     {
       "coord": "-0.001809,-0.00271",
@@ -198,17 +198,6 @@
       ]
     },
     {
-      "coord": "40.763188,-73.984107",
-      "count": 64,
-      "sampleKeys": [
-        "112RFoPxH6faJnpyD13jc7ZBKEpogN9WL6cAgBkVeF94HSgG5456",
-        "112PoXpR6VswegG7bovjM8YR5EUk8gB2YEd5QCZx4Da6LKqEmZp",
-        "1trSuseu1NFwtdVYhKKbsZQCGXijs3UqDeeAHfGbX7YX2M7uxaCuFSXn9si7MGQzXPg4EAp7TSdic7KgdgGx2SqJQvoNUaRs4FLpzt4RoPKP7dJt3gFPLJgSAwhknRtS7TrBPks71AfwjjVoTJgvWmKFYTvkCHmF3VYjc82n14ih9yX8nazdBjcrVGiBLBEdbqBgwoqyc31C6ChZscfMvS4wud66uLvPGKDXmF8uChMNBYNCyCVkAnJrjjff6W13KAkYokte3xTDTxtpcCNNN3613Kno9YYgoeTcR3D2j1wuw2ACYG1CtqXMLgZP4VtztnAoKBS3W7wLkVicZj1UnvnWMYaKCqpaGeyfrCoLaAXPUd",
-        "13tWCXZaM6riNS4sCkcRix8daQeQ27Doog8EeCCMZoABetyRJDP",
-        "14h3YrB5kgkqaG9CgsmaZEudVgtUezXAr5J5YgnfZS1aDRD9Hvx"
-      ]
-    },
-    {
       "coord": "17.062016,-96.719065",
       "count": 64,
       "sampleKeys": [
@@ -228,6 +217,17 @@
         "11xZireZJEBwuMbAePpvFvdWMMNjYrGuQpHY57zF4aZKFe5NywY",
         "112ZWcZCCdpd2BLDX1LNyhMAVmBqsRMoZmzLaiimJmwQW3ifG5ce",
         "11epZXLpgnXNh6ptvfyFrHsaGKCCfWEmBgeU6VnQwY3Gh1tmXDN"
+      ]
+    },
+    {
+      "coord": "40.763188,-73.984107",
+      "count": 63,
+      "sampleKeys": [
+        "112RFoPxH6faJnpyD13jc7ZBKEpogN9WL6cAgBkVeF94HSgG5456",
+        "112PoXpR6VswegG7bovjM8YR5EUk8gB2YEd5QCZx4Da6LKqEmZp",
+        "13tWCXZaM6riNS4sCkcRix8daQeQ27Doog8EeCCMZoABetyRJDP",
+        "14h3YrB5kgkqaG9CgsmaZEudVgtUezXAr5J5YgnfZS1aDRD9Hvx",
+        "14rchiA7JNxd5PzAmHaLD9Crc6oHxxztrif4GBTF524N5W3d8AG"
       ]
     },
     {
