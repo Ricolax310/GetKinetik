@@ -2,18 +2,18 @@
   "schema": "getkinetik.signal-feed/v1",
   "cadence": "daily",
   "mode": "cross-network-first",
-  "generatedAt": "2026-06-11T18:04:48.757Z",
+  "generatedAt": "2026-06-12T17:47:52.395Z",
   "sectorSummary": [
     {
       "type": "integrity",
       "label": "Registry & identity integrity",
-      "signalCount": 5,
+      "signalCount": 7,
       "networks": [
         "Geodnet",
         "Helium IoT",
         "Helium Mobile"
       ],
-      "topSeverity": "medium",
+      "topSeverity": "high",
       "whatWeDontKnow": "Whether shared/duplicated identifiers are legitimate co-located installs or registry artifacts — only operator confirmation settles it."
     },
     {
@@ -25,6 +25,18 @@
       ],
       "topSeverity": "medium",
       "whatWeDontKnow": "Whether capacity or telemetry anomalies reflect real on-the-ground activity, ETL/display behavior, or registry double-counting — the public feed alone can't say."
+    },
+    {
+      "type": "growth",
+      "label": "Coverage growth",
+      "signalCount": 3,
+      "networks": [
+        "Geodnet",
+        "Helium IoT",
+        "Helium Mobile"
+      ],
+      "topSeverity": "low",
+      "whatWeDontKnow": "Whether registry growth reflects new physical deployments or registration churn — counts alone don't prove device reality."
     },
     {
       "type": "economics",
@@ -40,15 +52,17 @@
   "totals": {
     "networks": 7,
     "activeNetworks": 5,
-    "signals": 11,
+    "signals": 16,
     "byType": {
-      "integrity": 5,
+      "integrity": 7,
       "health": 4,
+      "growth": 3,
       "economics": 2
     },
     "bySeverity": {
       "medium": 7,
-      "low": 4
+      "high": 1,
+      "low": 8
     }
   },
   "networks": [
@@ -61,33 +75,65 @@
           "network": "Geodnet",
           "type": "integrity",
           "metric": "exactDupGroups",
-          "value": 8,
+          "value": 10,
           "previous": 8,
-          "delta": 0,
+          "delta": 2,
           "message": "8 exact (lat,lng) duplicate groups on 19,604 public stations — each row in §1 is one coordinate pair your registry team can grep today.",
           "severity": "medium",
           "confidence": 0.7,
           "anomalyType": "duplication_cluster",
           "kind": "headline",
           "metricKey": null,
-          "timestamp": "2026-06-11",
-          "asOf": "2026-06-11"
+          "timestamp": "2026-06-12",
+          "asOf": "2026-06-12"
         },
         {
           "network": "Geodnet",
           "type": "integrity",
+          "metric": "exactDupGroups",
+          "value": 10,
+          "previous": 8,
+          "delta": 2,
+          "message": "exact (lat,lng) duplicate groups: 10 (+2 (+25.0%))",
+          "severity": "high",
+          "confidence": 0.85,
+          "anomalyType": "duplication_cluster",
+          "kind": "metric",
+          "metricKey": "exactDupGroups",
+          "timestamp": "2026-06-12",
+          "asOf": "2026-06-12"
+        },
+        {
+          "network": "Geodnet",
+          "type": "growth",
           "metric": "observed",
-          "value": 19595,
-          "previous": 19604,
-          "delta": -9,
-          "message": "entities on public map: 19,595 (-9 (-0.0%))",
+          "value": 19597,
+          "previous": 19595,
+          "delta": 2,
+          "message": "entities on public map: 19,597 (+2 (+0.0%))",
           "severity": "low",
           "confidence": 0.85,
           "anomalyType": "duplication_cluster",
           "kind": "metric",
           "metricKey": "observed",
-          "timestamp": "2026-06-11",
-          "asOf": "2026-06-11"
+          "timestamp": "2026-06-12",
+          "asOf": "2026-06-12"
+        },
+        {
+          "network": "Geodnet",
+          "type": "integrity",
+          "metric": "flaggedPct",
+          "value": 0.09312649895392151,
+          "previous": 0.09344220464404185,
+          "delta": -0.00031570569012033534,
+          "message": "fleet share flagged (any heuristic): 9.31% (-0.03 pp (-0.3%))",
+          "severity": "low",
+          "confidence": 0.85,
+          "anomalyType": "duplication_cluster",
+          "kind": "metric",
+          "metricKey": "flaggedPct",
+          "timestamp": "2026-06-12",
+          "asOf": "2026-06-12"
         }
       ]
     },
@@ -100,65 +146,65 @@
           "network": "WeatherXM",
           "type": "health",
           "metric": "overCapacityCells",
-          "value": 290,
-          "previous": 286,
-          "delta": 4,
+          "value": 287,
+          "previous": 290,
+          "delta": -3,
           "message": "286 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.",
           "severity": "medium",
           "confidence": 0.7,
           "anomalyType": "capacity_violation",
           "kind": "headline",
           "metricKey": null,
-          "timestamp": "2026-06-11",
-          "asOf": "2026-06-11"
+          "timestamp": "2026-06-12",
+          "asOf": "2026-06-12"
         },
         {
           "network": "WeatherXM",
           "type": "health",
           "metric": "observed",
-          "value": 8495,
-          "previous": 8498,
-          "delta": -3,
-          "message": "entities on public map: 8,495 (-3 (-0.0%))",
+          "value": 8494,
+          "previous": 8495,
+          "delta": -1,
+          "message": "entities on public map: 8,494 (-1 (-0.0%))",
           "severity": "low",
           "confidence": 0.85,
           "anomalyType": "capacity_violation",
           "kind": "metric",
           "metricKey": "observed",
-          "timestamp": "2026-06-11",
-          "asOf": "2026-06-11"
+          "timestamp": "2026-06-12",
+          "asOf": "2026-06-12"
         },
         {
           "network": "WeatherXM",
           "type": "health",
           "metric": "overCapacityCells",
-          "value": 290,
-          "previous": 286,
-          "delta": 4,
-          "message": "cells over designed capacity: 290 (+4 (+1.4%))",
+          "value": 287,
+          "previous": 290,
+          "delta": -3,
+          "message": "cells over designed capacity: 287 (-3 (-1.0%))",
           "severity": "medium",
           "confidence": 0.85,
           "anomalyType": "capacity_violation",
           "kind": "metric",
           "metricKey": "overCapacityCells",
-          "timestamp": "2026-06-11",
-          "asOf": "2026-06-11"
+          "timestamp": "2026-06-12",
+          "asOf": "2026-06-12"
         },
         {
           "network": "WeatherXM",
           "type": "health",
           "metric": "overCapacityPct",
-          "value": 0.034137728075338436,
-          "previous": 0.03365497764179807,
-          "delta": 0.00048275043354036734,
-          "message": "share of map over capacity: 3.41% (+0.05 pp (+1.4%))",
+          "value": 0.03378855662820815,
+          "previous": 0.034137728075338436,
+          "delta": -0.00034917144713028647,
+          "message": "share of map over capacity: 3.38% (-0.03 pp (-1.0%))",
           "severity": "medium",
           "confidence": 0.85,
           "anomalyType": "capacity_violation",
           "kind": "metric",
           "metricKey": "overCapacityPct",
-          "timestamp": "2026-06-11",
-          "asOf": "2026-06-11"
+          "timestamp": "2026-06-12",
+          "asOf": "2026-06-12"
         }
       ]
     },
@@ -171,33 +217,33 @@
           "network": "Hivemapper",
           "type": "economics",
           "metric": "top20ShareOfSupply",
-          "value": 0.49206101897395493,
-          "previous": 0.49199459791417277,
-          "delta": 0.0000664210597821624,
+          "value": 0.4920454552014785,
+          "previous": 0.49206101897395493,
+          "delta": -0.000015563772476412385,
           "message": "49.20% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.",
           "severity": "medium",
           "confidence": 0.7,
           "anomalyType": "economic_concentration",
           "kind": "headline",
           "metricKey": null,
-          "timestamp": "2026-06-11",
-          "asOf": "2026-06-11"
+          "timestamp": "2026-06-12",
+          "asOf": "2026-06-12"
         },
         {
           "network": "Hivemapper",
           "type": "economics",
           "metric": "top20ShareOfSupply",
-          "value": 0.49206101897395493,
-          "previous": 0.49199459791417277,
-          "delta": 0.0000664210597821624,
-          "message": "top-20 SPL share of UI supply: 49.21% (+0.01 pp (+0.0%))",
+          "value": 0.4920454552014785,
+          "previous": 0.49206101897395493,
+          "delta": -0.000015563772476412385,
+          "message": "top-20 SPL share of UI supply: 49.20% (-0.00 pp (-0.0%))",
           "severity": "low",
           "confidence": 0.85,
           "anomalyType": "economic_concentration",
           "kind": "metric",
           "metricKey": "top20ShareOfSupply",
-          "timestamp": "2026-06-11",
-          "asOf": "2026-06-11"
+          "timestamp": "2026-06-12",
+          "asOf": "2026-06-12"
         }
       ]
     },
@@ -217,17 +263,49 @@
           "network": "Helium IoT",
           "type": "integrity",
           "metric": "stackedSpots",
-          "value": 4855,
+          "value": 4856,
           "previous": 4855,
-          "delta": 0,
+          "delta": 1,
           "message": "4,855 single-coordinate stacks of ≥10 hotspots on 1,008,019 located units — the largest stack holds 501 hotspots on one coordinate (§1 lists keys your registry team can grep today).",
           "severity": "medium",
           "confidence": 0.7,
           "anomalyType": "duplication_cluster",
           "kind": "headline",
           "metricKey": null,
-          "timestamp": "2026-06-11",
-          "asOf": "2026-06-11"
+          "timestamp": "2026-06-12",
+          "asOf": "2026-06-12"
+        },
+        {
+          "network": "Helium IoT",
+          "type": "growth",
+          "metric": "observed",
+          "value": 1008022,
+          "previous": 1008019,
+          "delta": 3,
+          "message": "entities on public map: 1,008,022 (+3 (+0.0%))",
+          "severity": "low",
+          "confidence": 0.85,
+          "anomalyType": "duplication_cluster",
+          "kind": "metric",
+          "metricKey": "observed",
+          "timestamp": "2026-06-12",
+          "asOf": "2026-06-12"
+        },
+        {
+          "network": "Helium IoT",
+          "type": "integrity",
+          "metric": "stackedSpots",
+          "value": 4856,
+          "previous": 4855,
+          "delta": 1,
+          "message": "single-coordinate stacks (≥10 hotspots): 4,856 (+1 (+0.0%))",
+          "severity": "low",
+          "confidence": 0.85,
+          "anomalyType": "duplication_cluster",
+          "kind": "metric",
+          "metricKey": "stackedSpots",
+          "timestamp": "2026-06-12",
+          "asOf": "2026-06-12"
         }
       ]
     },
@@ -249,24 +327,40 @@
           "anomalyType": "duplication_cluster",
           "kind": "headline",
           "metricKey": null,
-          "timestamp": "2026-06-11",
-          "asOf": "2026-06-11"
+          "timestamp": "2026-06-12",
+          "asOf": "2026-06-12"
+        },
+        {
+          "network": "Helium Mobile",
+          "type": "growth",
+          "metric": "observed",
+          "value": 54688,
+          "previous": 54683,
+          "delta": 5,
+          "message": "entities on public map: 54,688 (+5 (+0.0%))",
+          "severity": "low",
+          "confidence": 0.85,
+          "anomalyType": "duplication_cluster",
+          "kind": "metric",
+          "metricKey": "observed",
+          "timestamp": "2026-06-12",
+          "asOf": "2026-06-12"
         },
         {
           "network": "Helium Mobile",
           "type": "integrity",
           "metric": "flaggedPct",
-          "value": 0.20571292723515536,
-          "previous": 0.20573121445421794,
-          "delta": -0.000018287219062579352,
+          "value": 0.20567583382094792,
+          "previous": 0.20571292723515536,
+          "delta": -0.00003709341420743417,
           "message": "fleet share flagged (any heuristic): 20.57% (-0.00 pp (-0.0%))",
           "severity": "low",
           "confidence": 0.85,
           "anomalyType": "duplication_cluster",
           "kind": "metric",
           "metricKey": "flaggedPct",
-          "timestamp": "2026-06-11",
-          "asOf": "2026-06-11"
+          "timestamp": "2026-06-12",
+          "asOf": "2026-06-12"
         }
       ]
     },
@@ -278,7 +372,7 @@
       "signals": []
     }
   ],
-  "date": "2026-06-11",
+  "date": "2026-06-12",
   "ingest": [
     {
       "id": "geodnet",

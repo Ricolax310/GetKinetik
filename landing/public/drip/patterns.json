@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-11T18:04:49.485Z",
+  "generatedAt": "2026-06-12T17:47:53.301Z",
   "patterns": [
     {
       "scope": "systemic",
@@ -15,6 +15,21 @@
       "category": "INFRASTRUCTURE",
       "description": "Cross-network infrastructure coverage stress observed across multiple networks (Geodnet, Helium IoT, Helium Mobile, WeatherXM).",
       "patternType": "cross-network"
+    },
+    {
+      "scope": "systemic",
+      "classification": "divergence",
+      "headline": "Divergence: INFRASTRUCTURE metrics split across networks",
+      "pattern": "DIVERGENCE_INFRASTRUCTURE",
+      "networks": [
+        "Geodnet",
+        "Helium IoT",
+        "Helium Mobile",
+        "WeatherXM"
+      ],
+      "category": "INFRASTRUCTURE",
+      "description": "Opposing metric drift — Geodnet, Helium IoT, Helium Mobile rising while WeatherXM declining.",
+      "patternType": "divergence"
     },
     {
       "scope": "systemic",
@@ -43,6 +58,56 @@
     {
       "scope": "systemic",
       "classification": "repetition",
+      "headline": "Geodnet: repeated exactDupGroups observation",
+      "pattern": "REPEATED_IDENTITY",
+      "networks": [
+        "Geodnet"
+      ],
+      "category": "IDENTITY",
+      "description": "Observed Geodnet exactDupGroups on 7 of 7 recorded days.",
+      "patternType": "cross-network"
+    },
+    {
+      "scope": "systemic",
+      "classification": "repetition",
+      "headline": "Geodnet: repeated flaggedPct observation",
+      "pattern": "REPEATED_IDENTITY",
+      "networks": [
+        "Geodnet"
+      ],
+      "category": "IDENTITY",
+      "description": "Observed Geodnet flaggedPct on 6 of 7 recorded days.",
+      "patternType": "cross-network"
+    },
+    {
+      "scope": "cross-network",
+      "classification": "convergence",
+      "headline": "Cross-network identity registry stress observed across multiple networks",
+      "pattern": "CROSS_NETWORK_IDENTITY",
+      "networks": [
+        "Geodnet",
+        "Helium Mobile"
+      ],
+      "category": "IDENTITY",
+      "description": "Cross-network identity registry stress observed across multiple networks (Geodnet, Helium Mobile).",
+      "patternType": "cross-network"
+    },
+    {
+      "scope": "cross-network",
+      "classification": "divergence",
+      "headline": "Divergence: IDENTITY metrics split across networks",
+      "pattern": "DIVERGENCE_IDENTITY",
+      "networks": [
+        "Geodnet",
+        "Helium Mobile"
+      ],
+      "category": "IDENTITY",
+      "description": "Opposing metric drift — Geodnet rising while Geodnet, Helium Mobile declining.",
+      "patternType": "divergence"
+    },
+    {
+      "scope": "systemic",
+      "classification": "repetition",
       "headline": "WeatherXM: repeated overCapacityCells observation",
       "pattern": "REPEATED_CAPACITY",
       "networks": [
@@ -67,30 +132,6 @@
     {
       "scope": "systemic",
       "classification": "repetition",
-      "headline": "Geodnet: repeated exactDupGroups observation",
-      "pattern": "REPEATED_IDENTITY",
-      "networks": [
-        "Geodnet"
-      ],
-      "category": "IDENTITY",
-      "description": "Observed Geodnet exactDupGroups on 7 of 7 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Geodnet: repeated flaggedPct observation",
-      "pattern": "REPEATED_IDENTITY",
-      "networks": [
-        "Geodnet"
-      ],
-      "category": "IDENTITY",
-      "description": "Observed Geodnet flaggedPct on 6 of 7 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
       "headline": "Hivemapper: repeated top20ShareOfSupply observation",
       "pattern": "REPEATED_ECONOMICS",
       "networks": [
@@ -110,18 +151,6 @@
       ],
       "category": "CAPACITY",
       "description": "Observed capacity signal on WeatherXM (overCapacityCells).",
-      "patternType": "single-network"
-    },
-    {
-      "scope": "localized",
-      "classification": "stability",
-      "headline": "Geodnet: identity registry stress signal detected",
-      "pattern": "LOCAL_IDENTITY",
-      "networks": [
-        "Geodnet"
-      ],
-      "category": "IDENTITY",
-      "description": "Observed identity signal on Geodnet (exactDupGroups).",
       "patternType": "single-network"
     },
     {

@@ -19,33 +19,37 @@
       {
         "network": "Geodnet",
         "metric": "observed",
-        "confidence": 0.682,
+        "confidence": 0.733,
         "flags": []
+      },
+      {
+        "network": "Geodnet",
+        "metric": "flaggedPct",
+        "confidence": 0.76,
+        "flags": [
+          "volatile"
+        ]
       },
       {
         "network": "WeatherXM",
         "metric": "overCapacityCells",
-        "confidence": 0.64,
+        "confidence": 0.682,
         "flags": [
-          "isolated",
-          "volatile"
+          "isolated"
         ]
       },
       {
         "network": "WeatherXM",
         "metric": "observed",
-        "confidence": 0.646,
-        "flags": [
-          "volatile"
-        ]
+        "confidence": 0.774,
+        "flags": []
       },
       {
         "network": "WeatherXM",
         "metric": "overCapacityPct",
-        "confidence": 0.7,
+        "confidence": 0.79,
         "flags": [
-          "isolated",
-          "volatile"
+          "isolated"
         ]
       },
       {
@@ -63,20 +67,33 @@
         "flags": []
       },
       {
+        "network": "Helium IoT",
+        "metric": "observed",
+        "confidence": 0.62,
+        "flags": [
+          "unverified"
+        ]
+      },
+      {
         "network": "Helium Mobile",
         "metric": "stackedSpots",
-        "confidence": 0.646,
+        "confidence": 0.687,
         "flags": []
-      }
-    ],
-    "heldBack": [
+      },
+      {
+        "network": "Helium Mobile",
+        "metric": "observed",
+        "confidence": 0.697,
+        "flags": []
+      },
       {
         "network": "Helium Mobile",
         "metric": "flaggedPct",
-        "confidence": 0.595,
+        "confidence": 0.738,
         "flags": []
       }
-    ]
+    ],
+    "heldBack": []
   },
   "weekly": {
     "minConfidence": 0.8,
