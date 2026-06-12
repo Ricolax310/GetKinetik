@@ -66,6 +66,14 @@ function formatDailyMarkdown({ date, items, chosen, llm, posted }) {
       lines.push("");
         if (llm.action === "skip") {
         lines.push(`Skip reason: ${llm.skipReason}`);
+        if (llm.rickReply?.trim()) {
+          lines.push("");
+          lines.push("### @Kinetik_Rick reply (paste on the X thread — no links)");
+          lines.push("");
+          lines.push("```");
+          lines.push(llm.rickReply.trim());
+          lines.push("```");
+        }
       } else {
         lines.push(`Model: ${llm._model || "—"}`);
         lines.push("");
@@ -80,6 +88,14 @@ function formatDailyMarkdown({ date, items, chosen, llm, posted }) {
           lines.push("");
           lines.push("```");
           lines.push(llm.tweet);
+          lines.push("```");
+          lines.push("");
+        }
+        if (llm.rickReply?.trim()) {
+          lines.push("### @Kinetik_Rick reply (paste on the X thread — no links)");
+          lines.push("");
+          lines.push("```");
+          lines.push(llm.rickReply.trim());
           lines.push("```");
           lines.push("");
         }

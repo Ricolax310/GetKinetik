@@ -16,6 +16,12 @@ import {
   GTM_NORTH_STAR,
   formatRouteMarkdown,
 } from "./gtm-route.mjs";
+import {
+  getRickTask,
+  formatRickMarkdown,
+  RICK_NORTH_STAR,
+  RICK_GUARDRAILS,
+} from "./rick-route.mjs";
 
 const GTM_PATH = path.join(REPO_ROOT, "scripts/bureau/gtm-context.md");
 const NEWS_STATE_PATH = path.join(REPO_ROOT, "scripts/data/bureau-news-state.json");
@@ -156,6 +162,10 @@ function buildDoToday(enabled, news, manualTasks) {
   items.push(`${n}. **Today’s route (${route.day}):** ${route.task}`);
   n += 1;
 
+  const rick = getRickTask();
+  items.push(`${n}. **@Kinetik_Rick visibility (${rick.focus}):** ${rick.task}`);
+  n += 1;
+
   const dow = new Date().getUTCDay();
   if (dow === 5) {
     for (const slot of NURTURE_LANES) {
@@ -283,6 +293,7 @@ export function buildOperatorData(registry, pipelineResults = null) {
   });
 
   const routeBlock = formatRouteMarkdown();
+  const rickBlock = formatRickMarkdown();
   const markdown = buildOperatorMarkdown({
     today,
     weekday: weekdayLabel(today),
@@ -294,6 +305,7 @@ export function buildOperatorData(registry, pipelineResults = null) {
     automated,
     nextScanDays: daysUntilNextMondayUtc(),
     routeBlock,
+    rickBlock,
     guardrails: OUTREACH_GUARDRAILS,
   });
 
@@ -310,6 +322,9 @@ export function buildOperatorData(registry, pipelineResults = null) {
     northStar: GTM_NORTH_STAR,
     weeklyRoute: getWeeklyOutreachTask(),
     guardrails: OUTREACH_GUARDRAILS,
+    rickNorthStar: RICK_NORTH_STAR,
+    rickRoute: getRickTask(),
+    rickGuardrails: RICK_GUARDRAILS,
     markdown,
   };
 }
@@ -325,6 +340,7 @@ function buildOperatorMarkdown({
   automated,
   nextScanDays,
   routeBlock,
+  rickBlock,
 }) {
   const waitLines =
     warmWaits.length === 0
@@ -361,6 +377,10 @@ ${waitLines.join("\n")}
 ---
 
 ${routeBlock}
+
+---
+
+${rickBlock}
 
 ---
 

@@ -2,6 +2,7 @@
 
 import { buildKinetikBrainPack, defaultNewsModel } from "./news-context.mjs";
 import { AI_OUTREACH_SYSTEM_BLOCK, getWeeklyOutreachTask } from "./gtm-route.mjs";
+import { RICK_SYSTEM_BLOCK } from "./rick-route.mjs";
 
 const BUREAU_SYSTEM = `You are the GETKINETIK bureau voice engine for Eric (@Ricolax310 / Kinetik_Rick).
 
@@ -10,6 +11,8 @@ You are fully briefed on GETKINETIK's mission, warm leads, live reads, wait rule
 Write like a sharp operator — not marketing, not Gemini-flattery, not crypto bro.
 
 ${AI_OUTREACH_SYSTEM_BLOCK}
+
+${RICK_SYSTEM_BLOCK}
 
 TODAY'S ROUTE SLOT: comments fit Tuesday; public posts fit Monday/Saturday; skip suggesting cold DMs or "send outreach email today" any day.
 
@@ -30,6 +33,7 @@ OUTPUT: valid JSON only:
   "networkIds": ["geodnet"],
   "linkedinComment": "2-4 sentences for paste under their article/post",
   "tweet": "standalone tweet <=270 chars if own_post OR strong news; else empty",
+  "rickReply": "personal-voice X reply <=240 chars, NO links/hashtags; empty if no thread angle. Draft even when action=skip if the topic has a thread angle.",
   "postTweet": false,
   "notes": "one line for Eric"
 }

@@ -10,6 +10,11 @@ OUTREACH ROUTE (never contradict):
 - NEVER recommend cold DMs to founders with huge inboxes, daily "send outreach" blasts, or third pings on wait-list contacts.
 - Outreach drafts in repo = Friday nurture IF they engaged — not cold sends.
 
+RICK VISIBILITY LANE (personal @Kinetik_Rick — runs IN PARALLEL with the route above, never instead of it):
+- Goal: strangers click the profile and follow. Mon hook post, Tue 3 replies on big threads, Wed native demo clip, Thu quote-tweet take, Fri the week's one link post, Sat 2 replies.
+- Replies = NO links ever; quote tweets are fine in this lane (growth), partner contact stays DM.
+- When Eric asks about followers / being seen / posting, coach THIS lane — do not redirect him to LinkedIn comments or tell him visibility doesn't matter.
+
 Other rules:
 - Respect warm-lead wait rules in context (per-contact cooldowns live in the private GTM brain).
 - Never claim fraud proved — "patterns worth cross-checking", registry hygiene.
