@@ -1,17 +1,21 @@
-# DePIN Signal Intelligence — Week 23
+# DePIN Signal Intelligence — Week 24
 
-> Week 23 · machine-driven signal publication · evidence first
+> Week 24 · machine-driven signal publication · evidence first
 
 ## Executive Summary
 
-• Week 23: cross-network signal index updated from public infrastructure reads.
-• 0 publishable signal(s) across 0 network(s) met the weekly confidence gate.
-• 16 cross-network pattern(s) tagged: IDENTITY, CAPACITY, ECONOMICS, IDENTITY, INFRASTRUCTURE, IDENTITY, IDENTITY, INFRASTRUCTURE, IDENTITY, IDENTITY, INFRASTRUCTURE, IDENTITY, INFRASTRUCTURE, IDENTITY, INFRASTRUCTURE, CAPACITY.
-• 16 systemic-scope pattern(s) recorded with multi-network support.
+• Week 24: cross-network signal index updated from public infrastructure reads.
+• 1 publishable signal(s) across 1 network(s) met the weekly confidence gate.
+• 11 cross-network pattern(s) tagged: IDENTITY, IDENTITY, IDENTITY, INFRASTRUCTURE, CAPACITY, INFRASTRUCTURE, CAPACITY, ECONOMICS, INFRASTRUCTURE, INFRASTRUCTURE, INFRASTRUCTURE.
+• 11 systemic-scope pattern(s) recorded with multi-network support.
 
 ## This Week In Signals
 
-No signals met the weekly confidence threshold (0.8) this window.
+Cross-network summary: 1 signal(s) across 1 network(s) from public infrastructure reads.
+
+**Geodnet**
+- Geodnet: 9.3% flagged pct (+0 pp)
+
 
 ## Cross-Network Patterns
 
@@ -24,34 +28,7 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 - **Classification:** repetition
 - **Networks:** Geodnet
 
-Observed Geodnet exactDupGroups on 6 of 6 recorded days.
-
-### WeatherXM: repeated overCapacityCells observation
-
-- **Category:** CAPACITY
-- **Scope:** systemic
-- **Classification:** repetition
-- **Networks:** WeatherXM
-
-Observed WeatherXM overCapacityCells on 6 of 6 recorded days.
-
-### Hivemapper: repeated top20ShareOfSupply observation
-
-- **Category:** ECONOMICS
-- **Scope:** systemic
-- **Classification:** repetition
-- **Networks:** Hivemapper
-
-Observed Hivemapper top20ShareOfSupply on 6 of 6 recorded days.
-
-### Geodnet: repeated observed observation
-
-- **Category:** INFRASTRUCTURE
-- **Scope:** systemic
-- **Classification:** repetition
-- **Networks:** Geodnet
-
-Observed Geodnet observed on 4 of 6 recorded days.
+Observed Geodnet exactDupGroups on 7 of 7 recorded days.
 
 ### Geodnet: repeated flaggedPct observation
 
@@ -60,7 +37,34 @@ Observed Geodnet observed on 4 of 6 recorded days.
 - **Classification:** repetition
 - **Networks:** Geodnet
 
-Observed Geodnet flaggedPct on 4 of 6 recorded days.
+Observed Geodnet flaggedPct on 6 of 7 recorded days.
+
+### Helium Mobile: repeated flaggedPct observation
+
+- **Category:** IDENTITY
+- **Scope:** systemic
+- **Classification:** repetition
+- **Networks:** Helium Mobile
+
+Observed Helium Mobile flaggedPct on 5 of 7 recorded days.
+
+### Geodnet: repeated observed observation
+
+- **Category:** INFRASTRUCTURE
+- **Scope:** systemic
+- **Classification:** repetition
+- **Networks:** Geodnet
+
+Observed Geodnet observed on 7 of 7 recorded days.
+
+### WeatherXM: repeated overCapacityCells observation
+
+- **Category:** CAPACITY
+- **Scope:** systemic
+- **Classification:** repetition
+- **Networks:** WeatherXM
+
+Observed WeatherXM overCapacityCells on 7 of 7 recorded days.
 
 ### WeatherXM: repeated observed observation
 
@@ -69,7 +73,7 @@ Observed Geodnet flaggedPct on 4 of 6 recorded days.
 - **Classification:** repetition
 - **Networks:** WeatherXM
 
-Observed WeatherXM observed on 4 of 6 recorded days.
+Observed WeatherXM observed on 7 of 7 recorded days.
 
 ### WeatherXM: repeated overCapacityPct observation
 
@@ -78,92 +82,99 @@ Observed WeatherXM observed on 4 of 6 recorded days.
 - **Classification:** repetition
 - **Networks:** WeatherXM
 
-Observed WeatherXM overCapacityPct on 4 of 6 recorded days.
+Observed WeatherXM overCapacityPct on 7 of 7 recorded days.
+
+### Hivemapper: repeated top20ShareOfSupply observation
+
+- **Category:** ECONOMICS
+- **Scope:** systemic
+- **Classification:** repetition
+- **Networks:** Hivemapper
+
+Observed Hivemapper top20ShareOfSupply on 7 of 7 recorded days.
+
+### Helium IoT: repeated stackedSpots observation
+
+- **Category:** INFRASTRUCTURE
+- **Scope:** systemic
+- **Classification:** repetition
+- **Networks:** Helium IoT
+
+Observed Helium IoT stackedSpots on 5 of 7 recorded days.
+
+### Helium Mobile: repeated stackedSpots observation
+
+- **Category:** INFRASTRUCTURE
+- **Scope:** systemic
+- **Classification:** repetition
+- **Networks:** Helium Mobile
+
+Observed Helium Mobile stackedSpots on 5 of 7 recorded days.
+
+### Helium Mobile: repeated observed observation
+
+- **Category:** INFRASTRUCTURE
+- **Scope:** systemic
+- **Classification:** repetition
+- **Networks:** Helium Mobile
+
+Observed Helium Mobile observed on 4 of 7 recorded days.
+
+### Geodnet: identity registry stress signal detected
+
+- **Category:** IDENTITY
+- **Scope:** localized
+- **Classification:** drift
+- **Networks:** Geodnet
+
+Observed identity signal on Geodnet (flaggedPct).
 
 
 
 ## Systemic Observations
 
-- Geodnet: repeated exactDupGroups observation: Observed Geodnet exactDupGroups on 6 of 6 recorded days.
-- WeatherXM: repeated overCapacityCells observation: Observed WeatherXM overCapacityCells on 6 of 6 recorded days.
-- Hivemapper: repeated top20ShareOfSupply observation: Observed Hivemapper top20ShareOfSupply on 6 of 6 recorded days.
-- Geodnet: repeated observed observation: Observed Geodnet observed on 4 of 6 recorded days.
-- Geodnet: repeated flaggedPct observation: Observed Geodnet flaggedPct on 4 of 6 recorded days.
-- WeatherXM: repeated observed observation: Observed WeatherXM observed on 4 of 6 recorded days.
-- WeatherXM: repeated overCapacityPct observation: Observed WeatherXM overCapacityPct on 4 of 6 recorded days.
+- Geodnet: repeated exactDupGroups observation: Observed Geodnet exactDupGroups on 7 of 7 recorded days.
+- Geodnet: repeated flaggedPct observation: Observed Geodnet flaggedPct on 6 of 7 recorded days.
+- Helium Mobile: repeated flaggedPct observation: Observed Helium Mobile flaggedPct on 5 of 7 recorded days.
+- Geodnet: repeated observed observation: Observed Geodnet observed on 7 of 7 recorded days.
+- WeatherXM: repeated overCapacityCells observation: Observed WeatherXM overCapacityCells on 7 of 7 recorded days.
+- WeatherXM: repeated observed observation: Observed WeatherXM observed on 7 of 7 recorded days.
+- WeatherXM: repeated overCapacityPct observation: Observed WeatherXM overCapacityPct on 7 of 7 recorded days.
+- Hivemapper: repeated top20ShareOfSupply observation: Observed Hivemapper top20ShareOfSupply on 7 of 7 recorded days.
+- Helium IoT: repeated stackedSpots observation: Observed Helium IoT stackedSpots on 5 of 7 recorded days.
+- Helium Mobile: repeated stackedSpots observation: Observed Helium Mobile stackedSpots on 5 of 7 recorded days.
+- Helium Mobile: repeated observed observation: Observed Helium Mobile observed on 4 of 7 recorded days.
 
 
 ## Data Appendix
 
-### Cross-Network Summary
-
-| Sector | Signals | Networks | Top severity |
-|---|---:|---|---|
-| Coverage growth | 1 | WeatherXM | low |
-| Token economics | 2 | Hivemapper | medium |
-
 ### What Changed Today
 
-**Registry & identity integrity**
-- **Geodnet** — 11 exact (lat,lng) duplicate groups on 19,616 public stations — each row in §1 is one coordinate pair your registry team can review today. _(medium · conf 0.70)_
-- **Geodnet** — exact (lat,lng) duplicate groups: 11 (+3 (+37.5%)) _(high · conf 0.85)_
-- **Geodnet** — entities on public map: 19,616 (-60 (-0.3%)) _(low · conf 0.85)_
-- **Geodnet** — fleet share flagged (any heuristic): 9.34% (-0.00 pp (-0.0%)) _(low · conf 0.85)_
+_Latest reading: 2026-06-14_
 
-**Network health & capacity**
-- **WeatherXM** — 288 cells exceed designed capacity — §1 lists H3 indices + map centers for your review queue. _(medium · conf 0.70)_
-- **WeatherXM** — cells over designed capacity: 288 (-1 (-0.3%)) _(low · conf 0.85)_
-- **WeatherXM** — share of map over capacity: 3.39% (-0.01 pp (-0.4%)) _(low · conf 0.85)_
+- **Geodnet** — exact (lat,lng) duplicate groups: 13 (+5 (+62.5%))
+- **Geodnet** — entities on public map: 19,623 (+9 (+0.0%))
+- **Geodnet** — fleet share flagged (any heuristic): 9.31% (+0.03 pp (+0.3%))
+- **WeatherXM** — entities on public map: 8,498 (+1 (+0.0%))
+- **WeatherXM** — cells over designed capacity: 287 (-2 (-0.7%))
+- **WeatherXM** — share of map over capacity: 3.38% (-0.02 pp (-0.7%))
+- **Hivemapper** — top-20 SPL share of UI supply: 49.18% (-0.02 pp (-0.0%))
+- **Helium IoT** — entities on public map: 1,008,034 (+11 (+0.0%))
+- **Helium IoT** — single-coordinate stacks (≥10 hotspots): 4,857 (+1 (+0.0%))
+- **Helium Mobile** — entities on public map: 54,691 (+2 (+0.0%))
+- **Helium Mobile** — fleet share flagged (any heuristic): 20.57% (-0.00 pp (-0.0%))
 
-**Coverage growth**
-- **WeatherXM** — entities on public map: 8,492 (+3 (+0.0%)) _(low · conf 0.85)_
+### Signals To Watch
 
-**Token economics**
-- **Hivemapper** — 49.13% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read. _(medium · conf 0.70)_
-- **Hivemapper** — top-20 SPL share of UI supply: 49.13% (-0.02 pp (-0.0%)) _(low · conf 0.85)_
+- On the public cells view, do over-capacity H3 counts match your internal registry and rewards model?
+- For stations sharing an exact coordinate pair on the public registry, is that expected registration behavior or a dedupe gap worth reconciling?
+- Do the largest visible SPL accounts map to known treasury or market-maker custody labels on your side?
+- Does the public read for Helium IoT match what your team sees internally, or is the public feed expected to look this way?
+- Does the public read for Helium Mobile match what your team sees internally, or is the public feed expected to look this way?
+- Is the public Coverage Map metrics feed expected to show flat KM mapped / zero detections while driver registrations keep rising?
 
-### Trends
+### Sources & Methodology
 
-_Comparing 2026-06-02 → 2026-06-07 (6 runs)._
-
-- **integrity**: 1 → 12 ▲ (+11)
-- **health**: 5 → 7 ▲ (+2)
-- **growth**: 0 → 1 ▲ (+1)
-- **economics**: 1 → 2 ▲ (+1)
-
-### Signal Type
-
-- **Coverage growth** (`growth`) — 1 signal(s) across 1 network(s): WeatherXM
-- **Token economics** (`economics`) — 2 signal(s) across 1 network(s): Hivemapper
-
-### What We Don't Know
-
-- **Registry & identity integrity** — Whether shared/duplicated identifiers are legitimate co-located installs or registry artifacts — only operator confirmation settles it.
-- **Network health & capacity** — Whether capacity or telemetry anomalies reflect real on-the-ground activity, ETL/display behavior, or registry double-counting — the public feed alone can't say.
-- **Coverage growth** — Whether registry growth reflects new physical deployments or registration churn — counts alone don't prove device reality.
-- **Token economics** — Whether the largest visible accounts are treasury, market-maker, exchange custody, or operators — on-chain shape doesn't label holder intent.
-
-### Network Watch
-
-### Geodnet
-- [integrity] 11 exact (lat,lng) duplicate groups on 19,616 public stations — each row in §1 is one coordinate pair your registry team can review today. _(medium · conf 0.70)_
-- [integrity] exact (lat,lng) duplicate groups: 11 (+3 (+37.5%)) _(high · conf 0.85)_
-- [integrity] entities on public map: 19,616 (-60 (-0.3%)) _(low · conf 0.85)_
-- [integrity] fleet share flagged (any heuristic): 9.34% (-0.00 pp (-0.0%)) _(low · conf 0.85)_
-
-### WeatherXM
-- [health] 288 cells exceed designed capacity — §1 lists H3 indices + map centers for your review queue. _(medium · conf 0.70)_
-- [growth] entities on public map: 8,492 (+3 (+0.0%)) _(low · conf 0.85)_
-- [health] cells over designed capacity: 288 (-1 (-0.3%)) _(low · conf 0.85)_
-- [health] share of map over capacity: 3.39% (-0.01 pp (-0.4%)) _(low · conf 0.85)_
-
-### Hivemapper
-- [economics] 49.13% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read. _(medium · conf 0.70)_
-- [economics] top-20 SPL share of UI supply: 49.13% (-0.02 pp (-0.0%)) _(low · conf 0.85)_
-
-### NATIX
-- _No qualifying public finding in latest snapshot._
-
-### DIMO
-- _No public scanner wired yet — included for cross-network coverage._
-
+- Weekly report aggregates **daily signal briefs** and latest signal view snapshots.
+- Patterns lead; network detail and raw evidence follow. Narratives appear only when tied to observations above.
+- Public scans: `scripts/duplication-scan-*.mjs` · Index: `scripts/data/signal index-signal view-index.json`

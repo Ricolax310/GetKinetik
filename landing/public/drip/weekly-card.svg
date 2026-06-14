@@ -20,8 +20,8 @@
   <text x="56" y="48" fill="#3A9BFF" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" letter-spacing="3">GETKINETIK · WEEKLY</text>
   <text x="56" y="88" fill="#E6E8EC" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="38" font-weight="700">Weekly Signal Review</text>
   <text x="56" y="112" fill="#9AA0A8" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="14">What kept showing up · neutral observation across networks</text>
-  <text x="56" y="134" fill="#9AA0A8" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="15">Week 23 · rolling 7-day window</text>
-  <text x="1144" y="88" fill="#E6E8EC" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="34" font-weight="700" text-anchor="end">6</text>
+  <text x="56" y="134" fill="#9AA0A8" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="15">Week 24 · rolling 7-day window</text>
+  <text x="1144" y="88" fill="#E6E8EC" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="34" font-weight="700" text-anchor="end">1</text>
   <text x="1144" y="118" fill="#9AA0A8" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="13" text-anchor="end">networks under review</text>
 
   <path d="M 66 168 L 686 168 L 696 178 L 696 498 L 686 508 L 66 508 L 56 498 L 56 178 Z" fill="#111113" stroke="rgba(230, 232, 236, 0.10)"/>
@@ -30,29 +30,15 @@
       
       <rect x="84" y="222" width="3" height="32" fill="#3A9BFF" opacity="0.85"/>
       <text x="100" y="246" fill="#E6E8EC" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="16" font-weight="600">Geodnet</text>
-      <text x="664" y="246" fill="#FF1430" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="14" font-weight="600" text-anchor="end">−60 entities</text>
-      <line x1="84" y1="264" x2="668" y2="264" stroke="rgba(230, 232, 236, 0.10)"/>
-      <rect x="84" y="274" width="3" height="32" fill="#3A9BFF" opacity="0.85"/>
-      <text x="100" y="298" fill="#E6E8EC" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="16" font-weight="600">WeatherXM</text>
-      <text x="664" y="298" fill="#E8FF3B" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="14" font-weight="600" text-anchor="end">+3 entities</text>
-      <line x1="84" y1="316" x2="668" y2="316" stroke="rgba(230, 232, 236, 0.10)"/>
-      <rect x="84" y="326" width="3" height="32" fill="#3A9BFF" opacity="0.85"/>
-      <text x="100" y="350" fill="#E6E8EC" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="16" font-weight="600">Hivemapper</text>
-      <text x="664" y="350" fill="#FF1430" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="14" font-weight="600" text-anchor="end">−0.0 pp top 20%</text>
+      <text x="664" y="246" fill="#E8FF3B" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="14" font-weight="600" text-anchor="end">+0.0 pp flagged</text>
   <text x="76" y="456" fill="#9AA0A8" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" font-weight="700">Field notes</text>
-  <text x="80" y="548" fill="#9AA0A8" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12">— Cross-network identity registry stress observed across multiple networks</text><text x="80" y="576" fill="#9AA0A8" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12">— Geodnet: repeated exactDupGroups observation</text>
+  <text x="80" y="548" fill="#9AA0A8" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12">— Geodnet: repeated exactDupGroups observation</text><text x="80" y="576" fill="#9AA0A8" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12">— Geodnet: repeated flaggedPct observation</text>
 
   <path d="M 738 168 L 1134 168 L 1144 178 L 1144 498 L 1134 508 L 738 508 L 728 498 L 728 178 Z" fill="#111113" stroke="rgba(230, 232, 236, 0.10)"/>
   <text x="744" y="192" fill="#9AA0A8" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" font-weight="700">Emerging patterns</text>
   
       <text x="752" y="234" fill="#E6E8EC" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="14">Identity signals</text>
-      <text x="1120" y="234" fill="#6A6C72" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="20" font-weight="700" text-anchor="end">→</text>
-      <text x="752" y="270" fill="#E6E8EC" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="14">Infrastructure signals</text>
-      <text x="1120" y="270" fill="#6A6C72" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="20" font-weight="700" text-anchor="end">→</text>
-      <text x="752" y="306" fill="#E6E8EC" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="14">Capacity signals</text>
-      <text x="1120" y="306" fill="#FF1430" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="20" font-weight="700" text-anchor="end">↓</text>
-      <text x="752" y="342" fill="#E6E8EC" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="14">Economics signals</text>
-      <text x="1120" y="342" fill="#FF1430" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="20" font-weight="700" text-anchor="end">↓</text>
+      <text x="1120" y="234" fill="#E8FF3B" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="20" font-weight="700" text-anchor="end">↑</text>
 
   <path d="M 738 528 L 1134 528 L 1144 538 L 1144 618 L 1134 628 L 738 628 L 728 618 L 728 538 Z" fill="#111113" stroke="rgba(230, 232, 236, 0.10)"/>
   <text x="744" y="552" fill="#9AA0A8" font-family="Segoe UI, system-ui, -apple-system, sans-serif" font-size="12" font-weight="700">Review posture</text>
