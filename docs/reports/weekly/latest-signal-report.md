@@ -1,6 +1,6 @@
 # Weekly DePIN Signal Report
 
-> Week 2026-W24 · 2026-06-08 → 2026-06-13 · patterns first, then networks.
+> Week 2026-W24 · 2026-06-08 → 2026-06-14 · patterns first, then networks.
 
 ## Executive Summary
 
@@ -18,11 +18,11 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 **Observed in:**
 - WeatherXM
 
-**Signal:** Over-capacity H3 cells rose from 287 to 289.
+**Signal:** Over-capacity H3 cells declined from 289 to 287.
 
 **Scope:** localized
 
-**Classification:** escalation
+**Classification:** stability
 
 **Unknown:** Public data cannot determine whether pressure reflects density, registry effects, or expected reward behavior.
 
@@ -33,11 +33,11 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 - Helium IoT
 - Helium Mobile
 
-**Signal:** Exact coordinate-duplicate groups declined from 10 to 8 on Geodnet.
+**Signal:** Exact coordinate-duplicate groups rose from 8 to 13 on Geodnet.
 
 **Scope:** systemic
 
-**Classification:** stability
+**Classification:** escalation
 
 **Unknown:** Public data cannot confirm whether shared coordinates are distinct devices or one identity reused.
 
@@ -46,7 +46,7 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 **Observed in:**
 - Hivemapper
 
-**Signal:** Top-20 account share of supply observed near 49.20%.
+**Signal:** Top-20 account share of supply observed near 49.18%.
 
 **Scope:** localized
 
@@ -59,9 +59,9 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 ### WeatherXM
 
 **What changed**
-- entities on public map: 8,497 (+3 (+0.0%))
-- cells over designed capacity: 289 (+2 (+0.7%))
-- share of map over capacity: 3.40% (+0.02 pp (+0.7%))
+- entities on public map: 8,498 (+1 (+0.0%))
+- cells over designed capacity: 287 (-2 (-0.7%))
+- share of map over capacity: 3.38% (-0.02 pp (-0.7%))
 
 **Signal type**
 - Capacity pressure (`capacity_violation`)
@@ -78,9 +78,9 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 ### Geodnet
 
 **What changed**
-- exact (lat,lng) duplicate groups: 8 (-2 (-20.0%))
-- entities on public map: 19,614 (+17 (+0.1%))
-- fleet share flagged (any heuristic): 9.27% (-0.04 pp (-0.4%))
+- exact (lat,lng) duplicate groups: 13 (+5 (+62.5%))
+- entities on public map: 19,623 (+9 (+0.0%))
+- fleet share flagged (any heuristic): 9.31% (+0.03 pp (+0.3%))
 
 **Signal type**
 - Registry duplication (`duplication_cluster`)
@@ -101,7 +101,7 @@ _No public signal this week — scan not run or no headline finding._
 ### Hivemapper
 
 **What changed**
-- top-20 SPL share of UI supply: 49.20% (-0.01 pp (-0.0%))
+- top-20 SPL share of UI supply: 49.18% (-0.02 pp (-0.0%))
 
 **Signal type**
 - Economic concentration (`economic_concentration`)
@@ -118,8 +118,8 @@ _No public signal this week — scan not run or no headline finding._
 ### Helium IoT
 
 **What changed**
-- entities on public map: 1,008,023 (+1 (+0.0%))
-- fleet share flagged (any heuristic): 6.91% (-0.00 pp (-0.0%))
+- entities on public map: 1,008,034 (+11 (+0.0%))
+- single-coordinate stacks (≥10 hotspots): 4,857 (+1 (+0.0%))
 
 **Signal type**
 - Registry duplication (`duplication_cluster`)
@@ -136,7 +136,7 @@ _No public signal this week — scan not run or no headline finding._
 ### Helium Mobile
 
 **What changed**
-- entities on public map: 54,689 (+1 (+0.0%))
+- entities on public map: 54,691 (+2 (+0.0%))
 - fleet share flagged (any heuristic): 20.57% (-0.00 pp (-0.0%))
 
 **Signal type**
@@ -155,18 +155,18 @@ _No public signal this week — scan not run or no headline finding._
 
 ### What Changed Today
 
-_Latest reading: 2026-06-13_
+_Latest reading: 2026-06-14_
 
-- **Geodnet** — exact (lat,lng) duplicate groups: 8 (-2 (-20.0%))
-- **Geodnet** — entities on public map: 19,614 (+17 (+0.1%))
-- **Geodnet** — fleet share flagged (any heuristic): 9.27% (-0.04 pp (-0.4%))
-- **WeatherXM** — entities on public map: 8,497 (+3 (+0.0%))
-- **WeatherXM** — cells over designed capacity: 289 (+2 (+0.7%))
-- **WeatherXM** — share of map over capacity: 3.40% (+0.02 pp (+0.7%))
-- **Hivemapper** — top-20 SPL share of UI supply: 49.20% (-0.01 pp (-0.0%))
-- **Helium IoT** — entities on public map: 1,008,023 (+1 (+0.0%))
-- **Helium IoT** — fleet share flagged (any heuristic): 6.91% (-0.00 pp (-0.0%))
-- **Helium Mobile** — entities on public map: 54,689 (+1 (+0.0%))
+- **Geodnet** — exact (lat,lng) duplicate groups: 13 (+5 (+62.5%))
+- **Geodnet** — entities on public map: 19,623 (+9 (+0.0%))
+- **Geodnet** — fleet share flagged (any heuristic): 9.31% (+0.03 pp (+0.3%))
+- **WeatherXM** — entities on public map: 8,498 (+1 (+0.0%))
+- **WeatherXM** — cells over designed capacity: 287 (-2 (-0.7%))
+- **WeatherXM** — share of map over capacity: 3.38% (-0.02 pp (-0.7%))
+- **Hivemapper** — top-20 SPL share of UI supply: 49.18% (-0.02 pp (-0.0%))
+- **Helium IoT** — entities on public map: 1,008,034 (+11 (+0.0%))
+- **Helium IoT** — single-coordinate stacks (≥10 hotspots): 4,857 (+1 (+0.0%))
+- **Helium Mobile** — entities on public map: 54,691 (+2 (+0.0%))
 - **Helium Mobile** — fleet share flagged (any heuristic): 20.57% (-0.00 pp (-0.0%))
 
 ### Signals To Watch
