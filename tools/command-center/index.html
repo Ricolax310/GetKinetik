@@ -17,6 +17,7 @@
         </div>
         <div class="top-actions">
           <span id="meta-updated" class="meta"></span>
+          <button type="button" id="btn-pull-live" class="btn btn-primary">Pull live (news + tweets)</button>
           <button type="button" id="btn-refresh" class="btn">Refresh brief</button>
         </div>
       </header>
@@ -25,6 +26,20 @@
       <p id="load-status" class="banner" hidden></p>
 
       <main class="grid">
+        <section class="panel wide react-panel">
+          <h2>React today — post these</h2>
+          <p class="react-hint" id="react-hint"></p>
+          <h3 class="sub">Reply to live posts</h3>
+          <div id="react-tweets"></div>
+          <h3 class="sub">React to fresh news</h3>
+          <div id="react-news"></div>
+        </section>
+
+        <section class="panel wide">
+          <h2>Profile &amp; threads</h2>
+          <div id="growth-kit"></div>
+        </section>
+
         <section class="panel">
           <h2>Daily briefing</h2>
           <div id="brief-body" class="md-body"></div>

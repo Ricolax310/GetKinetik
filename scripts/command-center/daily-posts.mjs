@@ -199,6 +199,96 @@ export function buildDailyPosts(today = new Date().toISOString().slice(0, 10)) {
   return { today, leadNetwork: hero.network, posts };
 }
 
+// ── Growth kit: bio, pinned post, and a daily data thread ──────────────────
+
+/** Static-ish bio — accurate, no overclaiming, leads with what we can prove. */
+const BIO =
+  "Neutral DePIN bureau. I read public network data and flag what's worth a second look — duplicate coordinates, capacity overflows, stacked hotspots, supply concentration. Reproducible, no token, no shilling. Helium · WeatherXM · GEODNET · Hivemapper → getkinetik.app";
+
+/** Pinned-post snapshot — today's headline numbers across the audited networks. */
+function buildPinnedPost(heroes) {
+  const byId = {};
+  for (const h of heroes) byId[h.network] = h;
+  const bullets = heroes.slice(0, 4).map((h) => `• ${h.plain}`);
+  return [
+    "Most DePIN dashboards tell you a network is growing. None tell you if the devices are real.",
+    "",
+    "I run a neutral second read on public data — anyone can reproduce it, I hold no token in any network I audit.",
+    "",
+    "Today's reads:",
+    ...bullets,
+    "",
+    "Not accusations. Questions worth asking. Daily at getkinetik.app",
+  ].join("\n");
+}
+
+/** A 5-tweet data thread built from the day's lead finding. */
+function buildThread(hero) {
+  const close =
+    "I publish these daily across Helium, GEODNET, WeatherXM, Hivemapper. No token, no pitch — just reproducible public reads.\n\ngetkinetik.app";
+
+  const byKind = {
+    stack: [
+      `${hero.plain}.\n\nAcross the network, ${n(hero.stacks)} coordinates each hold 10+ hotspots — out of ~${n(hero.fleet)} located units.\n\nWhat that does and doesn't mean, from public data 🧵`,
+      `First, what it's NOT: proof of fraud. Helium asserts locations to H3 hexes, so dense buildings and shared mounts legitimately share coordinates. Small stacks are normal.`,
+      `What's worth a look: stacks of THIS size. ${n(hero.big)} radios on one point isn't a building — it's the classic hotspot-stacking pattern. Could be honest dense deployment, could be gaming. Public data can't tell you which.`,
+      `That's the point of a neutral read: surface the size, name the question, let the network answer. The keys are grep-able from the free Entity API — no insider access.`,
+      close,
+    ],
+    dup: [
+      `${hero.plain}.\n\nOn a public registry of ${n(hero.fleet)} stations, that's checkable by anyone today 🧵`,
+      `What it's NOT: an accusation. Co-located installs and shared-mount sites can share a coordinate legitimately.`,
+      `What's worth a look: for a GPS reference network, two stations at the EXACT same coordinate is structurally odd — there's no second position to triangulate from. Usually a dedupe gap, not fraud.`,
+      `Why it matters: you can only fix what you can see. Each duplicate group is one row a registry team can grep — no internal data needed.`,
+      close,
+    ],
+    capacity: [
+      `${hero.plain}.\n\nThat's from the public cells view — reproducible today 🧵`,
+      `What it's NOT: proof of fake devices. Over-capacity can come from registry double-counting or expected reward-zone behavior.`,
+      `What's worth a look: a map cell listing more stations than the area can physically hold is a registry-vs-reality question only the operator can settle.`,
+      `The neutral read just surfaces the count and the H3 indices. The network checks the cause. No accusation, just the question.`,
+      close,
+    ],
+    econ: [
+      `${hero.plain}.\n\nThat's visible on-chain — anyone can verify it 🧵`,
+      `What it's NOT: fraud. Treasuries, market makers, and exchanges all hold large wallets. Concentration isn't wrongdoing.`,
+      `What's worth a look: "how concentrated is visible supply?" is a fair question any holder should be able to answer from chain data. So I answer it, neutrally.`,
+      `This is economic SHAPE, not a device claim — useful for treasury/MM review, not proof of anything about the physical network.`,
+      close,
+    ],
+  };
+  return byKind[hero.kind] || null;
+}
+
+export function buildGrowthKit(today = new Date().toISOString().slice(0, 10)) {
+  const idx = dayIndex(today);
+  const heroes = loadNetworks().map(heroFact).filter(Boolean);
+  if (!heroes.length) return { today, bio: BIO, pinnedPost: null, thread: null };
+  const hero = heroes[idx % heroes.length];
+  return {
+    today,
+    leadNetwork: hero.network,
+    bio: BIO,
+    pinnedPost: buildPinnedPost(heroes),
+    thread: buildThread(hero),
+  };
+}
+
+export function renderGrowthKitMarkdown(kit) {
+  const lines = ["## PROFILE & THREADS — set once, post weekly", ""];
+  lines.push("### Bio (set once)", "", "```", kit.bio, "```", "");
+  if (kit.pinnedPost) {
+    lines.push("### Pinned post (refresh when numbers move)", "", "```", kit.pinnedPost, "```", "");
+  }
+  if (kit.thread?.length) {
+    lines.push(`### Data thread (post 1 today — lead: ${kit.leadNetwork})`, "");
+    kit.thread.forEach((t, i) => {
+      lines.push(`**${i + 1}/${kit.thread.length}**`, "", "```", t, "```", "");
+    });
+  }
+  return lines;
+}
+
 export function renderDailyPostsMarkdown(daily) {
   const lines = ["## DAILY POSTS — pick 1–3, post, move on", ""];
   if (!daily.posts.length) {

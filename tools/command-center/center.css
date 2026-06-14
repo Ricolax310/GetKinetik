@@ -197,6 +197,98 @@ a {
   font-size: 14px;
 }
 
+/* ── React Today panel ───────────────────────────────────────────────── */
+.btn-primary {
+  background: #1c3a5e;
+  border-color: var(--accent-soft);
+  font-weight: 600;
+}
+
+.react-panel {
+  border-color: #27405c;
+  background: linear-gradient(180deg, #0f1318 0%, #0f0f11 60%);
+}
+
+.react-hint {
+  color: var(--silver);
+  font-size: 13px;
+  margin-bottom: 14px;
+}
+
+h3.sub {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  margin: 18px 0 10px;
+}
+
+.react-card {
+  border: 1px solid var(--obsidian-edge);
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  background: #121214;
+}
+
+.react-head {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--platinum);
+}
+
+.react-meta {
+  font-size: 11px;
+  color: var(--steel);
+  margin-top: 2px;
+}
+
+.react-link {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.react-quote {
+  margin: 10px 0;
+  padding: 8px 12px;
+  border-left: 2px solid var(--steel);
+  color: var(--silver);
+  font-size: 13px;
+  font-style: italic;
+}
+
+.react-post {
+  position: relative;
+  margin-top: 10px;
+  padding: 12px;
+  background: var(--obsidian);
+  border: 1px solid var(--obsidian-edge);
+  border-radius: 8px;
+}
+
+.react-text {
+  font-size: 14px;
+  color: var(--platinum);
+  white-space: pre-wrap;
+  margin-bottom: 10px;
+}
+
+.copy-btn {
+  border: 1px solid var(--accent-soft);
+  background: transparent;
+  color: var(--accent-soft);
+  padding: 4px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.copy-btn:hover {
+  background: rgba(144, 202, 249, 0.12);
+}
+
 @media (max-width: 860px) {
   .grid {
     grid-template-columns: 1fr;

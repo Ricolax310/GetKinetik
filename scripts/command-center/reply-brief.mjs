@@ -3,7 +3,12 @@
 import fs from "node:fs";
 import path from "node:path";
 import { REPO_ROOT, BRIEF_DIR } from "./config.mjs";
-import { buildDailyPosts, renderDailyPostsMarkdown } from "./daily-posts.mjs";
+import {
+  buildDailyPosts,
+  renderDailyPostsMarkdown,
+  buildGrowthKit,
+  renderGrowthKitMarkdown,
+} from "./daily-posts.mjs";
 import { renderReactFeedMarkdown } from "./react-feed.mjs";
 
 export const LIVE_THREADS_PATH = path.join(REPO_ROOT, "docs/command-center/live-threads.json");
@@ -227,12 +232,14 @@ export function buildReplyBrief(today = new Date().toISOString().slice(0, 10)) {
   const liveKeys = new Set(live.threads.map((t) => t.networkKey).filter(Boolean));
   const seeds = buildThreadSeeds(today, liveKeys);
   const dailyPosts = buildDailyPosts(today);
+  const growthKit = buildGrowthKit(today);
 
   return {
     today,
     liveThreads: live,
     threadSeeds: seeds,
     dailyPosts,
+    growthKit,
   };
 }
 
@@ -283,6 +290,7 @@ export function writeReplyBriefMarkdown(replyBrief, weekday, reactFeed = null) {
     "",
     ...(reactFeed ? renderReactFeedMarkdown(reactFeed) : []),
     ...(replyBrief.dailyPosts ? renderDailyPostsMarkdown(replyBrief.dailyPosts) : []),
+    ...(replyBrief.growthKit ? renderGrowthKitMarkdown(replyBrief.growthKit) : []),
     ...renderLiveThreadsMarkdown(replyBrief.liveThreads),
     ...renderSeedsMarkdown(replyBrief.threadSeeds),
   ];
