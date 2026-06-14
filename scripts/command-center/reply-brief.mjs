@@ -3,6 +3,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { REPO_ROOT, BRIEF_DIR } from "./config.mjs";
+import { buildDailyPosts, renderDailyPostsMarkdown } from "./daily-posts.mjs";
 
 export const LIVE_THREADS_PATH = path.join(REPO_ROOT, "docs/command-center/live-threads.json");
 
@@ -169,23 +170,26 @@ function whyItMatters(net) {
   return stripDisallowed(map[net.anomalyType] || null);
 }
 
+/** Trim to a whole-sentence/clause boundary so posts never cut mid-word. */
+function clipClause(text, max) {
+  const t = String(text || "").trim();
+  if (t.length <= max) return t;
+  const slice = t.slice(0, max);
+  const cut = Math.max(slice.lastIndexOf(". "), slice.lastIndexOf("; "), slice.lastIndexOf(" — "), slice.lastIndexOf(", "));
+  return (cut > max * 0.5 ? slice.slice(0, cut) : slice.slice(0, slice.lastIndexOf(" "))).trim();
+}
+
 function suggestedPostForSeed(net) {
   const templates = {
     natix:
       "Reviewing the public Coverage Map metrics feed — KM mapped / detections plateaued around May 1 while registered drivers keep ticking up. Expected ETL behavior on that endpoint, or worth a look on your side?",
-    nodle:
-      "Public snapshot still shows spatial clustering in the contributor map — does that match your internal view, or is the public feed expected to look this way?",
-    dawn:
-      "Public registry shape for this network looks unchanged on a fresh pull — curious if that matches what you see internally.",
-    grass:
-      "Open contributor geometry still shows tight clusters on the public snapshot — alignment check, not an accusation.",
   };
   if (templates[net.id]) return stripDisallowed(templates[net.id]);
 
   const obs = observationFromNetwork(net);
   if (!obs) return null;
   return stripDisallowed(
-    `Public read on ${net.name}: ${obs.slice(0, 100)} — does that match your internal view, or is the public feed expected to behave this way?`,
+    `Public read on ${net.name}: ${clipClause(obs, 150)} — does that match your internal view, or is the public feed expected to behave this way?`,
   );
 }
 
@@ -221,11 +225,13 @@ export function buildReplyBrief(today = new Date().toISOString().slice(0, 10)) {
   const live = buildLiveThreads(today);
   const liveKeys = new Set(live.threads.map((t) => t.networkKey).filter(Boolean));
   const seeds = buildThreadSeeds(today, liveKeys);
+  const dailyPosts = buildDailyPosts(today);
 
   return {
     today,
     liveThreads: live,
     threadSeeds: seeds,
+    dailyPosts,
   };
 }
 
@@ -274,6 +280,7 @@ export function writeReplyBriefMarkdown(replyBrief, weekday) {
   const lines = [
     `# Daily Briefing — ${replyBrief.today} (${weekday})`,
     "",
+    ...(replyBrief.dailyPosts ? renderDailyPostsMarkdown(replyBrief.dailyPosts) : []),
     ...renderLiveThreadsMarkdown(replyBrief.liveThreads),
     ...renderSeedsMarkdown(replyBrief.threadSeeds),
   ];
