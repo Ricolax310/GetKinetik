@@ -17,6 +17,7 @@ import {
   scoreItem,
   parseItemDate,
 } from "../bureau/news-rss.mjs";
+import { buildLiveTweetReacts, renderLiveTweetsMarkdown } from "./live-tweets.mjs";
 
 const SOURCES_CONFIG = path.join(REPO_ROOT, "scripts/bureau/news-sources.json");
 const FRESH_DAYS = 12;
@@ -123,24 +124,28 @@ Write the reaction.`;
  */
 export async function buildReactFeed(options = {}, today = new Date().toISOString().slice(0, 10)) {
   if (!options.fetchRss) {
-    return { today, reacts: [], note: "Live mode off — run with --fetch-rss for reactive news posts." };
+    return { today, reacts: [], liveTweets: { reacts: [] }, note: "Live mode off — run with --fetch-rss for reactive posts." };
   }
 
   loadEnvQuiet();
   const apiKey = process.env.OPENAI_API_KEY?.trim();
   const model = process.env.BUREAU_DEPIN_CHAT_MODEL?.trim() || process.env.BUREAU_NEWS_MODEL?.trim() || "gpt-5";
 
+  // Live X conversation lane (independent of news; degrades gracefully).
+  const liveTweets = await buildLiveTweetReacts({ apiKey, model, max: 3 });
+
   const cfg = loadSources();
   const fresh = await freshNews(cfg);
 
   if (!fresh.length) {
-    return { today, reacts: [], note: "No fresh DePIN news in the last 12 days worth reacting to." };
+    return { today, reacts: [], liveTweets, note: "No fresh DePIN news in the last 12 days worth reacting to." };
   }
 
   // No key → still surface the fresh stories with a manual prompt to react.
   if (!apiKey) {
     return {
       today,
+      liveTweets,
       reacts: fresh.slice(0, MAX_REACTS).map((x) => ({
         headline: x.item.title,
         source: x.item.source,
@@ -177,12 +182,21 @@ export async function buildReactFeed(options = {}, today = new Date().toISOStrin
   return {
     today,
     reacts,
+    liveTweets,
     note: reacts.length ? null : "Fresh stories found, but none had an honest bureau angle today.",
   };
 }
 
 export function renderReactFeedMarkdown(feed) {
-  const lines = ["## REACT TODAY — jump on live DePIN conversation", ""];
+  const lines = [];
+
+  // Lane 1: live X conversation (people to reply to) — highest-value for growth.
+  if (feed.liveTweets) {
+    lines.push(...renderLiveTweetsMarkdown(feed.liveTweets));
+  }
+
+  // Lane 2: fresh DePIN news (your own take to post).
+  lines.push("## REACT TODAY — jump on live DePIN news", "");
   if (!feed.reacts.length) {
     lines.push(`_${feed.note || "Nothing to react to."}_`, "");
     return lines;
