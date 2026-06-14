@@ -9,6 +9,7 @@ import { ensureImportDirs } from "./ingest.mjs";
 import { openAgentStore } from "./sqlite-store.mjs";
 import { buildReplyBrief, writeReplyBriefMarkdown } from "./reply-brief.mjs";
 import { buildReadingFeed } from "./reading-feed.mjs";
+import { buildReactFeed } from "./react-feed.mjs";
 import { publishSignalReports } from "./signal-publication.mjs";
 
 function weekdayUtc(iso) {
@@ -29,18 +30,20 @@ export async function buildCommandCenter(options = {}) {
     const readingFeed = await buildReadingFeed({
       fetchRss: options.fetchRss ?? false,
     });
+    const reactFeed = await buildReactFeed({ fetchRss: options.fetchRss ?? false }, today);
 
     const payload = {
-      version: 7,
+      version: 8,
       appName: "GetKinetik Command Center",
       updatedAt: new Date().toISOString(),
       today,
       weekday,
       replyBrief,
+      reactFeed,
       readingFeed,
     };
 
-    const briefPath = writeReplyBriefMarkdown(replyBrief, weekday);
+    const briefPath = writeReplyBriefMarkdown(replyBrief, weekday, reactFeed);
     payload.dailyBrief = {
       path: briefPath,
       markdown: fs.readFileSync(path.join(REPO_ROOT, briefPath), "utf8"),

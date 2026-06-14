@@ -4,6 +4,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { REPO_ROOT, BRIEF_DIR } from "./config.mjs";
 import { buildDailyPosts, renderDailyPostsMarkdown } from "./daily-posts.mjs";
+import { renderReactFeedMarkdown } from "./react-feed.mjs";
 
 export const LIVE_THREADS_PATH = path.join(REPO_ROOT, "docs/command-center/live-threads.json");
 
@@ -274,12 +275,13 @@ function renderSeedsMarkdown(seeds) {
   return lines;
 }
 
-export function writeReplyBriefMarkdown(replyBrief, weekday) {
+export function writeReplyBriefMarkdown(replyBrief, weekday, reactFeed = null) {
   fs.mkdirSync(BRIEF_DIR, { recursive: true });
   const file = path.join(BRIEF_DIR, `${replyBrief.today}-brief.md`);
   const lines = [
     `# Daily Briefing — ${replyBrief.today} (${weekday})`,
     "",
+    ...(reactFeed ? renderReactFeedMarkdown(reactFeed) : []),
     ...(replyBrief.dailyPosts ? renderDailyPostsMarkdown(replyBrief.dailyPosts) : []),
     ...renderLiveThreadsMarkdown(replyBrief.liveThreads),
     ...renderSeedsMarkdown(replyBrief.threadSeeds),
