@@ -123,14 +123,33 @@ function renderDeltaText(cur, prev, key) {
   return legacy;
 }
 
-function isLegacySuppressed(deltaText) {
-  if (deltaText === "unchanged vs last run") return true;
-  if (/^\+0(\.0+)?(\s|$| pp)/.test(deltaText)) return true;
-  return false;
+// Mirror of GRAMMAR_V2.trivialAbs (signal-engine/grammar/grammar.v2.ts).
+// Kept numeric so the legacy path agrees with the grammar engine exactly —
+// the old text-regex check only caught "+0" deltas, not "-0.00 pp", which made
+// flaggedPct mismatch every run and trip the legacy fallback warning.
+const TRIVIAL_ABS = {
+  exactDupGroups: 0,
+  overCapacityCells: 0,
+  overCapacityPct: 0.0005,
+  kmFrozenDays: 0,
+  top20ShareOfSupply: 0.002,
+  observed: 5,
+  flaggedPct: 0.001,
+  drivers: 10,
+  detections: 50,
+  detectionsZeroDays: 0,
+};
+
+function isLegacySuppressed(key, cur, prev) {
+  const delta = Number.isFinite(cur) && Number.isFinite(prev) ? cur - prev : 0;
+  const abs = Math.abs(delta);
+  const thresh = TRIVIAL_ABS[key];
+  if (thresh === undefined) return abs === 0;
+  return abs <= thresh;
 }
 
-function shouldSuppressMetric(key, cur, prev, deltaText) {
-  const legacySuppressed = isLegacySuppressed(deltaText);
+function shouldSuppressMetric(key, cur, prev, _deltaText) {
+  const legacySuppressed = isLegacySuppressed(key, cur, prev);
   if (!grammar || grammarLegacyFallback) return legacySuppressed;
 
   const grammarSuppressed = grammar.renderSuppression({
