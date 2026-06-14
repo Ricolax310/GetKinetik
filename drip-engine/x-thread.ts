@@ -132,20 +132,41 @@ export function buildXThreadTweets(
   return [assertClean(head, "x-tweet 1"), assertClean(tail, "x-tweet 2")].slice(0, MAX_FEED_TWEETS);
 }
 
-/** Short caption for image posts — hook + link, details live in the chart. */
+/** Short caption for image posts — concrete movers first so every day differs.
+ *
+ * Previously this led with strongestHook(), which returns the cross-network
+ * pattern HEADLINE — a fixed taxonomy phrase ("infrastructure coverage stress")
+ * that is byte-identical every day. Result: every card posted the same text and
+ * the feed read like a stuck bot. We now lead with the actual signals that
+ * MOVED (per-network deltas), and only fall back to the generic headline when
+ * literally nothing changed this window. */
 export function buildXImageCaption(
   signals: Signal[],
   patterns: Pattern[],
   label: string,
 ): string {
-  const hook = strongestHook(patterns, signals);
   const date = formatDateLabel(label);
-  const nets = [...new Set(signals.map((s) => s.network.replace(/ Network$/i, "")))].slice(0, 4);
   const line1 = `DePIN index · ${date}`;
-  const line2 = hook.length <= 100 ? hook : `${hook.slice(0, 97)}…`;
-  const line3 = `${nets.join(" · ")} · https://${SITE_URL}/`;
-  const body = [line1, line2, line3].join("\n");
-  return appendHashtags(body, featuredNetworkNames(signals, 2));
+
+  // Prefer concrete movers (delta !== 0), one per network, strongest first.
+  const movers = selectFeedSignals(signals, 2).filter((s) => s.delta !== 0);
+  const factLines = movers.map((s) => `• ${compactFactLine(s)}`);
+
+  const nets = [...new Set(signals.map((s) => s.network.replace(/ Network$/i, "")))].slice(0, 4);
+  const linkLine = `${nets.join(" · ")} · https://${SITE_URL}/`;
+
+  let body: string;
+  if (factLines.length) {
+    body = [line1, "", ...factLines, "", linkLine].join("\n");
+  } else {
+    // Nothing moved — fall back to the pattern headline, but keep it short.
+    const hook = strongestHook(patterns, signals);
+    const line2 = hook.length <= 110 ? hook : `${hook.slice(0, 107)}…`;
+    body = [line1, "", line2, "", linkLine].join("\n");
+  }
+
+  const withTags = appendHashtags(body, featuredNetworkNames(signals, 2));
+  return trimTweet(withTags);
 }
 
 export function buildXThread(
