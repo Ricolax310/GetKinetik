@@ -1,8 +1,20 @@
 {
-  "generatedAt": "2026-06-13T09:59:45.670Z",
-  "cellsTotal": 8497,
-  "overCapacity": 289,
+  "generatedAt": "2026-06-14T10:09:34.259Z",
+  "cellsTotal": 8498,
+  "overCapacity": 287,
   "stats": {
+    "generatedAt": "2026-06-14T10:09:34.259Z",
+    "observed": 8498,
+    "overCapacityCells": 287,
+    "overCapacityPct": 0.03377265238879736,
+    "drilledCells": 60,
+    "devicesInDrilled": 102,
+    "polNoLocation": 52,
+    "polOther": 1,
+    "inactiveInDrilled": 56,
+    "lowQodInDrilled": 62
+  },
+  "prevStats": {
     "generatedAt": "2026-06-13T09:59:45.670Z",
     "observed": 8497,
     "overCapacityCells": 289,
@@ -13,18 +25,6 @@
     "polOther": 0,
     "inactiveInDrilled": 59,
     "lowQodInDrilled": 61
-  },
-  "prevStats": {
-    "generatedAt": "2026-06-12T10:29:46.099Z",
-    "observed": 8494,
-    "overCapacityCells": 287,
-    "overCapacityPct": 0.03378855662820815,
-    "drilledCells": 60,
-    "devicesInDrilled": 87,
-    "polNoLocation": 49,
-    "polOther": 0,
-    "inactiveInDrilled": 55,
-    "lowQodInDrilled": 59
   },
   "drilled": [
     {
@@ -93,7 +93,7 @@
           "metrics": {
             "qod_score": 0,
             "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-10T19:00:00-05:00"
+            "ts": "2026-06-11T19:00:00-05:00"
           },
           "timezone": "America/Chicago",
           "programName": "community",
@@ -140,7 +140,7 @@
           "metrics": {
             "qod_score": 0,
             "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-10T19:00:00-05:00"
+            "ts": "2026-06-11T19:00:00-05:00"
           },
           "timezone": "America/Chicago",
           "programName": "community",
@@ -187,7 +187,7 @@
           "metrics": {
             "qod_score": 0,
             "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-10T19:00:00-05:00"
+            "ts": "2026-06-11T19:00:00-05:00"
           },
           "timezone": "America/Chicago",
           "programName": "community",
@@ -234,7 +234,7 @@
           "metrics": {
             "qod_score": 0,
             "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-10T19:00:00-05:00"
+            "ts": "2026-06-11T19:00:00-05:00"
           },
           "timezone": "America/Chicago",
           "programName": "community",
@@ -281,7 +281,7 @@
           "metrics": {
             "qod_score": 0,
             "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-10T19:00:00-05:00"
+            "ts": "2026-06-11T19:00:00-05:00"
           },
           "timezone": "America/Chicago",
           "programName": "community",
@@ -328,7 +328,7 @@
           "metrics": {
             "qod_score": 0,
             "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-10T19:00:00-05:00"
+            "ts": "2026-06-11T19:00:00-05:00"
           },
           "timezone": "America/Chicago",
           "programName": "community",
@@ -375,7 +375,7 @@
           "metrics": {
             "qod_score": 0,
             "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-10T19:00:00-05:00"
+            "ts": "2026-06-11T19:00:00-05:00"
           },
           "timezone": "America/Chicago",
           "programName": "community",
@@ -422,7 +422,7 @@
           "metrics": {
             "qod_score": 0,
             "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-10T19:00:00-05:00"
+            "ts": "2026-06-11T19:00:00-05:00"
           },
           "timezone": "America/Chicago",
           "programName": "community",
@@ -469,7 +469,7 @@
           "metrics": {
             "qod_score": 0,
             "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-10T19:00:00-05:00"
+            "ts": "2026-06-11T19:00:00-05:00"
           },
           "timezone": "America/Chicago",
           "programName": "community",
@@ -516,7 +516,7 @@
           "metrics": {
             "qod_score": 0,
             "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-10T19:00:00-05:00"
+            "ts": "2026-06-11T19:00:00-05:00"
           },
           "timezone": "America/Chicago",
           "programName": "community",
@@ -546,11 +546,11 @@
       "cell": {
         "index": "8726cdb66ffffff",
         "device_count": 10,
-        "active_device_count": 0,
+        "active_device_count": 2,
         "devices": {
           "community": 10
         },
-        "avg_data_quality": 32,
+        "avg_data_quality": 21,
         "capacity": 1,
         "polygon": [
           {
@@ -588,8 +588,8 @@
         {
           "id": "2883a2e0-438d-11ef-8e8d-b55568dc8e66",
           "cellIndex": "8726cdb66ffffff",
-          "cellActiveDeviceCount": 0,
-          "cellAvgDataQuality": null,
+          "cellActiveDeviceCount": 2,
+          "cellAvgDataQuality": 21,
           "cellCenter": {
             "lat": 33.87973,
             "lon": -94.80422
@@ -608,7 +608,7 @@
           "metrics": {
             "qod_score": 0,
             "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-10T19:00:00-05:00"
+            "ts": "2026-06-11T19:00:00-05:00"
           },
           "timezone": "America/Chicago",
           "programName": "community",
@@ -635,8 +635,8 @@
         {
           "id": "2515f360-438d-11ef-8e8d-b55568dc8e66",
           "cellIndex": "8726cdb66ffffff",
-          "cellActiveDeviceCount": 0,
-          "cellAvgDataQuality": null,
+          "cellActiveDeviceCount": 2,
+          "cellAvgDataQuality": 21,
           "cellCenter": {
             "lat": 33.87977,
             "lon": -94.80423
@@ -655,7 +655,7 @@
           "metrics": {
             "qod_score": 0,
             "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-10T19:00:00-05:00"
+            "ts": "2026-06-11T19:00:00-05:00"
           },
           "timezone": "America/Chicago",
           "programName": "community",
@@ -682,8 +682,8 @@
         {
           "id": "250f3ca0-438d-11ef-8e8d-b55568dc8e66",
           "cellIndex": "8726cdb66ffffff",
-          "cellActiveDeviceCount": 0,
-          "cellAvgDataQuality": null,
+          "cellActiveDeviceCount": 2,
+          "cellAvgDataQuality": 21,
           "cellCenter": {
             "lat": 33.87975,
             "lon": -94.80423
@@ -702,7 +702,7 @@
           "metrics": {
             "qod_score": 0,
             "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-10T19:00:00-05:00"
+            "ts": "2026-06-11T19:00:00-05:00"
           },
           "timezone": "America/Chicago",
           "programName": "community",
@@ -729,8 +729,8 @@
         {
           "id": "2be0b091-438d-11ef-8e8d-b55568dc8e66",
           "cellIndex": "8726cdb66ffffff",
-          "cellActiveDeviceCount": 0,
-          "cellAvgDataQuality": null,
+          "cellActiveDeviceCount": 2,
+          "cellAvgDataQuality": 21,
           "cellCenter": {
             "lat": 33.87972,
             "lon": -94.80416
@@ -749,7 +749,7 @@
           "metrics": {
             "qod_score": 0,
             "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-10T19:00:00-05:00"
+            "ts": "2026-06-11T19:00:00-05:00"
           },
           "timezone": "America/Chicago",
           "programName": "community",
@@ -776,8 +776,8 @@
         {
           "id": "24355760-438d-11ef-8e8d-b55568dc8e66",
           "cellIndex": "8726cdb66ffffff",
-          "cellActiveDeviceCount": 0,
-          "cellAvgDataQuality": null,
+          "cellActiveDeviceCount": 2,
+          "cellAvgDataQuality": 21,
           "cellCenter": {
             "lat": 33.87977,
             "lon": -94.80427
@@ -794,8 +794,9 @@
           },
           "profile": "D1",
           "metrics": {
-            "qod_score": 19,
-            "ts": "2026-06-10T19:00:00-05:00"
+            "qod_score": 0,
+            "pol_reason": "QOD_THRESHOLD_NOT_REACHED",
+            "ts": "2026-06-11T19:00:00-05:00"
           },
           "timezone": "America/Chicago",
           "programName": "community",
@@ -822,8 +823,8 @@
         {
           "id": "2683db41-438d-11ef-8e8d-b55568dc8e66",
           "cellIndex": "8726cdb66ffffff",
-          "cellActiveDeviceCount": 0,
-          "cellAvgDataQuality": null,
+          "cellActiveDeviceCount": 2,
+          "cellAvgDataQuality": 21,
           "cellCenter": {
             "lat": 33.87976,
             "lon": -94.8042
@@ -842,7 +843,7 @@
           "metrics": {
             "qod_score": 0,
             "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-10T19:00:00-05:00"
+            "ts": "2026-06-11T19:00:00-05:00"
           },
           "timezone": "America/Chicago",
           "programName": "community",
@@ -869,8 +870,8 @@
         {
           "id": "33fe5390-438d-11ef-8e8d-b55568dc8e66",
           "cellIndex": "8726cdb66ffffff",
-          "cellActiveDeviceCount": 0,
-          "cellAvgDataQuality": null,
+          "cellActiveDeviceCount": 2,
+          "cellAvgDataQuality": 21,
           "cellCenter": {
             "lat": 33.87974,
             "lon": -94.80423
@@ -889,7 +890,7 @@
           "metrics": {
             "qod_score": 0,
             "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-10T19:00:00-05:00"
+            "ts": "2026-06-11T19:00:00-05:00"
           },
           "timezone": "America/Chicago",
           "programName": "community",
@@ -916,10 +917,10 @@
         {
           "id": "2e198990-438d-11ef-8e8d-b55568dc8e66",
           "cellIndex": "8726cdb66ffffff",
-          "cellActiveDeviceCount": 0,
-          "cellAvgDataQuality": null,
+          "cellActiveDeviceCount": 2,
+          "cellAvgDataQuality": 21,
           "cellCenter": {
-            "lat": 33.87971,
+            "lat": 33.87972,
             "lon": -94.80423
           },
           "address": "Idabel, US",
@@ -934,36 +935,36 @@
           },
           "profile": "D1",
           "metrics": {
-            "qod_score": 25,
-            "ts": "2026-06-10T19:00:00-05:00"
+            "qod_score": 21,
+            "ts": "2026-06-11T19:00:00-05:00"
           },
           "timezone": "America/Chicago",
           "programName": "community",
           "cellCapacity": 1,
           "isActive": false,
-          "lastWeatherStationActivity": "2026-06-12T00:15:00-05:00",
+          "lastWeatherStationActivity": "2026-06-14T02:30:00-05:00",
           "current_weather": {
-            "timestamp": "2026-06-12T00:15:00-05:00",
-            "temperature": 27.43,
-            "humidity": 86,
+            "timestamp": "2026-06-14T02:30:00-05:00",
+            "temperature": 25.5,
+            "humidity": 87,
             "wind_speed": 0,
             "wind_gust": 0,
-            "wind_direction": 344,
+            "wind_direction": 194,
             "solar_irradiance": 0,
             "uv_index": 0,
             "precipitation": 0,
-            "pressure": 996.46,
+            "pressure": 997.8,
             "icon": "partly-cloudy-night",
             "precipitation_accumulated": 0,
-            "dew_point": 24.878577942529187,
-            "feels_like": 31.825488011887202
+            "dew_point": 23.175825089226805,
+            "feels_like": 25.5
           }
         },
         {
           "id": "3359af20-438d-11ef-8e8d-b55568dc8e66",
           "cellIndex": "8726cdb66ffffff",
-          "cellActiveDeviceCount": 0,
-          "cellAvgDataQuality": null,
+          "cellActiveDeviceCount": 2,
+          "cellAvgDataQuality": 21,
           "cellCenter": {
             "lat": 33.87978,
             "lon": -94.80424
@@ -980,36 +981,36 @@
           },
           "profile": "D1",
           "metrics": {
-            "qod_score": 53,
-            "ts": "2026-06-10T19:00:00-05:00"
+            "qod_score": 22,
+            "ts": "2026-06-11T19:00:00-05:00"
           },
           "timezone": "America/Chicago",
           "programName": "community",
           "cellCapacity": 1,
           "isActive": false,
-          "lastWeatherStationActivity": "2026-06-12T00:24:00-05:00",
+          "lastWeatherStationActivity": "2026-06-14T00:03:00-05:00",
           "current_weather": {
-            "timestamp": "2026-06-12T00:24:00-05:00",
-            "temperature": 27.7,
-            "humidity": 85,
-            "wind_speed": 0.23,
-            "wind_gust": 1,
-            "wind_direction": 175,
+            "timestamp": "2026-06-14T00:03:00-05:00",
+            "temperature": 25.72,
+            "humidity": 88,
+            "wind_speed": 0,
+            "wind_gust": 0,
+            "wind_direction": 270,
             "solar_irradiance": 0,
             "uv_index": 0,
             "precipitation": 0,
-            "pressure": 996.57,
+            "pressure": 996.48,
             "icon": "partly-cloudy-night",
             "precipitation_accumulated": 0,
-            "dew_point": 24.9472697240066,
-            "feels_like": 32.422427814499976
+            "dew_point": 23.581559075574393,
+            "feels_like": 25.72
           }
         },
         {
           "id": "25eb6bd0-438d-11ef-8e8d-b55568dc8e66",
           "cellIndex": "8726cdb66ffffff",
-          "cellActiveDeviceCount": 0,
-          "cellAvgDataQuality": null,
+          "cellActiveDeviceCount": 2,
+          "cellAvgDataQuality": 21,
           "cellCenter": {
             "lat": 33.87978,
             "lon": -94.80424
@@ -1028,7 +1029,7 @@
           "metrics": {
             "qod_score": 0,
             "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-10T19:00:00-05:00"
+            "ts": "2026-06-11T19:00:00-05:00"
           },
           "timezone": "America/Chicago",
           "programName": "community",
@@ -1062,7 +1063,7 @@
         "devices": {
           "community": 28
         },
-        "avg_data_quality": 87,
+        "avg_data_quality": 89,
         "capacity": 3,
         "polygon": [
           {
@@ -1101,7 +1102,7 @@
           "id": "126eadf0-7115-11ef-a8d1-1fe2597b4789",
           "cellIndex": "871eda743ffffff",
           "cellActiveDeviceCount": 11,
-          "cellAvgDataQuality": 87,
+          "cellAvgDataQuality": 89,
           "cellCenter": {
             "lat": 37.97919,
             "lon": 23.71347
@@ -1120,7 +1121,7 @@
           "metrics": {
             "qod_score": 0,
             "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-11T03:00:00+03:00"
+            "ts": "2026-06-12T03:00:00+03:00"
           },
           "timezone": "Europe/Athens",
           "programName": "community",
@@ -1148,7 +1149,7 @@
           "id": "fc192be0-88bc-11ec-900c-abdec1c57354",
           "cellIndex": "871eda743ffffff",
           "cellActiveDeviceCount": 11,
-          "cellAvgDataQuality": 87,
+          "cellAvgDataQuality": 89,
           "cellCenter": {
             "lat": 37.98083,
             "lon": 23.71363
@@ -1166,7 +1167,7 @@
           "profile": "M5",
           "metrics": {
             "qod_score": 0,
-            "ts": "2026-06-13T11:59:43+03:00"
+            "ts": "2026-06-14T12:23:29+03:00"
           },
           "timezone": "Europe/Athens",
           "programName": "community",
@@ -1194,7 +1195,7 @@
           "id": "7699b010-1df5-11ed-960b-b351f0b0cc44",
           "cellIndex": "871eda743ffffff",
           "cellActiveDeviceCount": 11,
-          "cellAvgDataQuality": 87,
+          "cellAvgDataQuality": 89,
           "cellCenter": {
             "lat": 37.97956,
             "lon": 23.71326
@@ -1213,7 +1214,7 @@
           "metrics": {
             "qod_score": 0,
             "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-11T03:00:00+03:00"
+            "ts": "2026-06-12T03:00:00+03:00"
           },
           "timezone": "Europe/Athens",
           "programName": "community",
@@ -1241,7 +1242,7 @@
           "id": "5d9a6360-0bc4-11f0-9d44-115d444d739a",
           "cellIndex": "871eda743ffffff",
           "cellActiveDeviceCount": 11,
-          "cellAvgDataQuality": 87,
+          "cellAvgDataQuality": 89,
           "cellCenter": {
             "lat": 37.97964,
             "lon": 23.71347
@@ -1260,7 +1261,7 @@
           "metrics": {
             "qod_score": 0,
             "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-11T03:00:00+03:00"
+            "ts": "2026-06-12T03:00:00+03:00"
           },
           "timezone": "Europe/Athens",
           "programName": "community",
@@ -1288,7 +1289,7 @@
           "id": "c7587780-5344-11ef-a2e4-6df465256924",
           "cellIndex": "871eda743ffffff",
           "cellActiveDeviceCount": 11,
-          "cellAvgDataQuality": 87,
+          "cellAvgDataQuality": 89,
           "cellCenter": {
             "lat": 37.97943,
             "lon": 23.71342
@@ -1307,7 +1308,7 @@
           "metrics": {
             "qod_score": 0,
             "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-11T03:00:00+03:00"
+            "ts": "2026-06-12T03:00:00+03:00"
           },
           "timezone": "Europe/Athens",
           "programName": "community",
@@ -1335,7 +1336,7 @@
           "id": "04f1e520-cca3-11ec-8cb5-a7f2455167cf",
           "cellIndex": "871eda743ffffff",
           "cellActiveDeviceCount": 11,
-          "cellAvgDataQuality": 87,
+          "cellAvgDataQuality": 89,
           "cellCenter": {
             "lat": 37.97955,
             "lon": 23.71333
@@ -1354,7 +1355,7 @@
           "metrics": {
             "qod_score": 0,
             "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-11T03:00:00+03:00"
+            "ts": "2026-06-12T03:00:00+03:00"
           },
           "timezone": "Europe/Athens",
           "programName": "community",
@@ -1382,7 +1383,7 @@
           "id": "81493f60-bf55-11ed-9972-4f669f2d96bd",
           "cellIndex": "871eda743ffffff",
           "cellActiveDeviceCount": 11,
-          "cellAvgDataQuality": 87,
+          "cellAvgDataQuality": 89,
           "cellCenter": {
             "lat": 37.97922,
             "lon": 23.71326
@@ -1401,7 +1402,7 @@
           "metrics": {
             "qod_score": 0,
             "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-11T03:00:00+03:00"
+            "ts": "2026-06-12T03:00:00+03:00"
           },
           "timezone": "Europe/Athens",
           "programName": "community",
@@ -1429,10 +1430,10 @@
           "id": "fe601050-963e-11ec-900c-abdec1c57354",
           "cellIndex": "871eda743ffffff",
           "cellActiveDeviceCount": 11,
-          "cellAvgDataQuality": 87,
+          "cellAvgDataQuality": 89,
           "cellCenter": {
-            "lat": 37.9795,
-            "lon": 23.71334
+            "lat": 37.97953,
+            "lon": 23.71335
           },
           "address": "Athens, GR",
           "name": "Pet Topaz Fog",
@@ -1446,39 +1447,39 @@
           },
           "profile": "M5",
           "metrics": {
-            "qod_score": 68,
-            "ts": "2026-06-11T03:00:00+03:00"
+            "qod_score": 71,
+            "ts": "2026-06-12T03:00:00+03:00"
           },
           "timezone": "Europe/Athens",
           "programName": "community",
           "cellCapacity": 3,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-06-13T12:58:00+03:00",
+          "lastWeatherStationActivity": "2026-06-14T13:08:00+03:00",
           "current_weather": {
-            "timestamp": "2026-06-13T12:58:00+03:00",
-            "temperature": 29.5,
-            "humidity": 45,
+            "timestamp": "2026-06-14T13:08:00+03:00",
+            "temperature": 29.2,
+            "humidity": 42,
             "wind_speed": 0,
             "wind_gust": 0,
             "wind_direction": 167,
-            "solar_irradiance": 0.11475409836065574,
+            "solar_irradiance": 0.20491803278688525,
             "uv_index": 0,
             "precipitation": 0,
-            "pressure": 1009.1,
+            "pressure": 1008.96,
             "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 16.323174666791413,
-            "feels_like": 29.868061862500014
+            "dew_point": 14.974767133115682,
+            "feels_like": 29.17469052927999
           }
         },
         {
           "id": "d3debb80-862b-11ef-bb6a-31ace5ea88be",
           "cellIndex": "871eda743ffffff",
           "cellActiveDeviceCount": 11,
-          "cellAvgDataQuality": 87,
+          "cellAvgDataQuality": 89,
           "cellCenter": {
-            "lat": 37.97947,
-            "lon": 23.71328
+            "lat": 37.97955,
+            "lon": 23.7132
           },
           "address": "Athens, GR",
           "name": "Sunny Frost Ice",
@@ -1493,35 +1494,35 @@
           "profile": "D1",
           "metrics": {
             "qod_score": 99,
-            "ts": "2026-06-11T03:00:00+03:00"
+            "ts": "2026-06-12T03:00:00+03:00"
           },
           "timezone": "Europe/Athens",
           "programName": "community",
           "cellCapacity": 3,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-06-13T12:58:08+03:00",
+          "lastWeatherStationActivity": "2026-06-14T13:07:06+03:00",
           "current_weather": {
-            "timestamp": "2026-06-13T12:58:08+03:00",
-            "temperature": 28.11,
-            "humidity": 45,
+            "timestamp": "2026-06-14T13:07:06+03:00",
+            "temperature": 29.61,
+            "humidity": 37,
             "wind_speed": 0.5,
-            "wind_gust": 1.5,
-            "wind_direction": 184,
-            "solar_irradiance": 320.4918032786885,
-            "uv_index": 3,
+            "wind_gust": 0.5,
+            "wind_direction": 350,
+            "solar_irradiance": 609.672131147541,
+            "uv_index": 5,
             "precipitation": 0,
-            "pressure": 1010.24,
+            "pressure": 1010.11,
             "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 15.064023050705291,
-            "feels_like": 28.31462457204499
+            "dew_point": 13.382509672823948,
+            "feels_like": 29.101143692008197
           }
         },
         {
           "id": "571e4820-0bd4-11f0-b641-13ebff23371f",
           "cellIndex": "871eda743ffffff",
           "cellActiveDeviceCount": 11,
-          "cellAvgDataQuality": 87,
+          "cellAvgDataQuality": 89,
           "cellCenter": {
             "lat": 37.97936,
             "lon": 23.71331
@@ -1540,7 +1541,7 @@
           "metrics": {
             "qod_score": 0,
             "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-11T03:00:00+03:00"
+            "ts": "2026-06-12T03:00:00+03:00"
           },
           "timezone": "Europe/Athens",
           "programName": "community",
@@ -1568,10 +1569,10 @@
           "id": "a866f0a0-ab98-11ec-966b-a173bf0cd052",
           "cellIndex": "871eda743ffffff",
           "cellActiveDeviceCount": 11,
-          "cellAvgDataQuality": 87,
+          "cellAvgDataQuality": 89,
           "cellCenter": {
-            "lat": 37.97957,
-            "lon": 23.71332
+            "lat": 37.97952,
+            "lon": 23.71326
           },
           "address": "Athens, GR",
           "name": "Office #17",
@@ -1585,39 +1586,39 @@
           },
           "profile": "M5",
           "metrics": {
-            "qod_score": 69,
-            "ts": "2026-06-11T03:00:00+03:00"
+            "qod_score": 63,
+            "ts": "2026-06-12T03:00:00+03:00"
           },
           "timezone": "Europe/Athens",
           "programName": "community",
           "cellCapacity": 3,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-06-13T12:57:00+03:00",
+          "lastWeatherStationActivity": "2026-06-14T13:08:00+03:00",
           "current_weather": {
-            "timestamp": "2026-06-13T12:57:00+03:00",
-            "temperature": 27.9,
-            "humidity": 50,
+            "timestamp": "2026-06-14T13:08:00+03:00",
+            "temperature": 27.5,
+            "humidity": 48,
             "wind_speed": 0,
             "wind_gust": 0,
             "wind_direction": 140,
             "solar_irradiance": 0,
             "uv_index": 0,
             "precipitation": 0,
-            "pressure": 1009.51,
+            "pressure": 1009.39,
             "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 16.52032109193826,
-            "feels_like": 28.534782350000025
+            "dew_point": 15.514543015313857,
+            "feels_like": 27.950385700000005
           }
         },
         {
           "id": "db6200f0-784e-11ef-a8d1-1fe2597b4789",
           "cellIndex": "871eda743ffffff",
           "cellActiveDeviceCount": 11,
-          "cellAvgDataQuality": 87,
+          "cellAvgDataQuality": 89,
           "cellCenter": {
-            "lat": 37.9719357,
-            "lon": 23.7116162
+            "lat": 37.9719265,
+            "lon": 23.7116067
           },
           "address": "Athens, GR",
           "name": "Powerful Coal Avalanche",
@@ -1631,40 +1632,40 @@
           },
           "profile": "PULSE",
           "metrics": {
-            "qod_score": 99,
-            "ts": "2026-06-11T03:00:00+03:00"
+            "qod_score": 100,
+            "ts": "2026-06-12T03:00:00+03:00"
           },
           "timezone": "Europe/Athens",
           "programName": "community",
           "cellCapacity": 3,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-06-13T12:58:45+03:00",
+          "lastWeatherStationActivity": "2026-06-14T13:05:43+03:00",
           "current_weather": {
-            "timestamp": "2026-06-13T12:58:45+03:00",
-            "temperature": 25.44,
-            "humidity": 50,
-            "wind_speed": 2.2,
-            "wind_gust": 4.5,
-            "wind_direction": 332,
-            "solar_irradiance": 808.360655737705,
+            "timestamp": "2026-06-14T13:05:43+03:00",
+            "temperature": 27.11,
+            "humidity": 42,
+            "wind_speed": 4.5,
+            "wind_gust": 5.6,
+            "wind_direction": 274,
+            "solar_irradiance": 753.9344262295082,
             "uv_index": 7,
             "precipitation": 0,
-            "pressure": 1008.78,
-            "nextCommunication": "1781346461",
+            "pressure": 1008.77,
+            "nextCommunication": "1781433282",
             "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 14.261763821085655,
-            "feels_like": 25.44
+            "dew_point": 13.096723016243196,
+            "feels_like": 27.207525950639187
           }
         },
         {
           "id": "25fbe690-438d-11ef-8e8d-b55568dc8e66",
           "cellIndex": "871eda743ffffff",
           "cellActiveDeviceCount": 11,
-          "cellAvgDataQuality": 87,
+          "cellAvgDataQuality": 89,
           "cellCenter": {
-            "lat": 37.97947,
-            "lon": 23.71328
+            "lat": 37.97955,
+            "lon": 23.7132
           },
           "address": "Athens, GR",
           "name": "Sticky Phlox Degrees",
@@ -1679,35 +1680,35 @@
           "profile": "D1",
           "metrics": {
             "qod_score": 99,
-            "ts": "2026-06-11T03:00:00+03:00"
+            "ts": "2026-06-12T03:00:00+03:00"
           },
           "timezone": "Europe/Athens",
           "programName": "community",
           "cellCapacity": 3,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-06-13T12:58:00+03:00",
+          "lastWeatherStationActivity": "2026-06-14T13:09:00+03:00",
           "current_weather": {
-            "timestamp": "2026-06-13T12:58:00+03:00",
-            "temperature": 28.22,
-            "humidity": 45,
-            "wind_speed": 0.6,
-            "wind_gust": 1.5,
-            "wind_direction": 187,
-            "solar_irradiance": 259.42622950819674,
-            "uv_index": 2,
+            "timestamp": "2026-06-14T13:09:00+03:00",
+            "temperature": 29.67,
+            "humidity": 37,
+            "wind_speed": 0.77,
+            "wind_gust": 2,
+            "wind_direction": 190,
+            "solar_irradiance": 777.7049180327868,
+            "uv_index": 7,
             "precipitation": 0,
-            "pressure": 1010.39,
+            "pressure": 1010.3,
             "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 15.163690774201577,
-            "feels_like": 28.42629777417999
+            "dew_point": 13.435579399513355,
+            "feels_like": 29.163153106753846
           }
         },
         {
           "id": "97143fc0-93f5-11ec-966b-a173bf0cd052",
           "cellIndex": "871eda743ffffff",
           "cellActiveDeviceCount": 11,
-          "cellAvgDataQuality": 87,
+          "cellAvgDataQuality": 89,
           "cellCenter": {
             "lat": 37.98065948,
             "lon": 23.71023369
@@ -1726,7 +1727,7 @@
           "metrics": {
             "qod_score": 0,
             "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-11T03:00:00+03:00"
+            "ts": "2026-06-12T03:00:00+03:00"
           },
           "timezone": "Europe/Athens",
           "programName": "community",
@@ -1754,7 +1755,7 @@
           "id": "20bbf4d0-a6ab-11ec-900c-abdec1c57354",
           "cellIndex": "871eda743ffffff",
           "cellActiveDeviceCount": 11,
-          "cellAvgDataQuality": 87,
+          "cellAvgDataQuality": 89,
           "cellCenter": {
             "lat": 37.98077774,
             "lon": 23.71063232
@@ -1773,7 +1774,7 @@
           "metrics": {
             "qod_score": 0,
             "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-11T03:00:00+03:00"
+            "ts": "2026-06-12T03:00:00+03:00"
           },
           "timezone": "Europe/Athens",
           "programName": "community",
@@ -1801,10 +1802,10 @@
           "id": "70a16f40-6b7f-11ed-960b-b351f0b0cc44",
           "cellIndex": "871eda743ffffff",
           "cellActiveDeviceCount": 11,
-          "cellAvgDataQuality": 87,
+          "cellAvgDataQuality": 89,
           "cellCenter": {
-            "lat": 37.97195,
-            "lon": 23.71155
+            "lat": 37.97181,
+            "lon": 23.7116
           },
           "address": "Athens, GR",
           "name": "Blunt Cherry Air",
@@ -1818,36 +1819,36 @@
           },
           "profile": "H1",
           "metrics": {
-            "qod_score": 62,
-            "ts": "2026-06-11T03:00:00+03:00"
+            "qod_score": 59,
+            "ts": "2026-06-12T03:00:00+03:00"
           },
           "timezone": "Europe/Athens",
           "programName": "community",
           "cellCapacity": 3,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-06-13T12:59:20+03:00",
+          "lastWeatherStationActivity": "2026-06-14T13:06:46+03:00",
           "current_weather": {
-            "timestamp": "2026-06-13T12:59:20+03:00",
-            "temperature": 26.1,
-            "humidity": 49,
-            "wind_speed": 1.5,
-            "wind_gust": 3.2,
-            "wind_direction": 12,
-            "solar_irradiance": 895.2459016393443,
-            "uv_index": 6,
+            "timestamp": "2026-06-14T13:06:46+03:00",
+            "temperature": 26.5,
+            "humidity": 43,
+            "wind_speed": 3.3,
+            "wind_gust": 5.5,
+            "wind_direction": 236,
+            "solar_irradiance": 782.5573770491803,
+            "uv_index": 5,
             "precipitation": 0,
             "pressure": 6553.3,
             "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 14.554555885505238,
-            "feels_like": 26.1
+            "dew_point": 12.907650452451021,
+            "feels_like": 26.5
           }
         },
         {
           "id": "f82f6d20-bf50-11ed-95eb-b351f0b0cc44",
           "cellIndex": "871eda743ffffff",
           "cellActiveDeviceCount": 11,
-          "cellAvgDataQuality": 87,
+          "cellAvgDataQuality": 89,
           "cellCenter": {
             "lat": 37.97945,
             "lon": 23.71317
@@ -1866,7 +1867,7 @@
           "metrics": {
             "qod_score": 0,
             "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-11T03:00:00+03:00"
+            "ts": "2026-06-12T03:00:00+03:00"
           },
           "timezone": "Europe/Athens",
           "programName": "community",
@@ -1894,10 +1895,10 @@
           "id": "28e5c010-438d-11ef-8e8d-b55568dc8e66",
           "cellIndex": "871eda743ffffff",
           "cellActiveDeviceCount": 11,
-          "cellAvgDataQuality": 87,
+          "cellAvgDataQuality": 89,
           "cellCenter": {
-            "lat": 37.97203,
-            "lon": 23.71154
+            "lat": 37.97205,
+            "lon": 23.71178
           },
           "address": "Athens, GR",
           "name": "Frontal Butter Windstorm",
@@ -1912,35 +1913,35 @@
           "profile": "D1",
           "metrics": {
             "qod_score": 99,
-            "ts": "2026-06-11T03:00:00+03:00"
+            "ts": "2026-06-12T03:00:00+03:00"
           },
           "timezone": "Europe/Athens",
           "programName": "community",
           "cellCapacity": 3,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-06-13T12:59:00+03:00",
+          "lastWeatherStationActivity": "2026-06-14T13:08:00+03:00",
           "current_weather": {
-            "timestamp": "2026-06-13T12:59:00+03:00",
-            "temperature": 25.5,
-            "humidity": 51,
-            "wind_speed": 2.27,
-            "wind_gust": 5.1,
-            "wind_direction": 349,
-            "solar_irradiance": 916.7704918032787,
-            "uv_index": 8,
+            "timestamp": "2026-06-14T13:08:00+03:00",
+            "temperature": 27.02,
+            "humidity": 42,
+            "wind_speed": 2.33,
+            "wind_gust": 4,
+            "wind_direction": 245,
+            "solar_irradiance": 818.6065573770492,
+            "uv_index": 7,
             "precipitation": 0,
-            "pressure": 1008.66,
+            "pressure": 1008.65,
             "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 14.623423310614326,
-            "feels_like": 25.5
+            "dew_point": 13.015816450184523,
+            "feels_like": 27.1373883383008
           }
         },
         {
           "id": "0a31fe70-37cc-11f0-aa66-eb28bcaff84f",
           "cellIndex": "871eda743ffffff",
           "cellActiveDeviceCount": 11,
-          "cellAvgDataQuality": 87,
+          "cellAvgDataQuality": 89,
           "cellCenter": {
             "lat": 37.97187,
             "lon": 23.71163
@@ -1959,7 +1960,7 @@
           "metrics": {
             "qod_score": 0,
             "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-11T03:00:00+03:00"
+            "ts": "2026-06-12T03:00:00+03:00"
           },
           "timezone": "Europe/Athens",
           "programName": "community",
@@ -1987,10 +1988,10 @@
           "id": "57defc60-882d-11ec-900c-abdec1c57354",
           "cellIndex": "871eda743ffffff",
           "cellActiveDeviceCount": 11,
-          "cellAvgDataQuality": 87,
+          "cellAvgDataQuality": 89,
           "cellCenter": {
             "lat": 37.97208,
-            "lon": 23.71154
+            "lon": 23.71124
           },
           "address": "Athens, GR",
           "name": "Long Inky Mesocyclones",
@@ -2004,36 +2005,36 @@
           },
           "profile": "M5",
           "metrics": {
-            "qod_score": 65,
-            "ts": "2026-06-11T03:00:00+03:00"
+            "qod_score": 100,
+            "ts": "2026-06-12T03:00:00+03:00"
           },
           "timezone": "Europe/Athens",
           "programName": "community",
           "cellCapacity": 3,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-06-13T12:58:00+03:00",
+          "lastWeatherStationActivity": "2026-06-14T13:07:00+03:00",
           "current_weather": {
-            "timestamp": "2026-06-13T12:58:00+03:00",
-            "temperature": 25.67,
-            "humidity": 51,
-            "wind_speed": 2.36,
+            "timestamp": "2026-06-14T13:07:00+03:00",
+            "temperature": 26.32,
+            "humidity": 44,
+            "wind_speed": 2.95,
             "wind_gust": 4.59,
-            "wind_direction": 349,
-            "solar_irradiance": 1023.0819672131148,
-            "uv_index": 9,
+            "wind_direction": 238,
+            "solar_irradiance": 923.2950819672132,
+            "uv_index": 8,
             "precipitation": 0,
-            "pressure": 1007.36,
+            "pressure": 1007.34,
             "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 14.779927281799736,
-            "feels_like": 25.67
+            "dew_point": 13.096959142301955,
+            "feels_like": 26.32
           }
         },
         {
           "id": "45a9d8f0-0182-11ef-becc-99e8c3f8ae01",
           "cellIndex": "871eda743ffffff",
           "cellActiveDeviceCount": 11,
-          "cellAvgDataQuality": 87,
+          "cellAvgDataQuality": 89,
           "cellCenter": {
             "lat": 37.9794338,
             "lon": 23.713279
@@ -2052,7 +2053,7 @@
           "metrics": {
             "qod_score": 0,
             "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-11T03:00:00+03:00"
+            "ts": "2026-06-12T03:00:00+03:00"
           },
           "timezone": "Europe/Athens",
           "programName": "community",
@@ -2079,7 +2080,7 @@
           "id": "f0a2ce50-7118-11ef-aec8-4dd523f9b3d4",
           "cellIndex": "871eda743ffffff",
           "cellActiveDeviceCount": 11,
-          "cellAvgDataQuality": 87,
+          "cellAvgDataQuality": 89,
           "cellCenter": {
             "lat": 37.97938,
             "lon": 23.71321
@@ -2098,7 +2099,7 @@
           "metrics": {
             "qod_score": 0,
             "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-11T03:00:00+03:00"
+            "ts": "2026-06-12T03:00:00+03:00"
           },
           "timezone": "Europe/Athens",
           "programName": "community",
@@ -2126,7 +2127,7 @@
           "id": "662cb490-93f1-11ec-900c-abdec1c57354",
           "cellIndex": "871eda743ffffff",
           "cellActiveDeviceCount": 11,
-          "cellAvgDataQuality": 87,
+          "cellAvgDataQuality": 89,
           "cellCenter": {
             "lat": 37.97956,
             "lon": 23.71328
@@ -2145,7 +2146,7 @@
           "metrics": {
             "qod_score": 0,
             "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-11T03:00:00+03:00"
+            "ts": "2026-06-12T03:00:00+03:00"
           },
           "timezone": "Europe/Athens",
           "programName": "community",
@@ -2173,10 +2174,10 @@
           "id": "d130ade0-d8a3-11ec-a651-5fda0296159f",
           "cellIndex": "871eda743ffffff",
           "cellActiveDeviceCount": 11,
-          "cellAvgDataQuality": 87,
+          "cellAvgDataQuality": 89,
           "cellCenter": {
-            "lat": 37.9813,
-            "lon": 23.71452
+            "lat": 37.98136,
+            "lon": 23.71449
           },
           "address": "Athens, GR",
           "name": "Cheerful Coffee Water",
@@ -2191,38 +2192,38 @@
           "profile": "M5",
           "metrics": {
             "qod_score": 100,
-            "ts": "2026-06-11T03:00:00+03:00"
+            "ts": "2026-06-12T03:00:00+03:00"
           },
           "timezone": "Europe/Athens",
           "programName": "community",
           "cellCapacity": 3,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-06-13T12:58:00+03:00",
+          "lastWeatherStationActivity": "2026-06-14T13:07:00+03:00",
           "current_weather": {
-            "timestamp": "2026-06-13T12:58:00+03:00",
-            "temperature": 25.8,
-            "humidity": 57,
-            "wind_speed": 0.45,
-            "wind_gust": 0.51,
-            "wind_direction": 207,
-            "solar_irradiance": 324.1803278688525,
-            "uv_index": 3,
+            "timestamp": "2026-06-14T13:07:00+03:00",
+            "temperature": 26.55,
+            "humidity": 49,
+            "wind_speed": 2.95,
+            "wind_gust": 5.1,
+            "wind_direction": 230,
+            "solar_irradiance": 520.9590163934427,
+            "uv_index": 4,
             "precipitation": 0,
-            "pressure": 1009.37,
+            "pressure": 1009.3,
             "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 16.638813499759134,
-            "feels_like": 25.8
+            "dew_point": 14.966746624275265,
+            "feels_like": 26.55
           }
         },
         {
           "id": "71339480-1e0c-11ed-960b-b351f0b0cc44",
           "cellIndex": "871eda743ffffff",
           "cellActiveDeviceCount": 11,
-          "cellAvgDataQuality": 87,
+          "cellAvgDataQuality": 89,
           "cellCenter": {
-            "lat": 37.97945,
-            "lon": 23.71324
+            "lat": 37.97955,
+            "lon": 23.71329
           },
           "address": "Athens, GR",
           "name": "Curved Misty Haboob",
@@ -2236,39 +2237,39 @@
           },
           "profile": "M5",
           "metrics": {
-            "qod_score": 100,
-            "ts": "2026-06-11T03:00:00+03:00"
+            "qod_score": 98,
+            "ts": "2026-06-12T03:00:00+03:00"
           },
           "timezone": "Europe/Athens",
           "programName": "community",
           "cellCapacity": 3,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-06-13T12:58:00+03:00",
+          "lastWeatherStationActivity": "2026-06-14T13:07:00+03:00",
           "current_weather": {
-            "timestamp": "2026-06-13T12:58:00+03:00",
-            "temperature": 27.5,
-            "humidity": 44,
-            "wind_speed": 0.69,
-            "wind_gust": 1.02,
-            "wind_direction": 200,
-            "solar_irradiance": 233.36885245901638,
-            "uv_index": 1,
+            "timestamp": "2026-06-14T13:07:00+03:00",
+            "temperature": 29.1,
+            "humidity": 36,
+            "wind_speed": 0.63,
+            "wind_gust": 1.53,
+            "wind_direction": 143,
+            "solar_irradiance": 483.3196721311475,
+            "uv_index": 4,
             "precipitation": 0,
-            "pressure": 1009.52,
+            "pressure": 1009.36,
             "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 14.163719608382706,
-            "feels_like": 27.66045629999998
+            "dew_point": 12.512953128710755,
+            "feels_like": 28.50821726768002
           }
         },
         {
           "id": "e7f42fa0-96aa-11ed-960f-d7d4cf200cc9",
           "cellIndex": "871eda743ffffff",
           "cellActiveDeviceCount": 11,
-          "cellAvgDataQuality": 87,
+          "cellAvgDataQuality": 89,
           "cellCenter": {
-            "lat": 37.9719,
-            "lon": 23.71165
+            "lat": 37.97183,
+            "lon": 23.71156
           },
           "address": "Athens, GR",
           "name": "Blunt Taffy Tornado",
@@ -2283,35 +2284,35 @@
           "profile": "H1",
           "metrics": {
             "qod_score": 100,
-            "ts": "2026-06-11T03:00:00+03:00"
+            "ts": "2026-06-12T03:00:00+03:00"
           },
           "timezone": "Europe/Athens",
           "programName": "community",
           "cellCapacity": 3,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-06-13T12:56:52+03:00",
+          "lastWeatherStationActivity": "2026-06-14T13:06:19+03:00",
           "current_weather": {
-            "timestamp": "2026-06-13T12:56:52+03:00",
-            "temperature": 24.5,
-            "humidity": 52,
+            "timestamp": "2026-06-14T13:06:19+03:00",
+            "temperature": 26.1,
+            "humidity": 43,
             "wind_speed": 4,
-            "wind_gust": 7.4,
-            "wind_direction": 26,
-            "solar_irradiance": 1235.7131147540983,
-            "uv_index": 11,
+            "wind_gust": 6.1,
+            "wind_direction": 258,
+            "solar_irradiance": 1066.1311475409836,
+            "uv_index": 10,
             "precipitation": 0,
-            "pressure": 1007.6,
+            "pressure": 1007.5,
             "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 14.001807715929603,
-            "feels_like": 24.5
+            "dew_point": 12.546948627598432,
+            "feels_like": 26.1
           }
         },
         {
           "id": "264c66a0-bf55-11ed-95eb-b351f0b0cc44",
           "cellIndex": "871eda743ffffff",
           "cellActiveDeviceCount": 11,
-          "cellAvgDataQuality": 87,
+          "cellAvgDataQuality": 89,
           "cellCenter": {
             "lat": 37.97948,
             "lon": 23.71289
@@ -2330,7 +2331,7 @@
           "metrics": {
             "qod_score": 0,
             "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-11T03:00:00+03:00"
+            "ts": "2026-06-12T03:00:00+03:00"
           },
           "timezone": "Europe/Athens",
           "programName": "community",
@@ -2358,7 +2359,7 @@
           "id": "936f6eb0-8844-11ec-900c-abdec1c57354",
           "cellIndex": "871eda743ffffff",
           "cellActiveDeviceCount": 11,
-          "cellAvgDataQuality": 87,
+          "cellAvgDataQuality": 89,
           "cellCenter": {
             "lat": 37.98069763,
             "lon": 23.71016121
@@ -2376,7 +2377,7 @@
           "profile": "M5",
           "metrics": {
             "qod_score": 0,
-            "ts": "2026-06-13T11:56:40+03:00"
+            "ts": "2026-06-14T12:20:23+03:00"
           },
           "timezone": "Europe/Athens",
           "programName": "community",
@@ -2468,7 +2469,7 @@
           "metrics": {
             "qod_score": 0,
             "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-10T21:00:00-03:00"
+            "ts": "2026-06-11T21:00:00-03:00"
           },
           "timezone": "America/Halifax",
           "programName": "community",
@@ -2515,7 +2516,7 @@
           "metrics": {
             "qod_score": 0,
             "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-10T21:00:00-03:00"
+            "ts": "2026-06-11T21:00:00-03:00"
           },
           "timezone": "America/Halifax",
           "programName": "community",
@@ -2562,7 +2563,7 @@
           "metrics": {
             "qod_score": 0,
             "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-10T21:00:00-03:00"
+            "ts": "2026-06-11T21:00:00-03:00"
           },
           "timezone": "America/Halifax",
           "programName": "community",
@@ -2609,7 +2610,7 @@
           "metrics": {
             "qod_score": 0,
             "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-10T21:00:00-03:00"
+            "ts": "2026-06-11T21:00:00-03:00"
           },
           "timezone": "America/Halifax",
           "programName": "community",
@@ -2656,7 +2657,7 @@
           "metrics": {
             "qod_score": 0,
             "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-10T21:00:00-03:00"
+            "ts": "2026-06-11T21:00:00-03:00"
           },
           "timezone": "America/Halifax",
           "programName": "community",
@@ -2703,7 +2704,7 @@
           "metrics": {
             "qod_score": 0,
             "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-10T21:00:00-03:00"
+            "ts": "2026-06-11T21:00:00-03:00"
           },
           "timezone": "America/Halifax",
           "programName": "community",
@@ -2750,7 +2751,7 @@
           "metrics": {
             "qod_score": 0,
             "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-10T21:00:00-03:00"
+            "ts": "2026-06-11T21:00:00-03:00"
           },
           "timezone": "America/Halifax",
           "programName": "community",
@@ -2797,7 +2798,7 @@
           "metrics": {
             "qod_score": 0,
             "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-10T21:00:00-03:00"
+            "ts": "2026-06-11T21:00:00-03:00"
           },
           "timezone": "America/Halifax",
           "programName": "community",
@@ -2844,7 +2845,7 @@
           "metrics": {
             "qod_score": 0,
             "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-10T21:00:00-03:00"
+            "ts": "2026-06-11T21:00:00-03:00"
           },
           "timezone": "America/Halifax",
           "programName": "community",
@@ -2872,58 +2873,13 @@
     },
     {
       "cell": {
-        "index": "872aaa945ffffff",
-        "device_count": 9,
-        "active_device_count": 8,
-        "devices": {
-          "community": 9
-        },
-        "avg_data_quality": 96,
-        "capacity": 1,
-        "polygon": [
-          {
-            "lat": 39.181145623966536,
-            "lon": -77.35402210136857
-          },
-          {
-            "lat": 39.17429440835216,
-            "lon": -77.36781124303408
-          },
-          {
-            "lat": 39.16223994085991,
-            "lon": -77.3664856570319
-          },
-          {
-            "lat": 39.15703608606556,
-            "lon": -77.3513782009983
-          },
-          {
-            "lat": 39.163883757177324,
-            "lon": -77.3375916865036
-          },
-          {
-            "lat": 39.175938826690476,
-            "lon": -77.3389100003209
-          }
-        ],
-        "center": {
-          "lat": 39.16908987577078,
-          "lon": -77.35269981638912
-        },
-        "_ratio": 9
-      },
-      "devices": [],
-      "_error": "HTTP 429"
-    },
-    {
-      "cell": {
         "index": "871edcd23ffffff",
         "device_count": 8,
         "active_device_count": 8,
         "devices": {
           "community": 8
         },
-        "avg_data_quality": 95,
+        "avg_data_quality": 96,
         "capacity": 1,
         "polygon": [
           {
@@ -2954,6 +2910,419 @@
         "center": {
           "lat": 40.599309223525076,
           "lon": 22.984879829301512
+        },
+        "_ratio": 8
+      },
+      "devices": [
+        {
+          "id": "2c12b2b0-8e55-11ec-966b-a173bf0cd052",
+          "cellIndex": "871edcd23ffffff",
+          "cellActiveDeviceCount": 8,
+          "cellAvgDataQuality": 96,
+          "cellCenter": {
+            "lat": 40.60897,
+            "lon": 22.98975
+          },
+          "address": "Pylaia Municipal Unit, GR",
+          "name": "Feisty Lace Celsius",
+          "bundle": {
+            "name": "m5",
+            "title": "M5",
+            "connectivity": "wifi",
+            "url": "https://docs.weatherxm.com/wxm-devices/m5/introduction",
+            "ws_model": "WS1000",
+            "gw_model": "WG1000"
+          },
+          "profile": "M5",
+          "metrics": {
+            "qod_score": 100,
+            "ts": "2026-06-12T03:00:00+03:00"
+          },
+          "timezone": "Europe/Athens",
+          "programName": "community",
+          "cellCapacity": 1,
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-06-14T13:07:00+03:00",
+          "current_weather": {
+            "timestamp": "2026-06-14T13:07:00+03:00",
+            "temperature": 25.8,
+            "humidity": 49,
+            "wind_speed": 0.29,
+            "wind_gust": 0.51,
+            "wind_direction": 43,
+            "solar_irradiance": 25.60655737704918,
+            "uv_index": 0,
+            "precipitation": 0,
+            "pressure": 1004.69,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 14.279729209070508,
+            "feels_like": 25.8
+          }
+        },
+        {
+          "id": "2779d400-438d-11ef-8e8d-b55568dc8e66",
+          "cellIndex": "871edcd23ffffff",
+          "cellActiveDeviceCount": 8,
+          "cellAvgDataQuality": 96,
+          "cellCenter": {
+            "lat": 40.60413,
+            "lon": 22.97222
+          },
+          "address": "Pylaia Municipal Unit, GR",
+          "name": "Best Sienna Gust",
+          "bundle": {
+            "name": "d1",
+            "title": "D1",
+            "connectivity": "wifi",
+            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
+            "ws_model": "WS1001",
+            "gw_model": "WG1200"
+          },
+          "profile": "D1",
+          "metrics": {
+            "qod_score": 99,
+            "ts": "2026-06-12T03:00:00+03:00"
+          },
+          "timezone": "Europe/Athens",
+          "programName": "community",
+          "cellCapacity": 1,
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-06-14T13:08:00+03:00",
+          "current_weather": {
+            "timestamp": "2026-06-14T13:08:00+03:00",
+            "temperature": 26.17,
+            "humidity": 48,
+            "wind_speed": 2.3,
+            "wind_gust": 4,
+            "wind_direction": 189,
+            "solar_irradiance": 1047.8934426229507,
+            "uv_index": 9,
+            "precipitation": 0,
+            "pressure": 1009.09,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 14.299511305652207,
+            "feels_like": 26.17
+          }
+        },
+        {
+          "id": "27686ee1-438d-11ef-8e8d-b55568dc8e66",
+          "cellIndex": "871edcd23ffffff",
+          "cellActiveDeviceCount": 8,
+          "cellAvgDataQuality": 96,
+          "cellCenter": {
+            "lat": 40.60101,
+            "lon": 22.97474
+          },
+          "address": "Pylaia Municipal Unit, GR",
+          "name": "Itchy Velvet Rainbow",
+          "bundle": {
+            "name": "d1",
+            "title": "D1",
+            "connectivity": "wifi",
+            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
+            "ws_model": "WS1001",
+            "gw_model": "WG1200"
+          },
+          "profile": "D1",
+          "metrics": {
+            "qod_score": 99,
+            "ts": "2026-06-12T03:00:00+03:00"
+          },
+          "timezone": "Europe/Athens",
+          "programName": "community",
+          "cellCapacity": 1,
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-06-14T13:08:00+03:00",
+          "current_weather": {
+            "timestamp": "2026-06-14T13:08:00+03:00",
+            "temperature": 25.89,
+            "humidity": 49,
+            "wind_speed": 2.7,
+            "wind_gust": 3.5,
+            "wind_direction": 252,
+            "solar_irradiance": 802.7049180327868,
+            "uv_index": 7,
+            "precipitation": 0,
+            "pressure": 1010.27,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 14.362179971740613,
+            "feels_like": 25.89
+          }
+        },
+        {
+          "id": "b86263c0-bf53-11ed-95eb-b351f0b0cc44",
+          "cellIndex": "871edcd23ffffff",
+          "cellActiveDeviceCount": 8,
+          "cellAvgDataQuality": 96,
+          "cellCenter": {
+            "lat": 40.59931,
+            "lon": 22.97615
+          },
+          "address": "Pylaia Municipal Unit, GR",
+          "name": "Frontal Bisque Orographic",
+          "bundle": {
+            "name": "h1",
+            "title": "H1",
+            "connectivity": "helium",
+            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
+            "ws_model": "WS2000",
+            "gw_model": "WS2000"
+          },
+          "profile": "H1",
+          "metrics": {
+            "qod_score": 100,
+            "ts": "2026-06-12T03:00:00+03:00"
+          },
+          "timezone": "Europe/Athens",
+          "programName": "community",
+          "cellCapacity": 1,
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-06-14T13:07:34+03:00",
+          "current_weather": {
+            "timestamp": "2026-06-14T13:07:34+03:00",
+            "temperature": 26.2,
+            "humidity": 49,
+            "wind_speed": 2.2,
+            "wind_gust": 3.7,
+            "wind_direction": 186,
+            "solar_irradiance": 971.1967213114754,
+            "uv_index": 7,
+            "precipitation": 0,
+            "pressure": 1008.5,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 14.646158937219813,
+            "feels_like": 26.2
+          }
+        },
+        {
+          "id": "2d57c030-438d-11ef-8e8d-b55568dc8e66",
+          "cellIndex": "871edcd23ffffff",
+          "cellActiveDeviceCount": 8,
+          "cellAvgDataQuality": 96,
+          "cellCenter": {
+            "lat": 40.5928,
+            "lon": 22.9741
+          },
+          "address": "Pylaia Municipal Unit, GR",
+          "name": "Brave Cream Snowstorm",
+          "bundle": {
+            "name": "d1",
+            "title": "D1",
+            "connectivity": "wifi",
+            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
+            "ws_model": "WS1001",
+            "gw_model": "WG1200"
+          },
+          "profile": "D1",
+          "metrics": {
+            "qod_score": 100,
+            "ts": "2026-06-12T03:00:00+03:00"
+          },
+          "timezone": "Europe/Athens",
+          "programName": "community",
+          "cellCapacity": 1,
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-06-14T13:09:00+03:00",
+          "current_weather": {
+            "timestamp": "2026-06-14T13:09:00+03:00",
+            "temperature": 27.11,
+            "humidity": 46,
+            "wind_speed": 1.5,
+            "wind_gust": 2.5,
+            "wind_direction": 52,
+            "solar_irradiance": 1166.7459016393443,
+            "uv_index": 10,
+            "precipitation": 0,
+            "pressure": 1010.13,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 14.497639876111489,
+            "feels_like": 27.450870846824802
+          }
+        },
+        {
+          "id": "33e7a2d0-bf54-11ed-9972-4f669f2d96bd",
+          "cellIndex": "871edcd23ffffff",
+          "cellActiveDeviceCount": 8,
+          "cellAvgDataQuality": 96,
+          "cellCenter": {
+            "lat": 40.59622,
+            "lon": 22.97245
+          },
+          "address": "Pylaia Municipal Unit, GR",
+          "name": "Urban Raspberry Hailstones",
+          "bundle": {
+            "name": "h1",
+            "title": "H1",
+            "connectivity": "helium",
+            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
+            "ws_model": "WS2000",
+            "gw_model": "WS2000"
+          },
+          "profile": "H1",
+          "metrics": {
+            "qod_score": 100,
+            "ts": "2026-06-12T03:00:00+03:00"
+          },
+          "timezone": "Europe/Athens",
+          "programName": "community",
+          "cellCapacity": 1,
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-06-14T13:08:56+03:00",
+          "current_weather": {
+            "timestamp": "2026-06-14T13:08:56+03:00",
+            "temperature": 26.3,
+            "humidity": 50,
+            "wind_speed": 1.9,
+            "wind_gust": 3.8,
+            "wind_direction": 234,
+            "solar_irradiance": 939.0409836065573,
+            "uv_index": 6,
+            "precipitation": 0,
+            "pressure": 1008.8,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 15.051536640310228,
+            "feels_like": 26.3
+          }
+        },
+        {
+          "id": "af1f1760-bf51-11ed-9972-4f669f2d96bd",
+          "cellIndex": "871edcd23ffffff",
+          "cellActiveDeviceCount": 8,
+          "cellAvgDataQuality": 96,
+          "cellCenter": {
+            "lat": 40.59914,
+            "lon": 22.98168
+          },
+          "address": "Pylaia Municipal Unit, GR",
+          "name": "Long Sapphire Anemometer",
+          "bundle": {
+            "name": "h1",
+            "title": "H1",
+            "connectivity": "helium",
+            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
+            "ws_model": "WS2000",
+            "gw_model": "WS2000"
+          },
+          "profile": "H1",
+          "metrics": {
+            "qod_score": 100,
+            "ts": "2026-06-12T03:00:00+03:00"
+          },
+          "timezone": "Europe/Athens",
+          "programName": "community",
+          "cellCapacity": 1,
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-06-14T13:09:05+03:00",
+          "current_weather": {
+            "timestamp": "2026-06-14T13:09:05+03:00",
+            "temperature": 26.4,
+            "humidity": 48,
+            "wind_speed": 1.5,
+            "wind_gust": 3.2,
+            "wind_direction": 238,
+            "solar_irradiance": 929.7950819672132,
+            "uv_index": 6,
+            "precipitation": 0,
+            "pressure": 1005.4,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 14.509667426503368,
+            "feels_like": 26.4
+          }
+        },
+        {
+          "id": "25590d00-8835-11ec-966b-a173bf0cd052",
+          "cellIndex": "871edcd23ffffff",
+          "cellActiveDeviceCount": 8,
+          "cellAvgDataQuality": 96,
+          "cellCenter": {
+            "lat": 40.60845,
+            "lon": 22.9757
+          },
+          "address": "Pylaia Municipal Unit, GR",
+          "name": "Prehistoric Eggshell Uv",
+          "bundle": {
+            "name": "m5",
+            "title": "M5",
+            "connectivity": "wifi",
+            "url": "https://docs.weatherxm.com/wxm-devices/m5/introduction",
+            "ws_model": "WS1000",
+            "gw_model": "WG1000"
+          },
+          "profile": "M5",
+          "metrics": {
+            "qod_score": 76,
+            "ts": "2026-06-12T03:00:00+03:00"
+          },
+          "timezone": "Europe/Athens",
+          "programName": "community",
+          "cellCapacity": 1,
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-06-14T13:08:00+03:00",
+          "current_weather": {
+            "timestamp": "2026-06-14T13:08:00+03:00",
+            "temperature": 26.72,
+            "humidity": 50,
+            "wind_speed": 0.92,
+            "wind_gust": 1.53,
+            "wind_direction": 226,
+            "solar_irradiance": 771.1065573770492,
+            "uv_index": 7,
+            "precipitation": 0,
+            "pressure": 1008.52,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 15.437163098396523,
+            "feels_like": 27.349793664000003
+          }
+        }
+      ]
+    },
+    {
+      "cell": {
+        "index": "872aaa945ffffff",
+        "device_count": 8,
+        "active_device_count": 7,
+        "devices": {
+          "community": 8
+        },
+        "avg_data_quality": 95,
+        "capacity": 1,
+        "polygon": [
+          {
+            "lat": 39.181145623966536,
+            "lon": -77.35402210136857
+          },
+          {
+            "lat": 39.17429440835216,
+            "lon": -77.36781124303408
+          },
+          {
+            "lat": 39.16223994085991,
+            "lon": -77.3664856570319
+          },
+          {
+            "lat": 39.15703608606556,
+            "lon": -77.3513782009983
+          },
+          {
+            "lat": 39.163883757177324,
+            "lon": -77.3375916865036
+          },
+          {
+            "lat": 39.175938826690476,
+            "lon": -77.3389100003209
+          }
+        ],
+        "center": {
+          "lat": 39.16908987577078,
+          "lon": -77.35269981638912
         },
         "_ratio": 8
       },
@@ -3058,7 +3427,7 @@
         "devices": {
           "swissborg": 6
         },
-        "avg_data_quality": 41,
+        "avg_data_quality": null,
         "capacity": 1,
         "polygon": [
           {
@@ -3103,7 +3472,7 @@
         "devices": {
           "community": 5
         },
-        "avg_data_quality": 93,
+        "avg_data_quality": 91,
         "capacity": 1,
         "polygon": [
           {
@@ -3137,8 +3506,238 @@
         },
         "_ratio": 5
       },
-      "devices": [],
-      "_error": "HTTP 429"
+      "devices": [
+        {
+          "id": "f38cd860-bf56-11ed-8a70-d7d4cf200cc9",
+          "cellIndex": "871e15312ffffff",
+          "cellActiveDeviceCount": 5,
+          "cellAvgDataQuality": 91,
+          "cellCenter": {
+            "lat": 47.73725,
+            "lon": 16.21987
+          },
+          "address": "Lanzenkirchen, AT",
+          "name": "Mild Graphite Millimeter",
+          "bundle": {
+            "name": "h1",
+            "title": "H1",
+            "connectivity": "helium",
+            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
+            "ws_model": "WS2000",
+            "gw_model": "WS2000"
+          },
+          "profile": "H1",
+          "metrics": {
+            "qod_score": 82,
+            "ts": "2026-06-12T02:00:00+02:00"
+          },
+          "timezone": "Europe/Vienna",
+          "programName": "community",
+          "cellCapacity": 1,
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-06-14T12:06:53+02:00",
+          "current_weather": {
+            "timestamp": "2026-06-14T12:06:53+02:00",
+            "temperature": 22.1,
+            "humidity": 52,
+            "wind_speed": 3.2,
+            "wind_gust": 8.1,
+            "wind_direction": 288,
+            "solar_irradiance": 427.1311475409836,
+            "uv_index": 4,
+            "precipitation": 0,
+            "pressure": 951.1,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0.5079999999998108,
+            "dew_point": 11.785682830858624,
+            "feels_like": 22.1
+          }
+        },
+        {
+          "id": "4a2a1c50-5344-11ef-8e8d-b55568dc8e66",
+          "cellIndex": "871e15312ffffff",
+          "cellActiveDeviceCount": 5,
+          "cellAvgDataQuality": 91,
+          "cellCenter": {
+            "lat": 47.73771,
+            "lon": 16.22026
+          },
+          "address": "Lanzenkirchen, AT",
+          "name": "Funny Fuzzy Pileus",
+          "bundle": {
+            "name": "h2",
+            "title": "H2",
+            "connectivity": "helium",
+            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
+            "ws_model": "WS2001",
+            "gw_model": "WS2001"
+          },
+          "profile": "H2",
+          "metrics": {
+            "qod_score": 92,
+            "ts": "2026-06-12T02:00:00+02:00"
+          },
+          "timezone": "Europe/Vienna",
+          "programName": "community",
+          "cellCapacity": 1,
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-06-14T12:06:44+02:00",
+          "current_weather": {
+            "timestamp": "2026-06-14T12:06:44+02:00",
+            "temperature": 21.9,
+            "humidity": 50,
+            "wind_speed": 3.2,
+            "wind_gust": 6.1,
+            "wind_direction": 240,
+            "solar_irradiance": 424.1475409836066,
+            "uv_index": 4,
+            "precipitation": 0,
+            "pressure": 975.5,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0.5079999999999245,
+            "dew_point": 11.00861903424828,
+            "feels_like": 21.9
+          }
+        },
+        {
+          "id": "b900be90-5344-11ef-93f6-8bf643582247",
+          "cellIndex": "871e15312ffffff",
+          "cellActiveDeviceCount": 5,
+          "cellAvgDataQuality": 91,
+          "cellCenter": {
+            "lat": 47.73739,
+            "lon": 16.21997
+          },
+          "address": "Lanzenkirchen, AT",
+          "name": "Joyful Mauvelous Drought",
+          "bundle": {
+            "name": "h2",
+            "title": "H2",
+            "connectivity": "helium",
+            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
+            "ws_model": "WS2001",
+            "gw_model": "WS2001"
+          },
+          "profile": "H2",
+          "metrics": {
+            "qod_score": 93,
+            "ts": "2026-06-12T02:00:00+02:00"
+          },
+          "timezone": "Europe/Vienna",
+          "programName": "community",
+          "cellCapacity": 1,
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-06-14T12:06:58+02:00",
+          "current_weather": {
+            "timestamp": "2026-06-14T12:06:58+02:00",
+            "temperature": 22,
+            "humidity": 50,
+            "wind_speed": 3.1,
+            "wind_gust": 7.7,
+            "wind_direction": 42,
+            "solar_irradiance": 431.672131147541,
+            "uv_index": 4,
+            "precipitation": 0,
+            "pressure": 975.4,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0.5079999999999245,
+            "dew_point": 11.100564829719175,
+            "feels_like": 22
+          }
+        },
+        {
+          "id": "f1c585e0-bf56-11ed-95eb-b351f0b0cc44",
+          "cellIndex": "871e15312ffffff",
+          "cellActiveDeviceCount": 5,
+          "cellAvgDataQuality": 91,
+          "cellCenter": {
+            "lat": 47.73747,
+            "lon": 16.21989
+          },
+          "address": "Lanzenkirchen, AT",
+          "name": "Rare Butter Millimeter",
+          "bundle": {
+            "name": "h1",
+            "title": "H1",
+            "connectivity": "helium",
+            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
+            "ws_model": "WS2000",
+            "gw_model": "WS2000"
+          },
+          "profile": "H1",
+          "metrics": {
+            "qod_score": 94,
+            "ts": "2026-06-12T02:00:00+02:00"
+          },
+          "timezone": "Europe/Vienna",
+          "programName": "community",
+          "cellCapacity": 1,
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-06-14T12:05:38+02:00",
+          "current_weather": {
+            "timestamp": "2026-06-14T12:05:38+02:00",
+            "temperature": 21.8,
+            "humidity": 52,
+            "wind_speed": 3.6,
+            "wind_gust": 6.2,
+            "wind_direction": 210,
+            "solar_irradiance": 528.1639344262295,
+            "uv_index": 5,
+            "precipitation": 0,
+            "pressure": 975.3,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0.5080000000000382,
+            "dew_point": 11.508557477155522,
+            "feels_like": 21.8
+          }
+        },
+        {
+          "id": "9f3f44e0-5344-11ef-93f6-8bf643582247",
+          "cellIndex": "871e15312ffffff",
+          "cellActiveDeviceCount": 5,
+          "cellAvgDataQuality": 91,
+          "cellCenter": {
+            "lat": 47.73743,
+            "lon": 16.21998
+          },
+          "address": "Lanzenkirchen, AT",
+          "name": "Mammoth Fuzzy Cumulonimbus",
+          "bundle": {
+            "name": "h2",
+            "title": "H2",
+            "connectivity": "helium",
+            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
+            "ws_model": "WS2001",
+            "gw_model": "WS2001"
+          },
+          "profile": "H2",
+          "metrics": {
+            "qod_score": 94,
+            "ts": "2026-06-12T02:00:00+02:00"
+          },
+          "timezone": "Europe/Vienna",
+          "programName": "community",
+          "cellCapacity": 1,
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-06-14T12:08:43+02:00",
+          "current_weather": {
+            "timestamp": "2026-06-14T12:08:43+02:00",
+            "temperature": 22,
+            "humidity": 51,
+            "wind_speed": 2.2,
+            "wind_gust": 6.9,
+            "wind_direction": 326,
+            "solar_irradiance": 528.0983606557377,
+            "uv_index": 5,
+            "precipitation": 0,
+            "pressure": 975.6,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0.2540000000000191,
+            "dew_point": 11.399498237354663,
+            "feels_like": 22
+          }
+        }
+      ]
     },
     {
       "cell": {
@@ -3189,11 +3788,11 @@
       "cell": {
         "index": "873933759ffffff",
         "device_count": 5,
-        "active_device_count": 4,
+        "active_device_count": 5,
         "devices": {
           "community": 5
         },
-        "avg_data_quality": 63,
+        "avg_data_quality": 72,
         "capacity": 1,
         "polygon": [
           {
@@ -3238,7 +3837,7 @@
         "devices": {
           "community": 5
         },
-        "avg_data_quality": 100,
+        "avg_data_quality": 99,
         "capacity": 1,
         "polygon": [
           {
@@ -3279,11 +3878,11 @@
       "cell": {
         "index": "877a6ac76ffffff",
         "device_count": 9,
-        "active_device_count": 7,
+        "active_device_count": 8,
         "devices": {
           "swissborg": 9
         },
-        "avg_data_quality": 53,
+        "avg_data_quality": 55,
         "capacity": 2,
         "polygon": [
           {
@@ -3328,7 +3927,7 @@
         "devices": {
           "community": 8
         },
-        "avg_data_quality": 85,
+        "avg_data_quality": 82,
         "capacity": 2,
         "polygon": [
           {
@@ -3373,7 +3972,7 @@
         "devices": {
           "community": 4
         },
-        "avg_data_quality": 60,
+        "avg_data_quality": 61,
         "capacity": 1,
         "polygon": [
           {
@@ -3418,7 +4017,7 @@
         "devices": {
           "swissborg": 4
         },
-        "avg_data_quality": 23,
+        "avg_data_quality": 20,
         "capacity": 1,
         "polygon": [
           {
@@ -3509,7 +4108,7 @@
         "devices": {
           "community": 4
         },
-        "avg_data_quality": 86,
+        "avg_data_quality": 90,
         "capacity": 1,
         "polygon": [
           {
@@ -3543,235 +4142,6 @@
         },
         "_ratio": 4
       },
-      "devices": [
-        {
-          "id": "4b969ac0-bf55-11ed-8a70-d7d4cf200cc9",
-          "cellIndex": "872aac992ffffff",
-          "cellActiveDeviceCount": 4,
-          "cellAvgDataQuality": 86,
-          "cellCenter": {
-            "lat": 40.28876,
-            "lon": -75.72948
-          },
-          "address": "Amity Township, US",
-          "name": "Raspy Zaffre Sky",
-          "bundle": {
-            "name": "h1",
-            "title": "H1",
-            "connectivity": "helium",
-            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
-            "ws_model": "WS2000",
-            "gw_model": "WS2000"
-          },
-          "profile": "H1",
-          "metrics": {
-            "qod_score": 85,
-            "ts": "2026-06-10T20:00:00-04:00"
-          },
-          "timezone": "America/New_York",
-          "programName": "community",
-          "cellCapacity": 1,
-          "isActive": true,
-          "lastWeatherStationActivity": "2026-06-13T05:58:34-04:00",
-          "current_weather": {
-            "timestamp": "2026-06-13T05:58:34-04:00",
-            "temperature": 19.1,
-            "humidity": 74,
-            "wind_speed": 0,
-            "wind_gust": 0,
-            "wind_direction": 359,
-            "solar_irradiance": 8.262295081967213,
-            "uv_index": 0,
-            "precipitation": 0,
-            "pressure": 493,
-            "icon": "partly-cloudy-day",
-            "precipitation_accumulated": 0,
-            "dew_point": 14.35705500975683,
-            "feels_like": 19.1
-          }
-        },
-        {
-          "id": "cdd20820-bf56-11ed-9972-4f669f2d96bd",
-          "cellIndex": "872aac992ffffff",
-          "cellActiveDeviceCount": 4,
-          "cellAvgDataQuality": 86,
-          "cellCenter": {
-            "lat": 40.288,
-            "lon": -75.72915
-          },
-          "address": "Amity Township, US",
-          "name": "Overcast Lavender Hail",
-          "bundle": {
-            "name": "h1",
-            "title": "H1",
-            "connectivity": "helium",
-            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
-            "ws_model": "WS2000",
-            "gw_model": "WS2000"
-          },
-          "profile": "H1",
-          "metrics": {
-            "qod_score": 100,
-            "ts": "2026-06-10T20:00:00-04:00"
-          },
-          "timezone": "America/New_York",
-          "programName": "community",
-          "cellCapacity": 1,
-          "isActive": true,
-          "lastWeatherStationActivity": "2026-06-13T05:58:09-04:00",
-          "current_weather": {
-            "timestamp": "2026-06-13T05:58:09-04:00",
-            "temperature": 19.6,
-            "humidity": 71,
-            "wind_speed": 0,
-            "wind_gust": 0,
-            "wind_direction": 293,
-            "solar_irradiance": 13.795081967213115,
-            "uv_index": 0,
-            "precipitation": 0,
-            "pressure": 999.8,
-            "icon": "partly-cloudy-day",
-            "precipitation_accumulated": 0,
-            "dew_point": 14.198209303968955,
-            "feels_like": 19.6
-          }
-        },
-        {
-          "id": "030e85b0-7115-11ef-a8d1-1fe2597b4789",
-          "cellIndex": "872aac992ffffff",
-          "cellActiveDeviceCount": 4,
-          "cellAvgDataQuality": 86,
-          "cellCenter": {
-            "lat": 40.28868,
-            "lon": -75.72858
-          },
-          "address": "Amity Township, US",
-          "name": "Faint Brandy Cirrus",
-          "bundle": {
-            "name": "h2",
-            "title": "H2",
-            "connectivity": "helium",
-            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
-            "ws_model": "WS2001",
-            "gw_model": "WS2001"
-          },
-          "profile": "H2",
-          "metrics": {
-            "qod_score": 100,
-            "ts": "2026-06-10T20:00:00-04:00"
-          },
-          "timezone": "America/New_York",
-          "programName": "community",
-          "cellCapacity": 1,
-          "isActive": true,
-          "lastWeatherStationActivity": "2026-06-13T05:58:17-04:00",
-          "current_weather": {
-            "timestamp": "2026-06-13T05:58:17-04:00",
-            "temperature": 19.2,
-            "humidity": 71,
-            "wind_speed": 0,
-            "wind_gust": 0,
-            "wind_direction": 249,
-            "solar_irradiance": 4.836065573770492,
-            "uv_index": 0,
-            "precipitation": 0,
-            "pressure": 1000.5,
-            "icon": "partly-cloudy-day",
-            "precipitation_accumulated": 0,
-            "dew_point": 13.814481903748623,
-            "feels_like": 19.2
-          }
-        },
-        {
-          "id": "1ca10a80-1d3d-11ed-9972-4f669f2d96bd",
-          "cellIndex": "872aac992ffffff",
-          "cellActiveDeviceCount": 4,
-          "cellAvgDataQuality": 86,
-          "cellCenter": {
-            "lat": 40.28795,
-            "lon": -75.72914
-          },
-          "address": "Amity Township, US",
-          "name": "Gloomy Corduroy Coriolis",
-          "bundle": {
-            "name": "m5",
-            "title": "M5",
-            "connectivity": "wifi",
-            "url": "https://docs.weatherxm.com/wxm-devices/m5/introduction",
-            "ws_model": "WS1000",
-            "gw_model": "WG1000"
-          },
-          "profile": "M5",
-          "metrics": {
-            "qod_score": 59,
-            "ts": "2026-06-10T20:00:00-04:00"
-          },
-          "timezone": "America/New_York",
-          "programName": "community",
-          "cellCapacity": 1,
-          "isActive": true,
-          "lastWeatherStationActivity": "2026-06-13T05:58:00-04:00",
-          "current_weather": {
-            "timestamp": "2026-06-13T05:58:00-04:00",
-            "temperature": 18.5,
-            "humidity": 78,
-            "wind_speed": 0,
-            "wind_gust": 0,
-            "wind_direction": 81,
-            "solar_irradiance": 13.655737704918034,
-            "uv_index": 0,
-            "precipitation": 0,
-            "pressure": 999.32,
-            "icon": "partly-cloudy-day",
-            "precipitation_accumulated": 0,
-            "dew_point": 14.591686696899421,
-            "feels_like": 18.5
-          }
-        }
-      ]
-    },
-    {
-      "cell": {
-        "index": "871969046ffffff",
-        "device_count": 4,
-        "active_device_count": 3,
-        "devices": {
-          "community": 4
-        },
-        "avg_data_quality": 84,
-        "capacity": 1,
-        "polygon": [
-          {
-            "lat": 52.05056443329551,
-            "lon": 5.489393463762636
-          },
-          {
-            "lat": 52.0393549586958,
-            "lon": 5.491542080385415
-          },
-          {
-            "lat": 52.03593642864752,
-            "lon": 5.509318779693898
-          },
-          {
-            "lat": 52.04372722833726,
-            "lon": 5.524952793225902
-          },
-          {
-            "lat": 52.05493776325855,
-            "lon": 5.522809219226866
-          },
-          {
-            "lat": 52.058356438550334,
-            "lon": 5.505026587720014
-          }
-        ],
-        "center": {
-          "lat": 52.047147448793574,
-          "lon": 5.507173031428078
-        },
-        "_ratio": 4
-      },
       "devices": [],
       "_error": "HTTP 429"
     },
@@ -3783,7 +4153,7 @@
         "devices": {
           "community": 4
         },
-        "avg_data_quality": 96,
+        "avg_data_quality": 94,
         "capacity": 1,
         "polygon": [
           {
@@ -3828,7 +4198,7 @@
         "devices": {
           "community": 4
         },
-        "avg_data_quality": 81,
+        "avg_data_quality": 83,
         "capacity": 1,
         "polygon": [
           {
@@ -3873,7 +4243,7 @@
         "devices": {
           "swissborg": 4
         },
-        "avg_data_quality": 80,
+        "avg_data_quality": 79,
         "capacity": 1,
         "polygon": [
           {
@@ -3963,7 +4333,7 @@
         "devices": {
           "swissborg": 4
         },
-        "avg_data_quality": 36,
+        "avg_data_quality": 24,
         "capacity": 1,
         "polygon": [
           {
@@ -3997,201 +4367,14 @@
         },
         "_ratio": 4
       },
-      "devices": [
-        {
-          "id": "317add00-438d-11ef-8e8d-b55568dc8e66",
-          "cellIndex": "874995809ffffff",
-          "cellActiveDeviceCount": 1,
-          "cellAvgDataQuality": 36,
-          "cellCenter": {
-            "lat": 19.25861,
-            "lon": -99.06775
-          },
-          "address": "Xochimilco, MX",
-          "name": "Rural Paisley Gustnado",
-          "bundle": {
-            "name": "d1",
-            "title": "D1",
-            "connectivity": "wifi",
-            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
-            "ws_model": "WS1001",
-            "gw_model": "WG1200"
-          },
-          "profile": "D1",
-          "metrics": {
-            "qod_score": 0,
-            "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-10T18:00:00-06:00"
-          },
-          "timezone": "America/Mexico_City",
-          "programName": "swissborg",
-          "cellCapacity": 1,
-          "isActive": false,
-          "lastWeatherStationActivity": "2025-04-29T17:32:07-06:00",
-          "current_weather": {
-            "timestamp": "2025-04-29T17:32:07-06:00",
-            "temperature": 24.5,
-            "humidity": 37,
-            "wind_speed": 1.1,
-            "wind_gust": 1.5,
-            "wind_direction": 153,
-            "solar_irradiance": 60.73770491803279,
-            "uv_index": 0,
-            "precipitation": 0,
-            "pressure": 779.29,
-            "icon": "partly-cloudy-day",
-            "precipitation_accumulated": 0,
-            "dew_point": 8.857631346549077,
-            "feels_like": 24.5
-          }
-        },
-        {
-          "id": "247e6e50-438d-11ef-8e8d-b55568dc8e66",
-          "cellIndex": "874995809ffffff",
-          "cellActiveDeviceCount": 1,
-          "cellAvgDataQuality": 36,
-          "cellCenter": {
-            "lat": 19.26282,
-            "lon": -99.08738
-          },
-          "address": "Xochimilco, MX",
-          "name": "Hazy Maize Atmosphere",
-          "bundle": {
-            "name": "d1",
-            "title": "D1",
-            "connectivity": "wifi",
-            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
-            "ws_model": "WS1001",
-            "gw_model": "WG1200"
-          },
-          "profile": "D1",
-          "metrics": {
-            "qod_score": 0,
-            "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-10T18:00:00-06:00"
-          },
-          "timezone": "America/Mexico_City",
-          "programName": "swissborg",
-          "cellCapacity": 1,
-          "isActive": false,
-          "lastWeatherStationActivity": "2025-10-04T12:34:49-06:00",
-          "current_weather": {
-            "timestamp": "2025-10-04T12:34:49-06:00",
-            "temperature": 20,
-            "humidity": 61,
-            "wind_speed": 0,
-            "wind_gust": 0.5,
-            "wind_direction": 339,
-            "solar_irradiance": 361.2295081967213,
-            "uv_index": 3,
-            "precipitation": 0,
-            "pressure": 781.69,
-            "icon": "partly-cloudy-day",
-            "precipitation_accumulated": 0,
-            "dew_point": 12.251136179319124,
-            "feels_like": 20
-          }
-        },
-        {
-          "id": "22e70570-438d-11ef-8e8d-b55568dc8e66",
-          "cellIndex": "874995809ffffff",
-          "cellActiveDeviceCount": 1,
-          "cellAvgDataQuality": 36,
-          "cellCenter": {
-            "lat": 19.25705,
-            "lon": -99.0835
-          },
-          "address": "Xochimilco, MX",
-          "name": "Damp Fiery Sandstorm",
-          "bundle": {
-            "name": "d1",
-            "title": "D1",
-            "connectivity": "wifi",
-            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
-            "ws_model": "WS1001",
-            "gw_model": "WG1200"
-          },
-          "profile": "D1",
-          "metrics": {
-            "qod_score": 36,
-            "ts": "2026-06-10T18:00:00-06:00"
-          },
-          "timezone": "America/Mexico_City",
-          "programName": "swissborg",
-          "cellCapacity": 1,
-          "isActive": false,
-          "lastWeatherStationActivity": "2026-06-12T18:19:00-06:00",
-          "current_weather": {
-            "timestamp": "2026-06-12T18:19:00-06:00",
-            "temperature": 14.89,
-            "humidity": 92,
-            "wind_speed": 0,
-            "wind_gust": 0,
-            "wind_direction": 213,
-            "solar_irradiance": 3.19672131147541,
-            "uv_index": 0,
-            "precipitation": 4.16,
-            "pressure": 780.49,
-            "icon": "rain",
-            "precipitation_accumulated": 0,
-            "dew_point": 13.60147724215969,
-            "feels_like": 14.89
-          }
-        },
-        {
-          "id": "20ffa7d0-438d-11ef-8e8d-b55568dc8e66",
-          "cellIndex": "874995809ffffff",
-          "cellActiveDeviceCount": 1,
-          "cellAvgDataQuality": 36,
-          "cellCenter": {
-            "lat": 19.26906,
-            "lon": -99.08369
-          },
-          "address": "Xochimilco, MX",
-          "name": "Deep Champagne Snowsquall",
-          "bundle": {
-            "name": "d1",
-            "title": "D1",
-            "connectivity": "wifi",
-            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
-            "ws_model": "WS1001",
-            "gw_model": "WG1200"
-          },
-          "profile": "D1",
-          "metrics": {
-            "qod_score": 0,
-            "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-10T18:00:00-06:00"
-          },
-          "timezone": "America/Mexico_City",
-          "programName": "swissborg",
-          "cellCapacity": 1,
-          "isActive": false,
-          "lastWeatherStationActivity": "2025-01-31T12:49:31-06:00",
-          "current_weather": {
-            "timestamp": "2025-01-31T12:49:31-06:00",
-            "temperature": 21.78,
-            "humidity": 37,
-            "wind_speed": 2.1,
-            "wind_gust": 2.5,
-            "wind_direction": 68,
-            "solar_irradiance": 789.2622950819672,
-            "uv_index": 7,
-            "precipitation": 0,
-            "pressure": 783.37,
-            "icon": "partly-cloudy-day",
-            "precipitation_accumulated": 0,
-            "dew_point": 6.444961722105548,
-            "feels_like": 21.78
-          }
-        }
-      ]
+      "devices": [],
+      "_error": "HTTP 429"
     },
     {
       "cell": {
         "index": "871eda742ffffff",
         "device_count": 7,
-        "active_device_count": 6,
+        "active_device_count": 5,
         "devices": {
           "community": 7
         },
@@ -4240,7 +4423,7 @@
         "devices": {
           "community": 7
         },
-        "avg_data_quality": 72,
+        "avg_data_quality": 65,
         "capacity": 2,
         "polygon": [
           {
@@ -4274,8 +4457,334 @@
         },
         "_ratio": 3.5
       },
-      "devices": [],
-      "_error": "HTTP 429"
+      "devices": [
+        {
+          "id": "f6d47620-1c6f-11ed-960f-d7d4cf200cc9",
+          "cellIndex": "871ec902cffffff",
+          "cellActiveDeviceCount": 3,
+          "cellAvgDataQuality": 65,
+          "cellCenter": {
+            "lat": 40.99529,
+            "lon": 29.05536
+          },
+          "address": "Eğitim Mahallesi, TR",
+          "name": "Cuddly Aquamarine Monsoon",
+          "bundle": {
+            "name": "m5",
+            "title": "M5",
+            "connectivity": "wifi",
+            "url": "https://docs.weatherxm.com/wxm-devices/m5/introduction",
+            "ws_model": "WS1000",
+            "gw_model": "WG1000"
+          },
+          "profile": "M5",
+          "metrics": {
+            "qod_score": 100,
+            "ts": "2026-06-12T03:00:00+03:00"
+          },
+          "timezone": "Europe/Istanbul",
+          "programName": "community",
+          "cellCapacity": 2,
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-06-14T13:08:00+03:00",
+          "current_weather": {
+            "timestamp": "2026-06-14T13:08:00+03:00",
+            "temperature": 21.1,
+            "humidity": 64,
+            "wind_speed": 0.74,
+            "wind_gust": 1.53,
+            "wind_direction": 90,
+            "solar_irradiance": 502.45081967213116,
+            "uv_index": 4,
+            "precipitation": 0,
+            "pressure": 1000.97,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 14.025663734649529,
+            "feels_like": 21.1
+          }
+        },
+        {
+          "id": "33462720-438d-11ef-8e8d-b55568dc8e66",
+          "cellIndex": "871ec902cffffff",
+          "cellActiveDeviceCount": 3,
+          "cellAvgDataQuality": 65,
+          "cellCenter": {
+            "lat": 40.99541,
+            "lon": 29.05525
+          },
+          "address": "Eğitim Mahallesi, TR",
+          "name": "Bright Satin Haboob",
+          "bundle": {
+            "name": "d1",
+            "title": "D1",
+            "connectivity": "wifi",
+            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
+            "ws_model": "WS1001",
+            "gw_model": "WG1200"
+          },
+          "profile": "D1",
+          "metrics": {
+            "qod_score": 0,
+            "pol_reason": "NO_LOCATION_DATA",
+            "ts": "2026-06-12T03:00:00+03:00"
+          },
+          "timezone": "Europe/Istanbul",
+          "programName": "community",
+          "cellCapacity": 2,
+          "isActive": false,
+          "lastWeatherStationActivity": "2026-04-07T23:46:00+03:00",
+          "current_weather": {
+            "timestamp": "2026-04-07T23:46:00+03:00",
+            "temperature": 12.83,
+            "humidity": 72,
+            "wind_speed": 0,
+            "wind_gust": 0,
+            "wind_direction": 164,
+            "solar_irradiance": 0,
+            "uv_index": 0,
+            "precipitation": 0,
+            "pressure": 1000.19,
+            "icon": "partly-cloudy-night",
+            "precipitation_accumulated": 0,
+            "dew_point": 7.905827965102194,
+            "feels_like": 12.83
+          }
+        },
+        {
+          "id": "6560aa80-bf56-11ed-8a70-d7d4cf200cc9",
+          "cellIndex": "871ec902cffffff",
+          "cellActiveDeviceCount": 3,
+          "cellAvgDataQuality": 65,
+          "cellCenter": {
+            "lat": 40.99606,
+            "lon": 29.05477
+          },
+          "address": "Eğitim Mahallesi, TR",
+          "name": "Real Sepia Nowcast",
+          "bundle": {
+            "name": "h1",
+            "title": "H1",
+            "connectivity": "helium",
+            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
+            "ws_model": "WS2000",
+            "gw_model": "WS2000"
+          },
+          "profile": "H1",
+          "metrics": {
+            "qod_score": 27,
+            "ts": "2026-06-12T03:00:00+03:00"
+          },
+          "timezone": "Europe/Istanbul",
+          "programName": "community",
+          "cellCapacity": 2,
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-06-14T13:06:30+03:00",
+          "current_weather": {
+            "timestamp": "2026-06-14T13:06:30+03:00",
+            "temperature": 25.8,
+            "humidity": 52,
+            "wind_speed": 0,
+            "wind_gust": 0,
+            "wind_direction": 128,
+            "solar_irradiance": 0,
+            "uv_index": 0,
+            "precipitation": 0,
+            "pressure": 1001.3,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 15.201557393444666,
+            "feels_like": 25.8
+          }
+        },
+        {
+          "id": "87192c60-bf56-11ed-95eb-b351f0b0cc44",
+          "cellIndex": "871ec902cffffff",
+          "cellActiveDeviceCount": 3,
+          "cellAvgDataQuality": 65,
+          "cellCenter": {
+            "lat": 40.99542,
+            "lon": 29.05544
+          },
+          "address": "Eğitim Mahallesi, TR",
+          "name": "Freezing Puce Gust",
+          "bundle": {
+            "name": "h1",
+            "title": "H1",
+            "connectivity": "helium",
+            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
+            "ws_model": "WS2000",
+            "gw_model": "WS2000"
+          },
+          "profile": "H1",
+          "metrics": {
+            "qod_score": 69,
+            "ts": "2026-06-12T03:00:00+03:00"
+          },
+          "timezone": "Europe/Istanbul",
+          "programName": "community",
+          "cellCapacity": 2,
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-06-14T13:07:20+03:00",
+          "current_weather": {
+            "timestamp": "2026-06-14T13:07:20+03:00",
+            "temperature": 25.9,
+            "humidity": 52,
+            "wind_speed": 0,
+            "wind_gust": 0,
+            "wind_direction": 277,
+            "solar_irradiance": 0,
+            "uv_index": 0,
+            "precipitation": 0,
+            "pressure": 1001.4,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 15.293826883927807,
+            "feels_like": 25.9
+          }
+        },
+        {
+          "id": "2b3ca860-438d-11ef-8e8d-b55568dc8e66",
+          "cellIndex": "871ec902cffffff",
+          "cellActiveDeviceCount": 3,
+          "cellAvgDataQuality": 65,
+          "cellCenter": {
+            "lat": 40.99523,
+            "lon": 29.05529
+          },
+          "address": "Eğitim Mahallesi, TR",
+          "name": "Blunt Fallow Hectopascal",
+          "bundle": {
+            "name": "d1",
+            "title": "D1",
+            "connectivity": "wifi",
+            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
+            "ws_model": "WS1001",
+            "gw_model": "WG1200"
+          },
+          "profile": "D1",
+          "metrics": {
+            "qod_score": 0,
+            "pol_reason": "NO_LOCATION_DATA",
+            "ts": "2026-06-12T03:00:00+03:00"
+          },
+          "timezone": "Europe/Istanbul",
+          "programName": "community",
+          "cellCapacity": 2,
+          "isActive": false,
+          "lastWeatherStationActivity": "2026-04-27T23:44:00+03:00",
+          "current_weather": {
+            "timestamp": "2026-04-27T23:44:00+03:00",
+            "temperature": 9.11,
+            "humidity": 74,
+            "wind_speed": 1.6,
+            "wind_gust": 3.5,
+            "wind_direction": 245,
+            "solar_irradiance": 0,
+            "uv_index": 0,
+            "precipitation": 0,
+            "pressure": 1006.18,
+            "icon": "partly-cloudy-night",
+            "precipitation_accumulated": 0,
+            "dew_point": 4.71864041580014,
+            "feels_like": 8.515636298537311
+          }
+        },
+        {
+          "id": "27c44a81-438d-11ef-8e8d-b55568dc8e66",
+          "cellIndex": "871ec902cffffff",
+          "cellActiveDeviceCount": 3,
+          "cellAvgDataQuality": 65,
+          "cellCenter": {
+            "lat": 40.99539,
+            "lon": 29.05523
+          },
+          "address": "Eğitim Mahallesi, TR",
+          "name": "Faint Satin Monsoon",
+          "bundle": {
+            "name": "d1",
+            "title": "D1",
+            "connectivity": "wifi",
+            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
+            "ws_model": "WS1001",
+            "gw_model": "WG1200"
+          },
+          "profile": "D1",
+          "metrics": {
+            "qod_score": 0,
+            "pol_reason": "NO_LOCATION_DATA",
+            "ts": "2026-06-12T03:00:00+03:00"
+          },
+          "timezone": "Europe/Istanbul",
+          "programName": "community",
+          "cellCapacity": 2,
+          "isActive": false,
+          "lastWeatherStationActivity": "2026-04-20T18:25:00+03:00",
+          "current_weather": {
+            "timestamp": "2026-04-20T18:25:00+03:00",
+            "temperature": 16.11,
+            "humidity": 30,
+            "wind_speed": 0.47,
+            "wind_gust": 1,
+            "wind_direction": 261,
+            "solar_irradiance": 21.80327868852459,
+            "uv_index": 0,
+            "precipitation": 0,
+            "pressure": 998.05,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": -1.4845380987825205,
+            "feels_like": 16.11
+          }
+        },
+        {
+          "id": "2c213c00-438d-11ef-8e8d-b55568dc8e66",
+          "cellIndex": "871ec902cffffff",
+          "cellActiveDeviceCount": 3,
+          "cellAvgDataQuality": 65,
+          "cellCenter": {
+            "lat": 40.99529,
+            "lon": 29.05518
+          },
+          "address": "Eğitim Mahallesi, TR",
+          "name": "Overcast Black Climatologist",
+          "bundle": {
+            "name": "d1",
+            "title": "D1",
+            "connectivity": "wifi",
+            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
+            "ws_model": "WS1001",
+            "gw_model": "WG1200"
+          },
+          "profile": "D1",
+          "metrics": {
+            "qod_score": 0,
+            "pol_reason": "NO_LOCATION_DATA",
+            "ts": "2026-06-12T03:00:00+03:00"
+          },
+          "timezone": "Europe/Istanbul",
+          "programName": "community",
+          "cellCapacity": 2,
+          "isActive": false,
+          "lastWeatherStationActivity": "2026-04-20T18:25:00+03:00",
+          "current_weather": {
+            "timestamp": "2026-04-20T18:25:00+03:00",
+            "temperature": 16.72,
+            "humidity": 29,
+            "wind_speed": 0.8,
+            "wind_gust": 1.5,
+            "wind_direction": 239,
+            "solar_irradiance": 16.770491803278688,
+            "uv_index": 0,
+            "precipitation": 0,
+            "pressure": 997.96,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": -1.4175741065686103,
+            "feels_like": 16.72
+          }
+        }
+      ]
     },
     {
       "cell": {
@@ -4285,7 +4794,7 @@
         "devices": {
           "community": 7
         },
-        "avg_data_quality": 1,
+        "avg_data_quality": 24,
         "capacity": 2,
         "polygon": [
           {
@@ -4331,7 +4840,7 @@
           "community": 5,
           "swissborg": 2
         },
-        "avg_data_quality": 97,
+        "avg_data_quality": 94,
         "capacity": 2,
         "polygon": [
           {
@@ -4370,58 +4879,13 @@
     },
     {
       "cell": {
-        "index": "87264932cffffff",
-        "device_count": 10,
-        "active_device_count": 9,
-        "devices": {
-          "community": 10
-        },
-        "avg_data_quality": 70,
-        "capacity": 3,
-        "polygon": [
-          {
-            "lat": 34.73745997504328,
-            "lon": -86.73403278558507
-          },
-          {
-            "lat": 34.74646447646438,
-            "lon": -86.72395829283805
-          },
-          {
-            "lat": 34.75889964343252,
-            "lon": -86.72841412372247
-          },
-          {
-            "lat": 34.762331223511715,
-            "lon": -86.74294822889907
-          },
-          {
-            "lat": 34.75332586138001,
-            "lon": -86.75302457897277
-          },
-          {
-            "lat": 34.74088978004341,
-            "lon": -86.7485649668065
-          }
-        ],
-        "center": {
-          "lat": 34.74989580775875,
-          "lon": -86.73848988167607
-        },
-        "_ratio": 3.3333333333333335
-      },
-      "devices": [],
-      "_error": "HTTP 429"
-    },
-    {
-      "cell": {
         "index": "872752781ffffff",
         "device_count": 3,
         "active_device_count": 3,
         "devices": {
           "community": 3
         },
-        "avg_data_quality": 1,
+        "avg_data_quality": 10,
         "capacity": 1,
         "polygon": [
           {
@@ -4455,146 +4919,8 @@
         },
         "_ratio": 3
       },
-      "devices": [
-        {
-          "id": "9b74c580-bf55-11ed-9972-4f669f2d96bd",
-          "cellIndex": "872752781ffffff",
-          "cellActiveDeviceCount": 3,
-          "cellAvgDataQuality": 1,
-          "cellCenter": {
-            "lat": 45.16675,
-            "lon": -93.27315
-          },
-          "address": "Blaine, US",
-          "name": "Stale Nickel Upwind",
-          "bundle": {
-            "name": "h1",
-            "title": "H1",
-            "connectivity": "helium",
-            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
-            "ws_model": "WS2000",
-            "gw_model": "WS2000"
-          },
-          "profile": "H1",
-          "metrics": {
-            "qod_score": 2,
-            "ts": "2026-06-10T19:00:00-05:00"
-          },
-          "timezone": "America/Chicago",
-          "programName": "community",
-          "cellCapacity": 1,
-          "isActive": true,
-          "lastWeatherStationActivity": "2026-06-13T04:58:47-05:00",
-          "current_weather": {
-            "timestamp": "2026-06-13T04:58:47-05:00",
-            "temperature": 14.4,
-            "humidity": 99,
-            "wind_speed": 0,
-            "wind_gust": 0,
-            "wind_direction": 162,
-            "solar_irradiance": 0,
-            "uv_index": 0,
-            "precipitation": 0,
-            "pressure": 850.1,
-            "icon": "partly-cloudy-night",
-            "precipitation_accumulated": 0.2539999999999054,
-            "dew_point": 14.244595530976056,
-            "feels_like": 14.4
-          }
-        },
-        {
-          "id": "2a883860-bf51-11ed-9972-4f669f2d96bd",
-          "cellIndex": "872752781ffffff",
-          "cellActiveDeviceCount": 3,
-          "cellAvgDataQuality": 1,
-          "cellCenter": {
-            "lat": 45.16658,
-            "lon": -93.27288
-          },
-          "address": "Blaine, US",
-          "name": "Jolly Tuscan Frost",
-          "bundle": {
-            "name": "h1",
-            "title": "H1",
-            "connectivity": "helium",
-            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
-            "ws_model": "WS2000",
-            "gw_model": "WS2000"
-          },
-          "profile": "H1",
-          "metrics": {
-            "qod_score": 1,
-            "ts": "2026-06-10T19:00:00-05:00"
-          },
-          "timezone": "America/Chicago",
-          "programName": "community",
-          "cellCapacity": 1,
-          "isActive": true,
-          "lastWeatherStationActivity": "2026-06-13T04:57:39-05:00",
-          "current_weather": {
-            "timestamp": "2026-06-13T04:57:39-05:00",
-            "temperature": 14.5,
-            "humidity": 98,
-            "wind_speed": 0,
-            "wind_gust": 0,
-            "wind_direction": 102,
-            "solar_irradiance": 0,
-            "uv_index": 0,
-            "precipitation": 0,
-            "pressure": 976.5,
-            "icon": "partly-cloudy-night",
-            "precipitation_accumulated": 0,
-            "dew_point": 14.187561257230929,
-            "feels_like": 14.5
-          }
-        },
-        {
-          "id": "9c67d810-bf55-11ed-95eb-b351f0b0cc44",
-          "cellIndex": "872752781ffffff",
-          "cellActiveDeviceCount": 3,
-          "cellAvgDataQuality": 1,
-          "cellCenter": {
-            "lat": 45.16666030883789,
-            "lon": -93.27268981933594
-          },
-          "address": "Blaine, US",
-          "name": "Bent Tuscan Windsock",
-          "bundle": {
-            "name": "h1",
-            "title": "H1",
-            "connectivity": "helium",
-            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
-            "ws_model": "WS2000",
-            "gw_model": "WS2000"
-          },
-          "profile": "H1",
-          "metrics": {
-            "qod_score": 2,
-            "ts": "2026-06-10T19:00:00-05:00"
-          },
-          "timezone": "America/Chicago",
-          "programName": "community",
-          "cellCapacity": 1,
-          "isActive": true,
-          "lastWeatherStationActivity": "2026-06-13T04:58:27-05:00",
-          "current_weather": {
-            "timestamp": "2026-06-13T04:58:27-05:00",
-            "temperature": 14.5,
-            "humidity": 99,
-            "wind_speed": 0,
-            "wind_gust": 0,
-            "wind_direction": 348,
-            "solar_irradiance": 0,
-            "uv_index": 0,
-            "precipitation": 0,
-            "pressure": 976.7,
-            "icon": "partly-cloudy-night",
-            "precipitation_accumulated": 0.2540000000001328,
-            "dew_point": 14.344474813364151,
-            "feels_like": 14.5
-          }
-        }
-      ]
+      "devices": [],
+      "_error": "HTTP 429"
     },
     {
       "cell": {
@@ -4604,7 +4930,7 @@
         "devices": {
           "community": 6
         },
-        "avg_data_quality": 92,
+        "avg_data_quality": 91,
         "capacity": 2,
         "polygon": [
           {
@@ -4649,7 +4975,7 @@
         "devices": {
           "swissborg": 6
         },
-        "avg_data_quality": 60,
+        "avg_data_quality": 39,
         "capacity": 2,
         "polygon": [
           {
@@ -4695,7 +5021,7 @@
           "swissborg": 5,
           "community": 1
         },
-        "avg_data_quality": 83,
+        "avg_data_quality": 99,
         "capacity": 2,
         "polygon": [
           {
@@ -4729,8 +5055,284 @@
         },
         "_ratio": 3
       },
-      "devices": [],
-      "_error": "HTTP 429"
+      "devices": [
+        {
+          "id": "32f966b0-438d-11ef-8e8d-b55568dc8e66",
+          "cellIndex": "87bcc2c60ffffff",
+          "cellActiveDeviceCount": 6,
+          "cellAvgDataQuality": 99,
+          "cellCenter": {
+            "lat": -26.51588,
+            "lon": 29.18964
+          },
+          "address": "Govan Mbeki Local Municipality, ZA",
+          "name": "Modern Silver Thunder",
+          "bundle": {
+            "name": "d1",
+            "title": "D1",
+            "connectivity": "wifi",
+            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
+            "ws_model": "WS1001",
+            "gw_model": "WG1200"
+          },
+          "profile": "D1",
+          "metrics": {
+            "qod_score": 99,
+            "ts": "2026-06-12T02:00:00+02:00"
+          },
+          "timezone": "Africa/Johannesburg",
+          "programName": "swissborg",
+          "cellCapacity": 2,
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-06-14T12:09:00+02:00",
+          "current_weather": {
+            "timestamp": "2026-06-14T12:09:00+02:00",
+            "temperature": 18.8,
+            "humidity": 62,
+            "wind_speed": 1.73,
+            "wind_gust": 3,
+            "wind_direction": 333,
+            "solar_irradiance": 565.188524590164,
+            "uv_index": 5,
+            "precipitation": 0,
+            "pressure": 848.71,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 11.366094367539022,
+            "feels_like": 18.8
+          }
+        },
+        {
+          "id": "83ac5bd0-ad73-11ef-8b2f-f594437d6709",
+          "cellIndex": "87bcc2c60ffffff",
+          "cellActiveDeviceCount": 6,
+          "cellAvgDataQuality": 99,
+          "cellCenter": {
+            "lat": -26.52158,
+            "lon": 29.19977
+          },
+          "address": "Govan Mbeki Local Municipality, ZA",
+          "name": "Macho Violet Weathering",
+          "bundle": {
+            "name": "d1",
+            "title": "D1",
+            "connectivity": "wifi",
+            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
+            "ws_model": "WS1001",
+            "gw_model": "WG1200"
+          },
+          "profile": "D1",
+          "metrics": {
+            "qod_score": 99,
+            "ts": "2026-06-12T02:00:00+02:00"
+          },
+          "timezone": "Africa/Johannesburg",
+          "programName": "swissborg",
+          "cellCapacity": 2,
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-06-14T12:08:00+02:00",
+          "current_weather": {
+            "timestamp": "2026-06-14T12:08:00+02:00",
+            "temperature": 18.61,
+            "humidity": 64,
+            "wind_speed": 2.77,
+            "wind_gust": 5.6,
+            "wind_direction": 321,
+            "solar_irradiance": 555.516393442623,
+            "uv_index": 5,
+            "precipitation": 0,
+            "pressure": 847.53,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 11.66665903771991,
+            "feels_like": 18.61
+          }
+        },
+        {
+          "id": "31aa5170-438d-11ef-8e8d-b55568dc8e66",
+          "cellIndex": "87bcc2c60ffffff",
+          "cellActiveDeviceCount": 6,
+          "cellAvgDataQuality": 99,
+          "cellCenter": {
+            "lat": -26.51659,
+            "lon": 29.18989
+          },
+          "address": "Govan Mbeki Local Municipality, ZA",
+          "name": "Fantastic Carnelian Snowstorm",
+          "bundle": {
+            "name": "d1",
+            "title": "D1",
+            "connectivity": "wifi",
+            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
+            "ws_model": "WS1001",
+            "gw_model": "WG1200"
+          },
+          "profile": "D1",
+          "metrics": {
+            "qod_score": 99,
+            "ts": "2026-06-12T02:00:00+02:00"
+          },
+          "timezone": "Africa/Johannesburg",
+          "programName": "swissborg",
+          "cellCapacity": 2,
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-06-14T12:09:00+02:00",
+          "current_weather": {
+            "timestamp": "2026-06-14T12:09:00+02:00",
+            "temperature": 18.78,
+            "humidity": 62,
+            "wind_speed": 1.67,
+            "wind_gust": 3,
+            "wind_direction": 331,
+            "solar_irradiance": 493.5245901639344,
+            "uv_index": 4,
+            "precipitation": 0,
+            "pressure": 849.01,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 11.34721384653665,
+            "feels_like": 18.78
+          }
+        },
+        {
+          "id": "2bf59820-438d-11ef-8e8d-b55568dc8e66",
+          "cellIndex": "87bcc2c60ffffff",
+          "cellActiveDeviceCount": 6,
+          "cellAvgDataQuality": 99,
+          "cellCenter": {
+            "lat": -26.52551,
+            "lon": 29.20083
+          },
+          "address": "Govan Mbeki Local Municipality, ZA",
+          "name": "Isobar Sandstone Kelvin",
+          "bundle": {
+            "name": "d1",
+            "title": "D1",
+            "connectivity": "wifi",
+            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
+            "ws_model": "WS1001",
+            "gw_model": "WG1200"
+          },
+          "profile": "D1",
+          "metrics": {
+            "qod_score": 100,
+            "ts": "2026-06-12T02:00:00+02:00"
+          },
+          "timezone": "Africa/Johannesburg",
+          "programName": "community",
+          "cellCapacity": 2,
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-06-14T12:09:00+02:00",
+          "current_weather": {
+            "timestamp": "2026-06-14T12:09:00+02:00",
+            "temperature": 18.57,
+            "humidity": 64,
+            "wind_speed": 2.1,
+            "wind_gust": 3.5,
+            "wind_direction": 10,
+            "solar_irradiance": 506.9672131147541,
+            "uv_index": 4,
+            "precipitation": 0,
+            "pressure": 846.14,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 11.628753656076793,
+            "feels_like": 18.57
+          }
+        },
+        {
+          "id": "2ee69d90-438d-11ef-8e8d-b55568dc8e66",
+          "cellIndex": "87bcc2c60ffffff",
+          "cellActiveDeviceCount": 6,
+          "cellAvgDataQuality": 99,
+          "cellCenter": {
+            "lat": -26.5217,
+            "lon": 29.19912
+          },
+          "address": "Govan Mbeki Local Municipality, ZA",
+          "name": "Great Seaweed Rain",
+          "bundle": {
+            "name": "d1",
+            "title": "D1",
+            "connectivity": "wifi",
+            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
+            "ws_model": "WS1001",
+            "gw_model": "WG1200"
+          },
+          "profile": "D1",
+          "metrics": {
+            "qod_score": 99,
+            "ts": "2026-06-12T02:00:00+02:00"
+          },
+          "timezone": "Africa/Johannesburg",
+          "programName": "swissborg",
+          "cellCapacity": 2,
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-06-14T12:08:00+02:00",
+          "current_weather": {
+            "timestamp": "2026-06-14T12:08:00+02:00",
+            "temperature": 18.89,
+            "humidity": 64,
+            "wind_speed": 1.2,
+            "wind_gust": 2,
+            "wind_direction": 349,
+            "solar_irradiance": 438.40983606557376,
+            "uv_index": 4,
+            "precipitation": 0,
+            "pressure": 847.43,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 11.931988098023748,
+            "feels_like": 18.89
+          }
+        },
+        {
+          "id": "21dd5da1-438d-11ef-8e8d-b55568dc8e66",
+          "cellIndex": "87bcc2c60ffffff",
+          "cellActiveDeviceCount": 6,
+          "cellAvgDataQuality": 99,
+          "cellCenter": {
+            "lat": -26.51924,
+            "lon": 29.19257
+          },
+          "address": "Govan Mbeki Local Municipality, ZA",
+          "name": "Overt Powder Temperature",
+          "bundle": {
+            "name": "d1",
+            "title": "D1",
+            "connectivity": "wifi",
+            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
+            "ws_model": "WS1001",
+            "gw_model": "WG1200"
+          },
+          "profile": "D1",
+          "metrics": {
+            "qod_score": 99,
+            "ts": "2026-06-12T02:00:00+02:00"
+          },
+          "timezone": "Africa/Johannesburg",
+          "programName": "swissborg",
+          "cellCapacity": 2,
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-06-14T12:09:00+02:00",
+          "current_weather": {
+            "timestamp": "2026-06-14T12:09:00+02:00",
+            "temperature": 18.44,
+            "humidity": 63,
+            "wind_speed": 3.83,
+            "wind_gust": 5.6,
+            "wind_direction": 315,
+            "solar_irradiance": 479.1475409836066,
+            "uv_index": 4,
+            "precipitation": 0,
+            "pressure": 848.9,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 11.267572069167537,
+            "feels_like": 18.44
+          }
+        }
+      ]
     },
     {
       "cell": {
@@ -4740,7 +5342,7 @@
         "devices": {
           "community": 3
         },
-        "avg_data_quality": 95,
+        "avg_data_quality": 98,
         "capacity": 1,
         "polygon": [
           {
@@ -4830,7 +5432,7 @@
         "devices": {
           "community": 3
         },
-        "avg_data_quality": 100,
+        "avg_data_quality": 99,
         "capacity": 1,
         "polygon": [
           {
@@ -4864,147 +5466,8 @@
         },
         "_ratio": 3
       },
-      "devices": [
-        {
-          "id": "86b162e0-4f55-11ed-960b-b351f0b0cc44",
-          "cellIndex": "873f4dad2ffffff",
-          "cellActiveDeviceCount": 2,
-          "cellAvgDataQuality": 100,
-          "cellCenter": {
-            "lat": 34.67709,
-            "lon": 33.01178
-          },
-          "address": "Limassol, CY",
-          "name": "Striped Oxblood Atmosphere",
-          "bundle": {
-            "name": "m5",
-            "title": "M5",
-            "connectivity": "wifi",
-            "url": "https://docs.weatherxm.com/wxm-devices/m5/introduction",
-            "ws_model": "WS1000",
-            "gw_model": "WG1000"
-          },
-          "profile": "M5",
-          "metrics": {
-            "qod_score": 100,
-            "ts": "2026-06-11T03:00:00+03:00"
-          },
-          "timezone": "Asia/Nicosia",
-          "programName": "community",
-          "cellCapacity": 1,
-          "isActive": true,
-          "lastWeatherStationActivity": "2026-06-13T12:58:00+03:00",
-          "current_weather": {
-            "timestamp": "2026-06-13T12:58:00+03:00",
-            "temperature": 27.25,
-            "humidity": 68,
-            "wind_speed": 4.78,
-            "wind_gust": 8.67,
-            "wind_direction": 237,
-            "solar_irradiance": 705.9426229508197,
-            "uv_index": 6,
-            "precipitation": 0,
-            "pressure": 1006.48,
-            "icon": "partly-cloudy-day",
-            "precipitation_accumulated": 0,
-            "dew_point": 20.82876634447655,
-            "feels_like": 29.371721186999952
-          }
-        },
-        {
-          "id": "8709d130-4f57-11ed-9972-4f669f2d96bd",
-          "cellIndex": "873f4dad2ffffff",
-          "cellActiveDeviceCount": 2,
-          "cellAvgDataQuality": 100,
-          "cellCenter": {
-            "lat": 34.67421,
-            "lon": 32.99435
-          },
-          "address": "Limassol, CY",
-          "name": "Snap Sinopia Corona",
-          "bundle": {
-            "name": "m5",
-            "title": "M5",
-            "connectivity": "wifi",
-            "url": "https://docs.weatherxm.com/wxm-devices/m5/introduction",
-            "ws_model": "WS1000",
-            "gw_model": "WG1000"
-          },
-          "profile": "M5",
-          "metrics": {
-            "qod_score": 100,
-            "ts": "2026-06-11T03:00:00+03:00"
-          },
-          "timezone": "Asia/Nicosia",
-          "programName": "community",
-          "cellCapacity": 1,
-          "isActive": true,
-          "lastWeatherStationActivity": "2026-06-13T12:58:00+03:00",
-          "current_weather": {
-            "timestamp": "2026-06-13T12:58:00+03:00",
-            "temperature": 27,
-            "humidity": 70,
-            "wind_speed": 5.35,
-            "wind_gust": 6.63,
-            "wind_direction": 289,
-            "solar_irradiance": 550.2377049180328,
-            "uv_index": 5,
-            "precipitation": 0,
-            "pressure": 1005.93,
-            "icon": "partly-cloudy-day",
-            "precipitation_accumulated": 0,
-            "dew_point": 21.061661468130573,
-            "feels_like": 29.136757800000034
-          }
-        },
-        {
-          "id": "e91463d0-dbf9-11ec-9972-4f669f2d96bd",
-          "cellIndex": "873f4dad2ffffff",
-          "cellActiveDeviceCount": 2,
-          "cellAvgDataQuality": 100,
-          "cellCenter": {
-            "lat": 34.66693,
-            "lon": 33.01976
-          },
-          "address": "Limassol, CY",
-          "name": "Beautiful Rose Wind",
-          "bundle": {
-            "name": "m5",
-            "title": "M5",
-            "connectivity": "wifi",
-            "url": "https://docs.weatherxm.com/wxm-devices/m5/introduction",
-            "ws_model": "WS1000",
-            "gw_model": "WG1000"
-          },
-          "profile": "M5",
-          "metrics": {
-            "qod_score": 0,
-            "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-11T03:00:00+03:00"
-          },
-          "timezone": "Asia/Nicosia",
-          "programName": "community",
-          "cellCapacity": 1,
-          "isActive": false,
-          "lastWeatherStationActivity": "2026-03-01T01:59:00+02:00",
-          "current_weather": {
-            "timestamp": "2026-03-01T01:59:00+02:00",
-            "temperature": 9.5,
-            "humidity": 58,
-            "wind_speed": 0.34,
-            "wind_gust": 0.51,
-            "wind_direction": 312,
-            "solar_irradiance": 0,
-            "uv_index": 0,
-            "precipitation": 0,
-            "pressure": 1017.1,
-            "icon": "partly-cloudy-night",
-            "precipitation_accumulated": 0,
-            "dew_point": 1.6421344041754158,
-            "feels_like": 9.5
-          }
-        }
-      ]
+      "devices": [],
+      "_error": "HTTP 429"
     },
     {
       "cell": {
@@ -5014,7 +5477,7 @@
         "devices": {
           "swissborg": 3
         },
-        "avg_data_quality": 84,
+        "avg_data_quality": 92,
         "capacity": 1,
         "polygon": [
           {
@@ -5093,8 +5556,148 @@
         },
         "_ratio": 3
       },
-      "devices": [],
-      "_error": "HTTP 429"
+      "devices": [
+        {
+          "id": "b0b5a3a0-bf56-11ed-8a70-d7d4cf200cc9",
+          "cellIndex": "871968b99ffffff",
+          "cellActiveDeviceCount": 1,
+          "cellAvgDataQuality": 8,
+          "cellCenter": {
+            "lat": 52.84273,
+            "lon": 4.82346
+          },
+          "address": "Anna Paulowna, NL",
+          "name": "Bumpy Black Rainfall",
+          "bundle": {
+            "name": "h1",
+            "title": "H1",
+            "connectivity": "helium",
+            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
+            "ws_model": "WS2000",
+            "gw_model": "WS2000"
+          },
+          "profile": "H1",
+          "metrics": {
+            "qod_score": 8,
+            "ts": "2026-06-12T02:00:00+02:00"
+          },
+          "timezone": "Europe/Brussels",
+          "programName": "community",
+          "cellCapacity": 1,
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-06-14T12:08:09+02:00",
+          "current_weather": {
+            "timestamp": "2026-06-14T12:08:09+02:00",
+            "temperature": 3276.7,
+            "humidity": 127,
+            "wind_speed": 204.7,
+            "wind_gust": 6553.5,
+            "wind_direction": 511,
+            "solar_irradiance": 68759.0737704918,
+            "uv_index": 31,
+            "precipitation": 0,
+            "pressure": 6553.5,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 4136.902550504081,
+            "feels_like": 2246626.470694744
+          }
+        },
+        {
+          "id": "ea2c2050-bf51-11ed-8a70-d7d4cf200cc9",
+          "cellIndex": "871968b99ffffff",
+          "cellActiveDeviceCount": 1,
+          "cellAvgDataQuality": 8,
+          "cellCenter": {
+            "lat": 52.84272,
+            "lon": 4.82354
+          },
+          "address": "Anna Paulowna, NL",
+          "name": "Brilliant Nickel Gustnado",
+          "bundle": {
+            "name": "h1",
+            "title": "H1",
+            "connectivity": "helium",
+            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
+            "ws_model": "WS2000",
+            "gw_model": "WS2000"
+          },
+          "profile": "H1",
+          "metrics": {
+            "qod_score": 0,
+            "pol_reason": "NO_LOCATION_DATA",
+            "ts": "2026-06-12T02:00:00+02:00"
+          },
+          "timezone": "Europe/Brussels",
+          "programName": "community",
+          "cellCapacity": 1,
+          "isActive": false,
+          "lastWeatherStationActivity": "2023-12-02T15:09:52+01:00",
+          "current_weather": {
+            "timestamp": "2023-12-02T15:09:52+01:00",
+            "temperature": -0.1,
+            "humidity": 255,
+            "wind_speed": 6553.5,
+            "wind_gust": 6553.5,
+            "wind_direction": 65535,
+            "solar_irradiance": 17602324.975409836,
+            "uv_index": 255,
+            "precipitation": 0,
+            "pressure": 6553.5,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 13.520766690823194,
+            "feels_like": -44.07902069689597
+          }
+        },
+        {
+          "id": "bde7b000-bf50-11ed-95eb-b351f0b0cc44",
+          "cellIndex": "871968b99ffffff",
+          "cellActiveDeviceCount": 1,
+          "cellAvgDataQuality": 8,
+          "cellCenter": {
+            "lat": 52.84269,
+            "lon": 4.82345
+          },
+          "address": "Anna Paulowna, NL",
+          "name": "Strong Chili Hail",
+          "bundle": {
+            "name": "h1",
+            "title": "H1",
+            "connectivity": "helium",
+            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
+            "ws_model": "WS2000",
+            "gw_model": "WS2000"
+          },
+          "profile": "H1",
+          "metrics": {
+            "qod_score": 0,
+            "pol_reason": "NO_LOCATION_DATA",
+            "ts": "2026-06-12T02:00:00+02:00"
+          },
+          "timezone": "Europe/Brussels",
+          "programName": "community",
+          "cellCapacity": 1,
+          "isActive": false,
+          "lastWeatherStationActivity": "2023-09-25T15:34:59+02:00",
+          "current_weather": {
+            "timestamp": "2023-09-25T15:34:59+02:00",
+            "temperature": -0.1,
+            "humidity": 255,
+            "wind_speed": 0,
+            "wind_gust": 0,
+            "wind_direction": 260,
+            "solar_irradiance": 17602324.975409836,
+            "uv_index": 255,
+            "precipitation": 0,
+            "pressure": 6553.5,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 13.520766690823194,
+            "feels_like": -0.1
+          }
+        }
+      ]
     },
     {
       "cell": {
@@ -5194,7 +5797,7 @@
         "devices": {
           "community": 3
         },
-        "avg_data_quality": 99,
+        "avg_data_quality": 100,
         "capacity": 1,
         "polygon": [
           {
@@ -5225,6 +5828,51 @@
         "center": {
           "lat": 54.826347562512325,
           "lon": -5.864027189343101
+        },
+        "_ratio": 3
+      },
+      "devices": [],
+      "_error": "HTTP 429"
+    },
+    {
+      "cell": {
+        "index": "871969046ffffff",
+        "device_count": 3,
+        "active_device_count": 2,
+        "devices": {
+          "community": 3
+        },
+        "avg_data_quality": 75,
+        "capacity": 1,
+        "polygon": [
+          {
+            "lat": 52.05056443329551,
+            "lon": 5.489393463762636
+          },
+          {
+            "lat": 52.0393549586958,
+            "lon": 5.491542080385415
+          },
+          {
+            "lat": 52.03593642864752,
+            "lon": 5.509318779693898
+          },
+          {
+            "lat": 52.04372722833726,
+            "lon": 5.524952793225902
+          },
+          {
+            "lat": 52.05493776325855,
+            "lon": 5.522809219226866
+          },
+          {
+            "lat": 52.058356438550334,
+            "lon": 5.505026587720014
+          }
+        ],
+        "center": {
+          "lat": 52.047147448793574,
+          "lon": 5.507173031428078
         },
         "_ratio": 3
       },
@@ -5297,7 +5945,7 @@
           "metrics": {
             "qod_score": 0,
             "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-11T05:30:00+05:30"
+            "ts": "2026-06-12T05:30:00+05:30"
           },
           "timezone": "Asia/Kolkata",
           "programName": "swissborg",
@@ -5344,7 +5992,7 @@
           "metrics": {
             "qod_score": 0,
             "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-11T05:30:00+05:30"
+            "ts": "2026-06-12T05:30:00+05:30"
           },
           "timezone": "Asia/Kolkata",
           "programName": "swissborg",
@@ -5391,7 +6039,7 @@
           "metrics": {
             "qod_score": 0,
             "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-11T05:30:00+05:30"
+            "ts": "2026-06-12T05:30:00+05:30"
           },
           "timezone": "Asia/Kolkata",
           "programName": "swissborg",
@@ -5425,7 +6073,7 @@
         "devices": {
           "swissborg": 3
         },
-        "avg_data_quality": 74,
+        "avg_data_quality": 75,
         "capacity": 1,
         "polygon": [
           {
@@ -5470,7 +6118,7 @@
         "devices": {
           "community": 3
         },
-        "avg_data_quality": 76,
+        "avg_data_quality": 94,
         "capacity": 1,
         "polygon": [
           {
@@ -5554,13 +6202,58 @@
     },
     {
       "cell": {
+        "index": "87264932cffffff",
+        "device_count": 9,
+        "active_device_count": 8,
+        "devices": {
+          "community": 9
+        },
+        "avg_data_quality": 74,
+        "capacity": 3,
+        "polygon": [
+          {
+            "lat": 34.73745997504328,
+            "lon": -86.73403278558507
+          },
+          {
+            "lat": 34.74646447646438,
+            "lon": -86.72395829283805
+          },
+          {
+            "lat": 34.75889964343252,
+            "lon": -86.72841412372247
+          },
+          {
+            "lat": 34.762331223511715,
+            "lon": -86.74294822889907
+          },
+          {
+            "lat": 34.75332586138001,
+            "lon": -86.75302457897277
+          },
+          {
+            "lat": 34.74088978004341,
+            "lon": -86.7485649668065
+          }
+        ],
+        "center": {
+          "lat": 34.74989580775875,
+          "lon": -86.73848988167607
+        },
+        "_ratio": 3
+      },
+      "devices": [],
+      "_error": "HTTP 429"
+    },
+    {
+      "cell": {
         "index": "87196d0f3ffffff",
         "device_count": 6,
         "active_device_count": 4,
         "devices": {
           "community": 6
         },
-        "avg_data_quality": 63,
+        "avg_data_quality": 64,
         "capacity": 2,
         "polygon": [
           {
@@ -5601,11 +6294,11 @@
       "cell": {
         "index": "877a63215ffffff",
         "device_count": 3,
-        "active_device_count": 2,
+        "active_device_count": 3,
         "devices": {
           "swissborg": 3
         },
-        "avg_data_quality": 18,
+        "avg_data_quality": 17,
         "capacity": 1,
         "polygon": [
           {
@@ -5639,8 +6332,146 @@
         },
         "_ratio": 3
       },
-      "devices": [],
-      "_error": "HTTP 429"
+      "devices": [
+        {
+          "id": "ab15d130-5344-11ef-8e8d-b55568dc8e66",
+          "cellIndex": "877a63215ffffff",
+          "cellActiveDeviceCount": 3,
+          "cellAvgDataQuality": 17,
+          "cellCenter": {
+            "lat": -1.36768,
+            "lon": 37.29607
+          },
+          "address": "Mitaboni ward, KE",
+          "name": "Delightful Grullo Lightning",
+          "bundle": {
+            "name": "h2",
+            "title": "H2",
+            "connectivity": "helium",
+            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
+            "ws_model": "WS2001",
+            "gw_model": "WS2001"
+          },
+          "profile": "H2",
+          "metrics": {
+            "qod_score": 23,
+            "ts": "2026-06-12T03:00:00+03:00"
+          },
+          "timezone": "Asia/Riyadh",
+          "programName": "swissborg",
+          "cellCapacity": 1,
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-06-14T13:07:41+03:00",
+          "current_weather": {
+            "timestamp": "2026-06-14T13:07:41+03:00",
+            "temperature": 22.4,
+            "humidity": 60,
+            "wind_speed": 2.5,
+            "wind_gust": 3.9,
+            "wind_direction": 185,
+            "solar_irradiance": 932.2786885245902,
+            "uv_index": 8,
+            "precipitation": 0,
+            "pressure": 860,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 14.255501390939054,
+            "feels_like": 22.4
+          }
+        },
+        {
+          "id": "e37bd600-5344-11ef-a2e4-6df465256924",
+          "cellIndex": "877a63215ffffff",
+          "cellActiveDeviceCount": 3,
+          "cellAvgDataQuality": 17,
+          "cellCenter": {
+            "lat": -1.37078,
+            "lon": 37.2935
+          },
+          "address": "Mitaboni ward, KE",
+          "name": "Big Banana Degrees",
+          "bundle": {
+            "name": "h2",
+            "title": "H2",
+            "connectivity": "helium",
+            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
+            "ws_model": "WS2001",
+            "gw_model": "WS2001"
+          },
+          "profile": "H2",
+          "metrics": {
+            "qod_score": 25,
+            "ts": "2026-06-12T03:00:00+03:00"
+          },
+          "timezone": "Asia/Riyadh",
+          "programName": "swissborg",
+          "cellCapacity": 1,
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-06-14T13:07:11+03:00",
+          "current_weather": {
+            "timestamp": "2026-06-14T13:07:11+03:00",
+            "temperature": 23.3,
+            "humidity": 57,
+            "wind_speed": 0.7,
+            "wind_gust": 2.8,
+            "wind_direction": 118,
+            "solar_irradiance": 777.1229508196722,
+            "uv_index": 6,
+            "precipitation": 0,
+            "pressure": 859.4,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 14.305554683725877,
+            "feels_like": 23.3
+          }
+        },
+        {
+          "id": "dd50b430-5344-11ef-93f6-8bf643582247",
+          "cellIndex": "877a63215ffffff",
+          "cellActiveDeviceCount": 3,
+          "cellAvgDataQuality": 17,
+          "cellCenter": {
+            "lat": -1.3601,
+            "lon": 37.29977
+          },
+          "address": "Mitaboni ward, KE",
+          "name": "Plain Maize Aurora",
+          "bundle": {
+            "name": "h2",
+            "title": "H2",
+            "connectivity": "helium",
+            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
+            "ws_model": "WS2001",
+            "gw_model": "WS2001"
+          },
+          "profile": "H2",
+          "metrics": {
+            "qod_score": 5,
+            "ts": "2026-06-12T03:00:00+03:00"
+          },
+          "timezone": "Asia/Riyadh",
+          "programName": "swissborg",
+          "cellCapacity": 1,
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-06-14T13:06:37+03:00",
+          "current_weather": {
+            "timestamp": "2026-06-14T13:06:37+03:00",
+            "temperature": 22.4,
+            "humidity": 60,
+            "wind_speed": 2.2,
+            "wind_gust": 4.3,
+            "wind_direction": 66,
+            "solar_irradiance": 118.91803278688525,
+            "uv_index": 0,
+            "precipitation": 0,
+            "pressure": 862.8,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 14.255501390939054,
+            "feels_like": 22.4
+          }
+        }
+      ]
     },
     {
       "cell": {
@@ -5650,7 +6481,7 @@
         "devices": {
           "community": 3
         },
-        "avg_data_quality": 99,
+        "avg_data_quality": 97,
         "capacity": 1,
         "polygon": [
           {
@@ -5684,147 +6515,8 @@
         },
         "_ratio": 3
       },
-      "devices": [
-        {
-          "id": "30f46ef0-438d-11ef-8e8d-b55568dc8e66",
-          "cellIndex": "873f4dad0ffffff",
-          "cellActiveDeviceCount": 1,
-          "cellAvgDataQuality": 99,
-          "cellCenter": {
-            "lat": 34.69278,
-            "lon": 33.02544
-          },
-          "address": "Limassol, CY",
-          "name": "Isobar Cardinal Sunrise",
-          "bundle": {
-            "name": "d1",
-            "title": "D1",
-            "connectivity": "wifi",
-            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
-            "ws_model": "WS1001",
-            "gw_model": "WG1200"
-          },
-          "profile": "D1",
-          "metrics": {
-            "qod_score": 0,
-            "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-11T03:00:00+03:00"
-          },
-          "timezone": "Asia/Nicosia",
-          "programName": "community",
-          "cellCapacity": 1,
-          "isActive": false,
-          "lastWeatherStationActivity": "2026-06-04T01:05:00+03:00",
-          "current_weather": {
-            "timestamp": "2026-06-04T01:05:00+03:00",
-            "temperature": 21.94,
-            "humidity": 54,
-            "wind_speed": 0.27,
-            "wind_gust": 0.5,
-            "wind_direction": 54,
-            "solar_irradiance": 0,
-            "uv_index": 0,
-            "precipitation": 0,
-            "pressure": 1008.25,
-            "icon": "partly-cloudy-night",
-            "precipitation_accumulated": 0,
-            "dew_point": 12.210624784412557,
-            "feels_like": 21.94
-          }
-        },
-        {
-          "id": "2d5cc940-438d-11ef-8e8d-b55568dc8e66",
-          "cellIndex": "873f4dad0ffffff",
-          "cellActiveDeviceCount": 1,
-          "cellAvgDataQuality": 99,
-          "cellCenter": {
-            "lat": 34.69917,
-            "lon": 33.01593
-          },
-          "address": "Limassol, CY",
-          "name": "Vast Dandelion Hail",
-          "bundle": {
-            "name": "d1",
-            "title": "D1",
-            "connectivity": "wifi",
-            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
-            "ws_model": "WS1001",
-            "gw_model": "WG1200"
-          },
-          "profile": "D1",
-          "metrics": {
-            "qod_score": 99,
-            "ts": "2026-06-11T03:00:00+03:00"
-          },
-          "timezone": "Asia/Nicosia",
-          "programName": "community",
-          "cellCapacity": 1,
-          "isActive": true,
-          "lastWeatherStationActivity": "2026-06-13T12:59:00+03:00",
-          "current_weather": {
-            "timestamp": "2026-06-13T12:59:00+03:00",
-            "temperature": 26.8,
-            "humidity": 64,
-            "wind_speed": 6.27,
-            "wind_gust": 8.6,
-            "wind_direction": 241,
-            "solar_irradiance": 1007.0983606557377,
-            "uv_index": 9,
-            "precipitation": 0,
-            "pressure": 1003.14,
-            "icon": "partly-cloudy-day",
-            "precipitation_accumulated": 0,
-            "dew_point": 19.421313146223085,
-            "feels_like": 28.350786974719995
-          }
-        },
-        {
-          "id": "1b9ca340-4f58-11ed-960b-b351f0b0cc44",
-          "cellIndex": "873f4dad0ffffff",
-          "cellActiveDeviceCount": 1,
-          "cellAvgDataQuality": 99,
-          "cellCenter": {
-            "lat": 34.68591,
-            "lon": 33.01307
-          },
-          "address": "Limassol, CY",
-          "name": "Zesty Berry Breeze",
-          "bundle": {
-            "name": "m5",
-            "title": "M5",
-            "connectivity": "wifi",
-            "url": "https://docs.weatherxm.com/wxm-devices/m5/introduction",
-            "ws_model": "WS1000",
-            "gw_model": "WG1000"
-          },
-          "profile": "M5",
-          "metrics": {
-            "qod_score": 100,
-            "ts": "2026-06-11T03:00:00+03:00"
-          },
-          "timezone": "Asia/Nicosia",
-          "programName": "community",
-          "cellCapacity": 1,
-          "isActive": true,
-          "lastWeatherStationActivity": "2026-06-13T12:58:00+03:00",
-          "current_weather": {
-            "timestamp": "2026-06-13T12:58:00+03:00",
-            "temperature": 25.8,
-            "humidity": 71,
-            "wind_speed": 6.73,
-            "wind_gust": 10.71,
-            "wind_direction": 302,
-            "solar_irradiance": 817.7131147540983,
-            "uv_index": 7,
-            "precipitation": 0,
-            "pressure": 1004.47,
-            "icon": "partly-cloudy-day",
-            "precipitation_accumulated": 0,
-            "dew_point": 20.142911424193418,
-            "feels_like": 25.8
-          }
-        }
-      ]
+      "devices": [],
+      "_error": "HTTP 429"
     },
     {
       "cell": {
@@ -5834,7 +6526,7 @@
         "devices": {
           "community": 3
         },
-        "avg_data_quality": 61,
+        "avg_data_quality": 82,
         "capacity": 1,
         "polygon": [
           {
@@ -5924,7 +6616,7 @@
         "devices": {
           "community": 8
         },
-        "avg_data_quality": 86,
+        "avg_data_quality": 99,
         "capacity": 3,
         "polygon": [
           {
@@ -6014,7 +6706,7 @@
         "devices": {
           "community": 5
         },
-        "avg_data_quality": 94,
+        "avg_data_quality": 99,
         "capacity": 2,
         "polygon": [
           {
@@ -6048,18 +6740,249 @@
         },
         "_ratio": 2.5
       },
-      "devices": [],
-      "_error": "HTTP 429"
+      "devices": [
+        {
+          "id": "31acc271-438d-11ef-8e8d-b55568dc8e66",
+          "cellIndex": "871e9d943ffffff",
+          "cellActiveDeviceCount": 4,
+          "cellAvgDataQuality": 99,
+          "cellCenter": {
+            "lat": 40.73052,
+            "lon": 14.56444
+          },
+          "address": "Angri, IT",
+          "name": "Amateur Ivory Lenticular",
+          "bundle": {
+            "name": "d1",
+            "title": "D1",
+            "connectivity": "wifi",
+            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
+            "ws_model": "WS1001",
+            "gw_model": "WG1200"
+          },
+          "profile": "D1",
+          "metrics": {
+            "qod_score": 99,
+            "ts": "2026-06-12T02:00:00+02:00"
+          },
+          "timezone": "Europe/Rome",
+          "programName": "community",
+          "cellCapacity": 2,
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-06-14T12:08:00+02:00",
+          "current_weather": {
+            "timestamp": "2026-06-14T12:08:00+02:00",
+            "temperature": 28.69,
+            "humidity": 50,
+            "wind_speed": 2.73,
+            "wind_gust": 4,
+            "wind_direction": 302,
+            "solar_irradiance": 739.4754098360655,
+            "uv_index": 6,
+            "precipitation": 0,
+            "pressure": 1013.87,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 17.245264760720797,
+            "feels_like": 29.46715429350002
+          }
+        },
+        {
+          "id": "333d7490-438d-11ef-8e8d-b55568dc8e66",
+          "cellIndex": "871e9d943ffffff",
+          "cellActiveDeviceCount": 4,
+          "cellAvgDataQuality": 99,
+          "cellCenter": {
+            "lat": 40.72881,
+            "lon": 14.56612
+          },
+          "address": "Angri, IT",
+          "name": "Spicy Persimmon Smog",
+          "bundle": {
+            "name": "d1",
+            "title": "D1",
+            "connectivity": "wifi",
+            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
+            "ws_model": "WS1001",
+            "gw_model": "WG1200"
+          },
+          "profile": "D1",
+          "metrics": {
+            "qod_score": 0,
+            "pol_reason": "NO_LOCATION_DATA",
+            "ts": "2026-06-12T02:00:00+02:00"
+          },
+          "timezone": "Europe/Rome",
+          "programName": "community",
+          "cellCapacity": 2,
+          "isActive": false,
+          "lastWeatherStationActivity": "2026-02-17T07:55:00+01:00",
+          "current_weather": {
+            "timestamp": "2026-02-17T07:55:00+01:00",
+            "temperature": 9.33,
+            "humidity": 77,
+            "wind_speed": 0.02,
+            "wind_gust": 0.5,
+            "wind_direction": 22,
+            "solar_irradiance": 29.65573770491803,
+            "uv_index": 0,
+            "precipitation": 0,
+            "pressure": 993.54,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 5.502818121077862,
+            "feels_like": 9.33
+          }
+        },
+        {
+          "id": "ae2fd7d0-50e4-11ed-960f-d7d4cf200cc9",
+          "cellIndex": "871e9d943ffffff",
+          "cellActiveDeviceCount": 4,
+          "cellAvgDataQuality": 99,
+          "cellCenter": {
+            "lat": 40.73039,
+            "lon": 14.56398
+          },
+          "address": "Angri, IT",
+          "name": "Energetic Prune Shower",
+          "bundle": {
+            "name": "m5",
+            "title": "M5",
+            "connectivity": "wifi",
+            "url": "https://docs.weatherxm.com/wxm-devices/m5/introduction",
+            "ws_model": "WS1000",
+            "gw_model": "WG1000"
+          },
+          "profile": "M5",
+          "metrics": {
+            "qod_score": 100,
+            "ts": "2026-06-12T02:00:00+02:00"
+          },
+          "timezone": "Europe/Rome",
+          "programName": "community",
+          "cellCapacity": 2,
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-06-14T12:08:00+02:00",
+          "current_weather": {
+            "timestamp": "2026-06-14T12:08:00+02:00",
+            "temperature": 29.2,
+            "humidity": 50,
+            "wind_speed": 2.16,
+            "wind_gust": 4.08,
+            "wind_direction": 301,
+            "solar_irradiance": 677.1967213114754,
+            "uv_index": 6,
+            "precipitation": 0,
+            "pressure": 1012.77,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 17.71317207505583,
+            "feels_like": 30.128294400000016
+          }
+        },
+        {
+          "id": "318d0570-438d-11ef-8e8d-b55568dc8e66",
+          "cellIndex": "871e9d943ffffff",
+          "cellActiveDeviceCount": 4,
+          "cellAvgDataQuality": 99,
+          "cellCenter": {
+            "lat": 40.72882,
+            "lon": 14.56599
+          },
+          "address": "Angri, IT",
+          "name": "Careful Midnight Permafrost",
+          "bundle": {
+            "name": "d1",
+            "title": "D1",
+            "connectivity": "wifi",
+            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
+            "ws_model": "WS1001",
+            "gw_model": "WG1200"
+          },
+          "profile": "D1",
+          "metrics": {
+            "qod_score": 99,
+            "ts": "2026-06-12T02:00:00+02:00"
+          },
+          "timezone": "Europe/Rome",
+          "programName": "community",
+          "cellCapacity": 2,
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-06-14T12:09:00+02:00",
+          "current_weather": {
+            "timestamp": "2026-06-14T12:09:00+02:00",
+            "temperature": 29.07,
+            "humidity": 48,
+            "wind_speed": 0,
+            "wind_gust": 0,
+            "wind_direction": 163,
+            "solar_irradiance": 45.704918032786885,
+            "uv_index": 0,
+            "precipitation": 0,
+            "pressure": 1011.62,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 16.94814761985495,
+            "feels_like": 29.705148768372787
+          }
+        },
+        {
+          "id": "347446e0-438d-11ef-8e8d-b55568dc8e66",
+          "cellIndex": "871e9d943ffffff",
+          "cellActiveDeviceCount": 4,
+          "cellAvgDataQuality": 99,
+          "cellCenter": {
+            "lat": 40.73052,
+            "lon": 14.56444
+          },
+          "address": "Angri, IT",
+          "name": "Delightful Black Scud",
+          "bundle": {
+            "name": "d1",
+            "title": "D1",
+            "connectivity": "wifi",
+            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
+            "ws_model": "WS1001",
+            "gw_model": "WG1200"
+          },
+          "profile": "D1",
+          "metrics": {
+            "qod_score": 99,
+            "ts": "2026-06-12T02:00:00+02:00"
+          },
+          "timezone": "Europe/Rome",
+          "programName": "community",
+          "cellCapacity": 2,
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-06-14T12:08:00+02:00",
+          "current_weather": {
+            "timestamp": "2026-06-14T12:08:00+02:00",
+            "temperature": 28.69,
+            "humidity": 50,
+            "wind_speed": 2.73,
+            "wind_gust": 4,
+            "wind_direction": 302,
+            "solar_irradiance": 739.4754098360655,
+            "uv_index": 6,
+            "precipitation": 0,
+            "pressure": 1013.8,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 17.245264760720797,
+            "feels_like": 29.46715429350002
+          }
+        }
+      ]
     },
     {
       "cell": {
         "index": "87bcdc866ffffff",
         "device_count": 5,
-        "active_device_count": 4,
+        "active_device_count": 5,
         "devices": {
           "swissborg": 5
         },
-        "avg_data_quality": 72,
+        "avg_data_quality": 82,
         "capacity": 2,
         "polygon": [
           {
@@ -6093,238 +7016,8 @@
         },
         "_ratio": 2.5
       },
-      "devices": [
-        {
-          "id": "e7539a00-bf53-11ed-95eb-b351f0b0cc44",
-          "cellIndex": "87bcdc866ffffff",
-          "cellActiveDeviceCount": 4,
-          "cellAvgDataQuality": 78,
-          "cellCenter": {
-            "lat": -25.78223,
-            "lon": 28.25945
-          },
-          "address": "Pretoria, ZA",
-          "name": "Damp Hazelnut Gust",
-          "bundle": {
-            "name": "h1",
-            "title": "H1",
-            "connectivity": "helium",
-            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
-            "ws_model": "WS2000",
-            "gw_model": "WS2000"
-          },
-          "profile": "H1",
-          "metrics": {
-            "qod_score": 84,
-            "ts": "2026-06-11T02:00:00+02:00"
-          },
-          "timezone": "Africa/Johannesburg",
-          "programName": "swissborg",
-          "cellCapacity": 2,
-          "isActive": true,
-          "lastWeatherStationActivity": "2026-06-13T11:57:11+02:00",
-          "current_weather": {
-            "timestamp": "2026-06-13T11:57:11+02:00",
-            "temperature": 24.1,
-            "humidity": 37,
-            "wind_speed": 0.5,
-            "wind_gust": 1.1,
-            "wind_direction": 358,
-            "solar_irradiance": 529.827868852459,
-            "uv_index": 5,
-            "precipitation": 0,
-            "pressure": 866.4,
-            "icon": "partly-cloudy-day",
-            "precipitation_accumulated": 0,
-            "dew_point": 8.503006893659496,
-            "feels_like": 24.1
-          }
-        },
-        {
-          "id": "1a669810-bf55-11ed-8a70-d7d4cf200cc9",
-          "cellIndex": "87bcdc866ffffff",
-          "cellActiveDeviceCount": 4,
-          "cellAvgDataQuality": 78,
-          "cellCenter": {
-            "lat": -25.7823,
-            "lon": 28.26098
-          },
-          "address": "Pretoria, ZA",
-          "name": "Polar Stone Snowsquall",
-          "bundle": {
-            "name": "h1",
-            "title": "H1",
-            "connectivity": "helium",
-            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
-            "ws_model": "WS2000",
-            "gw_model": "WS2000"
-          },
-          "profile": "H1",
-          "metrics": {
-            "qod_score": 51,
-            "ts": "2026-06-11T02:00:00+02:00"
-          },
-          "timezone": "Africa/Johannesburg",
-          "programName": "swissborg",
-          "cellCapacity": 2,
-          "isActive": true,
-          "lastWeatherStationActivity": "2026-06-13T11:57:47+02:00",
-          "current_weather": {
-            "timestamp": "2026-06-13T11:57:47+02:00",
-            "temperature": 22.5,
-            "humidity": 41,
-            "wind_speed": 0.1,
-            "wind_gust": 0.8,
-            "wind_direction": 294,
-            "solar_irradiance": 713.2049180327868,
-            "uv_index": 4,
-            "precipitation": 0,
-            "pressure": 866.1,
-            "icon": "partly-cloudy-day",
-            "precipitation_accumulated": 0,
-            "dew_point": 8.592200292486002,
-            "feels_like": 22.5
-          }
-        },
-        {
-          "id": "83f74781-ad73-11ef-8b2f-f594437d6709",
-          "cellIndex": "87bcdc866ffffff",
-          "cellActiveDeviceCount": 4,
-          "cellAvgDataQuality": 78,
-          "cellCenter": {
-            "lat": -25.79665,
-            "lon": 28.25416
-          },
-          "address": "Pretoria, ZA",
-          "name": "Ancient Gunmetal Graupel",
-          "bundle": {
-            "name": "d1",
-            "title": "D1",
-            "connectivity": "wifi",
-            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
-            "ws_model": "WS1001",
-            "gw_model": "WG1200"
-          },
-          "profile": "D1",
-          "metrics": {
-            "qod_score": 50,
-            "ts": "2026-06-11T02:00:00+02:00"
-          },
-          "timezone": "Africa/Johannesburg",
-          "programName": "swissborg",
-          "cellCapacity": 2,
-          "isActive": true,
-          "lastWeatherStationActivity": "2026-06-13T11:59:00+02:00",
-          "current_weather": {
-            "timestamp": "2026-06-13T11:59:00+02:00",
-            "temperature": 21.22,
-            "humidity": 45,
-            "wind_speed": 0.7,
-            "wind_gust": 1,
-            "wind_direction": 35,
-            "solar_irradiance": 587.9508196721312,
-            "uv_index": 5,
-            "precipitation": 0,
-            "pressure": 855.54,
-            "icon": "partly-cloudy-day",
-            "precipitation_accumulated": 0,
-            "dew_point": 8.813435596087661,
-            "feels_like": 21.22
-          }
-        },
-        {
-          "id": "dd28aff0-bf55-11ed-8a70-d7d4cf200cc9",
-          "cellIndex": "87bcdc866ffffff",
-          "cellActiveDeviceCount": 4,
-          "cellAvgDataQuality": 78,
-          "cellCenter": {
-            "lat": -25.78274,
-            "lon": 28.25959
-          },
-          "address": "Pretoria, ZA",
-          "name": "Mild Capri Cloudburst",
-          "bundle": {
-            "name": "h1",
-            "title": "H1",
-            "connectivity": "helium",
-            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
-            "ws_model": "WS2000",
-            "gw_model": "WS2000"
-          },
-          "profile": "H1",
-          "metrics": {
-            "qod_score": 87,
-            "ts": "2026-06-11T02:00:00+02:00"
-          },
-          "timezone": "Africa/Johannesburg",
-          "programName": "swissborg",
-          "cellCapacity": 2,
-          "isActive": true,
-          "lastWeatherStationActivity": "2026-06-13T11:57:22+02:00",
-          "current_weather": {
-            "timestamp": "2026-06-13T11:57:22+02:00",
-            "temperature": 22.3,
-            "humidity": 43,
-            "wind_speed": 0.4,
-            "wind_gust": 1.6,
-            "wind_direction": 6,
-            "solar_irradiance": 538.1147540983607,
-            "uv_index": 3,
-            "precipitation": 0,
-            "pressure": 866.3,
-            "icon": "partly-cloudy-day",
-            "precipitation_accumulated": 0,
-            "dew_point": 9.117586589696183,
-            "feels_like": 22.3
-          }
-        },
-        {
-          "id": "a2fe65e0-bf55-11ed-8a70-d7d4cf200cc9",
-          "cellIndex": "87bcdc866ffffff",
-          "cellActiveDeviceCount": 4,
-          "cellAvgDataQuality": 78,
-          "cellCenter": {
-            "lat": -25.7817,
-            "lon": 28.26005
-          },
-          "address": "Pretoria, ZA",
-          "name": "Magic Thistle Sun",
-          "bundle": {
-            "name": "h1",
-            "title": "H1",
-            "connectivity": "helium",
-            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
-            "ws_model": "WS2000",
-            "gw_model": "WS2000"
-          },
-          "profile": "H1",
-          "metrics": {
-            "qod_score": 91,
-            "ts": "2026-06-11T02:00:00+02:00"
-          },
-          "timezone": "Africa/Johannesburg",
-          "programName": "swissborg",
-          "cellCapacity": 2,
-          "isActive": true,
-          "lastWeatherStationActivity": "2026-06-13T11:56:56+02:00",
-          "current_weather": {
-            "timestamp": "2026-06-13T11:56:56+02:00",
-            "temperature": 20.8,
-            "humidity": 46,
-            "wind_speed": 0.9,
-            "wind_gust": 1.6,
-            "wind_direction": 10,
-            "solar_irradiance": 547.7540983606557,
-            "uv_index": 4,
-            "precipitation": 0,
-            "pressure": 866.8,
-            "icon": "partly-cloudy-day",
-            "precipitation_accumulated": 0,
-            "dew_point": 8.756809908546066,
-            "feels_like": 20.8
-          }
-        }
-      ]
+      "devices": [],
+      "_error": "HTTP 429"
     },
     {
       "cell": {
@@ -6334,7 +7027,7 @@
         "devices": {
           "community": 5
         },
-        "avg_data_quality": 86,
+        "avg_data_quality": 82,
         "capacity": 2,
         "polygon": [
           {
@@ -6379,7 +7072,7 @@
         "devices": {
           "community": 5
         },
-        "avg_data_quality": 87,
+        "avg_data_quality": 91,
         "capacity": 2,
         "polygon": [
           {
@@ -6503,8 +7196,239 @@
         },
         "_ratio": 2.5
       },
-      "devices": [],
-      "_error": "HTTP 429"
+      "devices": [
+        {
+          "id": "7dc56400-1c6b-11ed-960b-b351f0b0cc44",
+          "cellIndex": "873904194ffffff",
+          "cellActiveDeviceCount": 4,
+          "cellAvgDataQuality": 96,
+          "cellCenter": {
+            "lat": 40.36076,
+            "lon": -7.9394
+          },
+          "address": "Covas e Vila Nova de Oliveirinha, PT",
+          "name": "Jolly Kobe Gust",
+          "bundle": {
+            "name": "m5",
+            "title": "M5",
+            "connectivity": "wifi",
+            "url": "https://docs.weatherxm.com/wxm-devices/m5/introduction",
+            "ws_model": "WS1000",
+            "gw_model": "WG1000"
+          },
+          "profile": "M5",
+          "metrics": {
+            "qod_score": 99,
+            "ts": "2026-06-12T01:00:00+01:00"
+          },
+          "timezone": "Europe/Lisbon",
+          "programName": "community",
+          "cellCapacity": 2,
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-06-14T11:08:00+01:00",
+          "current_weather": {
+            "timestamp": "2026-06-14T11:08:00+01:00",
+            "temperature": 20.4,
+            "humidity": 88,
+            "wind_speed": 0.26,
+            "wind_gust": 0.51,
+            "wind_direction": 170,
+            "solar_irradiance": 216.86885245901638,
+            "uv_index": 2,
+            "precipitation": 0,
+            "pressure": 982.58,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0.5,
+            "dew_point": 18.34505674253122,
+            "feels_like": 20.4
+          }
+        },
+        {
+          "id": "2e468d00-438d-11ef-8e8d-b55568dc8e66",
+          "cellIndex": "873904194ffffff",
+          "cellActiveDeviceCount": 4,
+          "cellAvgDataQuality": 96,
+          "cellCenter": {
+            "lat": 40.36016,
+            "lon": -7.94108
+          },
+          "address": "Covas e Vila Nova de Oliveirinha, PT",
+          "name": "Prehistoric Punch Hail",
+          "bundle": {
+            "name": "d1",
+            "title": "D1",
+            "connectivity": "wifi",
+            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
+            "ws_model": "WS1001",
+            "gw_model": "WG1200"
+          },
+          "profile": "D1",
+          "metrics": {
+            "qod_score": 99,
+            "ts": "2026-06-12T01:00:00+01:00"
+          },
+          "timezone": "Europe/Lisbon",
+          "programName": "community",
+          "cellCapacity": 2,
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-06-14T11:09:00+01:00",
+          "current_weather": {
+            "timestamp": "2026-06-14T11:09:00+01:00",
+            "temperature": 21.17,
+            "humidity": 83,
+            "wind_speed": 0.03,
+            "wind_gust": 0.5,
+            "wind_direction": 148,
+            "solar_irradiance": 211.9344262295082,
+            "uv_index": 1,
+            "precipitation": 0,
+            "pressure": 983.85,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0.25,
+            "dew_point": 18.168000302676326,
+            "feels_like": 21.17
+          }
+        },
+        {
+          "id": "2ea85c10-438d-11ef-8e8d-b55568dc8e66",
+          "cellIndex": "873904194ffffff",
+          "cellActiveDeviceCount": 4,
+          "cellAvgDataQuality": 96,
+          "cellCenter": {
+            "lat": 40.35899,
+            "lon": -7.94349
+          },
+          "address": "Covas e Vila Nova de Oliveirinha, PT",
+          "name": "Modern Purple Moisture",
+          "bundle": {
+            "name": "d1",
+            "title": "D1",
+            "connectivity": "wifi",
+            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
+            "ws_model": "WS1001",
+            "gw_model": "WG1200"
+          },
+          "profile": "D1",
+          "metrics": {
+            "qod_score": 99,
+            "ts": "2026-06-12T01:00:00+01:00"
+          },
+          "timezone": "Europe/Lisbon",
+          "programName": "community",
+          "cellCapacity": 2,
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-06-14T11:09:00+01:00",
+          "current_weather": {
+            "timestamp": "2026-06-14T11:09:00+01:00",
+            "temperature": 21.65,
+            "humidity": 84,
+            "wind_speed": 0,
+            "wind_gust": 0.5,
+            "wind_direction": 129,
+            "solar_irradiance": 239.34426229508196,
+            "uv_index": 2,
+            "precipitation": 0,
+            "pressure": 985.93,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0.5100000000001046,
+            "dew_point": 18.82872979605588,
+            "feels_like": 21.65
+          }
+        },
+        {
+          "id": "2e9681c0-438d-11ef-8e8d-b55568dc8e66",
+          "cellIndex": "873904194ffffff",
+          "cellActiveDeviceCount": 4,
+          "cellAvgDataQuality": 96,
+          "cellCenter": {
+            "lat": 40.35981,
+            "lon": -7.93692
+          },
+          "address": "Covas e Vila Nova de Oliveirinha, PT",
+          "name": "Cold Indigo Scud",
+          "bundle": {
+            "name": "d1",
+            "title": "D1",
+            "connectivity": "wifi",
+            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
+            "ws_model": "WS1001",
+            "gw_model": "WG1200"
+          },
+          "profile": "D1",
+          "metrics": {
+            "qod_score": 90,
+            "ts": "2026-06-12T01:00:00+01:00"
+          },
+          "timezone": "Europe/Lisbon",
+          "programName": "community",
+          "cellCapacity": 2,
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-06-14T11:09:00+01:00",
+          "current_weather": {
+            "timestamp": "2026-06-14T11:09:00+01:00",
+            "temperature": 21.17,
+            "humidity": 86,
+            "wind_speed": 0,
+            "wind_gust": 0,
+            "wind_direction": 125,
+            "solar_irradiance": 249.71311475409837,
+            "uv_index": 2,
+            "precipitation": 0,
+            "pressure": 983.06,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0.5099999999997635,
+            "dew_point": 18.73478429007594,
+            "feels_like": 21.17
+          }
+        },
+        {
+          "id": "31af3370-438d-11ef-8e8d-b55568dc8e66",
+          "cellIndex": "873904194ffffff",
+          "cellActiveDeviceCount": 4,
+          "cellAvgDataQuality": 96,
+          "cellCenter": {
+            "lat": 40.35965,
+            "lon": -7.94166
+          },
+          "address": "Covas e Vila Nova de Oliveirinha, PT",
+          "name": "Swift Opaque Celsius",
+          "bundle": {
+            "name": "d1",
+            "title": "D1",
+            "connectivity": "wifi",
+            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
+            "ws_model": "WS1001",
+            "gw_model": "WG1200"
+          },
+          "profile": "D1",
+          "metrics": {
+            "qod_score": 0,
+            "pol_reason": "NO_LOCATION_DATA",
+            "ts": "2026-06-12T01:00:00+01:00"
+          },
+          "timezone": "Europe/Lisbon",
+          "programName": "community",
+          "cellCapacity": 2,
+          "isActive": false,
+          "lastWeatherStationActivity": "2025-07-14T16:40:34+01:00",
+          "current_weather": {
+            "timestamp": "2025-07-14T16:40:34+01:00",
+            "temperature": 29.39,
+            "humidity": 45,
+            "wind_speed": 1.2,
+            "wind_gust": 1.5,
+            "wind_direction": 291,
+            "solar_irradiance": 679.5901639344262,
+            "uv_index": 6,
+            "precipitation": 0,
+            "pressure": 985.88,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 16.2235522017493,
+            "feels_like": 29.73386729204503
+          }
+        }
+      ]
     },
     {
       "cell": {
@@ -6548,243 +7472,8 @@
         },
         "_ratio": 2.5
       },
-      "devices": [
-        {
-          "id": "35228840-438d-11ef-8e8d-b55568dc8e66",
-          "cellIndex": "874995808ffffff",
-          "cellActiveDeviceCount": 0,
-          "cellAvgDataQuality": null,
-          "cellCenter": {
-            "lat": 19.2547,
-            "lon": -99.05449
-          },
-          "address": "Xochimilco, MX",
-          "name": "Powerful Licorice Hectopascal",
-          "bundle": {
-            "name": "d1",
-            "title": "D1",
-            "connectivity": "wifi",
-            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
-            "ws_model": "WS1001",
-            "gw_model": "WG1200"
-          },
-          "profile": "D1",
-          "metrics": {
-            "qod_score": 0,
-            "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-10T18:00:00-06:00"
-          },
-          "timezone": "America/Mexico_City",
-          "programName": "swissborg",
-          "cellCapacity": 2,
-          "isActive": false,
-          "lastWeatherStationActivity": "2025-06-20T04:37:15-06:00",
-          "current_weather": {
-            "timestamp": "2025-06-20T04:37:15-06:00",
-            "temperature": 13.89,
-            "humidity": 92,
-            "wind_speed": 0,
-            "wind_gust": 0,
-            "wind_direction": 92,
-            "solar_irradiance": 0,
-            "uv_index": 0,
-            "precipitation": 0,
-            "pressure": 781.02,
-            "icon": "partly-cloudy-night",
-            "precipitation_accumulated": 0,
-            "dew_point": 12.611424369658168,
-            "feels_like": 13.89
-          }
-        },
-        {
-          "id": "2499be80-438d-11ef-8e8d-b55568dc8e66",
-          "cellIndex": "874995808ffffff",
-          "cellActiveDeviceCount": 0,
-          "cellAvgDataQuality": null,
-          "cellCenter": {
-            "lat": 19.24881,
-            "lon": -99.06001
-          },
-          "address": "Xochimilco, MX",
-          "name": "Cuddly Bole Sky",
-          "bundle": {
-            "name": "d1",
-            "title": "D1",
-            "connectivity": "wifi",
-            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
-            "ws_model": "WS1001",
-            "gw_model": "WG1200"
-          },
-          "profile": "D1",
-          "metrics": {
-            "qod_score": 0,
-            "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-10T18:00:00-06:00"
-          },
-          "timezone": "America/Mexico_City",
-          "programName": "swissborg",
-          "cellCapacity": 2,
-          "isActive": false,
-          "lastWeatherStationActivity": "2026-05-14T03:48:00-06:00",
-          "current_weather": {
-            "timestamp": "2026-05-14T03:48:00-06:00",
-            "temperature": 11.17,
-            "humidity": 92,
-            "wind_speed": 0,
-            "wind_gust": 0,
-            "wind_direction": 136,
-            "solar_irradiance": 0,
-            "uv_index": 0,
-            "precipitation": 0,
-            "pressure": 782.17,
-            "icon": "partly-cloudy-night",
-            "precipitation_accumulated": 0,
-            "dew_point": 9.918286517063839,
-            "feels_like": 11.17
-          }
-        },
-        {
-          "id": "243f9090-438d-11ef-8e8d-b55568dc8e66",
-          "cellIndex": "874995808ffffff",
-          "cellActiveDeviceCount": 0,
-          "cellAvgDataQuality": null,
-          "cellCenter": {
-            "lat": 19.25068,
-            "lon": -99.06568
-          },
-          "address": "Xochimilco, MX",
-          "name": "Witty Grey Rain",
-          "bundle": {
-            "name": "d1",
-            "title": "D1",
-            "connectivity": "wifi",
-            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
-            "ws_model": "WS1001",
-            "gw_model": "WG1200"
-          },
-          "profile": "D1",
-          "metrics": {
-            "qod_score": 0,
-            "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-10T18:00:00-06:00"
-          },
-          "timezone": "America/Mexico_City",
-          "programName": "swissborg",
-          "cellCapacity": 2,
-          "isActive": false,
-          "lastWeatherStationActivity": "2025-04-11T11:48:48-06:00",
-          "current_weather": {
-            "timestamp": "2025-04-11T11:48:48-06:00",
-            "temperature": 20.28,
-            "humidity": 10,
-            "wind_speed": 3.8,
-            "wind_gust": 5.1,
-            "wind_direction": 73,
-            "solar_irradiance": 940.655737704918,
-            "uv_index": 8,
-            "precipitation": 0,
-            "pressure": 779.61,
-            "icon": "partly-cloudy-day",
-            "precipitation_accumulated": 0,
-            "dew_point": -12.37003839171783,
-            "feels_like": 20.28
-          }
-        },
-        {
-          "id": "26203770-438d-11ef-8e8d-b55568dc8e66",
-          "cellIndex": "874995808ffffff",
-          "cellActiveDeviceCount": 0,
-          "cellAvgDataQuality": null,
-          "cellCenter": {
-            "lat": 19.24499,
-            "lon": -99.06846
-          },
-          "address": "Xochimilco, MX",
-          "name": "Main Orange Orographic",
-          "bundle": {
-            "name": "d1",
-            "title": "D1",
-            "connectivity": "wifi",
-            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
-            "ws_model": "WS1001",
-            "gw_model": "WG1200"
-          },
-          "profile": "D1",
-          "metrics": {
-            "qod_score": 0,
-            "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-10T18:00:00-06:00"
-          },
-          "timezone": "America/Mexico_City",
-          "programName": "swissborg",
-          "cellCapacity": 2,
-          "isActive": false,
-          "lastWeatherStationActivity": "2025-07-21T15:56:30-06:00",
-          "current_weather": {
-            "timestamp": "2025-07-21T15:56:30-06:00",
-            "temperature": 28.94,
-            "humidity": 35,
-            "wind_speed": 0,
-            "wind_gust": 0,
-            "wind_direction": 338,
-            "solar_irradiance": 583.6065573770492,
-            "uv_index": 5,
-            "precipitation": 0,
-            "pressure": 780.7,
-            "icon": "partly-cloudy-day",
-            "precipitation_accumulated": 0,
-            "dew_point": 11.943559149992742,
-            "feels_like": 28.280653165379977
-          }
-        },
-        {
-          "id": "25f074e0-438d-11ef-8e8d-b55568dc8e66",
-          "cellIndex": "874995808ffffff",
-          "cellActiveDeviceCount": 0,
-          "cellAvgDataQuality": null,
-          "cellCenter": {
-            "lat": 19.25635,
-            "lon": -99.05894
-          },
-          "address": "Xochimilco, MX",
-          "name": "Mild Manatee Shower",
-          "bundle": {
-            "name": "d1",
-            "title": "D1",
-            "connectivity": "wifi",
-            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
-            "ws_model": "WS1001",
-            "gw_model": "WG1200"
-          },
-          "profile": "D1",
-          "metrics": {
-            "qod_score": 0,
-            "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-06-10T18:00:00-06:00"
-          },
-          "timezone": "America/Mexico_City",
-          "programName": "swissborg",
-          "cellCapacity": 2,
-          "isActive": false,
-          "lastWeatherStationActivity": "2025-03-11T20:33:53-06:00",
-          "current_weather": {
-            "timestamp": "2025-03-11T20:33:53-06:00",
-            "temperature": 19.61,
-            "humidity": 47,
-            "wind_speed": 0.05,
-            "wind_gust": 1,
-            "wind_direction": 0,
-            "solar_irradiance": 0,
-            "uv_index": 0,
-            "precipitation": 0,
-            "pressure": 781.72,
-            "icon": "partly-cloudy-night",
-            "precipitation_accumulated": 0,
-            "dew_point": 7.9887222518603425,
-            "feels_like": 19.61
-          }
-        }
-      ]
+      "devices": [],
+      "_error": "HTTP 429"
     }
   ]
 }

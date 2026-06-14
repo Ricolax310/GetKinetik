@@ -1,12 +1,13 @@
 # Daily DePIN Signal Brief
 
-> 2026-06-13 · automated cross-network pipeline · evidence not verdicts
+> 2026-06-14 · automated cross-network pipeline · evidence not verdicts
 
 ## Today's Read
 
-• Geodnet duplicate-coordinate groups declined from 10 to 8.
-• WeatherXM over-capacity cells rose from 287 to 289.
-• Geodnet entities on public map rose from 19,597 to 19,614.
+• Geodnet duplicate-coordinate groups rose from 8 to 13.
+• WeatherXM over-capacity cells declined from 289 to 287.
+• Helium IoT entities on public map rose from 1,008,023 to 1,008,034.
+• Geodnet entities on public map rose from 19,614 to 19,623.
 
 ## Why It Matters
 
@@ -30,28 +31,28 @@ _Totals: 16 signal(s) across 5/7 networks._
 ### What Changed Today
 
 **Registry & identity integrity**
-- **Geodnet** — 8 exact (lat,lng) duplicate groups on 19,604 public stations — each row in §1 is one coordinate pair your registry team can grep today. _(medium · conf 0.70)_
-- **Geodnet** — exact (lat,lng) duplicate groups: 8 (-2 (-20.0%)) _(high · conf 0.85)_
-- **Geodnet** — fleet share flagged (any heuristic): 9.27% (-0.04 pp (-0.4%)) _(low · conf 0.85)_
-- **Helium IoT** — 4,855 single-coordinate stacks of ≥10 hotspots on 1,008,019 located units — the largest stack holds 501 hotspots on one coordinate (§1 lists keys your registry team can grep today). _(medium · conf 0.70)_
-- **Helium IoT** — fleet share flagged (any heuristic): 6.91% (-0.00 pp (-0.0%)) _(low · conf 0.85)_
-- **Helium Mobile** — 529 single-coordinate stacks of ≥10 hotspots on 54,683 located units — the largest stack holds 497 hotspots on one coordinate (§1 lists keys your registry team can grep today). _(medium · conf 0.70)_
+- **Geodnet** — 13 exact (lat,lng) duplicate groups on 19,623 public stations — each row in §1 is one coordinate pair your registry team can grep today. _(medium · conf 0.70)_
+- **Geodnet** — exact (lat,lng) duplicate groups: 13 (+5 (+62.5%)) _(high · conf 0.85)_
+- **Geodnet** — fleet share flagged (any heuristic): 9.31% (+0.03 pp (+0.3%)) _(low · conf 0.85)_
+- **Helium IoT** — 4,857 single-coordinate stacks of ≥10 hotspots on 1,008,034 located units — the largest stack holds 501 hotspots on one coordinate (§1 lists keys your registry team can grep today). _(medium · conf 0.70)_
+- **Helium IoT** — single-coordinate stacks (≥10 hotspots): 4,857 (+1 (+0.0%)) _(low · conf 0.85)_
+- **Helium Mobile** — 529 single-coordinate stacks of ≥10 hotspots on 54,691 located units — the largest stack holds 497 hotspots on one coordinate (§1 lists keys your registry team can grep today). _(medium · conf 0.70)_
 - **Helium Mobile** — fleet share flagged (any heuristic): 20.57% (-0.00 pp (-0.0%)) _(low · conf 0.85)_
 
 **Network health & capacity**
-- **WeatherXM** — 286 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue. _(medium · conf 0.70)_
-- **WeatherXM** — cells over designed capacity: 289 (+2 (+0.7%)) _(low · conf 0.85)_
-- **WeatherXM** — share of map over capacity: 3.40% (+0.02 pp (+0.7%)) _(low · conf 0.85)_
+- **WeatherXM** — 287 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue. _(medium · conf 0.70)_
+- **WeatherXM** — cells over designed capacity: 287 (-2 (-0.7%)) _(low · conf 0.85)_
+- **WeatherXM** — share of map over capacity: 3.38% (-0.02 pp (-0.7%)) _(low · conf 0.85)_
 
 **Coverage growth**
-- **Geodnet** — entities on public map: 19,614 (+17 (+0.1%)) _(low · conf 0.85)_
-- **WeatherXM** — entities on public map: 8,497 (+3 (+0.0%)) _(low · conf 0.85)_
-- **Helium IoT** — entities on public map: 1,008,023 (+1 (+0.0%)) _(low · conf 0.85)_
-- **Helium Mobile** — entities on public map: 54,689 (+1 (+0.0%)) _(low · conf 0.85)_
+- **Geodnet** — entities on public map: 19,623 (+9 (+0.0%)) _(low · conf 0.85)_
+- **WeatherXM** — entities on public map: 8,498 (+1 (+0.0%)) _(low · conf 0.85)_
+- **Helium IoT** — entities on public map: 1,008,034 (+11 (+0.0%)) _(low · conf 0.85)_
+- **Helium Mobile** — entities on public map: 54,691 (+2 (+0.0%)) _(low · conf 0.85)_
 
 **Token economics**
-- **Hivemapper** — 49.20% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read. _(medium · conf 0.70)_
-- **Hivemapper** — top-20 SPL share of UI supply: 49.20% (-0.01 pp (-0.0%)) _(low · conf 0.85)_
+- **Hivemapper** — 49.18% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read. _(medium · conf 0.70)_
+- **Hivemapper** — top-20 SPL share of UI supply: 49.18% (-0.02 pp (-0.0%)) _(low · conf 0.85)_
 
 ### Signal Type
 
@@ -78,32 +79,32 @@ _Operational context for observed metrics — not verdicts._
 ### Network Breakdown
 
 ### Geodnet
-- [integrity] 8 exact (lat,lng) duplicate groups on 19,604 public stations — each row in §1 is one coordinate pair your registry team can grep today. _(medium · conf 0.70)_
-- [integrity] exact (lat,lng) duplicate groups: 8 (-2 (-20.0%)) _(high · conf 0.85)_
-- [growth] entities on public map: 19,614 (+17 (+0.1%)) _(low · conf 0.85)_
-- [integrity] fleet share flagged (any heuristic): 9.27% (-0.04 pp (-0.4%)) _(low · conf 0.85)_
+- [integrity] 13 exact (lat,lng) duplicate groups on 19,623 public stations — each row in §1 is one coordinate pair your registry team can grep today. _(medium · conf 0.70)_
+- [integrity] exact (lat,lng) duplicate groups: 13 (+5 (+62.5%)) _(high · conf 0.85)_
+- [growth] entities on public map: 19,623 (+9 (+0.0%)) _(low · conf 0.85)_
+- [integrity] fleet share flagged (any heuristic): 9.31% (+0.03 pp (+0.3%)) _(low · conf 0.85)_
 
 ### WeatherXM
-- [health] 286 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue. _(medium · conf 0.70)_
-- [growth] entities on public map: 8,497 (+3 (+0.0%)) _(low · conf 0.85)_
-- [health] cells over designed capacity: 289 (+2 (+0.7%)) _(low · conf 0.85)_
-- [health] share of map over capacity: 3.40% (+0.02 pp (+0.7%)) _(low · conf 0.85)_
+- [health] 287 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue. _(medium · conf 0.70)_
+- [growth] entities on public map: 8,498 (+1 (+0.0%)) _(low · conf 0.85)_
+- [health] cells over designed capacity: 287 (-2 (-0.7%)) _(low · conf 0.85)_
+- [health] share of map over capacity: 3.38% (-0.02 pp (-0.7%)) _(low · conf 0.85)_
 
 ### Hivemapper
-- [economics] 49.20% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read. _(medium · conf 0.70)_
-- [economics] top-20 SPL share of UI supply: 49.20% (-0.01 pp (-0.0%)) _(low · conf 0.85)_
+- [economics] 49.18% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read. _(medium · conf 0.70)_
+- [economics] top-20 SPL share of UI supply: 49.18% (-0.02 pp (-0.0%)) _(low · conf 0.85)_
 
 ### NATIX
 - _No qualifying public finding in latest snapshot._
 
 ### Helium IoT
-- [integrity] 4,855 single-coordinate stacks of ≥10 hotspots on 1,008,019 located units — the largest stack holds 501 hotspots on one coordinate (§1 lists keys your registry team can grep today). _(medium · conf 0.70)_
-- [growth] entities on public map: 1,008,023 (+1 (+0.0%)) _(low · conf 0.85)_
-- [integrity] fleet share flagged (any heuristic): 6.91% (-0.00 pp (-0.0%)) _(low · conf 0.85)_
+- [integrity] 4,857 single-coordinate stacks of ≥10 hotspots on 1,008,034 located units — the largest stack holds 501 hotspots on one coordinate (§1 lists keys your registry team can grep today). _(medium · conf 0.70)_
+- [growth] entities on public map: 1,008,034 (+11 (+0.0%)) _(low · conf 0.85)_
+- [integrity] single-coordinate stacks (≥10 hotspots): 4,857 (+1 (+0.0%)) _(low · conf 0.85)_
 
 ### Helium Mobile
-- [integrity] 529 single-coordinate stacks of ≥10 hotspots on 54,683 located units — the largest stack holds 497 hotspots on one coordinate (§1 lists keys your registry team can grep today). _(medium · conf 0.70)_
-- [growth] entities on public map: 54,689 (+1 (+0.0%)) _(low · conf 0.85)_
+- [integrity] 529 single-coordinate stacks of ≥10 hotspots on 54,691 located units — the largest stack holds 497 hotspots on one coordinate (§1 lists keys your registry team can grep today). _(medium · conf 0.70)_
+- [growth] entities on public map: 54,691 (+2 (+0.0%)) _(low · conf 0.85)_
 - [integrity] fleet share flagged (any heuristic): 20.57% (-0.00 pp (-0.0%)) _(low · conf 0.85)_
 
 ### DIMO
