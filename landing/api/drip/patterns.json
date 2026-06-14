@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-13T17:32:31.532Z",
+  "generatedAt": "2026-06-14T17:31:11.822Z",
   "patterns": [
     {
       "scope": "systemic",
@@ -49,7 +49,7 @@
         "Helium IoT"
       ],
       "category": "INFRASTRUCTURE",
-      "description": "Observed Helium IoT stackedSpots on 4 of 7 recorded days.",
+      "description": "Observed Helium IoT stackedSpots on 5 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -61,21 +61,19 @@
         "Helium Mobile"
       ],
       "category": "INFRASTRUCTURE",
-      "description": "Observed Helium Mobile stackedSpots on 4 of 7 recorded days.",
+      "description": "Observed Helium Mobile stackedSpots on 5 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
       "scope": "systemic",
-      "classification": "convergence",
-      "headline": "Cross-network identity registry stress observed across multiple networks",
-      "pattern": "CROSS_NETWORK_IDENTITY",
+      "classification": "repetition",
+      "headline": "Helium Mobile: repeated observed observation",
+      "pattern": "REPEATED_INFRASTRUCTURE",
       "networks": [
-        "Geodnet",
-        "Helium IoT",
         "Helium Mobile"
       ],
-      "category": "IDENTITY",
-      "description": "Cross-network identity registry stress observed across multiple networks (Geodnet, Helium IoT, Helium Mobile).",
+      "category": "INFRASTRUCTURE",
+      "description": "Observed Helium Mobile observed on 4 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -111,8 +109,34 @@
         "Helium Mobile"
       ],
       "category": "IDENTITY",
-      "description": "Observed Helium Mobile flaggedPct on 4 of 7 recorded days.",
+      "description": "Observed Helium Mobile flaggedPct on 5 of 7 recorded days.",
       "patternType": "cross-network"
+    },
+    {
+      "scope": "cross-network",
+      "classification": "convergence",
+      "headline": "Cross-network identity registry stress observed across multiple networks",
+      "pattern": "CROSS_NETWORK_IDENTITY",
+      "networks": [
+        "Geodnet",
+        "Helium Mobile"
+      ],
+      "category": "IDENTITY",
+      "description": "Cross-network identity registry stress observed across multiple networks (Geodnet, Helium Mobile).",
+      "patternType": "cross-network"
+    },
+    {
+      "scope": "cross-network",
+      "classification": "divergence",
+      "headline": "Divergence: IDENTITY metrics split across networks",
+      "pattern": "DIVERGENCE_IDENTITY",
+      "networks": [
+        "Geodnet",
+        "Helium Mobile"
+      ],
+      "category": "IDENTITY",
+      "description": "Opposing metric drift — Geodnet rising while Helium Mobile declining.",
+      "patternType": "divergence"
     },
     {
       "scope": "systemic",

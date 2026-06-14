@@ -10,7 +10,7 @@
       "label": "headline finding",
       "current": null,
       "previous": null,
-      "deltaText": "13 exact (lat,lng) duplicate groups on 19,623 public stations — each row in §1 is one coordinate pair your registry team can grep today.",
+      "deltaText": "8 exact (lat,lng) duplicate groups on 19,604 public stations — each row in §1 is one coordinate pair your registry team can grep today.",
       "report": "docs/reports/geodnet-sybil-report.md",
       "publicSource": "https://rtk.geodnet.com/api/v2/coverage_stations",
       "asOf": "2026-06-14"
@@ -69,7 +69,7 @@
       "label": "headline finding",
       "current": null,
       "previous": null,
-      "deltaText": "287 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.",
+      "deltaText": "286 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.",
       "report": "docs/reports/weatherxm-sybil-report.md",
       "publicSource": "WeatherXM public cells API",
       "asOf": "2026-06-14"
@@ -128,7 +128,7 @@
       "label": "headline finding",
       "current": null,
       "previous": null,
-      "deltaText": "49.18% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.",
+      "deltaText": "49.20% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.",
       "report": "docs/reports/hivemapper-sybil-report.md",
       "publicSource": "Solana mainnet HONEY SPL mint (public RPC)",
       "asOf": "2026-06-14"
@@ -157,7 +157,7 @@
       "label": "headline finding",
       "current": null,
       "previous": null,
-      "deltaText": "4,857 single-coordinate stacks of ≥10 hotspots on 1,008,034 located units — the largest stack holds 501 hotspots on one coordinate (§1 lists keys your registry team can grep today).",
+      "deltaText": "4,855 single-coordinate stacks of ≥10 hotspots on 1,008,019 located units — the largest stack holds 501 hotspots on one coordinate (§1 lists keys your registry team can grep today).",
       "report": "docs/reports/helium-iot-sybil-report.md",
       "publicSource": "https://entities.nft.helium.io/v2/hotspots?subnetwork=iot",
       "asOf": "2026-06-14"
@@ -201,7 +201,7 @@
       "label": "headline finding",
       "current": null,
       "previous": null,
-      "deltaText": "529 single-coordinate stacks of ≥10 hotspots on 54,691 located units — the largest stack holds 497 hotspots on one coordinate (§1 lists keys your registry team can grep today).",
+      "deltaText": "529 single-coordinate stacks of ≥10 hotspots on 54,683 located units — the largest stack holds 497 hotspots on one coordinate (§1 lists keys your registry team can grep today).",
       "report": "docs/reports/helium-mobile-sybil-report.md",
       "publicSource": "https://entities.nft.helium.io/v2/hotspots?subnetwork=mobile",
       "asOf": "2026-06-14"
@@ -244,5 +244,5 @@
     "Does the public read for Helium IoT match what your team sees internally, or is the public feed expected to look this way?",
     "Does the public read for Helium Mobile match what your team sees internally, or is the public feed expected to look this way?"
   ],
-  "threadSeed": "Public read on Geodnet: 13 exact (lat,lng) duplicate groups on 19,623 public stations — each row in §1 is one coordinate pai — does that match your internal view, or is the public feed expected to behave this way?"
+  "threadSeed": "Public read on Geodnet: 8 exact (lat,lng) duplicate groups on 19,604 public stations — each row in §1 is one coordinate pair your registry team can grep today. — does that match your internal view, or is the public feed expected to behave this way?"
 }

@@ -1,12 +1,13 @@
-# DePIN Signal Brief — 2026-06-13
+# DePIN Signal Brief — 2026-06-14
 
-> 2026-06-13 · machine-driven signal publication · evidence first
+> 2026-06-14 · machine-driven signal publication · evidence first
 
 ## Today's Read
 
-• Geodnet duplicate-coordinate groups declined from 10 to 8.
-• WeatherXM over-capacity cells rose from 287 to 289.
-• Geodnet entities on public map rose from 19,597 to 19,614.
+• Geodnet duplicate-coordinate groups rose from 8 to 13.
+• WeatherXM over-capacity cells declined from 289 to 287.
+• Helium IoT entities on public map rose from 1,008,023 to 1,008,034.
+• Geodnet entities on public map rose from 19,614 to 19,623.
 
 ## Why It Matters
 
@@ -18,16 +19,16 @@ Observations span 5 networks — no single network dominates the index.
 
 ### What Changed Today
 
-- **Geodnet** — exact (lat,lng) duplicate groups: 8 (-2 (-20.0%))
-- **Geodnet** — entities on public map: 19,614 (+17 (+0.1%))
-- **Geodnet** — fleet share flagged (any heuristic): 9.27% (-0.04 pp (-0.4%))
-- **WeatherXM** — entities on public map: 8,497 (+3 (+0.0%))
-- **WeatherXM** — cells over designed capacity: 289 (+2 (+0.7%))
-- **WeatherXM** — share of map over capacity: 3.40% (+0.02 pp (+0.7%))
-- **Hivemapper** — top-20 SPL share of UI supply: 49.20% (-0.01 pp (-0.0%))
-- **Helium IoT** — entities on public map: 1,008,023 (+1 (+0.0%))
-- **Helium IoT** — fleet share flagged (any heuristic): 6.91% (-0.00 pp (-0.0%))
-- **Helium Mobile** — entities on public map: 54,689 (+1 (+0.0%))
+- **Geodnet** — exact (lat,lng) duplicate groups: 13 (+5 (+62.5%))
+- **Geodnet** — entities on public map: 19,623 (+9 (+0.0%))
+- **Geodnet** — fleet share flagged (any heuristic): 9.31% (+0.03 pp (+0.3%))
+- **WeatherXM** — entities on public map: 8,498 (+1 (+0.0%))
+- **WeatherXM** — cells over designed capacity: 287 (-2 (-0.7%))
+- **WeatherXM** — share of map over capacity: 3.38% (-0.02 pp (-0.7%))
+- **Hivemapper** — top-20 SPL share of UI supply: 49.18% (-0.02 pp (-0.0%))
+- **Helium IoT** — entities on public map: 1,008,034 (+11 (+0.0%))
+- **Helium IoT** — single-coordinate stacks (≥10 hotspots): 4,857 (+1 (+0.0%))
+- **Helium Mobile** — entities on public map: 54,691 (+2 (+0.0%))
 - **Helium Mobile** — fleet share flagged (any heuristic): 20.57% (-0.00 pp (-0.0%))
 
 ### Signal Type
@@ -64,7 +65,7 @@ Observations span 5 networks — no single network dominates the index.
 
 ### Thread Seed
 
-Public read on Geodnet: 8 exact (lat,lng) duplicate groups on 19,604 public stations — each row in §1 is one coordinate pair — does that match your internal view, or is the public feed expected to behave this way?
+Public read on Geodnet: 8 exact (lat,lng) duplicate groups on 19,604 public stations — each row in §1 is one coordinate pair your registry team can review today. — does that match your internal view, or is the public feed expected to behave this way?
 
 ### Sources & Methodology
 
