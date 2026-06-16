@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-15T18:33:23.921Z",
+  "generatedAt": "2026-06-16T18:31:57.579Z",
   "patterns": [
     {
       "scope": "systemic",
@@ -7,27 +7,13 @@
       "headline": "Cross-network infrastructure coverage stress observed across multiple networks",
       "pattern": "CROSS_NETWORK_INFRASTRUCTURE",
       "networks": [
-        "Geodnet",
         "Helium IoT",
-        "Helium Mobile"
+        "Helium Mobile",
+        "WeatherXM"
       ],
       "category": "INFRASTRUCTURE",
-      "description": "Cross-network infrastructure coverage stress observed across multiple networks (Geodnet, Helium IoT, Helium Mobile).",
+      "description": "Cross-network infrastructure coverage stress observed across multiple networks (Helium IoT, Helium Mobile, WeatherXM).",
       "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "divergence",
-      "headline": "Divergence: INFRASTRUCTURE metrics split across networks",
-      "pattern": "DIVERGENCE_INFRASTRUCTURE",
-      "networks": [
-        "Geodnet",
-        "Helium IoT",
-        "Helium Mobile"
-      ],
-      "category": "INFRASTRUCTURE",
-      "description": "Opposing metric drift — Helium IoT, Helium Mobile rising while Geodnet declining.",
-      "patternType": "divergence"
     },
     {
       "scope": "systemic",
@@ -38,7 +24,7 @@
         "Geodnet"
       ],
       "category": "INFRASTRUCTURE",
-      "description": "Observed Geodnet observed on 7 of 7 recorded days.",
+      "description": "Observed Geodnet observed on 6 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -62,7 +48,7 @@
         "Helium IoT"
       ],
       "category": "INFRASTRUCTURE",
-      "description": "Observed Helium IoT stackedSpots on 6 of 7 recorded days.",
+      "description": "Observed Helium IoT stackedSpots on 7 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -74,7 +60,7 @@
         "Helium Mobile"
       ],
       "category": "INFRASTRUCTURE",
-      "description": "Observed Helium Mobile stackedSpots on 6 of 7 recorded days.",
+      "description": "Observed Helium Mobile stackedSpots on 7 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -98,7 +84,7 @@
         "Helium IoT"
       ],
       "category": "INFRASTRUCTURE",
-      "description": "Observed Helium IoT observed on 4 of 7 recorded days.",
+      "description": "Observed Helium IoT observed on 5 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -122,7 +108,7 @@
         "Geodnet"
       ],
       "category": "IDENTITY",
-      "description": "Observed Geodnet flaggedPct on 5 of 7 recorded days.",
+      "description": "Observed Geodnet flaggedPct on 4 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -146,7 +132,7 @@
         "WeatherXM"
       ],
       "category": "CAPACITY",
-      "description": "Observed WeatherXM overCapacityPct on 6 of 7 recorded days.",
+      "description": "Observed WeatherXM overCapacityPct on 5 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {

@@ -25,7 +25,7 @@ Observations span 4 networks — no single network dominates the index.
 - **WeatherXM** — cells over designed capacity: 284 (-1 (-0.4%))
 - **Helium IoT** — entities on public map: 1,008,046 (+6 (+0.0%))
 - **Helium IoT** — largest single-coordinate stack: 502 (+1 (+0.2%))
-- **Hivemapper** — 49.17% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
+- **Hivemapper** — 49.20% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
 
 ### Signal Type
 
@@ -58,7 +58,7 @@ Observations span 4 networks — no single network dominates the index.
 
 ### Thread Seed
 
-Public read on Geodnet: 10 exact (lat,lng) duplicate groups on 19,618 public stations — each row in §1 is one coordinate pair your registry team can grep today. — does that match your internal view, or is the public feed expected to behave this way?
+Public read on Geodnet: 8 exact (lat,lng) duplicate groups on 19,604 public stations — each row in §1 is one coordinate pair your registry team can grep today. — does that match your internal view, or is the public feed expected to behave this way?
 
 ### Sources & Methodology
 
