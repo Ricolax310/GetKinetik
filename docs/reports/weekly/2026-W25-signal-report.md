@@ -1,6 +1,6 @@
 # Weekly DePIN Signal Report
 
-> Week 2026-W25 · 2026-06-15 → 2026-06-16 · patterns first, then networks.
+> Week 2026-W25 · 2026-06-15 → 2026-06-17 · patterns first, then networks.
 
 ## Executive Summary
 
@@ -98,7 +98,7 @@ _No public signal this week — scan not run or no headline finding._
 ### Hivemapper
 
 **What changed**
-- 49.17% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
+- 49.20% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
 
 **Signal type**
 - Economic concentration (`economic_concentration`)
@@ -133,7 +133,7 @@ _No public signal this week — scan not run or no headline finding._
 ### Helium Mobile
 
 **What changed**
-- 529 single-coordinate stacks of ≥10 hotspots on 54,703 located units — the largest stack holds 497 hotspots on one coordinate (§1 lists keys your registry team can grep today).
+- 529 single-coordinate stacks of ≥10 hotspots on 54,683 located units — the largest stack holds 497 hotspots on one coordinate (§1 lists keys your registry team can grep today).
 
 **Signal type**
 - Registry duplication (`duplication_cluster`)
@@ -151,7 +151,7 @@ _No public signal this week — scan not run or no headline finding._
 
 ### What Changed Today
 
-_Latest reading: 2026-06-16_
+_Latest reading: 2026-06-17_
 
 - **Geodnet** — exact (lat,lng) duplicate groups: 10 (-1 (-9.1%))
 - **WeatherXM** — entities on public map: 8,502 (+6 (+0.1%))
