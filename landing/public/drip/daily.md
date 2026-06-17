@@ -1,6 +1,6 @@
-# DePIN Signal Brief — 2026-06-16
+# DePIN Signal Brief — 2026-06-17
 
-> 2026-06-16 · machine-driven signal publication · evidence first
+> 2026-06-17 · machine-driven signal publication · evidence first
 
 ## Today's Read
 
@@ -8,6 +8,7 @@
 • WeatherXM over-capacity cells declined from 285 to 284.
 • WeatherXM entities on public map rose from 8,496 to 8,502.
 • Helium IoT entities on public map rose from 1,008,040 to 1,008,046.
+• Helium IoT largest hotspot stack rose from 501 to 502.
 
 ## Why It Matters
 

@@ -1,10 +1,11 @@
 {
-  "generatedAt": "2026-06-16T18:31:57.579Z",
+  "generatedAt": "2026-06-17T17:54:51.832Z",
   "schema": "getkinetik.drip/v2",
-  "date": "2026-06-16",
+  "date": "2026-06-17",
   "minConfidence": 0.6,
   "daily": [
     "Geodnet: 10 duplicate coordinate clusters (−1)",
+    "Helium IoT: 502 largest stack (+1)",
     "Helium IoT: 1,008,046 entities on public map (+6)",
     "Helium IoT: 4,858 stacked spots (unchanged)",
     "Helium Mobile: 529 stacked spots (unchanged)",
@@ -14,18 +15,17 @@
   ],
   "weekly": [
     "Cross-network infrastructure coverage stress observed across multiple networks. Cross-network infrastructure coverage stress observed across multiple networks (Helium IoT, Helium Mobile, WeatherXM).",
-    "Geodnet: repeated observed observation. Observed Geodnet observed on 6 of 7 recorded days.",
+    "Geodnet: repeated observed observation. Observed Geodnet observed on 5 of 7 recorded days.",
     "WeatherXM: repeated observed observation. Observed WeatherXM observed on 6 of 7 recorded days.",
     "Helium IoT: repeated stackedSpots observation. Observed Helium IoT stackedSpots on 7 of 7 recorded days.",
     "Helium Mobile: repeated stackedSpots observation. Observed Helium Mobile stackedSpots on 7 of 7 recorded days.",
-    "Helium Mobile: repeated observed observation. Observed Helium Mobile observed on 5 of 7 recorded days.",
-    "Helium IoT: repeated observed observation. Observed Helium IoT observed on 5 of 7 recorded days.",
+    "Helium IoT: repeated observed observation. Observed Helium IoT observed on 6 of 7 recorded days.",
+    "Helium Mobile: repeated observed observation. Observed Helium Mobile observed on 4 of 7 recorded days.",
     "Geodnet: repeated exactDupGroups observation. Observed Geodnet exactDupGroups on 7 of 7 recorded days.",
-    "Geodnet: repeated flaggedPct observation. Observed Geodnet flaggedPct on 4 of 7 recorded days.",
     "WeatherXM: repeated overCapacityCells observation. Observed WeatherXM overCapacityCells on 7 of 7 recorded days.",
-    "WeatherXM: repeated overCapacityPct observation. Observed WeatherXM overCapacityPct on 5 of 7 recorded days.",
+    "WeatherXM: repeated overCapacityPct observation. Observed WeatherXM overCapacityPct on 4 of 7 recorded days.",
     "Hivemapper: repeated top20ShareOfSupply observation. Observed Hivemapper top20ShareOfSupply on 7 of 7 recorded days.",
-    "Helium Mobile: repeated flaggedPct observation. Observed Helium Mobile flaggedPct on 5 of 7 recorded days.",
+    "Helium Mobile: repeated flaggedPct observation. Observed Helium Mobile flaggedPct on 4 of 7 recorded days.",
     "WeatherXM: capacity pressure signal detected. Observed capacity signal on WeatherXM (overCapacityCells).",
     "Geodnet: identity registry stress signal detected. Observed identity signal on Geodnet (exactDupGroups).",
     "Hivemapper: economic distribution shape signal detected. Observed economics signal on Hivemapper (top20ShareOfSupply).",
@@ -55,7 +55,7 @@
         "Geodnet"
       ],
       "category": "INFRASTRUCTURE",
-      "description": "Observed Geodnet observed on 6 of 7 recorded days.",
+      "description": "Observed Geodnet observed on 5 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -97,25 +97,25 @@
     {
       "scope": "systemic",
       "classification": "repetition",
-      "headline": "Helium Mobile: repeated observed observation",
-      "pattern": "REPEATED_INFRASTRUCTURE",
-      "networks": [
-        "Helium Mobile"
-      ],
-      "category": "INFRASTRUCTURE",
-      "description": "Observed Helium Mobile observed on 5 of 7 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
       "headline": "Helium IoT: repeated observed observation",
       "pattern": "REPEATED_INFRASTRUCTURE",
       "networks": [
         "Helium IoT"
       ],
       "category": "INFRASTRUCTURE",
-      "description": "Observed Helium IoT observed on 5 of 7 recorded days.",
+      "description": "Observed Helium IoT observed on 6 of 7 recorded days.",
+      "patternType": "cross-network"
+    },
+    {
+      "scope": "systemic",
+      "classification": "repetition",
+      "headline": "Helium Mobile: repeated observed observation",
+      "pattern": "REPEATED_INFRASTRUCTURE",
+      "networks": [
+        "Helium Mobile"
+      ],
+      "category": "INFRASTRUCTURE",
+      "description": "Observed Helium Mobile observed on 4 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -128,18 +128,6 @@
       ],
       "category": "IDENTITY",
       "description": "Observed Geodnet exactDupGroups on 7 of 7 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Geodnet: repeated flaggedPct observation",
-      "pattern": "REPEATED_IDENTITY",
-      "networks": [
-        "Geodnet"
-      ],
-      "category": "IDENTITY",
-      "description": "Observed Geodnet flaggedPct on 4 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -163,7 +151,7 @@
         "WeatherXM"
       ],
       "category": "CAPACITY",
-      "description": "Observed WeatherXM overCapacityPct on 5 of 7 recorded days.",
+      "description": "Observed WeatherXM overCapacityPct on 4 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -187,7 +175,7 @@
         "Helium Mobile"
       ],
       "category": "IDENTITY",
-      "description": "Observed Helium Mobile flaggedPct on 5 of 7 recorded days.",
+      "description": "Observed Helium Mobile flaggedPct on 4 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -298,6 +286,15 @@
       "feedConfidence": 0.85
     },
     {
+      "network": "Helium IoT",
+      "metric": "largestStack",
+      "value": 502,
+      "delta": 1,
+      "timestamp": "2026-06-16",
+      "severity": "low",
+      "feedConfidence": 0.85
+    },
+    {
       "network": "Helium Mobile",
       "metric": "stackedSpots",
       "value": 529,
@@ -352,21 +349,18 @@
         "flags": []
       },
       {
+        "network": "Helium IoT",
+        "metric": "largestStack",
+        "confidence": 0.646,
+        "flags": []
+      },
+      {
         "network": "Helium Mobile",
         "metric": "stackedSpots",
         "confidence": 0.722,
         "flags": []
       }
     ],
-    "heldBack": [
-      {
-        "network": "Helium IoT",
-        "metric": "largestStack",
-        "confidence": 0.57,
-        "flags": [
-          "unverified"
-        ]
-      }
-    ]
+    "heldBack": []
   }
 }

@@ -1,6 +1,6 @@
 # Daily DePIN Signal Brief
 
-> 2026-06-16 · automated cross-network pipeline · evidence not verdicts
+> 2026-06-17 · automated cross-network pipeline · evidence not verdicts
 
 ## Today's Read
 

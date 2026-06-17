@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-16T18:31:57.579Z",
+  "generatedAt": "2026-06-17T17:54:51.832Z",
   "patterns": [
     {
       "scope": "systemic",
@@ -24,7 +24,7 @@
         "Geodnet"
       ],
       "category": "INFRASTRUCTURE",
-      "description": "Observed Geodnet observed on 6 of 7 recorded days.",
+      "description": "Observed Geodnet observed on 5 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -66,25 +66,25 @@
     {
       "scope": "systemic",
       "classification": "repetition",
-      "headline": "Helium Mobile: repeated observed observation",
-      "pattern": "REPEATED_INFRASTRUCTURE",
-      "networks": [
-        "Helium Mobile"
-      ],
-      "category": "INFRASTRUCTURE",
-      "description": "Observed Helium Mobile observed on 5 of 7 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
       "headline": "Helium IoT: repeated observed observation",
       "pattern": "REPEATED_INFRASTRUCTURE",
       "networks": [
         "Helium IoT"
       ],
       "category": "INFRASTRUCTURE",
-      "description": "Observed Helium IoT observed on 5 of 7 recorded days.",
+      "description": "Observed Helium IoT observed on 6 of 7 recorded days.",
+      "patternType": "cross-network"
+    },
+    {
+      "scope": "systemic",
+      "classification": "repetition",
+      "headline": "Helium Mobile: repeated observed observation",
+      "pattern": "REPEATED_INFRASTRUCTURE",
+      "networks": [
+        "Helium Mobile"
+      ],
+      "category": "INFRASTRUCTURE",
+      "description": "Observed Helium Mobile observed on 4 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -97,18 +97,6 @@
       ],
       "category": "IDENTITY",
       "description": "Observed Geodnet exactDupGroups on 7 of 7 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Geodnet: repeated flaggedPct observation",
-      "pattern": "REPEATED_IDENTITY",
-      "networks": [
-        "Geodnet"
-      ],
-      "category": "IDENTITY",
-      "description": "Observed Geodnet flaggedPct on 4 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -132,7 +120,7 @@
         "WeatherXM"
       ],
       "category": "CAPACITY",
-      "description": "Observed WeatherXM overCapacityPct on 5 of 7 recorded days.",
+      "description": "Observed WeatherXM overCapacityPct on 4 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -156,7 +144,7 @@
         "Helium Mobile"
       ],
       "category": "IDENTITY",
-      "description": "Observed Helium Mobile flaggedPct on 5 of 7 recorded days.",
+      "description": "Observed Helium Mobile flaggedPct on 4 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {

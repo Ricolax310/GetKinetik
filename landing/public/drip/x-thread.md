@@ -1,5 +1,5 @@
 1/1
-DePIN index · Jun 16
+DePIN index · Jun 17
 
 • Geodnet: 10 duplicate coordinate clusters (−1)
 • WeatherXM: 284 capacity exceedances (−1)
