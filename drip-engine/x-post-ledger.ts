@@ -10,6 +10,8 @@ export interface XPostLedger {
   daily?: string;
   weekly?: string;
   monthly?: string;
+  /** Date key of the last @Kinetik_Rick amplification quote-tweet. */
+  rickDaily?: string;
 }
 
 const LEDGER_PATH = path.join(PATHS.publicDrip, "x-post-ledger.json");
@@ -43,4 +45,16 @@ export function recordXPost(cadence: XPostCadence, key: string): void {
 
 export function skipXPostMessage(cadence: XPostCadence, key: string): string {
   return `Skipped X post — ${cadence} already published for ${key} (set DRIP_FORCE_X_POST=true to override)`;
+}
+
+/** True when Rick already amplified this date (and not forced). */
+export function rickAlreadyDone(key: string): boolean {
+  if (process.env.DRIP_FORCE_X_POST === "true") return false;
+  return readLedger().rickDaily === key;
+}
+
+export function recordRick(key: string): void {
+  const ledger = readLedger();
+  ledger.rickDaily = key;
+  writeLedger(ledger);
 }

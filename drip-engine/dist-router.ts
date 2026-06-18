@@ -14,7 +14,8 @@ import { buildXThread, buildXThreadTweets, buildXImageCaption } from "./x-thread
 import { buildDailyEditorial } from "../editorial-engine/daily.ts";
 import { buildWeeklyEditorial } from "../editorial-engine/weekly.ts";
 import { publishXThread } from "./publishers/x-publisher.ts";
-import { xPostAlreadyDone, recordXPost, skipXPostMessage } from "./x-post-ledger.ts";
+import { amplifyAsRick } from "./publishers/rick-amplify.ts";
+import { xPostAlreadyDone, recordXPost, skipXPostMessage, rickAlreadyDone, recordRick } from "./x-post-ledger.ts";
 import { renderDailyCardPng, buildDailyCardSvg } from "./chart-card.ts";
 import { publishSubstackDraft } from "./publishers/substack-publisher.ts";
 import { DAILY_CONFIDENCE_MIN, WEEKLY_CONFIDENCE_MIN, heldBackSignals } from "./signal-confidence.ts";
@@ -240,6 +241,19 @@ export async function executeDistribution(ctx: DistributionContext): Promise<Dis
         });
         publish.x = xResult.message;
         if (xResult.ok) recordXPost("daily", ctx.date);
+
+        // Amplify: @Kinetik_Rick quote-tweets the signal post to drive traffic.
+        const signalTweetId = xResult.tweetIds?.[0];
+        if (xResult.ok && signalTweetId && !rickAlreadyDone(ctx.date)) {
+          const rick = await amplifyAsRick({
+            quoteTweetId: signalTweetId,
+            signals: ctx.signals,
+            patterns: ctx.patterns,
+            dateKey: ctx.date,
+          });
+          publish.rick = rick.message;
+          if (rick.ok) recordRick(ctx.date);
+        }
       }
     }
   } else {

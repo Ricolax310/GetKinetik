@@ -62,6 +62,9 @@ export async function runDaily(): Promise<{
   if (publish.x) {
     (publish.x.includes("Posted") ? console.log : console.warn)(`[drip:x] ${publish.x}`);
   }
+  if (publish.rick) {
+    (publish.rick.includes("quote-tweeted") ? console.log : console.warn)(`[drip:rick] ${publish.rick}`);
+  }
 
   return { published: written, patterns, signals, publish };
 }
