@@ -1,7 +1,16 @@
 {
-  "generatedAt": "2026-06-16T10:36:35.247Z",
+  "generatedAt": "2026-06-18T10:32:08.700Z",
   "source": "https://entities.nft.helium.io/v2/hotspots?subnetwork=mobile",
   "stats": {
+    "generatedAt": "2026-06-18T10:32:08.700Z",
+    "observed": 54705,
+    "unasserted": 1903,
+    "stackedSpots": 530,
+    "largestStack": 497,
+    "flaggedCount": 11259,
+    "flaggedPct": 0.20581299698382233
+  },
+  "prevStats": {
     "generatedAt": "2026-06-16T10:36:35.247Z",
     "observed": 54703,
     "unasserted": 1903,
@@ -10,16 +19,7 @@
     "flaggedCount": 11248,
     "flaggedPct": 0.20561943586274975
   },
-  "prevStats": {
-    "generatedAt": "2026-06-15T11:04:22.024Z",
-    "observed": 54700,
-    "unasserted": 1903,
-    "stackedSpots": 529,
-    "largestStack": 497,
-    "flaggedCount": 11248,
-    "flaggedPct": 0.2056307129798903
-  },
-  "hotspotsTotal": 56606,
+  "hotspotsTotal": 56608,
   "topStacks": [
     {
       "coord": "-0.001809,-0.00271",
@@ -165,6 +165,17 @@
       ]
     },
     {
+      "coord": "19.91435,-103.018342",
+      "count": 68,
+      "sampleKeys": [
+        "1trSuseYfcvYmJpP5uXEqSzF6PTus1brpzJ8BJ3Xq1FqVVPs6M6CFANQZtaz96TEK5DTF6zJwcM6D1hLvWm9CvTfeAZsumdyWy7tX59KXxioCr3MQEGwDwpa9aSdke6kSJrC2MNQyauwPUuJtxtFhrRFpQuJHhPHeXuavfqrVwyMySNWr8X47o7SFb6uzzYmbkTSobPj4iFU5XjafAvBsZzYMkAxcDSpkXwXJwWV3w1e2ZhAtdqRjfsbZPt1BoVyjzihYQwYJH3Z9jjdQ2SJL4gdusEfii94TwZ6KVe291iHBpeTCdw24PyKDf6aRMgpvoWR9r77w5oCdy9te5KTGNzmY2uE5VC9oeLoWoGnrn4zth",
+        "1trSuseWDM4W1qxdDw1H8FSMGTR6rdZKBLvYeNNFt7A7d5UTFAo5qBSSwTDumfvr8ZgAPgtFsdnfifQ4mtCLPfyYCTSVS1S9YdbnADL74CqgcVcuJaZB2o6BroRrWa5R1aqh8HWenu9nG4JxCE2pjub2hDPcaNtaa1sKGjLFxjH9Wg9CWi4SvLESPgfdmQsrdxPyqFaxPRcXa257uo9kUqeGGhVwCnA2CkGC4NcSrTXU6zs3kG4yKr93V2vvATbS9ExWvANwEQPMgu6qzGBFeznVqmdQ8E3ZLWwWGpwmoojStYAhNsKu6JHqJfnzvij28x9JecWboPmPikHRhUDxF2xsLDFcHizqi3gZSYxj5G1mM2",
+        "1trSuseZU7rZUg2nh7Bec51Bchrb8y9DypE5S3kkXVLBHH4ZFmic6iRSQcqxjFtRB8JxUGzFaF3FC7wQiMqqiZpsjpBrofWZk9udYt15ZF1bWZ7BKtYh3eUnAde6LADHqtCquYXFKtaxwmwCwwQ9VMNtpKBc1Z1upq1Q9PdFhz1oQqoDaAgiq4ZxTPz6a4EzSBrQDuLbjTdYzhNKpbFR8nxyH92VxfvAg3d6oVivDFFr2YYd99E3Nz25XiUE9VusMoLSWp9dd8SpvDnXTnr47q32DDDD6QkhKTG4viBAYPagbSxdjNYAqHZuvfp1eAjzd41ocxNStkMkRJV2XXXAQPnFKKwXa5Ax9fsyXJ4P3cjRCP",
+        "1trSusecE4vMxNq865ugky1wzBA4YS9h1pG35YD3rxsn6xW9B6WUqNp2FT5f6vG4oUKNR4gdfEFKqmKpp1wujpQYyfY7QpqEiX3vViPJHtX1EuApnPMeK2Xzr2EewataKmDbMmNimc4KC5wW59kT1vYQv5CaBnhskxA6VMVEzHJuPeYvcPn4UhdnjKuCKxyzQa2VbS4q2uH5zcbr6ZcGLNC1dHUEqjc29MHnjSLnp3zuppNan96Hit15jVqq4TLmj18E8F765qe62tomAAas7rzo1uie18wNpBmqiEShoimMvmaujbLsXSdb91Mr3nBeNDotCfaBSWYU5tvMdEtZE4SXAK6HvN6M2SG2vkuCBCVkxM",
+        "1trSuserERMoGdY6vacob895kNKnW1Ss4HX84y2RFKSPkmvRLLjpjih2pFvS45eHF3fPim4agP9S1vwVPj5e9PQuJzij1k4fnNPr2M5AdmZwquWhM2YNJrurpiTSB89Bi83tYqifnGJ54UQN5gb86gP3tfb3bky9GH1bZpG1snUDcdXbGbjirV8exoqEbSm5e9URsKkajnuzVRpxzyRP7LCufqH6EHdASVT4riiMvHX1L3x2MLfiazQfwHCRjRxhHdd1syYg2nYXPCFBHzDZonRK889YkZ86pG5E76CwMzPcqbj2DMHPro8Zc6MMz94KZhkGGPxV36X3eRdGmgEeC21c4UsHyT8DSyGmJmBSg9gJvE"
+      ]
+    },
+    {
       "coord": "40.749808,-73.990004",
       "count": 67,
       "sampleKeys": [
@@ -173,17 +184,6 @@
         "1trSusfCbB44rr3eHyryH8TaRJZ6htxxksxmWuJpcYEtvzNhG2gFoip26HyA1W67YjdnTWgrKziyK8w7WdLEww1Xo9TGHuDX9P2qPjgL4UqhxTu3DDmCiiodCRVuXd5fgPntJfLEvUFbMzCQwZ3z2sPZWcTdpqPwkny9DcUR56LTzJ1dYLngsT5hHQcXs4yvWgyfyT37MMV2xUgE7PoQKDE114G6UdGroXcTT3KdtH4bJksgQ17eEWNKvCF5zebmZFUeoYKt71Pz16ZSz9iSPpZGE6PnAzsdvKNV8oe4ako2BMHsizM5fFY5idZHDLc9ZRzbhJBgefmEDwXjp3StEYbrHHJEexTuaj634ruhDnV2Pt",
         "1trSusf2bwMibrftbwBTJMyM7ZP8vUdq5C2p7DBmdvn43C5NnkE3BQ38cjjcYsXAPQVamA8ZFLHXKxMqnRKtLH7Ybx95X8XroafXz7KvSJmiaq5An1AZpAq29khu8qeLkHGiu2LpxFG1y9WUbv9o27SheZ7HWSpfRo9LhejSDGbLYSdn7G3fzpQyeAXpheF8k4CngswkcznRr27rzZPQKecUvpApVSzuc7yDz96P3ubbivXuNJWgBe3z9gPE6kENqD5BR4V2fJButvxiqV3sa6HpS5gBHfbDF7BtbHMQC1uqtnn8ojh1NzVvCV1bKgtLBssYbbLc47UN7s8meqd276jAC8SFVEYXceucSfYMtBKxWg",
         "1trSusenM47nMhp5uReUuAsaTUnkLHJKfczRZcrAqw9XoWgFjJ6PWe8Sh8gpj6FPvuuYaRVNDys9pL64Fq2ypCMWEBWAna2AvMCaiZwJYQpUYQGWENsKfwG7BF6aDLweKugsYi3Q31Y5y1fCiAykM7u9DUKeKaj8muiVKwAYgZFmzEfkRtLqHb1M9oGiJj1sq5wjSZ1acNWbUzVPEGAhyQtLoX6LV4CZKo8CebrBAhizNdBJ1ixGNybtT6WBL6hzkDs75gguRnmvtEx8ht7L33uenibwrhopVJX44cTspmsJhbdTLdXSVduk4UwqMUTBomswX1sYiASDxAvGnJQHzhwG4HxC3uXe73AGtLftkK7dfM"
-      ]
-    },
-    {
-      "coord": "19.91435,-103.018342",
-      "count": 67,
-      "sampleKeys": [
-        "1trSuseYfcvYmJpP5uXEqSzF6PTus1brpzJ8BJ3Xq1FqVVPs6M6CFANQZtaz96TEK5DTF6zJwcM6D1hLvWm9CvTfeAZsumdyWy7tX59KXxioCr3MQEGwDwpa9aSdke6kSJrC2MNQyauwPUuJtxtFhrRFpQuJHhPHeXuavfqrVwyMySNWr8X47o7SFb6uzzYmbkTSobPj4iFU5XjafAvBsZzYMkAxcDSpkXwXJwWV3w1e2ZhAtdqRjfsbZPt1BoVyjzihYQwYJH3Z9jjdQ2SJL4gdusEfii94TwZ6KVe291iHBpeTCdw24PyKDf6aRMgpvoWR9r77w5oCdy9te5KTGNzmY2uE5VC9oeLoWoGnrn4zth",
-        "1trSuseWDM4W1qxdDw1H8FSMGTR6rdZKBLvYeNNFt7A7d5UTFAo5qBSSwTDumfvr8ZgAPgtFsdnfifQ4mtCLPfyYCTSVS1S9YdbnADL74CqgcVcuJaZB2o6BroRrWa5R1aqh8HWenu9nG4JxCE2pjub2hDPcaNtaa1sKGjLFxjH9Wg9CWi4SvLESPgfdmQsrdxPyqFaxPRcXa257uo9kUqeGGhVwCnA2CkGC4NcSrTXU6zs3kG4yKr93V2vvATbS9ExWvANwEQPMgu6qzGBFeznVqmdQ8E3ZLWwWGpwmoojStYAhNsKu6JHqJfnzvij28x9JecWboPmPikHRhUDxF2xsLDFcHizqi3gZSYxj5G1mM2",
-        "1trSuseZU7rZUg2nh7Bec51Bchrb8y9DypE5S3kkXVLBHH4ZFmic6iRSQcqxjFtRB8JxUGzFaF3FC7wQiMqqiZpsjpBrofWZk9udYt15ZF1bWZ7BKtYh3eUnAde6LADHqtCquYXFKtaxwmwCwwQ9VMNtpKBc1Z1upq1Q9PdFhz1oQqoDaAgiq4ZxTPz6a4EzSBrQDuLbjTdYzhNKpbFR8nxyH92VxfvAg3d6oVivDFFr2YYd99E3Nz25XiUE9VusMoLSWp9dd8SpvDnXTnr47q32DDDD6QkhKTG4viBAYPagbSxdjNYAqHZuvfp1eAjzd41ocxNStkMkRJV2XXXAQPnFKKwXa5Ax9fsyXJ4P3cjRCP",
-        "1trSusecE4vMxNq865ugky1wzBA4YS9h1pG35YD3rxsn6xW9B6WUqNp2FT5f6vG4oUKNR4gdfEFKqmKpp1wujpQYyfY7QpqEiX3vViPJHtX1EuApnPMeK2Xzr2EewataKmDbMmNimc4KC5wW59kT1vYQv5CaBnhskxA6VMVEzHJuPeYvcPn4UhdnjKuCKxyzQa2VbS4q2uH5zcbr6ZcGLNC1dHUEqjc29MHnjSLnp3zuppNan96Hit15jVqq4TLmj18E8F765qe62tomAAas7rzo1uie18wNpBmqiEShoimMvmaujbLsXSdb91Mr3nBeNDotCfaBSWYU5tvMdEtZE4SXAK6HvN6M2SG2vkuCBCVkxM",
-        "1trSuserERMoGdY6vacob895kNKnW1Ss4HX84y2RFKSPkmvRLLjpjih2pFvS45eHF3fPim4agP9S1vwVPj5e9PQuJzij1k4fnNPr2M5AdmZwquWhM2YNJrurpiTSB89Bi83tYqifnGJ54UQN5gb86gP3tfb3bky9GH1bZpG1snUDcdXbGbjirV8exoqEbSm5e9URsKkajnuzVRpxzyRP7LCufqH6EHdASVT4riiMvHX1L3x2MLfiazQfwHCRjRxhHdd1syYg2nYXPCFBHzDZonRK889YkZ86pG5E76CwMzPcqbj2DMHPro8Zc6MMz94KZhkGGPxV36X3eRdGmgEeC21c4UsHyT8DSyGmJmBSg9gJvE"
       ]
     },
     {
