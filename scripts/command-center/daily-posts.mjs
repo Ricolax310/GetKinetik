@@ -18,7 +18,7 @@ import { REPO_ROOT } from "./config.mjs";
 const AUDIT_INDEX = path.join(REPO_ROOT, "scripts/data/bureau-audit-index.json");
 const TWEET_LIMIT = 280;
 
-function loadNetworks() {
+export function loadNetworks() {
   if (!fs.existsSync(AUDIT_INDEX)) return [];
   try {
     return JSON.parse(fs.readFileSync(AUDIT_INDEX, "utf8")).networks || [];
@@ -55,7 +55,7 @@ function fit(text) {
  * Per-network "hero fact" — the most interesting, plain-language number we can
  * stand behind today. Returns null for networks with nothing post-worthy.
  */
-function heroFact(net) {
+export function heroFact(net) {
   const s = net.stats || {};
   switch (net.id) {
     case "helium-iot":

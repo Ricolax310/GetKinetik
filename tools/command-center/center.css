@@ -289,6 +289,42 @@ h3.sub {
   background: rgba(144, 202, 249, 0.12);
 }
 
+.task-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--steel);
+  cursor: pointer;
+  user-select: none;
+}
+
+.task-check input {
+  accent-color: var(--accent-soft);
+  cursor: pointer;
+}
+
+.task-done {
+  opacity: 0.45;
+}
+
+.task-done .react-text,
+.task-done .seed-post,
+.task-done > div:first-child {
+  text-decoration: line-through;
+}
+
+.task-done .task-check {
+  color: #66bb6a;
+}
+
+.seed-post {
+  margin-top: 6px;
+  color: var(--silver);
+  font-size: 13px;
+}
+
 @media (max-width: 860px) {
   .grid {
     grid-template-columns: 1fr;

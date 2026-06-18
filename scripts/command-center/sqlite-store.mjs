@@ -69,6 +69,15 @@ export function openAgentStore() {
       business_guardrail INTEGER NOT NULL DEFAULT 1,
       payload_json TEXT
     );
+
+    -- Persistent "done" state for daily action items. Keyed by content so a
+    -- completed task stays checked across days until its underlying signal
+    -- materially changes (new key) and it legitimately re-surfaces.
+    CREATE TABLE IF NOT EXISTS task_completions (
+      task_key TEXT PRIMARY KEY,
+      label TEXT,
+      done_at TEXT NOT NULL
+    );
   `);
 
   const statements = {
@@ -110,6 +119,16 @@ export function openAgentStore() {
       (captured_at, open_issues, pending_tasks, deployment_status, ci_status, doc_gaps, business_guardrail, payload_json)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     `),
+    markTaskDone: db.prepare(`
+      INSERT INTO task_completions (task_key, label, done_at)
+      VALUES (?, ?, ?)
+      ON CONFLICT(task_key) DO UPDATE SET
+        label = excluded.label,
+        done_at = excluded.done_at
+    `),
+    clearTask: db.prepare("DELETE FROM task_completions WHERE task_key = ?"),
+    listTasks: db.prepare("SELECT task_key, label, done_at FROM task_completions"),
+    pruneTasks: db.prepare("DELETE FROM task_completions WHERE done_at < ?"),
   };
 
   return {
@@ -199,6 +218,30 @@ export function openAgentStore() {
         db.exec("ROLLBACK");
         throw e;
       }
+    },
+
+    setTaskDone(taskKey, done, label = null) {
+      if (!taskKey) return;
+      if (done) {
+        statements.markTaskDone.run(String(taskKey), label, nowIso());
+      } else {
+        statements.clearTask.run(String(taskKey));
+      }
+    },
+
+    /** Map of { [taskKey]: { doneAt, label } } for every completed item. */
+    getDoneTasks() {
+      const out = {};
+      for (const row of statements.listTasks.all()) {
+        out[row.task_key] = { doneAt: row.done_at, label: row.label };
+      }
+      return out;
+    },
+
+    /** Drop completions older than `days` so genuinely stale ticks don't linger. */
+    pruneDoneTasks(days = 45) {
+      const cutoff = new Date(Date.now() - days * 86_400_000).toISOString();
+      statements.pruneTasks.run(cutoff);
     },
 
     recordProjectHealth(health) {

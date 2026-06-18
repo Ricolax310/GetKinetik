@@ -11,6 +11,7 @@ import { buildReplyBrief, writeReplyBriefMarkdown } from "./reply-brief.mjs";
 import { buildReadingFeed } from "./reading-feed.mjs";
 import { buildReactFeed } from "./react-feed.mjs";
 import { publishSignalReports } from "./signal-publication.mjs";
+import { buildDailyPostsSmart } from "./ai-posts.mjs";
 
 function weekdayUtc(iso) {
   return new Date(`${iso}T12:00:00Z`).toLocaleDateString("en-US", {
@@ -27,6 +28,16 @@ export async function buildCommandCenter(options = {}) {
     const today = todayUtc();
     const weekday = weekdayUtc(today);
     const replyBrief = buildReplyBrief(today);
+
+    // Upgrade daily posts + the data thread from canned templates to AI-generated
+    // content grounded in today's real numbers (cached per day; template fallback).
+    const smartPosts = await buildDailyPostsSmart(today, { force: options.forcePosts === true });
+    replyBrief.dailyPosts = smartPosts;
+    if (smartPosts.thread?.length && replyBrief.growthKit) {
+      replyBrief.growthKit.thread = smartPosts.thread;
+      replyBrief.growthKit.leadNetwork = smartPosts.leadNetwork || replyBrief.growthKit.leadNetwork;
+    }
+
     const readingFeed = await buildReadingFeed({
       fetchRss: options.fetchRss ?? false,
     });

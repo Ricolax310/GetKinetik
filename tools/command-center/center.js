@@ -7,6 +7,74 @@ function esc(s) {
     .replace(/>/g, "&gt;");
 }
 
+/** Completion state, keyed by content hash so ticks persist across days. */
+let DONE = {};
+
+/** Stable djb2 hash of content → short hex. Same text ⇒ same key ⇒ stays ticked. */
+function hashKey(prefix, text) {
+  const s = String(text || "");
+  let h = 5381;
+  for (let i = 0; i < s.length; i += 1) {
+    h = ((h << 5) + h + s.charCodeAt(i)) >>> 0;
+  }
+  return `${prefix}:${h.toString(16)}`;
+}
+
+async function loadTaskState() {
+  try {
+    const res = await fetch("/data/task-state.json", { cache: "no-store" });
+    if (res.ok) {
+      const body = await res.json();
+      DONE = body.done || {};
+    }
+  } catch {
+    DONE = {};
+  }
+}
+
+async function toggleTask(key, label, done) {
+  if (done) DONE[key] = { doneAt: new Date().toISOString(), label };
+  else delete DONE[key];
+  try {
+    await fetch("/api/task", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ key, label, done }),
+    });
+  } catch {
+    /* keep optimistic local state; will reconcile on next load */
+  }
+}
+
+/**
+ * Add a "done" checkbox to an action element. When checked, the item dims and
+ * is marked complete in the local store so it won't nag again tomorrow (until
+ * its content changes, which yields a new key).
+ */
+function attachCheck(el, key, label) {
+  const isDone = Boolean(DONE[key]);
+  el.classList.toggle("task-done", isDone);
+
+  const row = document.createElement("label");
+  row.className = "task-check";
+  const box = document.createElement("input");
+  box.type = "checkbox";
+  box.checked = isDone;
+  const txt = document.createElement("span");
+  txt.textContent = isDone ? "Done" : "Mark done";
+
+  box.addEventListener("change", () => {
+    const done = box.checked;
+    el.classList.toggle("task-done", done);
+    txt.textContent = done ? "Done" : "Mark done";
+    toggleTask(key, label, done);
+  });
+
+  row.appendChild(box);
+  row.appendChild(txt);
+  el.appendChild(row);
+}
+
 function renderMarkdownish(md) {
   return esc(md || "_No briefing yet._").replace(
     /^## (.+)$/gm,
@@ -29,6 +97,26 @@ function renderList(el, items, emptyText) {
       const meta = [item.status, item.anomalyType].filter(Boolean).join(" · ");
       li.innerHTML = `<div>${esc(title)}</div>${meta ? `<div class="muted">${esc(meta)}</div>` : ""}`;
     }
+    el.appendChild(li);
+  }
+}
+
+function renderSeeds(el, seeds) {
+  el.innerHTML = "";
+  if (!seeds?.length) {
+    el.innerHTML = '<li class="muted">No thread seeds.</li>';
+    return;
+  }
+  for (const s of seeds) {
+    const li = document.createElement("li");
+    const key = hashKey("seed", `${s.networkId || s.target}:${s.suggestedPost || s.observation || ""}`);
+    const meta = [s.observation, s.whyItMatters].filter(Boolean).join(" · ");
+    li.innerHTML =
+      `<div>${esc(s.target || "—")}</div>` +
+      (meta ? `<div class="muted">${esc(meta)}</div>` : "") +
+      (s.suggestedPost ? `<div class="seed-post">${esc(s.suggestedPost)}</div>` : "");
+    if (s.suggestedPost) li.appendChild(copyButton(s.suggestedPost));
+    attachCheck(li, key, s.target || "Thread seed");
     el.appendChild(li);
   }
 }
@@ -77,7 +165,7 @@ function copyButton(text) {
   return btn;
 }
 
-function postCard({ heading, meta, link, quote, body }) {
+function postCard({ heading, meta, link, quote, body, taskKey, taskLabel }) {
   const card = document.createElement("div");
   card.className = "react-card";
 
@@ -118,6 +206,7 @@ function postCard({ heading, meta, link, quote, body }) {
     wrap.appendChild(copyButton(body));
     card.appendChild(wrap);
   }
+  if (taskKey) attachCheck(card, taskKey, taskLabel || heading || "");
   return card;
 }
 
@@ -129,7 +218,13 @@ function renderGrowthKit(kit) {
     return;
   }
   const add = (label, text, sub) => {
-    const card = postCard({ heading: label, meta: sub, body: text });
+    const card = postCard({
+      heading: label,
+      meta: sub,
+      body: text,
+      taskKey: text ? hashKey("growth", text) : null,
+      taskLabel: label,
+    });
     el.appendChild(card);
   };
   if (kit.bio) add("Bio (set once)", kit.bio);
@@ -178,6 +273,8 @@ function renderReactFeed(react) {
           link: t.url,
           quote: t.text,
           body: t.reply,
+          taskKey: t.url ? hashKey("reply", t.url) : hashKey("reply", t.text),
+          taskLabel: `Reply to @${t.author || "?"}`,
         }),
       );
     }
@@ -193,6 +290,8 @@ function renderReactFeed(react) {
           meta: `${r.source || ""}${r.published ? ` · ${r.published}` : ""}${r.angle ? ` · ${r.angle}` : ""}`,
           link: r.url,
           body: r.tweet,
+          taskKey: hashKey("news", r.url || r.headline),
+          taskLabel: r.headline,
         }),
       );
     }
@@ -236,11 +335,7 @@ function applyPayload(data) {
     data.replyBrief?.liveThreads?.threads,
     "No live threads.",
   );
-  renderList(
-    $("thread-seeds"),
-    data.replyBrief?.threadSeeds?.seeds,
-    "No thread seeds.",
-  );
+  renderSeeds($("thread-seeds"), data.replyBrief?.threadSeeds?.seeds);
 
   renderReactFeed(data.reactFeed);
   renderGrowthKit(data.replyBrief?.growthKit);
@@ -287,7 +382,8 @@ async function rebuild({ fetchRss }) {
     });
     const body = await res.json();
     if (!res.ok) throw new Error(body.error || "Refresh failed");
-    applyPayload(await loadData());
+    const [data] = await Promise.all([loadData(), loadTaskState()]);
+    applyPayload(data);
     status.hidden = true;
   } catch (e) {
     errBox.hidden = false;
@@ -318,7 +414,7 @@ async function boot() {
   status.hidden = false;
   status.textContent = "Loading…";
   try {
-    let data = await loadData();
+    const [data] = await Promise.all([loadData(), loadTaskState()]);
     if (data.today !== todayKey()) {
       status.textContent = "Refreshing today's brief…";
       await refreshBrief();

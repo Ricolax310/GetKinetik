@@ -1,0 +1,34 @@
+{
+  "2026-06-18": {
+    "leadNetwork": "Helium IoT",
+    "posts": [
+      {
+        "goal": "Followers — broad hook",
+        "audience": "DePIN-curious general",
+        "text": "4,857 Helium IoT map coordinates each host 10+ hotspots. Fleet≈1,008,034. Not a verdict—just a stack pattern worth a look. High-density points can be batch onboards, shared rooftops, or coordinate reuse. Checkable on the public map."
+      },
+      {
+        "goal": "Authority — explainer",
+        "audience": "builders/operators",
+        "text": "501 Helium IoT hotspots resolve to the exact same GPS point. This can come from default coords, templated installers, or indoor units using a site pin. Registry hygiene: flag per-coordinate counts and prompt updates on repeated exact matches."
+      },
+      {
+        "goal": "Reach — community question",
+        "audience": "DePIN community",
+        "text": "Operators: how do you cap per-coordinate density without blocking legit shared sites? IoT shows 4,857 coords with 10+ hotspots; Mobile shows 529 coords with 10+. What heuristics (distance buckets, per-site attestations) work in practice?"
+      },
+      {
+        "goal": "Partners — network tag",
+        "audience": "Helium IoT team",
+        "text": "Helium IoT team: any published policy on duplicate coordinates and per-site limits? Today’s read: 501 hotspots at one point; 4,857 coords hosting 10+. A brief note on expected behaviors and remediation would help downstream integrators."
+      }
+    ],
+    "thread": [
+      "501 Helium IoT hotspots sit on the exact same GPS coordinate. Another 4,857 coordinates each host 10+ hotspots. Fleet≈1,008,034. Pattern worth a look, not a verdict.",
+      "What it’s NOT: not price talk, not proof of abuse, not custody claims. Dense points can come from shared roofs, warehoused installs, or reused default pins.",
+      "What’s worth a look: per-coordinate caps, installer UX that prevents default coords, and map deduping. Helium Mobile shows a similar shape: 497 on one point; 529 coords with 10+.",
+      "Reproducible: pull the public hotspot list, group by exact lat/lon string. Count per coordinate. You’ll see 501 at one point on IoT and 4,857 coords with 10+. Same method on Mobile yields 497 and 529.",
+      "Daily integrity reads. Neutral, checkable. getkinetik.app"
+    ]
+  }
+}

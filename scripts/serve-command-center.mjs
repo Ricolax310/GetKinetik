@@ -68,6 +68,36 @@ async function ensureFresh() {
   await buildCommandCenter({ fetchRss: process.env.COMMAND_CENTER_FETCH_RSS_AUTO === "1" });
 }
 
+function handleTaskState(res) {
+  const store = openAgentStore();
+  try {
+    send(res, 200, JSON.stringify({ done: store.getDoneTasks() }), MIME[".json"]);
+  } finally {
+    store.close();
+  }
+}
+
+async function handleTaskToggle(req, res) {
+  let body;
+  try {
+    body = await readJsonBody(req);
+  } catch (e) {
+    return send(res, 400, JSON.stringify({ error: e.message }), MIME[".json"]);
+  }
+  if (!body?.key || typeof body.key !== "string") {
+    return send(res, 400, JSON.stringify({ error: "Missing task key" }), MIME[".json"]);
+  }
+  const store = openAgentStore();
+  try {
+    store.setTaskDone(body.key, body.done === true, body.label ? String(body.label).slice(0, 200) : null);
+    send(res, 200, JSON.stringify({ ok: true, key: body.key, done: body.done === true }), MIME[".json"]);
+  } catch (e) {
+    send(res, 500, JSON.stringify({ error: String(e?.message || e) }), MIME[".json"]);
+  } finally {
+    store.close();
+  }
+}
+
 async function handleRefresh(req, res) {
   let body = {};
   try {
@@ -121,6 +151,12 @@ function serveStatic(req, res) {
 const server = http.createServer((req, res) => {
   if (req.method === "POST" && req.url?.startsWith("/api/refresh")) {
     return handleRefresh(req, res);
+  }
+  if (req.method === "POST" && req.url?.startsWith("/api/task")) {
+    return handleTaskToggle(req, res);
+  }
+  if (req.method === "GET" && req.url?.split("?")[0] === "/data/task-state.json") {
+    return handleTaskState(res);
   }
   if (req.method === "GET" || req.method === "HEAD") {
     return serveStatic(req, res);
