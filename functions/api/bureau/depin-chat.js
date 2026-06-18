@@ -14,6 +14,7 @@ import {
   chatCompletions,
   defaultDepinChatModel,
 } from "../_lib/openaiChat.js";
+import { embedTexts, rankChunks, rerank } from "../_lib/hfEmbed.js";
 
 const MAX_MESSAGES = 16;
 const MAX_USER_CHARS = 2000;
@@ -24,7 +25,9 @@ const MAX_OUTPUT_TOKENS = 1500;
  *  Context fetch is bounded separately, so 20s here keeps worst-case total safe. */
 const OPENAI_TIMEOUT_MS = 20_000;
 const MAX_CONTEXT_CHARS = 6_000;
-const BUILD_MARKER = "chat-resilience-9";
+const RETRIEVAL_TOP_K = 8;
+const EMBED_TIMEOUT_MS = 6_000;
+const BUILD_MARKER = "chat-retrieval-1";
 
 function json(body, status = 200) {
   return new Response(JSON.stringify(body), {
@@ -75,6 +78,53 @@ async function loadContextPack(env, request) {
   });
   if (!res.ok) throw new Error(`context ${res.status}`);
   return res.json();
+}
+
+/**
+ * Embedding-based retrieval: pick the chunks most relevant to the user's question
+ * instead of sending one truncated blob. Requires the pack to carry precomputed
+ * chunk embeddings (pack.retrieval) AND an HF token in the env. Returns the
+ * focused context string, or null to signal "fall back to plain context".
+ */
+async function retrieveContext(pack, query, env) {
+  const index = pack?.retrieval;
+  const token = env?.HF_TOKEN?.trim();
+  if (!token || !index?.chunks?.length || !index.model || !query) return null;
+
+  try {
+    const [queryVec] = await embedTexts({
+      texts: query,
+      token,
+      model: index.model,
+      timeoutMs: EMBED_TIMEOUT_MS,
+    });
+    if (!queryVec?.length) return null;
+
+    const top = rankChunks(queryVec, index.chunks, RETRIEVAL_TOP_K);
+
+    // Optional cross-encoder rerank — only when a rerank model is configured.
+    // Fully fault-tolerant: returns the embedding order on any issue.
+    const rerankModel = env?.BUREAU_RERANK_MODEL?.trim();
+    let passages = top.map((t) => t.text);
+    if (rerankModel) {
+      passages = await rerank({
+        query,
+        passages,
+        token,
+        model: rerankModel,
+        timeoutMs: EMBED_TIMEOUT_MS,
+      });
+    }
+
+    let out = "";
+    for (const text of passages) {
+      if (out.length + text.length + 2 > MAX_CONTEXT_CHARS) break;
+      out += (out ? "\n\n" : "") + text;
+    }
+    return out || null;
+  } catch {
+    return null; // any failure → caller uses the plain truncated context
+  }
 }
 
 export async function onRequestPost(ctx) {
@@ -143,11 +193,21 @@ export async function onRequestPost(ctx) {
       const pack = await loadContextPack(env, request);
       const rawContext =
         typeof pack.context === "string" ? pack.context : "";
-      context =
-        rawContext.length > MAX_CONTEXT_CHARS
-          ? `${rawContext.slice(0, MAX_CONTEXT_CHARS)}\n\n[context truncated for chat]`
-          : rawContext || context;
+      const query = messages[messages.length - 1]?.content || "";
+
+      // Prefer focused, embedding-retrieved context; fall back to truncation.
+      const retrieved = await retrieveContext(pack, query, env);
+      if (retrieved) {
+        context = retrieved;
+      } else {
+        context =
+          rawContext.length > MAX_CONTEXT_CHARS
+            ? `${rawContext.slice(0, MAX_CONTEXT_CHARS)}\n\n[context truncated for chat]`
+            : rawContext || context;
+      }
+
       meta = `Pack generated: ${pack.generatedAt || pack.updatedAt || "unknown"}. `;
+      if (retrieved) meta += "Context retrieved by relevance. ";
       if (pack.news?.liveHeadlines?.length) {
         meta += `${pack.news.liveHeadlines.length} live headlines + `;
       }

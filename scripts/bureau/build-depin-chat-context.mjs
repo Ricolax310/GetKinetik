@@ -4,6 +4,12 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { loadAllFeedItems, scoreItem } from "./news-rss.mjs";
+import { loadEnvQuiet } from "./lib.mjs";
+import {
+  chunkText,
+  embedTexts,
+  DEFAULT_EMBED_MODEL,
+} from "../../functions/api/_lib/hfEmbed.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -191,8 +197,10 @@ export async function buildDepinChatContext(options = {}) {
     .filter(Boolean)
     .join("\n");
 
+  const retrieval = await buildRetrievalIndex(context, options);
+
   return {
-    version: 2,
+    version: retrieval ? 3 : 2,
     updatedAt: now.slice(0, 10),
     generatedAt: now,
     auditIndexUpdated: auditUpdated,
@@ -208,7 +216,46 @@ export async function buildDepinChatContext(options = {}) {
       liveHeadlines,
     },
     context,
+    ...(retrieval ? { retrieval } : {}),
   };
+}
+
+/**
+ * Pre-compute embeddings for the context, chunk by chunk, so the chat function
+ * can retrieve only the relevant slices at query time instead of truncating.
+ *
+ * Only runs when an HF token is available (build machine / CI). When absent the
+ * pack ships without embeddings and the chat function falls back to plain context.
+ */
+async function buildRetrievalIndex(context, options = {}) {
+  if (options.embed === false) return null;
+  loadEnvQuiet();
+  const token = process.env.HF_TOKEN?.trim();
+  if (!token) {
+    console.error("[depin-context] no HF_TOKEN — skipping embeddings (chat falls back to plain context)");
+    return null;
+  }
+
+  const model = process.env.BUREAU_EMBED_MODEL?.trim() || DEFAULT_EMBED_MODEL;
+  const chunks = chunkText(context);
+  if (!chunks.length) return null;
+
+  try {
+    console.error(`[depin-context] embedding ${chunks.length} chunks via ${model}…`);
+    const vectors = await embedTexts({ texts: chunks, token, model, timeoutMs: 60_000 });
+    if (vectors.length !== chunks.length) {
+      throw new Error(`embedding count mismatch (${vectors.length} != ${chunks.length})`);
+    }
+    return {
+      model,
+      dims: vectors[0]?.length || 0,
+      builtAt: new Date().toISOString(),
+      chunks: chunks.map((text, i) => ({ text, embedding: vectors[i] })),
+    };
+  } catch (e) {
+    console.error(`[depin-context] embedding failed (${e.message}) — shipping without retrieval`);
+    return null;
+  }
 }
 
 export async function writeDepinChatContext(options = {}) {
