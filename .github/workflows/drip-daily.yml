@@ -5,6 +5,11 @@ on:
   schedule:
     - cron: "0 17 * * *" # 09:00 America/Los_Angeles (PST, UTC-8); 08:00 during PDT
   workflow_dispatch:
+    inputs:
+      force:
+        description: "Force re-post even if already posted today (use after deleting the old post)"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -44,6 +49,8 @@ jobs:
           RICK_X_API_SECRET: ${{ secrets.RICK_X_API_SECRET }}
           RICK_X_ACCESS_TOKEN: ${{ secrets.RICK_X_ACCESS_TOKEN }}
           RICK_X_ACCESS_SECRET: ${{ secrets.RICK_X_ACCESS_SECRET }}
+          # Manual force (workflow_dispatch) — re-post even if already posted today.
+          DRIP_FORCE_X_POST: ${{ inputs.force }}
         run: node drip-engine/run.ts daily
 
       - name: Commit drip outputs
