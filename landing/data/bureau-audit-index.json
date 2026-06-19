@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-18",
+  "updatedAt": "2026-06-19",
   "networks": [
     {
       "id": "geodnet",
@@ -17,13 +17,13 @@
         "flaggedCount": 1816,
         "flaggedPct": 0.09258692770470073
       },
-      "topFinding": "**9 exact (lat,lng) duplicate groups** on 19,614 public stations — each row in §1 is one coordinate pair your registry team can grep today.",
+      "topFinding": "**8 exact (lat,lng) duplicate groups** on 19,604 public stations — each row in §1 is one coordinate pair your registry team can grep today.",
       "anomalyType": "duplication_cluster",
-      "assetClass": "spatial_distribution",
-      "verificationEligible": true,
-      "route": "verify-device",
-      "reason": null,
-      "verificationCall": "Sample station IDs that share an exact coordinate pair in §1 and run POST /api/verify-device on each operator's Proof of Origin to confirm whether they resolve to distinct, real device identities.",
+      "assetClass": "none",
+      "verificationEligible": false,
+      "route": "monitor",
+      "reason": "No taxonomy rule found for anomalyType 'duplication_cluster', defaulting to monitor.",
+      "verificationCall": null,
       "clarificationRequest": null
     },
     {
@@ -46,11 +46,11 @@
       },
       "topFinding": "**286 cells** exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.",
       "anomalyType": "capacity_violation",
-      "assetClass": "device_identity",
-      "verificationEligible": true,
-      "route": "verify-device",
-      "reason": null,
-      "verificationCall": "For operators in the over-capacity H3 cells in §1, run POST /api/verify-device to attest active, signed device presence over time and compare against the public cell tally.",
+      "assetClass": "none",
+      "verificationEligible": false,
+      "route": "monitor",
+      "reason": "No taxonomy rule found for anomalyType 'capacity_violation', defaulting to monitor.",
+      "verificationCall": null,
       "clarificationRequest": null
     },
     {
@@ -67,12 +67,12 @@
         "largestAccountsReturned": 20,
         "partASkipped": false
       },
-      "topFinding": "**49.17% of UI-reported HONEY** sits in the **top 20 visible SPL accounts** (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.",
+      "topFinding": "**49.20% of UI-reported HONEY** sits in the **top 20 visible SPL accounts** (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.",
       "anomalyType": "economic_concentration",
-      "assetClass": "economic_layer",
+      "assetClass": "none",
       "verificationEligible": false,
       "route": "monitor",
-      "reason": "On-chain holder/economic shape — NOT a device-level claim. verify-device cannot link holders to operators; monitor only.",
+      "reason": "No taxonomy rule found for anomalyType 'economic_concentration', defaulting to monitor.",
       "verificationCall": null,
       "clarificationRequest": null
     },
@@ -98,7 +98,7 @@
       },
       "topFinding": null,
       "anomalyType": "telemetry_discontinuity",
-      "assetClass": "telemetry_integrity",
+      "assetClass": "none",
       "verificationEligible": false,
       "route": "monitor",
       "reason": "No qualifying headline finding extracted from report yet.",
@@ -120,13 +120,13 @@
         "flaggedCount": 69653,
         "flaggedPct": 0.06909670244858643
       },
-      "topFinding": "**4,858 single-coordinate stacks of ≥10 hotspots** on 1,008,051 located units — the largest stack holds **502 hotspots on one coordinate** (§1 lists keys your registry team can grep today).",
+      "topFinding": "**4,855 single-coordinate stacks of ≥10 hotspots** on 1,008,019 located units — the largest stack holds **501 hotspots on one coordinate** (§1 lists keys your registry team can grep today).",
       "anomalyType": "duplication_cluster",
-      "assetClass": "spatial_distribution",
-      "verificationEligible": true,
-      "route": "verify-device",
-      "reason": null,
-      "verificationCall": "Sample hotspot keys from the largest same-coordinate stacks in §1 and run POST /api/verify-device to confirm whether stacked asserted locations resolve to distinct, physically separate radios.",
+      "assetClass": "none",
+      "verificationEligible": false,
+      "route": "monitor",
+      "reason": "No taxonomy rule found for anomalyType 'duplication_cluster', defaulting to monitor.",
+      "verificationCall": null,
       "clarificationRequest": null
     },
     {
@@ -144,13 +144,13 @@
         "flaggedCount": 11259,
         "flaggedPct": 0.20581299698382233
       },
-      "topFinding": "**530 single-coordinate stacks of ≥10 hotspots** on 54,705 located units — the largest stack holds **497 hotspots on one coordinate** (§1 lists keys your registry team can grep today).",
+      "topFinding": "**529 single-coordinate stacks of ≥10 hotspots** on 54,683 located units — the largest stack holds **497 hotspots on one coordinate** (§1 lists keys your registry team can grep today).",
       "anomalyType": "duplication_cluster",
-      "assetClass": "spatial_distribution",
-      "verificationEligible": true,
-      "route": "verify-device",
-      "reason": null,
-      "verificationCall": "Sample hotspot keys from the largest same-coordinate stacks in §1 and run POST /api/verify-device to confirm whether stacked asserted locations resolve to distinct, physically separate radios.",
+      "assetClass": "none",
+      "verificationEligible": false,
+      "route": "monitor",
+      "reason": "No taxonomy rule found for anomalyType 'duplication_cluster', defaulting to monitor.",
+      "verificationCall": null,
       "clarificationRequest": null
     }
   ]
