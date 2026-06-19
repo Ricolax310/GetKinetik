@@ -144,7 +144,7 @@ export function buildXImageCaption(
   signals: Signal[],
   patterns: Pattern[],
   label: string,
-  opts?: { mentionRick?: boolean },
+  opts?: { mentionRick?: boolean; mentionHandle?: string },
 ): string {
   const date = formatDateLabel(label);
   const line1 = `DePIN index · ${date}`;
@@ -166,7 +166,8 @@ export function buildXImageCaption(
     body = [line1, "", line2, "", linkLine].join("\n");
   }
 
-  const withMention = opts?.mentionRick ? `${body}\n@Kinetik_Rick` : body;
+  const handle = (opts?.mentionHandle ?? "Kinetik_Rick").replace(/^@/, "");
+  const withMention = opts?.mentionRick ? `@${handle}\n${body}` : body;
   const withTags = appendHashtags(withMention, featuredNetworkNames(signals, 2));
   return trimTweet(withTags);
 }

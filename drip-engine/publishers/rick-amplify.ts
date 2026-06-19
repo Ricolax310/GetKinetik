@@ -16,6 +16,7 @@ import { compactFactLine } from "../narrative-builder.ts";
 import { assertClean, neutralize } from "../sanitize.ts";
 
 const X_TWEET_URL = "https://api.twitter.com/2/tweets";
+const X_USERS_ME_URL = "https://api.twitter.com/2/users/me";
 const MAX_LEN = 240; // Rick voice stays tight
 
 interface RickCreds {
@@ -74,6 +75,27 @@ function loadRickCreds(): RickCreds | null {
   const accessSecret = process.env.RICK_X_ACCESS_SECRET;
   if (!apiKey || !apiSecret || !accessToken || !accessSecret) return null;
   return { apiKey, apiSecret, accessToken, accessSecret };
+}
+
+/** Handle (no @) bureau must mention so Rick can reply via API. */
+export async function resolveRickMentionHandle(): Promise<string | null> {
+  const fromEnv = process.env.RICK_X_HANDLE?.replace(/^@/, "").trim();
+  if (fromEnv) return fromEnv;
+
+  const creds = loadRickCreds();
+  if (!creds) return null;
+
+  try {
+    const res = await fetch(`${X_USERS_ME_URL}?user.fields=username`, {
+      headers: { Authorization: oauthHeader("GET", X_USERS_ME_URL, creds) },
+    });
+    const raw = await res.text();
+    if (!res.ok) return null;
+    const data = JSON.parse(raw) as { data?: { username?: string } };
+    return data.data?.username ?? null;
+  } catch {
+    return null;
+  }
 }
 
 const SEV_RANK: Record<string, number> = { high: 3, medium: 2, low: 1 };
@@ -155,7 +177,8 @@ export async function amplifyAsRick(opts: {
       return { ok: false, message: `Rick reply failed — X API ${res.status}: ${raw.slice(0, 300)}` };
     }
     const data = JSON.parse(raw) as { data?: { id?: string } };
-    return { ok: true, message: `@Kinetik_Rick replied on the signal post`, tweetId: data.data?.id };
+    const handle = (await resolveRickMentionHandle()) ?? "Kinetik_Rick";
+    return { ok: true, message: `@${handle} replied on the signal post`, tweetId: data.data?.id };
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
     return { ok: false, message: `Rick reply error: ${msg}` };

@@ -14,7 +14,7 @@ import { buildXThread, buildXThreadTweets, buildXImageCaption } from "./x-thread
 import { buildDailyEditorial } from "../editorial-engine/daily.ts";
 import { buildWeeklyEditorial } from "../editorial-engine/weekly.ts";
 import { publishXThread } from "./publishers/x-publisher.ts";
-import { amplifyAsRick } from "./publishers/rick-amplify.ts";
+import { amplifyAsRick, resolveRickMentionHandle } from "./publishers/rick-amplify.ts";
 import { xPostAlreadyDone, recordXPost, skipXPostMessage, rickAlreadyDone, recordRick } from "./x-post-ledger.ts";
 import { renderDailyCardPng, buildDailyCardSvg } from "./chart-card.ts";
 import { publishSubstackDraft } from "./publishers/substack-publisher.ts";
@@ -218,7 +218,11 @@ export async function executeDistribution(ctx: DistributionContext): Promise<Dis
 
     const thread = buildXThread(ctx.signals, ctx.patterns, ctx.date);
     const tweets = buildXThreadTweets(ctx.signals, ctx.patterns, ctx.date);
-    const caption = buildXImageCaption(ctx.signals, ctx.patterns, ctx.date, { mentionRick: true });
+    const rickHandle = await resolveRickMentionHandle();
+    const caption = buildXImageCaption(ctx.signals, ctx.patterns, ctx.date, {
+      mentionRick: Boolean(rickHandle),
+      mentionHandle: rickHandle ?? undefined,
+    });
     write(path.join(PATHS.publicDrip, "x-thread.md"), thread);
     write(path.join(PATHS.publicDrip, "daily-x-thread.txt"), thread);
     written.push("landing/public/drip/x-thread.md");
