@@ -1,7 +1,16 @@
 {
-  "generatedAt": "2026-06-18T10:32:05.235Z",
+  "generatedAt": "2026-06-19T10:33:29.024Z",
   "source": "https://entities.nft.helium.io/v2/hotspots?subnetwork=iot",
   "stats": {
+    "generatedAt": "2026-06-19T10:33:29.024Z",
+    "observed": 1008055,
+    "unasserted": 27405,
+    "stackedSpots": 4858,
+    "largestStack": 502,
+    "flaggedCount": 69655,
+    "flaggedPct": 0.069098412289012
+  },
+  "prevStats": {
     "generatedAt": "2026-06-18T10:32:05.235Z",
     "observed": 1008051,
     "unasserted": 27405,
@@ -10,16 +19,7 @@
     "flaggedCount": 69653,
     "flaggedPct": 0.06909670244858643
   },
-  "prevStats": {
-    "generatedAt": "2026-06-16T10:36:17.024Z",
-    "observed": 1008046,
-    "unasserted": 27405,
-    "stackedSpots": 4858,
-    "largestStack": 502,
-    "flaggedCount": 69650,
-    "flaggedPct": 0.06909406911986159
-  },
-  "hotspotsTotal": 1035456,
+  "hotspotsTotal": 1035460,
   "topStacks": [
     {
       "coord": "-0.001809,-0.00271",
@@ -242,6 +242,17 @@
       ]
     },
     {
+      "coord": "51.31643,6.182851",
+      "count": 54,
+      "sampleKeys": [
+        "11xapR2HqHZJ6EbF2tgsBTbmrmJ14UPfY7pQqAdu4zr3gKpzX6b",
+        "11eQ2WFYYZfWCnuQtTaFuUpSRBBUk6fPhw5SQwXhXssYq5TxbJE",
+        "11bQusUSF77V4xLZMA1to1w4Zr6UVmr4XSaPF1ndKqzDjkLvR6P",
+        "112gR645uupqmgAzZ8sDSShufauDB1bywaCZqL2wTemK5QUWDVUT",
+        "112ZSwSRSMkYom4TMCgEPKeVPmd9sZhe8SRwZhxwit3H9U4Ec1BR"
+      ]
+    },
+    {
       "coord": "40.734079,-73.985107",
       "count": 53,
       "sampleKeys": [
@@ -294,17 +305,6 @@
         "112X1PKbdgnK4nw97kauRbFyhYRi6KU9FfYtPn8aRxWaN1eqbX65",
         "112L7FQXqn6vMFkKiFWrTshynY5RkyxHNLe91pkaF4ZTAYFS7yFy",
         "11FAPfhYKnw3q624Tv2RouJnSmLgWtsBmMTwrGL6v9aA9JZM4xd"
-      ]
-    },
-    {
-      "coord": "51.31643,6.182851",
-      "count": 52,
-      "sampleKeys": [
-        "11xapR2HqHZJ6EbF2tgsBTbmrmJ14UPfY7pQqAdu4zr3gKpzX6b",
-        "11eQ2WFYYZfWCnuQtTaFuUpSRBBUk6fPhw5SQwXhXssYq5TxbJE",
-        "11bQusUSF77V4xLZMA1to1w4Zr6UVmr4XSaPF1ndKqzDjkLvR6P",
-        "112gR645uupqmgAzZ8sDSShufauDB1bywaCZqL2wTemK5QUWDVUT",
-        "112ZSwSRSMkYom4TMCgEPKeVPmd9sZhe8SRwZhxwit3H9U4Ec1BR"
       ]
     },
     {
