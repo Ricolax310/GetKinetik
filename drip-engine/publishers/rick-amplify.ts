@@ -1,6 +1,7 @@
 // Kinetik Rick amplifier — after the bureau signal posts (@kinetiksignal), the
-// personal account (@Kinetik_Rick) quote-tweets it to drive his followers to the
-// signal post. Quote tweets are explicitly allowed in Rick's growth lane.
+// personal account (@Kinetik_Rick) replies on the signal post to drive followers
+// into the thread. We use a reply (not quote-tweet) because X API blocks
+// programmatic quotes unless the quoter was @mentioned on the source tweet.
 //
 // Requires Rick's OWN user tokens (separate account):
 //   RICK_X_ACCESS_TOKEN, RICK_X_ACCESS_SECRET   (required)
@@ -107,11 +108,11 @@ export function composeRickQuote(signals: Signal[], dateKey: string): string {
 }
 
 /**
- * Quote-tweet the bureau signal post from @Kinetik_Rick.
+ * Reply on the bureau signal post from @Kinetik_Rick (thread amplification).
  * Safe no-op when Rick creds are absent; respects DRIP_DRY_RUN.
  */
 export async function amplifyAsRick(opts: {
-  quoteTweetId: string;
+  quoteTweetId: string; // signal post id — kept for call-site continuity
   signals: Signal[];
   patterns?: Pattern[];
   dateKey: string;
@@ -125,7 +126,7 @@ export async function amplifyAsRick(opts: {
   const dryRun = opts.dryRun ?? process.env.DRIP_DRY_RUN === "true";
 
   if (dryRun) {
-    return { ok: true, message: `DRY_RUN: @Kinetik_Rick would quote-tweet ${opts.quoteTweetId}: "${text}"` };
+    return { ok: true, message: `DRY_RUN: @Kinetik_Rick would reply on ${opts.quoteTweetId}: "${text}"` };
   }
 
   const creds = loadRickCreds();
@@ -144,16 +145,19 @@ export async function amplifyAsRick(opts: {
         Authorization: oauthHeader("POST", X_TWEET_URL, creds),
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ text, quote_tweet_id: opts.quoteTweetId }),
+      body: JSON.stringify({
+        text,
+        reply: { in_reply_to_tweet_id: opts.quoteTweetId },
+      }),
     });
     const raw = await res.text();
     if (!res.ok) {
-      return { ok: false, message: `Rick quote failed — X API ${res.status}: ${raw.slice(0, 300)}` };
+      return { ok: false, message: `Rick reply failed — X API ${res.status}: ${raw.slice(0, 300)}` };
     }
     const data = JSON.parse(raw) as { data?: { id?: string } };
-    return { ok: true, message: `@Kinetik_Rick quote-tweeted the signal post`, tweetId: data.data?.id };
+    return { ok: true, message: `@Kinetik_Rick replied on the signal post`, tweetId: data.data?.id };
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
-    return { ok: false, message: `Rick quote error: ${msg}` };
+    return { ok: false, message: `Rick reply error: ${msg}` };
   }
 }

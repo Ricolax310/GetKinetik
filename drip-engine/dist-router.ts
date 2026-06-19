@@ -218,7 +218,7 @@ export async function executeDistribution(ctx: DistributionContext): Promise<Dis
 
     const thread = buildXThread(ctx.signals, ctx.patterns, ctx.date);
     const tweets = buildXThreadTweets(ctx.signals, ctx.patterns, ctx.date);
-    const caption = buildXImageCaption(ctx.signals, ctx.patterns, ctx.date);
+    const caption = buildXImageCaption(ctx.signals, ctx.patterns, ctx.date, { mentionRick: true });
     write(path.join(PATHS.publicDrip, "x-thread.md"), thread);
     write(path.join(PATHS.publicDrip, "daily-x-thread.txt"), thread);
     written.push("landing/public/drip/x-thread.md");
@@ -242,7 +242,7 @@ export async function executeDistribution(ctx: DistributionContext): Promise<Dis
         publish.x = xResult.message;
         if (xResult.ok) recordXPost("daily", ctx.date);
 
-        // Amplify: @Kinetik_Rick quote-tweets the signal post to drive traffic.
+        // Amplify: @Kinetik_Rick replies on the signal post to drive traffic.
         const signalTweetId = xResult.tweetIds?.[0];
         if (xResult.ok && signalTweetId && !rickAlreadyDone(ctx.date)) {
           const rick = await amplifyAsRick({
