@@ -219,6 +219,9 @@ export async function executeDistribution(ctx: DistributionContext): Promise<Dis
     const thread = buildXThread(ctx.signals, ctx.patterns, ctx.date);
     const tweets = buildXThreadTweets(ctx.signals, ctx.patterns, ctx.date);
     const rickHandle = await resolveRickMentionHandle();
+    if (process.env.RICK_X_ACCESS_TOKEN) {
+      console.log(`[drip:rick] bureau will @mention ${rickHandle ? `@${rickHandle}` : "(none — set RICK_X_HANDLE)"}`);
+    }
     const caption = buildXImageCaption(ctx.signals, ctx.patterns, ctx.date, {
       mentionRick: Boolean(rickHandle),
       mentionHandle: rickHandle ?? undefined,

@@ -49,6 +49,7 @@ jobs:
           RICK_X_API_SECRET: ${{ secrets.RICK_X_API_SECRET }}
           RICK_X_ACCESS_TOKEN: ${{ secrets.RICK_X_ACCESS_TOKEN }}
           RICK_X_ACCESS_SECRET: ${{ secrets.RICK_X_ACCESS_SECRET }}
+          RICK_X_HANDLE: ${{ secrets.RICK_X_HANDLE }}
           # Manual force (workflow_dispatch) — re-post even if already posted today.
           DRIP_FORCE_X_POST: ${{ inputs.force }}
         run: node drip-engine/run.ts daily
