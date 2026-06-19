@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<meta name="theme-color" content="#0A0A0A"/>
+<meta name="color-scheme" content="dark"/>
+<title>Helium IoT hotspot stacking: 502 on one GPS point | GETKINETIK</title>
+<meta name="description" content="4,858 single-coordinate stacks of ≥10 hotspots on 1,008,051 located units — the largest stack holds 502 hotspots on one coordinate (§1 lists keys your registry team can grep today). Independent, reproducible read of Helium IoT&#39;s public data by the neutral GETKINETIK DePIN bureau — no token, no…"/>
+<meta name="keywords" content="Helium IoT hotspot stacking, duplicate GPS hotspots, fake hotspots"/>
+<meta name="robots" content="index,follow,max-image-preview:large"/>
+<link rel="canonical" href="https://getkinetik.app/findings/helium-iot/"/>
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="Helium IoT hotspot stacking: 502 on one GPS point | GETKINETIK"/>
+<meta property="og:description" content="4,858 single-coordinate stacks of ≥10 hotspots on 1,008,051 located units — the largest stack holds 502 hotspots on one coordinate (§1 lists keys your registry team can grep today). Independent, reproducible read of Helium IoT&#39;s public data by the neutral GETKINETIK DePIN bureau — no token, no…"/>
+<meta property="og:url" content="https://getkinetik.app/findings/helium-iot/"/>
+<meta property="og:site_name" content="GETKINETIK"/>
+<meta property="og:image" content="https://getkinetik.app/og-image.png"/>
+<meta property="og:image:width" content="1024"/>
+<meta property="og:image:height" content="1024"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Helium IoT hotspot stacking: 502 on one GPS point | GETKINETIK"/>
+<meta name="twitter:description" content="4,858 single-coordinate stacks of ≥10 hotspots on 1,008,051 located units — the largest stack holds 502 hotspots on one coordinate (§1 lists keys your registry team can grep today). Independent, reproducible read of Helium IoT&#39;s public data by the neutral GETKINETIK DePIN bureau — no token, no…"/>
+<meta name="twitter:image" content="https://getkinetik.app/og-image.png"/>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230A0A0A'/%3E%3Cpolygon points='16,6 24,16 16,26 8,16' fill='%231565C0'/%3E%3C/svg%3E"/>
+<style>
+  :root{--bg:#0a0a0a;--soft:#111113;--edge:#1a1a1d;--accent:#1565C0;--ember:#90CAF9;
+    --plat:#e8e8ea;--silver:#b8b8bd;--steel:#6e6e75;--flag:#FF6B6B}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--plat);line-height:1.6;
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Inter","Segoe UI",system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased}
+  a{color:var(--ember);text-decoration:none}
+  a:hover{color:var(--plat)}
+  .container{max-width:820px;margin:0 auto;padding:48px 22px 88px}
+  header.top{display:flex;justify-content:space-between;align-items:center;gap:16px;
+    padding-bottom:28px;border-bottom:1px solid var(--edge);margin-bottom:40px;flex-wrap:wrap}
+  header.top .brand{font-weight:600;letter-spacing:.12em;font-size:13px;color:var(--ember)}
+  .top-nav{display:flex;gap:14px;flex-wrap:wrap}
+  .top-nav a{color:var(--silver);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+  .eyebrow{color:var(--ember);font-size:12px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px}
+  h1{font-size:clamp(28px,5vw,44px);line-height:1.12;font-weight:700;letter-spacing:-.02em;margin-bottom:14px}
+  h2{font-size:22px;font-weight:650;margin:40px 0 14px;letter-spacing:-.01em}
+  p{color:var(--silver);margin-bottom:14px}
+  .meta{font-size:13px;color:var(--steel);margin-bottom:8px}
+  .meta code{color:var(--silver);background:var(--soft);padding:2px 6px;border-radius:5px;font-size:12px}
+  .finding{background:var(--soft);border:1px solid var(--edge);border-left:3px solid var(--accent);
+    border-radius:12px;padding:22px 24px;margin:26px 0;font-size:18px;color:var(--plat);line-height:1.5}
+  table{width:100%;border-collapse:collapse;margin:18px 0;font-size:14px}
+  th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--edge)}
+  th{color:var(--steel);font-weight:500;font-size:12px;letter-spacing:.04em;text-transform:uppercase}
+  td.v{text-align:right;color:var(--plat);font-variant-numeric:tabular-nums;font-weight:600}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0}
+  .card{background:var(--soft);border:1px solid var(--edge);border-radius:12px;padding:18px 20px}
+  .card h3{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ember);margin-bottom:8px}
+  .card p{font-size:14px;margin:0}
+  .cta{background:var(--soft);border:1px solid var(--edge);border-radius:12px;padding:22px 24px;margin:34px 0}
+  .cta a{display:inline-block;margin-right:18px;font-size:14px}
+  .pill{display:inline-block;background:rgba(21,101,192,.14);border:1px solid rgba(144,202,249,.3);
+    color:var(--ember);font-size:11px;letter-spacing:.06em;text-transform:uppercase;
+    padding:4px 10px;border-radius:999px;margin-bottom:18px}
+  .others{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+  .others a{background:var(--soft);border:1px solid var(--edge);border-radius:8px;padding:8px 12px;font-size:13px;color:var(--silver)}
+  footer{margin-top:56px;padding-top:24px;border-top:1px solid var(--edge);font-size:12px;color:var(--steel)}
+  @media(max-width:620px){.cols{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Report","headline":"Helium IoT — Duplicate-coordinate read","about":"Helium IoT DePIN network public-data Sybil-risk read","datePublished":"2026-06-18","inLanguage":"en","isAccessibleForFree":true,"url":"https://getkinetik.app/findings/helium-iot/","keywords":"Helium IoT hotspot stacking, duplicate GPS hotspots, fake hotspots","publisher":{"@type":"Organization","name":"GETKINETIK Bureau","url":"https://getkinetik.app"},"description":"4,858 single-coordinate stacks of ≥10 hotspots on 1,008,051 located units — the largest stack holds 502 hotspots on one coordinate (§1 lists keys your registry team can grep today)."}</script>
+<div class="container">
+<header class="top">
+<span class="brand">GETKINETIK BUREAU</span>
+<nav class="top-nav">
+<a href="/">Home</a>
+<a href="/findings/">Findings</a>
+<a href="/bureau/">Bureau</a>
+<a href="/verify/">Verify</a>
+<a href="/api/docs/">API</a>
+</nav>
+</header>
+<p class="eyebrow">Public-data read · neutral bureau</p>
+<span class="pill">Duplicate-coordinate read</span>
+<h1>Helium IoT: public Sybil-risk read</h1>
+<p class="meta">As of <strong>2026-06-18</strong></p>
+<p class="meta">Public source: <code>https://entities.nft.helium.io/v2/hotspots?subnetwork=iot</code> · no auth, no internal data</p>
+
+<div class="finding">4,858 single-coordinate stacks of ≥10 hotspots on 1,008,051 located units — the largest stack holds 502 hotspots on one coordinate (§1 lists keys your registry team can grep today).</div>
+
+<p>This is an independent read of <strong>Helium IoT</strong>'s own public data by the GETKINETIK bureau. We publish what the public endpoint returns — covering duplicate GPS coordinates and stacked devices — so anyone can reproduce it. We hold no token in any network we read and take no equity in graded networks.</p>
+
+<h2>The numbers</h2>
+<table>
+<thead><tr><th>Metric</th><th class="v">Value</th></tr></thead>
+<tbody>
+<tr><td>Units observed (with coordinates)</td><td class="v">1,008,051</td></tr>
+<tr><td>On-chain with no asserted location</td><td class="v">27,405</td></tr>
+<tr><td>Coordinates holding 10+ units</td><td class="v">4,858</td></tr>
+<tr><td>Largest single-coordinate stack</td><td class="v">502</td></tr>
+<tr><td>Flagged (any heuristic)</td><td class="v">69,653</td></tr>
+<tr><td>Share of fleet flagged</td><td class="v">6.91%</td></tr>
+</tbody>
+</table>
+
+<h2>What this means — and what it doesn't</h2>
+<div class="cols">
+<div class="card"><h3>Worth a look</h3><p>Multiple devices reporting the exact same GPS coordinate. At small counts this is normal — dense buildings, shared rooftops, and H3-hex snapping all produce shared coordinates legitimately. Large single-coordinate stacks are the documented stacking pattern that warrants a registry cross-check.</p></div>
+<div class="card"><h3>Not an accusation</h3><p>This is not proof of fraud. Honest dense deployments can share a coordinate, and the bureau makes no accusation. The list is a review queue, not a verdict.</p></div>
+</div>
+
+<h2>How to confirm it</h2>
+<p>Sample hotspot keys from the largest same-coordinate stacks in §1 and run POST /api/verify-device to confirm whether stacked asserted locations resolve to distinct, physically separate radios.</p>
+<p>For an authoritative per-device grade — hardware-rooted signature, chain age, tamper flags — a network or operator can POST a Proof of Origin to <a href="/api/docs/">the verify-device API</a>.</p>
+
+<div class="cta">
+<h3 style="font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ember);margin-bottom:12px">Go deeper</h3>
+<a href="https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/helium-iot-sybil-report.md">Full methodology &amp; row-level table →</a>
+<a href="/verify/">Verify a device →</a>
+<a href="mailto:eric@outfromnothingllc.com">Request the full table →</a>
+</div>
+
+<h2>Other networks the bureau reads</h2>
+<div class="others"><a href="/findings/geodnet/">Geodnet</a><a href="/findings/weatherxm/">WeatherXM</a><a href="/findings/hivemapper/">Hivemapper</a><a href="/findings/helium-mobile/">Helium Mobile</a></div>
+
+<footer>
+<p>GETKINETIK is an independent, neutral DePIN bureau. Findings cite public endpoints only and are reproducible. No token. No custody. No equity in graded networks.</p>
+<p style="margin-top:8px"><a href="/findings/">← All findings</a> · <a href="/bureau/">About the bureau</a> · eric@outfromnothingllc.com</p>
+</footer>
+</div>
+</body>
+</html>

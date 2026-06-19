@@ -25,11 +25,14 @@ jobs:
       - name: Refresh publishing pack (one-pagers + delta posts)
         run: node scripts/bureau-run.mjs publish
 
+      - name: Rebuild SEO findings pages + sitemap
+        run: node scripts/bureau/build-findings-pages.mjs
+
       - name: Commit daily outputs
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           # Private ops outputs (daily briefs, outreach queue, ops pack) are gitignored — see getkinetik-ops repo.
-          git add docs/bureau/papers/**/*.md docs/bureau/papers/README.md scripts/data/bureau-audit-index.json landing/data/bureau-audit-index.json landing/data/depin-chat-context.json || true
+          git add docs/bureau/papers/**/*.md docs/bureau/papers/README.md scripts/data/bureau-audit-index.json landing/data/bureau-audit-index.json landing/data/depin-chat-context.json landing/findings landing/sitemap.xml || true
           git diff --staged --quiet || git commit -m "chore(bureau): daily brief and post drafts [automated]"
           git push || true
