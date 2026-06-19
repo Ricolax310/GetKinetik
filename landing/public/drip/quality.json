@@ -21,7 +21,7 @@
       {
         "network": "WeatherXM",
         "metric": "overCapacityCells",
-        "confidence": 0.682,
+        "confidence": 0.73,
         "flags": [
           "isolated"
         ]
@@ -39,13 +39,19 @@
         "metric": "stackedSpots",
         "confidence": 0.672,
         "flags": []
+      },
+      {
+        "network": "Helium Mobile",
+        "metric": "stackedSpots",
+        "confidence": 0.672,
+        "flags": []
       }
     ],
     "heldBack": [
       {
-        "network": "Helium Mobile",
-        "metric": "stackedSpots",
-        "confidence": 0.58,
+        "network": "Geodnet",
+        "metric": "observed",
+        "confidence": 0.595,
         "flags": []
       }
     ]
