@@ -282,10 +282,10 @@ function renderSeedsMarkdown(seeds) {
   return lines;
 }
 
-export function writeReplyBriefMarkdown(replyBrief, weekday, reactFeed = null) {
+export function writeReplyBriefMarkdown(replyBrief, weekday, reactFeed = null, opts = {}) {
   fs.mkdirSync(BRIEF_DIR, { recursive: true });
   const file = path.join(BRIEF_DIR, `${replyBrief.today}-brief.md`);
-  const lines = [
+  const exportLines = [
     `# Daily Briefing — ${replyBrief.today} (${weekday})`,
     "",
     ...(reactFeed ? renderReactFeedMarkdown(reactFeed) : []),
@@ -294,8 +294,14 @@ export function writeReplyBriefMarkdown(replyBrief, weekday, reactFeed = null) {
     ...renderLiveThreadsMarkdown(replyBrief.liveThreads),
     ...renderSeedsMarkdown(replyBrief.threadSeeds),
   ];
-  const md = lines.join("\n");
-  fs.writeFileSync(file, md, "utf8");
-  fs.writeFileSync(path.join(BRIEF_DIR, "latest-brief.md"), md, "utf8");
+  const exportMd = exportLines.join("\n");
+  fs.writeFileSync(file, exportMd, "utf8");
+  fs.writeFileSync(path.join(BRIEF_DIR, "latest-brief.md"), exportMd, "utf8");
+
+  // Command center UI uses structured panels — avoid duplicating the same blocks as markdown.
+  if (opts.commandCenterOnly) {
+    return path.relative(REPO_ROOT, file).replace(/\\/g, "/");
+  }
+
   return path.relative(REPO_ROOT, file).replace(/\\/g, "/");
 }

@@ -17,7 +17,8 @@ import {
   scoreItem,
   parseItemDate,
 } from "../bureau/news-rss.mjs";
-import { buildLiveTweetReacts, renderLiveTweetsMarkdown } from "./live-tweets.mjs";
+import { buildLiveTweetReacts, mintBearer, renderLiveTweetsMarkdown } from "./live-tweets.mjs";
+import { findArticleOnX, draftReplyForArticleTweet, xComposeIntentUrl } from "./news-x-bridge.mjs";
 
 const SOURCES_CONFIG = path.join(REPO_ROOT, "scripts/bureau/news-sources.json");
 const FRESH_DAYS = 12;
@@ -132,30 +133,99 @@ export async function buildReactFeed(options = {}, today = new Date().toISOStrin
   const model = process.env.BUREAU_DEPIN_CHAT_MODEL?.trim() || process.env.BUREAU_NEWS_MODEL?.trim() || "gpt-5";
 
   // Live X conversation lane (independent of news; degrades gracefully).
-  const liveTweets = await buildLiveTweetReacts({ apiKey, model, max: 3 });
+  const liveTweets = await buildLiveTweetReacts({ apiKey, model, max: 5, quoteCount: 2 });
 
   const cfg = loadSources();
   const fresh = await freshNews(cfg);
+  const bearer = await mintBearer();
 
   if (!fresh.length) {
     return { today, reacts: [], liveTweets, note: "No fresh DePIN news in the last 12 days worth reacting to." };
   }
 
-  // No key → still surface the fresh stories with a manual prompt to react.
+  async function buildNewsReact(x) {
+    const base = {
+      headline: x.item.title,
+      source: x.item.source,
+      url: x.item.link,
+      published: x.date?.toISOString().slice(0, 10) || null,
+    };
+    const xThread = bearer ? await findArticleOnX(x.item, bearer) : null;
+    if (xThread && apiKey) {
+      try {
+        const d = await draftReplyForArticleTweet(xThread, apiKey, model);
+        if (d.action !== "skip" && d.reply) {
+          return {
+            ...base,
+            mode: "x-reply",
+            angle: d.angle || "Found on X — reply on this thread",
+            xThread: {
+              author: xThread.author,
+              text: xThread.text,
+              url: xThread.url,
+              engagement: xThread.engagement,
+            },
+            tweet: null,
+            reply: d.reply.slice(0, 240),
+          };
+        }
+      } catch {
+        /* fall through to compose */
+      }
+    }
+    if (!apiKey) {
+      return {
+        ...base,
+        mode: xThread ? "x-reply" : "x-compose",
+        angle: xThread ? "Found on X — add OPENAI_API_KEY to draft reply" : "Add OPENAI_API_KEY to auto-draft a take",
+        xThread: xThread
+          ? { author: xThread.author, text: xThread.text, url: xThread.url, engagement: xThread.engagement }
+          : null,
+        tweet: null,
+        reply: null,
+        composeUrl: xThread ? null : xComposeIntentUrl("DePIN read on this story —", x.item.link),
+      };
+    }
+    const take = await reactTake({ item: x.item, apiKey, model });
+    if (take.action === "skip" || !take.tweet) return null;
+    const tweet = fit(take.tweet);
+    if (xThread) {
+      return {
+        ...base,
+        mode: "x-reply",
+        angle: take.angle || null,
+        xThread: {
+          author: xThread.author,
+          text: xThread.text,
+          url: xThread.url,
+          engagement: xThread.engagement,
+        },
+        tweet: take.replyAngle ? fit(take.replyAngle) : tweet,
+        reply: take.replyAngle ? fit(take.replyAngle) : null,
+      };
+    }
+    return {
+      ...base,
+      mode: "x-compose",
+      angle: take.angle || null,
+      tweet,
+      reply: null,
+      composeUrl: xComposeIntentUrl(tweet, x.item.link),
+    };
+  }
+
+  // No key → still surface stories with X thread discovery when possible.
   if (!apiKey) {
+    const reacts = [];
+    for (const x of fresh) {
+      if (reacts.length >= MAX_REACTS) break;
+      reacts.push(await buildNewsReact(x));
+    }
     return {
       today,
       liveTweets,
-      reacts: fresh.slice(0, MAX_REACTS).map((x) => ({
-        headline: x.item.title,
-        source: x.item.source,
-        url: x.item.link,
-        published: x.date?.toISOString().slice(0, 10) || null,
-        angle: "Add OPENAI_API_KEY to auto-draft a take",
-        tweet: null,
-        replyAngle: null,
-      })),
-      note: "Showing fresh stories without auto-drafted takes (no OPENAI_API_KEY).",
+      reacts: reacts.filter(Boolean),
+      note: "Showing fresh stories — add OPENAI_API_KEY to auto-draft takes.",
     };
   }
 
@@ -163,17 +233,8 @@ export async function buildReactFeed(options = {}, today = new Date().toISOStrin
   for (const x of fresh) {
     if (reacts.length >= MAX_REACTS) break;
     try {
-      const take = await reactTake({ item: x.item, apiKey, model });
-      if (take.action === "skip" || !take.tweet) continue;
-      reacts.push({
-        headline: x.item.title,
-        source: x.item.source,
-        url: x.item.link,
-        published: x.date?.toISOString().slice(0, 10) || null,
-        angle: take.angle || null,
-        tweet: fit(take.tweet),
-        replyAngle: take.replyAngle ? fit(take.replyAngle) : null,
-      });
+      const row = await buildNewsReact(x);
+      if (row) reacts.push(row);
     } catch {
       /* skip this item, try next */
     }
@@ -202,19 +263,23 @@ export function renderReactFeedMarkdown(feed) {
     return lines;
   }
   lines.push(
-    "> Fresh DePIN news with a ready reaction in your voice. Reacting to what's happening > broadcasting your own numbers. Quote-tweet or reply to the source, post the take, engage replies.",
+    "> Fresh DePIN news: we search X for someone already sharing the story. Reply on their thread when found; otherwise use Post to X to publish your take with the article link.",
     "",
   );
   for (const r of feed.reacts) {
     lines.push(`### ${r.headline}`);
     lines.push("");
-    lines.push(`_${r.source}${r.published ? ` · ${r.published}` : ""}${r.angle ? ` · angle: ${r.angle}` : ""}_`);
-    if (r.url) lines.push("", `Source: ${r.url}`);
-    if (r.tweet) {
-      lines.push("", "**Post:**", "```", r.tweet, "```");
+    lines.push(`_${r.source}${r.published ? ` · ${r.published}` : ""}${r.angle ? ` · ${r.angle}` : ""}_`);
+    if (r.url) lines.push("", `Article: ${r.url}`);
+    if (r.xThread?.url) {
+      lines.push("", `**On X (@${r.xThread.author}):**`, `> ${(r.xThread.text || "").replace(/\n/g, " ")}`, r.xThread.url);
     }
-    if (r.replyAngle) {
-      lines.push("", `**If you find the thread, reply:** ${r.replyAngle}`);
+    if (r.reply) {
+      lines.push("", "**Reply on X:**", "```", r.reply, "```");
+    }
+    if (r.tweet && r.mode === "x-compose") {
+      lines.push("", "**Post to X (with article link):**", "```", r.tweet, "```");
+      if (r.composeUrl) lines.push("", `[Open compose](${r.composeUrl})`);
     }
     lines.push("");
   }

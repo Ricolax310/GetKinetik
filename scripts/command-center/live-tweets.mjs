@@ -6,7 +6,39 @@
 // Data: GET /2/tweets/search/recent (last 7 days), ranked by engagement after a
 // hard junk filter (price bots, watchlists, airdrop/shill noise removed).
 
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { loadEnvQuiet } from "../bureau/lib.mjs";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+// Memory of tweet IDs already surfaced, so the queue is always fresh instead of
+// re-showing the same evergreen posts every day. Entries expire after the TTL.
+const SEEN_PATH = path.resolve(__dirname, "../data/live-tweets-seen.json");
+const SEEN_TTL_DAYS = 21;
+
+function loadSeenIds() {
+  try {
+    const raw = JSON.parse(fs.readFileSync(SEEN_PATH, "utf8"));
+    const cutoff = Date.now() - SEEN_TTL_DAYS * 86_400_000;
+    const out = {};
+    for (const [id, ts] of Object.entries(raw)) {
+      if (typeof ts === "number" && ts > cutoff) out[id] = ts;
+    }
+    return out;
+  } catch {
+    return {};
+  }
+}
+
+function saveSeenIds(seen) {
+  try {
+    fs.mkdirSync(path.dirname(SEEN_PATH), { recursive: true });
+    fs.writeFileSync(SEEN_PATH, JSON.stringify(seen), "utf8");
+  } catch {
+    /* best effort — never block a build on the seen cache */
+  }
+}
 
 const SEARCH_QUERY =
   '(DePIN OR GEODNET OR WeatherXM OR Hivemapper OR "proof of location" OR "decentralized physical") -is:retweet -is:reply lang:en';
@@ -54,17 +86,21 @@ export async function mintBearer() {
   }
 }
 
-async function searchRecent(bearer) {
+/** Search recent tweets (last 7 days). Returns normalized tweet rows. */
+export async function searchXRecent(bearer, query, maxResults = 100) {
   const url =
     "https://api.twitter.com/2/tweets/search/recent?query=" +
-    encodeURIComponent(SEARCH_QUERY) +
-    "&max_results=100&sort_order=relevancy" +
+    encodeURIComponent(query) +
+    `&max_results=${Math.min(Math.max(maxResults, 10), 100)}&sort_order=relevancy` +
     "&tweet.fields=public_metrics,created_at,lang" +
     "&expansions=author_id&user.fields=username,public_metrics,verified";
-  const res = await fetch(url, {
-    headers: { Authorization: `Bearer ${bearer}` },
-    signal: AbortSignal.timeout?.(15_000),
-  });
+  const res = await fetch(
+    url,
+    {
+      headers: { Authorization: `Bearer ${bearer}` },
+      signal: AbortSignal.timeout?.(15_000),
+    },
+  );
   if (!res.ok) throw new Error(`search HTTP ${res.status}`);
   const j = await res.json();
   const users = Object.fromEntries((j.includes?.users || []).map((u) => [u.id, u]));
@@ -82,6 +118,10 @@ async function searchRecent(bearer) {
       url: u.username ? `https://x.com/${u.username}/status/${t.id}` : null,
     };
   });
+}
+
+async function searchRecent(bearer) {
+  return searchXRecent(bearer, SEARCH_QUERY, 100);
 }
 
 function qualityScore(t) {
@@ -118,7 +158,8 @@ HARD RULES:
 OUTPUT valid JSON only:
 { "action": "reply" | "skip", "angle": "short phrase", "reply": "<=240 char reply" }`;
 
-async function draftReply({ tweet, apiKey, model }) {
+/** Draft a reply to an existing X post (exported for news-x-bridge). */
+export async function draftTweetReply({ tweet, apiKey, model }) {
   const res = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
     headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
@@ -138,12 +179,49 @@ async function draftReply({ tweet, apiKey, model }) {
   return JSON.parse(body.choices?.[0]?.message?.content || "{}");
 }
 
+const QUOTE_SYSTEM = `You write X QUOTE-TWEETS for GETKINETIK's @Kinetik_Rick — a sharp solo operator running a neutral DePIN integrity bureau.
+
+A quote-tweet reposts someone's tweet with YOUR take on top. The quoted tweet supplies context, so your line must stand strong alone and add the bureau's lens: "are the things earning rewards actually real, and can an outsider verify it on public data?"
+
+VOICE: confident, human, a builder with a point of view — not a brand. NO links, NO hashtags, NO emoji filler, NO "great thread".
+
+HARD RULES:
+- Neutral. Never claim fraud is proven. "worth checking", "the open question is", "on public data you can see".
+- No price talk, no shilling, no financial advice.
+- <=240 characters. One sharp idea that makes a stranger curious enough to follow.
+- If the tweet has no honest angle to quote, action:"skip".
+
+OUTPUT valid JSON only:
+{ "action": "quote" | "skip", "angle": "short phrase", "quote": "<=240 char quote-tweet take" }`;
+
+/** Draft a quote-tweet take for an existing X post (growth lane). */
+export async function draftTweetQuote({ tweet, apiKey, model }) {
+  const res = await fetch("https://api.openai.com/v1/chat/completions", {
+    method: "POST",
+    headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
+    body: JSON.stringify({
+      model,
+      response_format: { type: "json_object" },
+      messages: [
+        { role: "system", content: QUOTE_SYSTEM },
+        { role: "user", content: `THEIR TWEET (@${tweet.author}):\n"${tweet.text}"\n\nWrite the quote-tweet take.` },
+      ],
+      ...(/^(gpt-5|o\d)/i.test(model) ? {} : { temperature: 0.6 }),
+    }),
+    signal: AbortSignal.timeout?.(25_000),
+  });
+  if (!res.ok) throw new Error(`quote LLM HTTP ${res.status}`);
+  const body = await res.json();
+  return JSON.parse(body.choices?.[0]?.message?.content || "{}");
+}
+
 /**
- * @param {{ apiKey?: string, model?: string, max?: number }} opts
+ * @param {{ apiKey?: string, model?: string, max?: number, quoteCount?: number }} opts
  * @returns {Promise<{ available: boolean, reacts: object[], note: string|null }>}
  */
 export async function buildLiveTweetReacts(opts = {}) {
-  const max = opts.max ?? 3;
+  const max = opts.max ?? 5;
+  const quoteCount = opts.quoteCount ?? 2;
   const bearer = await mintBearer();
   if (!bearer) {
     return { available: false, reacts: [], note: "X search unavailable (no X_API_KEY/X_API_SECRET or token mint failed)." };
@@ -156,15 +234,19 @@ export async function buildLiveTweetReacts(opts = {}) {
     return { available: false, reacts: [], note: `X search failed: ${String(e.message).slice(0, 80)}` };
   }
 
+  // Drop tweets already surfaced recently so every pull is fresh — this is the
+  // fix for "it's been the same posts for days".
+  const seen = loadSeenIds();
+
   const ranked = tweets
     .map((t) => ({ t, score: qualityScore(t) }))
-    .filter((x) => x.score >= 0)
+    .filter((x) => x.score >= 0 && !seen[x.t.id])
     .sort((a, b) => b.score - a.score)
     .slice(0, max * 2)
     .map((x) => x.t);
 
   if (!ranked.length) {
-    return { available: true, reacts: [], note: "No reply-worthy DePIN tweets in the current window." };
+    return { available: true, reacts: [], note: "No new reply-worthy DePIN tweets right now — you've worked the current batch. Check back later." };
   }
 
   const apiKey = opts.apiKey;
@@ -173,17 +255,34 @@ export async function buildLiveTweetReacts(opts = {}) {
   for (const t of ranked) {
     if (reacts.length >= max) break;
     if (!apiKey) {
-      reacts.push({ author: t.author, text: t.text, url: t.url, engagement: t.engagement, followers: t.followers, reply: null, angle: "Add OPENAI_API_KEY to auto-draft a reply" });
+      reacts.push({ author: t.author, text: t.text, url: t.url, engagement: t.engagement, followers: t.followers, reply: null, quoteDraft: null, angle: "Add OPENAI_API_KEY to auto-draft a reply" });
+      seen[t.id] = Date.now();
       continue;
     }
     try {
-      const d = await draftReply({ tweet: t, apiKey, model });
-      if (d.action === "skip" || !d.reply) continue;
-      reacts.push({ author: t.author, text: t.text, url: t.url, engagement: t.engagement, followers: t.followers, reply: d.reply.slice(0, 240), angle: d.angle || null });
+      const d = await draftTweetReply({ tweet: t, apiKey, model });
+      if (d.action === "skip" || !d.reply) {
+        seen[t.id] = Date.now(); // chose to skip — don't resurface it
+        continue;
+      }
+      // Also draft a quote-tweet take for the strongest few.
+      let quoteDraft = null;
+      if (reacts.length < quoteCount) {
+        try {
+          const q = await draftTweetQuote({ tweet: t, apiKey, model });
+          if (q.action !== "skip" && q.quote) quoteDraft = q.quote.slice(0, 240);
+        } catch {
+          /* quote is optional */
+        }
+      }
+      reacts.push({ author: t.author, text: t.text, url: t.url, engagement: t.engagement, followers: t.followers, reply: d.reply.slice(0, 240), quoteDraft, angle: d.angle || null });
+      seen[t.id] = Date.now();
     } catch {
       /* skip this tweet */
     }
   }
+
+  saveSeenIds(seen);
 
   return { available: true, reacts, note: reacts.length ? null : "Found tweets, but none had an honest bureau angle." };
 }

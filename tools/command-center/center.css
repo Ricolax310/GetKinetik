@@ -243,9 +243,17 @@ h3.sub {
   margin-top: 2px;
 }
 
+.react-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 14px;
+  row-gap: 4px;
+  margin-top: 6px;
+}
+
 .react-link {
   display: inline-block;
-  margin-top: 6px;
   font-size: 12px;
   font-weight: 600;
 }

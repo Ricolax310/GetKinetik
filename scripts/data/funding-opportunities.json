@@ -1,0 +1,146 @@
+{
+  "updatedAt": "2026-06-20",
+  "note": "Funding routes that fit a neutral, non-dilutive, no-token DePIN bureau. Non-dilutive options are listed first. Always open the program page for the current round + deadline before applying — amounts and cadence change.",
+  "groups": [
+    {
+      "label": "Retroactive / public goods — best fit (non-dilutive, rewards shipped work)",
+      "items": [
+        {
+          "name": "Gitcoin Grants (Quadratic Funding rounds)",
+          "type": "retro / QF",
+          "dilutive": false,
+          "cadence": "periodic rounds",
+          "fit": "Open-source public-goods rounds. Your public Sybil reads + offline verifier fit the infra/tooling and security categories. Pairs with your existing Giveth page.",
+          "url": "https://www.gitcoin.co/"
+        },
+        {
+          "name": "Optimism Retro Funding (RetroPGF)",
+          "type": "retroactive",
+          "dilutive": false,
+          "cadence": "periodic missions/rounds",
+          "fit": "Rewards already-shipped tooling that benefits the ecosystem. A neutral verifier + reproducible reports qualify as infra/tooling. Base contributes to this collective too.",
+          "url": "https://retrofunding.optimism.io/"
+        },
+        {
+          "name": "Octant (Golem) public goods",
+          "type": "retro / epochs",
+          "dilutive": false,
+          "cadence": "quarterly epochs",
+          "fit": "Quarterly public-goods funding for projects with demonstrable impact. Neutral DePIN integrity tooling is a clean public-good narrative.",
+          "url": "https://octant.app/"
+        },
+        {
+          "name": "Giveth (you are already listed)",
+          "type": "donations / QF",
+          "dilutive": false,
+          "cadence": "ongoing + rounds",
+          "fit": "Keep the project page fresh with the latest findings; line it up with Gitcoin rounds so a campaign hits both at once.",
+          "url": "https://giveth.io/"
+        }
+      ]
+    },
+    {
+      "label": "Ecosystem builder grants (non-dilutive)",
+      "items": [
+        {
+          "name": "Base (Coinbase) builder grants",
+          "type": "grant / retro",
+          "dilutive": false,
+          "cadence": "rolling",
+          "fit": "Strongest narrative fit: Base Verify is anti-Sybil at the SOCIAL layer; GETKINETIK is anti-Sybil at the DEVICE layer — a direct complement, not a competitor.",
+          "url": "https://www.base.org/"
+        },
+        {
+          "name": "Solana Foundation grants",
+          "type": "grant",
+          "dilutive": false,
+          "cadence": "rolling",
+          "fit": "Helium, Hivemapper and Natix are Solana-based. A neutral cross-network Sybil read of Solana DePIN is a strong ecosystem-level pitch.",
+          "url": "https://solana.org/grants"
+        },
+        {
+          "name": "Ethereum Foundation ESP",
+          "type": "grant",
+          "dilutive": false,
+          "cadence": "rolling",
+          "fit": "Funds open-source infra, tooling and research. A public verifier + methodology fits ESP's neutral-infrastructure mandate.",
+          "url": "https://esp.ethereum.foundation/"
+        },
+        {
+          "name": "Arbitrum Foundation grants",
+          "type": "grant",
+          "dilutive": false,
+          "cadence": "rounds",
+          "fit": "Infra/tooling grants plus an audit-subsidy track relevant to a signature verifier.",
+          "url": "https://arbitrum.foundation/grants"
+        }
+      ]
+    },
+    {
+      "label": "Hackathons — fast cash + visibility (non-dilutive)",
+      "items": [
+        {
+          "name": "ETHGlobal",
+          "type": "hackathon",
+          "dilutive": false,
+          "cadence": "year-round events",
+          "fit": "Ship the verify-device demo against DePIN/security sponsor bounties. Wins = prize cash + face time with protocol teams. Doubles as distribution.",
+          "url": "https://ethglobal.com/"
+        },
+        {
+          "name": "Colosseum (Solana hackathons)",
+          "type": "hackathon / seed",
+          "dilutive": false,
+          "cadence": "seasonal",
+          "fit": "Solana DePIN track — directly your audited networks. Top projects get follow-on funding access.",
+          "url": "https://www.colosseum.org/"
+        },
+        {
+          "name": "DoraHacks",
+          "type": "hackathon / quests",
+          "dilutive": false,
+          "cadence": "ongoing BUIDL quests",
+          "fit": "Recurring DePIN and infra quests/bounties; low overhead to enter with an existing demo.",
+          "url": "https://dorahacks.io/"
+        },
+        {
+          "name": "Encode Club",
+          "type": "hackathon / accelerator",
+          "dilutive": false,
+          "cadence": "recurring programs",
+          "fit": "Frequent DePIN/AI hackathons and education programs with bounties and mentor access.",
+          "url": "https://www.encode.club/"
+        }
+      ]
+    },
+    {
+      "label": "DePIN funds & accelerators — DILUTIVE (equity/token; conflicts with no-token stance — listed for completeness)",
+      "items": [
+        {
+          "name": "Borderless Capital",
+          "type": "VC fund",
+          "dilutive": true,
+          "cadence": "rolling",
+          "fit": "DePIN-focused; co-led ROVR's round with GEODNET, so warm to your exact space. Dilutive (equity/token) — only if you change the non-dilutive plan.",
+          "url": "https://borderlesscapital.io/"
+        },
+        {
+          "name": "Escape Velocity (EV3)",
+          "type": "VC fund",
+          "dilutive": true,
+          "cadence": "rolling",
+          "fit": "DePIN-native early-stage fund. Dilutive — keep for context, not aligned with the public-good route.",
+          "url": "https://www.ev3.xyz/"
+        },
+        {
+          "name": "Outlier Ventures (Base Camp)",
+          "type": "accelerator",
+          "dilutive": true,
+          "cadence": "cohorts",
+          "fit": "DePIN accelerator cohorts with mentorship + demo day. Takes a token warrant (partly dilutive).",
+          "url": "https://outlierventures.io/"
+        }
+      ]
+    }
+  ]
+}

@@ -165,7 +165,7 @@ function copyButton(text) {
   return btn;
 }
 
-function postCard({ heading, meta, link, quote, body, taskKey, taskLabel }) {
+function postCard({ heading, meta, link, linkLabel, composeUrl, quote, body, taskKey, taskLabel, articleUrl }) {
   const card = document.createElement("div");
   card.className = "react-card";
 
@@ -181,15 +181,36 @@ function postCard({ heading, meta, link, quote, body, taskKey, taskLabel }) {
     m.textContent = meta;
     card.appendChild(m);
   }
+  const links = document.createElement("div");
+  links.className = "react-links";
   if (link) {
     const a = document.createElement("a");
     a.className = "react-link";
     a.href = link;
     a.target = "_blank";
     a.rel = "noopener";
-    a.textContent = "→ open on X";
-    card.appendChild(a);
+    a.textContent = linkLabel || "→ open on X";
+    links.appendChild(a);
   }
+  if (articleUrl && articleUrl !== link) {
+    const a = document.createElement("a");
+    a.className = "react-link react-link-secondary";
+    a.href = articleUrl;
+    a.target = "_blank";
+    a.rel = "noopener";
+    a.textContent = "→ read article";
+    links.appendChild(a);
+  }
+  if (composeUrl) {
+    const a = document.createElement("a");
+    a.className = "react-link react-link-compose";
+    a.href = composeUrl;
+    a.target = "_blank";
+    a.rel = "noopener";
+    a.textContent = "→ post to X";
+    links.appendChild(a);
+  }
+  if (links.childElementCount) card.appendChild(links);
   if (quote) {
     const q = document.createElement("blockquote");
     q.className = "react-quote";
@@ -229,14 +250,9 @@ function renderGrowthKit(kit) {
   };
   if (kit.bio) add("Bio (set once)", kit.bio);
   if (kit.pinnedPost) add("Pinned post (refresh when numbers move)", kit.pinnedPost);
-  if (kit.thread?.length) {
-    const h = document.createElement("div");
-    h.className = "react-head";
-    h.style.marginTop = "6px";
-    h.textContent = `Data thread — post 1 today (lead: ${kit.leadNetwork || "—"})`;
-    el.appendChild(h);
-    kit.thread.forEach((t, i) => add(`${i + 1}/${kit.thread.length}`, t));
-  }
+  // No multi-tweet thread: at low follower counts one strong tweet beats a
+  // 5-tweet thread nobody reads past tweet 1. The single Daily Posts above are
+  // the post-one-and-move-on content.
 }
 
 function renderReactFeed(react) {
@@ -261,7 +277,7 @@ function renderReactFeed(react) {
       "Nothing live yet — click “Pull live (news + tweets)”. This pulls fresh tweets + news and drafts replies (takes a couple minutes).";
   } else {
     hint.textContent =
-      "Click a link to open the post on X, hit reply, paste. Replying with one sharp insight is the fastest way to gain the right followers.";
+      "Live posts: open on X → reply → paste. News: we search X for the story first; reply on that thread, or use Post to X to publish your take with the article link.";
   }
 
   if (tweets.length) {
@@ -277,6 +293,18 @@ function renderReactFeed(react) {
           taskLabel: `Reply to @${t.author || "?"}`,
         }),
       );
+      if (t.quoteDraft) {
+        tweetsEl.appendChild(
+          postCard({
+            heading: `@${t.author || "?"} · quote-tweet`,
+            meta: "Quote-tweet this with your take (growth lane)",
+            link: t.url,
+            body: t.quoteDraft,
+            taskKey: t.url ? hashKey("quote", t.url) : hashKey("quote", t.text),
+            taskLabel: `Quote @${t.author || "?"}`,
+          }),
+        );
+      }
     }
   } else {
     tweetsEl.innerHTML = `<p class="muted">${esc(react.liveTweets?.note || "No reply-worthy tweets in this window.")}</p>`;
@@ -284,19 +312,45 @@ function renderReactFeed(react) {
 
   if (news.length) {
     for (const r of news) {
+      const onX = r.xThread?.url;
+      const isReply = r.mode === "x-reply" && onX;
       newsEl.appendChild(
         postCard({
           heading: r.headline,
-          meta: `${r.source || ""}${r.published ? ` · ${r.published}` : ""}${r.angle ? ` · ${r.angle}` : ""}`,
-          link: r.url,
-          body: r.tweet,
-          taskKey: hashKey("news", r.url || r.headline),
+          meta: `${r.source || ""}${r.published ? ` · ${r.published}` : ""}${r.angle ? ` · ${r.angle}` : ""}${isReply ? ` · @${r.xThread.author} on X` : r.mode === "x-compose" ? " · post your take" : ""}`,
+          link: isReply ? onX : null,
+          linkLabel: "→ reply on X",
+          articleUrl: r.url,
+          composeUrl: r.composeUrl || null,
+          quote: isReply ? r.xThread.text : null,
+          body: r.reply || r.tweet,
+          taskKey: hashKey("news", onX || r.url || r.headline),
           taskLabel: r.headline,
         }),
       );
     }
   } else {
     newsEl.innerHTML = `<p class="muted">${esc(react.note || "No fresh news takes in this window.")}</p>`;
+  }
+}
+
+function renderDailyPosts(el, daily) {
+  el.innerHTML = "";
+  const posts = daily?.posts || [];
+  if (!posts.length) {
+    el.innerHTML = `<p class="muted">${esc(daily?.note || "No posts available.")}</p>`;
+    return;
+  }
+  for (const p of posts) {
+    el.appendChild(
+      postCard({
+        heading: p.goal,
+        meta: p.audience ? `Audience: ${p.audience}` : "",
+        body: p.text,
+        taskKey: hashKey("post", p.text),
+        taskLabel: p.goal || "Daily post",
+      }),
+    );
   }
 }
 
@@ -320,6 +374,44 @@ function renderPublication(container, pub) {
   }
 }
 
+function renderFunding(el, funding) {
+  if (!el) return;
+  el.innerHTML = "";
+  const groups = funding?.groups || [];
+  if (!groups.length) {
+    el.innerHTML = '<p class="muted">No funding list yet.</p>';
+    return;
+  }
+  if (funding.note) {
+    const note = document.createElement("p");
+    note.className = "react-hint muted";
+    note.textContent = funding.note;
+    el.appendChild(note);
+  }
+  for (const g of groups) {
+    const h = document.createElement("h3");
+    h.className = "sub";
+    h.textContent = g.label;
+    el.appendChild(h);
+    for (const it of g.items || []) {
+      const card = document.createElement("div");
+      card.className = "feed-item";
+      const tags = [it.type, it.dilutive ? "dilutive" : "non-dilutive", it.cadence]
+        .filter(Boolean)
+        .join(" · ");
+      const linkHtml = it.url
+        ? `<div class="source"><a href="${esc(it.url)}" target="_blank" rel="noopener noreferrer">${esc(it.url)}</a></div>`
+        : "";
+      card.innerHTML =
+        `<div class="title">${esc(it.name)}</div>` +
+        `<div class="muted">${esc(tags)}</div>` +
+        (it.fit ? `<div>${esc(it.fit)}</div>` : "") +
+        linkHtml;
+      el.appendChild(card);
+    }
+  }
+}
+
 function applyPayload(data) {
   $("headline").textContent = data.today
     ? `${data.weekday || "Today"} · ${data.today}`
@@ -328,7 +420,9 @@ function applyPayload(data) {
     ? `Updated ${new Date(data.updatedAt).toLocaleString()}`
     : "";
 
-  $("brief-body").innerHTML = renderMarkdownish(data.dailyBrief?.markdown);
+  $("brief-export").textContent = data.dailyBrief?.exportPath
+    ? `Full markdown export: ${data.dailyBrief.exportPath}`
+    : "";
 
   renderList(
     $("live-threads"),
@@ -338,9 +432,11 @@ function applyPayload(data) {
   renderSeeds($("thread-seeds"), data.replyBrief?.threadSeeds?.seeds);
 
   renderReactFeed(data.reactFeed);
+  renderDailyPosts($("daily-posts"), data.replyBrief?.dailyPosts);
   renderGrowthKit(data.replyBrief?.growthKit);
   renderReadingFeed($("reading-feed"), data.readingFeed);
   renderPublication($("publication"), data.publication);
+  renderFunding($("funding"), data.funding);
 }
 
 async function loadData() {
@@ -437,3 +533,4 @@ async function boot() {
 $("btn-refresh").addEventListener("click", refreshBrief);
 $("btn-pull-live").addEventListener("click", pullLive);
 boot();
+

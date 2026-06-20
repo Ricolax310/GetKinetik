@@ -88,11 +88,10 @@ Write a fresh set of posts. Output STRICT JSON:
     { "goal": "Authority — explainer", "audience": "builders/operators", "text": "<=270 chars" },
     { "goal": "Reach — community question", "audience": "DePIN community", "text": "<=270 chars" },
     { "goal": "Partners — network tag", "audience": "<network> team", "text": "<=270 chars" }
-  ],
-  "thread": ["tweet 1 (hook + number)", "tweet 2 (what it's NOT)", "tweet 3 (what's worth a look)", "tweet 4 (why it matters / reproducible)", "tweet 5 (close: daily reads, getkinetik.app)"]
+  ]
 }
 
-Each thread tweet <= 270 chars. Make it genuinely different from the recent posts.${avoid}`;
+Make each post genuinely different from the recent posts.${avoid}`;
 }
 
 export async function generateAiContent({ heroes, recent = [], apiKey, model, baseUrl }) {

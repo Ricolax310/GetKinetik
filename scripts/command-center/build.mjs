@@ -20,6 +20,48 @@ function weekdayUtc(iso) {
   });
 }
 
+const FUNDING_PATH = path.join(REPO_ROOT, "scripts/data/funding-opportunities.json");
+
+/** Curated grant / retro / hackathon list — static data surfaced in the UI. */
+function loadFunding() {
+  try {
+    if (fs.existsSync(FUNDING_PATH)) {
+      return JSON.parse(fs.readFileSync(FUNDING_PATH, "utf8"));
+    }
+  } catch (e) {
+    console.warn(`[command-center] funding list load failed: ${e.message}`);
+  }
+  return null;
+}
+
+const NETWORK_TAGS = {
+  helium: "#Helium",
+  geodnet: "#GEODNET",
+  weatherxm: "#WeatherXM",
+  hivemapper: "#Hivemapper",
+  natix: "#NATIX",
+};
+
+/**
+ * Append up to 2 targeted hashtags (one network tag if detected + #DePIN) so
+ * posts are discoverable in search/feeds. Skips posts that already carry tags
+ * and never pushes a tweet past 280 chars.
+ */
+function withHashtags(text) {
+  if (!text || /#\w/.test(text)) return text;
+  const lower = text.toLowerCase();
+  const tags = [];
+  for (const [key, tag] of Object.entries(NETWORK_TAGS)) {
+    if (lower.includes(key)) {
+      tags.push(tag);
+      break;
+    }
+  }
+  tags.push("#DePIN");
+  const suffix = ` ${tags.join(" ")}`;
+  return (text + suffix).length <= 280 ? text + suffix : text;
+}
+
 export async function buildCommandCenter(options = {}) {
   ensureImportDirs();
   const store = openAgentStore();
@@ -33,9 +75,19 @@ export async function buildCommandCenter(options = {}) {
     // content grounded in today's real numbers (cached per day; template fallback).
     const smartPosts = await buildDailyPostsSmart(today, { force: options.forcePosts === true });
     replyBrief.dailyPosts = smartPosts;
-    if (smartPosts.thread?.length && replyBrief.growthKit) {
-      replyBrief.growthKit.thread = smartPosts.thread;
+    // Thread intentionally dropped: a single strong tweet outperforms a 5-tweet
+    // thread at low follower counts. Keep only the lead network for the kit.
+    if (replyBrief.growthKit) {
+      replyBrief.growthKit.thread = null;
       replyBrief.growthKit.leadNetwork = smartPosts.leadNetwork || replyBrief.growthKit.leadNetwork;
+    }
+
+    // Strategic reach: tag each post with its network + #DePIN for search/feed
+    // discovery (a minor lever — replies on big threads still do the real work).
+    if (Array.isArray(replyBrief.dailyPosts?.posts)) {
+      for (const p of replyBrief.dailyPosts.posts) {
+        if (p?.text) p.text = withHashtags(p.text);
+      }
     }
 
     const readingFeed = await buildReadingFeed({
@@ -44,7 +96,7 @@ export async function buildCommandCenter(options = {}) {
     const reactFeed = await buildReactFeed({ fetchRss: options.fetchRss ?? false }, today);
 
     const payload = {
-      version: 8,
+      version: 9,
       appName: "GetKinetik Command Center",
       updatedAt: new Date().toISOString(),
       today,
@@ -52,12 +104,15 @@ export async function buildCommandCenter(options = {}) {
       replyBrief,
       reactFeed,
       readingFeed,
+      funding: loadFunding(),
     };
 
-    const briefPath = writeReplyBriefMarkdown(replyBrief, weekday, reactFeed);
+    const briefPath = writeReplyBriefMarkdown(replyBrief, weekday, reactFeed, {
+      commandCenterOnly: true,
+    });
     payload.dailyBrief = {
       path: briefPath,
-      markdown: fs.readFileSync(path.join(REPO_ROOT, briefPath), "utf8"),
+      exportPath: briefPath,
     };
 
     payload.publication = publishSignalReports(today, replyBrief);

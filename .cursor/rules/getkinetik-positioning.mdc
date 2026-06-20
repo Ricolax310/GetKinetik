@@ -1,0 +1,42 @@
+---
+description: GETKINETIK product positioning, voice lanes, and guardrails for all agent work
+alwaysApply: true
+---
+
+# GETKINETIK positioning
+
+## What we are
+
+- Independent **neutral DePIN bureau** — public Genesis Score + signed device evidence
+- **Not** an earnings aggregator pitch, **not** a token project, **not** taking equity in graded networks
+- Hardware-sealed Ed25519 identity per device; public verifier; partner API at `/api/verify-device`
+- Genesis Score is 0–1000, methodology-published; v1.1+ uses bureau-bounded chain age
+
+## Voice lanes (do not mix)
+
+| Lane | Account | Job | Win metric |
+|------|---------|-----|------------|
+| Bureau / signal | @kinetiksignal | Daily DePIN index cards, neutral data | Reach on cards |
+| Personal visibility | @Kinetik_Rick (@Ricolax310) | Builder voice, replies on big threads | Profile clicks + follows |
+| Partner outreach | DMs / email | Sybil reports, bureau pitch | Warm reply → call |
+
+Rick lane rules: replies have **no links**; max **one link post per week**; sound like a builder, not a brand bot. Partner wait-list rules in `scripts/bureau/gtm-context.md` still apply.
+
+## Copy guardrails
+
+- Never promise token boosts, NODL boosts, or "credits" as partner value — use **Genesis Score**, **verify-device**, **attestation**, **Sybil reads**
+- Be honest on continuity: phone loss = seniority loss until backup ships
+- Bureau findings must cite **public endpoints only** — "we publish what the API returns"
+- Outreach: human tone, concrete numbers, no cold-AI walls of text
+
+## Build priorities (when advising the user)
+
+Distribution and partner replies beat infra polish until engagement exists. Prefer: Rick visibility, Sybil report outreach, landing/bureau front door, Android/iOS parity. Deprioritize: RAG/eval harnesses, dataset versioning, feature depth with no reader.
+
+## Key paths
+
+- Bureau pages: `landing/bureau/`, `landing/bureau/why/`
+- Rick route: `scripts/bureau/rick-route.mjs`
+- Operator brief: `scripts/bureau/operator-brief.mjs`
+- Sybil scanners: `scripts/sybil-scan-*.mjs`
+- Drip (signal cards): `drip-engine/`
