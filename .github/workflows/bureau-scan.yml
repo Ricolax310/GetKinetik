@@ -1,10 +1,11 @@
-# Weekly full bureau pipeline — public sample reads, outreach drafts, daily brief.
+# Daily full bureau pipeline — re-scans every network so bureau data is never
+# stale. Public sample reads, outreach drafts, daily brief.
 # Does NOT send email/DMs or post to social. Human review required.
-name: Bureau weekly pipeline
+name: Bureau full pipeline (daily)
 
 on:
   schedule:
-    - cron: "0 14 * * 1" # Mondays 14:00 UTC
+    - cron: "0 14 * * *" # every day 14:00 UTC
   workflow_dispatch:
 
 permissions:
@@ -34,5 +35,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           # Private ops outputs (briefs, outreach, ops pack) are gitignored — see getkinetik-ops repo.
           git add docs/reports/*.md scripts/data/*-snapshot.json scripts/data/bureau-audit-index.json landing/data/bureau-audit-index.json landing/data/depin-chat-context.json scripts/data/bureau-pipeline.json docs/bureau/papers/**/*.md docs/bureau/papers/README.md landing/findings landing/sitemap.xml || true
-          git diff --staged --quiet || git commit -m "chore(bureau): weekly public sample reads [automated]"
+          git diff --staged --quiet || git commit -m "chore(bureau): daily public sample reads [automated]"
           git push || true
