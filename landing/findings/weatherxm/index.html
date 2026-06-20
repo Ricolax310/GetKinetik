@@ -66,7 +66,7 @@
 </style>
 </head>
 <body>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Report","headline":"WeatherXM — Over-capacity read","about":"WeatherXM DePIN network public-data Sybil-risk read","datePublished":"2026-06-18","inLanguage":"en","isAccessibleForFree":true,"url":"https://getkinetik.app/findings/weatherxm/","keywords":"WeatherXM over-capacity cells, fake weather stations, station density","publisher":{"@type":"Organization","name":"GETKINETIK Bureau","url":"https://getkinetik.app"},"description":"286 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue."}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Report","headline":"WeatherXM — Over-capacity read","about":"WeatherXM DePIN network public-data Sybil-risk read","datePublished":"2026-06-19","inLanguage":"en","isAccessibleForFree":true,"url":"https://getkinetik.app/findings/weatherxm/","keywords":"WeatherXM over-capacity cells, fake weather stations, station density","publisher":{"@type":"Organization","name":"GETKINETIK Bureau","url":"https://getkinetik.app"},"description":"286 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue."}</script>
 <div class="container">
 <header class="top">
 <span class="brand">GETKINETIK BUREAU</span>
@@ -81,7 +81,7 @@
 <p class="eyebrow">Public-data read · neutral bureau</p>
 <span class="pill">Over-capacity read</span>
 <h1>WeatherXM: public Sybil-risk read</h1>
-<p class="meta">As of <strong>2026-06-18</strong></p>
+<p class="meta">As of <strong>2026-06-19</strong></p>
 <p class="meta">Public source: <code>WeatherXM public cells API</code> · no auth, no internal data</p>
 
 <div class="finding">286 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.</div>
@@ -96,11 +96,11 @@
 <tr><td>Cells over designed capacity</td><td class="v">286</td></tr>
 <tr><td>Share of cells over capacity</td><td class="v">3.36%</td></tr>
 <tr><td>Cells drilled in detail</td><td class="v">60</td></tr>
-<tr><td>Devices in drilled cells</td><td class="v">204</td></tr>
-<tr><td>Pol No Location</td><td class="v">90</td></tr>
+<tr><td>Devices in drilled cells</td><td class="v">240</td></tr>
+<tr><td>Pol No Location</td><td class="v">100</td></tr>
 <tr><td>Pol Other</td><td class="v">2</td></tr>
-<tr><td>Inactive In Drilled</td><td class="v">112</td></tr>
-<tr><td>Low Qod In Drilled</td><td class="v">107</td></tr>
+<tr><td>Inactive In Drilled</td><td class="v">133</td></tr>
+<tr><td>Low Qod In Drilled</td><td class="v">114</td></tr>
 </tbody>
 </table>
 
@@ -111,7 +111,7 @@
 </div>
 
 <h2>How to confirm it</h2>
-<p>For operators in the over-capacity H3 cells in §1, run POST /api/verify-device to attest active, signed device presence over time and compare against the public cell tally.</p>
+<p>Reproduce the read from the public source above and cross-check the flagged entries against the registry.</p>
 <p>For an authoritative per-device grade — hardware-rooted signature, chain age, tamper flags — a network or operator can POST a Proof of Origin to <a href="/api/docs/">the verify-device API</a>.</p>
 
 <div class="cta">
