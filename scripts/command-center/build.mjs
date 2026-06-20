@@ -12,6 +12,7 @@ import { buildReadingFeed } from "./reading-feed.mjs";
 import { buildReactFeed } from "./react-feed.mjs";
 import { publishSignalReports } from "./signal-publication.mjs";
 import { buildDailyPostsSmart } from "./ai-posts.mjs";
+import { fetchLiveFunding } from "./funding-radar.mjs";
 
 function weekdayUtc(iso) {
   return new Date(`${iso}T12:00:00Z`).toLocaleDateString("en-US", {
@@ -95,6 +96,16 @@ export async function buildCommandCenter(options = {}) {
     });
     const reactFeed = await buildReactFeed({ fetchRss: options.fetchRss ?? false }, today);
 
+    // Curated funding list (always) + live opportunities (live/Pull-live only).
+    const funding = loadFunding();
+    if (funding && options.fetchRss) {
+      try {
+        funding.live = await fetchLiveFunding();
+      } catch (e) {
+        console.warn(`[command-center] live funding fetch failed: ${e.message}`);
+      }
+    }
+
     const payload = {
       version: 9,
       appName: "GetKinetik Command Center",
@@ -104,7 +115,7 @@ export async function buildCommandCenter(options = {}) {
       replyBrief,
       reactFeed,
       readingFeed,
-      funding: loadFunding(),
+      funding,
     };
 
     const briefPath = writeReplyBriefMarkdown(replyBrief, weekday, reactFeed, {

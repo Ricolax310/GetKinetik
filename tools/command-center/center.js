@@ -388,6 +388,25 @@ function renderFunding(el, funding) {
     note.textContent = funding.note;
     el.appendChild(note);
   }
+  if (funding.live?.length) {
+    const h = document.createElement("h3");
+    h.className = "sub";
+    h.textContent = "Live — recent announcements (open now)";
+    el.appendChild(h);
+    for (const it of funding.live) {
+      const card = document.createElement("div");
+      card.className = "feed-item";
+      const meta = [it.type, it.date, it.source].filter(Boolean).join(" · ");
+      const linkHtml = it.url
+        ? `<div class="source"><a href="${esc(it.url)}" target="_blank" rel="noopener noreferrer">open →</a></div>`
+        : "";
+      card.innerHTML =
+        `<div class="title">${esc(it.title)}</div>` +
+        `<div class="muted">${esc(meta)}</div>` +
+        linkHtml;
+      el.appendChild(card);
+    }
+  }
   for (const g of groups) {
     const h = document.createElement("h3");
     h.className = "sub";

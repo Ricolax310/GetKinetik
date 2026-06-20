@@ -53,6 +53,7 @@ secrets.json
 docs/outreach/generated/*
 !docs/outreach/generated/.gitkeep
 scripts/data/bureau-run-log.json
+scripts/data/live-tweets-seen.json
 
 # Private ops — lives in the private getkinetik-ops repo, never committed here.
 # Local tooling still reads/writes these paths; they just stay out of git.
