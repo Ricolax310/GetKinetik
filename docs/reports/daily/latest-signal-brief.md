@@ -4,9 +4,9 @@
 
 ## Today's Read
 
-• WeatherXM: 287 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.
-• Geodnet: 10 exact (lat,lng) duplicate groups on 19,588 public stations — each row in §1 is one coordinate pair your registry team can grep today.
-• Hivemapper: 49.18% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a con…
+• WeatherXM: 286 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.
+• Geodnet: 8 exact (lat,lng) duplicate groups on 19,604 public stations — each row in §1 is one coordinate pair your registry team can grep today.
+• Hivemapper: 49.20% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a con…
 
 ## Why It Matters
 
@@ -18,9 +18,9 @@ Observations span 3 networks — no single network dominates the index.
 
 ### What Changed Today
 
-- **WeatherXM** — 287 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.
-- **Geodnet** — 10 exact (lat,lng) duplicate groups on 19,588 public stations — each row in §1 is one coordinate pair your registry team can grep today.
-- **Hivemapper** — 49.18% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
+- **WeatherXM** — 286 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.
+- **Geodnet** — 8 exact (lat,lng) duplicate groups on 19,604 public stations — each row in §1 is one coordinate pair your registry team can grep today.
+- **Hivemapper** — 49.20% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
 
 ### Signal Type
 
