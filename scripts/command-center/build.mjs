@@ -4,7 +4,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { OUT_JSON, REPO_ROOT, PRIVATE_DIR, todayUtc } from "./config.mjs";
+import { OUT_JSON, REPO_ROOT, PRIVATE_DIR, todayUtc, AUDIT_INDEX_CACHE } from "./config.mjs";
 import { ensureImportDirs } from "./ingest.mjs";
 import { openAgentStore } from "./sqlite-store.mjs";
 import { buildReplyBrief, writeReplyBriefMarkdown } from "./reply-brief.mjs";
@@ -33,6 +33,27 @@ function loadFunding() {
     console.warn(`[command-center] funding list load failed: ${e.message}`);
   }
   return null;
+}
+
+const AUDIT_INDEX_REMOTE =
+  "https://raw.githubusercontent.com/Ricolax310/GetKinetik/main/scripts/data/bureau-audit-index.json";
+
+// Pull the latest canonical audit index over HTTP into the gitignored cache so
+// the local dashboard is never stale. Git-free + best-effort: offline or a
+// non-public repo just leaves the existing local data in place.
+async function syncRemoteAuditIndex() {
+  try {
+    const res = await fetch(AUDIT_INDEX_REMOTE, { signal: AbortSignal.timeout?.(12_000) });
+    if (!res.ok) return;
+    const text = await res.text();
+    const parsed = JSON.parse(text);
+    if (Array.isArray(parsed.networks) && parsed.networks.length) {
+      fs.mkdirSync(path.dirname(AUDIT_INDEX_CACHE), { recursive: true });
+      fs.writeFileSync(AUDIT_INDEX_CACHE, text, "utf8");
+    }
+  } catch {
+    /* offline / non-public / parse error — keep using local data */
+  }
 }
 
 const NETWORK_TAGS = {
@@ -70,6 +91,13 @@ export async function buildCommandCenter(options = {}) {
   try {
     const today = todayUtc();
     const weekday = weekdayUtc(today);
+
+    // Pull live: sync the latest canonical audit index (git-free, gitignored
+    // cache) so the local dashboard reflects today's data. No git operations.
+    if (options.fetchRss) {
+      await syncRemoteAuditIndex();
+    }
+
     const replyBrief = buildReplyBrief(today);
 
     // Upgrade daily posts + the data thread from canned templates to AI-generated

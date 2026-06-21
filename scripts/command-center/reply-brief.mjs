@@ -2,7 +2,7 @@
 
 import fs from "node:fs";
 import path from "node:path";
-import { REPO_ROOT, BRIEF_DIR } from "./config.mjs";
+import { REPO_ROOT, BRIEF_DIR, resolveAuditIndexPath } from "./config.mjs";
 import {
   buildDailyPosts,
   renderDailyPostsMarkdown,
@@ -118,7 +118,7 @@ function stripDisallowed(text) {
 }
 
 function loadAuditNetworks() {
-  const p = path.join(REPO_ROOT, "scripts/data/bureau-audit-index.json");
+  const p = resolveAuditIndexPath();
   if (!fs.existsSync(p)) return [];
   try {
     return JSON.parse(fs.readFileSync(p, "utf8")).networks || [];

@@ -1,5 +1,6 @@
 // Local-first paths and defaults for the Command Center.
 
+import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -13,6 +14,26 @@ export function todayUtc() {
 
 export const PRIVATE_DIR = path.join(REPO_ROOT, "docs/bureau/private");
 export const IMPORTS_DIR = path.join(PRIVATE_DIR, "imports");
+
+// Audit index resolution. The tracked file is the committed copy; the cache is a
+// gitignored, HTTP-synced copy of the latest canonical data (written on Pull
+// live). Reads use whichever is FRESHER by mtime, so the local dashboard is
+// never stale whether you Pull live or git pull — with ZERO git side effects
+// (the cache lives under the gitignored private dir; no tracked file is touched).
+export const AUDIT_INDEX_TRACKED = path.join(REPO_ROOT, "scripts/data/bureau-audit-index.json");
+export const AUDIT_INDEX_CACHE = path.join(PRIVATE_DIR, "bureau-audit-index.cache.json");
+
+export function resolveAuditIndexPath() {
+  try {
+    if (!fs.existsSync(AUDIT_INDEX_CACHE)) return AUDIT_INDEX_TRACKED;
+    if (!fs.existsSync(AUDIT_INDEX_TRACKED)) return AUDIT_INDEX_CACHE;
+    const cacheM = fs.statSync(AUDIT_INDEX_CACHE).mtimeMs;
+    const trackedM = fs.statSync(AUDIT_INDEX_TRACKED).mtimeMs;
+    return cacheM >= trackedM ? AUDIT_INDEX_CACHE : AUDIT_INDEX_TRACKED;
+  } catch {
+    return AUDIT_INDEX_TRACKED;
+  }
+}
 export const X_IMPORT_DIR = path.join(IMPORTS_DIR, "x");
 export const RSS_CACHE_PATH = path.join(IMPORTS_DIR, "rss-cache.json");
 export const GITHUB_CACHE_PATH = path.join(IMPORTS_DIR, "github-issues.json");

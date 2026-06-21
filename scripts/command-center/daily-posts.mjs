@@ -13,15 +13,15 @@
 
 import fs from "node:fs";
 import path from "node:path";
-import { REPO_ROOT } from "./config.mjs";
+import { resolveAuditIndexPath } from "./config.mjs";
 
-const AUDIT_INDEX = path.join(REPO_ROOT, "scripts/data/bureau-audit-index.json");
 const TWEET_LIMIT = 280;
 
 export function loadNetworks() {
-  if (!fs.existsSync(AUDIT_INDEX)) return [];
+  const p = resolveAuditIndexPath();
+  if (!fs.existsSync(p)) return [];
   try {
-    return JSON.parse(fs.readFileSync(AUDIT_INDEX, "utf8")).networks || [];
+    return JSON.parse(fs.readFileSync(p, "utf8")).networks || [];
   } catch {
     return [];
   }

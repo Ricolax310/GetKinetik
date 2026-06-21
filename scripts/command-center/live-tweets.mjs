@@ -41,7 +41,7 @@ function saveSeenIds(seen) {
 }
 
 const SEARCH_QUERY =
-  '(DePIN OR GEODNET OR WeatherXM OR Hivemapper OR "proof of location" OR "decentralized physical") -is:retweet -is:reply lang:en';
+  '(DePIN OR "decentralized physical" OR GEODNET OR WeatherXM OR Hivemapper OR Helium OR IoTeX OR peaq OR DIMO OR Natix OR "proof of location" OR "node rewards" OR "fake nodes" OR sybil) -is:retweet -is:reply lang:en';
 
 // Headlines/tweets that are noise, not conversation — never react to these.
 const JUNK = [
@@ -57,7 +57,7 @@ const JUNK = [
 ];
 
 const DEPIN_TERMS =
-  /\b(depin|geodnet|weatherxm|hivemapper|helium|nodle|iotex|peaq|roam|dimo|proof of location|decentralized physical|sensor network|mapping network|node network|rtk|gnss)\b/i;
+  /\b(depin|geodnet|weatherxm|hivemapper|helium|nodle|iotex|peaq|roam|dimo|natix|wingbits|onocoy|render|io\.?net|akash|filecoin|livepeer|sybil|hotspot|proof of location|decentralized physical|physical infrastructure|sensor network|mapping network|node network|node rewards|rtk|gnss)\b/i;
 
 // Substance signals — what a reply-worthy take tends to contain.
 const SUBSTANCE =
@@ -238,15 +238,20 @@ export async function buildLiveTweetReacts(opts = {}) {
   // fix for "it's been the same posts for days".
   const seen = loadSeenIds();
 
-  const ranked = tweets
+  const pool = tweets
     .map((t) => ({ t, score: qualityScore(t) }))
-    .filter((x) => x.score >= 0 && !seen[x.t.id])
-    .sort((a, b) => b.score - a.score)
-    .slice(0, max * 2)
-    .map((x) => x.t);
+    .filter((x) => x.score >= 0)
+    .sort((a, b) => b.score - a.score);
+
+  // Prefer tweets you haven't worked yet; but if you've cleared the fresh batch,
+  // fall back to the best current ones rather than showing an empty feed.
+  let ranked = pool.filter((x) => !seen[x.t.id]).slice(0, max * 2).map((x) => x.t);
+  if (!ranked.length) {
+    ranked = pool.slice(0, max * 2).map((x) => x.t);
+  }
 
   if (!ranked.length) {
-    return { available: true, reacts: [], note: "No new reply-worthy DePIN tweets right now — you've worked the current batch. Check back later." };
+    return { available: true, reacts: [], note: "No DePIN tweets in the current window — try again shortly." };
   }
 
   const apiKey = opts.apiKey;
