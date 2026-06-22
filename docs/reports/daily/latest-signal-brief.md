@@ -6,7 +6,7 @@
 
 • Geodnet duplicate-coordinate groups declined from 10 to 9.
 • Geodnet entities on public map rose from 19,588 to 19,604.
-• WeatherXM: 287 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.
+• WeatherXM: 286 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.
 
 ## Why It Matters
 
@@ -20,8 +20,8 @@ Observations span 3 networks — no single network dominates the index.
 
 - **Geodnet** — exact (lat,lng) duplicate groups: 9 (-1 (-10.0%))
 - **Geodnet** — entities on public map: 19,604 (+16 (+0.1%))
-- **WeatherXM** — 287 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.
-- **Hivemapper** — 49.14% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
+- **WeatherXM** — 286 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.
+- **Hivemapper** — 49.20% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
 
 ### Signal Type
 
