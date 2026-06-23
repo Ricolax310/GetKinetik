@@ -179,6 +179,20 @@ try {
   console.warn(`[command-center] Background jobs disabled: ${e.message}`);
 }
 
+server.on("error", (err) => {
+  if (err && err.code === "EADDRINUSE") {
+    console.error(
+      `\n[command-center] Port ${PORT} is already in use — another Command Center is running.\n` +
+        `  Stop it (PowerShell):\n` +
+        `    Get-NetTCPConnection -LocalPort ${PORT} -State Listen | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force }\n` +
+        `  Or use another port:  $env:COMMAND_CENTER_PORT=5201; npm run command-center\n`,
+    );
+  } else {
+    console.error("[command-center] server error:", err);
+  }
+  process.exit(1);
+});
+
 server.listen(PORT, HOST, () => {
   console.log(`
 GETKINETIK Command Center (localhost only)

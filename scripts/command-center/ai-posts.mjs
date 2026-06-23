@@ -11,10 +11,8 @@ import { fileURLToPath } from "node:url";
 import { REPO_ROOT } from "./config.mjs";
 import { loadEnvQuiet } from "../bureau/lib.mjs";
 import { heroFact, loadNetworks, buildDailyPosts, buildGrowthKit } from "./daily-posts.mjs";
-import {
-  defaultDepinChatModel,
-  usesCompletionTokensParam,
-} from "../../functions/api/_lib/openaiChat.js";
+import { defaultDepinChatModel } from "../../functions/api/_lib/openaiChat.js";
+import { llmChat } from "../bureau/llm.mjs";
 
 const HISTORY_PATH = path.join(REPO_ROOT, "scripts/data/ai-posts-history.json");
 const HISTORY_DAYS = 10;
@@ -96,40 +94,18 @@ Write a fresh set of posts. Output STRICT JSON:
 Make each post genuinely different from the recent posts.${avoid}`;
 }
 
-export async function generateAiContent({ heroes, recent = [], apiKey, model, baseUrl }) {
-  if (!apiKey) throw new Error("OPENAI_API_KEY required");
+export async function generateAiContent({ heroes, recent = [], model }) {
   const chosenModel = model || defaultDepinChatModel(process.env);
-  const url = (baseUrl || process.env.OPENAI_BASE_URL || "https://api.openai.com/v1").replace(/\/$/, "") + "/chat/completions";
-
-  const payload = {
-    model: chosenModel,
-    response_format: { type: "json_object" },
-    messages: [
-      { role: "system", content: SYSTEM },
-      { role: "user", content: buildUserPrompt(heroes, recent) },
-    ],
-  };
-  if (usesCompletionTokensParam(chosenModel)) {
-    payload.max_completion_tokens = 2000;
-    payload.reasoning_effort = "low";
-  } else {
-    payload.temperature = 0.75;
-    payload.max_tokens = 2000;
-  }
-
-  const res = await fetch(url, {
-    method: "POST",
-    headers: { authorization: `Bearer ${apiKey}`, "content-type": "application/json" },
-    body: JSON.stringify(payload),
-    signal: AbortSignal.timeout(45_000),
+  const r = await llmChat({
+    system: SYSTEM,
+    user: buildUserPrompt(heroes, recent),
+    openaiModel: chosenModel,
+    maxOutput: 2000,
+    temperature: 0.75,
   });
-  const raw = await res.text();
-  if (!res.ok) throw new Error(`LLM HTTP ${res.status} (${chosenModel}): ${raw.slice(0, 300)}`);
-
-  const body = JSON.parse(raw);
-  const content = body.choices?.[0]?.message?.content;
-  const parsed = JSON.parse(content);
-  parsed._model = chosenModel;
+  if (!r.ok) throw new Error(r.error || "LLM failed");
+  const parsed = JSON.parse(r.content);
+  parsed._model = r.provider || chosenModel;
   return parsed;
 }
 
@@ -139,9 +115,9 @@ export async function generateAiContent({ heroes, recent = [], apiKey, model, ba
  */
 export async function buildDailyPostsSmart(today = new Date().toISOString().slice(0, 10), opts = {}) {
   loadEnvQuiet();
-  const apiKey = process.env.OPENAI_API_KEY?.trim();
+  const hasProvider = Boolean(process.env.OPENAI_API_KEY?.trim() || process.env.HF_TOKEN?.trim());
   const heroes = heroesToday();
-  if (!apiKey || !heroes.length) {
+  if (!hasProvider || !heroes.length) {
     return { ...buildDailyPosts(today), source: "template" };
   }
 
@@ -159,7 +135,7 @@ export async function buildDailyPostsSmart(today = new Date().toISOString().slic
   }
 
   try {
-    const gen = await generateAiContent({ heroes, recent: recentTexts(history), apiKey });
+    const gen = await generateAiContent({ heroes, recent: recentTexts(history) });
     const posts = (gen.posts || []).filter((p) => p?.text);
     if (!posts.length) throw new Error("empty generation");
 
@@ -179,18 +155,18 @@ if (isMain) {
   loadEnvQuiet();
   const today = new Date().toISOString().slice(0, 10);
   const heroes = heroesToday();
-  const apiKey = process.env.OPENAI_API_KEY?.trim();
+  const hasProvider = Boolean(process.env.OPENAI_API_KEY?.trim() || process.env.HF_TOKEN?.trim());
 
   const sep = "─".repeat(70);
   console.log(`\n${sep}\nBEFORE — current template posts\n${sep}`);
   for (const p of buildDailyPosts(today).posts) console.log(`\n[${p.goal}]\n${p.text}`);
 
-  if (!apiKey) {
-    console.log("\n(no OPENAI_API_KEY — cannot show AI version)");
+  if (!hasProvider) {
+    console.log("\n(no OPENAI_API_KEY or HF_TOKEN — cannot show AI version)");
   } else {
     console.log(`\n${sep}\nAFTER — AI-generated from the same real numbers\n${sep}`);
     try {
-      const gen = await generateAiContent({ heroes, recent: [], apiKey });
+      const gen = await generateAiContent({ heroes, recent: [] });
       for (const p of gen.posts || []) console.log(`\n[${p.goal}]\n${p.text}`);
       console.log(`\n--- THREAD ---`);
       (gen.thread || []).forEach((t, i) => console.log(`\n${i + 1}/ ${t}`));

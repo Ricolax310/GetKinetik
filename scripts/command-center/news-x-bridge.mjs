@@ -69,6 +69,6 @@ export async function findArticleOnX(item, bearer) {
 }
 
 /** Draft a reply when we found the article on X. */
-export async function draftReplyForArticleTweet(tweet, apiKey, model) {
-  return draftTweetReply({ tweet, apiKey, model });
+export async function draftReplyForArticleTweet(tweet, model) {
+  return draftTweetReply({ tweet, model });
 }

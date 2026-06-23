@@ -3,6 +3,7 @@
 import { buildKinetikBrainPack, defaultNewsModel } from "./news-context.mjs";
 import { AI_OUTREACH_SYSTEM_BLOCK, getWeeklyOutreachTask } from "./gtm-route.mjs";
 import { RICK_SYSTEM_BLOCK } from "./rick-route.mjs";
+import { llmChat } from "./llm.mjs";
 
 const BUREAU_SYSTEM = `You are the GETKINETIK bureau voice engine for Eric (@Ricolax310 / Kinetik_Rick).
 
@@ -47,8 +48,6 @@ export async function generateNewsCopy({
   networkIds,
   registry,
   model,
-  apiKey,
-  baseUrl,
 }) {
   const brain = buildKinetikBrainPack(registry, networkIds);
   const route = getWeeklyOutreachTask();
@@ -70,43 +69,22 @@ Matched networks: ${networkIds.join(", ") || "general DePIN"}
 
 Decide skip, comment-only (linkedinComment), or own_post (linkedinComment optional + tweet with postTweet).`;
 
-  const url = (baseUrl || "https://api.openai.com/v1").replace(/\/$/, "") + "/chat/completions";
   const chosenModel = model || defaultNewsModel();
-
-  const payload = {
-    model: chosenModel,
-    response_format: { type: "json_object" },
-    messages: [
-      { role: "system", content: BUREAU_SYSTEM },
-      { role: "user", content: user },
-    ],
-  };
-  // gpt-5 / o-series: only default temperature; omit param
-  if (!/^(gpt-5|o\d)/i.test(chosenModel)) {
-    payload.temperature = 0.25;
-  }
-
-  const res = await fetch(url, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(payload),
+  const r = await llmChat({
+    system: BUREAU_SYSTEM,
+    user,
+    openaiModel: chosenModel,
+    maxOutput: 2000,
+    temperature: 0.25,
   });
-  const raw = await res.text();
-  if (!res.ok) {
-    throw new Error(`LLM HTTP ${res.status} (${chosenModel}): ${raw.slice(0, 400)}`);
-  }
+  if (!r.ok) throw new Error(r.error || "news LLM failed");
   let parsed;
   try {
-    const body = JSON.parse(raw);
-    const content = body.choices?.[0]?.message?.content;
-    parsed = JSON.parse(content);
+    parsed = JSON.parse(r.content);
   } catch (e) {
     throw new Error(`LLM parse failed: ${e.message}`);
   }
-  parsed._model = chosenModel;
+  parsed._model = r.provider || chosenModel;
   return parsed;
 }
 

@@ -19,6 +19,8 @@ import {
 } from "../bureau/news-rss.mjs";
 import { buildLiveTweetReacts, mintBearer, renderLiveTweetsMarkdown } from "./live-tweets.mjs";
 import { findArticleOnX, draftReplyForArticleTweet, xComposeIntentUrl } from "./news-x-bridge.mjs";
+import { defaultDepinChatModel } from "../../functions/api/_lib/openaiChat.js";
+import { llmChat } from "../bureau/llm.mjs";
 
 const SOURCES_CONFIG = path.join(REPO_ROOT, "scripts/bureau/news-sources.json");
 const FRESH_DAYS = 12;
@@ -66,9 +68,11 @@ async function freshNews(cfg) {
 
 const REACT_SYSTEM = `You write X posts for GETKINETIK, a NEUTRAL DePIN integrity bureau run by a sharp solo operator.
 
-The bureau's whole lens: "Are the things earning rewards actually real, and can an outsider verify it on public data?" You read major DePIN networks on public endpoints and surface patterns worth a closer look — duplicate coordinates, capacity overflows, supply concentration, stacked hotspots.
+Your home turf: "Are the things earning rewards actually real, and can an outsider verify it on public data?" (duplicate coordinates, capacity overflows, supply concentration, stacked nodes) — but you can ALSO engage more broadly on any DePIN/crypto-infrastructure story: real vs claimed coverage, reward design, data quality, adoption, hardware, or a sharp builder take.
 
-Given a fresh DePIN news item, write a reaction post that adds ONE genuinely useful angle through this lens. Make a small account worth following.
+Given a fresh news item, write a reaction post that adds ONE genuinely useful angle and makes a small account worth following. Write so a newcomer understands.
+
+DEFAULT TO "react". You can almost always find an angle. ONLY skip pure scams, giveaways, or price-pump items with nothing real to engage.
 
 VOICE: sharp operator. Plain language. A real human take with a point of view. NOT marketing, NOT crypto-bro hype, NOT vague "interesting times" filler, NOT AI-flattery.
 
@@ -77,7 +81,6 @@ HARD RULES:
 - No price predictions, no shilling, no financial advice.
 - At most one hashtag, often zero. No emoji filler.
 - The post must stand alone and make sense to someone who didn't read the article.
-- If the story has no honest trust/verification angle, say so via action:"skip".
 
 OUTPUT valid JSON only:
 {
@@ -87,7 +90,7 @@ OUTPUT valid JSON only:
   "replyAngle": "<=200 char take to use as a reply if you find the original thread; no links/hashtags"
 }`;
 
-async function reactTake({ item, apiKey, model }) {
+async function reactTake({ item, model }) {
   const user = `FRESH DePIN NEWS:
 Title: ${item.title}
 Source: ${item.source}
@@ -96,27 +99,15 @@ Snippet: ${item.description || "(none)"}
 
 Write the reaction.`;
 
-  const url = "https://api.openai.com/v1/chat/completions";
-  const payload = {
-    model,
-    response_format: { type: "json_object" },
-    messages: [
-      { role: "system", content: REACT_SYSTEM },
-      { role: "user", content: user },
-    ],
-  };
-  if (!/^(gpt-5|o\d)/i.test(model)) payload.temperature = 0.5;
-
-  const res = await fetch(url, {
-    method: "POST",
-    headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
-    signal: AbortSignal.timeout?.(25_000),
+  const r = await llmChat({
+    system: REACT_SYSTEM,
+    user,
+    openaiModel: model,
+    maxOutput: 2000,
+    temperature: 0.5,
   });
-  if (!res.ok) throw new Error(`LLM HTTP ${res.status}`);
-  const body = await res.json();
-  const parsed = JSON.parse(body.choices?.[0]?.message?.content || "{}");
-  return parsed;
+  if (!r.ok) throw new Error(r.error || "news LLM failed");
+  return JSON.parse(r.content || "{}");
 }
 
 /**
@@ -129,11 +120,12 @@ export async function buildReactFeed(options = {}, today = new Date().toISOStrin
   }
 
   loadEnvQuiet();
-  const apiKey = process.env.OPENAI_API_KEY?.trim();
-  const model = process.env.BUREAU_DEPIN_CHAT_MODEL?.trim() || process.env.BUREAU_NEWS_MODEL?.trim() || "gpt-5";
+  // "Has a provider" = OpenAI OR the HF fallback is configured.
+  const hasProvider = Boolean(process.env.OPENAI_API_KEY?.trim() || process.env.HF_TOKEN?.trim());
+  const model = process.env.BUREAU_DEPIN_CHAT_MODEL?.trim() || process.env.BUREAU_NEWS_MODEL?.trim() || defaultDepinChatModel(process.env);
 
   // Live X conversation lane (independent of news; degrades gracefully).
-  const liveTweets = await buildLiveTweetReacts({ apiKey, model, max: 5, quoteCount: 2 });
+  const liveTweets = await buildLiveTweetReacts({ model, max: 5, quoteCount: 2 });
 
   const cfg = loadSources();
   const fresh = await freshNews(cfg);
@@ -151,9 +143,9 @@ export async function buildReactFeed(options = {}, today = new Date().toISOStrin
       published: x.date?.toISOString().slice(0, 10) || null,
     };
     const xThread = bearer ? await findArticleOnX(x.item, bearer) : null;
-    if (xThread && apiKey) {
+    if (xThread && hasProvider) {
       try {
-        const d = await draftReplyForArticleTweet(xThread, apiKey, model);
+        const d = await draftReplyForArticleTweet(xThread, model);
         if (d.action !== "skip" && d.reply) {
           return {
             ...base,
@@ -173,11 +165,11 @@ export async function buildReactFeed(options = {}, today = new Date().toISOStrin
         /* fall through to compose */
       }
     }
-    if (!apiKey) {
+    if (!hasProvider) {
       return {
         ...base,
         mode: xThread ? "x-reply" : "x-compose",
-        angle: xThread ? "Found on X — add OPENAI_API_KEY to draft reply" : "Add OPENAI_API_KEY to auto-draft a take",
+        angle: xThread ? "Found on X — add OPENAI_API_KEY or HF_TOKEN to draft reply" : "Add OPENAI_API_KEY or HF_TOKEN to auto-draft a take",
         xThread: xThread
           ? { author: xThread.author, text: xThread.text, url: xThread.url, engagement: xThread.engagement }
           : null,
@@ -186,7 +178,7 @@ export async function buildReactFeed(options = {}, today = new Date().toISOStrin
         composeUrl: xThread ? null : xComposeIntentUrl("DePIN read on this story —", x.item.link),
       };
     }
-    const take = await reactTake({ item: x.item, apiKey, model });
+    const take = await reactTake({ item: x.item, model });
     if (take.action === "skip" || !take.tweet) return null;
     const tweet = fit(take.tweet);
     if (xThread) {
@@ -214,8 +206,8 @@ export async function buildReactFeed(options = {}, today = new Date().toISOStrin
     };
   }
 
-  // No key → still surface stories with X thread discovery when possible.
-  if (!apiKey) {
+  // No provider → still surface stories with X thread discovery when possible.
+  if (!hasProvider) {
     const reacts = [];
     for (const x of fresh) {
       if (reacts.length >= MAX_REACTS) break;
@@ -225,26 +217,47 @@ export async function buildReactFeed(options = {}, today = new Date().toISOStrin
       today,
       liveTweets,
       reacts: reacts.filter(Boolean),
-      note: "Showing fresh stories — add OPENAI_API_KEY to auto-draft takes.",
+      note: "Showing fresh stories — add OPENAI_API_KEY or HF_TOKEN to auto-draft takes.",
     };
   }
 
   const reacts = [];
+  let lastNewsError = null;
   for (const x of fresh) {
     if (reacts.length >= MAX_REACTS) break;
     try {
       const row = await buildNewsReact(x);
       if (row) reacts.push(row);
-    } catch {
-      /* skip this item, try next */
+    } catch (e) {
+      lastNewsError = String(e?.message || e); // surface the reason, don't swallow
     }
+  }
+
+  // Never show empty: if the model drafted nothing, surface the top stories so
+  // you can post your own take — and say WHY (e.g. OpenAI quota) if it failed.
+  let note = null;
+  if (!reacts.length) {
+    for (const x of fresh.slice(0, MAX_REACTS)) {
+      reacts.push({
+        headline: x.item.title,
+        source: x.item.source,
+        url: x.item.link,
+        published: x.date?.toISOString().slice(0, 10) || null,
+        mode: "x-compose",
+        angle: "Fresh story — post your own take with the article",
+        tweet: null,
+        reply: null,
+        composeUrl: xComposeIntentUrl("DePIN read on this story —", x.item.link),
+      });
+    }
+    if (lastNewsError) note = `AI drafting unavailable (${lastNewsError}). Showing stories — post your own take.`;
   }
 
   return {
     today,
     reacts,
     liveTweets,
-    note: reacts.length ? null : "Fresh stories found, but none had an honest bureau angle today.",
+    note,
   };
 }
 

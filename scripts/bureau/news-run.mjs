@@ -127,13 +127,13 @@ function formatDailyMarkdown({ date, items, chosen, llm, posted }) {
  */
 export async function runBureauNews(opts = {}) {
   loadEnvQuiet();
-  const apiKey = process.env.OPENAI_API_KEY;
-  if (!apiKey?.trim()) {
-    throw new Error("OPENAI_API_KEY required for bureau news (set in .env or GitHub secret)");
+  // OpenAI is primary; HF_TOKEN enables the fallback so the run survives an
+  // OpenAI quota/outage instead of failing outright.
+  if (!process.env.OPENAI_API_KEY?.trim() && !process.env.HF_TOKEN?.trim()) {
+    throw new Error("OPENAI_API_KEY or HF_TOKEN required for bureau news (set in .env or GitHub secret)");
   }
 
   const model = opts.model || process.env.BUREAU_NEWS_MODEL || process.env.OPENAI_MODEL || "gpt-5";
-  const baseUrl = process.env.OPENAI_BASE_URL;
   const minConfidence = Number(
     opts.minConfidence ?? process.env.BUREAU_NEWS_MIN_CONFIDENCE ?? 0.85,
   );
@@ -173,8 +173,6 @@ export async function runBureauNews(opts = {}) {
         networkIds: candidate.networkIds,
         registry,
         model,
-        apiKey,
-        baseUrl,
       });
       if (llm.action === "comment" && llm.confidence >= minConfidence) {
         chosen = candidate;

@@ -10,6 +10,8 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { loadEnvQuiet } from "../bureau/lib.mjs";
+import { defaultDepinChatModel } from "../../functions/api/_lib/openaiChat.js";
+import { llmChat } from "../bureau/llm.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // Memory of tweet IDs already surfaced, so the queue is always fresh instead of
@@ -143,9 +145,11 @@ function qualityScore(t) {
 
 const REPLY_SYSTEM = `You write X REPLIES for GETKINETIK, a neutral DePIN integrity bureau run by a sharp solo operator (@Kinetik_Rick).
 
-Given someone's real tweet about DePIN, write a reply that adds ONE genuinely useful point through the bureau's lens: "are the things earning rewards actually real, and can an outsider verify it on public data?" You read networks on public endpoints and surface patterns worth a look — duplicate coordinates, capacity overflows, stacked hotspots, supply concentration.
+Given someone's real tweet about DePIN or crypto infrastructure, write a reply that adds ONE genuinely useful, human point. Your home turf is "are the things earning rewards actually real, and can an outsider verify it on public data?" (duplicate coordinates, capacity overflows, stacked nodes, supply concentration) — but you can ALSO engage more broadly: real vs claimed coverage, reward design, data quality, hardware, or a sharp builder observation.
 
-A great reply makes the original poster (and lurkers) want to follow you. Engage their actual point — don't hijack.
+DEFAULT TO "reply". You can almost always find a useful angle. ONLY skip pure scams, giveaways, airdrop-farming, or price-pump posts with nothing real to engage.
+
+A great reply makes the poster (and lurkers) want to follow you. Engage their actual point — don't hijack.
 
 VOICE: sharp, friendly, human. A peer adding insight, not a brand. NO hashtags, NO links, NO emoji filler, NO "great point!". Plain language.
 
@@ -153,30 +157,21 @@ HARD RULES:
 - Neutral. Never claim fraud is proven. "worth checking", "the open question is", "on public data you can see".
 - No price talk, no shilling, no financial advice.
 - <=240 characters. One clear idea.
-- If the tweet has no honest trust/verification angle (pure price, shill, off-topic), action:"skip".
 
 OUTPUT valid JSON only:
 { "action": "reply" | "skip", "angle": "short phrase", "reply": "<=240 char reply" }`;
 
 /** Draft a reply to an existing X post (exported for news-x-bridge). */
-export async function draftTweetReply({ tweet, apiKey, model }) {
-  const res = await fetch("https://api.openai.com/v1/chat/completions", {
-    method: "POST",
-    headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
-    body: JSON.stringify({
-      model,
-      response_format: { type: "json_object" },
-      messages: [
-        { role: "system", content: REPLY_SYSTEM },
-        { role: "user", content: `THEIR TWEET (@${tweet.author}):\n"${tweet.text}"\n\nWrite the reply.` },
-      ],
-      ...(/^(gpt-5|o\d)/i.test(model) ? {} : { temperature: 0.5 }),
-    }),
-    signal: AbortSignal.timeout?.(25_000),
+export async function draftTweetReply({ tweet, model }) {
+  const r = await llmChat({
+    system: REPLY_SYSTEM,
+    user: `THEIR TWEET (@${tweet.author}):\n"${tweet.text}"\n\nWrite the reply.`,
+    openaiModel: model,
+    maxOutput: 2000,
+    temperature: 0.5,
   });
-  if (!res.ok) throw new Error(`reply LLM HTTP ${res.status}`);
-  const body = await res.json();
-  return JSON.parse(body.choices?.[0]?.message?.content || "{}");
+  if (!r.ok) throw new Error(r.error || "reply LLM failed");
+  return JSON.parse(r.content || "{}");
 }
 
 const QUOTE_SYSTEM = `You write X QUOTE-TWEETS for GETKINETIK's @Kinetik_Rick — a sharp solo operator running a neutral DePIN integrity bureau.
@@ -195,24 +190,16 @@ OUTPUT valid JSON only:
 { "action": "quote" | "skip", "angle": "short phrase", "quote": "<=240 char quote-tweet take" }`;
 
 /** Draft a quote-tweet take for an existing X post (growth lane). */
-export async function draftTweetQuote({ tweet, apiKey, model }) {
-  const res = await fetch("https://api.openai.com/v1/chat/completions", {
-    method: "POST",
-    headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
-    body: JSON.stringify({
-      model,
-      response_format: { type: "json_object" },
-      messages: [
-        { role: "system", content: QUOTE_SYSTEM },
-        { role: "user", content: `THEIR TWEET (@${tweet.author}):\n"${tweet.text}"\n\nWrite the quote-tweet take.` },
-      ],
-      ...(/^(gpt-5|o\d)/i.test(model) ? {} : { temperature: 0.6 }),
-    }),
-    signal: AbortSignal.timeout?.(25_000),
+export async function draftTweetQuote({ tweet, model }) {
+  const r = await llmChat({
+    system: QUOTE_SYSTEM,
+    user: `THEIR TWEET (@${tweet.author}):\n"${tweet.text}"\n\nWrite the quote-tweet take.`,
+    openaiModel: model,
+    maxOutput: 2000,
+    temperature: 0.6,
   });
-  if (!res.ok) throw new Error(`quote LLM HTTP ${res.status}`);
-  const body = await res.json();
-  return JSON.parse(body.choices?.[0]?.message?.content || "{}");
+  if (!r.ok) throw new Error(r.error || "quote LLM failed");
+  return JSON.parse(r.content || "{}");
 }
 
 /**
@@ -254,27 +241,25 @@ export async function buildLiveTweetReacts(opts = {}) {
     return { available: true, reacts: [], note: "No DePIN tweets in the current window — try again shortly." };
   }
 
-  const apiKey = opts.apiKey;
-  const model = opts.model || "gpt-5";
+  const model = opts.model || defaultDepinChatModel(process.env);
+  const hasProvider = Boolean(process.env.OPENAI_API_KEY?.trim() || process.env.HF_TOKEN?.trim());
   const reacts = [];
+  let lastDraftError = null;
   for (const t of ranked) {
     if (reacts.length >= max) break;
-    if (!apiKey) {
-      reacts.push({ author: t.author, text: t.text, url: t.url, engagement: t.engagement, followers: t.followers, reply: null, quoteDraft: null, angle: "Add OPENAI_API_KEY to auto-draft a reply" });
+    if (!hasProvider) {
+      reacts.push({ author: t.author, text: t.text, url: t.url, engagement: t.engagement, followers: t.followers, reply: null, quoteDraft: null, angle: "Add OPENAI_API_KEY or HF_TOKEN to auto-draft a reply" });
       seen[t.id] = Date.now();
       continue;
     }
     try {
-      const d = await draftTweetReply({ tweet: t, apiKey, model });
-      if (d.action === "skip" || !d.reply) {
-        seen[t.id] = Date.now(); // chose to skip — don't resurface it
-        continue;
-      }
+      const d = await draftTweetReply({ tweet: t, model });
+      if (d.action === "skip" || !d.reply) continue; // leave unseen so it can resurface
       // Also draft a quote-tweet take for the strongest few.
       let quoteDraft = null;
       if (reacts.length < quoteCount) {
         try {
-          const q = await draftTweetQuote({ tweet: t, apiKey, model });
+          const q = await draftTweetQuote({ tweet: t, model });
           if (q.action !== "skip" && q.quote) quoteDraft = q.quote.slice(0, 240);
         } catch {
           /* quote is optional */
@@ -282,14 +267,28 @@ export async function buildLiveTweetReacts(opts = {}) {
       }
       reacts.push({ author: t.author, text: t.text, url: t.url, engagement: t.engagement, followers: t.followers, reply: d.reply.slice(0, 240), quoteDraft, angle: d.angle || null });
       seen[t.id] = Date.now();
-    } catch {
-      /* skip this tweet */
+    } catch (e) {
+      lastDraftError = String(e?.message || e); // surface the reason, don't swallow
     }
+  }
+
+  // Never show an empty feed: if the model drafted nothing, surface the top
+  // tweets anyway (no draft) so you can write your own — and say WHY there are
+  // no drafts (e.g. OpenAI quota) instead of failing silently.
+  let note = null;
+  if (!reacts.length) {
+    for (const t of ranked.slice(0, max)) {
+      reacts.push({ author: t.author, text: t.text, url: t.url, engagement: t.engagement, followers: t.followers, reply: null, quoteDraft: null, angle: lastDraftError ? "AI draft unavailable — write your own take" : "Open thread — write a quick take in your voice" });
+      seen[t.id] = Date.now();
+    }
+    if (lastDraftError) note = `AI drafting unavailable (${lastDraftError}). Showing tweets to reply to manually.`;
+  } else if (lastDraftError) {
+    note = `Some drafts were skipped — AI error: ${lastDraftError}`;
   }
 
   saveSeenIds(seen);
 
-  return { available: true, reacts, note: reacts.length ? null : "Found tweets, but none had an honest bureau angle." };
+  return { available: true, reacts, note };
 }
 
 export function renderLiveTweetsMarkdown(live) {

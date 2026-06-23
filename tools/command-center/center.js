@@ -432,30 +432,44 @@ function renderFunding(el, funding) {
 }
 
 function applyPayload(data) {
-  $("headline").textContent = data.today
-    ? `${data.weekday || "Today"} · ${data.today}`
-    : "Today";
-  $("meta-updated").textContent = data.updatedAt
-    ? `Updated ${new Date(data.updatedAt).toLocaleString()}`
-    : "";
+  // Each panel renders independently. One panel throwing must NEVER blank the
+  // whole dashboard (that exact failure — a render error wiping every panel — is
+  // what this guards against). Errors are logged + surfaced, never swallowed.
+  const safe = (label, fn) => {
+    try {
+      fn();
+    } catch (e) {
+      console.error(`[command-center] panel render failed: ${label}`, e);
+      const box = $("load-error");
+      if (box) {
+        box.hidden = false;
+        box.textContent = `A panel failed to render (${label}) — other panels still work. See console for details.`;
+      }
+    }
+  };
 
-  $("brief-export").textContent = data.dailyBrief?.exportPath
-    ? `Full markdown export: ${data.dailyBrief.exportPath}`
-    : "";
+  safe("header", () => {
+    $("headline").textContent = data.today
+      ? `${data.weekday || "Today"} · ${data.today}`
+      : "Today";
+    $("meta-updated").textContent = data.updatedAt
+      ? `Updated ${new Date(data.updatedAt).toLocaleString()}`
+      : "";
+    $("brief-export").textContent = data.dailyBrief?.exportPath
+      ? `Full markdown export: ${data.dailyBrief.exportPath}`
+      : "";
+  });
 
-  renderList(
-    $("live-threads"),
-    data.replyBrief?.liveThreads?.threads,
-    "No live threads.",
+  safe("live-threads", () =>
+    renderList($("live-threads"), data.replyBrief?.liveThreads?.threads, "No live threads."),
   );
-  renderSeeds($("thread-seeds"), data.replyBrief?.threadSeeds?.seeds);
-
-  renderReactFeed(data.reactFeed);
-  renderDailyPosts($("daily-posts"), data.replyBrief?.dailyPosts);
-  renderGrowthKit(data.replyBrief?.growthKit);
-  renderReadingFeed($("reading-feed"), data.readingFeed);
-  renderPublication($("publication"), data.publication);
-  renderFunding($("funding"), data.funding);
+  safe("thread-seeds", () => renderSeeds($("thread-seeds"), data.replyBrief?.threadSeeds?.seeds));
+  safe("react-feed", () => renderReactFeed(data.reactFeed));
+  safe("daily-posts", () => renderDailyPosts($("daily-posts"), data.replyBrief?.dailyPosts));
+  safe("growth-kit", () => renderGrowthKit(data.replyBrief?.growthKit));
+  safe("reading-feed", () => renderReadingFeed($("reading-feed"), data.readingFeed));
+  safe("publication", () => renderPublication($("publication"), data.publication));
+  safe("funding", () => renderFunding($("funding"), data.funding));
 }
 
 async function loadData() {
