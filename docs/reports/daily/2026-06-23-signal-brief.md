@@ -54,7 +54,7 @@ Observations span 4 networks — no single network dominates the index.
 
 ### Thread Seed
 
-Public read on Geodnet: 8 exact (lat,lng) duplicate groups on 19,604 public stations — each row in §1 is one coordinate pair your registry team can grep today. — does that match your internal view, or is the public feed expected to behave this way?
+Public read on Geodnet: 10 exact (lat,lng) duplicate groups on 19,609 public stations — each row in §1 is one coordinate pair your registry team can grep today. — does that match your internal view, or is the public feed expected to behave this way?
 
 ### Sources & Methodology
 
