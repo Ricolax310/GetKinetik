@@ -131,15 +131,17 @@ export async function onRequestPost(ctx) {
   try {
     const { request, env } = ctx;
 
-    // Diagnostic probe: POST ?ping returns immediately (no context, no OpenAI).
-    // Isolates whether platform 502s originate before or during the model call.
-    if (new URL(request.url).searchParams.has("ping")) {
+    // Diagnostic probes (?ping/?probe/?nocall) are DISABLED in production: they
+    // previously let anyone probe the OpenAI key's validity and burn quota.
+    // Enable only by setting DEPIN_CHAT_DEBUG=1 in the Cloudflare environment.
+    const debugEnabled = env.DEPIN_CHAT_DEBUG === "1";
+    const params = new URL(request.url).searchParams;
+
+    if (debugEnabled && params.has("ping")) {
       return json({ ok: true, build: BUILD_MARKER, pong: true, hasKey: Boolean(env.OPENAI_API_KEY?.trim()) });
     }
 
-    // Diagnostic probe: POST ?probe makes a minimal outbound OpenAI request
-    // and reports the upstream status — isolates key/egress issues.
-    if (new URL(request.url).searchParams.has("probe")) {
+    if (debugEnabled && params.has("probe")) {
       const stages = { build: BUILD_MARKER, hasKey: Boolean(env.OPENAI_API_KEY?.trim()) };
       try {
         const r = await fetch("https://api.openai.com/v1/models?limit=1", {
@@ -214,11 +216,14 @@ export async function onRequestPost(ctx) {
       if (pack.news?.topPick?.title) {
         meta += `today's bureau news pick: "${pack.news.topPick.title}". `;
       }
-    } catch {
+    } catch (err) {
+      console.error("[depin-chat] context load failed:", String(err?.message || err));
       /* use fallback context */
     }
 
-    const modelOverride = new URL(request.url).searchParams.get("model");
+    // Model is server-controlled. A client ?model= override (previously allowed)
+    // let anyone force expensive/unsupported models — only honor it in debug mode.
+    const modelOverride = env.DEPIN_CHAT_DEBUG === "1" ? params.get("model") : null;
     const model = modelOverride || defaultDepinChatModel(env);
 
     const system = `You are the public GETKINETIK bureau assistant on getkinetik.app.
@@ -241,7 +246,7 @@ Rules:
 ${context}`;
 
     // Diagnostic: ?nocall runs context-load + prompt build but SKIPS OpenAI.
-    if (new URL(request.url).searchParams.has("nocall")) {
+    if (debugEnabled && params.has("nocall")) {
       return json({ ok: true, build: BUILD_MARKER, promptChars: system.length, model });
     }
 
@@ -255,7 +260,9 @@ ${context}`;
     });
 
     if (!result.ok) {
-      return json({ ok: false, error: result.error, model, debug: result.debug || null });
+      // Log internal debug server-side; never leak upstream paths/details to clients.
+      if (result.debug) console.error("[depin-chat] upstream error:", result.debug);
+      return json({ ok: false, error: result.error, model });
     }
 
     return json({ ok: true, reply: result.reply, model: result.model });

@@ -327,6 +327,11 @@ async function verifyAndAttest(proofUrl, env) {
 
   // Step 7: load bureau context and compute flags.
   const nodeId = payload.nodeId ?? null;
+  // Validate nodeId shape BEFORE any KV read/write so a malformed id can't
+  // pollute the bureau:* / attestation:* namespaces. Matches /api/score/:nodeId.
+  if (!nodeId || !/^KINETIK-NODE-[0-9A-F]{8}$/.test(nodeId)) {
+    return { valid: false, reason: "invalid_node_id" };
+  }
   const priorContext = await loadBureauContext(env, nodeId);
 
   const nowMs = Date.now();
@@ -609,7 +614,9 @@ export async function onRequestPost(ctx) {
     return json(result, 200);
   } catch (err) {
     console.error("[verify-device] unexpected error:", err);
-    return json({ valid: false, reason: "internal_error" }, 200);
+    // 503 (not 200) so partners can distinguish a bureau outage from a genuine
+    // cryptographic rejection (which is 200 + valid:false). Retryable.
+    return json({ valid: false, reason: "internal_error", retryable: true }, 503);
   }
 }
 
@@ -679,6 +686,14 @@ async function maybeFireTierWebhook(env, result, priorTier) {
     typeof env?.SCORE_WEBHOOK_SECRET === "string"
       ? env.SCORE_WEBHOOK_SECRET
       : "";
+  // Fail closed: never ship unsigned webhooks. Partners must be able to verify
+  // the X-GETKINETIK-Signature; an unsigned event is unauthenticatable.
+  if (!secret.trim()) {
+    console.error(
+      "[verify-device] SCORE_WEBHOOK_URLS set but SCORE_WEBHOOK_SECRET missing — skipping webhook (refusing to send unsigned).",
+    );
+    return;
+  }
   const delivery =
     (crypto.randomUUID && crypto.randomUUID()) ||
     `del-${Date.now()}-${Math.random().toString(16).slice(2)}`;
