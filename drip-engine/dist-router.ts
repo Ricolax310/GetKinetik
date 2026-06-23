@@ -238,7 +238,17 @@ export async function executeDistribution(ctx: DistributionContext): Promise<Dis
 
     const xPlan = plan.channels.find((c) => c.channel === "x");
     if (xPlan?.livePublish) {
-      if (xPostAlreadyDone("daily", ctx.date)) {
+      // Content guard: never live-post empty/no-signal filler. If there are no
+      // signals or no tweet text, skip the post instead of shipping a generic
+      // "DePIN signal update" with nothing behind it.
+      const hasContent =
+        Array.isArray(ctx.signals) && ctx.signals.length > 0 &&
+        Array.isArray(tweets) && tweets.length > 0 &&
+        typeof caption === "string" && caption.trim().length > 0;
+      if (!hasContent) {
+        publish.x = `Live X post skipped — no publishable signals today (signals=${ctx.signals?.length ?? 0}, tweets=${tweets?.length ?? 0}).`;
+        console.warn(`[drip] ${publish.x}`);
+      } else if (xPostAlreadyDone("daily", ctx.date)) {
         publish.x = skipXPostMessage("daily", ctx.date);
       } else {
         const xResult = await publishXThread(thread, {
