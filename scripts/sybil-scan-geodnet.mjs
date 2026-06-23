@@ -3,6 +3,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import {
+  assertScanNotCollapsed,
   loadPreviousStats,
   renderCrossCheckSection,
   renderExecutiveSummary,
@@ -154,6 +155,8 @@ const exactDups = [...exactDupGroups.values()].filter((g) => g.length >= 2);
 // ---- 4. Snapshot ----------------------------------------------------------
 const snapAbs = path.resolve(OUTPUT_SNAPSHOT);
 const prevStats = loadPreviousStats(snapAbs);
+// Don't let a failed/empty fetch wipe a good snapshot.
+assertScanNotCollapsed({ observed: stations.length, prevStats, label: "geodnet" });
 const stats = {
   generatedAt: new Date().toISOString(),
   observed: stations.length,

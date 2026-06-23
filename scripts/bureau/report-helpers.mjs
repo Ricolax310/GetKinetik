@@ -19,6 +19,47 @@ export function stripEmoji(text) {
     .trim();
 }
 
+/**
+ * Guard against a failed/empty upstream scan overwriting a good snapshot.
+ *
+ * A scan that returns 0 rows (API outage, shape change, truncated pagination)
+ * would otherwise write `observed: 0`, wiping a healthy snapshot and resetting
+ * deltas to "first run". This throws BEFORE the snapshot write so the prior
+ * good data is preserved and the failure is loud (non-zero exit).
+ *
+ * @param {object} o
+ * @param {number} o.observed        rows observed this run
+ * @param {Record<string, number>|null} o.prevStats  previous snapshot stats
+ * @param {string} o.label           network label for the error message
+ * @param {number} [o.minAbsolute=1] hard floor — fewer than this is always a failure
+ * @param {number} [o.minRatio=0.4]  must keep at least this fraction of prior count
+ * @param {boolean} [o.allowCollapse] override (e.g. --force / env) to permit a real drop
+ */
+export function assertScanNotCollapsed({
+  observed,
+  prevStats,
+  label,
+  minAbsolute = 1,
+  minRatio = 0.4,
+  allowCollapse = process.env.BUREAU_SCAN_ALLOW_COLLAPSE === "1",
+}) {
+  if (typeof observed !== "number" || !Number.isFinite(observed) || observed < minAbsolute) {
+    throw new Error(
+      `[${label}] scan returned ${observed} rows — refusing to overwrite the existing snapshot. ` +
+        `Upstream is likely down or changed shape. Prior data kept. ` +
+        `(set BUREAU_SCAN_ALLOW_COLLAPSE=1 to force.)`,
+    );
+  }
+  const prev = prevStats && typeof prevStats.observed === "number" ? prevStats.observed : null;
+  if (prev && prev > 0 && observed < prev * minRatio && !allowCollapse) {
+    throw new Error(
+      `[${label}] scan collapsed: ${observed} rows vs ${prev} last run ` +
+        `(< ${Math.round(minRatio * 100)}% retained) — refusing to overwrite the good snapshot. ` +
+        `If this drop is real, set BUREAU_SCAN_ALLOW_COLLAPSE=1 to force.`,
+    );
+  }
+}
+
 /** @typedef {{ key: string, label: string, value: number, lowerIsBetter?: boolean, pct?: boolean }} StatRow */
 
 export function loadPreviousStats(snapshotAbsPath) {

@@ -3,6 +3,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import {
+  assertScanNotCollapsed,
   loadPreviousStats,
   renderCrossCheckSection,
   renderExecutiveSummary,
@@ -128,6 +129,8 @@ const topBundles = [...bundleHistogramGlobal.entries()].sort((a, b) => b[1] - a[
 
 const snapAbs = path.resolve(OUTPUT_SNAPSHOT);
 const prevStats = loadPreviousStats(snapAbs);
+// Don't let a failed/empty fetch wipe a good snapshot.
+assertScanNotCollapsed({ observed: cells.length, prevStats, label: "weatherxm" });
 const stats = {
   generatedAt: new Date().toISOString(),
   observed: cells.length,

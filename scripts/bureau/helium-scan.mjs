@@ -17,6 +17,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import {
+  assertScanNotCollapsed,
   loadPreviousStats,
   renderCrossCheckSection,
   renderExecutiveSummary,
@@ -84,6 +85,8 @@ export async function runHeliumScan({ subnetwork, networkLabel, reportPath, snap
   // ---- Snapshot ---------------------------------------------------------------
   const snapAbs = path.resolve(snapshotPath);
   const prevStats = loadPreviousStats(snapAbs);
+  // Don't let a failed/empty fetch wipe a good snapshot.
+  assertScanNotCollapsed({ observed: located.length, prevStats, label: subnetwork ? `helium-${subnetwork}` : "helium" });
   const stats = {
     generatedAt: new Date().toISOString(),
     observed: located.length,
