@@ -316,7 +316,12 @@
   }
 
   fetch("/api/anchors")
-    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (r) {
+      // A failed request must NOT fall through to the "no anchors yet" empty
+      // state — that reads as "the chain is empty" when really the API is down.
+      if (!r.ok) throw new Error("anchors HTTP " + r.status);
+      return r.json();
+    })
     .then(function (anchors) {
       var loadingEl = document.getElementById("anchors-loading");
       if (loadingEl) loadingEl.style.display = "none";

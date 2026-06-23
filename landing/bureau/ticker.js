@@ -33,11 +33,21 @@
     if (el) el.textContent = val;
   }
 
+  function setStatus(msg) {
+    var el = document.querySelector('[data-stat="status"]');
+    if (el) el.textContent = msg;
+  }
+
   function refresh() {
     fetch("/api/bureau/stats", { cache: "no-store" })
-      .then(function (r) { return r.json(); })
+      .then(function (r) {
+        // Distinguish a real outage from "no data" — a 5xx/HTML body must not
+        // silently look like an empty bureau.
+        if (!r.ok) throw new Error("stats HTTP " + r.status);
+        return r.json();
+      })
       .then(function (data) {
-        if (!data || !data.ok) return;
+        if (!data || !data.ok) throw new Error("stats payload not ok");
         var s = data.stats || {};
         set("total", fmtN(s.total));
         set("valid", fmtN(s.valid));
@@ -48,8 +58,12 @@
         set("strong", fmtN(strong));
         set("version", data.methodologyVersion || "v1.1");
         set("last", fmtAgo(s.lastVerifyAt));
+        setStatus("");
       })
-      .catch(function () { /* keep '—' on failure */ });
+      .catch(function () {
+        // Make a failure visible instead of leaving stale "—" that reads as "no data".
+        setStatus("Live stats temporarily unavailable — retrying.");
+      });
   }
 
   refresh();
