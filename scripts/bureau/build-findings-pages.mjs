@@ -74,6 +74,7 @@ const CONCEPT = {
   weatherxm: "over-capacity cells",
   hivemapper: "HONEY concentration",
   natix: "coverage metrics",
+  dimo: "device-backing gap",
 };
 
 /** A tight headline (number-first) for titles, derived from the strongest stat. */
@@ -83,6 +84,7 @@ function shortHeadline(net) {
   if (typeof s.exactDupGroups === "number") return `${num(s.exactDupGroups)} identical-coordinate groups`;
   if (typeof s.overCapacityCells === "number") return `${num(s.overCapacityCells)} above designed limit`;
   if (typeof s.top20ShareOfSupply === "number") return `${pct(s.top20ShareOfSupply)} in top 20 wallets`;
+  if (typeof s.hardwarePct === "number") return `${pct(s.hardwarePct)} backed by hardware`;
   return clip(net.topFinding, 48);
 }
 
@@ -131,6 +133,7 @@ const SEO_TERMS = {
   weatherxm: "WeatherXM over-capacity cells, fake weather stations, station density",
   hivemapper: "Hivemapper HONEY supply concentration, token distribution",
   natix: "Natix coverage metrics, mapping activity, driver registrations",
+  dimo: "DIMO connected devices, vehicle data DePIN, real device share, aftermarket vs synthetic",
 };
 
 const STAT_LABELS = {

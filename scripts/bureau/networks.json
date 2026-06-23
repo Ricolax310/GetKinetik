@@ -38,6 +38,12 @@
       "route": "monitor",
       "note": "On-chain holder/economic shape — NOT a device-level claim. verify-device cannot link holders to operators; monitor only."
     },
+    "device_backing_gap": {
+      "assetClass": "device_identity",
+      "verificationEligible": false,
+      "route": "clarify",
+      "note": "More on-chain identities than connected/active devices on the public registry — a composition gap observed at aggregate level. Bounded reality-check with the operator first (expected pre-onboarding/churn vs counted-but-unbacked identities?) before any device test."
+    },
     "scaffold": {
       "assetClass": "none",
       "verificationEligible": false,
@@ -105,6 +111,21 @@
       "routing": {
         "anomalyType": "telemetry_discontinuity",
         "clarificationRequest": "Sanity-check (not a test request): ask whether the public Coverage Map metrics feed (/coverage/v1/metrics/global) is expected to stay flat in production — KM mapped / detections plateaued ~2026-05-01 while driver registrations kept rising. Offer the exact change-point timestamps + requests. verify-device only becomes relevant if confirmation establishes a real per-device activity change rather than an ETL/display freeze."
+      }
+    },
+    {
+      "id": "dimo",
+      "name": "DIMO",
+      "scanScript": "sybil-scan-dimo.mjs",
+      "report": "docs/reports/dimo-sybil-report.md",
+      "snapshot": "scripts/data/dimo-snapshot.json",
+      "publicSource": "https://identity-api.dimo.zone/query",
+      "scanNotes": "DIMO public Identity GraphQL API (no auth). Compares on-chain vehicle identities against connected aftermarket (hardware) + synthetic (software) devices.",
+      "requiresEnv": [],
+      "defaultEnabled": true,
+      "routing": {
+        "anomalyType": "device_backing_gap",
+        "clarificationRequest": "Sanity-check (not a test request): the public Identity API shows more vehicle identities than connected devices. Ask whether the unbacked identities are expected (pre-onboarding, churn, deregistered) or whether they count as active for rewards. verify-device only becomes relevant if confirmation establishes real per-device activity to ground-truth."
       }
     },
     {

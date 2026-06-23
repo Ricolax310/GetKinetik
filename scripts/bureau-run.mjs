@@ -12,6 +12,7 @@ import {
   extractHeadlineFindings,
   fileAgeMs,
   formatAge,
+  loadAnomalyTaxonomy,
   loadEnvQuiet,
   loadRegistry,
   redactSecrets,
@@ -250,7 +251,7 @@ async function cmdBrief(registry) {
   const opsPackOut = writeOpsPack(registry, pipelineResults);
   const depinChatCtx = await writeDepinChatContext();
   const pubOut = writePublishingPack(registry, pipelineResults);
-  writeAuditIndex(REPO_ROOT, registry, resolveRepo);
+  writeAuditIndex(REPO_ROOT, registry, resolveRepo, loadAnomalyTaxonomy());
   appendLog({
     action: "brief",
     ok: true,
@@ -282,7 +283,7 @@ async function cmdPublish(registry) {
     }
   }
   const pubOut = writePublishingPack(registry, pipelineResults);
-  writeAuditIndex(REPO_ROOT, registry, resolveRepo);
+  writeAuditIndex(REPO_ROOT, registry, resolveRepo, loadAnomalyTaxonomy());
   const depinChatCtx = await writeDepinChatContext();
   appendLog({ action: "publish", ok: true, depinChat: depinChatCtx, ...pubOut });
   console.log("GETKINETIK bureau publishing pack\n");
