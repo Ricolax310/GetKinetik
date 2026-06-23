@@ -75,7 +75,10 @@ function missingEnv(net) {
 function runScan(net) {
   const script = resolveRepo(path.join("scripts", net.scanScript));
   if (!fs.existsSync(script)) {
-    throw new Error(`scan script missing: ${net.scanScript}`);
+    // A missing scanner for one network must not kill the whole pipeline —
+    // skip it with a clear warning (same as a missing-env skip).
+    console.error(`[warn] ${net.id}: skipping scan — scanner not found (${net.scanScript})`);
+    return { ok: false, skipped: true, reason: `scan script missing: ${net.scanScript}` };
   }
   const miss = missingEnv(net);
   if (miss.length) {

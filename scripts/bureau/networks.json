@@ -100,7 +100,8 @@
       "publicSource": "Natix Coverage Map metrics feed (coverage.natix.network/coverage/v1/metrics) + Solana NATIX SPL mint",
       "scanNotes": "Part A reads the public Coverage Map metrics (no auth) and flags frozen cumulative output metrics vs moving driver count. Part B reads on-chain concentration (SOLANA_RPC_URL). Optional --nodes= geometry pass if a contributor snapshot is shared.",
       "requiresEnv": ["SOLANA_RPC_URL"],
-      "defaultEnabled": true,
+      "defaultEnabled": false,
+      "_disabledReason": "scanner sybil-scan-natix.mjs not yet implemented — re-enable when the script lands.",
       "routing": {
         "anomalyType": "telemetry_discontinuity",
         "clarificationRequest": "Sanity-check (not a test request): ask whether the public Coverage Map metrics feed (/coverage/v1/metrics/global) is expected to stay flat in production — KM mapped / detections plateaued ~2026-05-01 while driver registrations kept rising. Offer the exact change-point timestamps + requests. verify-device only becomes relevant if confirmation establishes a real per-device activity change rather than an ETL/display freeze."
