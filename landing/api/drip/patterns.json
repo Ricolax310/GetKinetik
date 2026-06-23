@@ -1,56 +1,6 @@
 {
-  "generatedAt": "2026-06-22T18:24:23.448Z",
+  "generatedAt": "2026-06-23T17:37:35.830Z",
   "patterns": [
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Helium IoT: repeated stackedSpots observation",
-      "pattern": "REPEATED_INFRASTRUCTURE",
-      "networks": [
-        "Helium IoT"
-      ],
-      "category": "INFRASTRUCTURE",
-      "description": "Observed Helium IoT stackedSpots on 7 of 7 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Helium Mobile: repeated stackedSpots observation",
-      "pattern": "REPEATED_INFRASTRUCTURE",
-      "networks": [
-        "Helium Mobile"
-      ],
-      "category": "INFRASTRUCTURE",
-      "description": "Observed Helium Mobile stackedSpots on 7 of 7 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "cross-network",
-      "classification": "convergence",
-      "headline": "Cross-network infrastructure coverage stress observed across multiple networks",
-      "pattern": "CROSS_NETWORK_INFRASTRUCTURE",
-      "networks": [
-        "Helium IoT",
-        "Helium Mobile"
-      ],
-      "category": "INFRASTRUCTURE",
-      "description": "Cross-network infrastructure coverage stress observed across multiple networks (Helium IoT, Helium Mobile).",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "cross-network",
-      "classification": "stability",
-      "headline": "Stability: INFRASTRUCTURE metrics unchanged across networks",
-      "pattern": "STABILITY_INFRASTRUCTURE",
-      "networks": [
-        "Helium IoT",
-        "Helium Mobile"
-      ],
-      "category": "INFRASTRUCTURE",
-      "description": "No delta movement recorded for INFRASTRUCTURE metrics this window.",
-      "patternType": "cross-network"
-    },
     {
       "scope": "systemic",
       "classification": "repetition",
@@ -88,8 +38,32 @@
       "patternType": "cross-network"
     },
     {
+      "scope": "systemic",
+      "classification": "repetition",
+      "headline": "Helium IoT: repeated stackedSpots observation",
+      "pattern": "REPEATED_INFRASTRUCTURE",
+      "networks": [
+        "Helium IoT"
+      ],
+      "category": "INFRASTRUCTURE",
+      "description": "Observed Helium IoT stackedSpots on 7 of 7 recorded days.",
+      "patternType": "cross-network"
+    },
+    {
+      "scope": "systemic",
+      "classification": "repetition",
+      "headline": "Helium Mobile: repeated stackedSpots observation",
+      "pattern": "REPEATED_INFRASTRUCTURE",
+      "networks": [
+        "Helium Mobile"
+      ],
+      "category": "INFRASTRUCTURE",
+      "description": "Observed Helium Mobile stackedSpots on 7 of 7 recorded days.",
+      "patternType": "cross-network"
+    },
+    {
       "scope": "localized",
-      "classification": "stability",
+      "classification": "drift",
       "headline": "WeatherXM: capacity pressure signal detected",
       "pattern": "LOCAL_CAPACITY",
       "networks": [
@@ -133,6 +107,18 @@
       ],
       "category": "ECONOMICS",
       "description": "Observed holder/supply concentration metrics from public on-chain reads.",
+      "patternType": "single-network"
+    },
+    {
+      "scope": "localized",
+      "classification": "stability",
+      "headline": "Helium IoT: infrastructure coverage stress signal detected",
+      "pattern": "LOCAL_INFRASTRUCTURE",
+      "networks": [
+        "Helium IoT"
+      ],
+      "category": "INFRASTRUCTURE",
+      "description": "Observed infrastructure signal on Helium IoT (stackedSpots).",
       "patternType": "single-network"
     }
   ]

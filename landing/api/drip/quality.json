@@ -13,7 +13,7 @@
       {
         "network": "Geodnet",
         "metric": "exactDupGroups",
-        "confidence": 0.73,
+        "confidence": 0.682,
         "flags": [
           "isolated"
         ]
@@ -40,19 +40,13 @@
         "metric": "stackedSpots",
         "confidence": 0.672,
         "flags": []
-      },
-      {
-        "network": "Helium Mobile",
-        "metric": "stackedSpots",
-        "confidence": 0.672,
-        "flags": []
       }
     ],
     "heldBack": [
       {
-        "network": "Geodnet",
-        "metric": "observed",
-        "confidence": 0.595,
+        "network": "Helium Mobile",
+        "metric": "stackedSpots",
+        "confidence": 0.58,
         "flags": []
       }
     ]

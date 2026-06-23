@@ -21,7 +21,7 @@ Observations span 4 networks — no single network dominates the index.
 - **Geodnet** — exact (lat,lng) duplicate groups: 10 (+1 (+11.1%))
 - **WeatherXM** — cells over designed capacity: 288 (+1 (+0.3%))
 - **Helium Mobile** — single-coordinate stacks (≥10 hotspots): 531 (+1 (+0.2%))
-- **Hivemapper** — 49.23% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
+- **Hivemapper** — 49.20% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
 
 ### Signal Type
 
