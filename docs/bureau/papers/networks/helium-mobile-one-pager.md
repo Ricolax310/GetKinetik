@@ -2,7 +2,7 @@
 
 > Public endpoints only. Not a verdict.
 
-**As of:** 2026-06-23  
+**As of:** 2026-06-24  
 **Public source:** https://entities.nft.helium.io/v2/hotspots?subnetwork=mobile  
 **Full report:** [docs/reports/helium-mobile-sybil-report.md](https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/helium-mobile-sybil-report.md)  
 **Live terminal:** https://getkinetik.app/audits.html  
