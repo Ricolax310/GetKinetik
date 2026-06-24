@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-23",
+  "updatedAt": "2026-06-24",
   "networks": [
     {
       "id": "geodnet",
@@ -8,16 +8,16 @@
       "publicSource": "https://rtk.geodnet.com/api/v2/coverage_stations",
       "generatedAt": "2026-06-23",
       "stats": {
-        "generatedAt": "2026-06-23T10:14:31.766Z",
-        "observed": 19609,
+        "generatedAt": "2026-06-23T21:45:53.245Z",
+        "observed": 19618,
         "exactDupGroups": 10,
         "nearDupClusters": 917,
-        "tightClusters": 4,
-        "lowPrecision": 10,
-        "flaggedCount": 1827,
-        "flaggedPct": 0.09317150288133
+        "tightClusters": 5,
+        "lowPrecision": 5,
+        "flaggedCount": 1825,
+        "flaggedPct": 0.09302681211132634
       },
-      "topFinding": "**8 exact (lat,lng) duplicate groups** on 19,604 public stations — each row in §1 is one coordinate pair your registry team can grep today.",
+      "topFinding": "**10 exact (lat,lng) duplicate groups** on 19,618 public stations — each row in §1 is one coordinate pair your registry team can grep today.",
       "anomalyType": "duplication_cluster",
       "assetClass": "spatial_distribution",
       "verificationEligible": true,
@@ -33,16 +33,16 @@
       "publicSource": "WeatherXM public cells API",
       "generatedAt": "2026-06-23",
       "stats": {
-        "generatedAt": "2026-06-23T10:15:10.378Z",
-        "observed": 8498,
-        "overCapacityCells": 288,
-        "overCapacityPct": 0.033890327135796657,
+        "generatedAt": "2026-06-23T21:47:21.245Z",
+        "observed": 8495,
+        "overCapacityCells": 286,
+        "overCapacityPct": 0.03366686286050618,
         "drilledCells": 60,
-        "devicesInDrilled": 235,
-        "polNoLocation": 86,
+        "devicesInDrilled": 282,
+        "polNoLocation": 104,
         "polOther": 9,
-        "inactiveInDrilled": 115,
-        "lowQodInDrilled": 106
+        "inactiveInDrilled": 133,
+        "lowQodInDrilled": 129
       },
       "topFinding": "**286 cells** exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.",
       "anomalyType": "capacity_violation",
@@ -60,14 +60,14 @@
       "publicSource": "Solana mainnet HONEY SPL mint (public RPC)",
       "generatedAt": "2026-06-23",
       "stats": {
-        "generatedAt": "2026-06-23T10:15:13.732Z",
+        "generatedAt": "2026-06-23T21:47:27.170Z",
         "supplyUiAmount": 6552381632.486435,
-        "top20SumUi": 3225497753.8746467,
-        "top20ShareOfSupply": 0.4922634142496773,
+        "top20SumUi": 3224600926.810273,
+        "top20ShareOfSupply": 0.49212654385435,
         "largestAccountsReturned": 20,
         "partASkipped": false
       },
-      "topFinding": "**49.20% of UI-reported HONEY** sits in the **top 20 visible SPL accounts** (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.",
+      "topFinding": "**49.21% of UI-reported HONEY** sits in the **top 20 visible SPL accounts** (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.",
       "anomalyType": "economic_concentration",
       "assetClass": "economic_layer",
       "verificationEligible": false,
@@ -139,7 +139,7 @@
       "publicSource": "https://entities.nft.helium.io/v2/hotspots?subnetwork=iot",
       "generatedAt": "2026-06-23",
       "stats": {
-        "generatedAt": "2026-06-23T10:15:37.160Z",
+        "generatedAt": "2026-06-23T21:48:27.624Z",
         "observed": 1008059,
         "unasserted": 27406,
         "stackedSpots": 4858,
@@ -147,7 +147,7 @@
         "flaggedCount": 69654,
         "flaggedPct": 0.06909714609958345
       },
-      "topFinding": "**4,855 single-coordinate stacks of ≥10 hotspots** on 1,008,019 located units — the largest stack holds **501 hotspots on one coordinate** (§1 lists keys your registry team can grep today).",
+      "topFinding": "**4,858 single-coordinate stacks of ≥10 hotspots** on 1,008,059 located units — the largest stack holds **502 hotspots on one coordinate** (§1 lists keys your registry team can grep today).",
       "anomalyType": "duplication_cluster",
       "assetClass": "spatial_distribution",
       "verificationEligible": true,
@@ -163,7 +163,7 @@
       "publicSource": "https://entities.nft.helium.io/v2/hotspots?subnetwork=mobile",
       "generatedAt": "2026-06-23",
       "stats": {
-        "generatedAt": "2026-06-23T10:15:42.007Z",
+        "generatedAt": "2026-06-23T21:48:50.903Z",
         "observed": 54719,
         "unasserted": 1903,
         "stackedSpots": 531,
@@ -171,7 +171,7 @@
         "flaggedCount": 11270,
         "flaggedPct": 0.20596136625303826
       },
-      "topFinding": "**529 single-coordinate stacks of ≥10 hotspots** on 54,683 located units — the largest stack holds **497 hotspots on one coordinate** (§1 lists keys your registry team can grep today).",
+      "topFinding": "**531 single-coordinate stacks of ≥10 hotspots** on 54,719 located units — the largest stack holds **497 hotspots on one coordinate** (§1 lists keys your registry team can grep today).",
       "anomalyType": "duplication_cluster",
       "assetClass": "spatial_distribution",
       "verificationEligible": true,
