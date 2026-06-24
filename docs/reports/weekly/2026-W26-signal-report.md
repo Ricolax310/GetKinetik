@@ -1,11 +1,11 @@
 # Weekly DePIN Signal Report
 
-> Week 2026-W26 · 2026-06-22 → 2026-06-23 · patterns first, then networks.
+> Week 2026-W26 · 2026-06-22 → 2026-06-24 · patterns first, then networks.
 
 ## Executive Summary
 
 - Week 2026-W26: cross-network signal index updated from public infrastructure reads.
-- 3 publishable signal(s) across 5 network(s) met the weekly confidence gate.
+- 3 publishable signal(s) across 6 network(s) met the weekly confidence gate.
 - 1 cross-network pattern(s) tagged: IDENTITY.
 - 1 systemic-scope pattern(s) recorded with multi-network support.
 
@@ -18,11 +18,11 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 **Observed in:**
 - WeatherXM
 
-**Signal:** Over-capacity H3 cells rose from 287 to 288.
+**Signal:** Over-capacity H3 cells declined from 286 to 285.
 
 **Scope:** localized
 
-**Classification:** escalation
+**Classification:** stability
 
 **Unknown:** Public data cannot determine whether pressure reflects density, registry effects, or expected reward behavior.
 
@@ -33,11 +33,11 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 - Helium IoT
 - Helium Mobile
 
-**Signal:** Exact coordinate-duplicate groups rose from 9 to 10 on Geodnet.
+**Signal:** Exact coordinate-duplicate groups declined from 11 to 7 on Geodnet.
 
 **Scope:** systemic
 
-**Classification:** escalation
+**Classification:** stability
 
 **Unknown:** Public data cannot confirm whether shared coordinates are distinct devices or one identity reused.
 
@@ -46,7 +46,7 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 **Observed in:**
 - Hivemapper
 
-**Signal:** Top-20 account share of supply observed near 49.23%.
+**Signal:** Top-20 account share of supply observed near 49.13%.
 
 **Scope:** localized
 
@@ -59,13 +59,13 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 ### WeatherXM
 
 **What changed**
-- cells over designed capacity: 288 (+1 (+0.3%))
+- cells over designed capacity: 285 (-1 (-0.3%))
 
 **Signal type**
 - Capacity pressure (`capacity_violation`)
 
 **Trend**
-- single delta observed
+- multiple deltas observed
 
 **Open question**
 - On the public cells view, do over-capacity H3 counts match your internal registry and rewards model?
@@ -76,7 +76,8 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 ### Geodnet
 
 **What changed**
-- exact (lat,lng) duplicate groups: 10 (+1 (+11.1%))
+- exact (lat,lng) duplicate groups: 7 (-4 (-36.4%))
+- entities on public map: 19,597 (-6 (-0.0%))
 
 **Signal type**
 - Registry duplication (`duplication_cluster`)
@@ -97,7 +98,7 @@ _No public signal this week — scan not run or no headline finding._
 ### Hivemapper
 
 **What changed**
-- 49.23% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
+- 49.13% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
 
 **Signal type**
 - Economic concentration (`economic_concentration`)
@@ -111,10 +112,27 @@ _No public signal this week — scan not run or no headline finding._
 **What we don't know**
 - Whether the largest visible accounts are treasury, market-maker, exchange custody, or operators — on-chain shape doesn't label holder intent.
 
+### DIMO
+
+**What changed**
+- Of 158,089 DIMO vehicle identities, 40,622 (25.7%) are backed by physical hardware; 31,381 (19.9%) connect via software/synthetic devices, and 86,086 (54.5%) show no connected device on the public registry.
+
+**Signal type**
+- Uncategorized public observation (`device_backing_gap`)
+
+**Trend**
+- insufficient history
+
+**Open question**
+- Does the public read for DIMO match what your team sees internally, or is the public feed expected to look this way?
+
+**What we don't know**
+- What the public feed cannot disambiguate without operator confirmation.
+
 ### Helium IoT
 
 **What changed**
-- 4,858 single-coordinate stacks of ≥10 hotspots on 1,008,059 located units — the largest stack holds 502 hotspots on one coordinate (§1 lists keys your registry team can grep today).
+- 4,858 single-coordinate stacks of ≥10 hotspots on 1,008,065 located units — the largest stack holds 502 hotspots on one coordinate (§1 lists keys your registry team can grep today).
 
 **Signal type**
 - Registry duplication (`duplication_cluster`)
@@ -131,7 +149,7 @@ _No public signal this week — scan not run or no headline finding._
 ### Helium Mobile
 
 **What changed**
-- single-coordinate stacks (≥10 hotspots): 531 (+1 (+0.2%))
+- 531 single-coordinate stacks of ≥10 hotspots on 54,719 located units — the largest stack holds 497 hotspots on one coordinate (§1 lists keys your registry team can grep today).
 
 **Signal type**
 - Registry duplication (`duplication_cluster`)
@@ -149,11 +167,11 @@ _No public signal this week — scan not run or no headline finding._
 
 ### What Changed Today
 
-_Latest reading: 2026-06-23_
+_Latest reading: 2026-06-24_
 
-- **Geodnet** — exact (lat,lng) duplicate groups: 10 (+1 (+11.1%))
-- **WeatherXM** — cells over designed capacity: 288 (+1 (+0.3%))
-- **Helium Mobile** — single-coordinate stacks (≥10 hotspots): 531 (+1 (+0.2%))
+- **Geodnet** — exact (lat,lng) duplicate groups: 7 (-4 (-36.4%))
+- **Geodnet** — entities on public map: 19,597 (-6 (-0.0%))
+- **WeatherXM** — cells over designed capacity: 285 (-1 (-0.3%))
 
 ### Signals To Watch
 
@@ -162,7 +180,7 @@ _Latest reading: 2026-06-23_
 - Do the largest visible SPL accounts map to known treasury or market-maker custody labels on your side?
 - Does the public read for Helium IoT match what your team sees internally, or is the public feed expected to look this way?
 - Does the public read for Helium Mobile match what your team sees internally, or is the public feed expected to look this way?
-- Is the public Coverage Map metrics feed expected to show flat KM mapped / zero detections while driver registrations keep rising?
+- Does the public read for DIMO match what your team sees internally, or is the public feed expected to look this way?
 
 ### Sources & Methodology
 
