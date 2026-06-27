@@ -1,11 +1,11 @@
 # Weekly DePIN Signal Report
 
-> Week 2026-W26 · 2026-06-22 → 2026-06-26 · patterns first, then networks.
+> Week 2026-W26 · 2026-06-22 → 2026-06-27 · patterns first, then networks.
 
 ## Executive Summary
 
 - Week 2026-W26: cross-network signal index updated from public infrastructure reads.
-- 5 publishable signal(s) across 6 network(s) met the weekly confidence gate.
+- 2 publishable signal(s) across 6 network(s) met the weekly confidence gate.
 - 1 cross-network pattern(s) tagged: IDENTITY.
 - 1 systemic-scope pattern(s) recorded with multi-network support.
 
@@ -18,7 +18,7 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 **Observed in:**
 - WeatherXM
 
-**Signal:** Over-capacity H3 cells declined from 289 to 287.
+**Signal:** Over-capacity H3 cells observed at 287.
 
 **Scope:** localized
 
@@ -33,11 +33,11 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 - Helium IoT
 - Helium Mobile
 
-**Signal:** Exact coordinate-duplicate groups declined from 8 to 7 on Geodnet.
+**Signal:** Exact coordinate-duplicate groups rose from 6 to 10 on Geodnet.
 
 **Scope:** systemic
 
-**Classification:** stability
+**Classification:** escalation
 
 **Unknown:** Public data cannot confirm whether shared coordinates are distinct devices or one identity reused.
 
@@ -46,7 +46,7 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 **Observed in:**
 - Hivemapper
 
-**Signal:** Top-20 account share of supply observed near 49.10%.
+**Signal:** Top-20 account share of supply observed near 49.09%.
 
 **Scope:** localized
 
@@ -59,7 +59,7 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 ### WeatherXM
 
 **What changed**
-- cells over designed capacity: 287 (-2 (-0.7%))
+- 287 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.
 
 **Signal type**
 - Capacity pressure (`capacity_violation`)
@@ -76,8 +76,8 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 ### Geodnet
 
 **What changed**
-- exact (lat,lng) duplicate groups: 7 (-1 (-12.5%))
-- entities on public map: 19,576 (-9 (-0.0%))
+- exact (lat,lng) duplicate groups: 10 (+4 (+66.7%))
+- entities on public map: 19,580 (+7 (+0.0%))
 
 **Signal type**
 - Registry duplication (`duplication_cluster`)
@@ -98,7 +98,7 @@ _No public signal this week — scan not run or no headline finding._
 ### Hivemapper
 
 **What changed**
-- 49.10% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
+- 49.09% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
 
 **Signal type**
 - Economic concentration (`economic_concentration`)
@@ -115,7 +115,7 @@ _No public signal this week — scan not run or no headline finding._
 ### DIMO
 
 **What changed**
-- entities on public map: 158,119 (+22 (+0.0%))
+- Of 158,125 DIMO vehicle identities, 40,622 (25.7%) are backed by physical hardware; 31,403 (19.9%) connect via software/synthetic devices, and 86,100 (54.5%) show no connected device on the public registry.
 
 **Signal type**
 - Uncategorized public observation (`device_backing_gap`)
@@ -149,7 +149,7 @@ _No public signal this week — scan not run or no headline finding._
 ### Helium Mobile
 
 **What changed**
-- single-coordinate stacks (≥10 hotspots): 530 (-1 (-0.2%))
+- 530 single-coordinate stacks of ≥10 hotspots on 54,727 located units — the largest stack holds 497 hotspots on one coordinate (§1 lists keys your registry team can grep today).
 
 **Signal type**
 - Registry duplication (`duplication_cluster`)
@@ -167,13 +167,10 @@ _No public signal this week — scan not run or no headline finding._
 
 ### What Changed Today
 
-_Latest reading: 2026-06-26_
+_Latest reading: 2026-06-27_
 
-- **Geodnet** — exact (lat,lng) duplicate groups: 7 (-1 (-12.5%))
-- **Geodnet** — entities on public map: 19,576 (-9 (-0.0%))
-- **WeatherXM** — cells over designed capacity: 287 (-2 (-0.7%))
-- **DIMO** — entities on public map: 158,119 (+22 (+0.0%))
-- **Helium Mobile** — single-coordinate stacks (≥10 hotspots): 530 (-1 (-0.2%))
+- **Geodnet** — exact (lat,lng) duplicate groups: 10 (+4 (+66.7%))
+- **Geodnet** — entities on public map: 19,580 (+7 (+0.0%))
 
 ### Signals To Watch
 

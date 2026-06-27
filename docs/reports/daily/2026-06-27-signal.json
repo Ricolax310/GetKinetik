@@ -10,7 +10,7 @@
       "label": "headline finding",
       "current": null,
       "previous": null,
-      "deltaText": "6 exact (lat,lng) duplicate groups on 19,573 public stations — each row in §1 is one coordinate pair your registry team can grep today.",
+      "deltaText": "10 exact (lat,lng) duplicate groups on 19,580 public stations — each row in §1 is one coordinate pair your registry team can grep today.",
       "report": "docs/reports/geodnet-sybil-report.md",
       "publicSource": "https://rtk.geodnet.com/api/v2/coverage_stations",
       "asOf": "2026-06-27"
@@ -23,9 +23,24 @@
       "kind": "metric",
       "label": "exact (lat,lng) duplicate groups",
       "metricKey": "exactDupGroups",
-      "current": 6,
-      "previous": 7,
-      "deltaText": "-1 (-14.3%)",
+      "current": 10,
+      "previous": 6,
+      "deltaText": "+4 (+66.7%)",
+      "report": "docs/reports/geodnet-sybil-report.md",
+      "publicSource": "https://rtk.geodnet.com/api/v2/coverage_stations",
+      "asOf": "2026-06-27"
+    },
+    {
+      "network": "Geodnet",
+      "networkId": "geodnet",
+      "anomalyType": "duplication_cluster",
+      "narrative": "geographic expansion",
+      "kind": "metric",
+      "label": "entities on public map",
+      "metricKey": "observed",
+      "current": 19580,
+      "previous": 19573,
+      "deltaText": "+7 (+0.0%)",
       "report": "docs/reports/geodnet-sybil-report.md",
       "publicSource": "https://rtk.geodnet.com/api/v2/coverage_stations",
       "asOf": "2026-06-27"
@@ -67,7 +82,7 @@
       "label": "headline finding",
       "current": null,
       "previous": null,
-      "deltaText": "Of 158,124 DIMO vehicle identities, 40,622 (25.7%) are backed by physical hardware; 31,403 (19.9%) connect via software/synthetic devices, and 86,099 (54.5%) show no connected device on the public registry.",
+      "deltaText": "Of 158,125 DIMO vehicle identities, 40,622 (25.7%) are backed by physical hardware; 31,403 (19.9%) connect via software/synthetic devices, and 86,100 (54.5%) show no connected device on the public registry.",
       "report": "docs/reports/dimo-sybil-report.md",
       "publicSource": "https://identity-api.dimo.zone/query",
       "asOf": "2026-06-27"
@@ -109,5 +124,5 @@
     "Does the public read for Helium IoT match what your team sees internally, or is the public feed expected to look this way?",
     "Does the public read for Helium Mobile match what your team sees internally, or is the public feed expected to look this way?"
   ],
-  "threadSeed": "Public read on Geodnet: 7 exact (lat,lng) duplicate groups on 19,576 public stations — each row in §1 is one coordinate pair your registry team can grep today. — does that match your internal view, or is the public feed expected to behave this way?"
+  "threadSeed": "Public read on Geodnet: 10 exact (lat,lng) duplicate groups on 19,580 public stations — each row in §1 is one coordinate pair your registry team can grep today. — does that match your internal view, or is the public feed expected to behave this way?"
 }

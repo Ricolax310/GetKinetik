@@ -4,9 +4,9 @@
 
 ## Today's Read
 
-• Geodnet duplicate-coordinate groups declined from 7 to 6.
+• Geodnet duplicate-coordinate groups rose from 6 to 10.
+• Geodnet entities on public map rose from 19,573 to 19,580.
 • WeatherXM: 287 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.
-• Hivemapper: 49.09% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a con…
 
 ## Why It Matters
 
@@ -18,7 +18,8 @@ Observations span 3 networks — no single network dominates the index.
 
 ### What Changed Today
 
-- **Geodnet** — exact (lat,lng) duplicate groups: 6 (-1 (-14.3%))
+- **Geodnet** — exact (lat,lng) duplicate groups: 10 (+4 (+66.7%))
+- **Geodnet** — entities on public map: 19,580 (+7 (+0.0%))
 - **WeatherXM** — 287 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.
 - **Hivemapper** — 49.09% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
 
@@ -50,7 +51,7 @@ Observations span 3 networks — no single network dominates the index.
 
 ### Thread Seed
 
-Public read on Geodnet: 7 exact (lat,lng) duplicate groups on 19,576 public stations — each row in §1 is one coordinate pair your registry team can grep today. — does that match your internal view, or is the public feed expected to behave this way?
+Public read on Geodnet: 10 exact (lat,lng) duplicate groups on 19,580 public stations — each row in §1 is one coordinate pair your registry team can grep today. — does that match your internal view, or is the public feed expected to behave this way?
 
 ### Sources & Methodology
 
