@@ -2,7 +2,7 @@
 
 > Independent public read by the GETKINETIK Bureau. **Part A** (when Solana RPC succeeds) reads on-chain state for the public HONEY SPL mint. **Part B** (optional) runs the same four geometry heuristics as `sybil-report.mjs` on a node list *you* supply. Hivemapper does not publish an unauthenticated global contributor JSON like WeatherXM's cells API or Geodnet's station list — use your own `SOLANA_RPC_URL` for reliable Part A, or attach `--nodes=` for the Geodnet-style pass.
 
-- **As of:** 2026-06-27
+- **As of:** 2026-06-28
 - **Solana RPC used:** `https://mainnet.helius-rpc.com/?api-key=[REDACTED]`
 - **HONEY mint:** `4vMsoUT2BWatFweudnQM1xedRLfJgJ7hswhcpz4xgBTy`
 - **Reported circulating / UI supply:** 6,555,027,621.143 HONEY
@@ -21,8 +21,8 @@
 
 | Metric | This run | vs last run |
 |---|---:|---|
-| Top-20 visible SPL accounts (% of UI supply) | 49.09% | +0.00 pp (+0.0%) |
-| Sum of top-20 balances (HONEY) | 3,217,916,084.787 | +132,756.915 (+0.0%) |
+| Top-20 visible SPL accounts (% of UI supply) | 49.09% | unchanged vs last run |
+| Sum of top-20 balances (HONEY) | 3,217,916,084.787 | unchanged vs last run |
 | UI-reported supply (HONEY) | 6,555,027,621.143 | unchanged vs last run |
 
 ## What to cross-check this week
