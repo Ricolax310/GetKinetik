@@ -1,26 +1,26 @@
 {
   "version": 2,
   "updatedAt": "2026-06-30",
-  "generatedAt": "2026-06-30T09:19:08.307Z",
+  "generatedAt": "2026-06-30T10:14:14.411Z",
   "auditIndexUpdated": "2026-06-30",
   "networks": [
     {
       "id": "geodnet",
       "name": "Geodnet",
-      "generatedAt": "2026-06-29",
-      "topFinding": "6 exact (lat,lng) duplicate groups on 19,582 public stations — each row in §1 is one coordinate pair your registry team can grep today."
+      "generatedAt": "2026-06-30",
+      "topFinding": "9 exact (lat,lng) duplicate groups on 19,572 public stations — each row in §1 is one coordinate pair your registry team can grep today."
     },
     {
       "id": "weatherxm",
       "name": "WeatherXM",
-      "generatedAt": "2026-06-29",
+      "generatedAt": "2026-06-30",
       "topFinding": "289 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue."
     },
     {
       "id": "hivemapper",
       "name": "Hivemapper",
-      "generatedAt": "2026-06-29",
-      "topFinding": "49.10% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read."
+      "generatedAt": "2026-06-30",
+      "topFinding": "49.05% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read."
     },
     {
       "id": "natix",
@@ -31,25 +31,78 @@
     {
       "id": "dimo",
       "name": "DIMO",
-      "generatedAt": "2026-06-29",
-      "topFinding": "Of 158,137 DIMO vehicle identities, 40,622 (25.7%) are backed by physical hardware; 31,402 (19.9%) connect via software/synthetic devices, and 86,113 (54.5%) show no connected device on the public registry."
+      "generatedAt": "2026-06-30",
+      "topFinding": "Of 158,149 DIMO vehicle identities, 40,622 (25.7%) are backed by physical hardware; 31,402 (19.9%) connect via software/synthetic devices, and 86,125 (54.5%) show no connected device on the public registry."
     },
     {
       "id": "helium-iot",
       "name": "Helium IoT",
-      "generatedAt": "2026-06-29",
-      "topFinding": "4,861 single-coordinate stacks of ≥10 hotspots on 1,008,077 located units — the largest stack holds 502 hotspots on one coordinate (§1 lists keys your registry team can grep today)."
+      "generatedAt": "2026-06-30",
+      "topFinding": "4,861 single-coordinate stacks of ≥10 hotspots on 1,008,080 located units — the largest stack holds 502 hotspots on one coordinate (§1 lists keys your registry team can grep today)."
     },
     {
       "id": "helium-mobile",
       "name": "Helium Mobile",
-      "generatedAt": "2026-06-29",
-      "topFinding": "530 single-coordinate stacks of ≥10 hotspots on 54,752 located units — the largest stack holds 497 hotspots on one coordinate (§1 lists keys your registry team can grep today)."
+      "generatedAt": "2026-06-30",
+      "topFinding": "530 single-coordinate stacks of ≥10 hotspots on 54,764 located units — the largest stack holds 497 hotspots on one coordinate (§1 lists keys your registry team can grep today)."
     }
   ],
   "news": {
-    "topPick": null,
-    "headlines": [],
+    "topPick": {
+      "title": "Developing A Truly Global RTK Network - Inside GNSS",
+      "source": null,
+      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE1FdS1xdjFYRENCVWNHNUpNQ250YWJ6aVEwaXNadzdlZ3ZnZTVrbXh4ekVXUlZHOUNPanVfMFpWemdXY0lzQ0tQZGxwZHNyX3lULVNhM0F5bXFlVXFDQnVUQkxaOVNLNE5YMWhBUzNn?oc=5"
+    },
+    "headlines": [
+      {
+        "score": 55,
+        "title": "Developing A Truly Global RTK Network - Inside GNSS"
+      },
+      {
+        "score": 48,
+        "title": "Decentralized Physical Infrastructure Networks (DePIN) – Blockchain meets IoT -"
+      },
+      {
+        "score": 45,
+        "title": "State of GEODNET Q3 2025 - Messari"
+      },
+      {
+        "score": 45,
+        "title": "State of GEODNET Q2 2025 - Messari"
+      },
+      {
+        "score": 45,
+        "title": "Wingbits and GEODNET Enter Partnership to Revolutionize Global Aviation Flight-T"
+      },
+      {
+        "score": 45,
+        "title": "ROVR Network Raises $2.6M Seed Round Co-Led by Borderless Capital and GEODNET -"
+      },
+      {
+        "score": 45,
+        "title": "Knowledge Popularization - WEB3 RTK Network - Geodnet Disrupts Tradition with We"
+      },
+      {
+        "score": 45,
+        "title": "DroneDeploy signs up to offer GEODNET RTK access - Spatial Source"
+      },
+      {
+        "score": 45,
+        "title": "DroneDeploy and GEODNET Foundation Announce Partnership to Provide Enterprise RT"
+      },
+      {
+        "score": 45,
+        "title": "Understanding GEODNET: A Comprehensive Overview - Messari"
+      },
+      {
+        "score": 41,
+        "title": "WeatherXM price today, WXM to USD live price, marketcap and chart - CoinMarketCa"
+      },
+      {
+        "score": 41,
+        "title": "Top 12 Solana Mobile Seeker dApps for Passive Income – Part 1 - Binance"
+      }
+    ],
     "liveHeadlines": [
       {
         "score": 55,
@@ -89,12 +142,6 @@
       },
       {
         "score": 45,
-        "title": "DePIN: The New Industrial Revolution - panteracapital.com",
-        "source": "Google News: GEODNET RTK DePIN",
-        "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxNOEVQMWJqckdEUDJCWVZQaXNPMDdvcE9uZm1qWVNabGdGaEZlcUNtTlB2VFNLWUlXUHQ0eFdBZzd3clV1WXhUUU16R2tnai1fM3czdEhaY0xJdDduNmJXQ2o1VjZUYzNPd2QyUDlGR2NIUXc0TVFkN1lmb19UdGNkcWtXSS1ZUQ"
-      },
-      {
-        "score": 45,
         "title": "Knowledge Popularization - WEB3 RTK Network - Geodnet Disrupts Tradition with Web3 for Centimeter-Level Positioning - Binance",
         "source": "Google News: GEODNET RTK DePIN",
         "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE4yQ1lTQzNIV1BzSThoaEVBRG1NWm1YeWFaSUlMazlBS0kwSmJoYUhUXzExUG51RE14Z3pneFVpcEhYdm5SR0FuWWJFdFdMYWI2YUNZUGZ2Z0hJamFvM29SSmVhYw"
@@ -130,12 +177,6 @@
         "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTFA3RmZxa0NseEJOQXMtbUthclE2SVpiTWpHT0ZZbXh2aDlWVDRKdUxNOFM4cG1RLU41Wm51SUVSWHpVT3ZSZ0FySllxWE5DQWFQNVpjZVhzOXJ5UC1qUllrbDhCQQ"
       },
       {
-        "score": 40,
-        "title": "GEODNET token trading goes live on Coinbase June 23, 2026 - Crypto Briefing",
-        "source": "Google News: decentralized physical infrastructure network",
-        "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE50dWdBVnlNOGtIWkFqNkR2RDBGeHAzSkVRUEVBRUhGNm5saDg1TV9ySmlVa3c0MkpFYWlHTW5mZllRRlI5RTFwUDgwTHhxemVoOUJQZ1hsZ3QtRGdRYlVsQ0FuZUZLWlh3"
-      },
-      {
         "score": 38,
         "title": "Volkswagen ADMT Taps Solana-Based Hivemapper Bee Maps for Driverless Data - CoinDesk",
         "source": "Google News: DePIN partnership announcement",
@@ -148,6 +189,12 @@
         "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE5ueU5aWTR1M3dkT0tQOTJmVnlENjVHSG9tT2VBYUdpV213MU1DajAtUDZWYnhvY0lsOTN3T0pEbzYzQm9LWl9mMG9oSnY4Ql9lS0syYjRmSDloaTZlSXVjVE5vV3I4TW9aWFhRWUFlbWc4bnctS0t1QU1DdTlxZw"
       },
       {
+        "score": 37,
+        "title": "Helium Plus Lets Businesses Join Solana DePIN Project With Just Wi-Fi - CoinDesk",
+        "source": "Google News: decentralized physical infrastructure network",
+        "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxQVkpNelEtbEZWLWZYQ3d4QVhHZk9oVUlXaHd1VURISXpEN2FwcTVuRm5POHlfakZSbUthRzNhN2RiT0pkdEd4a0UwZHpKTlAtaXotdWg0V19QS0hwOUt1RThCaC01b1hSZ2s5Zk5yRkhDT3N0U1hMcUh4VS1mOGVDOTlNRG1aMUhWQzVPTlVmd2Z3NnBpdWFJVG5QbXRjZER3NkdkejJsQ2VkWVZmY0NF"
+      },
+      {
         "score": 36,
         "title": "Bee Maps Raises $32M to Scale Solana-Powered Decentralized Mapping Network - CoinDesk",
         "source": "Google News: Hivemapper HONEY Solana",
@@ -158,8 +205,14 @@
         "title": "Lyft Taps Solana-Powered Hivemapper for Decentralized Mapping Data - Decrypt",
         "source": "Google News: Hivemapper HONEY Solana",
         "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxNb01OZFVwYW4xdWU5UV9CQXJnQmsxbjRvMDF4dFF0eXRjc0p4SFdiYy1PZzljQzRwNDNFUE9iaUQyYzR2TGx1T2JmUGZ0ZFJ2OU9laDhnQnpYbEpqeW0ybWN3eGV6YkEyWi1LM0piZmpITEJVYUpwSl9RY1BHeGhTeDF5Yi1uZEpzSkM1Y096bk9kQUXSAZsBQVVfeXFMUE9jWWdQUU0zZVpLU1VCbzdUMWMzaC1Hb2FiQWsxY0s0NnpjM3ZsWmpQVUtoRjlJTDI2cjUwMk5oWmpnaElVZzlDVVg2V19EVDFvVmtLc2ZRWS1ucVpWRVo4VWc2eExBTDY3Wk45bU0wYmloZG1WajlzX2tobUxwMFM0anQzcEZwa1l1ZmZyMFE1TUFGTGRUMjhVYU0"
+      },
+      {
+        "score": 33,
+        "title": "5 Devices to Get Started in DePIN - HackerNoon",
+        "source": "Google News: WeatherXM DePIN",
+        "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9QaVJhQlIycFc1MHpBUHN4d21GRlU4U0RwaF9xVzhnVklvNE1qMnR2dFpYbXJLbThVT2lYMUIxZFpFcWpFZkoyR3ZqU0NwU2loRFN2YW8yWUJFT1RYZHUtbVN0SXZjT1E"
       }
     ]
   },
-  "context": "GETKINETIK is the neutral DePIN bureau at getkinetik.app — reproducible public reads, optional hardware-signed device evidence (Proof of Origin, verify-device API). Not a token, not custody, not an earnings aggregator.\nContext generated: 2026-06-30 09:19 UTC\nPublic audit index updated: 2026-06-30\nTopics you help with: DePIN trust, registry hygiene, economic concentration on-chain, RTK/mapping/weather network integrity patterns, why neutral third-party reads matter, Genesis Score as optional reference (not priced, not financial advice). You may discuss recent DePIN news headlines below in general terms.\nNever: accuse fraud as proved, shill tokens, price predictions, tell users to trust GETKINETIK servers blindly — point to public methodology and reproducible sources.\n## Neutrality charter (excerpt)\n# NEUTRALITY CHARTER\n\n> **GETKINETIK is the independent trust layer for the decentralized\n> physical economy. This document is the immutable contract that makes\n> our grading worth trusting. Drift from these rules ends the\n> company's reason to exist.**\n\n**Publisher:** OutFromNothing LLC (California).\n\n**Who we are:** The **neutral bureau** — a friendly helper for DePIN trust,\nnot a network, not a token issuer, not a replacement for any network's\nown verifier. We help operators prove devices, help networks get a\nsecond read, and help outsiders reproduce what we observed. Partners\nadopt, fork, or ignore our reference policy; they never have to adopt us\nto stay credible.\n\n---\n\n## Why this document exists\n\nCredit bureaus, rating agencies, financial data utilities, and reputation\ninfrastructure providers — Carfax, Equifax, S&P, Moody's, Bloomberg,\nStripe Radar, Plaid, Etherscan — share one structural property: they\nhave nothing to gain from any specific outcome in the markets they\ngrade. The moment they do, the grade becomes worthless.\n\nDePIN currently has no such neutral entity. Every network grades\nitself. Every foundation publishes its own KPIs. No one independently\nattests to whether a node is real, an operator is honest, or earnings\nare accurate.\n\nGETKINETIK fills that slot — but only if it remains structurally\nincapable of corruption. This document defines those structural rules.\nFuture operators of the company are bound by them.\n\n---\n\n## The Five Rules (immutable)\n\nThese are the rules that protect the bureau. They are not subject to\nquarterly business pressure, partner requests, capital incentives, or\nstrategic exceptions.\n\n### 1. **No GETKINETIK token. Ever.**\n\nWe will not issue a token, coin, point, NFT, security, or any other\nfungible or non-fungible instrument that is sold, traded, swapped,\nlisted on an exchange, redeemable for currency, or capable of\nappreciating in market value.\n\nThis includes \"utility tokens,\" \"governance tokens,\" \"loyalty tokens,\"\n\"reward tokens,\" \"soulbound tokens,\" wrapped representations of\ninternal scores, or any future financial wrapper that has the\neconomic shape of a token regardless of the legal label applied to it.\n\n**Genesis Score is a public reputation grade about a node, not a\ncurrency.** It is non-transferable, non-priced, never redeemable, and\ncannot be bought, sold, traded, or held by anyone other than the node\nit grades.\n\n### 2. **No equity in graded networks.**\n\nGETKINETIK and OutFromNothing LLC will not hold equity, tokens, vested\nallocations, advisor shares, or any economic interest in any DePIN\nnetwork whose nodes the bureau grades.\n\nWe will not accept payment in the native token of a graded network\n(NODL, $DIMO, HONEY, WXM, GEOD, etc.). All revenue flows in fiat\n(USD) or chain-neutral stablecoin (USDC/USDT). If a partner cannot pay\nin those denominations, they cannot pay.\n\n### 3. **No exclusive partnerships.**\n\nEvery DePIN network is graded by the same published methodology. We\ndo not soften the grade for any partner, regardless of how much they\npay or how strategic they are. We do not offer \"preferred network\"\nstatus, \"promoted listings,\" or any commercial product that distorts\nthe underlying grading.\n\nPartners pay for **API access**, **integration support**, and **SLA\ntiers** — never for favorable treatment of their network in the data.\n\n### 4. **All revenue in fiat or stablecoin.**\n\nThe complete revenue model:\n\n| Tier | Pays | Receives |\n|------|--------|------------|\n| **Free** | Anyone | Public verifier, basic ledger, own data export |\n| **Consumer Pro** | Individual users (USD subscription) | Advanced reports, hardware-ROI calculators, exportable history |\n| **Partner API** | DePIN networks, lenders, insurers, exchanges (USD/USDC, monthly billed) | `verify-device` calls, batch attestation, fraud signals, compliance reports |\n| **Enterprise** | Foundations, auditors, governments, large platforms (USD, contracted) | Full read API access, methodology disclosure, custom attestation classes, SOC 2 reports |\n\nMoney in: fiat or stablecoin only. Money out: company operating\nexpenses. No token treasury. No vested founder coins. No \"ecosystem\nfund\" we control. The P&L statement fits on one page.\n\n### 5. **Methodology is public.**\n\nThe Genesis Score formula, the verify-device validation rules, the\nattestation index methodology, and any future grading systems are\n**publicly documented and versioned** — like FICO publishes its score\ncomponents, not the proprietary weights but\n…[truncated]\n## Current public sample reads\n- Geodnet (read 2026-06-29): 6 exact (lat,lng) duplicate groups on 19,582 public stations — each row in §1 is one coordinate pair your registry team can grep today.\n- WeatherXM (read 2026-06-29): 289 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.\n- Hivemapper (read 2026-06-29): 49.10% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.\n- Natix Network (read 2026-06-02): public sample read on open data\n- DIMO (read 2026-06-29): Of 158,137 DIMO vehicle identities, 40,622 (25.7%) are backed by physical hardware; 31,402 (19.9%) connect via software/synthetic devices, and 86,113 (54.5%) show no connected device on the public reg\n- Helium IoT (read 2026-06-29): 4,861 single-coordinate stacks of ≥10 hotspots on 1,008,077 located units — the largest stack holds 502 hotspots on one coordinate (§1 lists keys your registry team can grep today).\n- Helium Mobile (read 2026-06-29): 530 single-coordinate stacks of ≥10 hotspots on 54,752 located units — the largest stack holds 497 hotspots on one coordinate (§1 lists keys your registry team can grep today).\n## Latest bureau brief (public summary)\nGeodnet: report 0h ago, 6 exact (lat,lng) duplicate groups on 19,582 publ…\nWeatherXM: report 0h ago, 289 cells exceed designed capacity — §1 lists H3 …\nHivemapper: report 0h ago, 49.10% of UI-reported HONEY sits in the top 20 vi…\nDIMO: report 0h ago, Of 158,137 DIMO vehicle identities, 40,622 (25.7%…\nHelium IoT: report 0h ago, 4,861 single-coordinate stacks of ≥10 hotspots on…\nHelium Mobile: report 0h ago, 530 single-coordinate stacks of ≥10 hotspots on 5…\n## Recent DePIN / infrastructure news (headlines only)\n- [55] Developing A Truly Global RTK Network - Inside GNSS — Google News: GEODNET RTK DePIN\n- [48] Decentralized Physical Infrastructure Networks (DePIN) – Blockchain meets IoT - it-daily — Google News: WeatherXM DePIN\n- [45] State of GEODNET Q3 2025 - Messari — Google News: GEODNET RTK DePIN\n- [45] State of GEODNET Q2 2025 - Messari — Google News: GEODNET RTK DePIN\n- [45] Wingbits and GEODNET Enter Partnership to Revolutionize Global Aviation Flight-Tracking Infrastructure - Business Wire — Google News: GEODNET RTK DePIN\n- [45] ROVR Network Raises $2.6M Seed Round Co-Led by Borderless Capital and GEODNET - Inside Unmanned Systems — Google News: GEODNET RTK DePIN\n- [45] DePIN: The New Industrial Revolution - panteracapital.com — Google News: GEODNET RTK DePIN\n- [45] Knowledge Popularization - WEB3 RTK Network - Geodnet Disrupts Tradition with Web3 for Centimeter-Level Positioning - Binance — Google News: GEODNET RTK DePIN\n- [45] DroneDeploy signs up to offer GEODNET RTK access - Spatial Source — Google News: GEODNET RTK DePIN\n- [45] DroneDeploy and GEODNET Foundation Announce Partnership to Provide Enterprise RTK Services for Drone-based Reality Capture - Business Wire — Google News: GEODNET RTK DePIN\n- [45] Understanding GEODNET: A Comprehensive Overview - Messari — Google News: GEODNET RTK DePIN\n- [41] WeatherXM price today, WXM to USD live price, marketcap and chart - CoinMarketCap — Google News: WeatherXM DePIN\n- [41] Top 12 Solana Mobile Seeker dApps for Passive Income – Part 1 - Binance — Google News: WeatherXM DePIN\n- [40] GEODNET token trading goes live on Coinbase June 23, 2026 - Crypto Briefing — Google News: decentralized physical infrastructure network\n- [38] Volkswagen ADMT Taps Solana-Based Hivemapper Bee Maps for Driverless Data - CoinDesk — Google News: DePIN partnership announcement\n- [38] Ride-hailing platform Lyft partners with Bee Maps, powered by Solana-based DePIN Hivemapper, to access decentralized data - The Block — Google News: DePIN partnership announcement\n- [36] Bee Maps Raises $32M to Scale Solana-Powered Decentralized Mapping Network - CoinDesk — Google News: Hivemapper HONEY Solana\n- [36] Lyft Taps Solana-Powered Hivemapper for Decentralized Mapping Data - Decrypt — Google News: Hivemapper HONEY Solana\n\nVisitors may ask how a headline relates to DePIN trust, registry hygiene, or neutral second reads. Do not quote paywalled articles; discuss themes and link to getkinetik.app/audits when relevant.\nLinks: https://getkinetik.app/bureau/ | https://getkinetik.app/audits.html | https://getkinetik.app/bureau/ask/ | https://getkinetik.app/api/docs/"
+  "context": "GETKINETIK is the neutral DePIN bureau at getkinetik.app — reproducible public reads, optional hardware-signed device evidence (Proof of Origin, verify-device API). Not a token, not custody, not an earnings aggregator.\nContext generated: 2026-06-30 10:14 UTC\nPublic audit index updated: 2026-06-30\nTopics you help with: DePIN trust, registry hygiene, economic concentration on-chain, RTK/mapping/weather network integrity patterns, why neutral third-party reads matter, Genesis Score as optional reference (not priced, not financial advice). You may discuss recent DePIN news headlines below in general terms.\nNever: accuse fraud as proved, shill tokens, price predictions, tell users to trust GETKINETIK servers blindly — point to public methodology and reproducible sources.\n## Neutrality charter (excerpt)\n# NEUTRALITY CHARTER\n\n> **GETKINETIK is the independent trust layer for the decentralized\n> physical economy. This document is the immutable contract that makes\n> our grading worth trusting. Drift from these rules ends the\n> company's reason to exist.**\n\n**Publisher:** OutFromNothing LLC (California).\n\n**Who we are:** The **neutral bureau** — a friendly helper for DePIN trust,\nnot a network, not a token issuer, not a replacement for any network's\nown verifier. We help operators prove devices, help networks get a\nsecond read, and help outsiders reproduce what we observed. Partners\nadopt, fork, or ignore our reference policy; they never have to adopt us\nto stay credible.\n\n---\n\n## Why this document exists\n\nCredit bureaus, rating agencies, financial data utilities, and reputation\ninfrastructure providers — Carfax, Equifax, S&P, Moody's, Bloomberg,\nStripe Radar, Plaid, Etherscan — share one structural property: they\nhave nothing to gain from any specific outcome in the markets they\ngrade. The moment they do, the grade becomes worthless.\n\nDePIN currently has no such neutral entity. Every network grades\nitself. Every foundation publishes its own KPIs. No one independently\nattests to whether a node is real, an operator is honest, or earnings\nare accurate.\n\nGETKINETIK fills that slot — but only if it remains structurally\nincapable of corruption. This document defines those structural rules.\nFuture operators of the company are bound by them.\n\n---\n\n## The Five Rules (immutable)\n\nThese are the rules that protect the bureau. They are not subject to\nquarterly business pressure, partner requests, capital incentives, or\nstrategic exceptions.\n\n### 1. **No GETKINETIK token. Ever.**\n\nWe will not issue a token, coin, point, NFT, security, or any other\nfungible or non-fungible instrument that is sold, traded, swapped,\nlisted on an exchange, redeemable for currency, or capable of\nappreciating in market value.\n\nThis includes \"utility tokens,\" \"governance tokens,\" \"loyalty tokens,\"\n\"reward tokens,\" \"soulbound tokens,\" wrapped representations of\ninternal scores, or any future financial wrapper that has the\neconomic shape of a token regardless of the legal label applied to it.\n\n**Genesis Score is a public reputation grade about a node, not a\ncurrency.** It is non-transferable, non-priced, never redeemable, and\ncannot be bought, sold, traded, or held by anyone other than the node\nit grades.\n\n### 2. **No equity in graded networks.**\n\nGETKINETIK and OutFromNothing LLC will not hold equity, tokens, vested\nallocations, advisor shares, or any economic interest in any DePIN\nnetwork whose nodes the bureau grades.\n\nWe will not accept payment in the native token of a graded network\n(NODL, $DIMO, HONEY, WXM, GEOD, etc.). All revenue flows in fiat\n(USD) or chain-neutral stablecoin (USDC/USDT). If a partner cannot pay\nin those denominations, they cannot pay.\n\n### 3. **No exclusive partnerships.**\n\nEvery DePIN network is graded by the same published methodology. We\ndo not soften the grade for any partner, regardless of how much they\npay or how strategic they are. We do not offer \"preferred network\"\nstatus, \"promoted listings,\" or any commercial product that distorts\nthe underlying grading.\n\nPartners pay for **API access**, **integration support**, and **SLA\ntiers** — never for favorable treatment of their network in the data.\n\n### 4. **All revenue in fiat or stablecoin.**\n\nThe complete revenue model:\n\n| Tier | Pays | Receives |\n|------|--------|------------|\n| **Free** | Anyone | Public verifier, basic ledger, own data export |\n| **Consumer Pro** | Individual users (USD subscription) | Advanced reports, hardware-ROI calculators, exportable history |\n| **Partner API** | DePIN networks, lenders, insurers, exchanges (USD/USDC, monthly billed) | `verify-device` calls, batch attestation, fraud signals, compliance reports |\n| **Enterprise** | Foundations, auditors, governments, large platforms (USD, contracted) | Full read API access, methodology disclosure, custom attestation classes, SOC 2 reports |\n\nMoney in: fiat or stablecoin only. Money out: company operating\nexpenses. No token treasury. No vested founder coins. No \"ecosystem\nfund\" we control. The P&L statement fits on one page.\n\n### 5. **Methodology is public.**\n\nThe Genesis Score formula, the verify-device validation rules, the\nattestation index methodology, and any future grading systems are\n**publicly documented and versioned** — like FICO publishes its score\ncomponents, not the proprietary weights but\n…[truncated]\n## Current public sample reads\n- Geodnet (read 2026-06-30): 9 exact (lat,lng) duplicate groups on 19,572 public stations — each row in §1 is one coordinate pair your registry team can grep today.\n- WeatherXM (read 2026-06-30): 289 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.\n- Hivemapper (read 2026-06-30): 49.05% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.\n- Natix Network (read 2026-06-02): public sample read on open data\n- DIMO (read 2026-06-30): Of 158,149 DIMO vehicle identities, 40,622 (25.7%) are backed by physical hardware; 31,402 (19.9%) connect via software/synthetic devices, and 86,125 (54.5%) show no connected device on the public reg\n- Helium IoT (read 2026-06-30): 4,861 single-coordinate stacks of ≥10 hotspots on 1,008,080 located units — the largest stack holds 502 hotspots on one coordinate (§1 lists keys your registry team can grep today).\n- Helium Mobile (read 2026-06-30): 530 single-coordinate stacks of ≥10 hotspots on 54,764 located units — the largest stack holds 497 hotspots on one coordinate (§1 lists keys your registry team can grep today).\n## Recent DePIN / infrastructure news (headlines only)\n**Bureau news pick today:** Developing A Truly Global RTK Network - Inside GNSS\n- [48] Decentralized Physical Infrastructure Networks (DePIN) – Blockchain meets IoT - — news\n- [45] State of GEODNET Q3 2025 - Messari — news\n- [45] State of GEODNET Q2 2025 - Messari — news\n- [45] Wingbits and GEODNET Enter Partnership to Revolutionize Global Aviation Flight-T — news\n- [45] ROVR Network Raises $2.6M Seed Round Co-Led by Borderless Capital and GEODNET - — news\n- [45] Knowledge Popularization - WEB3 RTK Network - Geodnet Disrupts Tradition with We — news\n- [45] DroneDeploy signs up to offer GEODNET RTK access - Spatial Source — news\n- [45] DroneDeploy and GEODNET Foundation Announce Partnership to Provide Enterprise RT — news\n- [45] Understanding GEODNET: A Comprehensive Overview - Messari — news\n- [41] WeatherXM price today, WXM to USD live price, marketcap and chart - CoinMarketCa — news\n- [41] Top 12 Solana Mobile Seeker dApps for Passive Income – Part 1 - Binance — news\n- [48] Decentralized Physical Infrastructure Networks (DePIN) – Blockchain meets IoT - it-daily — Google News: WeatherXM DePIN\n- [45] Wingbits and GEODNET Enter Partnership to Revolutionize Global Aviation Flight-Tracking Infrastructure - Business Wire — Google News: GEODNET RTK DePIN\n- [45] ROVR Network Raises $2.6M Seed Round Co-Led by Borderless Capital and GEODNET - Inside Unmanned Systems — Google News: GEODNET RTK DePIN\n- [45] Knowledge Popularization - WEB3 RTK Network - Geodnet Disrupts Tradition with Web3 for Centimeter-Level Positioning - Binance — Google News: GEODNET RTK DePIN\n- [45] DroneDeploy and GEODNET Foundation Announce Partnership to Provide Enterprise RTK Services for Drone-based Reality Capture - Business Wire — Google News: GEODNET RTK DePIN\n- [41] WeatherXM price today, WXM to USD live price, marketcap and chart - CoinMarketCap — Google News: WeatherXM DePIN\n- [38] Volkswagen ADMT Taps Solana-Based Hivemapper Bee Maps for Driverless Data - CoinDesk — Google News: DePIN partnership announcement\n- [38] Ride-hailing platform Lyft partners with Bee Maps, powered by Solana-based DePIN Hivemapper, to access decentralized data - The Block — Google News: DePIN partnership announcement\n- [37] Helium Plus Lets Businesses Join Solana DePIN Project With Just Wi-Fi - CoinDesk — Google News: decentralized physical infrastructure network\n\nVisitors may ask how a headline relates to DePIN trust, registry hygiene, or neutral second reads. Do not quote paywalled articles; discuss themes and link to getkinetik.app/audits when relevant.\nLinks: https://getkinetik.app/bureau/ | https://getkinetik.app/audits.html | https://getkinetik.app/bureau/ask/ | https://getkinetik.app/api/docs/"
 }
