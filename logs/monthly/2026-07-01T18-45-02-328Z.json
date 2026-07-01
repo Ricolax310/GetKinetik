@@ -1,0 +1,24 @@
+{
+  "job": "monthly_depin_state",
+  "cadence": "monthly",
+  "timestamp": "2026-07-01T18:45:02.328Z",
+  "networksProcessed": [
+    "geodnet",
+    "weatherxm",
+    "hivemapper",
+    "natix",
+    "helium-iot",
+    "helium-mobile",
+    "dimo"
+  ],
+  "signalsGenerated": 8,
+  "reportsPublished": [
+    "signals/monthly/2026-07.json",
+    "signals/monthly/latest.json",
+    "docs/reports/monthly/2026-07-state-of-depin.md",
+    "docs/reports/monthly/state-of-depin.md",
+    "landing/public/state-of-depin.html"
+  ],
+  "errors": [],
+  "ok": true
+}
