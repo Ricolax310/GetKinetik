@@ -1,7 +1,16 @@
 {
-  "generatedAt": "2026-07-01T10:21:12.472Z",
+  "generatedAt": "2026-07-01T14:59:46.567Z",
   "source": "https://entities.nft.helium.io/v2/hotspots?subnetwork=iot",
   "stats": {
+    "generatedAt": "2026-07-01T14:59:46.567Z",
+    "observed": 1008084,
+    "unasserted": 27406,
+    "stackedSpots": 4861,
+    "largestStack": 502,
+    "flaggedCount": 69702,
+    "flaggedPct": 0.06914304760317593
+  },
+  "prevStats": {
     "generatedAt": "2026-07-01T10:21:12.472Z",
     "observed": 1008082,
     "unasserted": 27406,
@@ -10,16 +19,7 @@
     "flaggedCount": 69700,
     "flaggedPct": 0.06914120081501307
   },
-  "prevStats": {
-    "generatedAt": "2026-06-30T14:52:31.719Z",
-    "observed": 1008082,
-    "unasserted": 27406,
-    "stackedSpots": 4861,
-    "largestStack": 502,
-    "flaggedCount": 69701,
-    "flaggedPct": 0.06914219279780812
-  },
-  "hotspotsTotal": 1035488,
+  "hotspotsTotal": 1035490,
   "topStacks": [
     {
       "coord": "-0.001809,-0.00271",
@@ -111,7 +111,7 @@
     },
     {
       "coord": "51.31643,6.182851",
-      "count": 70,
+      "count": 72,
       "sampleKeys": [
         "11xapR2HqHZJ6EbF2tgsBTbmrmJ14UPfY7pQqAdu4zr3gKpzX6b",
         "11eQ2WFYYZfWCnuQtTaFuUpSRBBUk6fPhw5SQwXhXssYq5TxbJE",

@@ -2,15 +2,15 @@
 
 > Independent public read by the GETKINETIK Bureau using only Helium's free Entity API. **No internal Helium data was used.** Asserted locations snap to H3 hexes, so shared exact coordinates are expected in dense buildings — the heuristics below only flag *large* stacks (≥10 hotspots on one coordinate), the classic stacking pattern worth a registry look.
 
-- **As of:** 2026-06-30
+- **As of:** 2026-07-01
 - **Public source:** `https://entities.nft.helium.io/v2/hotspots?subnetwork=iot`
-- **Hotspots observed (with coordinates):** 1,008,082
+- **Hotspots observed (with coordinates):** 1,008,084
 - **Hotspots without asserted location:** 27,406
-- **Hotspots flagged (any heuristic):** 69,701 (6.91%)
+- **Hotspots flagged (any heuristic):** 69,702 (6.91%)
 
 ## Executive summary
 
-1. **4,861 single-coordinate stacks of ≥10 hotspots** on 1,008,082 located units — the largest stack holds **502 hotspots on one coordinate** (§1 lists keys your registry team can grep today).
+1. **4,861 single-coordinate stacks of ≥10 hotspots** on 1,008,084 located units — the largest stack holds **502 hotspots on one coordinate** (§1 lists keys your registry team can grep today).
 2. **27,406 hotspots exist on-chain with no asserted location** — on the registry but not on the map.
 3. Stacks are *expected* at small sizes (H3 snapping, dense buildings) — only review-worthy at this threshold; every number reproduces from the free public endpoint with no API key.
 
@@ -20,7 +20,7 @@
 
 | Metric | This run | vs last run |
 |---|---:|---|
-| Hotspots with asserted coordinates | 1,008,082 | +2 (+0.0%) |
+| Hotspots with asserted coordinates | 1,008,084 | +2 (+0.0%) |
 | Single-coordinate stacks (≥10 hotspots) | 4,861 | unchanged vs last run |
 | Largest single-coordinate stack | 502 | unchanged vs last run |
 | Fleet share flagged (any heuristic) | 6.91% | +0.00 pp (+0.0%) |
@@ -54,7 +54,7 @@
 | `25.772442,-80.189633` | 74 | `112JeLWfapdArJtHQGgU56Dg…`, `1128gGUJDMm7XfBssR1aRR5D…`, `1126y6UBhQKVfGD4qRksRPwd…` |
 | `40.70968,-74.007674` | 74 | `11wzUpRnYwW1snDjLy9r8UeU…`, `11X8986iMRqvB2HqjPUppsH3…`, `112vsMG7tTL8seruxtGgKkKN…` |
 | `40.757674,-73.992453` | 72 | `112sv66DwbXJfDxe3VW1M3mD…`, `11nm3ZrRsyeC7N5UsF9pjVNM…`, `11BWzVR5ReJCMF7x3kym1ynx…` |
-| `51.31643,6.182851` | 70 | `11xapR2HqHZJ6EbF2tgsBTbm…`, `11eQ2WFYYZfWCnuQtTaFuUpS…`, `11bQusUSF77V4xLZMA1to1w4…` |
+| `51.31643,6.182851` | 72 | `11xapR2HqHZJ6EbF2tgsBTbm…`, `11eQ2WFYYZfWCnuQtTaFuUpS…`, `11bQusUSF77V4xLZMA1to1w4…` |
 | `37.786539,-122.394451` | 65 | `11M5G1yyc93FvLkLV43WtGqc…`, `112SX2ukHgYX9yqBs3YLaEzN…`, `11X4E1JL5VAJti9WUL9KhQRE…` |
 
 _…and 4,851 more in the snapshot file._
