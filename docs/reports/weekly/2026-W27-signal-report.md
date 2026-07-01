@@ -1,6 +1,6 @@
 # Weekly DePIN Signal Report
 
-> Week 2026-W27 · 2026-06-29 → 2026-06-30 · patterns first, then networks.
+> Week 2026-W27 · 2026-06-29 → 2026-07-01 · patterns first, then networks.
 
 ## Executive Summary
 
@@ -33,7 +33,7 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 - Helium IoT
 - Helium Mobile
 
-**Signal:** Exact coordinate-duplicate groups observed at 9 on Geodnet.
+**Signal:** Exact coordinate-duplicate groups declined from 10 to 7 on Geodnet.
 
 **Scope:** systemic
 
@@ -46,7 +46,7 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 **Observed in:**
 - Hivemapper
 
-**Signal:** Top-20 account share of supply observed near 49.06%.
+**Signal:** Top-20 account share of supply observed near 49.08%.
 
 **Scope:** localized
 
@@ -76,7 +76,7 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 ### Geodnet
 
 **What changed**
-- entities on public map: 19,580 (+8 (+0.0%))
+- exact (lat,lng) duplicate groups: 7 (-3 (-30.0%))
 
 **Signal type**
 - Registry duplication (`duplication_cluster`)
@@ -97,7 +97,7 @@ _No public signal this week — scan not run or no headline finding._
 ### Hivemapper
 
 **What changed**
-- 49.06% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
+- 49.08% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
 
 **Signal type**
 - Economic concentration (`economic_concentration`)
@@ -114,7 +114,7 @@ _No public signal this week — scan not run or no headline finding._
 ### DIMO
 
 **What changed**
-- Of 158,153 DIMO vehicle identities, 40,622 (25.7%) are backed by physical hardware; 31,402 (19.9%) connect via software/synthetic devices, and 86,129 (54.5%) show no connected device on the public registry.
+- Of 158,163 DIMO vehicle identities, 40,622 (25.7%) are backed by physical hardware; 31,406 (19.9%) connect via software/synthetic devices, and 86,135 (54.5%) show no connected device on the public registry.
 
 **Signal type**
 - Uncategorized public observation (`device_backing_gap`)
@@ -131,7 +131,7 @@ _No public signal this week — scan not run or no headline finding._
 ### Helium IoT
 
 **What changed**
-- 4,861 single-coordinate stacks of ≥10 hotspots on 1,008,082 located units — the largest stack holds 502 hotspots on one coordinate (§1 lists keys your registry team can grep today).
+- 4,861 single-coordinate stacks of ≥10 hotspots on 1,008,084 located units — the largest stack holds 502 hotspots on one coordinate (§1 lists keys your registry team can grep today).
 
 **Signal type**
 - Registry duplication (`duplication_cluster`)
@@ -148,7 +148,7 @@ _No public signal this week — scan not run or no headline finding._
 ### Helium Mobile
 
 **What changed**
-- single-coordinate stacks (≥10 hotspots): 531 (+1 (+0.2%))
+- single-coordinate stacks (≥10 hotspots): 530 (-1 (-0.2%))
 
 **Signal type**
 - Registry duplication (`duplication_cluster`)
@@ -166,10 +166,10 @@ _No public signal this week — scan not run or no headline finding._
 
 ### What Changed Today
 
-_Latest reading: 2026-06-30_
+_Latest reading: 2026-07-01_
 
-- **Geodnet** — entities on public map: 19,580 (+8 (+0.0%))
-- **Helium Mobile** — single-coordinate stacks (≥10 hotspots): 531 (+1 (+0.2%))
+- **Geodnet** — exact (lat,lng) duplicate groups: 7 (-3 (-30.0%))
+- **Helium Mobile** — single-coordinate stacks (≥10 hotspots): 530 (-1 (-0.2%))
 
 ### Signals To Watch
 
