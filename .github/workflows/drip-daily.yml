@@ -65,7 +65,8 @@ jobs:
             git commit -m "chore(drip): daily distribution [automated]"
             # Push MUST succeed — the X post-ledger lives here. A silently failed
             # push ("|| true") loses the dedupe record and causes duplicate posts
-            # next run. Rebase onto remote, then fail loudly if push still fails.
-            git pull --rebase origin main || { echo "::error::drip ledger rebase failed"; exit 1; }
+            # next run. Rebase onto remote (autostash: the drip run leaves other
+            # unstaged generated files in the tree), then fail loudly on error.
+            git pull --rebase --autostash origin main || { echo "::error::drip ledger rebase failed"; exit 1; }
             git push origin HEAD:main || { echo "::error::drip ledger push failed — duplicate-post risk next run"; exit 1; }
           fi
