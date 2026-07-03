@@ -13,7 +13,7 @@
       {
         "network": "Geodnet",
         "metric": "exactDupGroups",
-        "confidence": 0.67,
+        "confidence": 0.73,
         "flags": [
           "isolated"
         ]
@@ -21,7 +21,7 @@
       {
         "network": "WeatherXM",
         "metric": "overCapacityCells",
-        "confidence": 0.7,
+        "confidence": 0.73,
         "flags": [
           "isolated"
         ]
@@ -29,26 +29,25 @@
       {
         "network": "Hivemapper",
         "metric": "top20ShareOfSupply",
-        "confidence": 0.67,
+        "confidence": 0.73,
         "flags": [
           "isolated"
         ]
-      }
-    ],
-    "heldBack": [
+      },
       {
         "network": "Helium IoT",
         "metric": "stackedSpots",
-        "confidence": 0.595,
+        "confidence": 0.62,
         "flags": []
       },
       {
         "network": "Helium Mobile",
         "metric": "stackedSpots",
-        "confidence": 0.595,
+        "confidence": 0.62,
         "flags": []
       }
-    ]
+    ],
+    "heldBack": []
   },
   "weekly": {
     "minConfidence": 0.8,
