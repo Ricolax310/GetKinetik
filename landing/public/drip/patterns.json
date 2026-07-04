@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-03T17:31:45.444Z",
+  "generatedAt": "2026-07-04T17:24:33.612Z",
   "patterns": [
     {
       "scope": "systemic",
@@ -10,7 +10,7 @@
         "Helium IoT"
       ],
       "category": "INFRASTRUCTURE",
-      "description": "Observed Helium IoT stackedSpots on 2 of 2 recorded days.",
+      "description": "Observed Helium IoT stackedSpots on 3 of 3 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -22,7 +22,7 @@
         "Helium Mobile"
       ],
       "category": "INFRASTRUCTURE",
-      "description": "Observed Helium Mobile stackedSpots on 2 of 2 recorded days.",
+      "description": "Observed Helium Mobile stackedSpots on 3 of 3 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -60,7 +60,7 @@
         "Geodnet"
       ],
       "category": "IDENTITY",
-      "description": "Observed Geodnet exactDupGroups on 2 of 2 recorded days.",
+      "description": "Observed Geodnet exactDupGroups on 3 of 3 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -72,7 +72,7 @@
         "WeatherXM"
       ],
       "category": "CAPACITY",
-      "description": "Observed WeatherXM overCapacityCells on 2 of 2 recorded days.",
+      "description": "Observed WeatherXM overCapacityCells on 3 of 3 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -84,7 +84,7 @@
         "Hivemapper"
       ],
       "category": "ECONOMICS",
-      "description": "Observed Hivemapper top20ShareOfSupply on 2 of 2 recorded days.",
+      "description": "Observed Hivemapper top20ShareOfSupply on 3 of 3 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -101,7 +101,7 @@
     },
     {
       "scope": "localized",
-      "classification": "drift",
+      "classification": "stability",
       "headline": "Geodnet: identity registry stress signal detected",
       "pattern": "LOCAL_IDENTITY",
       "networks": [
@@ -113,7 +113,7 @@
     },
     {
       "scope": "localized",
-      "classification": "drift",
+      "classification": "stability",
       "headline": "Hivemapper: economic distribution shape signal detected",
       "pattern": "LOCAL_ECONOMICS",
       "networks": [
