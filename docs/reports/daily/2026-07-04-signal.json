@@ -10,7 +10,7 @@
       "label": "headline finding",
       "current": null,
       "previous": null,
-      "deltaText": "9 exact (lat,lng) duplicate groups on 19,573 public stations — each row in §1 is one coordinate pair your registry team can grep today.",
+      "deltaText": "9 exact (lat,lng) duplicate groups on 19,564 public stations — each row in §1 is one coordinate pair your registry team can grep today.",
       "report": "docs/reports/geodnet-sybil-report.md",
       "publicSource": "https://rtk.geodnet.com/api/v2/coverage_stations",
       "asOf": "2026-07-04"
@@ -21,11 +21,11 @@
       "anomalyType": "duplication_cluster",
       "narrative": "registry quality",
       "kind": "metric",
-      "label": "exact (lat,lng) duplicate groups",
-      "metricKey": "exactDupGroups",
-      "current": 9,
-      "previous": 8,
-      "deltaText": "+1 (+12.5%)",
+      "label": "entities on public map",
+      "metricKey": "observed",
+      "current": 19564,
+      "previous": 19573,
+      "deltaText": "-9 (-0.0%)",
       "report": "docs/reports/geodnet-sybil-report.md",
       "publicSource": "https://rtk.geodnet.com/api/v2/coverage_stations",
       "asOf": "2026-07-04"
@@ -39,7 +39,22 @@
       "label": "headline finding",
       "current": null,
       "previous": null,
-      "deltaText": "290 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.",
+      "deltaText": "289 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.",
+      "report": "docs/reports/weatherxm-sybil-report.md",
+      "publicSource": "WeatherXM public cells API",
+      "asOf": "2026-07-04"
+    },
+    {
+      "network": "WeatherXM",
+      "networkId": "weatherxm",
+      "anomalyType": "capacity_violation",
+      "narrative": "capacity pressure",
+      "kind": "metric",
+      "label": "cells over designed capacity",
+      "metricKey": "overCapacityCells",
+      "current": 289,
+      "previous": 290,
+      "deltaText": "-1 (-0.3%)",
       "report": "docs/reports/weatherxm-sybil-report.md",
       "publicSource": "WeatherXM public cells API",
       "asOf": "2026-07-04"
@@ -67,22 +82,7 @@
       "label": "headline finding",
       "current": null,
       "previous": null,
-      "deltaText": "Of 158,192 DIMO vehicle identities, 40,622 (25.7%) are backed by physical hardware; 31,415 (19.9%) connect via software/synthetic devices, and 86,155 (54.5%) show no connected device on the public registry.",
-      "report": "docs/reports/dimo-sybil-report.md",
-      "publicSource": "https://identity-api.dimo.zone/query",
-      "asOf": "2026-07-04"
-    },
-    {
-      "network": "DIMO",
-      "networkId": "dimo",
-      "anomalyType": "device_backing_gap",
-      "narrative": "geographic expansion",
-      "kind": "metric",
-      "label": "entities on public map",
-      "metricKey": "observed",
-      "current": 158192,
-      "previous": 158180,
-      "deltaText": "+12 (+0.0%)",
+      "deltaText": "Of 158,194 DIMO vehicle identities, 40,622 (25.7%) are backed by physical hardware; 31,415 (19.9%) connect via software/synthetic devices, and 86,157 (54.5%) show no connected device on the public registry.",
       "report": "docs/reports/dimo-sybil-report.md",
       "publicSource": "https://identity-api.dimo.zone/query",
       "asOf": "2026-07-04"
@@ -124,5 +124,5 @@
     "Does the public read for Helium IoT match what your team sees internally, or is the public feed expected to look this way?",
     "Does the public read for Helium Mobile match what your team sees internally, or is the public feed expected to look this way?"
   ],
-  "threadSeed": "Public read on Geodnet: 8 exact (lat,lng) duplicate groups on 19,572 public stations — each row in §1 is one coordinate pair your registry team can grep today. — does that match your internal view, or is the public feed expected to behave this way?"
+  "threadSeed": "Public read on Geodnet: 9 exact (lat,lng) duplicate groups on 19,564 public stations — each row in §1 is one coordinate pair your registry team can grep today. — does that match your internal view, or is the public feed expected to behave this way?"
 }
