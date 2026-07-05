@@ -1,12 +1,12 @@
-# DePIN Signal Brief — 2026-07-04
+# DePIN Signal Brief — 2026-07-05
 
-> 2026-07-04 · machine-driven signal publication · evidence first
+> 2026-07-05 · machine-driven signal publication · evidence first
 
 ## Today's Read
 
-• WeatherXM over-capacity cells declined from 290 to 289.
-• Geodnet duplicate-coordinate groups unchanged at 9.
-• Hivemapper visible HONEY concentration remains near 49% of visible supply.
+• Geodnet duplicate-coordinate groups declined from 9 to 7.
+• WeatherXM over-capacity cells declined from 289 to 288.
+• Geodnet entities on public map rose from 19,564 to 19,570.
 
 ## Why It Matters
 
@@ -18,26 +18,31 @@ Observations span 5 networks — no single network dominates the index.
 
 ### What Changed Today
 
-- **Geodnet** — entities on public map: 19,564 (-9 (-0.0%))
-- **WeatherXM** — cells over designed capacity: 289 (-1 (-0.3%))
-- **Hivemapper** — 49.04% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
+- **Geodnet** — exact (lat,lng) duplicate groups: 7 (-2 (-22.2%))
+- **Geodnet** — entities on public map: 19,570 (+6 (+0.0%))
+- **WeatherXM** — cells over designed capacity: 288 (-1 (-0.3%))
+- **DIMO** — entities on public map: 158,202 (+8 (+0.0%))
+- **Hivemapper** — 49.03% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
 
 ### Signal Type
 
 - **Geodnet** — Registry duplication (`duplication_cluster`)
 - **WeatherXM** — Capacity pressure (`capacity_violation`)
+- **DIMO** — Uncategorized public observation (`device_backing_gap`)
 - **Hivemapper** — Economic concentration (`economic_concentration`)
 
 ### Signal Context
 
 - Geodnet: duplicate or inconsistent registry entries are review-able from public data alone.
 - WeatherXM: public cell capacity counts are a reproducible registry-pressure signal.
+- DIMO: measurable public-data delta worth cross-checking with internal ops.
 - Hivemapper: visible on-chain concentration is economic shape only — useful for custody reconciliation, not device claims.
 
 ### What We Don't Know
 
 - **Geodnet** — Whether shared coordinates are legitimate co-located installs, shared-mount sites, or registry artifacts — public data can't tell without operator confirmation.
 - **WeatherXM** — Whether over-capacity cells reflect real device density, registry double-counting, or expected reward-zone behavior — only the operator's internal registry settles it.
+- **DIMO** — What the public feed cannot disambiguate without operator confirmation.
 - **Hivemapper** — Whether the largest visible accounts are treasury, market-maker, exchange custody, or operators — on-chain shape doesn't label holder intent.
 
 ### Questions Worth Asking
@@ -50,7 +55,7 @@ Observations span 5 networks — no single network dominates the index.
 
 ### Thread Seed
 
-Public read on Geodnet: 9 exact (lat,lng) duplicate groups on 19,564 public stations — each row in §1 is one coordinate pair your registry team can review today. — does that match your internal view, or is the public feed expected to behave this way?
+Public read on Geodnet: 7 exact (lat,lng) duplicate groups on 19,570 public stations — each row in §1 is one coordinate pair your registry team can review today. — does that match your internal view, or is the public feed expected to behave this way?
 
 ### Sources & Methodology
 
@@ -58,4 +63,5 @@ Public read on Geodnet: 9 exact (lat,lng) duplicate groups on 19,564 public stat
 - Reproduce scans: `node scripts/duplication-scan-<network>.mjs` (see each report header)
 - **Geodnet:** `docs/reports/geodnet-duplication-report.md` · https://rtk.geodnet.com/api/v2/coverage_stations
 - **WeatherXM:** `docs/reports/weatherxm-duplication-report.md` · WeatherXM public cells API
+- **DIMO:** `docs/reports/dimo-duplication-report.md` · https://identity-api.dimo.zone/query
 - **Hivemapper:** `docs/reports/hivemapper-duplication-report.md` · Solana mainnet HONEY SPL mint (public RPC)
