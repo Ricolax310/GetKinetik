@@ -1,16 +1,17 @@
 {
-  "generatedAt": "2026-06-21T18:40:44.893Z",
+  "generatedAt": "2026-07-05T18:28:43.490Z",
   "schema": "getkinetik.drip/v2",
-  "date": "2026-06-21",
-  "week": 25,
+  "date": "2026-07-05",
+  "week": 27,
   "minConfidence": 0.8,
   "daily": [],
   "weekly": [
-    "Geodnet: repeated exactDupGroups observation. Observed Geodnet exactDupGroups on 7 of 7 recorded days.",
-    "WeatherXM: repeated overCapacityCells observation. Observed WeatherXM overCapacityCells on 7 of 7 recorded days.",
-    "Hivemapper: repeated top20ShareOfSupply observation. Observed Hivemapper top20ShareOfSupply on 7 of 7 recorded days.",
-    "Helium IoT: repeated stackedSpots observation. Observed Helium IoT stackedSpots on 7 of 7 recorded days.",
-    "Helium Mobile: repeated stackedSpots observation. Observed Helium Mobile stackedSpots on 7 of 7 recorded days."
+    "Geodnet: repeated exactDupGroups observation. Observed Geodnet exactDupGroups on 4 of 4 recorded days.",
+    "WeatherXM: repeated overCapacityCells observation. Observed WeatherXM overCapacityCells on 4 of 4 recorded days.",
+    "Hivemapper: repeated top20ShareOfSupply observation. Observed Hivemapper top20ShareOfSupply on 4 of 4 recorded days.",
+    "Helium IoT: repeated stackedSpots observation. Observed Helium IoT stackedSpots on 4 of 4 recorded days.",
+    "Helium Mobile: repeated stackedSpots observation. Observed Helium Mobile stackedSpots on 4 of 4 recorded days.",
+    "Geodnet: repeated observed observation. Observed Geodnet observed on 2 of 4 recorded days."
   ],
   "patterns": [
     {
@@ -22,7 +23,7 @@
         "Geodnet"
       ],
       "category": "IDENTITY",
-      "description": "Observed Geodnet exactDupGroups on 7 of 7 recorded days.",
+      "description": "Observed Geodnet exactDupGroups on 4 of 4 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -34,7 +35,7 @@
         "WeatherXM"
       ],
       "category": "CAPACITY",
-      "description": "Observed WeatherXM overCapacityCells on 7 of 7 recorded days.",
+      "description": "Observed WeatherXM overCapacityCells on 4 of 4 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -46,7 +47,7 @@
         "Hivemapper"
       ],
       "category": "ECONOMICS",
-      "description": "Observed Hivemapper top20ShareOfSupply on 7 of 7 recorded days.",
+      "description": "Observed Hivemapper top20ShareOfSupply on 4 of 4 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -58,7 +59,7 @@
         "Helium IoT"
       ],
       "category": "INFRASTRUCTURE",
-      "description": "Observed Helium IoT stackedSpots on 7 of 7 recorded days.",
+      "description": "Observed Helium IoT stackedSpots on 4 of 4 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -70,7 +71,19 @@
         "Helium Mobile"
       ],
       "category": "INFRASTRUCTURE",
-      "description": "Observed Helium Mobile stackedSpots on 7 of 7 recorded days.",
+      "description": "Observed Helium Mobile stackedSpots on 4 of 4 recorded days.",
+      "patternType": "cross-network"
+    },
+    {
+      "scope": "systemic",
+      "classification": "repetition",
+      "headline": "Geodnet: repeated observed observation",
+      "pattern": "REPEATED_INFRASTRUCTURE",
+      "networks": [
+        "Geodnet"
+      ],
+      "category": "INFRASTRUCTURE",
+      "description": "Observed Geodnet observed on 2 of 4 recorded days.",
       "patternType": "cross-network"
     }
   ],
@@ -88,6 +101,12 @@
         "flags": [
           "isolated"
         ]
+      },
+      {
+        "network": "Geodnet",
+        "metric": "observed",
+        "confidence": 0.687,
+        "flags": []
       },
       {
         "network": "WeatherXM",
@@ -108,13 +127,19 @@
       {
         "network": "Helium IoT",
         "metric": "stackedSpots",
-        "confidence": 0.62,
+        "confidence": 0.722,
         "flags": []
       },
       {
         "network": "Helium Mobile",
         "metric": "stackedSpots",
-        "confidence": 0.62,
+        "confidence": 0.722,
+        "flags": []
+      },
+      {
+        "network": "DIMO",
+        "metric": "observed",
+        "confidence": 0.595,
         "flags": []
       }
     ]
