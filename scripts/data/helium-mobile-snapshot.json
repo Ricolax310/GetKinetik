@@ -1,7 +1,16 @@
 {
-  "generatedAt": "2026-07-04T14:31:38.268Z",
+  "generatedAt": "2026-07-05T14:32:40.992Z",
   "source": "https://entities.nft.helium.io/v2/hotspots?subnetwork=mobile",
   "stats": {
+    "generatedAt": "2026-07-05T14:32:40.992Z",
+    "observed": 54773,
+    "unasserted": 1903,
+    "stackedSpots": 530,
+    "largestStack": 497,
+    "flaggedCount": 11275,
+    "flaggedPct": 0.20584959742939038
+  },
+  "prevStats": {
     "generatedAt": "2026-07-04T14:31:38.268Z",
     "observed": 54771,
     "unasserted": 1903,
@@ -10,16 +19,7 @@
     "flaggedCount": 11273,
     "flaggedPct": 0.20582059849190265
   },
-  "prevStats": {
-    "generatedAt": "2026-07-04T09:42:46.318Z",
-    "observed": 54771,
-    "unasserted": 1903,
-    "stackedSpots": 530,
-    "largestStack": 497,
-    "flaggedCount": 11273,
-    "flaggedPct": 0.20582059849190265
-  },
-  "hotspotsTotal": 56674,
+  "hotspotsTotal": 56676,
   "topStacks": [
     {
       "coord": "-0.001809,-0.00271",
@@ -473,6 +473,17 @@
       ]
     },
     {
+      "coord": "37.431854,-121.896823",
+      "count": 42,
+      "sampleKeys": [
+        "1trSusesgvxiC41m1d68Egq2ZtMwWZBVHxWSLztgZ5i9YWioQDDBVLSSEEHJJMVvJz7wFo5Xk2J6WUiKhKXyWFTzGf76gwuUoqQSfCw5fecUvbbHfmm2Uto23TaPtqhqx6PRCpRHgLoz9zsu4KYXTuSGyw4snRBQajdp9WF15u31BDidQNhcR6NWQ5McJgp6DYzTTr2EC2NpFzk3LZGssUecQE9DCdEu2saSH6AHqccqyKpi7G7FDboVEFHXgN116HbwZzQCv72ztT9mQk5UER9UDniosbYFwsssKGYQFQgZqMmj2UHqvPCcvQcUhfug8KrRKeEFDm4npvrmRsKYZr4rh8jSJa1WjHJWJo4rJHQBop",
+        "1trSuseUc4D51h5oXrqwCoXSmLmrtdMawHhMin7mT2pVD4HYzRobBSj7hVRyBcnZn1n99NzLoSVNgkmkk2YEgwqrY4zpMHdFjBGXdX5RV4L72RRJnhQtnQX12U77tGEtTApTiFdZXpeoHByq6XGpzKzWZ7b3kEyoDYdkH1s1mRnDLPmSFppbr9TJRFa19Dbwg64Ua83jKa1kwWReCcv2YDAYczwZj3QEwbRA1weQJ9P2WUfA8vpjsQ45h76EfNCknZQrfS4nzzd1ET6CZ3Ef5AeEQFkDfLaYCBzt61EeeafzrtRvT9LkZpq19qHbuV75f1qpykpZ949GVUMB8jZS1Ah79XAM4FwsUp5SZvt5USuUuR",
+        "1trSusekc6r735sKphzN6tRfqxMkyhazAdAC6gpYWm8JS3Wi29ZDughYcixaTG99Pyjk7o879VnB92beE6gKj6S67G8axnhdPMnUm6NCZtjLNkNtXZcrZwgo1po6Nc19qeHsXheUpDXCipT4N2LSCv8Jh2mbK7LB1LQmZz9QR94Hg8faFe7uyLHaJtbFSMnHtSq4iXn79M23peK783toH3xofPf8Lks6GwY878sRJMvzjbWzyQ8vmisseroTK8oGuRbLcVeipuXorXGPbd5iTasc3fm76fYkjSbYJRzKVv4rzsK5uoZvFrSmmyfCruujw9Px9fKUogDpXNwifJC669XVdFsTynL9MVHVMWRSFg5kQv",
+        "1trSusenpRc8V7g9q9HQGqkazcVfZQx99ppWoAf4ZWLTXWs9MFHriLiaBLEQuM6kAu8gwRFkCRzB3iScqcFEqHZ5LmnJRDtqEDCWG8xk1Ft2D6KZHde8ViBgn2a5rgNEftgmp1pLxkgQfXjnfPuj3Yx7VEh1oxs1bbuUvhyvmEpHhfyMyagzJKjy3CFwTHjAprmT17BB6AjqjZFDddvfgrg7cxBBUuPWvxXrsgFTWhGYisq23EW3X7hSAYMs3iuB97YAyZmyfCkiz9bYAVEmyZaWtpXtZf2kRqLE4ftrqC4LU5aPsJojTFFLHeCQPGVEfqRKMXkYD2b7QfF793LLGna6iP5rLQ67Csn7Qw6XdAx4su",
+        "1trSuseYNHYvei3X2riAtg5x2jPiMwUMBgUemuNHyEmmfC1ybtKHoonbzDHPEwXPTTEHEuUin992t1mhNCaCgZF948AeBEmue7V5Rm4wUexfivt5cN8Zb9SimMWwPQ196bxZVrUAHXNxQNp9YA7PjDJ1x3cv5LmhYMiLZuKeCMZDxqXtsmH88ai3HQ8RfEEisiPHYLoSF5Mz4EHfw6eaCksfx8yxoDtbVUPNqjKfYhLtUnoMrVco4AJoibv7mvsSGnDFtfvy3GMN7uzuP7HCbUo4oth74D4q4P2R5BMpWFDpk8ab1ewai299eLEkTkdihxyngkYaky5cJhQqTxCm9ebrdD2AVLRg4b11aWchB75EDe"
+      ]
+    },
+    {
       "coord": "40.789953,-73.972303",
       "count": 42,
       "sampleKeys": [
@@ -547,17 +558,6 @@
         "1trSusecxNK94jnUECxosbLEQyMvseHNaSLX5UxGJS3btxDYH7rhMmRNpT4dB8rmd4BbpsKnUFbWtvFcgnFmKJCR4bdjVYnVi36bUdLNn6XNyBqmbsdG8a91T5cK6qtDSZM3S24tzuYSTKfF6Pi7gvoRLqhGd4uskjiVJrb1Be1gzdHmi5X7HTDA68SE9XtE44EDLJN8jrzz6e6UaUsDj1euZLAAtT9crx1wgRM3CrNomdpzA2re1wzgmD7TGzonWT21jMjApbcVgGS56sRJK8MdnwX7B5jxnXQdfv7M7scGEYE9QPjjVcWe6z4faCRwq9vAr7de9MHhviwaThYa93BhvDiRX3MGQfTq9RGgkFBiPu",
         "1trSusexQaKvRzXFX5bgt4bFNRUkAfVdUSSLqbV2SmdScydzMqLYFY7PQNMKMYAXwTS9rDY4FKDwLWRedoX4nwy5nW2ksqhZQWDtRYQHofX8zJtD2ASCC3Ed99GDQLwCsSE9smJ4dU18BjDfWrGWSzsBkCq2BNG5W8tC8yRyWK9Wz1X8GuNbRVxzcUkXcX8hb8mBKJrHbmRR75ZZHhRLkNnPDitzvEAecx7iG5xgFca6G7rZyrBr1UXr9bBrdBHuiUUb1oTQjV57RBoQ2vHUU1LjWaM5FyUoh31dwtAtSq1ZFuCgR1yVuUcJf11k1XAsuFQLr2BPTVVt4tQ1Ezb2Tn2cekndBdTHC3GzRRcFKrqpMx",
         "1trSusehuruvcbrcyrg5xj9NK4AcKB5KoJjA9rMX15zmwQnZhF9WdHBWjQ1hLy8cntVLAjUNs9TNhLPMwm8HKLLKZy9hUScd2HvkmYQ1Au4CP77nTbmtj3rX5EvZzzevL6RBi7fjzcHVYKE1kmD1F4LxZVEioVp2j9Yo3Lnt7Mwct6wW31uTmtbBncxp2xbPh1PSFmw8ZdpwW7mfATi9utJfchWnZtnr8q3jEtjbtAidCutsieq1KDEnArPXPirMHhwaBZhPtPkHkXyVVxW68sbaqfHeQRLZPYHZMT4DhnaTQKpDE7TQ5DMwFfinH9G42eqDjfYxukEEybne1gntMduzfX2odRQMn5qBmAkJ6XjB2v"
-      ]
-    },
-    {
-      "coord": "37.431854,-121.896823",
-      "count": 40,
-      "sampleKeys": [
-        "1trSusesgvxiC41m1d68Egq2ZtMwWZBVHxWSLztgZ5i9YWioQDDBVLSSEEHJJMVvJz7wFo5Xk2J6WUiKhKXyWFTzGf76gwuUoqQSfCw5fecUvbbHfmm2Uto23TaPtqhqx6PRCpRHgLoz9zsu4KYXTuSGyw4snRBQajdp9WF15u31BDidQNhcR6NWQ5McJgp6DYzTTr2EC2NpFzk3LZGssUecQE9DCdEu2saSH6AHqccqyKpi7G7FDboVEFHXgN116HbwZzQCv72ztT9mQk5UER9UDniosbYFwsssKGYQFQgZqMmj2UHqvPCcvQcUhfug8KrRKeEFDm4npvrmRsKYZr4rh8jSJa1WjHJWJo4rJHQBop",
-        "1trSuseUc4D51h5oXrqwCoXSmLmrtdMawHhMin7mT2pVD4HYzRobBSj7hVRyBcnZn1n99NzLoSVNgkmkk2YEgwqrY4zpMHdFjBGXdX5RV4L72RRJnhQtnQX12U77tGEtTApTiFdZXpeoHByq6XGpzKzWZ7b3kEyoDYdkH1s1mRnDLPmSFppbr9TJRFa19Dbwg64Ua83jKa1kwWReCcv2YDAYczwZj3QEwbRA1weQJ9P2WUfA8vpjsQ45h76EfNCknZQrfS4nzzd1ET6CZ3Ef5AeEQFkDfLaYCBzt61EeeafzrtRvT9LkZpq19qHbuV75f1qpykpZ949GVUMB8jZS1Ah79XAM4FwsUp5SZvt5USuUuR",
-        "1trSusekc6r735sKphzN6tRfqxMkyhazAdAC6gpYWm8JS3Wi29ZDughYcixaTG99Pyjk7o879VnB92beE6gKj6S67G8axnhdPMnUm6NCZtjLNkNtXZcrZwgo1po6Nc19qeHsXheUpDXCipT4N2LSCv8Jh2mbK7LB1LQmZz9QR94Hg8faFe7uyLHaJtbFSMnHtSq4iXn79M23peK783toH3xofPf8Lks6GwY878sRJMvzjbWzyQ8vmisseroTK8oGuRbLcVeipuXorXGPbd5iTasc3fm76fYkjSbYJRzKVv4rzsK5uoZvFrSmmyfCruujw9Px9fKUogDpXNwifJC669XVdFsTynL9MVHVMWRSFg5kQv",
-        "1trSusenpRc8V7g9q9HQGqkazcVfZQx99ppWoAf4ZWLTXWs9MFHriLiaBLEQuM6kAu8gwRFkCRzB3iScqcFEqHZ5LmnJRDtqEDCWG8xk1Ft2D6KZHde8ViBgn2a5rgNEftgmp1pLxkgQfXjnfPuj3Yx7VEh1oxs1bbuUvhyvmEpHhfyMyagzJKjy3CFwTHjAprmT17BB6AjqjZFDddvfgrg7cxBBUuPWvxXrsgFTWhGYisq23EW3X7hSAYMs3iuB97YAyZmyfCkiz9bYAVEmyZaWtpXtZf2kRqLE4ftrqC4LU5aPsJojTFFLHeCQPGVEfqRKMXkYD2b7QfF793LLGna6iP5rLQ67Csn7Qw6XdAx4su",
-        "1trSuseYNHYvei3X2riAtg5x2jPiMwUMBgUemuNHyEmmfC1ybtKHoonbzDHPEwXPTTEHEuUin992t1mhNCaCgZF948AeBEmue7V5Rm4wUexfivt5cN8Zb9SimMWwPQ196bxZVrUAHXNxQNp9YA7PjDJ1x3cv5LmhYMiLZuKeCMZDxqXtsmH88ai3HQ8RfEEisiPHYLoSF5Mz4EHfw6eaCksfx8yxoDtbVUPNqjKfYhLtUnoMrVco4AJoibv7mvsSGnDFtfvy3GMN7uzuP7HCbUo4oth74D4q4P2R5BMpWFDpk8ab1ewai299eLEkTkdihxyngkYaky5cJhQqTxCm9ebrdD2AVLRg4b11aWchB75EDe"
       ]
     },
     {
