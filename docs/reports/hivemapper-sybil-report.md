@@ -2,10 +2,10 @@
 
 > Independent public read by the GETKINETIK Bureau. **Part A** (when Solana RPC succeeds) reads on-chain state for the public HONEY SPL mint. **Part B** (optional) runs the same four geometry heuristics as `sybil-report.mjs` on a node list *you* supply. Hivemapper does not publish an unauthenticated global contributor JSON like WeatherXM's cells API or Geodnet's station list — use your own `SOLANA_RPC_URL` for reliable Part A, or attach `--nodes=` for the Geodnet-style pass.
 
-- **As of:** 2026-07-05
+- **As of:** 2026-07-06
 - **Solana RPC used:** `https://mainnet.helius-rpc.com/?api-key=[REDACTED]`
 - **HONEY mint:** `4vMsoUT2BWatFweudnQM1xedRLfJgJ7hswhcpz4xgBTy`
-- **Reported circulating / UI supply:** 6,557,840,637.279 HONEY
+- **Reported circulating / UI supply:** 6,557,840,620.444 HONEY
 - **Sum of top 20 largest SPL token accounts:** 3,215,424,456.044 HONEY (49.03% of UI supply)
 - **No `--nodes=` file was supplied. For GPS / co-location style heuristics (same family as Geodnet / WeatherXM scans), obtain a public or partner-shared contributor snapshot with `lat` / `lng` and re-run with `--nodes=…` (schema: `scripts/sample-nodes.json`).**
 
@@ -21,9 +21,9 @@
 
 | Metric | This run | vs last run |
 |---|---:|---|
-| Top-20 visible SPL accounts (% of UI supply) | 49.03% | -0.01 pp (-0.0%) |
-| Sum of top-20 balances (HONEY) | 3,215,424,456.044 | -610,527.194 (-0.0%) |
-| UI-reported supply (HONEY) | 6,557,840,637.279 | unchanged vs last run |
+| Top-20 visible SPL accounts (% of UI supply) | 49.03% | +0.00 pp (+0.0%) |
+| Sum of top-20 balances (HONEY) | 3,215,424,456.044 | unchanged vs last run |
+| UI-reported supply (HONEY) | 6,557,840,620.444 | -16.834 (-0.0%) |
 
 ## What to cross-check this week
 
