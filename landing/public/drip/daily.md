@@ -1,27 +1,26 @@
-# DePIN Signal Brief — 2026-07-05
+# DePIN Signal Brief — 2026-07-06
 
-> 2026-07-05 · machine-driven signal publication · evidence first
+> 2026-07-06 · machine-driven signal publication · evidence first
 
 ## Today's Read
 
-• Geodnet duplicate-coordinate groups declined from 9 to 7.
-• WeatherXM over-capacity cells declined from 289 to 288.
-• Geodnet entities on public map rose from 19,564 to 19,570.
+• Geodnet duplicate-coordinate groups rose from 6 to 10.
+• WeatherXM over-capacity cells declined from 290 to 289.
+• DIMO entities on public map rose from 158,205 to 158,211.
 
 ## Why It Matters
 
 Today's signals show modest movement in registry, capacity, and concentration metrics. Telemetry and concentration readings are largely unchanged.
 The observed changes are incremental rather than structural and remain reproducible from public data sources.
-Observations span 5 networks — no single network dominates the index.
+Observations span 6 networks — no single network dominates the index.
 
 ## Full Evidence
 
 ### What Changed Today
 
-- **Geodnet** — exact (lat,lng) duplicate groups: 7 (-2 (-22.2%))
-- **Geodnet** — entities on public map: 19,570 (+6 (+0.0%))
-- **WeatherXM** — cells over designed capacity: 288 (-1 (-0.3%))
-- **DIMO** — entities on public map: 158,202 (+8 (+0.0%))
+- **Geodnet** — exact (lat,lng) duplicate groups: 10 (+4 (+66.7%))
+- **WeatherXM** — cells over designed capacity: 289 (-1 (-0.3%))
+- **DIMO** — entities on public map: 158,211 (+6 (+0.0%))
 - **Hivemapper** — 49.03% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
 
 ### Signal Type
@@ -55,7 +54,7 @@ Observations span 5 networks — no single network dominates the index.
 
 ### Thread Seed
 
-Public read on Geodnet: 7 exact (lat,lng) duplicate groups on 19,570 public stations — each row in §1 is one coordinate pair your registry team can review today. — does that match your internal view, or is the public feed expected to behave this way?
+Public read on Geodnet: 10 exact (lat,lng) duplicate groups on 19,570 public stations — each row in §1 is one coordinate pair your registry team can review today. — does that match your internal view, or is the public feed expected to behave this way?
 
 ### Sources & Methodology
 

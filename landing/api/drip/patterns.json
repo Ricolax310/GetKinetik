@@ -1,40 +1,18 @@
 {
-  "generatedAt": "2026-07-05T18:28:43.490Z",
+  "generatedAt": "2026-07-06T17:52:32.131Z",
   "patterns": [
     {
       "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Geodnet: repeated exactDupGroups observation",
-      "pattern": "REPEATED_IDENTITY",
+      "classification": "convergence",
+      "headline": "Cross-network infrastructure coverage stress observed across multiple networks",
+      "pattern": "CROSS_NETWORK_INFRASTRUCTURE",
       "networks": [
-        "Geodnet"
+        "DIMO",
+        "Helium IoT",
+        "Helium Mobile"
       ],
-      "category": "IDENTITY",
-      "description": "Observed Geodnet exactDupGroups on 4 of 4 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "WeatherXM: repeated overCapacityCells observation",
-      "pattern": "REPEATED_CAPACITY",
-      "networks": [
-        "WeatherXM"
-      ],
-      "category": "CAPACITY",
-      "description": "Observed WeatherXM overCapacityCells on 4 of 4 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Hivemapper: repeated top20ShareOfSupply observation",
-      "pattern": "REPEATED_ECONOMICS",
-      "networks": [
-        "Hivemapper"
-      ],
-      "category": "ECONOMICS",
-      "description": "Observed Hivemapper top20ShareOfSupply on 4 of 4 recorded days.",
+      "category": "INFRASTRUCTURE",
+      "description": "Cross-network infrastructure coverage stress observed across multiple networks (DIMO, Helium IoT, Helium Mobile).",
       "patternType": "cross-network"
     },
     {
@@ -46,7 +24,7 @@
         "Helium IoT"
       ],
       "category": "INFRASTRUCTURE",
-      "description": "Observed Helium IoT stackedSpots on 4 of 4 recorded days.",
+      "description": "Observed Helium IoT stackedSpots on 5 of 5 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -58,20 +36,92 @@
         "Helium Mobile"
       ],
       "category": "INFRASTRUCTURE",
-      "description": "Observed Helium Mobile stackedSpots on 4 of 4 recorded days.",
+      "description": "Observed Helium Mobile stackedSpots on 5 of 5 recorded days.",
       "patternType": "cross-network"
     },
     {
       "scope": "systemic",
       "classification": "repetition",
-      "headline": "Geodnet: repeated observed observation",
-      "pattern": "REPEATED_INFRASTRUCTURE",
+      "headline": "Geodnet: repeated exactDupGroups observation",
+      "pattern": "REPEATED_IDENTITY",
       "networks": [
         "Geodnet"
       ],
-      "category": "INFRASTRUCTURE",
-      "description": "Observed Geodnet observed on 2 of 4 recorded days.",
+      "category": "IDENTITY",
+      "description": "Observed Geodnet exactDupGroups on 5 of 5 recorded days.",
       "patternType": "cross-network"
+    },
+    {
+      "scope": "systemic",
+      "classification": "repetition",
+      "headline": "WeatherXM: repeated overCapacityCells observation",
+      "pattern": "REPEATED_CAPACITY",
+      "networks": [
+        "WeatherXM"
+      ],
+      "category": "CAPACITY",
+      "description": "Observed WeatherXM overCapacityCells on 5 of 5 recorded days.",
+      "patternType": "cross-network"
+    },
+    {
+      "scope": "systemic",
+      "classification": "repetition",
+      "headline": "Hivemapper: repeated top20ShareOfSupply observation",
+      "pattern": "REPEATED_ECONOMICS",
+      "networks": [
+        "Hivemapper"
+      ],
+      "category": "ECONOMICS",
+      "description": "Observed Hivemapper top20ShareOfSupply on 5 of 5 recorded days.",
+      "patternType": "cross-network"
+    },
+    {
+      "scope": "localized",
+      "classification": "drift",
+      "headline": "WeatherXM: capacity pressure signal detected",
+      "pattern": "LOCAL_CAPACITY",
+      "networks": [
+        "WeatherXM"
+      ],
+      "category": "CAPACITY",
+      "description": "Observed capacity signal on WeatherXM (overCapacityCells).",
+      "patternType": "single-network"
+    },
+    {
+      "scope": "localized",
+      "classification": "drift",
+      "headline": "Geodnet: identity registry stress signal detected",
+      "pattern": "LOCAL_IDENTITY",
+      "networks": [
+        "Geodnet"
+      ],
+      "category": "IDENTITY",
+      "description": "Observed identity signal on Geodnet (exactDupGroups).",
+      "patternType": "single-network"
+    },
+    {
+      "scope": "localized",
+      "classification": "drift",
+      "headline": "Hivemapper: economic distribution shape signal detected",
+      "pattern": "LOCAL_ECONOMICS",
+      "networks": [
+        "Hivemapper"
+      ],
+      "category": "ECONOMICS",
+      "description": "Observed economics signal on Hivemapper (top20ShareOfSupply).",
+      "patternType": "single-network"
+    },
+    {
+      "scope": "localized",
+      "classification": "concentration",
+      "headline": "Economic concentration shape on public ledgers",
+      "pattern": "ECONOMICS_CONCENTRATION",
+      "networks": [
+        "Hivemapper"
+      ],
+      "category": "ECONOMICS",
+      "description": "Observed holder/supply concentration metrics from public on-chain reads.",
+      "patternType": "single-network"
     }
   ]
 }
