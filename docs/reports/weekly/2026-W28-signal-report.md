@@ -1,6 +1,6 @@
 # Weekly DePIN Signal Report
 
-> Week 2026-W28 · 2026-07-06 → 2026-07-06 · patterns first, then networks.
+> Week 2026-W28 · 2026-07-06 → 2026-07-07 · patterns first, then networks.
 
 ## Executive Summary
 
@@ -18,11 +18,11 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 **Observed in:**
 - WeatherXM
 
-**Signal:** Over-capacity H3 cells declined from 290 to 289.
+**Signal:** Over-capacity H3 cells rose from 288 to 289.
 
 **Scope:** localized
 
-**Classification:** stability
+**Classification:** escalation
 
 **Unknown:** Public data cannot determine whether pressure reflects density, registry effects, or expected reward behavior.
 
@@ -33,11 +33,11 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 - Helium IoT
 - Helium Mobile
 
-**Signal:** Exact coordinate-duplicate groups rose from 6 to 10 on Geodnet.
+**Signal:** Exact coordinate-duplicate groups declined from 9 to 8 on Geodnet.
 
 **Scope:** systemic
 
-**Classification:** escalation
+**Classification:** stability
 
 **Unknown:** Public data cannot confirm whether shared coordinates are distinct devices or one identity reused.
 
@@ -59,13 +59,13 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 ### WeatherXM
 
 **What changed**
-- cells over designed capacity: 289 (-1 (-0.3%))
+- cells over designed capacity: 289 (+1 (+0.3%))
 
 **Signal type**
 - Capacity pressure (`capacity_violation`)
 
 **Trend**
-- single delta observed
+- multiple deltas observed
 
 **Open question**
 - On the public cells view, do over-capacity H3 counts match your internal registry and rewards model?
@@ -76,13 +76,14 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 ### Geodnet
 
 **What changed**
-- exact (lat,lng) duplicate groups: 10 (+4 (+66.7%))
+- exact (lat,lng) duplicate groups: 8 (-1 (-11.1%))
+- entities on public map: 19,570 (+7 (+0.0%))
 
 **Signal type**
 - Registry duplication (`duplication_cluster`)
 
 **Trend**
-- single delta observed
+- multiple deltas observed
 
 **Open question**
 - For stations sharing an exact coordinate pair on the public registry, is that expected registration behavior or a dedupe gap worth reconciling?
@@ -114,7 +115,7 @@ _No public signal this week — scan not run or no headline finding._
 ### DIMO
 
 **What changed**
-- entities on public map: 158,211 (+6 (+0.0%))
+- Of 158,222 DIMO vehicle identities, 40,622 (25.7%) are backed by physical hardware; 31,422 (19.9%) connect via software/synthetic devices, and 86,178 (54.5%) show no connected device on the public registry.
 
 **Signal type**
 - Uncategorized public observation (`device_backing_gap`)
@@ -131,7 +132,7 @@ _No public signal this week — scan not run or no headline finding._
 ### Helium IoT
 
 **What changed**
-- 4,861 single-coordinate stacks of ≥10 hotspots on 1,008,093 located units — the largest stack holds 502 hotspots on one coordinate (§1 lists keys your registry team can grep today).
+- 4,861 single-coordinate stacks of ≥10 hotspots on 1,008,095 located units — the largest stack holds 502 hotspots on one coordinate (§1 lists keys your registry team can grep today).
 
 **Signal type**
 - Registry duplication (`duplication_cluster`)
@@ -148,7 +149,7 @@ _No public signal this week — scan not run or no headline finding._
 ### Helium Mobile
 
 **What changed**
-- 530 single-coordinate stacks of ≥10 hotspots on 54,774 located units — the largest stack holds 497 hotspots on one coordinate (§1 lists keys your registry team can grep today).
+- 530 single-coordinate stacks of ≥10 hotspots on 54,775 located units — the largest stack holds 497 hotspots on one coordinate (§1 lists keys your registry team can grep today).
 
 **Signal type**
 - Registry duplication (`duplication_cluster`)
@@ -166,11 +167,11 @@ _No public signal this week — scan not run or no headline finding._
 
 ### What Changed Today
 
-_Latest reading: 2026-07-06_
+_Latest reading: 2026-07-07_
 
-- **Geodnet** — exact (lat,lng) duplicate groups: 10 (+4 (+66.7%))
-- **WeatherXM** — cells over designed capacity: 289 (-1 (-0.3%))
-- **DIMO** — entities on public map: 158,211 (+6 (+0.0%))
+- **Geodnet** — exact (lat,lng) duplicate groups: 8 (-1 (-11.1%))
+- **Geodnet** — entities on public map: 19,570 (+7 (+0.0%))
+- **WeatherXM** — cells over designed capacity: 289 (+1 (+0.3%))
 
 ### Signals To Watch
 

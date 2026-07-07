@@ -10,7 +10,7 @@
       "label": "headline finding",
       "current": null,
       "previous": null,
-      "deltaText": "9 exact (lat,lng) duplicate groups on 19,563 public stations — each row in §1 is one coordinate pair your registry team can grep today.",
+      "deltaText": "8 exact (lat,lng) duplicate groups on 19,570 public stations — each row in §1 is one coordinate pair your registry team can grep today.",
       "report": "docs/reports/geodnet-sybil-report.md",
       "publicSource": "https://rtk.geodnet.com/api/v2/coverage_stations",
       "asOf": "2026-07-07"
@@ -23,9 +23,9 @@
       "kind": "metric",
       "label": "exact (lat,lng) duplicate groups",
       "metricKey": "exactDupGroups",
-      "current": 9,
-      "previous": 10,
-      "deltaText": "-1 (-10.0%)",
+      "current": 8,
+      "previous": 9,
+      "deltaText": "-1 (-11.1%)",
       "report": "docs/reports/geodnet-sybil-report.md",
       "publicSource": "https://rtk.geodnet.com/api/v2/coverage_stations",
       "asOf": "2026-07-07"
@@ -34,13 +34,13 @@
       "network": "Geodnet",
       "networkId": "geodnet",
       "anomalyType": "duplication_cluster",
-      "narrative": "registry quality",
+      "narrative": "geographic expansion",
       "kind": "metric",
       "label": "entities on public map",
       "metricKey": "observed",
-      "current": 19563,
-      "previous": 19570,
-      "deltaText": "-7 (-0.0%)",
+      "current": 19570,
+      "previous": 19563,
+      "deltaText": "+7 (+0.0%)",
       "report": "docs/reports/geodnet-sybil-report.md",
       "publicSource": "https://rtk.geodnet.com/api/v2/coverage_stations",
       "asOf": "2026-07-07"
@@ -54,7 +54,7 @@
       "label": "headline finding",
       "current": null,
       "previous": null,
-      "deltaText": "288 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.",
+      "deltaText": "289 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.",
       "report": "docs/reports/weatherxm-sybil-report.md",
       "publicSource": "WeatherXM public cells API",
       "asOf": "2026-07-07"
@@ -67,9 +67,9 @@
       "kind": "metric",
       "label": "cells over designed capacity",
       "metricKey": "overCapacityCells",
-      "current": 288,
-      "previous": 289,
-      "deltaText": "-1 (-0.3%)",
+      "current": 289,
+      "previous": 288,
+      "deltaText": "+1 (+0.3%)",
       "report": "docs/reports/weatherxm-sybil-report.md",
       "publicSource": "WeatherXM public cells API",
       "asOf": "2026-07-07"
@@ -97,22 +97,7 @@
       "label": "headline finding",
       "current": null,
       "previous": null,
-      "deltaText": "Of 158,222 DIMO vehicle identities, 40,622 (25.7%) are backed by physical hardware; 31,421 (19.9%) connect via software/synthetic devices, and 86,179 (54.5%) show no connected device on the public registry.",
-      "report": "docs/reports/dimo-sybil-report.md",
-      "publicSource": "https://identity-api.dimo.zone/query",
-      "asOf": "2026-07-07"
-    },
-    {
-      "network": "DIMO",
-      "networkId": "dimo",
-      "anomalyType": "device_backing_gap",
-      "narrative": "geographic expansion",
-      "kind": "metric",
-      "label": "entities on public map",
-      "metricKey": "observed",
-      "current": 158222,
-      "previous": 158211,
-      "deltaText": "+11 (+0.0%)",
+      "deltaText": "Of 158,222 DIMO vehicle identities, 40,622 (25.7%) are backed by physical hardware; 31,422 (19.9%) connect via software/synthetic devices, and 86,178 (54.5%) show no connected device on the public registry.",
       "report": "docs/reports/dimo-sybil-report.md",
       "publicSource": "https://identity-api.dimo.zone/query",
       "asOf": "2026-07-07"
@@ -140,7 +125,7 @@
       "label": "headline finding",
       "current": null,
       "previous": null,
-      "deltaText": "530 single-coordinate stacks of ≥10 hotspots on 54,774 located units — the largest stack holds 497 hotspots on one coordinate (§1 lists keys your registry team can grep today).",
+      "deltaText": "530 single-coordinate stacks of ≥10 hotspots on 54,775 located units — the largest stack holds 497 hotspots on one coordinate (§1 lists keys your registry team can grep today).",
       "report": "docs/reports/helium-mobile-sybil-report.md",
       "publicSource": "https://entities.nft.helium.io/v2/hotspots?subnetwork=mobile",
       "asOf": "2026-07-07"
@@ -154,5 +139,5 @@
     "Does the public read for Helium IoT match what your team sees internally, or is the public feed expected to look this way?",
     "Does the public read for Helium Mobile match what your team sees internally, or is the public feed expected to look this way?"
   ],
-  "threadSeed": "Public read on Geodnet: 10 exact (lat,lng) duplicate groups on 19,570 public stations — each row in §1 is one coordinate pair your registry team can grep today. — does that match your internal view, or is the public feed expected to behave this way?"
+  "threadSeed": "Public read on Geodnet: 8 exact (lat,lng) duplicate groups on 19,570 public stations — each row in §1 is one coordinate pair your registry team can grep today. — does that match your internal view, or is the public feed expected to behave this way?"
 }
