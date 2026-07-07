@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-06T17:52:32.131Z",
+  "generatedAt": "2026-07-07T17:40:23.212Z",
   "patterns": [
     {
       "scope": "systemic",
@@ -7,12 +7,12 @@
       "headline": "Cross-network infrastructure coverage stress observed across multiple networks",
       "pattern": "CROSS_NETWORK_INFRASTRUCTURE",
       "networks": [
-        "DIMO",
+        "Geodnet",
         "Helium IoT",
         "Helium Mobile"
       ],
       "category": "INFRASTRUCTURE",
-      "description": "Cross-network infrastructure coverage stress observed across multiple networks (DIMO, Helium IoT, Helium Mobile).",
+      "description": "Cross-network infrastructure coverage stress observed across multiple networks (Geodnet, Helium IoT, Helium Mobile).",
       "patternType": "cross-network"
     },
     {
@@ -24,7 +24,7 @@
         "Helium IoT"
       ],
       "category": "INFRASTRUCTURE",
-      "description": "Observed Helium IoT stackedSpots on 5 of 5 recorded days.",
+      "description": "Observed Helium IoT stackedSpots on 6 of 6 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -36,7 +36,19 @@
         "Helium Mobile"
       ],
       "category": "INFRASTRUCTURE",
-      "description": "Observed Helium Mobile stackedSpots on 5 of 5 recorded days.",
+      "description": "Observed Helium Mobile stackedSpots on 6 of 6 recorded days.",
+      "patternType": "cross-network"
+    },
+    {
+      "scope": "systemic",
+      "classification": "repetition",
+      "headline": "Geodnet: repeated observed observation",
+      "pattern": "REPEATED_INFRASTRUCTURE",
+      "networks": [
+        "Geodnet"
+      ],
+      "category": "INFRASTRUCTURE",
+      "description": "Observed Geodnet observed on 3 of 6 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -48,7 +60,7 @@
         "Geodnet"
       ],
       "category": "IDENTITY",
-      "description": "Observed Geodnet exactDupGroups on 5 of 5 recorded days.",
+      "description": "Observed Geodnet exactDupGroups on 6 of 6 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -60,7 +72,7 @@
         "WeatherXM"
       ],
       "category": "CAPACITY",
-      "description": "Observed WeatherXM overCapacityCells on 5 of 5 recorded days.",
+      "description": "Observed WeatherXM overCapacityCells on 6 of 6 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -72,7 +84,7 @@
         "Hivemapper"
       ],
       "category": "ECONOMICS",
-      "description": "Observed Hivemapper top20ShareOfSupply on 5 of 5 recorded days.",
+      "description": "Observed Hivemapper top20ShareOfSupply on 6 of 6 recorded days.",
       "patternType": "cross-network"
     },
     {
