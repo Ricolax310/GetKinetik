@@ -1,12 +1,12 @@
-# DePIN Signal Brief — 2026-07-07
+# DePIN Signal Brief — 2026-07-08
 
-> 2026-07-07 · machine-driven signal publication · evidence first
+> 2026-07-08 · machine-driven signal publication · evidence first
 
 ## Today's Read
 
-• Geodnet duplicate-coordinate groups declined from 9 to 8.
-• WeatherXM over-capacity cells rose from 288 to 289.
-• Geodnet entities on public map rose from 19,563 to 19,570.
+• WeatherXM over-capacity cells rose from 289 to 290.
+• Geodnet duplicate-coordinate groups unchanged at 9.
+• Hivemapper visible HONEY concentration remains near 49% of visible supply.
 
 ## Why It Matters
 
@@ -18,27 +18,26 @@ Observations span 5 networks — no single network dominates the index.
 
 ### What Changed Today
 
-- **Geodnet** — exact (lat,lng) duplicate groups: 8 (-1 (-11.1%))
-- **Geodnet** — entities on public map: 19,570 (+7 (+0.0%))
-- **WeatherXM** — cells over designed capacity: 289 (+1 (+0.3%))
+- **WeatherXM** — cells over designed capacity: 290 (+1 (+0.3%))
+- **Geodnet** — 9 exact (lat,lng) duplicate groups on 19,558 public stations — each row in §1 is one coordinate pair your registry team can review today.
 - **Hivemapper** — 49.03% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
 
 ### Signal Type
 
-- **Geodnet** — Registry duplication (`duplication_cluster`)
 - **WeatherXM** — Capacity pressure (`capacity_violation`)
+- **Geodnet** — Registry duplication (`duplication_cluster`)
 - **Hivemapper** — Economic concentration (`economic_concentration`)
 
 ### Signal Context
 
-- Geodnet: duplicate or inconsistent registry entries are review-able from public data alone.
 - WeatherXM: public cell capacity counts are a reproducible registry-pressure signal.
+- Geodnet: duplicate or inconsistent registry entries are review-able from public data alone.
 - Hivemapper: visible on-chain concentration is economic shape only — useful for custody reconciliation, not device claims.
 
 ### What We Don't Know
 
-- **Geodnet** — Whether shared coordinates are legitimate co-located installs, shared-mount sites, or registry artifacts — public data can't tell without operator confirmation.
 - **WeatherXM** — Whether over-capacity cells reflect real device density, registry double-counting, or expected reward-zone behavior — only the operator's internal registry settles it.
+- **Geodnet** — Whether shared coordinates are legitimate co-located installs, shared-mount sites, or registry artifacts — public data can't tell without operator confirmation.
 - **Hivemapper** — Whether the largest visible accounts are treasury, market-maker, exchange custody, or operators — on-chain shape doesn't label holder intent.
 
 ### Questions Worth Asking
@@ -51,12 +50,12 @@ Observations span 5 networks — no single network dominates the index.
 
 ### Thread Seed
 
-Public read on Geodnet: 8 exact (lat,lng) duplicate groups on 19,570 public stations — each row in §1 is one coordinate pair your registry team can review today. — does that match your internal view, or is the public feed expected to behave this way?
+Public read on Geodnet: 9 exact (lat,lng) duplicate groups on 19,558 public stations — each row in §1 is one coordinate pair your registry team can review today. — does that match your internal view, or is the public feed expected to behave this way?
 
 ### Sources & Methodology
 
 - Public signal views: [getkinetik.app/signals](https://getkinetik.app/signals/)
 - Reproduce scans: `node scripts/duplication-scan-<network>.mjs` (see each report header)
-- **Geodnet:** `docs/reports/geodnet-duplication-report.md` · https://rtk.geodnet.com/api/v2/coverage_stations
 - **WeatherXM:** `docs/reports/weatherxm-duplication-report.md` · WeatherXM public cells API
+- **Geodnet:** `docs/reports/geodnet-duplication-report.md` · https://rtk.geodnet.com/api/v2/coverage_stations
 - **Hivemapper:** `docs/reports/hivemapper-duplication-report.md` · Solana mainnet HONEY SPL mint (public RPC)
