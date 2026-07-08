@@ -1,11 +1,11 @@
 # Weekly DePIN Signal Report
 
-> Week 2026-W28 · 2026-07-06 → 2026-07-07 · patterns first, then networks.
+> Week 2026-W28 · 2026-07-06 → 2026-07-08 · patterns first, then networks.
 
 ## Executive Summary
 
 - Week 2026-W28: cross-network signal index updated from public infrastructure reads.
-- 3 publishable signal(s) across 6 network(s) met the weekly confidence gate.
+- 1 publishable signal(s) across 6 network(s) met the weekly confidence gate.
 - 1 cross-network pattern(s) tagged: IDENTITY.
 - 1 systemic-scope pattern(s) recorded with multi-network support.
 
@@ -18,7 +18,7 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 **Observed in:**
 - WeatherXM
 
-**Signal:** Over-capacity H3 cells rose from 288 to 289.
+**Signal:** Over-capacity H3 cells rose from 289 to 290.
 
 **Scope:** localized
 
@@ -33,7 +33,7 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 - Helium IoT
 - Helium Mobile
 
-**Signal:** Exact coordinate-duplicate groups declined from 9 to 8 on Geodnet.
+**Signal:** Exact coordinate-duplicate groups observed at 9 on Geodnet.
 
 **Scope:** systemic
 
@@ -59,7 +59,7 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 ### WeatherXM
 
 **What changed**
-- cells over designed capacity: 289 (+1 (+0.3%))
+- cells over designed capacity: 290 (+1 (+0.3%))
 
 **Signal type**
 - Capacity pressure (`capacity_violation`)
@@ -76,8 +76,7 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 ### Geodnet
 
 **What changed**
-- exact (lat,lng) duplicate groups: 8 (-1 (-11.1%))
-- entities on public map: 19,570 (+7 (+0.0%))
+- 9 exact (lat,lng) duplicate groups on 19,558 public stations — each row in §1 is one coordinate pair your registry team can grep today.
 
 **Signal type**
 - Registry duplication (`duplication_cluster`)
@@ -115,7 +114,7 @@ _No public signal this week — scan not run or no headline finding._
 ### DIMO
 
 **What changed**
-- Of 158,222 DIMO vehicle identities, 40,622 (25.7%) are backed by physical hardware; 31,422 (19.9%) connect via software/synthetic devices, and 86,178 (54.5%) show no connected device on the public registry.
+- Of 158,217 DIMO vehicle identities, 40,622 (25.7%) are backed by physical hardware; 31,420 (19.9%) connect via software/synthetic devices, and 86,175 (54.5%) show no connected device on the public registry.
 
 **Signal type**
 - Uncategorized public observation (`device_backing_gap`)
@@ -132,7 +131,7 @@ _No public signal this week — scan not run or no headline finding._
 ### Helium IoT
 
 **What changed**
-- 4,861 single-coordinate stacks of ≥10 hotspots on 1,008,095 located units — the largest stack holds 502 hotspots on one coordinate (§1 lists keys your registry team can grep today).
+- 4,861 single-coordinate stacks of ≥10 hotspots on 1,008,098 located units — the largest stack holds 502 hotspots on one coordinate (§1 lists keys your registry team can grep today).
 
 **Signal type**
 - Registry duplication (`duplication_cluster`)
@@ -167,11 +166,9 @@ _No public signal this week — scan not run or no headline finding._
 
 ### What Changed Today
 
-_Latest reading: 2026-07-07_
+_Latest reading: 2026-07-08_
 
-- **Geodnet** — exact (lat,lng) duplicate groups: 8 (-1 (-11.1%))
-- **Geodnet** — entities on public map: 19,570 (+7 (+0.0%))
-- **WeatherXM** — cells over designed capacity: 289 (+1 (+0.3%))
+- **WeatherXM** — cells over designed capacity: 290 (+1 (+0.3%))
 
 ### Signals To Watch
 
