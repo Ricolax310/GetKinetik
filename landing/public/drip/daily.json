@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-07-08T17:32:18.454Z",
+  "generatedAt": "2026-07-09T17:38:55.837Z",
   "schema": "getkinetik.drip/v2",
-  "date": "2026-07-08",
+  "date": "2026-07-09",
   "minConfidence": 0.6,
   "daily": [
     "Geodnet: 9 duplicate coordinate clusters (unchanged)",
     "Helium IoT: 4,861 stacked spots (unchanged)",
-    "Helium Mobile: 530 stacked spots (unchanged)",
-    "Hivemapper: 49% top-holder concentration (unchanged)",
-    "WeatherXM: 290 capacity exceedances (+1)"
+    "Helium Mobile: 528 stacked spots (unchanged)",
+    "Hivemapper: 49.1% top-holder concentration (−0 pp)",
+    "WeatherXM: 289 capacity exceedances (unchanged)"
   ],
   "weekly": [
     "Helium IoT: repeated stackedSpots observation. Observed Helium IoT stackedSpots on 7 of 7 recorded days.",
@@ -112,7 +112,7 @@
     },
     {
       "scope": "localized",
-      "classification": "drift",
+      "classification": "stability",
       "headline": "WeatherXM: capacity pressure signal detected",
       "pattern": "LOCAL_CAPACITY",
       "networks": [
@@ -168,25 +168,25 @@
       "metric": "exactDupGroups",
       "value": 9,
       "delta": 0,
-      "timestamp": "2026-07-08",
+      "timestamp": "2026-07-09",
       "severity": "medium",
       "feedConfidence": 0.7
     },
     {
       "network": "WeatherXM",
       "metric": "overCapacityCells",
-      "value": 290,
-      "delta": 1,
-      "timestamp": "2026-07-08",
+      "value": 289,
+      "delta": 0,
+      "timestamp": "2026-07-09",
       "severity": "medium",
       "feedConfidence": 0.7
     },
     {
       "network": "Hivemapper",
       "metric": "top20ShareOfSupply",
-      "value": 0.49031756673371285,
-      "delta": -0.0000017694402418833022,
-      "timestamp": "2026-07-08",
+      "value": 0.49084168334626715,
+      "delta": -0.0001949886968565795,
+      "timestamp": "2026-07-09",
       "severity": "medium",
       "feedConfidence": 0.7
     },
@@ -195,16 +195,16 @@
       "metric": "stackedSpots",
       "value": 4861,
       "delta": 0,
-      "timestamp": "2026-07-08",
+      "timestamp": "2026-07-09",
       "severity": "medium",
       "feedConfidence": 0.7
     },
     {
       "network": "Helium Mobile",
       "metric": "stackedSpots",
-      "value": 530,
+      "value": 528,
       "delta": 0,
-      "timestamp": "2026-07-08",
+      "timestamp": "2026-07-09",
       "severity": "medium",
       "feedConfidence": 0.7
     }
@@ -230,9 +230,10 @@
       {
         "network": "Hivemapper",
         "metric": "top20ShareOfSupply",
-        "confidence": 0.73,
+        "confidence": 0.64,
         "flags": [
-          "isolated"
+          "isolated",
+          "volatile"
         ]
       },
       {
