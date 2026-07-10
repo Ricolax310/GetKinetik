@@ -21,7 +21,7 @@
       {
         "network": "WeatherXM",
         "metric": "overCapacityCells",
-        "confidence": 0.73,
+        "confidence": 0.682,
         "flags": [
           "isolated"
         ]
@@ -29,10 +29,9 @@
       {
         "network": "Hivemapper",
         "metric": "top20ShareOfSupply",
-        "confidence": 0.64,
+        "confidence": 0.73,
         "flags": [
-          "isolated",
-          "volatile"
+          "isolated"
         ]
       },
       {
