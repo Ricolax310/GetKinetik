@@ -1,6 +1,6 @@
 # Bureau papers
 
-Updated: 2026-07-09
+Updated: 2026-07-10
 
 ## Weekly bulletin
 
