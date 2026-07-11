@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-10T17:35:02.391Z",
+  "generatedAt": "2026-07-11T17:22:20.184Z",
   "patterns": [
     {
       "scope": "systemic",
@@ -89,7 +89,7 @@
     },
     {
       "scope": "localized",
-      "classification": "drift",
+      "classification": "stability",
       "headline": "WeatherXM: capacity pressure signal detected",
       "pattern": "LOCAL_CAPACITY",
       "networks": [
@@ -113,7 +113,7 @@
     },
     {
       "scope": "localized",
-      "classification": "drift",
+      "classification": "stability",
       "headline": "Hivemapper: economic distribution shape signal detected",
       "pattern": "LOCAL_ECONOMICS",
       "networks": [

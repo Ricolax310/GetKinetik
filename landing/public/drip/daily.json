@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-07-10T17:35:02.391Z",
+  "generatedAt": "2026-07-11T17:22:20.184Z",
   "schema": "getkinetik.drip/v2",
-  "date": "2026-07-10",
+  "date": "2026-07-11",
   "minConfidence": 0.6,
   "daily": [
-    "Geodnet: 9 duplicate coordinate clusters (+2)",
+    "Geodnet: 7 duplicate coordinate clusters (−3)",
     "Helium IoT: 4,860 stacked spots (unchanged)",
     "Helium Mobile: 528 stacked spots (unchanged)",
-    "Hivemapper: 49.1% top-holder concentration (−0 pp)",
-    "WeatherXM: 288 capacity exceedances (−2)"
+    "Hivemapper: 50.6% top-holder concentration (unchanged)",
+    "WeatherXM: 289 capacity exceedances (unchanged)"
   ],
   "weekly": [
     "Helium IoT: repeated stackedSpots observation. Observed Helium IoT stackedSpots on 7 of 7 recorded days.",
@@ -112,7 +112,7 @@
     },
     {
       "scope": "localized",
-      "classification": "drift",
+      "classification": "stability",
       "headline": "WeatherXM: capacity pressure signal detected",
       "pattern": "LOCAL_CAPACITY",
       "networks": [
@@ -136,7 +136,7 @@
     },
     {
       "scope": "localized",
-      "classification": "drift",
+      "classification": "stability",
       "headline": "Hivemapper: economic distribution shape signal detected",
       "pattern": "LOCAL_ECONOMICS",
       "networks": [
@@ -166,27 +166,27 @@
     {
       "network": "Geodnet",
       "metric": "exactDupGroups",
-      "value": 9,
-      "delta": 2,
-      "timestamp": "2026-07-10",
+      "value": 7,
+      "delta": -3,
+      "timestamp": "2026-07-11",
       "severity": "medium",
       "feedConfidence": 0.7
     },
     {
       "network": "WeatherXM",
       "metric": "overCapacityCells",
-      "value": 288,
-      "delta": -2,
-      "timestamp": "2026-07-10",
+      "value": 289,
+      "delta": 0,
+      "timestamp": "2026-07-11",
       "severity": "medium",
       "feedConfidence": 0.7
     },
     {
       "network": "Hivemapper",
       "metric": "top20ShareOfSupply",
-      "value": 0.4906586212730916,
-      "delta": -0.00010332053449968459,
-      "timestamp": "2026-07-10",
+      "value": 0.5060506820423495,
+      "delta": 0,
+      "timestamp": "2026-07-11",
       "severity": "medium",
       "feedConfidence": 0.7
     },
@@ -195,7 +195,7 @@
       "metric": "stackedSpots",
       "value": 4860,
       "delta": 0,
-      "timestamp": "2026-07-10",
+      "timestamp": "2026-07-11",
       "severity": "medium",
       "feedConfidence": 0.7
     },
@@ -204,7 +204,7 @@
       "metric": "stackedSpots",
       "value": 528,
       "delta": 0,
-      "timestamp": "2026-07-10",
+      "timestamp": "2026-07-11",
       "severity": "medium",
       "feedConfidence": 0.7
     }
@@ -214,7 +214,7 @@
       {
         "network": "Geodnet",
         "metric": "exactDupGroups",
-        "confidence": 0.73,
+        "confidence": 0.682,
         "flags": [
           "isolated"
         ]
@@ -222,7 +222,7 @@
       {
         "network": "WeatherXM",
         "metric": "overCapacityCells",
-        "confidence": 0.682,
+        "confidence": 0.73,
         "flags": [
           "isolated"
         ]
