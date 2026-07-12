@@ -1,13 +1,13 @@
-# DePIN Signal Intelligence — Week 27
+# DePIN Signal Intelligence — Week 28
 
-> Week 27 · machine-driven signal publication · evidence first
+> Week 28 · machine-driven signal publication · evidence first
 
 ## Executive Summary
 
-• Week 27: cross-network signal index updated from public infrastructure reads.
+• Week 28: cross-network signal index updated from public infrastructure reads.
 • 0 publishable signal(s) across 0 network(s) met the weekly confidence gate.
-• 6 cross-network pattern(s) tagged: IDENTITY, CAPACITY, ECONOMICS, INFRASTRUCTURE, INFRASTRUCTURE, INFRASTRUCTURE.
-• 6 systemic-scope pattern(s) recorded with multi-network support.
+• 5 cross-network pattern(s) tagged: IDENTITY, CAPACITY, ECONOMICS, INFRASTRUCTURE, INFRASTRUCTURE.
+• 5 systemic-scope pattern(s) recorded with multi-network support.
 
 ## This Week In Signals
 
@@ -24,7 +24,7 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 - **Classification:** repetition
 - **Networks:** Geodnet
 
-Observed Geodnet exactDupGroups on 4 of 4 recorded days.
+Observed Geodnet exactDupGroups on 7 of 7 recorded days.
 
 ### WeatherXM: repeated overCapacityCells observation
 
@@ -33,7 +33,7 @@ Observed Geodnet exactDupGroups on 4 of 4 recorded days.
 - **Classification:** repetition
 - **Networks:** WeatherXM
 
-Observed WeatherXM overCapacityCells on 4 of 4 recorded days.
+Observed WeatherXM overCapacityCells on 7 of 7 recorded days.
 
 ### Hivemapper: repeated top20ShareOfSupply observation
 
@@ -42,7 +42,7 @@ Observed WeatherXM overCapacityCells on 4 of 4 recorded days.
 - **Classification:** repetition
 - **Networks:** Hivemapper
 
-Observed Hivemapper top20ShareOfSupply on 4 of 4 recorded days.
+Observed Hivemapper top20ShareOfSupply on 7 of 7 recorded days.
 
 ### Helium IoT: repeated stackedSpots observation
 
@@ -51,7 +51,7 @@ Observed Hivemapper top20ShareOfSupply on 4 of 4 recorded days.
 - **Classification:** repetition
 - **Networks:** Helium IoT
 
-Observed Helium IoT stackedSpots on 4 of 4 recorded days.
+Observed Helium IoT stackedSpots on 7 of 7 recorded days.
 
 ### Helium Mobile: repeated stackedSpots observation
 
@@ -60,39 +60,27 @@ Observed Helium IoT stackedSpots on 4 of 4 recorded days.
 - **Classification:** repetition
 - **Networks:** Helium Mobile
 
-Observed Helium Mobile stackedSpots on 4 of 4 recorded days.
-
-### Geodnet: repeated observed observation
-
-- **Category:** INFRASTRUCTURE
-- **Scope:** systemic
-- **Classification:** repetition
-- **Networks:** Geodnet
-
-Observed Geodnet observed on 2 of 4 recorded days.
+Observed Helium Mobile stackedSpots on 7 of 7 recorded days.
 
 
 
 ## Systemic Observations
 
-- Geodnet: repeated exactDupGroups observation: Observed Geodnet exactDupGroups on 4 of 4 recorded days.
-- WeatherXM: repeated overCapacityCells observation: Observed WeatherXM overCapacityCells on 4 of 4 recorded days.
-- Hivemapper: repeated top20ShareOfSupply observation: Observed Hivemapper top20ShareOfSupply on 4 of 4 recorded days.
-- Helium IoT: repeated stackedSpots observation: Observed Helium IoT stackedSpots on 4 of 4 recorded days.
-- Helium Mobile: repeated stackedSpots observation: Observed Helium Mobile stackedSpots on 4 of 4 recorded days.
-- Geodnet: repeated observed observation: Observed Geodnet observed on 2 of 4 recorded days.
+- Geodnet: repeated exactDupGroups observation: Observed Geodnet exactDupGroups on 7 of 7 recorded days.
+- WeatherXM: repeated overCapacityCells observation: Observed WeatherXM overCapacityCells on 7 of 7 recorded days.
+- Hivemapper: repeated top20ShareOfSupply observation: Observed Hivemapper top20ShareOfSupply on 7 of 7 recorded days.
+- Helium IoT: repeated stackedSpots observation: Observed Helium IoT stackedSpots on 7 of 7 recorded days.
+- Helium Mobile: repeated stackedSpots observation: Observed Helium Mobile stackedSpots on 7 of 7 recorded days.
 
 
 ## Data Appendix
 
 ### What Changed Today
 
-_Latest reading: 2026-07-05_
+_Latest reading: 2026-07-12_
 
-- **Geodnet** — exact (lat,lng) duplicate groups: 7 (-2 (-22.2%))
-- **Geodnet** — entities on public map: 19,570 (+6 (+0.0%))
-- **WeatherXM** — cells over designed capacity: 288 (-1 (-0.3%))
-- **DIMO** — entities on public map: 158,202 (+8 (+0.0%))
+- **Geodnet** — exact (lat,lng) duplicate groups: 10 (+1 (+11.1%))
+- **WeatherXM** — cells over designed capacity: 289 (-1 (-0.3%))
 
 ### Signals To Watch
 
