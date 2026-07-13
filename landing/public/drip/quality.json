@@ -19,6 +19,12 @@
         ]
       },
       {
+        "network": "Geodnet",
+        "metric": "observed",
+        "confidence": 0.646,
+        "flags": []
+      },
+      {
         "network": "WeatherXM",
         "metric": "overCapacityCells",
         "confidence": 0.73,
@@ -37,17 +43,26 @@
       {
         "network": "Helium IoT",
         "metric": "stackedSpots",
-        "confidence": 0.62,
+        "confidence": 0.722,
         "flags": []
       },
       {
         "network": "Helium Mobile",
         "metric": "stackedSpots",
-        "confidence": 0.62,
+        "confidence": 0.722,
         "flags": []
       }
     ],
-    "heldBack": []
+    "heldBack": [
+      {
+        "network": "DIMO",
+        "metric": "observed",
+        "confidence": 0.57,
+        "flags": [
+          "unverified"
+        ]
+      }
+    ]
   },
   "weekly": {
     "minConfidence": 0.8,
