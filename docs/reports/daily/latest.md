@@ -1,18 +1,17 @@
 # Daily DePIN Signal Brief
 
-> 2026-07-13 · automated cross-network pipeline · evidence not verdicts
+> 2026-07-14 · automated cross-network pipeline · evidence not verdicts
 
 ## Today's Read
 
-• Geodnet duplicate-coordinate groups unchanged at 10.
-• WeatherXM over-capacity cells unchanged at 289.
-• DIMO entities on public map rose from 158,239 to 158,252.
-• Geodnet entities on public map declined from 19,569 to 19,560.
+• Geodnet duplicate-coordinate groups declined from 10 to 8.
+• WeatherXM over-capacity cells declined from 289 to 288.
+• DIMO entities on public map rose from 158,252 to 158,260.
 
 ## Why It Matters
 
-Today's signals show modest movement in concentration metrics. Telemetry and concentration readings are largely unchanged.
-The observed changes are incremental rather than structural and remain reproducible from public data sources.
+Today's signals show movement in concentration metrics, with at least one high-severity read observable on public data.
+The observed changes are reproducible from public endpoints and remain non-conclusive without operator confirmation.
 Observations span 6 networks — no single network dominates the index.
 
 ## Full Evidence
@@ -21,35 +20,36 @@ Observations span 6 networks — no single network dominates the index.
 
 | Sector | Signals | Networks | Top severity |
 |---|---:|---|---|
-| Registry & identity integrity | 4 | Geodnet, Helium IoT, Helium Mobile | medium |
-| Network health & capacity | 2 | DIMO, WeatherXM | medium |
+| Registry & identity integrity | 4 | Geodnet, Helium IoT, Helium Mobile | high |
+| Network health & capacity | 3 | DIMO, WeatherXM | medium |
 | Coverage growth | 1 | DIMO | low |
 | Token economics | 1 | Hivemapper | medium |
 
-_Totals: 8 signal(s) across 6/7 networks._
+_Totals: 9 signal(s) across 6/7 networks._
 
 ### What Changed Today
 
 **Registry & identity integrity**
-- **Geodnet** — 10 exact (lat,lng) duplicate groups on 19,560 public stations — each row in §1 is one coordinate pair your registry team can grep today. _(medium · conf 0.70)_
-- **Geodnet** — entities on public map: 19,560 (-9 (-0.0%)) _(low · conf 0.85)_
-- **Helium IoT** — 4,859 single-coordinate stacks of ≥10 hotspots on 1,008,113 located units — the largest stack holds 502 hotspots on one coordinate (§1 lists keys your registry team can grep today). _(medium · conf 0.70)_
-- **Helium Mobile** — 528 single-coordinate stacks of ≥10 hotspots on 54,778 located units — the largest stack holds 497 hotspots on one coordinate (§1 lists keys your registry team can grep today). _(medium · conf 0.70)_
+- **Geodnet** — 8 exact (lat,lng) duplicate groups on 19,565 public stations — each row in §1 is one coordinate pair your registry team can grep today. _(medium · conf 0.70)_
+- **Geodnet** — exact (lat,lng) duplicate groups: 8 (-2 (-20.0%)) _(high · conf 0.85)_
+- **Helium IoT** — 4,859 single-coordinate stacks of ≥10 hotspots on 1,008,114 located units — the largest stack holds 502 hotspots on one coordinate (§1 lists keys your registry team can grep today). _(medium · conf 0.70)_
+- **Helium Mobile** — 528 single-coordinate stacks of ≥10 hotspots on 54,779 located units — the largest stack holds 497 hotspots on one coordinate (§1 lists keys your registry team can grep today). _(medium · conf 0.70)_
 
 **Network health & capacity**
-- **WeatherXM** — 289 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue. _(medium · conf 0.70)_
-- **DIMO** — Of 158,252 DIMO vehicle identities, 40,622 (25.7%) are backed by physical hardware; 31,416 (19.9%) connect via software/synthetic devices, and 86,214 (54.5%) show no connected device on the public registry. _(medium · conf 0.70)_
+- **WeatherXM** — 288 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue. _(medium · conf 0.70)_
+- **WeatherXM** — cells over designed capacity: 288 (-1 (-0.3%)) _(low · conf 0.85)_
+- **DIMO** — Of 158,260 DIMO vehicle identities, 40,622 (25.7%) are backed by physical hardware; 31,417 (19.9%) connect via software/synthetic devices, and 86,221 (54.5%) show no connected device on the public registry. _(medium · conf 0.70)_
 
 **Coverage growth**
-- **DIMO** — entities on public map: 158,252 (+13 (+0.0%)) _(low · conf 0.85)_
+- **DIMO** — entities on public map: 158,260 (+8 (+0.0%)) _(low · conf 0.85)_
 
 **Token economics**
-- **Hivemapper** — 50.60% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read. _(medium · conf 0.70)_
+- **Hivemapper** — 50.67% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read. _(medium · conf 0.70)_
 
 ### Signal Type
 
 - **Registry & identity integrity** (`integrity`) — 4 signal(s) across 3 network(s): Geodnet, Helium IoT, Helium Mobile
-- **Network health & capacity** (`health`) — 2 signal(s) across 2 network(s): DIMO, WeatherXM
+- **Network health & capacity** (`health`) — 3 signal(s) across 2 network(s): DIMO, WeatherXM
 - **Coverage growth** (`growth`) — 1 signal(s) across 1 network(s): DIMO
 - **Token economics** (`economics`) — 1 signal(s) across 1 network(s): Hivemapper
 
@@ -71,27 +71,28 @@ _Operational context for observed metrics — not verdicts._
 ### Network Breakdown
 
 ### Geodnet
-- [integrity] 10 exact (lat,lng) duplicate groups on 19,560 public stations — each row in §1 is one coordinate pair your registry team can grep today. _(medium · conf 0.70)_
-- [integrity] entities on public map: 19,560 (-9 (-0.0%)) _(low · conf 0.85)_
+- [integrity] 8 exact (lat,lng) duplicate groups on 19,565 public stations — each row in §1 is one coordinate pair your registry team can grep today. _(medium · conf 0.70)_
+- [integrity] exact (lat,lng) duplicate groups: 8 (-2 (-20.0%)) _(high · conf 0.85)_
 
 ### WeatherXM
-- [health] 289 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue. _(medium · conf 0.70)_
+- [health] 288 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue. _(medium · conf 0.70)_
+- [health] cells over designed capacity: 288 (-1 (-0.3%)) _(low · conf 0.85)_
 
 ### Hivemapper
-- [economics] 50.60% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read. _(medium · conf 0.70)_
+- [economics] 50.67% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read. _(medium · conf 0.70)_
 
 ### NATIX
 - _No qualifying public finding in latest snapshot._
 
 ### Helium IoT
-- [integrity] 4,859 single-coordinate stacks of ≥10 hotspots on 1,008,113 located units — the largest stack holds 502 hotspots on one coordinate (§1 lists keys your registry team can grep today). _(medium · conf 0.70)_
+- [integrity] 4,859 single-coordinate stacks of ≥10 hotspots on 1,008,114 located units — the largest stack holds 502 hotspots on one coordinate (§1 lists keys your registry team can grep today). _(medium · conf 0.70)_
 
 ### Helium Mobile
-- [integrity] 528 single-coordinate stacks of ≥10 hotspots on 54,778 located units — the largest stack holds 497 hotspots on one coordinate (§1 lists keys your registry team can grep today). _(medium · conf 0.70)_
+- [integrity] 528 single-coordinate stacks of ≥10 hotspots on 54,779 located units — the largest stack holds 497 hotspots on one coordinate (§1 lists keys your registry team can grep today). _(medium · conf 0.70)_
 
 ### DIMO
-- [health] Of 158,252 DIMO vehicle identities, 40,622 (25.7%) are backed by physical hardware; 31,416 (19.9%) connect via software/synthetic devices, and 86,214 (54.5%) show no connected device on the public registry. _(medium · conf 0.70)_
-- [growth] entities on public map: 158,252 (+13 (+0.0%)) _(low · conf 0.85)_
+- [health] Of 158,260 DIMO vehicle identities, 40,622 (25.7%) are backed by physical hardware; 31,417 (19.9%) connect via software/synthetic devices, and 86,221 (54.5%) show no connected device on the public registry. _(medium · conf 0.70)_
+- [growth] entities on public map: 158,260 (+8 (+0.0%)) _(low · conf 0.85)_
 
 ## Methodology
 

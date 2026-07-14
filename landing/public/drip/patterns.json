@@ -1,20 +1,6 @@
 {
-  "generatedAt": "2026-07-13T17:39:20.849Z",
+  "generatedAt": "2026-07-14T17:28:44.954Z",
   "patterns": [
-    {
-      "scope": "systemic",
-      "classification": "convergence",
-      "headline": "Cross-network infrastructure coverage stress observed across multiple networks",
-      "pattern": "CROSS_NETWORK_INFRASTRUCTURE",
-      "networks": [
-        "Geodnet",
-        "Helium IoT",
-        "Helium Mobile"
-      ],
-      "category": "INFRASTRUCTURE",
-      "description": "Cross-network infrastructure coverage stress observed across multiple networks (Geodnet, Helium IoT, Helium Mobile).",
-      "patternType": "cross-network"
-    },
     {
       "scope": "systemic",
       "classification": "repetition",
@@ -37,6 +23,32 @@
       ],
       "category": "INFRASTRUCTURE",
       "description": "Observed Helium Mobile stackedSpots on 7 of 7 recorded days.",
+      "patternType": "cross-network"
+    },
+    {
+      "scope": "cross-network",
+      "classification": "convergence",
+      "headline": "Cross-network infrastructure coverage stress observed across multiple networks",
+      "pattern": "CROSS_NETWORK_INFRASTRUCTURE",
+      "networks": [
+        "Helium IoT",
+        "Helium Mobile"
+      ],
+      "category": "INFRASTRUCTURE",
+      "description": "Cross-network infrastructure coverage stress observed across multiple networks (Helium IoT, Helium Mobile).",
+      "patternType": "cross-network"
+    },
+    {
+      "scope": "cross-network",
+      "classification": "stability",
+      "headline": "Stability: INFRASTRUCTURE metrics unchanged across networks",
+      "pattern": "STABILITY_INFRASTRUCTURE",
+      "networks": [
+        "Helium IoT",
+        "Helium Mobile"
+      ],
+      "category": "INFRASTRUCTURE",
+      "description": "No delta movement recorded for INFRASTRUCTURE metrics this window.",
       "patternType": "cross-network"
     },
     {
@@ -77,7 +89,7 @@
     },
     {
       "scope": "localized",
-      "classification": "stability",
+      "classification": "drift",
       "headline": "WeatherXM: capacity pressure signal detected",
       "pattern": "LOCAL_CAPACITY",
       "networks": [
@@ -89,7 +101,7 @@
     },
     {
       "scope": "localized",
-      "classification": "stability",
+      "classification": "drift",
       "headline": "Geodnet: identity registry stress signal detected",
       "pattern": "LOCAL_IDENTITY",
       "networks": [
