@@ -1,7 +1,16 @@
 {
-  "generatedAt": "2026-07-14T14:37:08.886Z",
+  "generatedAt": "2026-07-15T09:36:24.723Z",
   "source": "https://entities.nft.helium.io/v2/hotspots?subnetwork=mobile",
   "stats": {
+    "generatedAt": "2026-07-15T09:36:24.723Z",
+    "observed": 54795,
+    "unasserted": 1903,
+    "stackedSpots": 528,
+    "largestStack": 497,
+    "flaggedCount": 11266,
+    "flaggedPct": 0.20560270097636646
+  },
+  "prevStats": {
     "generatedAt": "2026-07-14T14:37:08.886Z",
     "observed": 54779,
     "unasserted": 1903,
@@ -10,16 +19,7 @@
     "flaggedCount": 11261,
     "flaggedPct": 0.20557147812117782
   },
-  "prevStats": {
-    "generatedAt": "2026-07-13T14:59:08.927Z",
-    "observed": 54778,
-    "unasserted": 1903,
-    "stackedSpots": 528,
-    "largestStack": 497,
-    "flaggedCount": 11261,
-    "flaggedPct": 0.20557523093212604
-  },
-  "hotspotsTotal": 56682,
+  "hotspotsTotal": 56698,
   "topStacks": [
     {
       "coord": "-0.001809,-0.00271",
@@ -243,7 +243,7 @@
     },
     {
       "coord": "40.734079,-73.985107",
-      "count": 61,
+      "count": 62,
       "sampleKeys": [
         "11Gts5rgN3NLRmB7SkKfhDi7SBXj84tEhisXyhj1tPaGa5zsx4u",
         "1trSusec1JpsXUji5RGqi7a86DFQeZyxYoHs6tNFPGmqqC3VgdyCAs8QmPgimKyr5N39ucy1aQcbSxNnnZoXsQFzQZSmmpkUtFcPoNPLSATSPhUvjSCmKhqeEHC1GBT4Jr9sYXdyVBXHXUzyKKjEaBHC2XEcKEZNLFrfwjiNMznWwJA4m9zuho9K5s7MmWujnEgCpKavfzw45JahoXBsF2bXZNkaSEroNvFWFZ8hi1GUgZ62Ko5y7W5FJg1EaJZi5tREsb4qPKJw6KYYHbjBZnAMmVdba4CLXu4nN63ECMYZAPTdGxszMXVD7Nboj3vTL43rDtgvgK4zL6iAZ5YNXb82iCmzweiWcniZn7owCb4xe7",
@@ -261,6 +261,17 @@
         "1trSusePHZZcmAC3Q49q3cFNxeScyqmX3meJVuhiQqR5WdcohzwYxg6bknFwJhaLfHqWCcnjfnuWiyYzbZCkhgYFviEQ1FivkPWoE1NtUzot569Z1svk2N4FxToijy6vVeRRYnYTJe1tveeTz8Wfs9T8uNjJXJRQ4JyWayYfWpAYJJ2Cv6PT1vBGW3Fg38yPoMJvSbDBR2zraGoRQhw715yCw2fu4Uo8WD9USkvnCbKG7NKFJcRrWR6pi3C1s9gm372y38XhiWHTj3nKWLSAk8TUM5yvXjy9r3mhvXNZn6fyu5oJytJYZ2nqNSmfdjBhKQ31bujGhpEJzYYSsmS3R4X5LYrfqov94zNB4aH7uaEfhK",
         "1trSusekLWqVB2z32xcfBp31EpDinPyuhkB7Bce4BxBStP7dTummR2ghgFssF1bB5Z4ER5skwmb39QSMJZMNACzgt6uEvc6jrEbt15kTTVDCsrUMJwJ51KYvoQ5227Rp3xcWJEdycM5FYX5qviTo54xRhmg6uuu26DLV9cmza6fkcCuANBrdqHaGP5a2ZtQN9huqnmCWGBFawGPEmTk3EujwxeNUgQpFoxMTTn8LTPtvzKY5Gg6fjQ5vhTxTMmK2nHFAJFpzQYFqzLzxmStQN5k4XiewqJZPzuVh7DJL7ENF4RNrXVKP5En4bA9e2TKoCBwCeGTYWhvbK7zpMEprN46hsQKsnQevus3t7pAFsPnUBv",
         "1trSuseb5N5KpTNiKJ1zgxP1SMCTECrYvnZDg86nZFSQ2Azde6hKFGDfZwBbSh6JY3ht2XBuoyy335r1BLrC58pZYyo2kimqCiREa1naK5GTJjUZZLsRD6akhMVnPjsLbjTbCNHoZmG7HhAQof9wNvznbdzGhYzdfGUav2wLuW9XzJqeHv7k6Svw7KPsPpsq2dLubGyHSNcppUqXoiXet7AjVFqXcowJ3nm1o8ucZLLfT8LsszqVBEDYzYvUQ6aEzyaCHCGGCAn6izgCjcujtJgTWYuD9AGMG8PJgKAHXBmNnd2bFtCbE2VZppy7zjmM84wHxN3jpAZV5u7ooDGb6thy5tSSFMPsPhcbRtTAJ59YVd"
+      ]
+    },
+    {
+      "coord": "40.752969,-73.970865",
+      "count": 58,
+      "sampleKeys": [
+        "11U6gZmD5wzESrMe7Nt2mwnchWZTYtNzyk4WwNvZBSCuSxnZAsU",
+        "1trSuseSwVbjA63HF3x882gW9LkELQQZ2ZuGHTWq97s7iNKAXuxSj2xRaHkkbjDKwMrP9yKV6MuKyo1KBMGqjcm1DniHwghyC5pcAktaAooyJtq19PAs8dR89Bc4SE3A8CfTajhqAKMtRLBqip7LFj2ciPsXiZT6JrXF5ocspPJSmiYPBFDKEvDHQSsytfABTEhwhZcbPoqRicycZqS8TrupwQPTez658wysNJENFbcun5cLEo7T8Kns2CkXUeiWN9xRFuHYfimh84YWLqizkh9hy3S1trtHuDSvvk1XLBwCixim6imZoZEf9qa8wpeN4fomcFXUUZcU98JrmJecRU2du6TbB68Tbp3tYbSTWXGMQ6",
+        "14nraR5JRRR93pg3qmELubivtu9CzURBQSXadVUkhwTPSi3zthH",
+        "1332GJEimcHvYgu9eukkMRCkr5q85RXQML9pHgXQuQoQ6Z7k4Hh",
+        "14fKvQh7uMHSj96vhF7LnNZnNpddH2Yo696dTxkZyEicz8xvU3W"
       ]
     },
     {
@@ -283,17 +294,6 @@
         "1trSusemynv6eihZXKGQy3PtkrY5gfykS8zhpGo2nZXA65zn3pNiyA6g3eh1JzceoJBSqPEugW5tVoeCHDA3vX5KVAJkcGeat4gT9pmzS2z7KkfhodDcREbFhGYHp7hQcN7Gjf61PiTu5V5wxsfkeRTYwENLKZDggtkJUtg6yJJmEc4kfaMsRPRPLAeHoKfMbFKgxgZWH1D3VAVKkcm6kreXiB7a6QKqrGJB38XoJfkynsKt3yAKxMjqsYobt8ELjHV7ATwckkaDYp7FE5vvsYuBcJuWgncvxkUUWRuSD9yC9BUmXYuY55yQfgsYRX7r8dVt62t7RGTueHpmAmPseTZ2yByzF2GVNzXY94JT3nfvXr",
         "14LFHj2LBw8gkibgqpdhRsxhCLtSFt9Qq2hjDGukWWL3iGV37at",
         "14KkUGpGffoNvCidqSQkbeU98vgupoVi6FxfEbG6unJiQUgSKgs"
-      ]
-    },
-    {
-      "coord": "40.752969,-73.970865",
-      "count": 57,
-      "sampleKeys": [
-        "11U6gZmD5wzESrMe7Nt2mwnchWZTYtNzyk4WwNvZBSCuSxnZAsU",
-        "1trSuseSwVbjA63HF3x882gW9LkELQQZ2ZuGHTWq97s7iNKAXuxSj2xRaHkkbjDKwMrP9yKV6MuKyo1KBMGqjcm1DniHwghyC5pcAktaAooyJtq19PAs8dR89Bc4SE3A8CfTajhqAKMtRLBqip7LFj2ciPsXiZT6JrXF5ocspPJSmiYPBFDKEvDHQSsytfABTEhwhZcbPoqRicycZqS8TrupwQPTez658wysNJENFbcun5cLEo7T8Kns2CkXUeiWN9xRFuHYfimh84YWLqizkh9hy3S1trtHuDSvvk1XLBwCixim6imZoZEf9qa8wpeN4fomcFXUUZcU98JrmJecRU2du6TbB68Tbp3tYbSTWXGMQ6",
-        "14nraR5JRRR93pg3qmELubivtu9CzURBQSXadVUkhwTPSi3zthH",
-        "1332GJEimcHvYgu9eukkMRCkr5q85RXQML9pHgXQuQoQ6Z7k4Hh",
-        "14fKvQh7uMHSj96vhF7LnNZnNpddH2Yo696dTxkZyEicz8xvU3W"
       ]
     },
     {
