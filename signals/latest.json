@@ -2,7 +2,7 @@
   "schema": "getkinetik.signal-feed/v1",
   "cadence": "daily",
   "mode": "cross-network-first",
-  "generatedAt": "2026-07-15T17:29:54.662Z",
+  "generatedAt": "2026-07-16T17:30:46.853Z",
   "sectorSummary": [
     {
       "type": "integrity",
@@ -19,7 +19,7 @@
     {
       "type": "health",
       "label": "Network health & capacity",
-      "signalCount": 3,
+      "signalCount": 2,
       "networks": [
         "DIMO",
         "WeatherXM"
@@ -41,14 +41,14 @@
   "totals": {
     "networks": 7,
     "activeNetworks": 6,
-    "signals": 8,
+    "signals": 7,
     "byType": {
       "integrity": 4,
-      "health": 3,
+      "health": 2,
       "economics": 1
     },
     "bySeverity": {
-      "medium": 7,
+      "medium": 6,
       "high": 1
     }
   },
@@ -63,32 +63,32 @@
           "type": "integrity",
           "metric": "exactDupGroups",
           "value": 7,
-          "previous": 11,
-          "delta": -4,
-          "message": "7 exact (lat,lng) duplicate groups on 19,574 public stations — each row in §1 is one coordinate pair your registry team can grep today.",
+          "previous": 8,
+          "delta": -1,
+          "message": "7 exact (lat,lng) duplicate groups on 19,585 public stations — each row in §1 is one coordinate pair your registry team can grep today.",
           "severity": "medium",
           "confidence": 0.7,
           "anomalyType": "duplication_cluster",
           "kind": "headline",
           "metricKey": null,
-          "timestamp": "2026-07-15",
-          "asOf": "2026-07-15"
+          "timestamp": "2026-07-16",
+          "asOf": "2026-07-16"
         },
         {
           "network": "Geodnet",
           "type": "integrity",
           "metric": "exactDupGroups",
           "value": 7,
-          "previous": 11,
-          "delta": -4,
-          "message": "exact (lat,lng) duplicate groups: 7 (-4 (-36.4%))",
+          "previous": 8,
+          "delta": -1,
+          "message": "exact (lat,lng) duplicate groups: 7 (-1 (-12.5%))",
           "severity": "high",
           "confidence": 0.85,
           "anomalyType": "duplication_cluster",
           "kind": "metric",
           "metricKey": "exactDupGroups",
-          "timestamp": "2026-07-15",
-          "asOf": "2026-07-15"
+          "timestamp": "2026-07-16",
+          "asOf": "2026-07-16"
         }
       ]
     },
@@ -101,33 +101,17 @@
           "network": "WeatherXM",
           "type": "health",
           "metric": "overCapacityCells",
-          "value": 287,
+          "value": 290,
           "previous": 290,
-          "delta": -3,
-          "message": "287 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.",
+          "delta": 0,
+          "message": "290 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.",
           "severity": "medium",
           "confidence": 0.7,
           "anomalyType": "capacity_violation",
           "kind": "headline",
           "metricKey": null,
-          "timestamp": "2026-07-15",
-          "asOf": "2026-07-15"
-        },
-        {
-          "network": "WeatherXM",
-          "type": "health",
-          "metric": "overCapacityCells",
-          "value": 287,
-          "previous": 290,
-          "delta": -3,
-          "message": "cells over designed capacity: 287 (-3 (-1.0%))",
-          "severity": "medium",
-          "confidence": 0.85,
-          "anomalyType": "capacity_violation",
-          "kind": "metric",
-          "metricKey": "overCapacityCells",
-          "timestamp": "2026-07-15",
-          "asOf": "2026-07-15"
+          "timestamp": "2026-07-16",
+          "asOf": "2026-07-16"
         }
       ]
     },
@@ -140,17 +124,17 @@
           "network": "Hivemapper",
           "type": "economics",
           "metric": "top20ShareOfSupply",
-          "value": 0.5065606236469361,
-          "previous": 0.5065658942610112,
-          "delta": -0.000005270614075070235,
-          "message": "50.66% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.",
+          "value": 0.5067527923745649,
+          "previous": 0.5065291729750124,
+          "delta": 0.00022361939955251042,
+          "message": "50.68% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.",
           "severity": "medium",
           "confidence": 0.7,
           "anomalyType": "economic_concentration",
           "kind": "headline",
           "metricKey": null,
-          "timestamp": "2026-07-15",
-          "asOf": "2026-07-15"
+          "timestamp": "2026-07-16",
+          "asOf": "2026-07-16"
         }
       ]
     },
@@ -173,14 +157,14 @@
           "value": 4859,
           "previous": 4859,
           "delta": 0,
-          "message": "4,859 single-coordinate stacks of ≥10 hotspots on 1,008,115 located units — the largest stack holds 502 hotspots on one coordinate (§1 lists keys your registry team can grep today).",
+          "message": "4,859 single-coordinate stacks of ≥10 hotspots on 1,008,116 located units — the largest stack holds 502 hotspots on one coordinate (§1 lists keys your registry team can grep today).",
           "severity": "medium",
           "confidence": 0.7,
           "anomalyType": "duplication_cluster",
           "kind": "headline",
           "metricKey": null,
-          "timestamp": "2026-07-15",
-          "asOf": "2026-07-15"
+          "timestamp": "2026-07-16",
+          "asOf": "2026-07-16"
         }
       ]
     },
@@ -196,14 +180,14 @@
           "value": 528,
           "previous": 528,
           "delta": 0,
-          "message": "528 single-coordinate stacks of ≥10 hotspots on 54,795 located units — the largest stack holds 497 hotspots on one coordinate (§1 lists keys your registry team can grep today).",
+          "message": "528 single-coordinate stacks of ≥10 hotspots on 54,800 located units — the largest stack holds 497 hotspots on one coordinate (§1 lists keys your registry team can grep today).",
           "severity": "medium",
           "confidence": 0.7,
           "anomalyType": "duplication_cluster",
           "kind": "headline",
           "metricKey": null,
-          "timestamp": "2026-07-15",
-          "asOf": "2026-07-15"
+          "timestamp": "2026-07-16",
+          "asOf": "2026-07-16"
         }
       ]
     },
@@ -219,19 +203,19 @@
           "value": null,
           "previous": null,
           "delta": 0,
-          "message": "Of 158,273 DIMO vehicle identities, 40,622 (25.7%) are backed by physical hardware; 31,418 (19.9%) connect via software/synthetic devices, and 86,233 (54.5%) show no connected device on the public registry.",
+          "message": "Of 158,283 DIMO vehicle identities, 40,622 (25.7%) are backed by physical hardware; 31,418 (19.8%) connect via software/synthetic devices, and 86,243 (54.5%) show no connected device on the public registry.",
           "severity": "medium",
           "confidence": 0.7,
           "anomalyType": "device_backing_gap",
           "kind": "headline",
           "metricKey": null,
-          "timestamp": "2026-07-15",
-          "asOf": "2026-07-15"
+          "timestamp": "2026-07-16",
+          "asOf": "2026-07-16"
         }
       ]
     }
   ],
-  "date": "2026-07-15",
+  "date": "2026-07-16",
   "ingest": [
     {
       "id": "geodnet",
