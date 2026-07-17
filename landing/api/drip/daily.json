@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-07-16T17:30:56.585Z",
+  "generatedAt": "2026-07-17T17:26:08.021Z",
   "schema": "getkinetik.drip/v2",
-  "date": "2026-07-16",
+  "date": "2026-07-17",
   "minConfidence": 0.6,
   "daily": [
-    "Geodnet: 7 duplicate coordinate clusters (−1)",
-    "Helium IoT: 4,859 stacked spots (unchanged)",
+    "Geodnet: 8 duplicate coordinate clusters (+1)",
+    "Helium IoT: 4,858 stacked spots (unchanged)",
     "Helium Mobile: 528 stacked spots (unchanged)",
-    "Hivemapper: 50.7% top-holder concentration (+0 pp)",
-    "WeatherXM: 290 capacity exceedances (unchanged)"
+    "Hivemapper: 50.8% top-holder concentration (unchanged)",
+    "WeatherXM: 288 capacity exceedances (unchanged)"
   ],
   "weekly": [
     "Helium IoT: repeated stackedSpots observation. Observed Helium IoT stackedSpots on 7 of 7 recorded days.",
@@ -166,36 +166,36 @@
     {
       "network": "Geodnet",
       "metric": "exactDupGroups",
-      "value": 7,
-      "delta": -1,
-      "timestamp": "2026-07-16",
+      "value": 8,
+      "delta": 1,
+      "timestamp": "2026-07-17",
       "severity": "medium",
       "feedConfidence": 0.7
     },
     {
       "network": "WeatherXM",
       "metric": "overCapacityCells",
-      "value": 290,
+      "value": 288,
       "delta": 0,
-      "timestamp": "2026-07-16",
+      "timestamp": "2026-07-17",
       "severity": "medium",
       "feedConfidence": 0.7
     },
     {
       "network": "Hivemapper",
       "metric": "top20ShareOfSupply",
-      "value": 0.5067527923745649,
-      "delta": 0.00022361939955251042,
-      "timestamp": "2026-07-16",
+      "value": 0.5081160854245415,
+      "delta": -0.000023353019837912825,
+      "timestamp": "2026-07-17",
       "severity": "medium",
       "feedConfidence": 0.7
     },
     {
       "network": "Helium IoT",
       "metric": "stackedSpots",
-      "value": 4859,
+      "value": 4858,
       "delta": 0,
-      "timestamp": "2026-07-16",
+      "timestamp": "2026-07-17",
       "severity": "medium",
       "feedConfidence": 0.7
     },
@@ -204,7 +204,7 @@
       "metric": "stackedSpots",
       "value": 528,
       "delta": 0,
-      "timestamp": "2026-07-16",
+      "timestamp": "2026-07-17",
       "severity": "medium",
       "feedConfidence": 0.7
     }
@@ -214,7 +214,7 @@
       {
         "network": "Geodnet",
         "metric": "exactDupGroups",
-        "confidence": 0.73,
+        "confidence": 0.682,
         "flags": [
           "isolated"
         ]

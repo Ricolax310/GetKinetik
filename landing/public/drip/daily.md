@@ -1,11 +1,11 @@
-# DePIN Signal Brief — 2026-07-16
+# DePIN Signal Brief — 2026-07-17
 
-> 2026-07-16 · machine-driven signal publication · evidence first
+> 2026-07-17 · machine-driven signal publication · evidence first
 
 ## Today's Read
 
-• Geodnet duplicate-coordinate groups declined from 8 to 7.
-• WeatherXM over-capacity cells unchanged at 290.
+• Geodnet duplicate-coordinate groups rose from 7 to 8.
+• WeatherXM over-capacity cells unchanged at 288.
 • Hivemapper visible HONEY concentration remains near 51% of visible supply.
 
 ## Why It Matters
@@ -18,9 +18,9 @@ Observations span 5 networks — no single network dominates the index.
 
 ### What Changed Today
 
-- **Geodnet** — exact (lat,lng) duplicate groups: 7 (-1 (-12.5%))
-- **WeatherXM** — 290 cells exceed designed capacity — §1 lists H3 indices + map centers for your review queue.
-- **Hivemapper** — 50.68% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
+- **Geodnet** — exact (lat,lng) duplicate groups: 8 (+1 (+14.3%))
+- **WeatherXM** — 288 cells exceed designed capacity — §1 lists H3 indices + map centers for your review queue.
+- **Hivemapper** — 50.81% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
 
 ### Signal Type
 
@@ -50,7 +50,7 @@ Observations span 5 networks — no single network dominates the index.
 
 ### Thread Seed
 
-Public read on Geodnet: 7 exact (lat,lng) duplicate groups on 19,585 public stations — each row in §1 is one coordinate pair your registry team can review today. — does that match your internal view, or is the public feed expected to behave this way?
+Public read on Geodnet: 8 exact (lat,lng) duplicate groups on 19,578 public stations — each row in §1 is one coordinate pair your registry team can review today. — does that match your internal view, or is the public feed expected to behave this way?
 
 ### Sources & Methodology
 
