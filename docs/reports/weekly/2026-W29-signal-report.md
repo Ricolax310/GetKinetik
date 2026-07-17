@@ -1,6 +1,6 @@
 # Weekly DePIN Signal Report
 
-> Week 2026-W29 · 2026-07-13 → 2026-07-16 · patterns first, then networks.
+> Week 2026-W29 · 2026-07-13 → 2026-07-17 · patterns first, then networks.
 
 ## Executive Summary
 
@@ -18,7 +18,7 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 **Observed in:**
 - WeatherXM
 
-**Signal:** Over-capacity H3 cells observed at 290.
+**Signal:** Over-capacity H3 cells observed at 288.
 
 **Scope:** localized
 
@@ -33,11 +33,11 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 - Helium IoT
 - Helium Mobile
 
-**Signal:** Exact coordinate-duplicate groups declined from 8 to 7 on Geodnet.
+**Signal:** Exact coordinate-duplicate groups rose from 7 to 8 on Geodnet.
 
 **Scope:** systemic
 
-**Classification:** stability
+**Classification:** escalation
 
 **Unknown:** Public data cannot confirm whether shared coordinates are distinct devices or one identity reused.
 
@@ -46,7 +46,7 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 **Observed in:**
 - Hivemapper
 
-**Signal:** Top-20 account share of supply observed near 50.68%.
+**Signal:** Top-20 account share of supply observed near 50.81%.
 
 **Scope:** localized
 
@@ -59,7 +59,7 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 ### WeatherXM
 
 **What changed**
-- 290 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.
+- 288 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.
 
 **Signal type**
 - Capacity pressure (`capacity_violation`)
@@ -76,7 +76,7 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 ### Geodnet
 
 **What changed**
-- exact (lat,lng) duplicate groups: 7 (-1 (-12.5%))
+- exact (lat,lng) duplicate groups: 8 (+1 (+14.3%))
 
 **Signal type**
 - Registry duplication (`duplication_cluster`)
@@ -97,7 +97,7 @@ _No public signal this week — scan not run or no headline finding._
 ### Hivemapper
 
 **What changed**
-- 50.68% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
+- 50.81% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
 
 **Signal type**
 - Economic concentration (`economic_concentration`)
@@ -114,7 +114,7 @@ _No public signal this week — scan not run or no headline finding._
 ### DIMO
 
 **What changed**
-- Of 158,283 DIMO vehicle identities, 40,622 (25.7%) are backed by physical hardware; 31,418 (19.8%) connect via software/synthetic devices, and 86,243 (54.5%) show no connected device on the public registry.
+- Of 158,289 DIMO vehicle identities, 40,622 (25.7%) are backed by physical hardware; 31,416 (19.8%) connect via software/synthetic devices, and 86,251 (54.5%) show no connected device on the public registry.
 
 **Signal type**
 - Uncategorized public observation (`device_backing_gap`)
@@ -131,7 +131,7 @@ _No public signal this week — scan not run or no headline finding._
 ### Helium IoT
 
 **What changed**
-- 4,859 single-coordinate stacks of ≥10 hotspots on 1,008,116 located units — the largest stack holds 502 hotspots on one coordinate (§1 lists keys your registry team can grep today).
+- 4,858 single-coordinate stacks of ≥10 hotspots on 1,008,117 located units — the largest stack holds 502 hotspots on one coordinate (§1 lists keys your registry team can grep today).
 
 **Signal type**
 - Registry duplication (`duplication_cluster`)
@@ -166,9 +166,9 @@ _No public signal this week — scan not run or no headline finding._
 
 ### What Changed Today
 
-_Latest reading: 2026-07-16_
+_Latest reading: 2026-07-17_
 
-- **Geodnet** — exact (lat,lng) duplicate groups: 7 (-1 (-12.5%))
+- **Geodnet** — exact (lat,lng) duplicate groups: 8 (+1 (+14.3%))
 
 ### Signals To Watch
 
