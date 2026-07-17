@@ -8,16 +8,16 @@
       "publicSource": "https://rtk.geodnet.com/api/v2/coverage_stations",
       "generatedAt": "2026-07-17",
       "stats": {
-        "generatedAt": "2026-07-17T09:32:56.281Z",
-        "observed": 19579,
-        "exactDupGroups": 7,
-        "nearDupClusters": 895,
+        "generatedAt": "2026-07-17T14:31:21.648Z",
+        "observed": 19578,
+        "exactDupGroups": 8,
+        "nearDupClusters": 896,
         "tightClusters": 4,
-        "lowPrecision": 5,
-        "flaggedCount": 1785,
-        "flaggedPct": 0.09116910976045764
+        "lowPrecision": 6,
+        "flaggedCount": 1788,
+        "flaggedPct": 0.09132699969353356
       },
-      "topFinding": "**7 exact (lat,lng) duplicate groups** on 19,579 public stations — each row in §1 is one coordinate pair your registry team can grep today.",
+      "topFinding": "**8 exact (lat,lng) duplicate groups** on 19,578 public stations — each row in §1 is one coordinate pair your registry team can grep today.",
       "anomalyType": "duplication_cluster",
       "assetClass": "spatial_distribution",
       "verificationEligible": true,
@@ -33,16 +33,16 @@
       "publicSource": "WeatherXM public cells API",
       "generatedAt": "2026-07-17",
       "stats": {
-        "generatedAt": "2026-07-17T09:33:26.890Z",
+        "generatedAt": "2026-07-17T14:31:58.227Z",
         "observed": 8497,
         "overCapacityCells": 288,
         "overCapacityPct": 0.0338943156408144,
         "drilledCells": 60,
-        "devicesInDrilled": 172,
-        "polNoLocation": 86,
+        "devicesInDrilled": 209,
+        "polNoLocation": 99,
         "polOther": 1,
-        "inactiveInDrilled": 97,
-        "lowQodInDrilled": 95
+        "inactiveInDrilled": 118,
+        "lowQodInDrilled": 119
       },
       "topFinding": "**288 cells** exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.",
       "anomalyType": "capacity_violation",
@@ -60,10 +60,10 @@
       "publicSource": "Solana mainnet HONEY SPL mint (public RPC)",
       "generatedAt": "2026-07-17",
       "stats": {
-        "generatedAt": "2026-07-17T09:33:28.685Z",
+        "generatedAt": "2026-07-17T14:32:02.662Z",
         "supplyUiAmount": 6562783852.528301,
-        "top20SumUi": 3334809301.4555717,
-        "top20ShareOfSupply": 0.5081394384443794,
+        "top20SumUi": 3334656040.6340714,
+        "top20ShareOfSupply": 0.5081160854245415,
         "largestAccountsReturned": 20,
         "partASkipped": false
       },
@@ -112,7 +112,7 @@
       "publicSource": "https://identity-api.dimo.zone/query",
       "generatedAt": "2026-07-17",
       "stats": {
-        "generatedAt": "2026-07-17T09:33:48.286Z",
+        "generatedAt": "2026-07-17T14:32:05.789Z",
         "observed": 158289,
         "aftermarketDevices": 40622,
         "syntheticDevices": 31416,
@@ -139,7 +139,7 @@
       "publicSource": "https://entities.nft.helium.io/v2/hotspots?subnetwork=iot",
       "generatedAt": "2026-07-17",
       "stats": {
-        "generatedAt": "2026-07-17T09:33:42.808Z",
+        "generatedAt": "2026-07-17T14:32:21.710Z",
         "observed": 1008117,
         "unasserted": 27405,
         "stackedSpots": 4858,
@@ -163,7 +163,7 @@
       "publicSource": "https://entities.nft.helium.io/v2/hotspots?subnetwork=mobile",
       "generatedAt": "2026-07-17",
       "stats": {
-        "generatedAt": "2026-07-17T09:33:47.956Z",
+        "generatedAt": "2026-07-17T14:32:28.995Z",
         "observed": 54800,
         "unasserted": 1903,
         "stackedSpots": 528,
