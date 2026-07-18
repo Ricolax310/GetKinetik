@@ -10,7 +10,7 @@
       "label": "headline finding",
       "current": null,
       "previous": null,
-      "deltaText": "6 exact (lat,lng) duplicate groups on 19,582 public stations — each row in §1 is one coordinate pair your registry team can grep today.",
+      "deltaText": "8 exact (lat,lng) duplicate groups on 19,578 public stations — each row in §1 is one coordinate pair your registry team can grep today.",
       "report": "docs/reports/geodnet-sybil-report.md",
       "publicSource": "https://rtk.geodnet.com/api/v2/coverage_stations",
       "asOf": "2026-07-18"
@@ -23,9 +23,9 @@
       "kind": "metric",
       "label": "exact (lat,lng) duplicate groups",
       "metricKey": "exactDupGroups",
-      "current": 6,
-      "previous": 8,
-      "deltaText": "-2 (-25.0%)",
+      "current": 8,
+      "previous": 6,
+      "deltaText": "+2 (+33.3%)",
       "report": "docs/reports/geodnet-sybil-report.md",
       "publicSource": "https://rtk.geodnet.com/api/v2/coverage_stations",
       "asOf": "2026-07-18"
@@ -53,7 +53,7 @@
       "label": "headline finding",
       "current": null,
       "previous": null,
-      "deltaText": "50.66% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.",
+      "deltaText": "50.67% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.",
       "report": "docs/reports/hivemapper-sybil-report.md",
       "publicSource": "Solana mainnet HONEY SPL mint (public RPC)",
       "asOf": "2026-07-18"
@@ -67,7 +67,7 @@
       "label": "headline finding",
       "current": null,
       "previous": null,
-      "deltaText": "Of 158,293 DIMO vehicle identities, 40,622 (25.7%) are backed by physical hardware; 31,417 (19.8%) connect via software/synthetic devices, and 86,254 (54.5%) show no connected device on the public registry.",
+      "deltaText": "Of 158,292 DIMO vehicle identities, 40,622 (25.7%) are backed by physical hardware; 31,417 (19.8%) connect via software/synthetic devices, and 86,253 (54.5%) show no connected device on the public registry.",
       "report": "docs/reports/dimo-sybil-report.md",
       "publicSource": "https://identity-api.dimo.zone/query",
       "asOf": "2026-07-18"
@@ -96,21 +96,6 @@
       "current": null,
       "previous": null,
       "deltaText": "528 single-coordinate stacks of ≥10 hotspots on 54,834 located units — the largest stack holds 497 hotspots on one coordinate (§1 lists keys your registry team can grep today).",
-      "report": "docs/reports/helium-mobile-sybil-report.md",
-      "publicSource": "https://entities.nft.helium.io/v2/hotspots?subnetwork=mobile",
-      "asOf": "2026-07-18"
-    },
-    {
-      "network": "Helium Mobile",
-      "networkId": "helium-mobile",
-      "anomalyType": "duplication_cluster",
-      "narrative": "geographic expansion",
-      "kind": "metric",
-      "label": "entities on public map",
-      "metricKey": "observed",
-      "current": 54834,
-      "previous": 54800,
-      "deltaText": "+34 (+0.1%)",
       "report": "docs/reports/helium-mobile-sybil-report.md",
       "publicSource": "https://entities.nft.helium.io/v2/hotspots?subnetwork=mobile",
       "asOf": "2026-07-18"
