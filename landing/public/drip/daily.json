@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-07-17T17:26:08.021Z",
+  "generatedAt": "2026-07-18T17:21:57.751Z",
   "schema": "getkinetik.drip/v2",
-  "date": "2026-07-17",
+  "date": "2026-07-18",
   "minConfidence": 0.6,
   "daily": [
-    "Geodnet: 8 duplicate coordinate clusters (+1)",
+    "Geodnet: 8 duplicate coordinate clusters (+2)",
     "Helium IoT: 4,858 stacked spots (unchanged)",
     "Helium Mobile: 528 stacked spots (unchanged)",
-    "Hivemapper: 50.8% top-holder concentration (unchanged)",
+    "Hivemapper: 50.7% top-holder concentration (unchanged)",
     "WeatherXM: 288 capacity exceedances (unchanged)"
   ],
   "weekly": [
@@ -167,8 +167,8 @@
       "network": "Geodnet",
       "metric": "exactDupGroups",
       "value": 8,
-      "delta": 1,
-      "timestamp": "2026-07-17",
+      "delta": 2,
+      "timestamp": "2026-07-18",
       "severity": "medium",
       "feedConfidence": 0.7
     },
@@ -177,16 +177,16 @@
       "metric": "overCapacityCells",
       "value": 288,
       "delta": 0,
-      "timestamp": "2026-07-17",
+      "timestamp": "2026-07-18",
       "severity": "medium",
       "feedConfidence": 0.7
     },
     {
       "network": "Hivemapper",
       "metric": "top20ShareOfSupply",
-      "value": 0.5081160854245415,
-      "delta": -0.000023353019837912825,
-      "timestamp": "2026-07-17",
+      "value": 0.5066768925643367,
+      "delta": 0.000029612718695726237,
+      "timestamp": "2026-07-18",
       "severity": "medium",
       "feedConfidence": 0.7
     },
@@ -195,7 +195,7 @@
       "metric": "stackedSpots",
       "value": 4858,
       "delta": 0,
-      "timestamp": "2026-07-17",
+      "timestamp": "2026-07-18",
       "severity": "medium",
       "feedConfidence": 0.7
     },
@@ -204,7 +204,7 @@
       "metric": "stackedSpots",
       "value": 528,
       "delta": 0,
-      "timestamp": "2026-07-17",
+      "timestamp": "2026-07-18",
       "severity": "medium",
       "feedConfidence": 0.7
     }
