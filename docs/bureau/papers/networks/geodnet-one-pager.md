@@ -2,7 +2,7 @@
 
 > Public endpoints only. Not a verdict.
 
-**As of:** 2026-07-18  
+**As of:** 2026-07-19  
 **Public source:** https://rtk.geodnet.com/api/v2/coverage_stations  
 **Full report:** [docs/reports/geodnet-sybil-report.md](https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/geodnet-sybil-report.md)  
 **Live terminal:** https://getkinetik.app/audits.html  
@@ -12,8 +12,8 @@
 
 ## Executive summary
 
-1. 8 exact (lat,lng) duplicate groups on 19,578 public stations — each row in §1 is one coordinate pair your registry team can grep today.
-2. 893 ≤10 m proximity clusters — tighter than two physical RTK antennas; start with the largest counts in §2 (names + anchors included).
+1. 7 exact (lat,lng) duplicate groups on 19,600 public stations — each row in §1 is one coordinate pair your registry team can grep today.
+2. 899 ≤10 m proximity clusters — tighter than two physical RTK antennas; start with the largest counts in §2 (names + anchors included).
 3. 9.1% of the public fleet touches at least one heuristic — useful as a sampling denominator, not a verdict.
 
 ---
@@ -22,12 +22,12 @@
 
 | Metric | This run | vs last run |
 |---|---:|---|
-| Stations with coordinates | 19,578 | -4 (-0.0%) |
-| Exact (lat,lng) duplicate groups | 8 | +2 (+33.3%) |
-| Clusters within 10 m | 893 | +1 (+0.1%) |
+| Stations with coordinates | 19,600 | +6 (+0.0%) |
+| Exact (lat,lng) duplicate groups | 7 | -1 (-12.5%) |
+| Clusters within 10 m | 899 | +2 (+0.2%) |
 | Clusters ≥4 within 100 m | 4 | unchanged vs last run |
-| Low-precision coordinates (≤2 decimals) | 1 | -2 (-66.7%) |
-| Fleet share flagged (any heuristic) | 9.09% | +0.01 pp (+0.1%) |
+| Low-precision coordinates (≤2 decimals) | 2 | -5 (-71.4%) |
+| Fleet share flagged (any heuristic) | 9.14% | -0.00 pp (-0.0%) |
 
 ---
 
