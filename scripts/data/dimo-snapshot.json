@@ -1,7 +1,19 @@
 {
-  "generatedAt": "2026-07-18T14:25:55.611Z",
+  "generatedAt": "2026-07-19T09:34:22.528Z",
   "source": "https://identity-api.dimo.zone/query",
   "stats": {
+    "generatedAt": "2026-07-19T09:34:22.528Z",
+    "observed": 158299,
+    "aftermarketDevices": 40622,
+    "syntheticDevices": 31417,
+    "backedDevices": 72039,
+    "unbackedVehicles": 86260,
+    "hardwarePct": 0.2566156450767219,
+    "syntheticPct": 0.19846619372200708,
+    "backedPct": 0.455081838798729,
+    "unbackedPct": 0.544918161201271
+  },
+  "prevStats": {
     "generatedAt": "2026-07-18T14:25:55.611Z",
     "observed": 158292,
     "aftermarketDevices": 40622,
@@ -12,17 +24,5 @@
     "syntheticPct": 0.19847497030803832,
     "backedPct": 0.4551019634599348,
     "unbackedPct": 0.5448980365400652
-  },
-  "prevStats": {
-    "generatedAt": "2026-07-18T09:30:34.551Z",
-    "observed": 158293,
-    "aftermarketDevices": 40622,
-    "syntheticDevices": 31417,
-    "backedDevices": 72039,
-    "unbackedVehicles": 86254,
-    "hardwarePct": 0.2566253719368513,
-    "syntheticPct": 0.1984737164625094,
-    "backedPct": 0.4550990883993607,
-    "unbackedPct": 0.5449009116006394
   }
 }
