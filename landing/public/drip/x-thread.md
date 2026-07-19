@@ -1,10 +1,10 @@
 1/1
-DePIN index · Jul 18
+DePIN index · Jul 19
 
-• Geodnet: 8 duplicate coordinate clusters (+2)
-• Hivemapper: 50.7% top-holder concentration (unchanged)
-• WeatherXM: 288 capacity exceedances (unchanged)
+• Geodnet: 7 duplicate coordinate clusters (−1)
+• WeatherXM: 289 capacity exceedances (+1)
+• Hivemapper: 51% top-holder concentration (unchanged)
 
 https://getkinetik.app/site/
 
-#DePIN #Geodnet #Hivemapper #Crypto
+#DePIN #Geodnet #WeatherXM #Crypto
