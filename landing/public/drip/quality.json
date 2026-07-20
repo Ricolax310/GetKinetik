@@ -19,9 +19,15 @@
         ]
       },
       {
+        "network": "Geodnet",
+        "metric": "observed",
+        "confidence": 0.646,
+        "flags": []
+      },
+      {
         "network": "WeatherXM",
         "metric": "overCapacityCells",
-        "confidence": 0.682,
+        "confidence": 0.73,
         "flags": [
           "isolated"
         ]
@@ -29,30 +35,33 @@
       {
         "network": "Hivemapper",
         "metric": "top20ShareOfSupply",
-        "confidence": 0.73,
+        "confidence": 0.64,
         "flags": [
-          "isolated"
+          "isolated",
+          "volatile"
         ]
       },
       {
         "network": "Helium IoT",
         "metric": "stackedSpots",
-        "confidence": 0.672,
+        "confidence": 0.722,
         "flags": []
       },
       {
         "network": "Helium Mobile",
         "metric": "stackedSpots",
-        "confidence": 0.672,
+        "confidence": 0.722,
         "flags": []
       }
     ],
     "heldBack": [
       {
-        "network": "Geodnet",
+        "network": "WeatherXM",
         "metric": "observed",
-        "confidence": 0.595,
-        "flags": []
+        "confidence": 0.57,
+        "flags": [
+          "unverified"
+        ]
       }
     ]
   },
