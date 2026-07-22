@@ -37,7 +37,7 @@
       {
         "network": "Helium IoT",
         "metric": "stackedSpots",
-        "confidence": 0.62,
+        "confidence": 0.672,
         "flags": []
       },
       {
@@ -47,7 +47,16 @@
         "flags": []
       }
     ],
-    "heldBack": []
+    "heldBack": [
+      {
+        "network": "Helium Mobile",
+        "metric": "largestStack",
+        "confidence": 0.519,
+        "flags": [
+          "unverified"
+        ]
+      }
+    ]
   },
   "weekly": {
     "minConfidence": 0.8,
