@@ -2,15 +2,15 @@
 
 > Independent public read by the GETKINETIK Bureau using only Helium's free Entity API. **No internal Helium data was used.** Asserted locations snap to H3 hexes, so shared exact coordinates are expected in dense buildings — the heuristics below only flag *large* stacks (≥10 hotspots on one coordinate), the classic stacking pattern worth a registry look.
 
-- **As of:** 2026-07-21
+- **As of:** 2026-07-22
 - **Public source:** `https://entities.nft.helium.io/v2/hotspots?subnetwork=mobile`
-- **Hotspots observed (with coordinates):** 54,842
+- **Hotspots observed (with coordinates):** 54,853
 - **Hotspots without asserted location:** 1,903
-- **Hotspots flagged (any heuristic):** 11,271 (20.55%)
+- **Hotspots flagged (any heuristic):** 11,273 (20.55%)
 
 ## Executive summary
 
-1. **528 single-coordinate stacks of ≥10 hotspots** on 54,842 located units — the largest stack holds **497 hotspots on one coordinate** (§1 lists keys your registry team can grep today).
+1. **528 single-coordinate stacks of ≥10 hotspots** on 54,853 located units — the largest stack holds **498 hotspots on one coordinate** (§1 lists keys your registry team can grep today).
 2. **1,903 hotspots exist on-chain with no asserted location** — on the registry but not on the map.
 3. Stacks are *expected* at small sizes (H3 snapping, dense buildings) — only review-worthy at this threshold; every number reproduces from the free public endpoint with no API key.
 
@@ -20,10 +20,10 @@
 
 | Metric | This run | vs last run |
 |---|---:|---|
-| Hotspots with asserted coordinates | 54,842 | unchanged vs last run |
+| Hotspots with asserted coordinates | 54,853 | unchanged vs last run |
 | Single-coordinate stacks (≥10 hotspots) | 528 | unchanged vs last run |
-| Largest single-coordinate stack | 497 | unchanged vs last run |
-| Fleet share flagged (any heuristic) | 20.55% | unchanged vs last run |
+| Largest single-coordinate stack | 498 | +1 (+0.2%) |
+| Fleet share flagged (any heuristic) | 20.55% | +0.00 pp (+0.0%) |
 
 ## What to cross-check this week
 
@@ -46,7 +46,7 @@
 
 | Coordinates | Hotspot count | Sample entity keys |
 |---|---:|---|
-| `-0.001809,-0.00271` | 497 | `112JR1FkYLCSm8WgSpVccMaY…`, `11Drn9i7RMUdVKGk6FFRc5S6…`, `11PaTbFDJmuMjYvMspVNxvbX…` |
+| `-0.001809,-0.00271` | 498 | `112JR1FkYLCSm8WgSpVccMaY…`, `11Drn9i7RMUdVKGk6FFRc5S6…`, `11PaTbFDJmuMjYvMspVNxvbX…` |
 | `32.848477,-116.987742` | 423 | `1trSuseaFNPwu9iTYRdDfhjh…`, `13bCDAwErzzkgEQJjpGGHDJx…`, `13TY3ux7eb821HQSQeLtTPTd…` |
 | `17.061372,-96.728188` | 114 | `1trSuseyjzRN4gA3C5noLNjR…`, `1trSusemBcxBAtFxPLDtC4TS…`, `1trSusedShTqrkW7HUxv9Qtr…` |
 | `25.789824,-80.134283` | 112 | `119bs2yyXP1CMH2dy4qVnbEi…`, `11FArsyyh9AXzhUa5Ju4JgJC…`, `1trSuserhjKerD3csLdXKkpi…` |
