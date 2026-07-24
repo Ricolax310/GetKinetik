@@ -2,7 +2,7 @@
   "schema": "getkinetik.signal-feed/v1",
   "cadence": "daily",
   "mode": "cross-network-first",
-  "generatedAt": "2026-07-23T17:31:35.171Z",
+  "generatedAt": "2026-07-24T09:46:51.849Z",
   "sectorSummary": [
     {
       "type": "integrity",
@@ -32,7 +32,7 @@
       "label": "Coverage growth",
       "signalCount": 1,
       "networks": [
-        "WeatherXM"
+        "DIMO"
       ],
       "topSeverity": "low",
       "whatWeDontKnow": "Whether registry growth reflects new physical deployments or registration churn — counts alone don't prove device reality."
@@ -59,9 +59,9 @@
       "economics": 1
     },
     "bySeverity": {
-      "medium": 6,
+      "medium": 7,
       "high": 1,
-      "low": 2
+      "low": 1
     }
   },
   "networks": [
@@ -74,33 +74,33 @@
           "network": "Geodnet",
           "type": "integrity",
           "metric": "exactDupGroups",
-          "value": 9,
-          "previous": 6,
-          "delta": 3,
-          "message": "9 exact (lat,lng) duplicate groups on 19,592 public stations — each row in §1 is one coordinate pair your registry team can grep today.",
+          "value": 8,
+          "previous": 9,
+          "delta": -1,
+          "message": "8 exact (lat,lng) duplicate groups on 19,588 public stations — each row in §1 is one coordinate pair your registry team can grep today.",
           "severity": "medium",
           "confidence": 0.7,
           "anomalyType": "duplication_cluster",
           "kind": "headline",
           "metricKey": null,
-          "timestamp": "2026-07-23",
-          "asOf": "2026-07-23"
+          "timestamp": "2026-07-24",
+          "asOf": "2026-07-24"
         },
         {
           "network": "Geodnet",
           "type": "integrity",
           "metric": "exactDupGroups",
-          "value": 9,
-          "previous": 6,
-          "delta": 3,
-          "message": "exact (lat,lng) duplicate groups: 9 (+3 (+50.0%))",
+          "value": 8,
+          "previous": 9,
+          "delta": -1,
+          "message": "exact (lat,lng) duplicate groups: 8 (-1 (-11.1%))",
           "severity": "high",
           "confidence": 0.85,
           "anomalyType": "duplication_cluster",
           "kind": "metric",
           "metricKey": "exactDupGroups",
-          "timestamp": "2026-07-23",
-          "asOf": "2026-07-23"
+          "timestamp": "2026-07-24",
+          "asOf": "2026-07-24"
         }
       ]
     },
@@ -113,49 +113,33 @@
           "network": "WeatherXM",
           "type": "health",
           "metric": "overCapacityCells",
-          "value": 287,
-          "previous": 286,
-          "delta": 1,
-          "message": "287 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.",
+          "value": 290,
+          "previous": 287,
+          "delta": 3,
+          "message": "290 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.",
           "severity": "medium",
           "confidence": 0.7,
           "anomalyType": "capacity_violation",
           "kind": "headline",
           "metricKey": null,
-          "timestamp": "2026-07-23",
-          "asOf": "2026-07-23"
-        },
-        {
-          "network": "WeatherXM",
-          "type": "growth",
-          "metric": "observed",
-          "value": 8500,
-          "previous": 8494,
-          "delta": 6,
-          "message": "entities on public map: 8,500 (+6 (+0.1%))",
-          "severity": "low",
-          "confidence": 0.85,
-          "anomalyType": "capacity_violation",
-          "kind": "metric",
-          "metricKey": "observed",
-          "timestamp": "2026-07-23",
-          "asOf": "2026-07-23"
+          "timestamp": "2026-07-24",
+          "asOf": "2026-07-24"
         },
         {
           "network": "WeatherXM",
           "type": "health",
           "metric": "overCapacityCells",
-          "value": 287,
-          "previous": 286,
-          "delta": 1,
-          "message": "cells over designed capacity: 287 (+1 (+0.3%))",
-          "severity": "low",
+          "value": 290,
+          "previous": 287,
+          "delta": 3,
+          "message": "cells over designed capacity: 290 (+3 (+1.0%))",
+          "severity": "medium",
           "confidence": 0.85,
           "anomalyType": "capacity_violation",
           "kind": "metric",
           "metricKey": "overCapacityCells",
-          "timestamp": "2026-07-23",
-          "asOf": "2026-07-23"
+          "timestamp": "2026-07-24",
+          "asOf": "2026-07-24"
         }
       ]
     },
@@ -168,17 +152,17 @@
           "network": "Hivemapper",
           "type": "economics",
           "metric": "top20ShareOfSupply",
-          "value": 0.4907425362671592,
-          "previous": 0.4907879345251439,
-          "delta": -0.00004539825798471897,
-          "message": "49.07% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.",
+          "value": 0.490449911975666,
+          "previous": 0.4907425362671592,
+          "delta": -0.00029262429149318203,
+          "message": "49.04% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.",
           "severity": "medium",
           "confidence": 0.7,
           "anomalyType": "economic_concentration",
           "kind": "headline",
           "metricKey": null,
-          "timestamp": "2026-07-23",
-          "asOf": "2026-07-23"
+          "timestamp": "2026-07-24",
+          "asOf": "2026-07-24"
         }
       ]
     },
@@ -201,14 +185,14 @@
           "value": 4858,
           "previous": 4858,
           "delta": 0,
-          "message": "4,858 single-coordinate stacks of ≥10 hotspots on 1,008,126 located units — the largest stack holds 502 hotspots on one coordinate (§1 lists keys your registry team can grep today).",
+          "message": "4,858 single-coordinate stacks of ≥10 hotspots on 1,008,128 located units — the largest stack holds 502 hotspots on one coordinate (§1 lists keys your registry team can grep today).",
           "severity": "medium",
           "confidence": 0.7,
           "anomalyType": "duplication_cluster",
           "kind": "headline",
           "metricKey": null,
-          "timestamp": "2026-07-23",
-          "asOf": "2026-07-23"
+          "timestamp": "2026-07-24",
+          "asOf": "2026-07-24"
         }
       ]
     },
@@ -224,14 +208,14 @@
           "value": 528,
           "previous": 528,
           "delta": 0,
-          "message": "528 single-coordinate stacks of ≥10 hotspots on 54,854 located units — the largest stack holds 498 hotspots on one coordinate (§1 lists keys your registry team can grep today).",
+          "message": "528 single-coordinate stacks of ≥10 hotspots on 54,856 located units — the largest stack holds 498 hotspots on one coordinate (§1 lists keys your registry team can grep today).",
           "severity": "medium",
           "confidence": 0.7,
           "anomalyType": "duplication_cluster",
           "kind": "headline",
           "metricKey": null,
-          "timestamp": "2026-07-23",
-          "asOf": "2026-07-23"
+          "timestamp": "2026-07-24",
+          "asOf": "2026-07-24"
         }
       ]
     },
@@ -247,42 +231,58 @@
           "value": null,
           "previous": null,
           "delta": 0,
-          "message": "Of 158,335 DIMO vehicle identities, 40,622 (25.7%) are backed by physical hardware; 31,419 (19.8%) connect via software/synthetic devices, and 86,294 (54.5%) show no connected device on the public registry.",
+          "message": "Of 158,359 DIMO vehicle identities, 40,622 (25.7%) are backed by physical hardware; 31,420 (19.8%) connect via software/synthetic devices, and 86,317 (54.5%) show no connected device on the public registry.",
           "severity": "medium",
           "confidence": 0.7,
           "anomalyType": "device_backing_gap",
           "kind": "headline",
           "metricKey": null,
-          "timestamp": "2026-07-23",
-          "asOf": "2026-07-23"
+          "timestamp": "2026-07-24",
+          "asOf": "2026-07-24"
+        },
+        {
+          "network": "DIMO",
+          "type": "growth",
+          "metric": "observed",
+          "value": 158359,
+          "previous": 158335,
+          "delta": 24,
+          "message": "entities on public map: 158,359 (+24 (+0.0%))",
+          "severity": "low",
+          "confidence": 0.85,
+          "anomalyType": "device_backing_gap",
+          "kind": "metric",
+          "metricKey": "observed",
+          "timestamp": "2026-07-24",
+          "asOf": "2026-07-24"
         }
       ]
     }
   ],
-  "date": "2026-07-23",
+  "date": "2026-07-24",
   "ingest": [
     {
       "id": "geodnet",
       "name": "Geodnet",
-      "status": "snapshot",
-      "scanned": false,
-      "reason": "snapshot reuse (offline mode)",
+      "status": "scanned",
+      "scanned": true,
+      "reason": null,
       "snapshotAgeDays": 0
     },
     {
       "id": "weatherxm",
       "name": "WeatherXM",
-      "status": "snapshot",
-      "scanned": false,
-      "reason": "snapshot reuse (offline mode)",
+      "status": "scanned",
+      "scanned": true,
+      "reason": null,
       "snapshotAgeDays": 0
     },
     {
       "id": "hivemapper",
       "name": "Hivemapper",
-      "status": "snapshot",
-      "scanned": false,
-      "reason": "snapshot reuse (offline mode)",
+      "status": "scanned",
+      "scanned": true,
+      "reason": null,
       "snapshotAgeDays": 0
     },
     {
@@ -290,31 +290,31 @@
       "name": "Natix Network",
       "status": "snapshot",
       "scanned": false,
-      "reason": "snapshot reuse (offline mode)",
+      "reason": "scan script missing: sybil-scan-natix.mjs",
       "snapshotAgeDays": 0
     },
     {
       "id": "helium-iot",
       "name": "Helium IoT",
-      "status": "snapshot",
-      "scanned": false,
-      "reason": "snapshot reuse (offline mode)",
+      "status": "scanned",
+      "scanned": true,
+      "reason": null,
       "snapshotAgeDays": 0
     },
     {
       "id": "helium-mobile",
       "name": "Helium Mobile",
-      "status": "snapshot",
-      "scanned": false,
-      "reason": "snapshot reuse (offline mode)",
+      "status": "scanned",
+      "scanned": true,
+      "reason": null,
       "snapshotAgeDays": 0
     },
     {
       "id": "dimo",
       "name": "DIMO",
-      "status": "snapshot",
-      "scanned": false,
-      "reason": "snapshot reuse (offline mode)",
+      "status": "scanned",
+      "scanned": true,
+      "reason": null,
       "snapshotAgeDays": 0
     }
   ]
