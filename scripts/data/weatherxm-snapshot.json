@@ -1,8 +1,20 @@
 {
-  "generatedAt": "2026-07-28T09:51:50.306Z",
-  "cellsTotal": 8501,
+  "generatedAt": "2026-07-28T14:48:51.199Z",
+  "cellsTotal": 8504,
   "overCapacity": 288,
   "stats": {
+    "generatedAt": "2026-07-28T14:48:51.199Z",
+    "observed": 8504,
+    "overCapacityCells": 288,
+    "overCapacityPct": 0.03386641580432737,
+    "drilledCells": 60,
+    "devicesInDrilled": 197,
+    "polNoLocation": 110,
+    "polOther": 4,
+    "inactiveInDrilled": 115,
+    "lowQodInDrilled": 125
+  },
+  "prevStats": {
     "generatedAt": "2026-07-28T09:51:50.306Z",
     "observed": 8501,
     "overCapacityCells": 288,
@@ -13,18 +25,6 @@
     "polOther": 5,
     "inactiveInDrilled": 105,
     "lowQodInDrilled": 112
-  },
-  "prevStats": {
-    "generatedAt": "2026-07-27T14:59:19.987Z",
-    "observed": 8502,
-    "overCapacityCells": 289,
-    "overCapacityPct": 0.033992001881910136,
-    "drilledCells": 60,
-    "devicesInDrilled": 217,
-    "polNoLocation": 109,
-    "polOther": 3,
-    "inactiveInDrilled": 106,
-    "lowQodInDrilled": 125
   },
   "drilled": [
     {
@@ -1169,7 +1169,7 @@
           "profile": "M5",
           "metrics": {
             "qod_score": 0,
-            "ts": "2026-07-28T12:49:03+03:00"
+            "ts": "2026-07-28T17:07:56+03:00"
           },
           "timezone": "Europe/Athens",
           "programName": "community",
@@ -1503,22 +1503,22 @@
           "programName": "community",
           "cellCapacity": 3,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T12:49:35+03:00",
+          "lastWeatherStationActivity": "2026-07-28T17:46:55+03:00",
           "current_weather": {
-            "timestamp": "2026-07-28T12:49:35+03:00",
-            "temperature": 36.72,
-            "humidity": 31,
-            "wind_speed": 0.6,
-            "wind_gust": 1.5,
-            "wind_direction": 143,
-            "solar_irradiance": 571.3934426229508,
-            "uv_index": 5,
+            "timestamp": "2026-07-28T17:46:55+03:00",
+            "temperature": 34.89,
+            "humidity": 36,
+            "wind_speed": 0.3,
+            "wind_gust": 0.5,
+            "wind_direction": 123,
+            "solar_irradiance": 20.81967213114754,
+            "uv_index": 0,
             "precipitation": 0,
-            "pressure": 1010.4,
+            "pressure": 1009.8,
             "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 16.84170218845799,
-            "feels_like": 37.7268494437632
+            "dew_point": 17.612044516586344,
+            "feels_like": 36.07067403910881
           }
         },
         {
@@ -1643,23 +1643,23 @@
           "programName": "community",
           "cellCapacity": 3,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T12:28:14+03:00",
+          "lastWeatherStationActivity": "2026-07-28T17:47:15+03:00",
           "current_weather": {
-            "timestamp": "2026-07-28T12:28:14+03:00",
+            "timestamp": "2026-07-28T17:47:15+03:00",
             "temperature": 34.89,
-            "humidity": 34,
-            "wind_speed": 2.2,
-            "wind_gust": 4,
-            "wind_direction": 94,
-            "solar_irradiance": 818.360655737705,
-            "uv_index": 7,
+            "humidity": 36,
+            "wind_speed": 2.8,
+            "wind_gust": 3.5,
+            "wind_direction": 58,
+            "solar_irradiance": 304.672131147541,
+            "uv_index": 2,
             "precipitation": 0,
-            "pressure": 1008.94,
-            "nextCommunication": "1785232711",
+            "pressure": 1008.29,
+            "nextCommunication": "1785251789",
             "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 16.708628708552048,
-            "feels_like": 35.5606456806168
+            "dew_point": 17.612044516586344,
+            "feels_like": 36.07067403910881
           }
         },
         {
@@ -1831,22 +1831,22 @@
           "programName": "community",
           "cellCapacity": 3,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T12:49:31+03:00",
+          "lastWeatherStationActivity": "2026-07-28T17:45:43+03:00",
           "current_weather": {
-            "timestamp": "2026-07-28T12:49:31+03:00",
-            "temperature": 34.8,
-            "humidity": 33,
-            "wind_speed": 2.8,
-            "wind_gust": 5.8,
-            "wind_direction": 58,
-            "solar_irradiance": 637.0901639344262,
-            "uv_index": 4,
+            "timestamp": "2026-07-28T17:45:43+03:00",
+            "temperature": 34.9,
+            "humidity": 36,
+            "wind_speed": 3.3,
+            "wind_gust": 5.6,
+            "wind_direction": 192,
+            "solar_irradiance": 197.37704918032787,
+            "uv_index": 0,
             "precipitation": 0,
             "pressure": 6553.3,
             "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 16.16094557744602,
-            "feels_like": 35.18058963008001
+            "dew_point": 17.620839812291425,
+            "feels_like": 36.08737070128002
           }
         },
         {
@@ -1924,22 +1924,22 @@
           "programName": "community",
           "cellCapacity": 3,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T12:51:00+03:00",
+          "lastWeatherStationActivity": "2026-07-28T17:48:00+03:00",
           "current_weather": {
-            "timestamp": "2026-07-28T12:51:00+03:00",
-            "temperature": 34.78,
-            "humidity": 34,
-            "wind_speed": 3.5,
-            "wind_gust": 5.6,
-            "wind_direction": 32,
-            "solar_irradiance": 744.860655737705,
-            "uv_index": 6,
+            "timestamp": "2026-07-28T17:48:00+03:00",
+            "temperature": 34.61,
+            "humidity": 37,
+            "wind_speed": 2.57,
+            "wind_gust": 3.5,
+            "wind_direction": 73,
+            "solar_irradiance": 374.72131147540983,
+            "uv_index": 3,
             "precipitation": 0,
-            "pressure": 1008.65,
+            "pressure": 1007.97,
             "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 16.612547246792182,
-            "feels_like": 35.386923485667225
+            "dew_point": 17.800223035192,
+            "feels_like": 35.8649618982082
           }
         },
         {
@@ -1970,22 +1970,22 @@
           "programName": "community",
           "cellCapacity": 3,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T12:50:00+03:00",
+          "lastWeatherStationActivity": "2026-07-28T17:47:00+03:00",
           "current_weather": {
-            "timestamp": "2026-07-28T12:50:00+03:00",
-            "temperature": 34.8,
-            "humidity": 31,
-            "wind_speed": 2.87,
-            "wind_gust": 5.1,
-            "wind_direction": 40,
-            "solar_irradiance": 856.2213114754098,
-            "uv_index": 8,
+            "timestamp": "2026-07-28T17:47:00+03:00",
+            "temperature": 34.47,
+            "humidity": 34,
+            "wind_speed": 2.93,
+            "wind_gust": 5.6,
+            "wind_direction": 103,
+            "solar_irradiance": 421.08196721311475,
+            "uv_index": 3,
             "precipitation": 0,
-            "pressure": 1007.13,
+            "pressure": 1006.5,
             "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 15.18405068727964,
-            "feels_like": 34.73189846592001
+            "dew_point": 16.341745447687913,
+            "feels_like": 34.9049929429272
           }
         },
         {
@@ -1994,8 +1994,8 @@
           "cellActiveDeviceCount": 7,
           "cellAvgDataQuality": 69,
           "cellCenter": {
-            "lat": 37.97203,
-            "lon": 23.71139
+            "lat": 37.97202,
+            "lon": 23.71144
           },
           "address": "Athens, GR",
           "name": "Long Inky Mesocyclones",
@@ -2016,22 +2016,22 @@
           "programName": "community",
           "cellCapacity": 3,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T12:50:00+03:00",
+          "lastWeatherStationActivity": "2026-07-28T17:47:00+03:00",
           "current_weather": {
-            "timestamp": "2026-07-28T12:50:00+03:00",
-            "temperature": 34.37,
-            "humidity": 35,
-            "wind_speed": 3.43,
-            "wind_gust": 5.1,
-            "wind_direction": 26,
-            "solar_irradiance": 725.5737704918033,
-            "uv_index": 6,
+            "timestamp": "2026-07-28T17:47:00+03:00",
+            "temperature": 34.43,
+            "humidity": 37,
+            "wind_speed": 2.16,
+            "wind_gust": 4.08,
+            "wind_direction": 51,
+            "solar_irradiance": 321.62295081967216,
+            "uv_index": 3,
             "precipitation": 0,
-            "pressure": 1007.56,
+            "pressure": 1006.87,
             "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 16.710159600909886,
-            "feels_like": 34.98154730164501
+            "dew_point": 17.64135251351255,
+            "feels_like": 35.56539124482578
           }
         },
         {
@@ -2296,22 +2296,22 @@
           "programName": "community",
           "cellCapacity": 3,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T12:50:37+03:00",
+          "lastWeatherStationActivity": "2026-07-28T17:46:48+03:00",
           "current_weather": {
-            "timestamp": "2026-07-28T12:50:37+03:00",
-            "temperature": 34.5,
-            "humidity": 34,
-            "wind_speed": 3.7,
-            "wind_gust": 6.1,
-            "wind_direction": 66,
-            "solar_irradiance": 918.688524590164,
-            "uv_index": 8,
+            "timestamp": "2026-07-28T17:46:48+03:00",
+            "temperature": 35.1,
+            "humidity": 36,
+            "wind_speed": 2.9,
+            "wind_gust": 6.4,
+            "wind_direction": 114,
+            "solar_irradiance": 328.6967213114754,
+            "uv_index": 3,
             "precipitation": 0,
-            "pressure": 1007.8,
+            "pressure": 1007.2,
             "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 16.367953800695805,
-            "feels_like": 34.95113782199999
+            "dew_point": 17.796737464095454,
+            "feels_like": 36.42393649328001
           }
         },
         {
@@ -2383,7 +2383,7 @@
           "profile": "M5",
           "metrics": {
             "qod_score": 0,
-            "ts": "2026-07-28T12:45:48+03:00"
+            "ts": "2026-07-28T17:04:21+03:00"
           },
           "timezone": "Europe/Athens",
           "programName": "community",
@@ -2948,22 +2948,22 @@
           "programName": "community",
           "cellCapacity": 1,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T05:48:36-04:00",
+          "lastWeatherStationActivity": "2026-07-28T10:46:38-04:00",
           "current_weather": {
-            "timestamp": "2026-07-28T05:48:36-04:00",
-            "temperature": 19.7,
-            "humidity": 99,
-            "wind_speed": 0,
-            "wind_gust": 0,
-            "wind_direction": 102,
-            "solar_irradiance": 0,
+            "timestamp": "2026-07-28T10:46:38-04:00",
+            "temperature": 24.4,
+            "humidity": 88,
+            "wind_speed": 0.8,
+            "wind_gust": 1.6,
+            "wind_direction": 162,
+            "solar_irradiance": 94.23770491803279,
             "uv_index": 0,
             "precipitation": 0,
-            "pressure": 992.4,
-            "icon": "partly-cloudy-night",
+            "pressure": 991.6,
+            "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 19.538132952831138,
-            "feels_like": 19.7
+            "dew_point": 22.28243040989937,
+            "feels_like": 24.4
           }
         },
         {
@@ -2972,8 +2972,8 @@
           "cellActiveDeviceCount": 8,
           "cellAvgDataQuality": 86,
           "cellCenter": {
-            "lat": 39.17913,
-            "lon": -77.35003
+            "lat": 39.17909,
+            "lon": -77.35014
           },
           "address": "Montgomery County, US",
           "name": "Misty Aureolin Pollution",
@@ -2993,23 +2993,23 @@
           "timezone": "America/New_York",
           "programName": "community",
           "cellCapacity": 1,
-          "isActive": false,
-          "lastWeatherStationActivity": "2026-07-28T01:04:19-04:00",
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-07-28T10:46:34-04:00",
           "current_weather": {
-            "timestamp": "2026-07-28T01:04:19-04:00",
-            "temperature": 20.8,
-            "humidity": 99,
+            "timestamp": "2026-07-28T10:46:34-04:00",
+            "temperature": 24.4,
+            "humidity": 88,
             "wind_speed": 0,
             "wind_gust": 0,
-            "wind_direction": 294,
-            "solar_irradiance": 68759.0737704918,
-            "uv_index": 31,
+            "wind_direction": 162,
+            "solar_irradiance": 177.31967213114754,
+            "uv_index": 1,
             "precipitation": 0,
-            "pressure": 995.2,
-            "icon": "partly-cloudy-night",
+            "pressure": 991.7,
+            "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 20.636775175796966,
-            "feels_like": 20.8
+            "dew_point": 22.28243040989937,
+            "feels_like": 24.4
           }
         },
         {
@@ -3040,22 +3040,22 @@
           "programName": "community",
           "cellCapacity": 1,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T05:48:36-04:00",
+          "lastWeatherStationActivity": "2026-07-28T10:47:48-04:00",
           "current_weather": {
-            "timestamp": "2026-07-28T05:48:36-04:00",
-            "temperature": 19.7,
-            "humidity": 98,
+            "timestamp": "2026-07-28T10:47:48-04:00",
+            "temperature": 24.5,
+            "humidity": 88,
             "wind_speed": 0,
-            "wind_gust": 0,
-            "wind_direction": 246,
-            "solar_irradiance": 0,
+            "wind_gust": 0.7,
+            "wind_direction": 216,
+            "solar_irradiance": 136.74590163934425,
             "uv_index": 0,
             "precipitation": 0,
-            "pressure": 992.8,
-            "icon": "partly-cloudy-night",
+            "pressure": 992,
+            "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 19.374824922775737,
-            "feels_like": 19.7
+            "dew_point": 22.38085280306189,
+            "feels_like": 24.5
           }
         },
         {
@@ -3086,22 +3086,22 @@
           "programName": "community",
           "cellCapacity": 1,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T05:49:21-04:00",
+          "lastWeatherStationActivity": "2026-07-28T10:45:31-04:00",
           "current_weather": {
-            "timestamp": "2026-07-28T05:49:21-04:00",
-            "temperature": 19.3,
-            "humidity": 99,
+            "timestamp": "2026-07-28T10:45:31-04:00",
+            "temperature": 25.3,
+            "humidity": 89,
             "wind_speed": 0,
             "wind_gust": 0,
-            "wind_direction": 12,
-            "solar_irradiance": 0,
+            "wind_direction": 81,
+            "solar_irradiance": 179.36065573770492,
             "uv_index": 0,
             "precipitation": 0,
-            "pressure": 992.5,
-            "icon": "partly-cloudy-night",
+            "pressure": 991.7,
+            "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 19.138625284788933,
-            "feels_like": 19.3
+            "dew_point": 23.35528023405945,
+            "feels_like": 25.3
           }
         },
         {
@@ -3132,22 +3132,22 @@
           "programName": "community",
           "cellCapacity": 1,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T05:48:49-04:00",
+          "lastWeatherStationActivity": "2026-07-28T10:46:53-04:00",
           "current_weather": {
-            "timestamp": "2026-07-28T05:48:49-04:00",
-            "temperature": 19.9,
-            "humidity": 99,
+            "timestamp": "2026-07-28T10:46:53-04:00",
+            "temperature": 24.8,
+            "humidity": 87,
             "wind_speed": 0,
-            "wind_gust": 0,
-            "wind_direction": 84,
-            "solar_irradiance": 0,
+            "wind_gust": 0.7,
+            "wind_direction": 78,
+            "solar_irradiance": 149.5327868852459,
             "uv_index": 0,
             "precipitation": 0,
-            "pressure": 832.8,
-            "icon": "partly-cloudy-night",
+            "pressure": 832.9,
+            "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 19.737886505822537,
-            "feels_like": 19.9
+            "dew_point": 22.48787393190894,
+            "feels_like": 24.8
           }
         },
         {
@@ -3178,22 +3178,22 @@
           "programName": "community",
           "cellCapacity": 1,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T05:51:00-04:00",
+          "lastWeatherStationActivity": "2026-07-28T10:48:00-04:00",
           "current_weather": {
-            "timestamp": "2026-07-28T05:51:00-04:00",
-            "temperature": 20.35,
-            "humidity": 99,
+            "timestamp": "2026-07-28T10:48:00-04:00",
+            "temperature": 26.48,
+            "humidity": 92,
             "wind_speed": 0,
             "wind_gust": 0,
             "wind_direction": 226,
-            "solar_irradiance": 0,
+            "solar_irradiance": 17.098360655737704,
             "uv_index": 0,
             "precipitation": 0,
-            "pressure": 992.62,
-            "icon": "partly-cloudy-night",
+            "pressure": 991.8,
+            "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 20.187331315044986,
-            "feels_like": 20.35
+            "dew_point": 25.07339260944292,
+            "feels_like": 26.48
           }
         },
         {
@@ -3224,22 +3224,22 @@
           "programName": "community",
           "cellCapacity": 1,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T05:50:13-04:00",
+          "lastWeatherStationActivity": "2026-07-28T10:46:24-04:00",
           "current_weather": {
-            "timestamp": "2026-07-28T05:50:13-04:00",
-            "temperature": 19.7,
-            "humidity": 99,
-            "wind_speed": 0,
-            "wind_gust": 0,
-            "wind_direction": 283,
-            "solar_irradiance": 0.01639344262295082,
+            "timestamp": "2026-07-28T10:46:24-04:00",
+            "temperature": 25.3,
+            "humidity": 85,
+            "wind_speed": 0.2,
+            "wind_gust": 1,
+            "wind_direction": 174,
+            "solar_irradiance": 181.44262295081967,
             "uv_index": 0,
             "precipitation": 0,
-            "pressure": 992.4,
-            "icon": "partly-cloudy-night",
+            "pressure": 991.5,
+            "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 19.538132952831138,
-            "feels_like": 19.7
+            "dew_point": 22.595613333840056,
+            "feels_like": 25.3
           }
         },
         {
@@ -3295,8 +3295,8 @@
           "cellActiveDeviceCount": 8,
           "cellAvgDataQuality": 86,
           "cellCenter": {
-            "lat": 39.17893,
-            "lon": -77.3509
+            "lat": 39.17901,
+            "lon": -77.3508
           },
           "address": "Montgomery County, US",
           "name": "Skinny Inky Snowstorm",
@@ -3317,22 +3317,436 @@
           "programName": "community",
           "cellCapacity": 1,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T05:49:55-04:00",
+          "lastWeatherStationActivity": "2026-07-28T10:47:53-04:00",
           "current_weather": {
-            "timestamp": "2026-07-28T05:49:55-04:00",
-            "temperature": 19.4,
-            "humidity": 99,
-            "wind_speed": 0,
-            "wind_gust": 0,
-            "wind_direction": 60,
-            "solar_irradiance": 0.01639344262295082,
+            "timestamp": "2026-07-28T10:47:53-04:00",
+            "temperature": 24.5,
+            "humidity": 87,
+            "wind_speed": 0.4,
+            "wind_gust": 1.7,
+            "wind_direction": 96,
+            "solar_irradiance": 204.9262295081967,
             "uv_index": 0,
             "precipitation": 0,
-            "pressure": 992.2,
+            "pressure": 991.5,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 22.193028218959647,
+            "feels_like": 24.5
+          }
+        }
+      ]
+    },
+    {
+      "cell": {
+        "index": "871edcd23ffffff",
+        "device_count": 8,
+        "active_device_count": 7,
+        "devices": {
+          "community": 8
+        },
+        "avg_data_quality": 70,
+        "capacity": 1,
+        "polygon": [
+          {
+            "lat": 40.60636437518818,
+            "lon": 22.969709970811355
+          },
+          {
+            "lat": 40.593094596451294,
+            "lon": 22.969053043013176
+          },
+          {
+            "lat": 40.58603880866386,
+            "lon": 22.98422071600205
+          },
+          {
+            "lat": 40.592251702519995,
+            "lon": 23.00004731332586
+          },
+          {
+            "lat": 40.605521395135455,
+            "lon": 23.00070880640293
+          },
+          {
+            "lat": 40.61257828046985,
+            "lon": 22.98553913703662
+          }
+        ],
+        "center": {
+          "lat": 40.59930922352508,
+          "lon": 22.984879829301512
+        },
+        "_ratio": 8
+      },
+      "devices": [
+        {
+          "id": "2c12b2b0-8e55-11ec-966b-a173bf0cd052",
+          "cellIndex": "871edcd23ffffff",
+          "cellActiveDeviceCount": 7,
+          "cellAvgDataQuality": 80,
+          "cellCenter": {
+            "lat": 40.60897,
+            "lon": 22.98954
+          },
+          "address": "-",
+          "name": "Feisty Lace Celsius",
+          "bundle": {
+            "name": "m5",
+            "title": "M5",
+            "connectivity": "wifi",
+            "url": "https://docs.weatherxm.com/wxm-devices/m5/introduction",
+            "ws_model": "WS1000",
+            "gw_model": "WG1000"
+          },
+          "profile": "M5",
+          "metrics": {
+            "qod_score": 100,
+            "ts": "2026-07-26T03:00:00+03:00"
+          },
+          "timezone": "Europe/Athens",
+          "programName": "community",
+          "cellCapacity": 1,
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-07-28T17:47:00+03:00",
+          "current_weather": {
+            "timestamp": "2026-07-28T17:47:00+03:00",
+            "temperature": 35.2,
+            "humidity": 35,
+            "wind_speed": 0.88,
+            "wind_gust": 1.53,
+            "wind_direction": 310,
+            "solar_irradiance": 48.221311475409834,
+            "uv_index": 0,
+            "precipitation": 0,
+            "pressure": 1005.86,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 17.43770953008281,
+            "feels_like": 36.321308832000035
+          }
+        },
+        {
+          "id": "2779d400-438d-11ef-8e8d-b55568dc8e66",
+          "cellIndex": "871edcd23ffffff",
+          "cellActiveDeviceCount": 7,
+          "cellAvgDataQuality": 80,
+          "cellCenter": {
+            "lat": 40.60415,
+            "lon": 22.97225
+          },
+          "address": "-",
+          "name": "Best Sienna Gust",
+          "bundle": {
+            "name": "d1",
+            "title": "D1",
+            "connectivity": "wifi",
+            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
+            "ws_model": "WS1001",
+            "gw_model": "WG1200"
+          },
+          "profile": "D1",
+          "metrics": {
+            "qod_score": 99,
+            "ts": "2026-07-26T03:00:00+03:00"
+          },
+          "timezone": "Europe/Athens",
+          "programName": "community",
+          "cellCapacity": 1,
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-07-28T17:47:00+03:00",
+          "current_weather": {
+            "timestamp": "2026-07-28T17:47:00+03:00",
+            "temperature": 33.78,
+            "humidity": 36,
+            "wind_speed": 3.17,
+            "wind_gust": 4.5,
+            "wind_direction": 175,
+            "solar_irradiance": 529.344262295082,
+            "uv_index": 4,
+            "precipitation": 0,
+            "pressure": 1010.26,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 16.635522057087975,
+            "feels_like": 34.29526797595519
+          }
+        },
+        {
+          "id": "27686ee1-438d-11ef-8e8d-b55568dc8e66",
+          "cellIndex": "871edcd23ffffff",
+          "cellActiveDeviceCount": 7,
+          "cellAvgDataQuality": 80,
+          "cellCenter": {
+            "lat": 40.60104,
+            "lon": 22.97463
+          },
+          "address": "-",
+          "name": "Itchy Velvet Rainbow",
+          "bundle": {
+            "name": "d1",
+            "title": "D1",
+            "connectivity": "wifi",
+            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
+            "ws_model": "WS1001",
+            "gw_model": "WG1200"
+          },
+          "profile": "D1",
+          "metrics": {
+            "qod_score": 100,
+            "ts": "2026-07-26T03:00:00+03:00"
+          },
+          "timezone": "Europe/Athens",
+          "programName": "community",
+          "cellCapacity": 1,
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-07-28T17:48:00+03:00",
+          "current_weather": {
+            "timestamp": "2026-07-28T17:48:00+03:00",
+            "temperature": 34.15,
+            "humidity": 37,
+            "wind_speed": 3.3,
+            "wind_gust": 5.6,
+            "wind_direction": 227,
+            "solar_irradiance": 334.672131147541,
+            "uv_index": 3,
+            "precipitation": 0,
+            "pressure": 1011.35,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 17.394195799740558,
+            "feels_like": 35.107716825845
+          }
+        },
+        {
+          "id": "b86263c0-bf53-11ed-95eb-b351f0b0cc44",
+          "cellIndex": "871edcd23ffffff",
+          "cellActiveDeviceCount": 7,
+          "cellAvgDataQuality": 80,
+          "cellCenter": {
+            "lat": 40.59939,
+            "lon": 22.97624
+          },
+          "address": "-",
+          "name": "Frontal Bisque Orographic",
+          "bundle": {
+            "name": "h1",
+            "title": "H1",
+            "connectivity": "helium",
+            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
+            "ws_model": "WS2000",
+            "gw_model": "WS2000"
+          },
+          "profile": "H1",
+          "metrics": {
+            "qod_score": 91,
+            "ts": "2026-07-26T03:00:00+03:00"
+          },
+          "timezone": "Europe/Athens",
+          "programName": "community",
+          "cellCapacity": 1,
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-07-28T17:46:53+03:00",
+          "current_weather": {
+            "timestamp": "2026-07-28T17:46:53+03:00",
+            "temperature": 34.4,
+            "humidity": 38,
+            "wind_speed": 3.3,
+            "wind_gust": 4.8,
+            "wind_direction": 204,
+            "solar_irradiance": 399.72131147540983,
+            "uv_index": 1,
+            "precipitation": 0,
+            "pressure": 1009.5,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 18.038539855341295,
+            "feels_like": 35.77244262912003
+          }
+        },
+        {
+          "id": "2d57c030-438d-11ef-8e8d-b55568dc8e66",
+          "cellIndex": "871edcd23ffffff",
+          "cellActiveDeviceCount": 7,
+          "cellAvgDataQuality": 80,
+          "cellCenter": {
+            "lat": 40.59277,
+            "lon": 22.97408
+          },
+          "address": "-",
+          "name": "Brave Cream Snowstorm",
+          "bundle": {
+            "name": "d1",
+            "title": "D1",
+            "connectivity": "wifi",
+            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
+            "ws_model": "WS1001",
+            "gw_model": "WG1200"
+          },
+          "profile": "D1",
+          "metrics": {
+            "qod_score": 71,
+            "ts": "2026-07-26T03:00:00+03:00"
+          },
+          "timezone": "Europe/Athens",
+          "programName": "community",
+          "cellCapacity": 1,
+          "isActive": false,
+          "lastWeatherStationActivity": "2026-07-28T17:02:00+03:00",
+          "current_weather": {
+            "timestamp": "2026-07-28T17:02:00+03:00",
+            "temperature": 35.28,
+            "humidity": 34,
+            "wind_speed": 3.2,
+            "wind_gust": 3.5,
+            "wind_direction": 58,
+            "solar_irradiance": 664.2622950819672,
+            "uv_index": 6,
+            "precipitation": 0,
+            "pressure": 1011.96,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 17.04924107744662,
+            "feels_like": 36.188027481907206
+          }
+        },
+        {
+          "id": "33e7a2d0-bf54-11ed-9972-4f669f2d96bd",
+          "cellIndex": "871edcd23ffffff",
+          "cellActiveDeviceCount": 7,
+          "cellAvgDataQuality": 80,
+          "cellCenter": {
+            "lat": 40.59615,
+            "lon": 22.97249
+          },
+          "address": "-",
+          "name": "Urban Raspberry Hailstones",
+          "bundle": {
+            "name": "h1",
+            "title": "H1",
+            "connectivity": "helium",
+            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
+            "ws_model": "WS2000",
+            "gw_model": "WS2000"
+          },
+          "profile": "H1",
+          "metrics": {
+            "qod_score": 1,
+            "ts": "2026-07-26T03:00:00+03:00"
+          },
+          "timezone": "Europe/Athens",
+          "programName": "community",
+          "cellCapacity": 1,
+          "isActive": false,
+          "lastWeatherStationActivity": "2026-07-28T01:22:11+03:00",
+          "current_weather": {
+            "timestamp": "2026-07-28T01:22:11+03:00",
+            "temperature": 25.7,
+            "humidity": 63,
+            "wind_speed": 0,
+            "wind_gust": 0,
+            "wind_direction": 78,
+            "solar_irradiance": 0,
+            "uv_index": 0,
+            "precipitation": 0,
+            "pressure": 1008.3,
             "icon": "partly-cloudy-night",
             "precipitation_accumulated": 0,
-            "dew_point": 19.238502272056984,
-            "feels_like": 19.4
+            "dew_point": 18.12952317682222,
+            "feels_like": 25.7
+          }
+        },
+        {
+          "id": "af1f1760-bf51-11ed-9972-4f669f2d96bd",
+          "cellIndex": "871edcd23ffffff",
+          "cellActiveDeviceCount": 7,
+          "cellAvgDataQuality": 80,
+          "cellCenter": {
+            "lat": 40.59901,
+            "lon": 22.98178
+          },
+          "address": "-",
+          "name": "Long Sapphire Anemometer",
+          "bundle": {
+            "name": "h1",
+            "title": "H1",
+            "connectivity": "helium",
+            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
+            "ws_model": "WS2000",
+            "gw_model": "WS2000"
+          },
+          "profile": "H1",
+          "metrics": {
+            "qod_score": 1,
+            "pol_reason": "NO_LOCATION_DATA",
+            "ts": "2026-07-26T03:00:00+03:00"
+          },
+          "timezone": "Europe/Athens",
+          "programName": "community",
+          "cellCapacity": 1,
+          "isActive": false,
+          "lastWeatherStationActivity": "2026-07-28T08:49:47+03:00",
+          "current_weather": {
+            "timestamp": "2026-07-28T08:49:47+03:00",
+            "temperature": 26.1,
+            "humidity": 65,
+            "wind_speed": 2.1,
+            "wind_gust": 3.2,
+            "wind_direction": 323,
+            "solar_irradiance": 253.04918032786884,
+            "uv_index": 0,
+            "precipitation": 0,
+            "pressure": 1007,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 19.00733281790054,
+            "feels_like": 26.1
+          }
+        },
+        {
+          "id": "25590d00-8835-11ec-966b-a173bf0cd052",
+          "cellIndex": "871edcd23ffffff",
+          "cellActiveDeviceCount": 7,
+          "cellAvgDataQuality": 80,
+          "cellCenter": {
+            "lat": 40.60875,
+            "lon": 22.97652
+          },
+          "address": "-",
+          "name": "Prehistoric Eggshell Uv",
+          "bundle": {
+            "name": "m5",
+            "title": "M5",
+            "connectivity": "wifi",
+            "url": "https://docs.weatherxm.com/wxm-devices/m5/introduction",
+            "ws_model": "WS1000",
+            "gw_model": "WG1000"
+          },
+          "profile": "M5",
+          "metrics": {
+            "qod_score": 98,
+            "ts": "2026-07-26T03:00:00+03:00"
+          },
+          "timezone": "Europe/Athens",
+          "programName": "community",
+          "cellCapacity": 1,
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-07-28T17:46:00+03:00",
+          "current_weather": {
+            "timestamp": "2026-07-28T17:46:00+03:00",
+            "temperature": 33.9,
+            "humidity": 39,
+            "wind_speed": 1.89,
+            "wind_gust": 3.06,
+            "wind_direction": 190,
+            "solar_irradiance": 323.6639344262295,
+            "uv_index": 3,
+            "precipitation": 0,
+            "pressure": 1009.68,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 18.00831014965035,
+            "feels_like": 35.18776042537997
           }
         }
       ]
@@ -3386,8 +3800,8 @@
           "cellActiveDeviceCount": 6,
           "cellAvgDataQuality": 86,
           "cellCenter": {
-            "lat": 39.24766,
-            "lon": -77.25572
+            "lat": 39.24774,
+            "lon": -77.25566
           },
           "address": "Montgomery County, US",
           "name": "Salty Mint Beaufort",
@@ -3408,22 +3822,22 @@
           "programName": "community",
           "cellCapacity": 1,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T05:51:25-04:00",
+          "lastWeatherStationActivity": "2026-07-28T10:46:23-04:00",
           "current_weather": {
-            "timestamp": "2026-07-28T05:51:25-04:00",
-            "temperature": 20.6,
-            "humidity": 93,
-            "wind_speed": 0,
-            "wind_gust": 0,
-            "wind_direction": 19,
-            "solar_irradiance": 0,
+            "timestamp": "2026-07-28T10:46:23-04:00",
+            "temperature": 24.1,
+            "humidity": 84,
+            "wind_speed": 0.1,
+            "wind_gust": 1,
+            "wind_direction": 109,
+            "solar_irradiance": 117.55737704918033,
             "uv_index": 0,
             "precipitation": 0,
-            "pressure": 981.2,
-            "icon": "partly-cloudy-night",
+            "pressure": 980.8,
+            "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 19.427692500539838,
-            "feels_like": 20.6
+            "dew_point": 21.226543593845786,
+            "feels_like": 24.1
           }
         },
         {
@@ -3454,22 +3868,22 @@
           "programName": "community",
           "cellCapacity": 1,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T05:49:28-04:00",
+          "lastWeatherStationActivity": "2026-07-28T10:45:38-04:00",
           "current_weather": {
-            "timestamp": "2026-07-28T05:49:28-04:00",
-            "temperature": 20.7,
-            "humidity": 92,
-            "wind_speed": 0,
-            "wind_gust": 0,
-            "wind_direction": 23,
-            "solar_irradiance": 0,
+            "timestamp": "2026-07-28T10:45:38-04:00",
+            "temperature": 23.8,
+            "humidity": 85,
+            "wind_speed": 0.4,
+            "wind_gust": 1.6,
+            "wind_direction": 38,
+            "solar_irradiance": 89.90983606557377,
             "uv_index": 0,
             "precipitation": 0,
-            "pressure": 981.1,
-            "icon": "partly-cloudy-night",
+            "pressure": 980.7,
+            "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 19.35292581688971,
-            "feels_like": 20.7
+            "dew_point": 21.12561279153144,
+            "feels_like": 23.8
           }
         },
         {
@@ -3500,22 +3914,22 @@
           "programName": "community",
           "cellCapacity": 1,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T05:50:31-04:00",
+          "lastWeatherStationActivity": "2026-07-28T10:46:42-04:00",
           "current_weather": {
-            "timestamp": "2026-07-28T05:50:31-04:00",
-            "temperature": 20.5,
-            "humidity": 95,
+            "timestamp": "2026-07-28T10:46:42-04:00",
+            "temperature": 24.3,
+            "humidity": 84,
             "wind_speed": 0,
             "wind_gust": 0,
-            "wind_direction": 12,
-            "solar_irradiance": 0,
-            "uv_index": 0,
+            "wind_direction": 226,
+            "solar_irradiance": 194.90983606557376,
+            "uv_index": 1,
             "precipitation": 0,
-            "pressure": 981.4,
-            "icon": "partly-cloudy-night",
+            "pressure": 980.8,
+            "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 19.670954369457966,
-            "feels_like": 20.5
+            "dew_point": 21.422262610031353,
+            "feels_like": 24.3
           }
         },
         {
@@ -3546,22 +3960,22 @@
           "programName": "community",
           "cellCapacity": 1,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T05:49:04-04:00",
+          "lastWeatherStationActivity": "2026-07-28T10:48:16-04:00",
           "current_weather": {
-            "timestamp": "2026-07-28T05:49:04-04:00",
-            "temperature": 20.9,
-            "humidity": 92,
+            "timestamp": "2026-07-28T10:48:16-04:00",
+            "temperature": 24.1,
+            "humidity": 85,
             "wind_speed": 0,
-            "wind_gust": 0,
-            "wind_direction": 25,
-            "solar_irradiance": 0,
+            "wind_gust": 0.7,
+            "wind_direction": 164,
+            "solar_irradiance": 29.80327868852459,
             "uv_index": 0,
             "precipitation": 0,
-            "pressure": 981.4,
-            "icon": "partly-cloudy-night",
+            "pressure": 980.8,
+            "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 19.550887234060912,
-            "feels_like": 20.9
+            "dew_point": 21.41962615092029,
+            "feels_like": 24.1
           }
         },
         {
@@ -3592,22 +4006,22 @@
           "programName": "community",
           "cellCapacity": 1,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T05:50:59-04:00",
+          "lastWeatherStationActivity": "2026-07-28T10:47:09-04:00",
           "current_weather": {
-            "timestamp": "2026-07-28T05:50:59-04:00",
-            "temperature": 21,
-            "humidity": 94,
+            "timestamp": "2026-07-28T10:47:09-04:00",
+            "temperature": 24.3,
+            "humidity": 85,
             "wind_speed": 0,
             "wind_gust": 0,
-            "wind_direction": 58,
-            "solar_irradiance": 0,
-            "uv_index": 0,
+            "wind_direction": 52,
+            "solar_irradiance": 161.11475409836066,
+            "uv_index": 1,
             "precipitation": 0,
-            "pressure": 981.6,
-            "icon": "partly-cloudy-night",
+            "pressure": 981.1,
+            "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 19.996777272307597,
-            "feels_like": 21
+            "dew_point": 21.615631376228183,
+            "feels_like": 24.3
           }
         },
         {
@@ -3638,22 +4052,22 @@
           "programName": "community",
           "cellCapacity": 1,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T05:50:32-04:00",
+          "lastWeatherStationActivity": "2026-07-28T10:46:43-04:00",
           "current_weather": {
-            "timestamp": "2026-07-28T05:50:32-04:00",
-            "temperature": 20.7,
-            "humidity": 94,
-            "wind_speed": 0,
-            "wind_gust": 0,
-            "wind_direction": 9,
-            "solar_irradiance": 0,
+            "timestamp": "2026-07-28T10:46:43-04:00",
+            "temperature": 23.8,
+            "humidity": 85,
+            "wind_speed": 0.3,
+            "wind_gust": 1.6,
+            "wind_direction": 21,
+            "solar_irradiance": 110.1311475409836,
             "uv_index": 0,
             "precipitation": 0,
-            "pressure": 959.9,
-            "icon": "partly-cloudy-night",
+            "pressure": 958.8,
+            "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 19.699051362393373,
-            "feels_like": 20.7
+            "dew_point": 21.12561279153144,
+            "feels_like": 23.8
           }
         },
         {
@@ -3700,374 +4114,6 @@
             "precipitation_accumulated": 0,
             "dew_point": 20.43293805549219,
             "feels_like": 22.9
-          }
-        }
-      ]
-    },
-    {
-      "cell": {
-        "index": "871edcd23ffffff",
-        "device_count": 7,
-        "active_device_count": 6,
-        "devices": {
-          "community": 7
-        },
-        "avg_data_quality": 66,
-        "capacity": 1,
-        "polygon": [
-          {
-            "lat": 40.60636437518818,
-            "lon": 22.969709970811355
-          },
-          {
-            "lat": 40.593094596451294,
-            "lon": 22.969053043013176
-          },
-          {
-            "lat": 40.58603880866386,
-            "lon": 22.98422071600205
-          },
-          {
-            "lat": 40.592251702519995,
-            "lon": 23.00004731332586
-          },
-          {
-            "lat": 40.605521395135455,
-            "lon": 23.00070880640293
-          },
-          {
-            "lat": 40.61257828046985,
-            "lon": 22.98553913703662
-          }
-        ],
-        "center": {
-          "lat": 40.59930922352508,
-          "lon": 22.984879829301512
-        },
-        "_ratio": 7
-      },
-      "devices": [
-        {
-          "id": "2c12b2b0-8e55-11ec-966b-a173bf0cd052",
-          "cellIndex": "871edcd23ffffff",
-          "cellActiveDeviceCount": 6,
-          "cellAvgDataQuality": 77,
-          "cellCenter": {
-            "lat": 40.60891,
-            "lon": 22.98959
-          },
-          "address": "-",
-          "name": "Feisty Lace Celsius",
-          "bundle": {
-            "name": "m5",
-            "title": "M5",
-            "connectivity": "wifi",
-            "url": "https://docs.weatherxm.com/wxm-devices/m5/introduction",
-            "ws_model": "WS1000",
-            "gw_model": "WG1000"
-          },
-          "profile": "M5",
-          "metrics": {
-            "qod_score": 100,
-            "ts": "2026-07-26T03:00:00+03:00"
-          },
-          "timezone": "Europe/Athens",
-          "programName": "community",
-          "cellCapacity": 1,
-          "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T12:50:00+03:00",
-          "current_weather": {
-            "timestamp": "2026-07-28T12:50:00+03:00",
-            "temperature": 33.13,
-            "humidity": 39,
-            "wind_speed": 0.56,
-            "wind_gust": 1.53,
-            "wind_direction": 334,
-            "solar_irradiance": 54.80327868852459,
-            "uv_index": 0,
-            "precipitation": 0,
-            "pressure": 1006.54,
-            "icon": "partly-cloudy-day",
-            "precipitation_accumulated": 0,
-            "dew_point": 17.32403555206381,
-            "feels_like": 33.94598456748819
-          }
-        },
-        {
-          "id": "2779d400-438d-11ef-8e8d-b55568dc8e66",
-          "cellIndex": "871edcd23ffffff",
-          "cellActiveDeviceCount": 6,
-          "cellAvgDataQuality": 77,
-          "cellCenter": {
-            "lat": 40.60415,
-            "lon": 22.97225
-          },
-          "address": "-",
-          "name": "Best Sienna Gust",
-          "bundle": {
-            "name": "d1",
-            "title": "D1",
-            "connectivity": "wifi",
-            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
-            "ws_model": "WS1001",
-            "gw_model": "WG1200"
-          },
-          "profile": "D1",
-          "metrics": {
-            "qod_score": 99,
-            "ts": "2026-07-26T03:00:00+03:00"
-          },
-          "timezone": "Europe/Athens",
-          "programName": "community",
-          "cellCapacity": 1,
-          "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T12:51:00+03:00",
-          "current_weather": {
-            "timestamp": "2026-07-28T12:51:00+03:00",
-            "temperature": 32.81,
-            "humidity": 40,
-            "wind_speed": 3.17,
-            "wind_gust": 5.1,
-            "wind_direction": 230,
-            "solar_irradiance": 1076.1147540983607,
-            "uv_index": 10,
-            "precipitation": 0,
-            "pressure": 1010.88,
-            "icon": "partly-cloudy-day",
-            "precipitation_accumulated": 0,
-            "dew_point": 17.440002820783075,
-            "feels_like": 33.662451488680006
-          }
-        },
-        {
-          "id": "27686ee1-438d-11ef-8e8d-b55568dc8e66",
-          "cellIndex": "871edcd23ffffff",
-          "cellActiveDeviceCount": 6,
-          "cellAvgDataQuality": 77,
-          "cellCenter": {
-            "lat": 40.60105,
-            "lon": 22.97463
-          },
-          "address": "-",
-          "name": "Itchy Velvet Rainbow",
-          "bundle": {
-            "name": "d1",
-            "title": "D1",
-            "connectivity": "wifi",
-            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
-            "ws_model": "WS1001",
-            "gw_model": "WG1200"
-          },
-          "profile": "D1",
-          "metrics": {
-            "qod_score": 100,
-            "ts": "2026-07-26T03:00:00+03:00"
-          },
-          "timezone": "Europe/Athens",
-          "programName": "community",
-          "cellCapacity": 1,
-          "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T12:51:00+03:00",
-          "current_weather": {
-            "timestamp": "2026-07-28T12:51:00+03:00",
-            "temperature": 33.17,
-            "humidity": 40,
-            "wind_speed": 2.47,
-            "wind_gust": 4,
-            "wind_direction": 256,
-            "solar_irradiance": 731.6065573770492,
-            "uv_index": 6,
-            "precipitation": 0,
-            "pressure": 1012.16,
-            "icon": "partly-cloudy-day",
-            "precipitation_accumulated": 0,
-            "dew_point": 17.76097967840273,
-            "feels_like": 34.23101821732003
-          }
-        },
-        {
-          "id": "b86263c0-bf53-11ed-95eb-b351f0b0cc44",
-          "cellIndex": "871edcd23ffffff",
-          "cellActiveDeviceCount": 6,
-          "cellAvgDataQuality": 77,
-          "cellCenter": {
-            "lat": 40.59939,
-            "lon": 22.97624
-          },
-          "address": "-",
-          "name": "Frontal Bisque Orographic",
-          "bundle": {
-            "name": "h1",
-            "title": "H1",
-            "connectivity": "helium",
-            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
-            "ws_model": "WS2000",
-            "gw_model": "WS2000"
-          },
-          "profile": "H1",
-          "metrics": {
-            "qod_score": 91,
-            "ts": "2026-07-26T03:00:00+03:00"
-          },
-          "timezone": "Europe/Athens",
-          "programName": "community",
-          "cellCapacity": 1,
-          "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T12:50:41+03:00",
-          "current_weather": {
-            "timestamp": "2026-07-28T12:50:41+03:00",
-            "temperature": 32.9,
-            "humidity": 41,
-            "wind_speed": 3.9,
-            "wind_gust": 5.2,
-            "wind_direction": 251,
-            "solar_irradiance": 882.9754098360655,
-            "uv_index": 7,
-            "precipitation": 0,
-            "pressure": 1010.3,
-            "icon": "partly-cloudy-day",
-            "precipitation_accumulated": 0,
-            "dew_point": 17.912200165220945,
-            "feels_like": 34.02208477578
-          }
-        },
-        {
-          "id": "2d57c030-438d-11ef-8e8d-b55568dc8e66",
-          "cellIndex": "871edcd23ffffff",
-          "cellActiveDeviceCount": 6,
-          "cellAvgDataQuality": 77,
-          "cellCenter": {
-            "lat": 40.59277,
-            "lon": 22.97408
-          },
-          "address": "-",
-          "name": "Brave Cream Snowstorm",
-          "bundle": {
-            "name": "d1",
-            "title": "D1",
-            "connectivity": "wifi",
-            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
-            "ws_model": "WS1001",
-            "gw_model": "WG1200"
-          },
-          "profile": "D1",
-          "metrics": {
-            "qod_score": 71,
-            "ts": "2026-07-26T03:00:00+03:00"
-          },
-          "timezone": "Europe/Athens",
-          "programName": "community",
-          "cellCapacity": 1,
-          "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T12:51:00+03:00",
-          "current_weather": {
-            "timestamp": "2026-07-28T12:51:00+03:00",
-            "temperature": 34.06,
-            "humidity": 36,
-            "wind_speed": 1.33,
-            "wind_gust": 2.5,
-            "wind_direction": 86,
-            "solar_irradiance": 1071.9918032786886,
-            "uv_index": 10,
-            "precipitation": 0,
-            "pressure": 1012.71,
-            "icon": "partly-cloudy-day",
-            "precipitation_accumulated": 0,
-            "dew_point": 16.881897787013727,
-            "feels_like": 34.72855138526079
-          }
-        },
-        {
-          "id": "33e7a2d0-bf54-11ed-9972-4f669f2d96bd",
-          "cellIndex": "871edcd23ffffff",
-          "cellActiveDeviceCount": 6,
-          "cellAvgDataQuality": 77,
-          "cellCenter": {
-            "lat": 40.59615,
-            "lon": 22.97249
-          },
-          "address": "-",
-          "name": "Urban Raspberry Hailstones",
-          "bundle": {
-            "name": "h1",
-            "title": "H1",
-            "connectivity": "helium",
-            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
-            "ws_model": "WS2000",
-            "gw_model": "WS2000"
-          },
-          "profile": "H1",
-          "metrics": {
-            "qod_score": 1,
-            "ts": "2026-07-26T03:00:00+03:00"
-          },
-          "timezone": "Europe/Athens",
-          "programName": "community",
-          "cellCapacity": 1,
-          "isActive": false,
-          "lastWeatherStationActivity": "2026-07-28T01:22:11+03:00",
-          "current_weather": {
-            "timestamp": "2026-07-28T01:22:11+03:00",
-            "temperature": 25.7,
-            "humidity": 63,
-            "wind_speed": 0,
-            "wind_gust": 0,
-            "wind_direction": 78,
-            "solar_irradiance": 0,
-            "uv_index": 0,
-            "precipitation": 0,
-            "pressure": 1008.3,
-            "icon": "partly-cloudy-night",
-            "precipitation_accumulated": 0,
-            "dew_point": 18.12952317682222,
-            "feels_like": 25.7
-          }
-        },
-        {
-          "id": "af1f1760-bf51-11ed-9972-4f669f2d96bd",
-          "cellIndex": "871edcd23ffffff",
-          "cellActiveDeviceCount": 6,
-          "cellAvgDataQuality": 77,
-          "cellCenter": {
-            "lat": 40.59901,
-            "lon": 22.98178
-          },
-          "address": "-",
-          "name": "Long Sapphire Anemometer",
-          "bundle": {
-            "name": "h1",
-            "title": "H1",
-            "connectivity": "helium",
-            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
-            "ws_model": "WS2000",
-            "gw_model": "WS2000"
-          },
-          "profile": "H1",
-          "metrics": {
-            "qod_score": 1,
-            "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-07-26T03:00:00+03:00"
-          },
-          "timezone": "Europe/Athens",
-          "programName": "community",
-          "cellCapacity": 1,
-          "isActive": false,
-          "lastWeatherStationActivity": "2026-07-28T08:49:47+03:00",
-          "current_weather": {
-            "timestamp": "2026-07-28T08:49:47+03:00",
-            "temperature": 26.1,
-            "humidity": 65,
-            "wind_speed": 2.1,
-            "wind_gust": 3.2,
-            "wind_direction": 323,
-            "solar_irradiance": 253.04918032786884,
-            "uv_index": 0,
-            "precipitation": 0,
-            "pressure": 1007,
-            "icon": "partly-cloudy-day",
-            "precipitation_accumulated": 0,
-            "dew_point": 19.00733281790054,
-            "feels_like": 26.1
           }
         }
       ]
@@ -4815,8 +4861,238 @@
         },
         "_ratio": 5
       },
-      "devices": [],
-      "_error": "HTTP 429"
+      "devices": [
+        {
+          "id": "f38cd860-bf56-11ed-8a70-d7d4cf200cc9",
+          "cellIndex": "871e15312ffffff",
+          "cellActiveDeviceCount": 5,
+          "cellAvgDataQuality": 85,
+          "cellCenter": {
+            "lat": 47.73748,
+            "lon": 16.22023
+          },
+          "address": "Lanzenkirchen, AT",
+          "name": "Mild Graphite Millimeter",
+          "bundle": {
+            "name": "h1",
+            "title": "H1",
+            "connectivity": "helium",
+            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
+            "ws_model": "WS2000",
+            "gw_model": "WS2000"
+          },
+          "profile": "H1",
+          "metrics": {
+            "qod_score": 84,
+            "ts": "2026-07-26T02:00:00+02:00"
+          },
+          "timezone": "Europe/Vienna",
+          "programName": "community",
+          "cellCapacity": 1,
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-07-28T16:46:26+02:00",
+          "current_weather": {
+            "timestamp": "2026-07-28T16:46:26+02:00",
+            "temperature": 30.4,
+            "humidity": 37,
+            "wind_speed": 1.6,
+            "wind_gust": 3.6,
+            "wind_direction": 205,
+            "solar_irradiance": 456.6803278688525,
+            "uv_index": 3,
+            "precipitation": 0,
+            "pressure": 958.5,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 14.08114974453965,
+            "feels_like": 29.954873246719977
+          }
+        },
+        {
+          "id": "4a2a1c50-5344-11ef-8e8d-b55568dc8e66",
+          "cellIndex": "871e15312ffffff",
+          "cellActiveDeviceCount": 5,
+          "cellAvgDataQuality": 85,
+          "cellCenter": {
+            "lat": 47.73739,
+            "lon": 16.22005
+          },
+          "address": "Lanzenkirchen, AT",
+          "name": "Funny Fuzzy Pileus",
+          "bundle": {
+            "name": "h2",
+            "title": "H2",
+            "connectivity": "helium",
+            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
+            "ws_model": "WS2001",
+            "gw_model": "WS2001"
+          },
+          "profile": "H2",
+          "metrics": {
+            "qod_score": 86,
+            "ts": "2026-07-26T02:00:00+02:00"
+          },
+          "timezone": "Europe/Vienna",
+          "programName": "community",
+          "cellCapacity": 1,
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-07-28T16:45:47+02:00",
+          "current_weather": {
+            "timestamp": "2026-07-28T16:45:47+02:00",
+            "temperature": 29.5,
+            "humidity": 36,
+            "wind_speed": 1.9,
+            "wind_gust": 3.7,
+            "wind_direction": 156,
+            "solar_irradiance": 462.9672131147541,
+            "uv_index": 2,
+            "precipitation": 0,
+            "pressure": 984.1,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 12.86564717861861,
+            "feels_like": 28.89552929199998
+          }
+        },
+        {
+          "id": "b900be90-5344-11ef-93f6-8bf643582247",
+          "cellIndex": "871e15312ffffff",
+          "cellActiveDeviceCount": 5,
+          "cellAvgDataQuality": 85,
+          "cellCenter": {
+            "lat": 47.73743,
+            "lon": 16.22008
+          },
+          "address": "Lanzenkirchen, AT",
+          "name": "Joyful Mauvelous Drought",
+          "bundle": {
+            "name": "h2",
+            "title": "H2",
+            "connectivity": "helium",
+            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
+            "ws_model": "WS2001",
+            "gw_model": "WS2001"
+          },
+          "profile": "H2",
+          "metrics": {
+            "qod_score": 89,
+            "ts": "2026-07-26T02:00:00+02:00"
+          },
+          "timezone": "Europe/Vienna",
+          "programName": "community",
+          "cellCapacity": 1,
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-07-28T16:47:04+02:00",
+          "current_weather": {
+            "timestamp": "2026-07-28T16:47:04+02:00",
+            "temperature": 29.8,
+            "humidity": 35,
+            "wind_speed": 1.3,
+            "wind_gust": 3.1,
+            "wind_direction": 120,
+            "solar_irradiance": 501.76229508196724,
+            "uv_index": 3,
+            "precipitation": 0,
+            "pressure": 983.8,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 12.699282885932348,
+            "feels_like": 29.103286782000016
+          }
+        },
+        {
+          "id": "f1c585e0-bf56-11ed-95eb-b351f0b0cc44",
+          "cellIndex": "871e15312ffffff",
+          "cellActiveDeviceCount": 5,
+          "cellAvgDataQuality": 85,
+          "cellCenter": {
+            "lat": 47.73754,
+            "lon": 16.22011
+          },
+          "address": "Lanzenkirchen, AT",
+          "name": "Rare Butter Millimeter",
+          "bundle": {
+            "name": "h1",
+            "title": "H1",
+            "connectivity": "helium",
+            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
+            "ws_model": "WS2000",
+            "gw_model": "WS2000"
+          },
+          "profile": "H1",
+          "metrics": {
+            "qod_score": 78,
+            "ts": "2026-07-26T02:00:00+02:00"
+          },
+          "timezone": "Europe/Vienna",
+          "programName": "community",
+          "cellCapacity": 1,
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-07-28T16:46:53+02:00",
+          "current_weather": {
+            "timestamp": "2026-07-28T16:46:53+02:00",
+            "temperature": 30.6,
+            "humidity": 37,
+            "wind_speed": 1.5,
+            "wind_gust": 3.1,
+            "wind_direction": 162,
+            "solar_irradiance": 494.09016393442624,
+            "uv_index": 3,
+            "precipitation": 0,
+            "pressure": 438.7,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 14.257982433398713,
+            "feels_like": 30.18380409912002
+          }
+        },
+        {
+          "id": "9f3f44e0-5344-11ef-93f6-8bf643582247",
+          "cellIndex": "871e15312ffffff",
+          "cellActiveDeviceCount": 5,
+          "cellAvgDataQuality": 85,
+          "cellCenter": {
+            "lat": 47.73748,
+            "lon": 16.21998
+          },
+          "address": "Lanzenkirchen, AT",
+          "name": "Mammoth Fuzzy Cumulonimbus",
+          "bundle": {
+            "name": "h2",
+            "title": "H2",
+            "connectivity": "helium",
+            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
+            "ws_model": "WS2001",
+            "gw_model": "WS2001"
+          },
+          "profile": "H2",
+          "metrics": {
+            "qod_score": 90,
+            "ts": "2026-07-26T02:00:00+02:00"
+          },
+          "timezone": "Europe/Vienna",
+          "programName": "community",
+          "cellCapacity": 1,
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-07-28T16:44:17+02:00",
+          "current_weather": {
+            "timestamp": "2026-07-28T16:44:17+02:00",
+            "temperature": 29.8,
+            "humidity": 35,
+            "wind_speed": 2.4,
+            "wind_gust": 4.2,
+            "wind_direction": 104,
+            "solar_irradiance": 555.8934426229508,
+            "uv_index": 4,
+            "precipitation": 0,
+            "pressure": 984.2,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 12.699282885932348,
+            "feels_like": 29.103286782000016
+          }
+        }
+      ]
     },
     {
       "cell": {
@@ -4957,7 +5233,7 @@
       "cell": {
         "index": "877a6ac76ffffff",
         "device_count": 9,
-        "active_device_count": 8,
+        "active_device_count": 9,
         "devices": {
           "swissborg": 9
         },
@@ -5221,193 +5497,8 @@
         },
         "_ratio": 4
       },
-      "devices": [
-        {
-          "id": "4b969ac0-bf55-11ed-8a70-d7d4cf200cc9",
-          "cellIndex": "872aac992ffffff",
-          "cellActiveDeviceCount": 4,
-          "cellAvgDataQuality": 86,
-          "cellCenter": {
-            "lat": 40.28896,
-            "lon": -75.72947
-          },
-          "address": "Amity Township, US",
-          "name": "Raspy Zaffre Sky",
-          "bundle": {
-            "name": "h1",
-            "title": "H1",
-            "connectivity": "helium",
-            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
-            "ws_model": "WS2000",
-            "gw_model": "WS2000"
-          },
-          "profile": "H1",
-          "metrics": {
-            "qod_score": 65,
-            "ts": "2026-07-25T20:00:00-04:00"
-          },
-          "timezone": "America/New_York",
-          "programName": "community",
-          "cellCapacity": 1,
-          "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T05:50:57-04:00",
-          "current_weather": {
-            "timestamp": "2026-07-28T05:50:57-04:00",
-            "temperature": 19.3,
-            "humidity": 99,
-            "wind_speed": 0,
-            "wind_gust": 0,
-            "wind_direction": 66,
-            "solar_irradiance": 0,
-            "uv_index": 0,
-            "precipitation": 0,
-            "pressure": 526.7,
-            "icon": "partly-cloudy-night",
-            "precipitation_accumulated": 0,
-            "dew_point": 19.138625284788933,
-            "feels_like": 19.3
-          }
-        },
-        {
-          "id": "cdd20820-bf56-11ed-9972-4f669f2d96bd",
-          "cellIndex": "872aac992ffffff",
-          "cellActiveDeviceCount": 4,
-          "cellAvgDataQuality": 86,
-          "cellCenter": {
-            "lat": 40.28798,
-            "lon": -75.7292
-          },
-          "address": "Amity Township, US",
-          "name": "Overcast Lavender Hail",
-          "bundle": {
-            "name": "h1",
-            "title": "H1",
-            "connectivity": "helium",
-            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
-            "ws_model": "WS2000",
-            "gw_model": "WS2000"
-          },
-          "profile": "H1",
-          "metrics": {
-            "qod_score": 91,
-            "ts": "2026-07-25T20:00:00-04:00"
-          },
-          "timezone": "America/New_York",
-          "programName": "community",
-          "cellCapacity": 1,
-          "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T05:48:38-04:00",
-          "current_weather": {
-            "timestamp": "2026-07-28T05:48:38-04:00",
-            "temperature": 19.4,
-            "humidity": 96,
-            "wind_speed": 0,
-            "wind_gust": 0,
-            "wind_direction": 313,
-            "solar_irradiance": 0.01639344262295082,
-            "uv_index": 0,
-            "precipitation": 0,
-            "pressure": 994.1,
-            "icon": "partly-cloudy-night",
-            "precipitation_accumulated": 0,
-            "dew_point": 18.7452695002991,
-            "feels_like": 19.4
-          }
-        },
-        {
-          "id": "030e85b0-7115-11ef-a8d1-1fe2597b4789",
-          "cellIndex": "872aac992ffffff",
-          "cellActiveDeviceCount": 4,
-          "cellAvgDataQuality": 86,
-          "cellCenter": {
-            "lat": 40.28863,
-            "lon": -75.72852
-          },
-          "address": "Amity Township, US",
-          "name": "Faint Brandy Cirrus",
-          "bundle": {
-            "name": "h2",
-            "title": "H2",
-            "connectivity": "helium",
-            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
-            "ws_model": "WS2001",
-            "gw_model": "WS2001"
-          },
-          "profile": "H2",
-          "metrics": {
-            "qod_score": 91,
-            "pol_reason": "LOCATION_NOT_VERIFIED",
-            "ts": "2026-07-25T20:00:00-04:00"
-          },
-          "timezone": "America/New_York",
-          "programName": "community",
-          "cellCapacity": 1,
-          "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T05:49:09-04:00",
-          "current_weather": {
-            "timestamp": "2026-07-28T05:49:09-04:00",
-            "temperature": 19.2,
-            "humidity": 99,
-            "wind_speed": 0,
-            "wind_gust": 0,
-            "wind_direction": 234,
-            "solar_irradiance": 0,
-            "uv_index": 0,
-            "precipitation": 0,
-            "pressure": 994.8,
-            "icon": "partly-cloudy-night",
-            "precipitation_accumulated": 0,
-            "dew_point": 19.038748250682474,
-            "feels_like": 19.2
-          }
-        },
-        {
-          "id": "1ca10a80-1d3d-11ed-9972-4f669f2d96bd",
-          "cellIndex": "872aac992ffffff",
-          "cellActiveDeviceCount": 4,
-          "cellAvgDataQuality": 86,
-          "cellCenter": {
-            "lat": 40.28796,
-            "lon": -75.72896
-          },
-          "address": "Amity Township, US",
-          "name": "Gloomy Corduroy Coriolis",
-          "bundle": {
-            "name": "m5",
-            "title": "M5",
-            "connectivity": "wifi",
-            "url": "https://docs.weatherxm.com/wxm-devices/m5/introduction",
-            "ws_model": "WS1000",
-            "gw_model": "WG1000"
-          },
-          "profile": "M5",
-          "metrics": {
-            "qod_score": 99,
-            "ts": "2026-07-25T20:00:00-04:00"
-          },
-          "timezone": "America/New_York",
-          "programName": "community",
-          "cellCapacity": 1,
-          "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T05:50:00-04:00",
-          "current_weather": {
-            "timestamp": "2026-07-28T05:50:00-04:00",
-            "temperature": 19.1,
-            "humidity": 99,
-            "wind_speed": 0,
-            "wind_gust": 0,
-            "wind_direction": 71,
-            "solar_irradiance": 0.3524590163934426,
-            "uv_index": 0,
-            "precipitation": 0,
-            "pressure": 993.5,
-            "icon": "partly-cloudy-night",
-            "precipitation_accumulated": 0,
-            "dew_point": 18.9388711697376,
-            "feels_like": 19.1
-          }
-        }
-      ]
+      "devices": [],
+      "_error": "HTTP 429"
     },
     {
       "cell": {
@@ -5451,8 +5542,196 @@
         },
         "_ratio": 4
       },
-      "devices": [],
-      "_error": "HTTP 429"
+      "devices": [
+        {
+          "id": "1c6ae870-4e97-11ed-9972-4f669f2d96bd",
+          "cellIndex": "871969046ffffff",
+          "cellActiveDeviceCount": 0,
+          "cellAvgDataQuality": null,
+          "cellCenter": {
+            "lat": 52.05729,
+            "lon": 5.50316
+          },
+          "address": "Overberg, NL",
+          "name": "Cheesy Gingham Smog",
+          "bundle": {
+            "name": "m5",
+            "title": "M5",
+            "connectivity": "wifi",
+            "url": "https://docs.weatherxm.com/wxm-devices/m5/introduction",
+            "ws_model": "WS1000",
+            "gw_model": "WG1000"
+          },
+          "profile": "M5",
+          "metrics": {
+            "qod_score": 0,
+            "pol_reason": "NO_LOCATION_DATA",
+            "ts": "2026-07-26T02:00:00+02:00"
+          },
+          "timezone": "Europe/Brussels",
+          "programName": "community",
+          "cellCapacity": 1,
+          "isActive": false,
+          "lastWeatherStationActivity": "2026-07-23T11:31:00+02:00",
+          "current_weather": {
+            "timestamp": "2026-07-23T11:31:00+02:00",
+            "temperature": 18.3,
+            "humidity": 73,
+            "wind_speed": 1.42,
+            "wind_gust": 1.53,
+            "wind_direction": 346,
+            "solar_irradiance": 212.52459016393442,
+            "uv_index": 1,
+            "precipitation": 0,
+            "pressure": 1019.13,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 13.376693528026388,
+            "feels_like": 18.3
+          }
+        },
+        {
+          "id": "a90882d0-1e8e-11ed-9972-4f669f2d96bd",
+          "cellIndex": "871969046ffffff",
+          "cellActiveDeviceCount": 0,
+          "cellAvgDataQuality": null,
+          "cellCenter": {
+            "lat": 52.05731,
+            "lon": 5.50314
+          },
+          "address": "Overberg, NL",
+          "name": "Lone Turquoise Air",
+          "bundle": {
+            "name": "m5",
+            "title": "M5",
+            "connectivity": "wifi",
+            "url": "https://docs.weatherxm.com/wxm-devices/m5/introduction",
+            "ws_model": "WS1000",
+            "gw_model": "WG1000"
+          },
+          "profile": "M5",
+          "metrics": {
+            "qod_score": 0,
+            "pol_reason": "NO_LOCATION_DATA",
+            "ts": "2026-07-26T02:00:00+02:00"
+          },
+          "timezone": "Europe/Brussels",
+          "programName": "community",
+          "cellCapacity": 1,
+          "isActive": false,
+          "lastWeatherStationActivity": "2026-07-18T11:35:00+02:00",
+          "current_weather": {
+            "timestamp": "2026-07-18T11:35:00+02:00",
+            "temperature": 19,
+            "humidity": 77,
+            "wind_speed": 0.06,
+            "wind_gust": 0.51,
+            "wind_direction": 30,
+            "solar_irradiance": 59.17213114754098,
+            "uv_index": 0,
+            "precipitation": 0,
+            "pressure": 1015.42,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 14.876304920123598,
+            "feels_like": 19
+          }
+        },
+        {
+          "id": "96421250-5058-11ed-960b-b351f0b0cc44",
+          "cellIndex": "871969046ffffff",
+          "cellActiveDeviceCount": 0,
+          "cellAvgDataQuality": null,
+          "cellCenter": {
+            "lat": 52.05518,
+            "lon": 5.51861
+          },
+          "address": "Overberg, NL",
+          "name": "Real Silver Earth",
+          "bundle": {
+            "name": "m5",
+            "title": "M5",
+            "connectivity": "wifi",
+            "url": "https://docs.weatherxm.com/wxm-devices/m5/introduction",
+            "ws_model": "WS1000",
+            "gw_model": "WG1000"
+          },
+          "profile": "M5",
+          "metrics": {
+            "qod_score": 0,
+            "pol_reason": "NO_LOCATION_DATA",
+            "ts": "2026-07-26T02:00:00+02:00"
+          },
+          "timezone": "Europe/Brussels",
+          "programName": "community",
+          "cellCapacity": 1,
+          "isActive": false,
+          "lastWeatherStationActivity": "2026-06-23T08:50:00+02:00",
+          "current_weather": {
+            "timestamp": "2026-06-23T08:50:00+02:00",
+            "temperature": 17.07,
+            "humidity": 86,
+            "wind_speed": 0,
+            "wind_gust": 0,
+            "wind_direction": 244,
+            "solar_irradiance": 85.3688524590164,
+            "uv_index": 0,
+            "precipitation": 0,
+            "pressure": 1035.33,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 14.709439401398495,
+            "feels_like": 17.07
+          }
+        },
+        {
+          "id": "c3199e00-4eb0-11ed-960f-d7d4cf200cc9",
+          "cellIndex": "871969046ffffff",
+          "cellActiveDeviceCount": 0,
+          "cellAvgDataQuality": null,
+          "cellCenter": {
+            "lat": 52.05727,
+            "lon": 5.50317
+          },
+          "address": "Overberg, NL",
+          "name": "Rich Cinnamon Flurry",
+          "bundle": {
+            "name": "m5",
+            "title": "M5",
+            "connectivity": "wifi",
+            "url": "https://docs.weatherxm.com/wxm-devices/m5/introduction",
+            "ws_model": "WS1000",
+            "gw_model": "WG1000"
+          },
+          "profile": "M5",
+          "metrics": {
+            "qod_score": 0,
+            "pol_reason": "NO_LOCATION_DATA",
+            "ts": "2026-07-26T02:00:00+02:00"
+          },
+          "timezone": "Europe/Brussels",
+          "programName": "community",
+          "cellCapacity": 1,
+          "isActive": false,
+          "lastWeatherStationActivity": "2026-07-23T11:14:00+02:00",
+          "current_weather": {
+            "timestamp": "2026-07-23T11:14:00+02:00",
+            "temperature": 18.3,
+            "humidity": 72,
+            "wind_speed": 0.75,
+            "wind_gust": 1.53,
+            "wind_direction": 336,
+            "solar_irradiance": 228.64754098360655,
+            "uv_index": 2,
+            "precipitation": 0,
+            "pressure": 1020.96,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 13.165151749811827,
+            "feels_like": 18.3
+          }
+        }
+      ]
     },
     {
       "cell": {
@@ -5617,22 +5896,22 @@
           "programName": "swissborg",
           "cellCapacity": 1,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T12:50:28+03:00",
+          "lastWeatherStationActivity": "2026-07-28T17:46:39+03:00",
           "current_weather": {
-            "timestamp": "2026-07-28T12:50:28+03:00",
-            "temperature": 22.7,
-            "humidity": 55,
-            "wind_speed": 2.1,
-            "wind_gust": 4.1,
-            "wind_direction": 281,
-            "solar_irradiance": 775.327868852459,
-            "uv_index": 5,
+            "timestamp": "2026-07-28T17:46:39+03:00",
+            "temperature": 16.2,
+            "humidity": 96,
+            "wind_speed": 0,
+            "wind_gust": 1,
+            "wind_direction": 127,
+            "solar_irradiance": 17.959016393442624,
+            "uv_index": 0,
             "precipitation": 0,
-            "pressure": 794,
+            "pressure": 792.5,
             "icon": "partly-cloudy-day",
-            "precipitation_accumulated": 0,
-            "dew_point": 13.196705650169562,
-            "feels_like": 22.7
+            "precipitation_accumulated": 13.462000000000444,
+            "dew_point": 15.561119325999925,
+            "feels_like": 16.2
           }
         },
         {
@@ -5710,22 +5989,22 @@
           "programName": "swissborg",
           "cellCapacity": 1,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T12:50:44+03:00",
+          "lastWeatherStationActivity": "2026-07-28T17:46:55+03:00",
           "current_weather": {
-            "timestamp": "2026-07-28T12:50:44+03:00",
-            "temperature": 22.3,
-            "humidity": 53,
-            "wind_speed": 0.3,
-            "wind_gust": 1.8,
-            "wind_direction": 267,
-            "solar_irradiance": 1054.6803278688524,
-            "uv_index": 8,
+            "timestamp": "2026-07-28T17:46:55+03:00",
+            "temperature": 16,
+            "humidity": 96,
+            "wind_speed": 0,
+            "wind_gust": 0,
+            "wind_direction": 151,
+            "solar_irradiance": 20.84426229508197,
+            "uv_index": 0,
             "precipitation": 0,
-            "pressure": 795.4,
+            "pressure": 793.9,
             "icon": "partly-cloudy-day",
-            "precipitation_accumulated": 0,
-            "dew_point": 12.259924172642346,
-            "feels_like": 22.3
+            "precipitation_accumulated": 9.906000000000063,
+            "dew_point": 15.362103507765703,
+            "feels_like": 16
           }
         }
       ]
@@ -5941,16 +6220,16 @@
           "programName": "community",
           "cellCapacity": 2,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T12:51:10+03:00",
+          "lastWeatherStationActivity": "2026-07-28T17:47:21+03:00",
           "current_weather": {
-            "timestamp": "2026-07-28T12:51:10+03:00",
+            "timestamp": "2026-07-28T17:47:21+03:00",
             "temperature": 3276.7,
             "humidity": 127,
-            "wind_speed": 2.6,
-            "wind_gust": 4.5,
-            "wind_direction": 36,
-            "solar_irradiance": 641.860655737705,
-            "uv_index": 4,
+            "wind_speed": 3.2,
+            "wind_gust": 5.8,
+            "wind_direction": 78,
+            "solar_irradiance": 262.4836065573771,
+            "uv_index": 0,
             "precipitation": 0,
             "pressure": 0,
             "icon": "partly-cloudy-day",
@@ -5965,8 +6244,8 @@
           "cellActiveDeviceCount": 4,
           "cellAvgDataQuality": 76,
           "cellCenter": {
-            "lat": 37.97345,
-            "lon": 23.6916
+            "lat": 37.97356,
+            "lon": 23.69153
           },
           "address": "-",
           "name": "Hot Shamrock Heat",
@@ -5987,22 +6266,22 @@
           "programName": "community",
           "cellCapacity": 2,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T12:50:00+03:00",
+          "lastWeatherStationActivity": "2026-07-28T17:47:00+03:00",
           "current_weather": {
-            "timestamp": "2026-07-28T12:50:00+03:00",
-            "temperature": 35.5,
-            "humidity": 34,
-            "wind_speed": 2.5,
-            "wind_gust": 4.59,
-            "wind_direction": 76,
-            "solar_irradiance": 714.0327868852459,
-            "uv_index": 6,
+            "timestamp": "2026-07-28T17:47:00+03:00",
+            "temperature": 35,
+            "humidity": 37,
+            "wind_speed": 1.44,
+            "wind_gust": 2.55,
+            "wind_direction": 39,
+            "solar_irradiance": 251.55737704918033,
+            "uv_index": 2,
             "precipitation": 0,
-            "pressure": 1013.23,
+            "pressure": 1012.63,
             "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 17.241353805088906,
-            "feels_like": 36.54982038200001
+            "dew_point": 18.144399718913274,
+            "feels_like": 36.52839894999998
           }
         },
         {
@@ -6033,22 +6312,22 @@
           "programName": "community",
           "cellCapacity": 2,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T12:49:59+03:00",
+          "lastWeatherStationActivity": "2026-07-28T17:46:10+03:00",
           "current_weather": {
-            "timestamp": "2026-07-28T12:49:59+03:00",
-            "temperature": 36,
-            "humidity": 33,
-            "wind_speed": 2.2,
-            "wind_gust": 4.1,
-            "wind_direction": 61,
-            "solar_irradiance": 655.0819672131148,
-            "uv_index": 4,
+            "timestamp": "2026-07-28T17:46:10+03:00",
+            "temperature": 35.5,
+            "humidity": 37,
+            "wind_speed": 2.1,
+            "wind_gust": 3.7,
+            "wind_direction": 11,
+            "solar_irradiance": 240.5737704918033,
+            "uv_index": 0,
             "precipitation": 0,
-            "pressure": 474.2,
+            "pressure": 474.1,
             "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 17.205038260301205,
-            "feels_like": 37.10474379200003
+            "dew_point": 18.58556626069509,
+            "feels_like": 37.407719730500006
           }
         },
         {
@@ -6057,8 +6336,8 @@
           "cellActiveDeviceCount": 4,
           "cellAvgDataQuality": 76,
           "cellCenter": {
-            "lat": 37.9793,
-            "lon": 23.7042
+            "lat": 37.97898,
+            "lon": 23.70423
           },
           "address": "-",
           "name": "Exotic Magnolia Beaufort",
@@ -6079,22 +6358,22 @@
           "programName": "community",
           "cellCapacity": 2,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T12:50:00+03:00",
+          "lastWeatherStationActivity": "2026-07-28T17:47:00+03:00",
           "current_weather": {
-            "timestamp": "2026-07-28T12:50:00+03:00",
-            "temperature": 34.5,
-            "humidity": 35,
-            "wind_speed": 3.45,
-            "wind_gust": 5.61,
-            "wind_direction": 35,
-            "solar_irradiance": 706.8360655737705,
-            "uv_index": 6,
+            "timestamp": "2026-07-28T17:47:00+03:00",
+            "temperature": 34.37,
+            "humidity": 38,
+            "wind_speed": 3.86,
+            "wind_gust": 6.63,
+            "wind_direction": 80,
+            "solar_irradiance": 307.155737704918,
+            "uv_index": 2,
             "precipitation": 0,
-            "pressure": 1010.96,
+            "pressure": 1010.31,
             "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 16.824131508682697,
-            "feels_like": 35.1858637625
+            "dew_point": 18.01197372966508,
+            "feels_like": 35.72177599146484
           }
         },
         {
@@ -6542,23 +6821,23 @@
           "timezone": "America/Los_Angeles",
           "programName": "community",
           "cellCapacity": 2,
-          "isActive": false,
-          "lastWeatherStationActivity": "2026-07-27T23:23:42-07:00",
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-07-28T07:39:21-07:00",
           "current_weather": {
-            "timestamp": "2026-07-27T23:23:42-07:00",
-            "temperature": 23.9,
-            "humidity": 50,
+            "timestamp": "2026-07-28T07:39:21-07:00",
+            "temperature": 20.6,
+            "humidity": 57,
             "wind_speed": 0,
             "wind_gust": 0,
-            "wind_direction": 122,
-            "solar_irradiance": 0,
+            "wind_direction": 119,
+            "solar_irradiance": 35.36065573770492,
             "uv_index": 0,
             "precipitation": 0,
-            "pressure": 1009.4,
-            "icon": "partly-cloudy-night",
+            "pressure": 1010.9,
+            "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 12.846992981955848,
-            "feels_like": 23.9
+            "dew_point": 11.783973126840404,
+            "feels_like": 20.6
           }
         }
       ]
@@ -6704,8 +6983,8 @@
           "cellActiveDeviceCount": 9,
           "cellAvgDataQuality": 53,
           "cellCenter": {
-            "lat": 34.74544,
-            "lon": -86.74874
+            "lat": 34.74531,
+            "lon": -86.7486
           },
           "address": "Madison, US",
           "name": "Sneaky Pistachio Horizon",
@@ -6726,22 +7005,22 @@
           "programName": "community",
           "cellCapacity": 3,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T04:49:59-05:00",
+          "lastWeatherStationActivity": "2026-07-28T09:48:00-05:00",
           "current_weather": {
-            "timestamp": "2026-07-28T04:49:59-05:00",
-            "temperature": 24.4,
-            "humidity": 94,
+            "timestamp": "2026-07-28T09:48:00-05:00",
+            "temperature": 36.6,
+            "humidity": 54,
             "wind_speed": 0,
             "wind_gust": 0,
-            "wind_direction": 260,
-            "solar_irradiance": 0,
-            "uv_index": 0,
+            "wind_direction": 270,
+            "solar_irradiance": 601.188524590164,
+            "uv_index": 4,
             "precipitation": 0,
-            "pressure": 982.5,
-            "icon": "partly-cloudy-night",
+            "pressure": 983.7,
+            "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 23.37082460734881,
-            "feels_like": 24.4
+            "dew_point": 25.786257536671165,
+            "feels_like": 47.003827849280064
           }
         },
         {
@@ -6772,22 +7051,22 @@
           "programName": "community",
           "cellCapacity": 3,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T04:40:20-05:00",
+          "lastWeatherStationActivity": "2026-07-28T09:45:35-05:00",
           "current_weather": {
-            "timestamp": "2026-07-28T04:40:20-05:00",
-            "temperature": 24.4,
-            "humidity": 94,
+            "timestamp": "2026-07-28T09:45:35-05:00",
+            "temperature": 38.5,
+            "humidity": 48,
             "wind_speed": 0,
-            "wind_gust": 0,
+            "wind_gust": 0.8,
             "wind_direction": 102,
-            "solar_irradiance": 0,
-            "uv_index": 0,
+            "solar_irradiance": 601.4918032786885,
+            "uv_index": 3,
             "precipitation": 0,
             "pressure": 6553.5,
-            "icon": "partly-cloudy-night",
+            "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 23.37082460734881,
-            "feels_like": 24.4
+            "dew_point": 25.543423877445882,
+            "feels_like": 49.12554797199999
           }
         },
         {
@@ -6818,22 +7097,22 @@
           "programName": "community",
           "cellCapacity": 3,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T04:49:26-05:00",
+          "lastWeatherStationActivity": "2026-07-28T09:45:37-05:00",
           "current_weather": {
-            "timestamp": "2026-07-28T04:49:26-05:00",
-            "temperature": 24.3,
-            "humidity": 95,
-            "wind_speed": 0,
-            "wind_gust": 0,
-            "wind_direction": 261,
-            "solar_irradiance": 0,
-            "uv_index": 0,
+            "timestamp": "2026-07-28T09:45:37-05:00",
+            "temperature": 37.6,
+            "humidity": 51,
+            "wind_speed": 0.2,
+            "wind_gust": 1,
+            "wind_direction": 132,
+            "solar_irradiance": 576.672131147541,
+            "uv_index": 3,
             "precipitation": 0,
-            "pressure": 982.4,
-            "icon": "partly-cloudy-night",
+            "pressure": 983.6,
+            "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 23.446912575549643,
-            "feels_like": 24.3
+            "dew_point": 25.742816489152027,
+            "feels_like": 48.26575259968002
           }
         },
         {
@@ -6956,23 +7235,23 @@
           "timezone": "America/Chicago",
           "programName": "community",
           "cellCapacity": 3,
-          "isActive": false,
-          "lastWeatherStationActivity": "2026-07-28T00:08:47-05:00",
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-07-28T09:48:30-05:00",
           "current_weather": {
-            "timestamp": "2026-07-28T00:08:47-05:00",
-            "temperature": 26.3,
-            "humidity": 91,
+            "timestamp": "2026-07-28T09:48:30-05:00",
+            "temperature": 34.5,
+            "humidity": 63,
             "wind_speed": 0,
             "wind_gust": 0,
-            "wind_direction": 108,
-            "solar_irradiance": 0,
-            "uv_index": 0,
+            "wind_direction": 113,
+            "solar_irradiance": 398.2295081967213,
+            "uv_index": 1,
             "precipitation": 0,
-            "pressure": 984.3,
-            "icon": "partly-cloudy-night",
+            "pressure": 983.5,
+            "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 24.712228720578075,
-            "feels_like": 26.3
+            "dew_point": 26.43305032560436,
+            "feels_like": 45.28736499050002
           }
         },
         {
@@ -7095,22 +7374,22 @@
           "programName": "community",
           "cellCapacity": 3,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T04:51:27-05:00",
+          "lastWeatherStationActivity": "2026-07-28T09:47:38-05:00",
           "current_weather": {
-            "timestamp": "2026-07-28T04:51:27-05:00",
-            "temperature": 24.5,
-            "humidity": 94,
+            "timestamp": "2026-07-28T09:47:38-05:00",
+            "temperature": 35.2,
+            "humidity": 59,
             "wind_speed": 0,
-            "wind_gust": 0,
-            "wind_direction": 32,
-            "solar_irradiance": 0,
-            "uv_index": 0,
+            "wind_gust": 1,
+            "wind_direction": 42,
+            "solar_irradiance": 565.3852459016393,
+            "uv_index": 3,
             "precipitation": 0,
-            "pressure": 982.5,
-            "icon": "partly-cloudy-night",
+            "pressure": 983.6,
+            "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 23.4700562959027,
-            "feels_like": 24.5
+            "dew_point": 25.980039667194585,
+            "feels_like": 45.451297624320105
           }
         }
       ]
@@ -7231,22 +7510,22 @@
           "programName": "community",
           "cellCapacity": 2,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T02:51:30-07:00",
+          "lastWeatherStationActivity": "2026-07-28T07:47:41-07:00",
           "current_weather": {
-            "timestamp": "2026-07-28T02:51:30-07:00",
-            "temperature": 31.6,
-            "humidity": 19,
+            "timestamp": "2026-07-28T07:47:41-07:00",
+            "temperature": 30.3,
+            "humidity": 23,
             "wind_speed": 0,
             "wind_gust": 0,
-            "wind_direction": 0,
-            "solar_irradiance": 0,
+            "wind_direction": 2,
+            "solar_irradiance": 216.0655737704918,
             "uv_index": 0,
             "precipitation": 0,
-            "pressure": 940.8,
-            "icon": "partly-cloudy-night",
+            "pressure": 942.7,
+            "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 5.1711898476614575,
-            "feels_like": 29.637759946880013
+            "dew_point": 6.863624080535175,
+            "feels_like": 28.68793224698
           }
         },
         {
@@ -7277,22 +7556,22 @@
           "programName": "community",
           "cellCapacity": 2,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T02:49:54-07:00",
+          "lastWeatherStationActivity": "2026-07-28T07:46:04-07:00",
           "current_weather": {
-            "timestamp": "2026-07-28T02:49:54-07:00",
-            "temperature": 31.9,
-            "humidity": 20,
-            "wind_speed": 1,
-            "wind_gust": 2.8,
-            "wind_direction": 168,
-            "solar_irradiance": 0,
+            "timestamp": "2026-07-28T07:46:04-07:00",
+            "temperature": 36.5,
+            "humidity": 18,
+            "wind_speed": 1.4,
+            "wind_gust": 1.8,
+            "wind_direction": 138,
+            "solar_irradiance": 215.7704918032787,
             "uv_index": 0,
             "precipitation": 0,
-            "pressure": 940.9,
-            "icon": "partly-cloudy-night",
+            "pressure": 942.7,
+            "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 6.157594914562418,
-            "feels_like": 29.961535692000012
+            "dew_point": 8.366331474340475,
+            "feels_like": 34.55488478199998
           }
         },
         {
@@ -7348,8 +7627,8 @@
           "cellActiveDeviceCount": 4,
           "cellAvgDataQuality": 87,
           "cellCenter": {
-            "lat": 36.11042,
-            "lon": -115.09506
+            "lat": 36.11036,
+            "lon": -115.09518
           },
           "address": "Clark County, US",
           "name": "Exotic Onyx Cloud",
@@ -7370,22 +7649,22 @@
           "programName": "community",
           "cellCapacity": 2,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T02:50:00-07:00",
+          "lastWeatherStationActivity": "2026-07-28T07:47:00-07:00",
           "current_weather": {
-            "timestamp": "2026-07-28T02:50:00-07:00",
-            "temperature": 33.73,
+            "timestamp": "2026-07-28T07:47:00-07:00",
+            "temperature": 36.9,
             "humidity": 18,
-            "wind_speed": 2.3,
-            "wind_gust": 4.08,
-            "wind_direction": 231,
-            "solar_irradiance": 0,
-            "uv_index": 0,
+            "wind_speed": 0,
+            "wind_gust": 0,
+            "wind_direction": 235,
+            "solar_irradiance": 182.0983606557377,
+            "uv_index": 1,
             "precipitation": 0,
-            "pressure": 941.16,
-            "icon": "partly-cloudy-night",
+            "pressure": 942.83,
+            "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 6.123598339346135,
-            "feels_like": 31.595689102472797
+            "dew_point": 8.689822288011012,
+            "feels_like": 35.01561146552
           }
         },
         {
@@ -7462,23 +7741,23 @@
           "timezone": "America/Los_Angeles",
           "programName": "community",
           "cellCapacity": 2,
-          "isActive": false,
-          "lastWeatherStationActivity": "2026-07-28T00:13:22-07:00",
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-07-28T07:47:18-07:00",
           "current_weather": {
-            "timestamp": "2026-07-28T00:13:22-07:00",
-            "temperature": 34.6,
-            "humidity": 16,
-            "wind_speed": 0.7,
-            "wind_gust": 1.7,
-            "wind_direction": 310,
-            "solar_irradiance": 0,
+            "timestamp": "2026-07-28T07:47:18-07:00",
+            "temperature": 36.9,
+            "humidity": 17,
+            "wind_speed": 0,
+            "wind_gust": 0,
+            "wind_direction": 30,
+            "solar_irradiance": 216.04098360655738,
             "uv_index": 0,
             "precipitation": 0,
-            "pressure": 941.1,
-            "icon": "partly-cloudy-night",
+            "pressure": 942.9,
+            "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 5.123473676302453,
-            "feels_like": 32.31172977728002
+            "dew_point": 7.847096505480433,
+            "feels_like": 34.86055194122001
           }
         }
       ]
@@ -7570,8 +7849,287 @@
         },
         "_ratio": 3
       },
-      "devices": [],
-      "_error": "HTTP 429"
+      "devices": [
+        {
+          "id": "21250a20-438d-11ef-8e8d-b55568dc8e66",
+          "cellIndex": "87499580affffff",
+          "cellActiveDeviceCount": 1,
+          "cellAvgDataQuality": null,
+          "cellCenter": {
+            "lat": 19.24635,
+            "lon": -99.03747
+          },
+          "address": "Mexico City, MX",
+          "name": "Oblong Cerulean Nowcast",
+          "bundle": {
+            "name": "d1",
+            "title": "D1",
+            "connectivity": "wifi",
+            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
+            "ws_model": "WS1001",
+            "gw_model": "WG1200"
+          },
+          "profile": "D1",
+          "metrics": {
+            "qod_score": 0,
+            "pol_reason": "NO_LOCATION_DATA",
+            "ts": "2026-07-25T18:00:00-06:00"
+          },
+          "timezone": "America/Mexico_City",
+          "programName": "swissborg",
+          "cellCapacity": 2,
+          "isActive": false,
+          "lastWeatherStationActivity": "2026-01-03T12:01:19-06:00",
+          "current_weather": {
+            "timestamp": "2026-01-03T12:01:19-06:00",
+            "temperature": 20.28,
+            "humidity": 36,
+            "wind_speed": 0.5,
+            "wind_gust": 4.5,
+            "wind_direction": 0,
+            "solar_irradiance": 575.8196721311475,
+            "uv_index": 5,
+            "precipitation": 0,
+            "pressure": 771.33,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 4.719958414440125,
+            "feels_like": 20.28
+          }
+        },
+        {
+          "id": "24839e70-438d-11ef-8e8d-b55568dc8e66",
+          "cellIndex": "87499580affffff",
+          "cellActiveDeviceCount": 1,
+          "cellAvgDataQuality": null,
+          "cellCenter": {
+            "lat": 19.25594,
+            "lon": -99.04518
+          },
+          "address": "Mexico City, MX",
+          "name": "Snowy Fuchsia Coriolis",
+          "bundle": {
+            "name": "d1",
+            "title": "D1",
+            "connectivity": "wifi",
+            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
+            "ws_model": "WS1001",
+            "gw_model": "WG1200"
+          },
+          "profile": "D1",
+          "metrics": {
+            "qod_score": 0,
+            "pol_reason": "NO_LOCATION_DATA",
+            "ts": "2026-07-25T18:00:00-06:00"
+          },
+          "timezone": "America/Mexico_City",
+          "programName": "swissborg",
+          "cellCapacity": 2,
+          "isActive": false,
+          "lastWeatherStationActivity": "2025-09-16T04:01:42-06:00",
+          "current_weather": {
+            "timestamp": "2025-09-16T04:01:42-06:00",
+            "temperature": 15.28,
+            "humidity": 84,
+            "wind_speed": 0,
+            "wind_gust": 0,
+            "wind_direction": 325,
+            "solar_irradiance": 0,
+            "uv_index": 0,
+            "precipitation": 0,
+            "pressure": 782.28,
+            "icon": "partly-cloudy-night",
+            "precipitation_accumulated": 0,
+            "dew_point": 12.592199101893085,
+            "feels_like": 15.28
+          }
+        },
+        {
+          "id": "1f7bee00-438d-11ef-8e8d-b55568dc8e66",
+          "cellIndex": "87499580affffff",
+          "cellActiveDeviceCount": 1,
+          "cellAvgDataQuality": null,
+          "cellCenter": {
+            "lat": 19.26068,
+            "lon": -99.0374
+          },
+          "address": "Mexico City, MX",
+          "name": "Shallow Blush Orographic",
+          "bundle": {
+            "name": "d1",
+            "title": "D1",
+            "connectivity": "wifi",
+            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
+            "ws_model": "WS1001",
+            "gw_model": "WG1200"
+          },
+          "profile": "D1",
+          "metrics": {
+            "qod_score": 0,
+            "ts": "2026-07-25T18:00:00-06:00"
+          },
+          "timezone": "America/Mexico_City",
+          "programName": "swissborg",
+          "cellCapacity": 2,
+          "isActive": false,
+          "lastWeatherStationActivity": "2026-07-25T04:10:00-06:00",
+          "current_weather": {
+            "timestamp": "2026-07-25T04:10:00-06:00",
+            "temperature": 15.81,
+            "humidity": 81,
+            "wind_speed": 0,
+            "wind_gust": 0,
+            "wind_direction": 276,
+            "solar_irradiance": 0,
+            "uv_index": 0,
+            "precipitation": 0,
+            "pressure": 783.78,
+            "icon": "partly-cloudy-night",
+            "precipitation_accumulated": 0,
+            "dew_point": 12.55536608176939,
+            "feels_like": 15.81
+          }
+        },
+        {
+          "id": "266c0d80-438d-11ef-8e8d-b55568dc8e66",
+          "cellIndex": "87499580affffff",
+          "cellActiveDeviceCount": 1,
+          "cellAvgDataQuality": null,
+          "cellCenter": {
+            "lat": 19.2476,
+            "lon": -99.04162
+          },
+          "address": "Mexico City, MX",
+          "name": "Scrawny Thistle Typhoon",
+          "bundle": {
+            "name": "d1",
+            "title": "D1",
+            "connectivity": "wifi",
+            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
+            "ws_model": "WS1001",
+            "gw_model": "WG1200"
+          },
+          "profile": "D1",
+          "metrics": {
+            "qod_score": 0,
+            "pol_reason": "NO_LOCATION_DATA",
+            "ts": "2026-07-25T18:00:00-06:00"
+          },
+          "timezone": "America/Mexico_City",
+          "programName": "swissborg",
+          "cellCapacity": 2,
+          "isActive": false,
+          "lastWeatherStationActivity": "2025-02-25T03:40:05-06:00",
+          "current_weather": {
+            "timestamp": "2025-02-25T03:40:05-06:00",
+            "temperature": 9.33,
+            "humidity": 51,
+            "wind_speed": 0,
+            "wind_gust": 0.5,
+            "wind_direction": 142,
+            "solar_irradiance": 0,
+            "uv_index": 0,
+            "precipitation": 0,
+            "pressure": 773.27,
+            "icon": "partly-cloudy-night",
+            "precipitation_accumulated": 0,
+            "dew_point": -0.29964292485470007,
+            "feels_like": 9.33
+          }
+        },
+        {
+          "id": "31282920-438d-11ef-8e8d-b55568dc8e66",
+          "cellIndex": "87499580affffff",
+          "cellActiveDeviceCount": 1,
+          "cellAvgDataQuality": null,
+          "cellCenter": {
+            "lat": 19.254,
+            "lon": -99.03529
+          },
+          "address": "Mexico City, MX",
+          "name": "Inclement Bronze Uv",
+          "bundle": {
+            "name": "d1",
+            "title": "D1",
+            "connectivity": "wifi",
+            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
+            "ws_model": "WS1001",
+            "gw_model": "WG1200"
+          },
+          "profile": "D1",
+          "metrics": {
+            "qod_score": 19,
+            "ts": "2026-07-25T18:00:00-06:00"
+          },
+          "timezone": "America/Mexico_City",
+          "programName": "swissborg",
+          "cellCapacity": 2,
+          "isActive": false,
+          "lastWeatherStationActivity": "2026-07-27T03:57:00-06:00",
+          "current_weather": {
+            "timestamp": "2026-07-27T03:57:00-06:00",
+            "temperature": 14.67,
+            "humidity": 79,
+            "wind_speed": 0,
+            "wind_gust": 0,
+            "wind_direction": 89,
+            "solar_irradiance": 0,
+            "uv_index": 0,
+            "precipitation": 0,
+            "pressure": 781.06,
+            "icon": "partly-cloudy-night",
+            "precipitation_accumulated": 0,
+            "dew_point": 11.066366081592104,
+            "feels_like": 14.67
+          }
+        },
+        {
+          "id": "2d5e9e00-438d-11ef-8e8d-b55568dc8e66",
+          "cellIndex": "87499580affffff",
+          "cellActiveDeviceCount": 1,
+          "cellAvgDataQuality": null,
+          "cellCenter": {
+            "lat": 19.25988,
+            "lon": -99.03454
+          },
+          "address": "Mexico City, MX",
+          "name": "Uneven Scarlet Lenticular",
+          "bundle": {
+            "name": "d1",
+            "title": "D1",
+            "connectivity": "wifi",
+            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
+            "ws_model": "WS1001",
+            "gw_model": "WG1200"
+          },
+          "profile": "D1",
+          "metrics": {
+            "qod_score": 0,
+            "ts": "2026-07-25T18:00:00-06:00"
+          },
+          "timezone": "America/Mexico_City",
+          "programName": "swissborg",
+          "cellCapacity": 2,
+          "isActive": false,
+          "lastWeatherStationActivity": "2026-07-25T04:14:00-06:00",
+          "current_weather": {
+            "timestamp": "2026-07-25T04:14:00-06:00",
+            "temperature": 16.67,
+            "humidity": 76,
+            "wind_speed": 0.07,
+            "wind_gust": 0.5,
+            "wind_direction": 258,
+            "solar_irradiance": 0,
+            "uv_index": 0,
+            "precipitation": 0,
+            "pressure": 783.63,
+            "icon": "partly-cloudy-night",
+            "precipitation_accumulated": 0,
+            "dew_point": 12.419439865914775,
+            "feels_like": 16.67
+          }
+        }
+      ]
     },
     {
       "cell": {
@@ -7616,285 +8174,8 @@
         },
         "_ratio": 3
       },
-      "devices": [
-        {
-          "id": "32f966b0-438d-11ef-8e8d-b55568dc8e66",
-          "cellIndex": "87bcc2c60ffffff",
-          "cellActiveDeviceCount": 5,
-          "cellAvgDataQuality": 98,
-          "cellCenter": {
-            "lat": -26.51584,
-            "lon": 29.18962
-          },
-          "address": "-",
-          "name": "Modern Silver Thunder",
-          "bundle": {
-            "name": "d1",
-            "title": "D1",
-            "connectivity": "wifi",
-            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
-            "ws_model": "WS1001",
-            "gw_model": "WG1200"
-          },
-          "profile": "D1",
-          "metrics": {
-            "qod_score": 99,
-            "ts": "2026-07-26T02:00:00+02:00"
-          },
-          "timezone": "Africa/Johannesburg",
-          "programName": "swissborg",
-          "cellCapacity": 2,
-          "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T11:51:00+02:00",
-          "current_weather": {
-            "timestamp": "2026-07-28T11:51:00+02:00",
-            "temperature": 16.52,
-            "humidity": 44,
-            "wind_speed": 2.37,
-            "wind_gust": 4,
-            "wind_direction": 68,
-            "solar_irradiance": 614.7213114754098,
-            "uv_index": 5,
-            "precipitation": 0,
-            "pressure": 846.29,
-            "icon": "partly-cloudy-day",
-            "precipitation_accumulated": 0,
-            "dew_point": 4.219662583329935,
-            "feels_like": 16.52
-          }
-        },
-        {
-          "id": "83ac5bd0-ad73-11ef-8b2f-f594437d6709",
-          "cellIndex": "87bcc2c60ffffff",
-          "cellActiveDeviceCount": 5,
-          "cellAvgDataQuality": 98,
-          "cellCenter": {
-            "lat": -26.52153,
-            "lon": 29.19977
-          },
-          "address": "-",
-          "name": "Macho Violet Weathering",
-          "bundle": {
-            "name": "d1",
-            "title": "D1",
-            "connectivity": "wifi",
-            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
-            "ws_model": "WS1001",
-            "gw_model": "WG1200"
-          },
-          "profile": "D1",
-          "metrics": {
-            "qod_score": 98,
-            "ts": "2026-07-26T02:00:00+02:00"
-          },
-          "timezone": "Africa/Johannesburg",
-          "programName": "swissborg",
-          "cellCapacity": 2,
-          "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T11:51:00+02:00",
-          "current_weather": {
-            "timestamp": "2026-07-28T11:51:00+02:00",
-            "temperature": 16.48,
-            "humidity": 45,
-            "wind_speed": 1.33,
-            "wind_gust": 3.5,
-            "wind_direction": 32,
-            "solar_irradiance": 575.0491803278688,
-            "uv_index": 5,
-            "precipitation": 0,
-            "pressure": 845.13,
-            "icon": "partly-cloudy-day",
-            "precipitation_accumulated": 0,
-            "dew_point": 4.50442942802873,
-            "feels_like": 16.48
-          }
-        },
-        {
-          "id": "31aa5170-438d-11ef-8e8d-b55568dc8e66",
-          "cellIndex": "87bcc2c60ffffff",
-          "cellActiveDeviceCount": 5,
-          "cellAvgDataQuality": 98,
-          "cellCenter": {
-            "lat": -26.51659,
-            "lon": 29.18989
-          },
-          "address": "-",
-          "name": "Fantastic Carnelian Snowstorm",
-          "bundle": {
-            "name": "d1",
-            "title": "D1",
-            "connectivity": "wifi",
-            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
-            "ws_model": "WS1001",
-            "gw_model": "WG1200"
-          },
-          "profile": "D1",
-          "metrics": {
-            "qod_score": 0,
-            "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-07-26T02:00:00+02:00"
-          },
-          "timezone": "Africa/Johannesburg",
-          "programName": "swissborg",
-          "cellCapacity": 2,
-          "isActive": false,
-          "lastWeatherStationActivity": "2026-07-03T09:13:00+02:00",
-          "current_weather": {
-            "timestamp": "2026-07-03T09:13:00+02:00",
-            "temperature": 4.33,
-            "humidity": 80,
-            "wind_speed": 2.37,
-            "wind_gust": 3.5,
-            "wind_direction": 184,
-            "solar_irradiance": 229.45081967213116,
-            "uv_index": 2,
-            "precipitation": 0,
-            "pressure": 848.52,
-            "icon": "partly-cloudy-day",
-            "precipitation_accumulated": 0,
-            "dew_point": 1.182897650481917,
-            "feels_like": 2.208009894359578
-          }
-        },
-        {
-          "id": "2bf59820-438d-11ef-8e8d-b55568dc8e66",
-          "cellIndex": "87bcc2c60ffffff",
-          "cellActiveDeviceCount": 5,
-          "cellAvgDataQuality": 98,
-          "cellCenter": {
-            "lat": -26.52568,
-            "lon": 29.20096
-          },
-          "address": "-",
-          "name": "Isobar Sandstone Kelvin",
-          "bundle": {
-            "name": "d1",
-            "title": "D1",
-            "connectivity": "wifi",
-            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
-            "ws_model": "WS1001",
-            "gw_model": "WG1200"
-          },
-          "profile": "D1",
-          "metrics": {
-            "qod_score": 98,
-            "ts": "2026-07-26T02:00:00+02:00"
-          },
-          "timezone": "Africa/Johannesburg",
-          "programName": "community",
-          "cellCapacity": 2,
-          "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T11:51:00+02:00",
-          "current_weather": {
-            "timestamp": "2026-07-28T11:51:00+02:00",
-            "temperature": 16.33,
-            "humidity": 45,
-            "wind_speed": 1.93,
-            "wind_gust": 3,
-            "wind_direction": 67,
-            "solar_irradiance": 557.155737704918,
-            "uv_index": 5,
-            "precipitation": 0,
-            "pressure": 843.78,
-            "icon": "partly-cloudy-day",
-            "precipitation_accumulated": 0,
-            "dew_point": 4.3679499060174605,
-            "feels_like": 16.33
-          }
-        },
-        {
-          "id": "2ee69d90-438d-11ef-8e8d-b55568dc8e66",
-          "cellIndex": "87bcc2c60ffffff",
-          "cellActiveDeviceCount": 5,
-          "cellAvgDataQuality": 98,
-          "cellCenter": {
-            "lat": -26.52166,
-            "lon": 29.1991
-          },
-          "address": "-",
-          "name": "Great Seaweed Rain",
-          "bundle": {
-            "name": "d1",
-            "title": "D1",
-            "connectivity": "wifi",
-            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
-            "ws_model": "WS1001",
-            "gw_model": "WG1200"
-          },
-          "profile": "D1",
-          "metrics": {
-            "qod_score": 97,
-            "ts": "2026-07-26T02:00:00+02:00"
-          },
-          "timezone": "Africa/Johannesburg",
-          "programName": "swissborg",
-          "cellCapacity": 2,
-          "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T11:51:00+02:00",
-          "current_weather": {
-            "timestamp": "2026-07-28T11:51:00+02:00",
-            "temperature": 16.3,
-            "humidity": 46,
-            "wind_speed": 0.73,
-            "wind_gust": 1.5,
-            "wind_direction": 64,
-            "solar_irradiance": 461.1475409836066,
-            "uv_index": 4,
-            "precipitation": 0,
-            "pressure": 845.07,
-            "icon": "partly-cloudy-day",
-            "precipitation_accumulated": 0,
-            "dew_point": 4.6550529331072,
-            "feels_like": 16.3
-          }
-        },
-        {
-          "id": "21dd5da1-438d-11ef-8e8d-b55568dc8e66",
-          "cellIndex": "87bcc2c60ffffff",
-          "cellActiveDeviceCount": 5,
-          "cellAvgDataQuality": 98,
-          "cellCenter": {
-            "lat": -26.51922,
-            "lon": 29.19263
-          },
-          "address": "-",
-          "name": "Overt Powder Temperature",
-          "bundle": {
-            "name": "d1",
-            "title": "D1",
-            "connectivity": "wifi",
-            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
-            "ws_model": "WS1001",
-            "gw_model": "WG1200"
-          },
-          "profile": "D1",
-          "metrics": {
-            "qod_score": 99,
-            "ts": "2026-07-26T02:00:00+02:00"
-          },
-          "timezone": "Africa/Johannesburg",
-          "programName": "swissborg",
-          "cellCapacity": 2,
-          "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T11:51:00+02:00",
-          "current_weather": {
-            "timestamp": "2026-07-28T11:51:00+02:00",
-            "temperature": 16.44,
-            "humidity": 45,
-            "wind_speed": 1.43,
-            "wind_gust": 2.5,
-            "wind_direction": 41,
-            "solar_irradiance": 525.1639344262295,
-            "uv_index": 4,
-            "precipitation": 0,
-            "pressure": 846.47,
-            "icon": "partly-cloudy-day",
-            "precipitation_accumulated": 0,
-            "dew_point": 4.4680356006725415,
-            "feels_like": 16.44
-          }
-        }
-      ]
+      "devices": [],
+      "_error": "HTTP 429"
     },
     {
       "cell": {
@@ -8013,22 +8294,22 @@
           "programName": "community",
           "cellCapacity": 2,
           "isActive": false,
-          "lastWeatherStationActivity": "2026-07-28T03:25:23-04:00",
+          "lastWeatherStationActivity": "2026-07-28T07:30:11-04:00",
           "current_weather": {
-            "timestamp": "2026-07-28T03:25:23-04:00",
-            "temperature": 20.5,
-            "humidity": 97,
+            "timestamp": "2026-07-28T07:30:11-04:00",
+            "temperature": 21.9,
+            "humidity": 92,
             "wind_speed": 0,
             "wind_gust": 0,
             "wind_direction": 84,
-            "solar_irradiance": 0,
+            "solar_irradiance": 21.87704918032787,
             "uv_index": 0,
             "precipitation": 0,
-            "pressure": 1004.7,
-            "icon": "partly-cloudy-night",
+            "pressure": 1004.1,
+            "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 20.007062662194155,
-            "feels_like": 20.5
+            "dew_point": 20.540671318148796,
+            "feels_like": 21.9
           }
         },
         {
@@ -8060,22 +8341,22 @@
           "programName": "community",
           "cellCapacity": 2,
           "isActive": false,
-          "lastWeatherStationActivity": "2026-07-28T04:18:21-04:00",
+          "lastWeatherStationActivity": "2026-07-28T08:20:07-04:00",
           "current_weather": {
-            "timestamp": "2026-07-28T04:18:21-04:00",
-            "temperature": 20.3,
-            "humidity": 99,
+            "timestamp": "2026-07-28T08:20:07-04:00",
+            "temperature": 22.2,
+            "humidity": 93,
             "wind_speed": 0,
             "wind_gust": 0,
-            "wind_direction": 179,
-            "solar_irradiance": 0,
+            "wind_direction": 180,
+            "solar_irradiance": 37.75409836065574,
             "uv_index": 0,
             "precipitation": 0,
-            "pressure": 1004.4,
-            "icon": "partly-cloudy-night",
+            "pressure": 1003.5,
+            "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 20.137393049747264,
-            "feels_like": 20.3
+            "dew_point": 21.013452151794738,
+            "feels_like": 22.2
           }
         },
         {
@@ -8107,22 +8388,22 @@
           "programName": "community",
           "cellCapacity": 2,
           "isActive": false,
-          "lastWeatherStationActivity": "2026-07-28T05:13:03-04:00",
+          "lastWeatherStationActivity": "2026-07-28T09:23:54-04:00",
           "current_weather": {
-            "timestamp": "2026-07-28T05:13:03-04:00",
-            "temperature": 20.3,
-            "humidity": 96,
+            "timestamp": "2026-07-28T09:23:54-04:00",
+            "temperature": 23.7,
+            "humidity": 88,
             "wind_speed": 0,
             "wind_gust": 0,
             "wind_direction": 168,
-            "solar_irradiance": 0,
+            "solar_irradiance": 149.95081967213116,
             "uv_index": 0,
             "precipitation": 0,
-            "pressure": 1004.4,
-            "icon": "partly-cloudy-night",
+            "pressure": 1003.8,
+            "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 19.64077683334084,
-            "feels_like": 20.3
+            "dew_point": 21.593457339424248,
+            "feels_like": 23.7
           }
         },
         {
@@ -8154,22 +8435,22 @@
           "programName": "community",
           "cellCapacity": 2,
           "isActive": false,
-          "lastWeatherStationActivity": "2026-07-28T05:11:03-04:00",
+          "lastWeatherStationActivity": "2026-07-28T09:24:55-04:00",
           "current_weather": {
-            "timestamp": "2026-07-28T05:11:03-04:00",
-            "temperature": 19.8,
-            "humidity": 99,
+            "timestamp": "2026-07-28T09:24:55-04:00",
+            "temperature": 23,
+            "humidity": 93,
             "wind_speed": 0,
             "wind_gust": 0,
             "wind_direction": 198,
-            "solar_irradiance": 0,
+            "solar_irradiance": 188.29508196721312,
             "uv_index": 0,
             "precipitation": 0,
-            "pressure": 6553.5,
-            "icon": "partly-cloudy-night",
+            "pressure": 378.9,
+            "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 19.63800975274596,
-            "feels_like": 19.8
+            "dew_point": 21.806299883709013,
+            "feels_like": 23
           }
         },
         {
@@ -8178,8 +8459,8 @@
           "cellActiveDeviceCount": 6,
           "cellAvgDataQuality": 18,
           "cellCenter": {
-            "lat": 40.89583,
-            "lon": -74.12217
+            "lat": 40.89586,
+            "lon": -74.12208
           },
           "address": "Elmwood Park, US",
           "name": "Fit Metal Beaufort",
@@ -8200,22 +8481,22 @@
           "programName": "community",
           "cellCapacity": 2,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T05:50:00-04:00",
+          "lastWeatherStationActivity": "2026-07-28T10:47:00-04:00",
           "current_weather": {
-            "timestamp": "2026-07-28T05:50:00-04:00",
-            "temperature": 19.9,
-            "humidity": 99,
-            "wind_speed": 0,
-            "wind_gust": 0,
-            "wind_direction": 290,
-            "solar_irradiance": 2.4918032786885247,
-            "uv_index": 0,
+            "timestamp": "2026-07-28T10:47:00-04:00",
+            "temperature": 25.77,
+            "humidity": 84,
+            "wind_speed": 0.17,
+            "wind_gust": 1.02,
+            "wind_direction": 159,
+            "solar_irradiance": 238.29508196721312,
+            "uv_index": 2,
             "precipitation": 0,
-            "pressure": 1004.03,
+            "pressure": 1003.07,
             "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 19.737886505822537,
-            "feels_like": 19.9
+            "dew_point": 22.860700654961093,
+            "feels_like": 25.77
           }
         },
         {
@@ -8247,22 +8528,22 @@
           "programName": "community",
           "cellCapacity": 2,
           "isActive": false,
-          "lastWeatherStationActivity": "2026-07-28T04:27:41-04:00",
+          "lastWeatherStationActivity": "2026-07-28T08:35:31-04:00",
           "current_weather": {
-            "timestamp": "2026-07-28T04:27:41-04:00",
-            "temperature": 20.4,
-            "humidity": 96,
+            "timestamp": "2026-07-28T08:35:31-04:00",
+            "temperature": 22.4,
+            "humidity": 93,
             "wind_speed": 0,
             "wind_gust": 0,
             "wind_direction": 172,
-            "solar_irradiance": 0,
+            "solar_irradiance": 41.4344262295082,
             "uv_index": 0,
             "precipitation": 0,
-            "pressure": 1004.5,
-            "icon": "partly-cloudy-night",
+            "pressure": 1003.7,
+            "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 19.740276702267245,
-            "feels_like": 20.4
+            "dew_point": 21.211666090569487,
+            "feels_like": 22.4
           }
         }
       ]
@@ -8383,22 +8664,22 @@
           "programName": "swissborg",
           "cellCapacity": 1,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T11:51:00+02:00",
+          "lastWeatherStationActivity": "2026-07-28T16:48:00+02:00",
           "current_weather": {
-            "timestamp": "2026-07-28T11:51:00+02:00",
-            "temperature": 18.06,
+            "timestamp": "2026-07-28T16:48:00+02:00",
+            "temperature": 18.61,
             "humidity": 52,
-            "wind_speed": 3.13,
+            "wind_speed": 3.43,
             "wind_gust": 5.6,
-            "wind_direction": 115,
-            "solar_irradiance": 512.7868852459017,
-            "uv_index": 4,
+            "wind_direction": 121,
+            "solar_irradiance": 107.62295081967213,
+            "uv_index": 1,
             "precipitation": 0,
-            "pressure": 1011.52,
+            "pressure": 1009.3,
             "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 8.05167900397719,
-            "feels_like": 18.06
+            "dew_point": 8.560281540870687,
+            "feels_like": 18.61
           }
         },
         {
@@ -8408,7 +8689,7 @@
           "cellAvgDataQuality": 99,
           "cellCenter": {
             "lat": -33.81931,
-            "lon": 18.67784
+            "lon": 18.6778
           },
           "address": "City of Cape Town, ZA",
           "name": "Stormy Kobicha Centimeter",
@@ -8429,22 +8710,22 @@
           "programName": "swissborg",
           "cellCapacity": 1,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T11:51:00+02:00",
+          "lastWeatherStationActivity": "2026-07-28T16:48:00+02:00",
           "current_weather": {
-            "timestamp": "2026-07-28T11:51:00+02:00",
-            "temperature": 18.44,
-            "humidity": 52,
-            "wind_speed": 1.27,
-            "wind_gust": 2.5,
-            "wind_direction": 52,
-            "solar_irradiance": 423.327868852459,
-            "uv_index": 3,
+            "timestamp": "2026-07-28T16:48:00+02:00",
+            "temperature": 19.22,
+            "humidity": 51,
+            "wind_speed": 2,
+            "wind_gust": 4,
+            "wind_direction": 169,
+            "solar_irradiance": 74.55737704918033,
+            "uv_index": 0,
             "precipitation": 0,
-            "pressure": 1010.98,
+            "pressure": 1008.71,
             "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 8.403085889811178,
-            "feels_like": 18.44
+            "dew_point": 8.836352839955524,
+            "feels_like": 19.22
           }
         },
         {
@@ -8707,22 +8988,22 @@
           "programName": "community",
           "cellCapacity": 1,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T10:50:15+01:00",
+          "lastWeatherStationActivity": "2026-07-28T15:46:26+01:00",
           "current_weather": {
-            "timestamp": "2026-07-28T10:50:15+01:00",
-            "temperature": 24.3,
-            "humidity": 64,
+            "timestamp": "2026-07-28T15:46:26+01:00",
+            "temperature": 28,
+            "humidity": 52,
             "wind_speed": 1.7,
-            "wind_gust": 3.3,
-            "wind_direction": 90,
-            "solar_irradiance": 609.8360655737705,
-            "uv_index": 4,
+            "wind_gust": 2.8,
+            "wind_direction": 66,
+            "solar_irradiance": 65.54918032786885,
+            "uv_index": 0,
             "precipitation": 0,
-            "pressure": 1006.8,
+            "pressure": 1005.2,
             "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 17.055567847029444,
-            "feels_like": 24.3
+            "dew_point": 17.230861278653162,
+            "feels_like": 28.838541247999995
           }
         }
       ]
@@ -8843,9 +9124,9 @@
           "programName": "community",
           "cellCapacity": 1,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T10:50:18+01:00",
+          "lastWeatherStationActivity": "2026-07-28T15:46:22+01:00",
           "current_weather": {
-            "timestamp": "2026-07-28T10:50:18+01:00",
+            "timestamp": "2026-07-28T15:46:22+01:00",
             "temperature": 3276.7,
             "humidity": 127,
             "wind_speed": 204.7,
@@ -8889,22 +9170,22 @@
           "programName": "community",
           "cellCapacity": 1,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T10:48:56+01:00",
+          "lastWeatherStationActivity": "2026-07-28T15:48:08+01:00",
           "current_weather": {
-            "timestamp": "2026-07-28T10:48:56+01:00",
-            "temperature": 19.5,
-            "humidity": 85,
-            "wind_speed": 1,
-            "wind_gust": 3.2,
-            "wind_direction": 306,
-            "solar_irradiance": 663.4754098360655,
-            "uv_index": 5,
+            "timestamp": "2026-07-28T15:48:08+01:00",
+            "temperature": 22.5,
+            "humidity": 78,
+            "wind_speed": 0.9,
+            "wind_gust": 2.7,
+            "wind_direction": 330,
+            "solar_irradiance": 424.28688524590166,
+            "uv_index": 4,
             "precipitation": 0,
-            "pressure": 997.8,
+            "pressure": 997,
             "icon": "partly-cloudy-day",
             "precipitation_accumulated": 1.77800000000002,
-            "dew_point": 16.910693083496795,
-            "feels_like": 19.5
+            "dew_point": 18.47214535926221,
+            "feels_like": 22.5
           }
         },
         {
@@ -8935,22 +9216,22 @@
           "programName": "community",
           "cellCapacity": 1,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T10:50:31+01:00",
+          "lastWeatherStationActivity": "2026-07-28T15:46:42+01:00",
           "current_weather": {
-            "timestamp": "2026-07-28T10:50:31+01:00",
-            "temperature": 19.4,
-            "humidity": 87,
+            "timestamp": "2026-07-28T15:46:42+01:00",
+            "temperature": 22.5,
+            "humidity": 81,
             "wind_speed": 0,
             "wind_gust": 0,
-            "wind_direction": 227,
-            "solar_irradiance": 650.7213114754098,
-            "uv_index": 6,
+            "wind_direction": 279,
+            "solar_irradiance": 368.4918032786885,
+            "uv_index": 3,
             "precipitation": 0,
-            "pressure": 997.3,
+            "pressure": 996.5,
             "icon": "partly-cloudy-day",
             "precipitation_accumulated": 1.5240000000001146,
-            "dew_point": 17.179778582161294,
-            "feels_like": 19.4
+            "dew_point": 19.076072159847904,
+            "feels_like": 22.5
           }
         }
       ]
@@ -9071,22 +9352,22 @@
           "programName": "swissborg",
           "cellCapacity": 1,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T12:51:38+03:00",
+          "lastWeatherStationActivity": "2026-07-28T17:47:49+03:00",
           "current_weather": {
-            "timestamp": "2026-07-28T12:51:38+03:00",
-            "temperature": 24.6,
-            "humidity": 47,
-            "wind_speed": 1.7,
-            "wind_gust": 3.2,
-            "wind_direction": 347,
-            "solar_irradiance": 417.2295081967213,
-            "uv_index": 3,
+            "timestamp": "2026-07-28T17:47:49+03:00",
+            "temperature": 17.9,
+            "humidity": 80,
+            "wind_speed": 1.4,
+            "wind_gust": 2.3,
+            "wind_direction": 190,
+            "solar_irradiance": 47.295081967213115,
+            "uv_index": 0,
             "precipitation": 0,
-            "pressure": 807,
+            "pressure": 806,
             "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 12.543085258278321,
-            "feels_like": 24.6
+            "dew_point": 14.400587535919689,
+            "feels_like": 17.9
           }
         },
         {
@@ -9117,22 +9398,22 @@
           "programName": "swissborg",
           "cellCapacity": 1,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T12:51:19+03:00",
+          "lastWeatherStationActivity": "2026-07-28T17:47:30+03:00",
           "current_weather": {
-            "timestamp": "2026-07-28T12:51:19+03:00",
-            "temperature": 25.9,
-            "humidity": 45,
-            "wind_speed": 1.4,
-            "wind_gust": 3.1,
-            "wind_direction": 42,
-            "solar_irradiance": 1012.6967213114754,
-            "uv_index": 8,
+            "timestamp": "2026-07-28T17:47:30+03:00",
+            "temperature": 17.5,
+            "humidity": 84,
+            "wind_speed": 0.5,
+            "wind_gust": 1.2,
+            "wind_direction": 246,
+            "solar_irradiance": 34.63934426229508,
+            "uv_index": 0,
             "precipitation": 0,
-            "pressure": 806.4,
+            "pressure": 805.5,
             "icon": "partly-cloudy-day",
-            "precipitation_accumulated": 0,
-            "dew_point": 13.060783228303482,
-            "feels_like": 25.9
+            "precipitation_accumulated": 0.5080000000000382,
+            "dew_point": 14.766047180932121,
+            "feels_like": 17.5
           }
         },
         {
@@ -9163,22 +9444,22 @@
           "programName": "swissborg",
           "cellCapacity": 1,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T12:49:23+03:00",
+          "lastWeatherStationActivity": "2026-07-28T17:48:35+03:00",
           "current_weather": {
-            "timestamp": "2026-07-28T12:49:23+03:00",
-            "temperature": 24.2,
-            "humidity": 48,
-            "wind_speed": 1.6,
-            "wind_gust": 3,
-            "wind_direction": 312,
-            "solar_irradiance": 1026.6967213114754,
-            "uv_index": 8,
+            "timestamp": "2026-07-28T17:48:35+03:00",
+            "temperature": 17.4,
+            "humidity": 83,
+            "wind_speed": 1.1,
+            "wind_gust": 3.6,
+            "wind_direction": 187,
+            "solar_irradiance": 47.76229508196721,
+            "uv_index": 0,
             "precipitation": 0,
-            "pressure": 806,
+            "pressure": 805.2,
             "icon": "partly-cloudy-day",
-            "precipitation_accumulated": 0,
-            "dew_point": 12.498829616586058,
-            "feels_like": 24.2
+            "precipitation_accumulated": 0.7619999999997162,
+            "dew_point": 14.482586880614093,
+            "feels_like": 17.4
           }
         }
       ]
@@ -9225,8 +9506,146 @@
         },
         "_ratio": 3
       },
-      "devices": [],
-      "_error": "HTTP 429"
+      "devices": [
+        {
+          "id": "2f513fe0-bf56-11ed-8a70-d7d4cf200cc9",
+          "cellIndex": "872759166ffffff",
+          "cellActiveDeviceCount": 3,
+          "cellAvgDataQuality": 84,
+          "cellCenter": {
+            "lat": 42.44206,
+            "lon": -88.1139
+          },
+          "address": "Lake County, US",
+          "name": "Thankful Zaffre Climatology",
+          "bundle": {
+            "name": "h1",
+            "title": "H1",
+            "connectivity": "helium",
+            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
+            "ws_model": "WS2000",
+            "gw_model": "WS2000"
+          },
+          "profile": "H1",
+          "metrics": {
+            "qod_score": 85,
+            "ts": "2026-07-25T19:00:00-05:00"
+          },
+          "timezone": "America/Chicago",
+          "programName": "community",
+          "cellCapacity": 1,
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-07-28T09:48:19-05:00",
+          "current_weather": {
+            "timestamp": "2026-07-28T09:48:19-05:00",
+            "temperature": 23,
+            "humidity": 75,
+            "wind_speed": 2.5,
+            "wind_gust": 4.6,
+            "wind_direction": 19,
+            "solar_irradiance": 412.5163934426229,
+            "uv_index": 2,
+            "precipitation": 0,
+            "pressure": 875,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 18.330087545825346,
+            "feels_like": 23
+          }
+        },
+        {
+          "id": "35b83230-bf56-11ed-9972-4f669f2d96bd",
+          "cellIndex": "872759166ffffff",
+          "cellActiveDeviceCount": 3,
+          "cellAvgDataQuality": 84,
+          "cellCenter": {
+            "lat": 42.44206,
+            "lon": -88.1142
+          },
+          "address": "Lake County, US",
+          "name": "Sparkly Gamboge Corona",
+          "bundle": {
+            "name": "h1",
+            "title": "H1",
+            "connectivity": "helium",
+            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
+            "ws_model": "WS2000",
+            "gw_model": "WS2000"
+          },
+          "profile": "H1",
+          "metrics": {
+            "qod_score": 91,
+            "ts": "2026-07-25T19:00:00-05:00"
+          },
+          "timezone": "America/Chicago",
+          "programName": "community",
+          "cellCapacity": 1,
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-07-28T09:46:31-05:00",
+          "current_weather": {
+            "timestamp": "2026-07-28T09:46:31-05:00",
+            "temperature": 22.8,
+            "humidity": 78,
+            "wind_speed": 0,
+            "wind_gust": 0,
+            "wind_direction": 12,
+            "solar_irradiance": 94.77868852459017,
+            "uv_index": 0,
+            "precipitation": 0,
+            "pressure": 956.8,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 18.763108273231033,
+            "feels_like": 22.8
+          }
+        },
+        {
+          "id": "fdf0d3d0-bf54-11ed-9972-4f669f2d96bd",
+          "cellIndex": "872759166ffffff",
+          "cellActiveDeviceCount": 3,
+          "cellAvgDataQuality": 84,
+          "cellCenter": {
+            "lat": 42.44202,
+            "lon": -88.11394
+          },
+          "address": "Lake County, US",
+          "name": "Small Nylon Mist",
+          "bundle": {
+            "name": "h1",
+            "title": "H1",
+            "connectivity": "helium",
+            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
+            "ws_model": "WS2000",
+            "gw_model": "WS2000"
+          },
+          "profile": "H1",
+          "metrics": {
+            "qod_score": 78,
+            "ts": "2026-07-25T19:00:00-05:00"
+          },
+          "timezone": "America/Chicago",
+          "programName": "community",
+          "cellCapacity": 1,
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-07-28T09:46:11-05:00",
+          "current_weather": {
+            "timestamp": "2026-07-28T09:46:11-05:00",
+            "temperature": 23.5,
+            "humidity": 77,
+            "wind_speed": 2.2,
+            "wind_gust": 3.2,
+            "wind_direction": 358,
+            "solar_irradiance": 475.5245901639344,
+            "uv_index": 2,
+            "precipitation": 0,
+            "pressure": 363.1,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 19.234609492602612,
+            "feels_like": 23.5
+          }
+        }
+      ]
     },
     {
       "cell": {
@@ -9270,146 +9689,8 @@
         },
         "_ratio": 3
       },
-      "devices": [
-        {
-          "id": "26219700-438d-11ef-8e8d-b55568dc8e66",
-          "cellIndex": "87266b0adffffff",
-          "cellActiveDeviceCount": 3,
-          "cellAvgDataQuality": 66,
-          "cellCenter": {
-            "lat": 37.00723,
-            "lon": -86.59542
-          },
-          "address": "Warren County, US",
-          "name": "Mysterious Spruce Scorcher",
-          "bundle": {
-            "name": "d1",
-            "title": "D1",
-            "connectivity": "wifi",
-            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
-            "ws_model": "WS1001",
-            "gw_model": "WG1200"
-          },
-          "profile": "D1",
-          "metrics": {
-            "qod_score": 99,
-            "ts": "2026-07-25T19:00:00-05:00"
-          },
-          "timezone": "America/Chicago",
-          "programName": "community",
-          "cellCapacity": 1,
-          "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T04:51:00-05:00",
-          "current_weather": {
-            "timestamp": "2026-07-28T04:51:00-05:00",
-            "temperature": 25.24,
-            "humidity": 99,
-            "wind_speed": 0,
-            "wind_gust": 0,
-            "wind_direction": 7,
-            "solar_irradiance": 0,
-            "uv_index": 0,
-            "precipitation": 0,
-            "pressure": 990.28,
-            "icon": "partly-cloudy-night",
-            "precipitation_accumulated": 0,
-            "dew_point": 25.071237089405386,
-            "feels_like": 25.24
-          }
-        },
-        {
-          "id": "268254a0-438d-11ef-8e8d-b55568dc8e66",
-          "cellIndex": "87266b0adffffff",
-          "cellActiveDeviceCount": 3,
-          "cellAvgDataQuality": 66,
-          "cellCenter": {
-            "lat": 37.00784,
-            "lon": -86.59436
-          },
-          "address": "Warren County, US",
-          "name": "Windy Iceberg Coriolis",
-          "bundle": {
-            "name": "d1",
-            "title": "D1",
-            "connectivity": "wifi",
-            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
-            "ws_model": "WS1001",
-            "gw_model": "WG1200"
-          },
-          "profile": "D1",
-          "metrics": {
-            "qod_score": 1,
-            "ts": "2026-07-25T19:00:00-05:00"
-          },
-          "timezone": "America/Chicago",
-          "programName": "community",
-          "cellCapacity": 1,
-          "isActive": false,
-          "lastWeatherStationActivity": "2026-07-27T23:09:00-05:00",
-          "current_weather": {
-            "timestamp": "2026-07-27T23:09:00-05:00",
-            "temperature": 25.22,
-            "humidity": 97,
-            "wind_speed": 0,
-            "wind_gust": 0,
-            "wind_direction": 111,
-            "solar_irradiance": 0,
-            "uv_index": 0,
-            "precipitation": 0,
-            "pressure": 992.91,
-            "icon": "partly-cloudy-night",
-            "precipitation_accumulated": 0,
-            "dew_point": 24.709264642981655,
-            "feels_like": 25.22
-          }
-        },
-        {
-          "id": "227c35b0-438d-11ef-8e8d-b55568dc8e66",
-          "cellIndex": "87266b0adffffff",
-          "cellActiveDeviceCount": 3,
-          "cellAvgDataQuality": 66,
-          "cellCenter": {
-            "lat": 37.00814,
-            "lon": -86.59577
-          },
-          "address": "Warren County, US",
-          "name": "Humid Vinyl Meteorology",
-          "bundle": {
-            "name": "d1",
-            "title": "D1",
-            "connectivity": "wifi",
-            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
-            "ws_model": "WS1001",
-            "gw_model": "WG1200"
-          },
-          "profile": "D1",
-          "metrics": {
-            "qod_score": 99,
-            "ts": "2026-07-25T19:00:00-05:00"
-          },
-          "timezone": "America/Chicago",
-          "programName": "community",
-          "cellCapacity": 1,
-          "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T04:51:00-05:00",
-          "current_weather": {
-            "timestamp": "2026-07-28T04:51:00-05:00",
-            "temperature": 25.44,
-            "humidity": 99,
-            "wind_speed": 0.2,
-            "wind_gust": 1,
-            "wind_direction": 61,
-            "solar_irradiance": 0,
-            "uv_index": 0,
-            "precipitation": 0,
-            "pressure": 989.94,
-            "icon": "partly-cloudy-night",
-            "precipitation_accumulated": 0,
-            "dew_point": 25.270985452822153,
-            "feels_like": 25.44
-          }
-        }
-      ]
+      "devices": [],
+      "_error": "HTTP 429"
     },
     {
       "cell": {
@@ -9621,22 +9902,22 @@
           "programName": "community",
           "cellCapacity": 2,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T11:51:11+02:00",
+          "lastWeatherStationActivity": "2026-07-28T16:47:21+02:00",
           "current_weather": {
-            "timestamp": "2026-07-28T11:51:11+02:00",
-            "temperature": 21.9,
-            "humidity": 74,
-            "wind_speed": 0,
-            "wind_gust": 0,
-            "wind_direction": 300,
-            "solar_irradiance": 50.58196721311475,
-            "uv_index": 0,
+            "timestamp": "2026-07-28T16:47:21+02:00",
+            "temperature": 28.3,
+            "humidity": 52,
+            "wind_speed": 0.1,
+            "wind_gust": 0.8,
+            "wind_direction": 267,
+            "solar_irradiance": 481.4754098360656,
+            "uv_index": 4,
             "precipitation": 0,
-            "pressure": 1020.1,
+            "pressure": 1019.7,
             "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 17.056128224145848,
-            "feels_like": 21.9
+            "dew_point": 17.507483125731312,
+            "feels_like": 29.204014362080002
           }
         },
         {
@@ -9693,7 +9974,7 @@
           "cellAvgDataQuality": 94,
           "cellCenter": {
             "lat": 52.95615,
-            "lon": 5.91417
+            "lon": 5.91425
           },
           "address": "Heerenveen, NL",
           "name": "Custom Yellow Winter",
@@ -9714,22 +9995,22 @@
           "programName": "community",
           "cellCapacity": 2,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T11:50:00+02:00",
+          "lastWeatherStationActivity": "2026-07-28T16:47:00+02:00",
           "current_weather": {
-            "timestamp": "2026-07-28T11:50:00+02:00",
-            "temperature": 24.15,
-            "humidity": 65,
-            "wind_speed": 0.89,
+            "timestamp": "2026-07-28T16:47:00+02:00",
+            "temperature": 27.17,
+            "humidity": 53,
+            "wind_speed": 0.77,
             "wind_gust": 2.04,
-            "wind_direction": 78,
-            "solar_irradiance": 599.4754098360655,
-            "uv_index": 5,
+            "wind_direction": 104,
+            "solar_irradiance": 466.72131147540983,
+            "uv_index": 4,
             "precipitation": 0,
-            "pressure": 1019.31,
+            "pressure": 1018.86,
             "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 17.158402546389873,
-            "feels_like": 24.15
+            "dew_point": 16.76522068054757,
+            "feels_like": 27.987743194441844
           }
         },
         {
@@ -9868,8 +10149,148 @@
         },
         "_ratio": 3
       },
-      "devices": [],
-      "_error": "HTTP 429"
+      "devices": [
+        {
+          "id": "30f46ef0-438d-11ef-8e8d-b55568dc8e66",
+          "cellIndex": "873f4dad0ffffff",
+          "cellActiveDeviceCount": 2,
+          "cellAvgDataQuality": 99,
+          "cellCenter": {
+            "lat": 34.69278,
+            "lon": 33.02544
+          },
+          "address": "-",
+          "name": "Isobar Cardinal Sunrise",
+          "bundle": {
+            "name": "d1",
+            "title": "D1",
+            "connectivity": "wifi",
+            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
+            "ws_model": "WS1001",
+            "gw_model": "WG1200"
+          },
+          "profile": "D1",
+          "metrics": {
+            "qod_score": 0,
+            "pol_reason": "NO_LOCATION_DATA",
+            "ts": "2026-07-26T03:00:00+03:00"
+          },
+          "timezone": "Asia/Nicosia",
+          "programName": "community",
+          "cellCapacity": 1,
+          "isActive": false,
+          "lastWeatherStationActivity": "2026-06-04T01:05:00+03:00",
+          "current_weather": {
+            "timestamp": "2026-06-04T01:05:00+03:00",
+            "temperature": 21.94,
+            "humidity": 54,
+            "wind_speed": 0.27,
+            "wind_gust": 0.5,
+            "wind_direction": 54,
+            "solar_irradiance": 0,
+            "uv_index": 0,
+            "precipitation": 0,
+            "pressure": 1008.25,
+            "icon": "partly-cloudy-night",
+            "precipitation_accumulated": 0,
+            "dew_point": 12.210624784412557,
+            "feels_like": 21.94
+          }
+        },
+        {
+          "id": "2d5cc940-438d-11ef-8e8d-b55568dc8e66",
+          "cellIndex": "873f4dad0ffffff",
+          "cellActiveDeviceCount": 2,
+          "cellAvgDataQuality": 99,
+          "cellCenter": {
+            "lat": 34.69909,
+            "lon": 33.01602
+          },
+          "address": "-",
+          "name": "Vast Dandelion Hail",
+          "bundle": {
+            "name": "d1",
+            "title": "D1",
+            "connectivity": "wifi",
+            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
+            "ws_model": "WS1001",
+            "gw_model": "WG1200"
+          },
+          "profile": "D1",
+          "metrics": {
+            "qod_score": 99,
+            "ts": "2026-07-26T03:00:00+03:00"
+          },
+          "timezone": "Asia/Nicosia",
+          "programName": "community",
+          "cellCapacity": 1,
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-07-28T17:48:00+03:00",
+          "current_weather": {
+            "timestamp": "2026-07-28T17:48:00+03:00",
+            "temperature": 31.19,
+            "humidity": 55,
+            "wind_speed": 3.87,
+            "wind_gust": 4.5,
+            "wind_direction": 225,
+            "solar_irradiance": 286.74590163934425,
+            "uv_index": 2,
+            "precipitation": 0,
+            "pressure": 999.32,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 21.081322638991388,
+            "feels_like": 34.26807666764503
+          }
+        },
+        {
+          "id": "1b9ca340-4f58-11ed-960b-b351f0b0cc44",
+          "cellIndex": "873f4dad0ffffff",
+          "cellActiveDeviceCount": 2,
+          "cellAvgDataQuality": 99,
+          "cellCenter": {
+            "lat": 34.68588,
+            "lon": 33.01324
+          },
+          "address": "-",
+          "name": "Zesty Berry Breeze",
+          "bundle": {
+            "name": "m5",
+            "title": "M5",
+            "connectivity": "wifi",
+            "url": "https://docs.weatherxm.com/wxm-devices/m5/introduction",
+            "ws_model": "WS1000",
+            "gw_model": "WG1000"
+          },
+          "profile": "M5",
+          "metrics": {
+            "qod_score": 100,
+            "pol_reason": "NO_LOCATION_DATA",
+            "ts": "2026-07-26T03:00:00+03:00"
+          },
+          "timezone": "Asia/Nicosia",
+          "programName": "community",
+          "cellCapacity": 1,
+          "isActive": true,
+          "lastWeatherStationActivity": "2026-07-28T17:47:00+03:00",
+          "current_weather": {
+            "timestamp": "2026-07-28T17:47:00+03:00",
+            "temperature": 30.9,
+            "humidity": 58,
+            "wind_speed": 3.17,
+            "wind_gust": 5.1,
+            "wind_direction": 29,
+            "solar_irradiance": 231.95081967213116,
+            "uv_index": 2,
+            "precipitation": 0,
+            "pressure": 1000.55,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 21.678287961365285,
+            "feels_like": 34.41208109112002
+          }
+        }
+      ]
     },
     {
       "cell": {
@@ -9942,22 +10363,22 @@
           "programName": "community",
           "cellCapacity": 1,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T10:50:47+01:00",
+          "lastWeatherStationActivity": "2026-07-28T15:46:57+01:00",
           "current_weather": {
-            "timestamp": "2026-07-28T10:50:47+01:00",
-            "temperature": 26,
-            "humidity": 58,
-            "wind_speed": 1.7,
-            "wind_gust": 3,
-            "wind_direction": 137,
-            "solar_irradiance": 620.3770491803278,
+            "timestamp": "2026-07-28T15:46:57+01:00",
+            "temperature": 35.6,
+            "humidity": 29,
+            "wind_speed": 2.8,
+            "wind_gust": 3.9,
+            "wind_direction": 276,
+            "solar_irradiance": 724.9180327868852,
             "uv_index": 4,
             "precipitation": 0,
-            "pressure": 1005.4,
+            "pressure": 1004,
             "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 17.099878268019083,
-            "feels_like": 26
+            "dew_point": 14.835422542884904,
+            "feels_like": 35.45869363968004
           }
         },
         {
@@ -9966,8 +10387,8 @@
           "cellActiveDeviceCount": 3,
           "cellAvgDataQuality": 57,
           "cellCenter": {
-            "lat": 39.48657,
-            "lon": -8.54692
+            "lat": 39.48663,
+            "lon": -8.54686
           },
           "address": "Torres Novas, PT",
           "name": "Urban Taupe Millimeter",
@@ -9988,22 +10409,22 @@
           "programName": "community",
           "cellCapacity": 1,
           "isActive": false,
-          "lastWeatherStationActivity": "2026-07-28T09:08:00+01:00",
+          "lastWeatherStationActivity": "2026-07-28T15:27:00+01:00",
           "current_weather": {
-            "timestamp": "2026-07-28T09:08:00+01:00",
-            "temperature": 23.5,
-            "humidity": 70,
-            "wind_speed": 0,
-            "wind_gust": 0,
-            "wind_direction": 326,
-            "solar_irradiance": 51.795081967213115,
-            "uv_index": 0,
+            "timestamp": "2026-07-28T15:27:00+01:00",
+            "temperature": 36.8,
+            "humidity": 33,
+            "wind_speed": 0.13,
+            "wind_gust": 0.51,
+            "wind_direction": 216,
+            "solar_irradiance": 221.327868852459,
+            "uv_index": 2,
             "precipitation": 0,
-            "pressure": 1008.92,
+            "pressure": 1008.23,
             "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 17.712948583669824,
-            "feels_like": 23.5
+            "dew_point": 17.90076407736156,
+            "feels_like": 38.478369556480004
           }
         },
         {
@@ -10012,8 +10433,8 @@
           "cellActiveDeviceCount": 3,
           "cellAvgDataQuality": 57,
           "cellCenter": {
-            "lat": 39.48765,
-            "lon": -8.54594
+            "lat": 39.48751,
+            "lon": -8.5462
           },
           "address": "Torres Novas, PT",
           "name": "Active Tangerine Rain",
@@ -10034,22 +10455,22 @@
           "programName": "community",
           "cellCapacity": 1,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T10:50:00+01:00",
+          "lastWeatherStationActivity": "2026-07-28T15:47:00+01:00",
           "current_weather": {
-            "timestamp": "2026-07-28T10:50:00+01:00",
-            "temperature": 27.75,
-            "humidity": 59,
+            "timestamp": "2026-07-28T15:47:00+01:00",
+            "temperature": 38.7,
+            "humidity": 35,
             "wind_speed": 0,
             "wind_gust": 0,
-            "wind_direction": 342,
-            "solar_irradiance": 88.89344262295081,
-            "uv_index": 0,
+            "wind_direction": 3,
+            "solar_irradiance": 540.6229508196722,
+            "uv_index": 5,
             "precipitation": 0,
-            "pressure": 1007.16,
+            "pressure": 1005.75,
             "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 19.009411655195045,
-            "feels_like": 29.224380351125
+            "dew_point": 20.502645706267323,
+            "feels_like": 42.891148314500015
           }
         }
       ]
@@ -10182,8 +10603,8 @@
             "solar_irradiance": 0,
             "uv_index": 0,
             "precipitation": 0,
-            "pressure": 984.07,
-            "nextCommunication": "1785232572",
+            "pressure": 983.23,
+            "nextCommunication": "1785251331",
             "icon": "partly-cloudy-night",
             "precipitation_accumulated": 0,
             "dew_point": 12.347408738341935,
@@ -10422,8 +10843,8 @@
             "solar_irradiance": 0,
             "uv_index": 0,
             "precipitation": 0,
-            "pressure": 1005.24,
-            "nextCommunication": "1785245876",
+            "pressure": 1006.46,
+            "nextCommunication": "1785289136",
             "icon": "partly-cloudy-night",
             "precipitation_accumulated": 0,
             "dew_point": 20.438583582123215,
@@ -10459,23 +10880,23 @@
           "programName": "community",
           "cellCapacity": 4,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T02:19:18Z",
+          "lastWeatherStationActivity": "2026-07-28T14:29:17Z",
           "current_weather": {
-            "timestamp": "2026-07-28T02:19:18Z",
-            "temperature": 29.72,
-            "humidity": 52,
+            "timestamp": "2026-07-28T14:29:17Z",
+            "temperature": 28.17,
+            "humidity": 57,
             "wind_speed": 0,
             "wind_gust": 0,
             "wind_direction": 344,
             "solar_irradiance": 0,
             "uv_index": 0,
             "precipitation": 0,
-            "pressure": 1005.45,
-            "nextCommunication": "1785247872",
-            "icon": "partly-cloudy-night",
+            "pressure": 1006.51,
+            "nextCommunication": "1785291655",
+            "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 18.816496479929217,
-            "feels_like": 31.16113268692481
+            "dew_point": 18.8493778540037,
+            "feels_like": 29.591426936409817
           }
         },
         {
@@ -10659,8 +11080,8 @@
             "wind_direction": 154,
             "solar_irradiance": 0.9016393442622951,
             "uv_index": 0,
-            "pressure": 954.17,
-            "nextCommunication": "1785232188",
+            "pressure": 956.06,
+            "nextCommunication": "1785250851",
             "precipitation": 0,
             "icon": "partly-cloudy-night",
             "precipitation_accumulated": 0,
@@ -10780,7 +11201,7 @@
           "profile": "PULSE",
           "metrics": {
             "qod_score": 84,
-            "ts": "2026-07-28T12:49:00+03:00"
+            "ts": "2026-07-28T17:07:56+03:00"
           },
           "timezone": "Europe/Athens",
           "programName": "community",
@@ -10831,22 +11252,22 @@
           "programName": "community",
           "cellCapacity": 2,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T12:51:00+03:00",
+          "lastWeatherStationActivity": "2026-07-28T17:48:00+03:00",
           "current_weather": {
-            "timestamp": "2026-07-28T12:51:00+03:00",
-            "temperature": 35.44,
-            "humidity": 41,
-            "wind_speed": 0.07,
-            "wind_gust": 0.5,
-            "wind_direction": 145,
-            "solar_irradiance": 925.655737704918,
-            "uv_index": 8,
+            "timestamp": "2026-07-28T17:48:00+03:00",
+            "temperature": 35.37,
+            "humidity": 35,
+            "wind_speed": 2.33,
+            "wind_gust": 4.5,
+            "wind_direction": 19,
+            "solar_irradiance": 405.1885245901639,
+            "uv_index": 3,
             "precipitation": 0,
-            "pressure": 1007.22,
+            "pressure": 1006.6,
             "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 20.182636055415152,
-            "feels_like": 38.56790465978878
+            "dew_point": 17.586691592413043,
+            "feels_like": 36.60604056864501
           }
         },
         {
@@ -10877,22 +11298,22 @@
           "programName": "community",
           "cellCapacity": 2,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T12:51:00+03:00",
+          "lastWeatherStationActivity": "2026-07-28T17:48:00+03:00",
           "current_weather": {
-            "timestamp": "2026-07-28T12:51:00+03:00",
-            "temperature": 36.06,
-            "humidity": 34,
-            "wind_speed": 0.87,
-            "wind_gust": 2,
-            "wind_direction": 235,
-            "solar_irradiance": 709.0983606557377,
-            "uv_index": 6,
+            "timestamp": "2026-07-28T17:48:00+03:00",
+            "temperature": 35.72,
+            "humidity": 35,
+            "wind_speed": 1.1,
+            "wind_gust": 3.5,
+            "wind_direction": 310,
+            "solar_irradiance": 267.78688524590166,
+            "uv_index": 2,
             "precipitation": 0,
-            "pressure": 1006.67,
+            "pressure": 1006.1,
             "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 17.730278267221127,
-            "feels_like": 37.49641291250882
+            "dew_point": 17.893382777624684,
+            "feels_like": 37.203304380719985
           }
         },
         {
@@ -10923,22 +11344,22 @@
           "programName": "community",
           "cellCapacity": 2,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T12:51:00+03:00",
+          "lastWeatherStationActivity": "2026-07-28T17:48:00+03:00",
           "current_weather": {
-            "timestamp": "2026-07-28T12:51:00+03:00",
-            "temperature": 35.44,
-            "humidity": 41,
-            "wind_speed": 0.07,
-            "wind_gust": 0.5,
-            "wind_direction": 145,
-            "solar_irradiance": 925.655737704918,
-            "uv_index": 8,
+            "timestamp": "2026-07-28T17:48:00+03:00",
+            "temperature": 35.37,
+            "humidity": 35,
+            "wind_speed": 2.33,
+            "wind_gust": 4.5,
+            "wind_direction": 19,
+            "solar_irradiance": 405.1885245901639,
+            "uv_index": 3,
             "precipitation": 0,
-            "pressure": 1007.24,
+            "pressure": 1006.66,
             "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 20.182636055415152,
-            "feels_like": 38.56790465978878
+            "dew_point": 17.586691592413043,
+            "feels_like": 36.60604056864501
           }
         },
         {
@@ -10947,8 +11368,8 @@
           "cellActiveDeviceCount": 4,
           "cellAvgDataQuality": 99,
           "cellCenter": {
-            "lat": 37.94889,
-            "lon": 23.72407
+            "lat": 37.94891,
+            "lon": 23.72408
           },
           "address": "-",
           "name": "Faithful Jasmine Gale",
@@ -10969,22 +11390,22 @@
           "programName": "community",
           "cellCapacity": 2,
           "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T12:50:00+03:00",
+          "lastWeatherStationActivity": "2026-07-28T17:47:00+03:00",
           "current_weather": {
-            "timestamp": "2026-07-28T12:50:00+03:00",
-            "temperature": 35.1,
-            "humidity": 36,
-            "wind_speed": 0.76,
-            "wind_gust": 1.53,
-            "wind_direction": 33,
-            "solar_irradiance": 605.5737704918033,
-            "uv_index": 5,
+            "timestamp": "2026-07-28T17:47:00+03:00",
+            "temperature": 34.8,
+            "humidity": 37,
+            "wind_speed": 1.09,
+            "wind_gust": 3.06,
+            "wind_direction": 218,
+            "solar_irradiance": 267.4344262295082,
+            "uv_index": 2,
             "precipitation": 0,
-            "pressure": 1005.4,
+            "pressure": 1004.83,
             "icon": "partly-cloudy-day",
             "precipitation_accumulated": 0,
-            "dew_point": 17.796737464095454,
-            "feels_like": 36.42393649328001
+            "dew_point": 17.96790616768291,
+            "feels_like": 36.18571887168001
           }
         }
       ]
@@ -11031,8 +11452,243 @@
         },
         "_ratio": 2.5
       },
-      "devices": [],
-      "_error": "HTTP 429"
+      "devices": [
+        {
+          "id": "31acc271-438d-11ef-8e8d-b55568dc8e66",
+          "cellIndex": "871e9d943ffffff",
+          "cellActiveDeviceCount": 0,
+          "cellAvgDataQuality": null,
+          "cellCenter": {
+            "lat": 40.73053,
+            "lon": 14.56443
+          },
+          "address": "Angri, IT",
+          "name": "Amateur Ivory Lenticular",
+          "bundle": {
+            "name": "d1",
+            "title": "D1",
+            "connectivity": "wifi",
+            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
+            "ws_model": "WS1001",
+            "gw_model": "WG1200"
+          },
+          "profile": "D1",
+          "metrics": {
+            "qod_score": 0,
+            "pol_reason": "NO_LOCATION_DATA",
+            "ts": "2026-07-26T02:00:00+02:00"
+          },
+          "timezone": "Europe/Rome",
+          "programName": "community",
+          "cellCapacity": 2,
+          "isActive": false,
+          "lastWeatherStationActivity": "2026-06-30T19:12:00+02:00",
+          "current_weather": {
+            "timestamp": "2026-06-30T19:12:00+02:00",
+            "temperature": 30.89,
+            "humidity": 61,
+            "wind_speed": 0.47,
+            "wind_gust": 1,
+            "wind_direction": 199,
+            "solar_irradiance": 65.29508196721312,
+            "uv_index": 0,
+            "precipitation": 0,
+            "pressure": 1011.67,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 22.496477033060405,
+            "feels_like": 35.1297039649138
+          }
+        },
+        {
+          "id": "333d7490-438d-11ef-8e8d-b55568dc8e66",
+          "cellIndex": "871e9d943ffffff",
+          "cellActiveDeviceCount": 0,
+          "cellAvgDataQuality": null,
+          "cellCenter": {
+            "lat": 40.72881,
+            "lon": 14.56612
+          },
+          "address": "Angri, IT",
+          "name": "Spicy Persimmon Smog",
+          "bundle": {
+            "name": "d1",
+            "title": "D1",
+            "connectivity": "wifi",
+            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
+            "ws_model": "WS1001",
+            "gw_model": "WG1200"
+          },
+          "profile": "D1",
+          "metrics": {
+            "qod_score": 0,
+            "pol_reason": "NO_LOCATION_DATA",
+            "ts": "2026-07-26T02:00:00+02:00"
+          },
+          "timezone": "Europe/Rome",
+          "programName": "community",
+          "cellCapacity": 2,
+          "isActive": false,
+          "lastWeatherStationActivity": "2026-02-17T07:55:00+01:00",
+          "current_weather": {
+            "timestamp": "2026-02-17T07:55:00+01:00",
+            "temperature": 9.33,
+            "humidity": 77,
+            "wind_speed": 0.02,
+            "wind_gust": 0.5,
+            "wind_direction": 22,
+            "solar_irradiance": 29.65573770491803,
+            "uv_index": 0,
+            "precipitation": 0,
+            "pressure": 993.54,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 5.502818121077862,
+            "feels_like": 9.33
+          }
+        },
+        {
+          "id": "ae2fd7d0-50e4-11ed-960f-d7d4cf200cc9",
+          "cellIndex": "871e9d943ffffff",
+          "cellActiveDeviceCount": 0,
+          "cellAvgDataQuality": null,
+          "cellCenter": {
+            "lat": 40.73059,
+            "lon": 14.56441
+          },
+          "address": "Angri, IT",
+          "name": "Energetic Prune Shower",
+          "bundle": {
+            "name": "m5",
+            "title": "M5",
+            "connectivity": "wifi",
+            "url": "https://docs.weatherxm.com/wxm-devices/m5/introduction",
+            "ws_model": "WS1000",
+            "gw_model": "WG1000"
+          },
+          "profile": "M5",
+          "metrics": {
+            "qod_score": 0,
+            "pol_reason": "NO_LOCATION_DATA",
+            "ts": "2026-07-26T02:00:00+02:00"
+          },
+          "timezone": "Europe/Rome",
+          "programName": "community",
+          "cellCapacity": 2,
+          "isActive": false,
+          "lastWeatherStationActivity": "2026-06-23T01:10:00+02:00",
+          "current_weather": {
+            "timestamp": "2026-06-23T01:10:00+02:00",
+            "temperature": 23.72,
+            "humidity": 72,
+            "wind_speed": 0,
+            "wind_gust": 0,
+            "wind_direction": 92,
+            "solar_irradiance": 0,
+            "uv_index": 0,
+            "precipitation": 0,
+            "pressure": 1013.55,
+            "icon": "partly-cloudy-night",
+            "precipitation_accumulated": 0,
+            "dew_point": 18.372136378836945,
+            "feels_like": 23.72
+          }
+        },
+        {
+          "id": "318d0570-438d-11ef-8e8d-b55568dc8e66",
+          "cellIndex": "871e9d943ffffff",
+          "cellActiveDeviceCount": 0,
+          "cellAvgDataQuality": null,
+          "cellCenter": {
+            "lat": 40.72881,
+            "lon": 14.56612
+          },
+          "address": "Angri, IT",
+          "name": "Careful Midnight Permafrost",
+          "bundle": {
+            "name": "d1",
+            "title": "D1",
+            "connectivity": "wifi",
+            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
+            "ws_model": "WS1001",
+            "gw_model": "WG1200"
+          },
+          "profile": "D1",
+          "metrics": {
+            "qod_score": 0,
+            "pol_reason": "NO_LOCATION_DATA",
+            "ts": "2026-07-26T02:00:00+02:00"
+          },
+          "timezone": "Europe/Rome",
+          "programName": "community",
+          "cellCapacity": 2,
+          "isActive": false,
+          "lastWeatherStationActivity": "2026-07-11T18:10:00+02:00",
+          "current_weather": {
+            "timestamp": "2026-07-11T18:10:00+02:00",
+            "temperature": 32.67,
+            "humidity": 45,
+            "wind_speed": 0,
+            "wind_gust": 0,
+            "wind_direction": 102,
+            "solar_irradiance": 28.934426229508198,
+            "uv_index": 0,
+            "precipitation": 0,
+            "pressure": 1010.02,
+            "icon": "partly-cloudy-day",
+            "precipitation_accumulated": 0,
+            "dew_point": 19.192443410627483,
+            "feels_like": 34.566868529405
+          }
+        },
+        {
+          "id": "347446e0-438d-11ef-8e8d-b55568dc8e66",
+          "cellIndex": "871e9d943ffffff",
+          "cellActiveDeviceCount": 0,
+          "cellAvgDataQuality": null,
+          "cellCenter": {
+            "lat": 40.73053,
+            "lon": 14.56445
+          },
+          "address": "Angri, IT",
+          "name": "Delightful Black Scud",
+          "bundle": {
+            "name": "d1",
+            "title": "D1",
+            "connectivity": "wifi",
+            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
+            "ws_model": "WS1001",
+            "gw_model": "WG1200"
+          },
+          "profile": "D1",
+          "metrics": {
+            "qod_score": 0,
+            "pol_reason": "NO_LOCATION_DATA",
+            "ts": "2026-07-26T02:00:00+02:00"
+          },
+          "timezone": "Europe/Rome",
+          "programName": "community",
+          "cellCapacity": 2,
+          "isActive": false,
+          "lastWeatherStationActivity": "2026-07-02T03:18:00+02:00",
+          "current_weather": {
+            "timestamp": "2026-07-02T03:18:00+02:00",
+            "temperature": 24.5,
+            "humidity": 76,
+            "wind_speed": 0,
+            "wind_gust": 0,
+            "wind_direction": 80,
+            "solar_irradiance": 0,
+            "uv_index": 0,
+            "precipitation": 0,
+            "pressure": 1007.53,
+            "icon": "partly-cloudy-night",
+            "precipitation_accumulated": 0,
+            "dew_point": 19.991500538877,
+            "feels_like": 24.5
+          }
+        }
+      ]
     },
     {
       "cell": {
@@ -11076,238 +11732,8 @@
         },
         "_ratio": 2.5
       },
-      "devices": [
-        {
-          "id": "e7539a00-bf53-11ed-95eb-b351f0b0cc44",
-          "cellIndex": "87bcdc866ffffff",
-          "cellActiveDeviceCount": 5,
-          "cellAvgDataQuality": 83,
-          "cellCenter": {
-            "lat": -25.78224,
-            "lon": 28.25939
-          },
-          "address": "Pretoria, ZA",
-          "name": "Damp Hazelnut Gust",
-          "bundle": {
-            "name": "h1",
-            "title": "H1",
-            "connectivity": "helium",
-            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
-            "ws_model": "WS2000",
-            "gw_model": "WS2000"
-          },
-          "profile": "H1",
-          "metrics": {
-            "qod_score": 91,
-            "ts": "2026-07-26T02:00:00+02:00"
-          },
-          "timezone": "Africa/Johannesburg",
-          "programName": "swissborg",
-          "cellCapacity": 2,
-          "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T11:49:33+02:00",
-          "current_weather": {
-            "timestamp": "2026-07-28T11:49:33+02:00",
-            "temperature": 19,
-            "humidity": 32,
-            "wind_speed": 3,
-            "wind_gust": 4.1,
-            "wind_direction": 135,
-            "solar_irradiance": 529.688524590164,
-            "uv_index": 3,
-            "precipitation": 0,
-            "pressure": 864.5,
-            "icon": "partly-cloudy-day",
-            "precipitation_accumulated": 0,
-            "dew_point": 1.9252456514825083,
-            "feels_like": 19
-          }
-        },
-        {
-          "id": "1a669810-bf55-11ed-8a70-d7d4cf200cc9",
-          "cellIndex": "87bcdc866ffffff",
-          "cellActiveDeviceCount": 5,
-          "cellAvgDataQuality": 83,
-          "cellCenter": {
-            "lat": -25.78229,
-            "lon": 28.26101
-          },
-          "address": "Pretoria, ZA",
-          "name": "Polar Stone Snowsquall",
-          "bundle": {
-            "name": "h1",
-            "title": "H1",
-            "connectivity": "helium",
-            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
-            "ws_model": "WS2000",
-            "gw_model": "WS2000"
-          },
-          "profile": "H1",
-          "metrics": {
-            "qod_score": 47,
-            "ts": "2026-07-26T02:00:00+02:00"
-          },
-          "timezone": "Africa/Johannesburg",
-          "programName": "swissborg",
-          "cellCapacity": 2,
-          "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T11:51:40+02:00",
-          "current_weather": {
-            "timestamp": "2026-07-28T11:51:40+02:00",
-            "temperature": 19.7,
-            "humidity": 33,
-            "wind_speed": 1.3,
-            "wind_gust": 3.2,
-            "wind_direction": 110,
-            "solar_irradiance": 728.6065573770492,
-            "uv_index": 4,
-            "precipitation": 0,
-            "pressure": 864.2,
-            "icon": "partly-cloudy-day",
-            "precipitation_accumulated": 0,
-            "dew_point": 2.9708822283408427,
-            "feels_like": 19.7
-          }
-        },
-        {
-          "id": "83f74781-ad73-11ef-8b2f-f594437d6709",
-          "cellIndex": "87bcdc866ffffff",
-          "cellActiveDeviceCount": 5,
-          "cellAvgDataQuality": 83,
-          "cellCenter": {
-            "lat": -25.79662,
-            "lon": 28.25418
-          },
-          "address": "Pretoria, ZA",
-          "name": "Ancient Gunmetal Graupel",
-          "bundle": {
-            "name": "d1",
-            "title": "D1",
-            "connectivity": "wifi",
-            "url": "https://docs.weatherxm.com/wxm-devices/d1/introduction",
-            "ws_model": "WS1001",
-            "gw_model": "WG1200"
-          },
-          "profile": "D1",
-          "metrics": {
-            "qod_score": 99,
-            "ts": "2026-07-26T02:00:00+02:00"
-          },
-          "timezone": "Africa/Johannesburg",
-          "programName": "swissborg",
-          "cellCapacity": 2,
-          "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T11:51:00+02:00",
-          "current_weather": {
-            "timestamp": "2026-07-28T11:51:00+02:00",
-            "temperature": 18.54,
-            "humidity": 37,
-            "wind_speed": 1.33,
-            "wind_gust": 2.5,
-            "wind_direction": 67,
-            "solar_irradiance": 594.2622950819672,
-            "uv_index": 5,
-            "precipitation": 0,
-            "pressure": 853.48,
-            "icon": "partly-cloudy-day",
-            "precipitation_accumulated": 0,
-            "dew_point": 3.567298332841773,
-            "feels_like": 18.54
-          }
-        },
-        {
-          "id": "dd28aff0-bf55-11ed-8a70-d7d4cf200cc9",
-          "cellIndex": "87bcdc866ffffff",
-          "cellActiveDeviceCount": 5,
-          "cellAvgDataQuality": 83,
-          "cellCenter": {
-            "lat": -25.78268,
-            "lon": 28.25951
-          },
-          "address": "Pretoria, ZA",
-          "name": "Mild Capri Cloudburst",
-          "bundle": {
-            "name": "h1",
-            "title": "H1",
-            "connectivity": "helium",
-            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
-            "ws_model": "WS2000",
-            "gw_model": "WS2000"
-          },
-          "profile": "H1",
-          "metrics": {
-            "qod_score": 91,
-            "ts": "2026-07-26T02:00:00+02:00"
-          },
-          "timezone": "Africa/Johannesburg",
-          "programName": "swissborg",
-          "cellCapacity": 2,
-          "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T11:51:15+02:00",
-          "current_weather": {
-            "timestamp": "2026-07-28T11:51:15+02:00",
-            "temperature": 20.9,
-            "humidity": 33,
-            "wind_speed": 0.8,
-            "wind_gust": 2.4,
-            "wind_direction": 73,
-            "solar_irradiance": 540.4098360655738,
-            "uv_index": 3,
-            "precipitation": 0,
-            "pressure": 864.4,
-            "icon": "partly-cloudy-day",
-            "precipitation_accumulated": 0,
-            "dew_point": 4.0226290665655124,
-            "feels_like": 20.9
-          }
-        },
-        {
-          "id": "a2fe65e0-bf55-11ed-8a70-d7d4cf200cc9",
-          "cellIndex": "87bcdc866ffffff",
-          "cellActiveDeviceCount": 5,
-          "cellAvgDataQuality": 83,
-          "cellCenter": {
-            "lat": -25.78197,
-            "lon": 28.25999
-          },
-          "address": "Pretoria, ZA",
-          "name": "Magic Thistle Sun",
-          "bundle": {
-            "name": "h1",
-            "title": "H1",
-            "connectivity": "helium",
-            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
-            "ws_model": "WS2000",
-            "gw_model": "WS2000"
-          },
-          "profile": "H1",
-          "metrics": {
-            "qod_score": 91,
-            "ts": "2026-07-26T02:00:00+02:00"
-          },
-          "timezone": "Africa/Johannesburg",
-          "programName": "swissborg",
-          "cellCapacity": 2,
-          "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T11:49:19+02:00",
-          "current_weather": {
-            "timestamp": "2026-07-28T11:49:19+02:00",
-            "temperature": 18.6,
-            "humidity": 35,
-            "wind_speed": 3.5,
-            "wind_gust": 4.1,
-            "wind_direction": 121,
-            "solar_irradiance": 538.4590163934427,
-            "uv_index": 4,
-            "precipitation": 0,
-            "pressure": 864.9,
-            "icon": "partly-cloudy-day",
-            "precipitation_accumulated": 0,
-            "dew_point": 2.833861365207319,
-            "feels_like": 18.6
-          }
-        }
-      ]
+      "devices": [],
+      "_error": "HTTP 429"
     },
     {
       "cell": {
@@ -11396,240 +11822,8 @@
         },
         "_ratio": 2.5
       },
-      "devices": [
-        {
-          "id": "c15cdaa0-7113-11ef-aec8-4dd523f9b3d4",
-          "cellIndex": "871e03785ffffff",
-          "cellActiveDeviceCount": 4,
-          "cellAvgDataQuality": 72,
-          "cellCenter": {
-            "lat": 47.4901,
-            "lon": 19.01825
-          },
-          "address": "Budapest, HU",
-          "name": "Salty Sunray Winter",
-          "bundle": {
-            "name": "h2",
-            "title": "H2",
-            "connectivity": "helium",
-            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
-            "ws_model": "WS2001",
-            "gw_model": "WS2001"
-          },
-          "profile": "H2",
-          "metrics": {
-            "qod_score": 91,
-            "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-07-26T02:00:00+02:00"
-          },
-          "timezone": "Europe/Budapest",
-          "programName": "community",
-          "cellCapacity": 2,
-          "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T11:51:46+02:00",
-          "current_weather": {
-            "timestamp": "2026-07-28T11:51:46+02:00",
-            "temperature": 26.5,
-            "humidity": 34,
-            "wind_speed": 2.1,
-            "wind_gust": 4.8,
-            "wind_direction": 208,
-            "solar_irradiance": 870.1311475409836,
-            "uv_index": 9,
-            "precipitation": 0,
-            "pressure": 1003.3,
-            "icon": "partly-cloudy-day",
-            "precipitation_accumulated": 0,
-            "dew_point": 9.365923123626919,
-            "feels_like": 26.5
-          }
-        },
-        {
-          "id": "4537dd10-4ecb-11ed-960b-b351f0b0cc44",
-          "cellIndex": "871e03785ffffff",
-          "cellActiveDeviceCount": 4,
-          "cellAvgDataQuality": 72,
-          "cellCenter": {
-            "lat": 47.50606,
-            "lon": 19.03004
-          },
-          "address": "Budapest, HU",
-          "name": "Clumsy Coal Humidity",
-          "bundle": {
-            "name": "m5",
-            "title": "M5",
-            "connectivity": "wifi",
-            "url": "https://docs.weatherxm.com/wxm-devices/m5/introduction",
-            "ws_model": "WS1000",
-            "gw_model": "WG1000"
-          },
-          "profile": "M5",
-          "metrics": {
-            "qod_score": 57,
-            "ts": "2026-07-26T02:00:00+02:00"
-          },
-          "timezone": "Europe/Budapest",
-          "programName": "community",
-          "cellCapacity": 2,
-          "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T11:49:00+02:00",
-          "current_weather": {
-            "timestamp": "2026-07-28T11:49:00+02:00",
-            "temperature": 25.9,
-            "humidity": 39,
-            "wind_speed": 4.06,
-            "wind_gust": 5.1,
-            "wind_direction": 106,
-            "solar_irradiance": 661,
-            "uv_index": 6,
-            "precipitation": 0,
-            "pressure": 1003.18,
-            "icon": "partly-cloudy-day",
-            "precipitation_accumulated": 0,
-            "dew_point": 10.888295578699047,
-            "feels_like": 25.9
-          }
-        },
-        {
-          "id": "b729ec30-7113-11ef-a8d1-1fe2597b4789",
-          "cellIndex": "871e03785ffffff",
-          "cellActiveDeviceCount": 4,
-          "cellAvgDataQuality": 72,
-          "cellCenter": {
-            "lat": 47.49915,
-            "lon": 19.02004
-          },
-          "address": "Budapest, HU",
-          "name": "Temperate Mint Typhoon",
-          "bundle": {
-            "name": "h2",
-            "title": "H2",
-            "connectivity": "helium",
-            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
-            "ws_model": "WS2001",
-            "gw_model": "WS2001"
-          },
-          "profile": "H2",
-          "metrics": {
-            "qod_score": 91,
-            "ts": "2026-07-26T02:00:00+02:00"
-          },
-          "timezone": "Europe/Budapest",
-          "programName": "community",
-          "cellCapacity": 2,
-          "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T11:51:05+02:00",
-          "current_weather": {
-            "timestamp": "2026-07-28T11:51:05+02:00",
-            "temperature": 28.3,
-            "humidity": 32,
-            "wind_speed": 1.2,
-            "wind_gust": 3.9,
-            "wind_direction": 136,
-            "solar_irradiance": 766.6229508196722,
-            "uv_index": 7,
-            "precipitation": 0,
-            "pressure": 1003.8,
-            "icon": "partly-cloudy-day",
-            "precipitation_accumulated": 0,
-            "dew_point": 10.033988351528476,
-            "feels_like": 27.54063256848
-          }
-        },
-        {
-          "id": "c4005c50-7113-11ef-a8d1-1fe2597b4789",
-          "cellIndex": "871e03785ffffff",
-          "cellActiveDeviceCount": 4,
-          "cellAvgDataQuality": 72,
-          "cellCenter": {
-            "lat": 47.50426,
-            "lon": 19.0205
-          },
-          "address": "Budapest, HU",
-          "name": "Bent Gunmetal Autumn",
-          "bundle": {
-            "name": "h2",
-            "title": "H2",
-            "connectivity": "helium",
-            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
-            "ws_model": "WS2001",
-            "gw_model": "WS2001"
-          },
-          "profile": "H2",
-          "metrics": {
-            "qod_score": 0,
-            "pol_reason": "NO_LOCATION_DATA",
-            "ts": "2026-07-26T02:00:00+02:00"
-          },
-          "timezone": "Europe/Budapest",
-          "programName": "community",
-          "cellCapacity": 2,
-          "isActive": false,
-          "lastWeatherStationActivity": "2026-07-20T04:41:16+02:00",
-          "current_weather": {
-            "timestamp": "2026-07-20T04:41:16+02:00",
-            "temperature": 16.4,
-            "humidity": 74,
-            "wind_speed": 0.7,
-            "wind_gust": 2.9,
-            "wind_direction": 6,
-            "solar_irradiance": 0,
-            "uv_index": 0,
-            "precipitation": 0,
-            "pressure": 1000.8,
-            "icon": "partly-cloudy-night",
-            "precipitation_accumulated": 0,
-            "dew_point": 11.75338906577035,
-            "feels_like": 16.4
-          }
-        },
-        {
-          "id": "e8868ae0-7118-11ef-aec8-4dd523f9b3d4",
-          "cellIndex": "871e03785ffffff",
-          "cellActiveDeviceCount": 4,
-          "cellAvgDataQuality": 72,
-          "cellCenter": {
-            "lat": 47.49214,
-            "lon": 19.01601
-          },
-          "address": "Budapest, HU",
-          "name": "Feisty Xanadu Orographic",
-          "bundle": {
-            "name": "h2",
-            "title": "H2",
-            "connectivity": "helium",
-            "url": "https://docs.weatherxm.com/wxm-devices/helium/introduction",
-            "ws_model": "WS2001",
-            "gw_model": "WS2001"
-          },
-          "profile": "H2",
-          "metrics": {
-            "qod_score": 52,
-            "ts": "2026-07-26T02:00:00+02:00"
-          },
-          "timezone": "Europe/Budapest",
-          "programName": "community",
-          "cellCapacity": 2,
-          "isActive": true,
-          "lastWeatherStationActivity": "2026-07-28T11:48:58+02:00",
-          "current_weather": {
-            "timestamp": "2026-07-28T11:48:58+02:00",
-            "temperature": 26.2,
-            "humidity": 35,
-            "wind_speed": 2.9,
-            "wind_gust": 5.7,
-            "wind_direction": 258,
-            "solar_irradiance": 762.983606557377,
-            "uv_index": 5,
-            "precipitation": 0,
-            "pressure": 1001.5,
-            "icon": "partly-cloudy-day",
-            "precipitation_accumulated": 0,
-            "dew_point": 9.53379532454206,
-            "feels_like": 26.2
-          }
-        }
-      ]
+      "devices": [],
+      "_error": "HTTP 429"
     },
     {
       "cell": {
