@@ -10,7 +10,7 @@
       "label": "headline finding",
       "current": null,
       "previous": null,
-      "deltaText": "7 exact (lat,lng) duplicate groups on 19,591 public stations — each row in §1 is one coordinate pair your registry team can grep today.",
+      "deltaText": "5 exact (lat,lng) duplicate groups on 19,594 public stations — each row in §1 is one coordinate pair your registry team can grep today.",
       "report": "docs/reports/geodnet-sybil-report.md",
       "publicSource": "https://rtk.geodnet.com/api/v2/coverage_stations",
       "asOf": "2026-07-30"
@@ -21,11 +21,11 @@
       "anomalyType": "duplication_cluster",
       "narrative": "registry quality",
       "kind": "metric",
-      "label": "entities on public map",
-      "metricKey": "observed",
-      "current": 19591,
-      "previous": 19602,
-      "deltaText": "-11 (-0.1%)",
+      "label": "exact (lat,lng) duplicate groups",
+      "metricKey": "exactDupGroups",
+      "current": 5,
+      "previous": 7,
+      "deltaText": "-2 (-28.6%)",
       "report": "docs/reports/geodnet-sybil-report.md",
       "publicSource": "https://rtk.geodnet.com/api/v2/coverage_stations",
       "asOf": "2026-07-30"
@@ -39,7 +39,7 @@
       "label": "headline finding",
       "current": null,
       "previous": null,
-      "deltaText": "287 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.",
+      "deltaText": "288 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.",
       "report": "docs/reports/weatherxm-sybil-report.md",
       "publicSource": "WeatherXM public cells API",
       "asOf": "2026-07-30"
@@ -50,11 +50,11 @@
       "anomalyType": "capacity_violation",
       "narrative": "capacity pressure",
       "kind": "metric",
-      "label": "entities on public map",
-      "metricKey": "observed",
-      "current": 8497,
-      "previous": 8503,
-      "deltaText": "-6 (-0.1%)",
+      "label": "cells over designed capacity",
+      "metricKey": "overCapacityCells",
+      "current": 288,
+      "previous": 287,
+      "deltaText": "+1 (+0.3%)",
       "report": "docs/reports/weatherxm-sybil-report.md",
       "publicSource": "WeatherXM public cells API",
       "asOf": "2026-07-30"
@@ -124,5 +124,5 @@
     "Does the public read for Helium IoT match what your team sees internally, or is the public feed expected to look this way?",
     "Does the public read for Helium Mobile match what your team sees internally, or is the public feed expected to look this way?"
   ],
-  "threadSeed": "Public read on Geodnet: 7 exact (lat,lng) duplicate groups on 19,602 public stations — each row in §1 is one coordinate pair your registry team can grep today. — does that match your internal view, or is the public feed expected to behave this way?"
+  "threadSeed": "Public read on Geodnet: 5 exact (lat,lng) duplicate groups on 19,594 public stations — each row in §1 is one coordinate pair your registry team can grep today. — does that match your internal view, or is the public feed expected to behave this way?"
 }
