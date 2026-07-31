@@ -1,7 +1,16 @@
 {
-  "generatedAt": "2026-07-30T14:46:47.478Z",
+  "generatedAt": "2026-07-31T09:55:12.769Z",
   "source": "https://entities.nft.helium.io/v2/hotspots?subnetwork=mobile",
   "stats": {
+    "generatedAt": "2026-07-31T09:55:12.769Z",
+    "observed": 54869,
+    "unasserted": 1903,
+    "stackedSpots": 528,
+    "largestStack": 497,
+    "flaggedCount": 11271,
+    "flaggedPct": 0.2054165375713062
+  },
+  "prevStats": {
     "generatedAt": "2026-07-30T14:46:47.478Z",
     "observed": 54864,
     "unasserted": 1903,
@@ -10,20 +19,11 @@
     "flaggedCount": 11272,
     "flaggedPct": 0.20545348498104404
   },
-  "prevStats": {
-    "generatedAt": "2026-07-30T09:49:35.640Z",
-    "observed": 54864,
-    "unasserted": 1903,
-    "stackedSpots": 528,
-    "largestStack": 498,
-    "flaggedCount": 11273,
-    "flaggedPct": 0.20547171186934968
-  },
-  "hotspotsTotal": 56767,
+  "hotspotsTotal": 56772,
   "topStacks": [
     {
       "coord": "-0.001809,-0.00271",
-      "count": 498,
+      "count": 497,
       "sampleKeys": [
         "112JR1FkYLCSm8WgSpVccMaY9ZQxbrftPaujjftALUJeLeUQr6oz",
         "11Drn9i7RMUdVKGk6FFRc5S65au9rc9jnokQSTAcsp8sj4djcCh",
