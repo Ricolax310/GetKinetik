@@ -1,10 +1,10 @@
-# DePIN Signal Brief — 2026-07-30
+# DePIN Signal Brief — 2026-07-31
 
-> 2026-07-30 · machine-driven signal publication · evidence first
+> 2026-07-31 · machine-driven signal publication · evidence first
 
 ## Today's Read
 
-• Geodnet duplicate-coordinate groups declined from 7 to 5.
+• Geodnet duplicate-coordinate groups declined from 6 to 5.
 • WeatherXM over-capacity cells rose from 287 to 288.
 • Hivemapper visible HONEY concentration remains near 49% of visible supply.
 
@@ -18,9 +18,9 @@ Observations span 5 networks — no single network dominates the index.
 
 ### What Changed Today
 
-- **Geodnet** — exact (lat,lng) duplicate groups: 5 (-2 (-28.6%))
+- **Geodnet** — exact (lat,lng) duplicate groups: 5 (-1 (-16.7%))
 - **WeatherXM** — cells over designed capacity: 288 (+1 (+0.3%))
-- **Hivemapper** — 48.94% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
+- **Hivemapper** — 48.96% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
 
 ### Signal Type
 
@@ -50,7 +50,7 @@ Observations span 5 networks — no single network dominates the index.
 
 ### Thread Seed
 
-Public read on Geodnet: 5 exact (lat,lng) duplicate groups on 19,594 public stations — each row in §1 is one coordinate pair your registry team can review today. — does that match your internal view, or is the public feed expected to behave this way?
+Public read on Geodnet: 5 exact (lat,lng) duplicate groups on 19,593 public stations — each row in §1 is one coordinate pair your registry team can review today. — does that match your internal view, or is the public feed expected to behave this way?
 
 ### Sources & Methodology
 

@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-07-30T17:32:22.124Z",
+  "generatedAt": "2026-07-31T17:32:45.564Z",
   "schema": "getkinetik.drip/v2",
-  "date": "2026-07-30",
+  "date": "2026-07-31",
   "minConfidence": 0.6,
   "daily": [
-    "Geodnet: 5 duplicate coordinate clusters (−2)",
-    "Helium IoT: 4,859 stacked spots (unchanged)",
+    "Geodnet: 5 duplicate coordinate clusters (−1)",
+    "Helium IoT: 4,858 stacked spots (unchanged)",
     "Helium Mobile: 528 stacked spots (unchanged)",
-    "Hivemapper: 48.9% top-holder concentration (unchanged)",
+    "Hivemapper: 49% top-holder concentration (unchanged)",
     "WeatherXM: 288 capacity exceedances (+1)"
   ],
   "weekly": [
@@ -167,8 +167,8 @@
       "network": "Geodnet",
       "metric": "exactDupGroups",
       "value": 5,
-      "delta": -2,
-      "timestamp": "2026-07-30",
+      "delta": -1,
+      "timestamp": "2026-07-31",
       "severity": "medium",
       "feedConfidence": 0.7
     },
@@ -177,25 +177,25 @@
       "metric": "overCapacityCells",
       "value": 288,
       "delta": 1,
-      "timestamp": "2026-07-30",
+      "timestamp": "2026-07-31",
       "severity": "medium",
       "feedConfidence": 0.7
     },
     {
       "network": "Hivemapper",
       "metric": "top20ShareOfSupply",
-      "value": 0.48940200901276815,
-      "delta": -0.000010710511172629111,
-      "timestamp": "2026-07-30",
+      "value": 0.4895665554402503,
+      "delta": 0.00007326814353936228,
+      "timestamp": "2026-07-31",
       "severity": "medium",
       "feedConfidence": 0.7
     },
     {
       "network": "Helium IoT",
       "metric": "stackedSpots",
-      "value": 4859,
+      "value": 4858,
       "delta": 0,
-      "timestamp": "2026-07-30",
+      "timestamp": "2026-07-31",
       "severity": "medium",
       "feedConfidence": 0.7
     },
@@ -204,7 +204,7 @@
       "metric": "stackedSpots",
       "value": 528,
       "delta": 0,
-      "timestamp": "2026-07-30",
+      "timestamp": "2026-07-31",
       "severity": "medium",
       "feedConfidence": 0.7
     }
@@ -214,7 +214,7 @@
       {
         "network": "Geodnet",
         "metric": "exactDupGroups",
-        "confidence": 0.682,
+        "confidence": 0.73,
         "flags": [
           "isolated"
         ]
@@ -222,7 +222,7 @@
       {
         "network": "WeatherXM",
         "metric": "overCapacityCells",
-        "confidence": 0.682,
+        "confidence": 0.73,
         "flags": [
           "isolated"
         ]
