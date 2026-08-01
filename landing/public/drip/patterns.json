@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-31T17:32:45.563Z",
+  "generatedAt": "2026-08-01T17:22:19.326Z",
   "patterns": [
     {
       "scope": "systemic",
@@ -31,24 +31,11 @@
       "headline": "Cross-network infrastructure coverage stress observed across multiple networks",
       "pattern": "CROSS_NETWORK_INFRASTRUCTURE",
       "networks": [
-        "Helium IoT",
+        "Geodnet",
         "Helium Mobile"
       ],
       "category": "INFRASTRUCTURE",
-      "description": "Cross-network infrastructure coverage stress observed across multiple networks (Helium IoT, Helium Mobile).",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "cross-network",
-      "classification": "stability",
-      "headline": "Stability: INFRASTRUCTURE metrics unchanged across networks",
-      "pattern": "STABILITY_INFRASTRUCTURE",
-      "networks": [
-        "Helium IoT",
-        "Helium Mobile"
-      ],
-      "category": "INFRASTRUCTURE",
-      "description": "No delta movement recorded for INFRASTRUCTURE metrics this window.",
+      "description": "Cross-network infrastructure coverage stress observed across multiple networks (Geodnet, Helium Mobile).",
       "patternType": "cross-network"
     },
     {
@@ -89,7 +76,7 @@
     },
     {
       "scope": "localized",
-      "classification": "drift",
+      "classification": "stability",
       "headline": "WeatherXM: capacity pressure signal detected",
       "pattern": "LOCAL_CAPACITY",
       "networks": [
