@@ -1,19 +1,20 @@
 {
-  "generatedAt": "2026-08-01T17:22:19.326Z",
+  "generatedAt": "2026-08-02T17:22:32.341Z",
   "schema": "getkinetik.drip/v2",
-  "date": "2026-08-01",
+  "date": "2026-08-02",
   "minConfidence": 0.6,
   "daily": [
-    "Geodnet: 8 duplicate coordinate clusters (+1)",
-    "Geodnet: 19,591 entities on public map (+8)",
+    "Geodnet: 6 duplicate coordinate clusters (−1)",
+    "Helium IoT: 4,859 stacked spots (unchanged)",
     "Helium Mobile: 528 stacked spots (unchanged)",
-    "Hivemapper: 49% top-holder concentration (+0 pp)",
-    "WeatherXM: 288 capacity exceedances (unchanged)"
+    "Hivemapper: 49% top-holder concentration (unchanged)",
+    "WeatherXM: 288 capacity exceedances (−1)"
   ],
   "weekly": [
     "Helium IoT: repeated stackedSpots observation. Observed Helium IoT stackedSpots on 7 of 7 recorded days.",
     "Helium Mobile: repeated stackedSpots observation. Observed Helium Mobile stackedSpots on 7 of 7 recorded days.",
-    "Cross-network infrastructure coverage stress observed across multiple networks. Cross-network infrastructure coverage stress observed across multiple networks (Geodnet, Helium Mobile).",
+    "Cross-network infrastructure coverage stress observed across multiple networks. Cross-network infrastructure coverage stress observed across multiple networks (Helium IoT, Helium Mobile).",
+    "Stability: INFRASTRUCTURE metrics unchanged across networks. No delta movement recorded for INFRASTRUCTURE metrics this window.",
     "Geodnet: repeated exactDupGroups observation. Observed Geodnet exactDupGroups on 7 of 7 recorded days.",
     "WeatherXM: repeated overCapacityCells observation. Observed WeatherXM overCapacityCells on 7 of 7 recorded days.",
     "Hivemapper: repeated top20ShareOfSupply observation. Observed Hivemapper top20ShareOfSupply on 7 of 7 recorded days.",
@@ -53,11 +54,24 @@
       "headline": "Cross-network infrastructure coverage stress observed across multiple networks",
       "pattern": "CROSS_NETWORK_INFRASTRUCTURE",
       "networks": [
-        "Geodnet",
+        "Helium IoT",
         "Helium Mobile"
       ],
       "category": "INFRASTRUCTURE",
-      "description": "Cross-network infrastructure coverage stress observed across multiple networks (Geodnet, Helium Mobile).",
+      "description": "Cross-network infrastructure coverage stress observed across multiple networks (Helium IoT, Helium Mobile).",
+      "patternType": "cross-network"
+    },
+    {
+      "scope": "cross-network",
+      "classification": "stability",
+      "headline": "Stability: INFRASTRUCTURE metrics unchanged across networks",
+      "pattern": "STABILITY_INFRASTRUCTURE",
+      "networks": [
+        "Helium IoT",
+        "Helium Mobile"
+      ],
+      "category": "INFRASTRUCTURE",
+      "description": "No delta movement recorded for INFRASTRUCTURE metrics this window.",
       "patternType": "cross-network"
     },
     {
@@ -98,7 +112,7 @@
     },
     {
       "scope": "localized",
-      "classification": "stability",
+      "classification": "drift",
       "headline": "WeatherXM: capacity pressure signal detected",
       "pattern": "LOCAL_CAPACITY",
       "networks": [
@@ -122,7 +136,7 @@
     },
     {
       "scope": "localized",
-      "classification": "drift",
+      "classification": "stability",
       "headline": "Hivemapper: economic distribution shape signal detected",
       "pattern": "LOCAL_ECONOMICS",
       "networks": [
@@ -152,36 +166,36 @@
     {
       "network": "Geodnet",
       "metric": "exactDupGroups",
-      "value": 8,
-      "delta": 1,
-      "timestamp": "2026-08-01",
+      "value": 6,
+      "delta": -1,
+      "timestamp": "2026-08-02",
       "severity": "medium",
       "feedConfidence": 0.7
-    },
-    {
-      "network": "Geodnet",
-      "metric": "observed",
-      "value": 19591,
-      "delta": 8,
-      "timestamp": "2026-08-01",
-      "severity": "low",
-      "feedConfidence": 0.85
     },
     {
       "network": "WeatherXM",
       "metric": "overCapacityCells",
       "value": 288,
-      "delta": 0,
-      "timestamp": "2026-08-01",
+      "delta": -1,
+      "timestamp": "2026-08-02",
       "severity": "medium",
       "feedConfidence": 0.7
     },
     {
       "network": "Hivemapper",
       "metric": "top20ShareOfSupply",
-      "value": 0.48975866979095484,
-      "delta": 0.0001206543474265298,
-      "timestamp": "2026-08-01",
+      "value": 0.4898486839948123,
+      "delta": 0,
+      "timestamp": "2026-08-02",
+      "severity": "medium",
+      "feedConfidence": 0.7
+    },
+    {
+      "network": "Helium IoT",
+      "metric": "stackedSpots",
+      "value": 4859,
+      "delta": 0,
+      "timestamp": "2026-08-02",
       "severity": "medium",
       "feedConfidence": 0.7
     },
@@ -190,7 +204,7 @@
       "metric": "stackedSpots",
       "value": 528,
       "delta": 0,
-      "timestamp": "2026-08-01",
+      "timestamp": "2026-08-02",
       "severity": "medium",
       "feedConfidence": 0.7
     }
@@ -200,21 +214,15 @@
       {
         "network": "Geodnet",
         "metric": "exactDupGroups",
-        "confidence": 0.682,
+        "confidence": 0.73,
         "flags": [
           "isolated"
         ]
       },
       {
-        "network": "Geodnet",
-        "metric": "observed",
-        "confidence": 0.687,
-        "flags": []
-      },
-      {
         "network": "WeatherXM",
         "metric": "overCapacityCells",
-        "confidence": 0.73,
+        "confidence": 0.682,
         "flags": [
           "isolated"
         ]
@@ -228,21 +236,18 @@
         ]
       },
       {
+        "network": "Helium IoT",
+        "metric": "stackedSpots",
+        "confidence": 0.62,
+        "flags": []
+      },
+      {
         "network": "Helium Mobile",
         "metric": "stackedSpots",
-        "confidence": 0.722,
+        "confidence": 0.62,
         "flags": []
       }
     ],
-    "heldBack": [
-      {
-        "network": "Helium IoT",
-        "metric": "stackedSpots",
-        "confidence": 0.595,
-        "flags": [
-          "volatile"
-        ]
-      }
-    ]
+    "heldBack": []
   }
 }
