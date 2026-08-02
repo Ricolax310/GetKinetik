@@ -1,11 +1,11 @@
 # Weekly DePIN Signal Report
 
-> Week 2026-W31 · 2026-07-27 → 2026-08-01 · patterns first, then networks.
+> Week 2026-W31 · 2026-07-27 → 2026-08-02 · patterns first, then networks.
 
 ## Executive Summary
 
 - Week 2026-W31: cross-network signal index updated from public infrastructure reads.
-- 3 publishable signal(s) across 6 network(s) met the weekly confidence gate.
+- 2 publishable signal(s) across 6 network(s) met the weekly confidence gate.
 - 1 cross-network pattern(s) tagged: IDENTITY.
 - 1 systemic-scope pattern(s) recorded with multi-network support.
 
@@ -18,7 +18,7 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 **Observed in:**
 - WeatherXM
 
-**Signal:** Over-capacity H3 cells observed at 288.
+**Signal:** Over-capacity H3 cells declined from 289 to 288.
 
 **Scope:** localized
 
@@ -33,11 +33,11 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 - Helium IoT
 - Helium Mobile
 
-**Signal:** Exact coordinate-duplicate groups rose from 7 to 8 on Geodnet.
+**Signal:** Exact coordinate-duplicate groups declined from 7 to 6 on Geodnet.
 
 **Scope:** systemic
 
-**Classification:** escalation
+**Classification:** stability
 
 **Unknown:** Public data cannot confirm whether shared coordinates are distinct devices or one identity reused.
 
@@ -59,7 +59,7 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 ### WeatherXM
 
 **What changed**
-- 288 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.
+- cells over designed capacity: 288 (-1 (-0.3%))
 
 **Signal type**
 - Capacity pressure (`capacity_violation`)
@@ -76,8 +76,7 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 ### Geodnet
 
 **What changed**
-- exact (lat,lng) duplicate groups: 8 (+1 (+14.3%))
-- entities on public map: 19,591 (+8 (+0.0%))
+- exact (lat,lng) duplicate groups: 6 (-1 (-14.3%))
 
 **Signal type**
 - Registry duplication (`duplication_cluster`)
@@ -115,7 +114,7 @@ _No public signal this week — scan not run or no headline finding._
 ### DIMO
 
 **What changed**
-- Of 158,405 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,422 (19.8%) connect via software/synthetic devices, and 86,361 (54.5%) show no connected device on the public registry.
+- Of 158,409 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,423 (19.8%) connect via software/synthetic devices, and 86,364 (54.5%) show no connected device on the public registry.
 
 **Signal type**
 - Uncategorized public observation (`device_backing_gap`)
@@ -132,7 +131,7 @@ _No public signal this week — scan not run or no headline finding._
 ### Helium IoT
 
 **What changed**
-- single-coordinate stacks (≥10 hotspots): 4,859 (+1 (+0.0%))
+- 4,859 single-coordinate stacks of ≥10 hotspots on 1,008,140 located units — the largest stack holds 502 hotspots on one coordinate (§1 lists keys your registry team can grep today).
 
 **Signal type**
 - Registry duplication (`duplication_cluster`)
@@ -149,7 +148,7 @@ _No public signal this week — scan not run or no headline finding._
 ### Helium Mobile
 
 **What changed**
-- 528 single-coordinate stacks of ≥10 hotspots on 54,870 located units — the largest stack holds 497 hotspots on one coordinate (§1 lists keys your registry team can grep today).
+- 528 single-coordinate stacks of ≥10 hotspots on 54,871 located units — the largest stack holds 497 hotspots on one coordinate (§1 lists keys your registry team can grep today).
 
 **Signal type**
 - Registry duplication (`duplication_cluster`)
@@ -167,11 +166,10 @@ _No public signal this week — scan not run or no headline finding._
 
 ### What Changed Today
 
-_Latest reading: 2026-08-01_
+_Latest reading: 2026-08-02_
 
-- **Geodnet** — exact (lat,lng) duplicate groups: 8 (+1 (+14.3%))
-- **Geodnet** — entities on public map: 19,591 (+8 (+0.0%))
-- **Helium IoT** — single-coordinate stacks (≥10 hotspots): 4,859 (+1 (+0.0%))
+- **Geodnet** — exact (lat,lng) duplicate groups: 6 (-1 (-14.3%))
+- **WeatherXM** — cells over designed capacity: 288 (-1 (-0.3%))
 
 ### Signals To Watch
 
