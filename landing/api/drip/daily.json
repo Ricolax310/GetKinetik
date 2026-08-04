@@ -1,20 +1,19 @@
 {
-  "generatedAt": "2026-08-03T17:35:05.150Z",
+  "generatedAt": "2026-08-04T17:33:44.820Z",
   "schema": "getkinetik.drip/v2",
-  "date": "2026-08-03",
+  "date": "2026-08-04",
   "minConfidence": 0.6,
   "daily": [
-    "Geodnet: 8 duplicate coordinate clusters (+1)",
+    "Geodnet: 6 duplicate coordinate clusters (−2)",
+    "Geodnet: 19,573 entities on public map (−6)",
     "Helium IoT: 4,859 stacked spots (unchanged)",
-    "Helium Mobile: 528 stacked spots (unchanged)",
-    "Hivemapper: 49.1% top-holder concentration (+0 pp)",
-    "WeatherXM: 287 capacity exceedances (−1)"
+    "Hivemapper: 48.2% top-holder concentration (−0 pp)",
+    "WeatherXM: 289 capacity exceedances (unchanged)"
   ],
   "weekly": [
     "Helium IoT: repeated stackedSpots observation. Observed Helium IoT stackedSpots on 7 of 7 recorded days.",
     "Helium Mobile: repeated stackedSpots observation. Observed Helium Mobile stackedSpots on 7 of 7 recorded days.",
-    "Cross-network infrastructure coverage stress observed across multiple networks. Cross-network infrastructure coverage stress observed across multiple networks (Helium IoT, Helium Mobile).",
-    "Stability: INFRASTRUCTURE metrics unchanged across networks. No delta movement recorded for INFRASTRUCTURE metrics this window.",
+    "Cross-network infrastructure coverage stress observed across multiple networks. Cross-network infrastructure coverage stress observed across multiple networks (Geodnet, Helium IoT).",
     "Geodnet: repeated exactDupGroups observation. Observed Geodnet exactDupGroups on 7 of 7 recorded days.",
     "WeatherXM: repeated overCapacityCells observation. Observed WeatherXM overCapacityCells on 7 of 7 recorded days.",
     "Hivemapper: repeated top20ShareOfSupply observation. Observed Hivemapper top20ShareOfSupply on 7 of 7 recorded days.",
@@ -54,24 +53,11 @@
       "headline": "Cross-network infrastructure coverage stress observed across multiple networks",
       "pattern": "CROSS_NETWORK_INFRASTRUCTURE",
       "networks": [
-        "Helium IoT",
-        "Helium Mobile"
+        "Geodnet",
+        "Helium IoT"
       ],
       "category": "INFRASTRUCTURE",
-      "description": "Cross-network infrastructure coverage stress observed across multiple networks (Helium IoT, Helium Mobile).",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "cross-network",
-      "classification": "stability",
-      "headline": "Stability: INFRASTRUCTURE metrics unchanged across networks",
-      "pattern": "STABILITY_INFRASTRUCTURE",
-      "networks": [
-        "Helium IoT",
-        "Helium Mobile"
-      ],
-      "category": "INFRASTRUCTURE",
-      "description": "No delta movement recorded for INFRASTRUCTURE metrics this window.",
+      "description": "Cross-network infrastructure coverage stress observed across multiple networks (Geodnet, Helium IoT).",
       "patternType": "cross-network"
     },
     {
@@ -112,7 +98,7 @@
     },
     {
       "scope": "localized",
-      "classification": "drift",
+      "classification": "stability",
       "headline": "WeatherXM: capacity pressure signal detected",
       "pattern": "LOCAL_CAPACITY",
       "networks": [
@@ -166,27 +152,36 @@
     {
       "network": "Geodnet",
       "metric": "exactDupGroups",
-      "value": 8,
-      "delta": 1,
-      "timestamp": "2026-08-03",
+      "value": 6,
+      "delta": -2,
+      "timestamp": "2026-08-04",
       "severity": "medium",
       "feedConfidence": 0.7
     },
     {
+      "network": "Geodnet",
+      "metric": "observed",
+      "value": 19573,
+      "delta": -6,
+      "timestamp": "2026-08-04",
+      "severity": "low",
+      "feedConfidence": 0.85
+    },
+    {
       "network": "WeatherXM",
       "metric": "overCapacityCells",
-      "value": 287,
-      "delta": -1,
-      "timestamp": "2026-08-03",
+      "value": 289,
+      "delta": 0,
+      "timestamp": "2026-08-04",
       "severity": "medium",
       "feedConfidence": 0.7
     },
     {
       "network": "Hivemapper",
       "metric": "top20ShareOfSupply",
-      "value": 0.490601027871253,
-      "delta": 0.00015630767949231794,
-      "timestamp": "2026-08-03",
+      "value": 0.48249235045441935,
+      "delta": -0.0004236597370387285,
+      "timestamp": "2026-08-04",
       "severity": "medium",
       "feedConfidence": 0.7
     },
@@ -195,16 +190,7 @@
       "metric": "stackedSpots",
       "value": 4859,
       "delta": 0,
-      "timestamp": "2026-08-03",
-      "severity": "medium",
-      "feedConfidence": 0.7
-    },
-    {
-      "network": "Helium Mobile",
-      "metric": "stackedSpots",
-      "value": 528,
-      "delta": 0,
-      "timestamp": "2026-08-03",
+      "timestamp": "2026-08-04",
       "severity": "medium",
       "feedConfidence": 0.7
     }
@@ -214,10 +200,16 @@
       {
         "network": "Geodnet",
         "metric": "exactDupGroups",
-        "confidence": 0.73,
+        "confidence": 0.682,
         "flags": [
           "isolated"
         ]
+      },
+      {
+        "network": "Geodnet",
+        "metric": "observed",
+        "confidence": 0.646,
+        "flags": []
       },
       {
         "network": "WeatherXM",
@@ -238,23 +230,17 @@
       {
         "network": "Helium IoT",
         "metric": "stackedSpots",
-        "confidence": 0.672,
-        "flags": []
-      },
-      {
-        "network": "Helium Mobile",
-        "metric": "stackedSpots",
-        "confidence": 0.672,
+        "confidence": 0.722,
         "flags": []
       }
     ],
     "heldBack": [
       {
-        "network": "WeatherXM",
-        "metric": "observed",
-        "confidence": 0.519,
+        "network": "Helium Mobile",
+        "metric": "stackedSpots",
+        "confidence": 0.595,
         "flags": [
-          "unverified"
+          "volatile"
         ]
       }
     ]
