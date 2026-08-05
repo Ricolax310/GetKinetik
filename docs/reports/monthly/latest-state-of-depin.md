@@ -6,31 +6,31 @@ _Rule: signals create reports; reports create narratives. Observations below pre
 
 ## What Changed Today
 
-_Latest reading: 2026-08-04_
+_Latest reading: 2026-08-05_
 
 - **Geodnet** — exact (lat,lng) duplicate groups: 6 (-2 (-25.0%))
-- **Geodnet** — entities on public map: 19,573 (-6 (-0.0%))
-- **Helium Mobile** — single-coordinate stacks (≥10 hotspots): 527 (-1 (-0.2%))
+- **Helium Mobile** — single-coordinate stacks (≥10 hotspots): 526 (-1 (-0.2%))
+- **Helium Mobile** — largest single-coordinate stack: 540 (+35 (+6.9%))
 
 ## Capacity pressure
 
 **Supporting observations**
-- WeatherXM: 289 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.
+- WeatherXM: 288 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.
 
 ## Registry quality
 
 **Supporting observations**
-- Geodnet: 6 exact (lat,lng) duplicate groups on 19,573 public stations — each row in §1 is one coordinate pair your registry team can grep today.
+- Geodnet: 6 exact (lat,lng) duplicate groups on 19,585 public stations — each row in §1 is one coordinate pair your registry team can grep today.
 - Geodnet: exact (lat,lng) duplicate groups 6 (-2 (-25.0%))
-- Geodnet: entities on public map 19,573 (-6 (-0.0%))
-- Helium IoT: 4,859 single-coordinate stacks of ≥10 hotspots on 1,008,148 located units — the largest stack holds 502 hotspots on one coordinate (§1 lists keys your registry team can grep today).
-- Helium Mobile: 527 single-coordinate stacks of ≥10 hotspots on 54,883 located units — the largest stack holds 497 hotspots on one coordinate (§1 lists keys your registry team can grep today).
-- Helium Mobile: single-coordinate stacks (≥10 hotspots) 527 (-1 (-0.2%))
+- Helium IoT: 4,860 single-coordinate stacks of ≥10 hotspots on 1,008,150 located units — the largest stack holds 502 hotspots on one coordinate (§1 lists keys your registry team can grep today).
+- Helium Mobile: 526 single-coordinate stacks of ≥10 hotspots on 54,903 located units — the largest stack holds 540 hotspots on one coordinate (§1 lists keys your registry team can grep today).
+- Helium Mobile: single-coordinate stacks (≥10 hotspots) 526 (-1 (-0.2%))
+- Helium Mobile: largest single-coordinate stack 540 (+35 (+6.9%))
 
 ## Reward concentration
 
 **Supporting observations**
-- Hivemapper: 48.25% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
+- Hivemapper: 48.12% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
 
 ## Signal Type
 
@@ -44,22 +44,22 @@ _Latest reading: 2026-08-04_
 ## Network snapshot (public reads)
 
 ### WeatherXM
-- 289 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.
+- 288 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.
 
 ### Geodnet
-- 6 exact (lat,lng) duplicate groups on 19,573 public stations — each row in §1 is one coordinate pair your registry team can grep today.
+- 6 exact (lat,lng) duplicate groups on 19,585 public stations — each row in §1 is one coordinate pair your registry team can grep today.
 
 ### Hivemapper
-- 48.25% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
+- 48.12% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
 
 ### DIMO
-- Of 158,411 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,423 (19.8%) connect via software/synthetic devices, and 86,366 (54.5%) show no connected device on the public registry.
+- Of 158,420 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,425 (19.8%) connect via software/synthetic devices, and 86,373 (54.5%) show no connected device on the public registry.
 
 ### Helium IoT
-- 4,859 single-coordinate stacks of ≥10 hotspots on 1,008,148 located units — the largest stack holds 502 hotspots on one coordinate (§1 lists keys your registry team can grep today).
+- 4,860 single-coordinate stacks of ≥10 hotspots on 1,008,150 located units — the largest stack holds 502 hotspots on one coordinate (§1 lists keys your registry team can grep today).
 
 ### Helium Mobile
-- 527 single-coordinate stacks of ≥10 hotspots on 54,883 located units — the largest stack holds 497 hotspots on one coordinate (§1 lists keys your registry team can grep today).
+- 526 single-coordinate stacks of ≥10 hotspots on 54,903 located units — the largest stack holds 540 hotspots on one coordinate (§1 lists keys your registry team can grep today).
 
 ## What We Don't Know
 
@@ -72,6 +72,6 @@ _Latest reading: 2026-08-04_
 
 ## Methodology
 
-- 4 daily signal record(s) in 2026-08.
+- 5 daily signal record(s) in 2026-08.
 - Themed sections appear only when observations exist in audit snapshots / daily signals.
 - Full audit reports: [getkinetik.app/audits](https://getkinetik.app/audits.html)
