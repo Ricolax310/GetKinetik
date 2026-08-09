@@ -1,7 +1,16 @@
 {
-  "generatedAt": "2026-08-08T14:24:45.183Z",
+  "generatedAt": "2026-08-09T09:29:44.581Z",
   "source": "https://entities.nft.helium.io/v2/hotspots?subnetwork=mobile",
   "stats": {
+    "generatedAt": "2026-08-09T09:29:44.581Z",
+    "observed": 54909,
+    "unasserted": 1903,
+    "stackedSpots": 526,
+    "largestStack": 540,
+    "flaggedCount": 11258,
+    "flaggedPct": 0.20503014077837878
+  },
+  "prevStats": {
     "generatedAt": "2026-08-08T14:24:45.183Z",
     "observed": 54907,
     "unasserted": 1903,
@@ -10,16 +19,7 @@
     "flaggedCount": 11259,
     "flaggedPct": 0.20505582166208317
   },
-  "prevStats": {
-    "generatedAt": "2026-08-08T09:27:51.044Z",
-    "observed": 54907,
-    "unasserted": 1903,
-    "stackedSpots": 526,
-    "largestStack": 540,
-    "flaggedCount": 11259,
-    "flaggedPct": 0.20505582166208317
-  },
-  "hotspotsTotal": 56810,
+  "hotspotsTotal": 56812,
   "topStacks": [
     {
       "coord": "-0.001809,-0.00271",
@@ -275,17 +275,6 @@
       ]
     },
     {
-      "coord": "25.772442,-80.189633",
-      "count": 57,
-      "sampleKeys": [
-        "11QrVeTGzruuGmNxjhNBou9dZMNuhtDs46jDEychnoTbw6cVc2G",
-        "1126KouqPbVou7jj4qcT6skAhTH1xZKUdTSUBcUSg4SE1CWhEgjh",
-        "112pAiK64xabFBww69eyrGh84nJ2wqMqJ7yAm4ctDGzmNbNztYdU",
-        "1trSuseXKbXeprrJUr7aboERFhsVMc64PEokE7dFqwjK8Joe4N4Dvub9iBjxY8dZGoNtJz63KSgj8GPjUgNNjdFQD5FWh668Ysmasg2whkLZDHwgKWVNJTe9EYxHnCQqp53a6Xs9pBuGnB3KbfDDAKrD2LUn8y7ZdBfhCve3wr6sKF8fnUYYaj99s4wd1es74wiWmeqm76f5KHFaCnkEQun3kLaVDxXqPvYgFBPkApJfM15QpE9ed8LLMneMqc2RT2CzhLnTJ2QQP7WEyaFkbzN7EhP8MvWxyV64fwUutFuQhNb5YnGErK4NH5UnjSTgFc2hjj8KQPZBxoSoDdNHdxkujc5yY4ddYNMEQCAZKyJGML",
-        "1trSuseYd2pS4haWbm3MDvCNVTivM56seJmhMMrdwSFA81BrS4QiUt6ML5BJkzqZMursv5BSe9VxTytm1ivXUebpjSPagUXqmyjufBSa9ZgX5QB5omeKPrCX4ePjXVi5peyzN4jfuLFEEcLfjUpPmVKH9J8DFvBhuHBxBd9UJEpsmbmHCZrUE6jg3z8Ec4WBjAoHLAYsoA6GNAVUPUdDXEFxzZN1oGZ9fwm89w2wFuZTBcuz7uvCzCfkD9suRgfmpfk5cNBjYbjmyuiaYCmjUk6EkGdiXD4xb4SDN1dybYdoZiJ99QcEce7BGxQHMg9VKbtCMWLERRunasAieUQSSnVVpo3JNaQAKqRHK2Lxwi8KZR"
-      ]
-    },
-    {
       "coord": "40.741943,-73.987555",
       "count": 57,
       "sampleKeys": [
@@ -305,6 +294,17 @@
         "1trSusexPoPBJXGLMNHnaiatxBfpgvPTHhAucaoNCgX1aDyG8CmqaN7FH3YCXqvbHzr3CtYCiDWo8jnc6VPbfsCevfnrWQoDpYQiKwimkGGtXPxgq29uRWajXMdVwVpAhhX1bjmVp6GcAjFgwJCmw1Q7xvApHcEf6jKjTnyLYmXXbxxfzfwiN7HjFNevrc5Di8ERkgJaGJFT81K6rFpC9AtACnwH8JhU5RPev4KbWtHoAx1WeKfRmSpLo2jhWLRDsknGqeBCfCuN8sKnta9aRSZWcVLZgj7bVKWRWX55Z1rq45gRdCU2WsyiKEMkk9evHwsmvAGBdoS1V95MjfcspsggyPrmKAcayzzTEgsC9sEVwK",
         "1trSusfADvKBkH9ExrLhAdgSTkPpDZkJkY1anqyT1xj2XLEXG6LyzXY616V6v2fhtckh66ZMt4yCigyVTA7Z4XyzKGWGk1wf9wHtweuZomhnEVaE8B3J4YrxAJTiaA92uDfSZDtzjE1Ayg1hfkRwD1y4kwSMzrFJK9a3xoPruWwnZ1WzVE7UKJfvM4MH14q8RsXWjumefrh4MfyJvNgVtCox56qYWuN11KPgan5BeSvndZW5Z4uhLifyMkeG6kgzGMUWHyMLif8UgSBYSQvZCCvtAQ3B9LMnNhaELUo4TBtwiKHcWXBrXZ3peqZYgYCkM4bsUH8ru9zSnQfE6bmyLpd6wQPSws38RiCSmD3HjMNFei",
         "1trSusehJ8p14UpwuFD77Sa3NaSYCK6KXAx1TmUCYpFDMiaNoVGsb1RhZsZVhoJABJ2QDZibfhKro2e4BFLpfYkAZAGxKpmKXnYseyyfmJFmg8EFPxzARtewsWgr5GfPMCfSU8FaYMcMHYUjoV38pzUFSnMMeiKB6RSJcn3kuE7uBEnTYsZVcyRpUzcVyy4R3VFXM7XfGCrVoPQjPmiJKrdf6w9DNFQsdfVRkkpCyWaEGZ8gUwWR4TeMrQQX1yGQB7ciiPzcS3QpQMhYg2kCrkkPCX4wtCLTswajyzCQQwzaqbLQhoBBSzcfBuyQXu3UyUrUmPADX4La4eaAFAk7WB7vuGNjFSvBnDceV33u65UiDV"
+      ]
+    },
+    {
+      "coord": "25.772442,-80.189633",
+      "count": 56,
+      "sampleKeys": [
+        "11QrVeTGzruuGmNxjhNBou9dZMNuhtDs46jDEychnoTbw6cVc2G",
+        "1126KouqPbVou7jj4qcT6skAhTH1xZKUdTSUBcUSg4SE1CWhEgjh",
+        "112pAiK64xabFBww69eyrGh84nJ2wqMqJ7yAm4ctDGzmNbNztYdU",
+        "1trSuseXKbXeprrJUr7aboERFhsVMc64PEokE7dFqwjK8Joe4N4Dvub9iBjxY8dZGoNtJz63KSgj8GPjUgNNjdFQD5FWh668Ysmasg2whkLZDHwgKWVNJTe9EYxHnCQqp53a6Xs9pBuGnB3KbfDDAKrD2LUn8y7ZdBfhCve3wr6sKF8fnUYYaj99s4wd1es74wiWmeqm76f5KHFaCnkEQun3kLaVDxXqPvYgFBPkApJfM15QpE9ed8LLMneMqc2RT2CzhLnTJ2QQP7WEyaFkbzN7EhP8MvWxyV64fwUutFuQhNb5YnGErK4NH5UnjSTgFc2hjj8KQPZBxoSoDdNHdxkujc5yY4ddYNMEQCAZKyJGML",
+        "1trSuseYd2pS4haWbm3MDvCNVTivM56seJmhMMrdwSFA81BrS4QiUt6ML5BJkzqZMursv5BSe9VxTytm1ivXUebpjSPagUXqmyjufBSa9ZgX5QB5omeKPrCX4ePjXVi5peyzN4jfuLFEEcLfjUpPmVKH9J8DFvBhuHBxBd9UJEpsmbmHCZrUE6jg3z8Ec4WBjAoHLAYsoA6GNAVUPUdDXEFxzZN1oGZ9fwm89w2wFuZTBcuz7uvCzCfkD9suRgfmpfk5cNBjYbjmyuiaYCmjUk6EkGdiXD4xb4SDN1dybYdoZiJ99QcEce7BGxQHMg9VKbtCMWLERRunasAieUQSSnVVpo3JNaQAKqRHK2Lxwi8KZR"
       ]
     },
     {
