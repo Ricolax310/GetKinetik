@@ -6,29 +6,27 @@ _Rule: signals create reports; reports create narratives. Observations below pre
 
 ## What Changed Today
 
-_Latest reading: 2026-08-08_
+_Latest reading: 2026-08-09_
 
 - **Geodnet** — exact (lat,lng) duplicate groups: 5 (+1 (+25.0%))
-- **WeatherXM** — cells over designed capacity: 289 (+1 (+0.3%))
 
 ## Capacity pressure
 
 **Supporting observations**
 - WeatherXM: 289 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.
-- WeatherXM: cells over designed capacity 289 (+1 (+0.3%))
 
 ## Registry quality
 
 **Supporting observations**
-- Geodnet: 5 exact (lat,lng) duplicate groups on 19,568 public stations — each row in §1 is one coordinate pair your registry team can grep today.
+- Geodnet: 5 exact (lat,lng) duplicate groups on 19,566 public stations — each row in §1 is one coordinate pair your registry team can grep today.
 - Geodnet: exact (lat,lng) duplicate groups 5 (+1 (+25.0%))
-- Helium IoT: 4,860 single-coordinate stacks of ≥10 hotspots on 1,008,163 located units — the largest stack holds 502 hotspots on one coordinate (§1 lists keys your registry team can grep today).
-- Helium Mobile: 526 single-coordinate stacks of ≥10 hotspots on 54,907 located units — the largest stack holds 540 hotspots on one coordinate (§1 lists keys your registry team can grep today).
+- Helium IoT: 4,860 single-coordinate stacks of ≥10 hotspots on 1,008,165 located units — the largest stack holds 502 hotspots on one coordinate (§1 lists keys your registry team can grep today).
+- Helium Mobile: 526 single-coordinate stacks of ≥10 hotspots on 54,909 located units — the largest stack holds 540 hotspots on one coordinate (§1 lists keys your registry team can grep today).
 
 ## Reward concentration
 
 **Supporting observations**
-- Hivemapper: 48.11% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
+- Hivemapper: 48.13% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
 
 ## Signal Type
 
@@ -45,19 +43,19 @@ _Latest reading: 2026-08-08_
 - 289 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.
 
 ### Geodnet
-- 5 exact (lat,lng) duplicate groups on 19,568 public stations — each row in §1 is one coordinate pair your registry team can grep today.
+- 5 exact (lat,lng) duplicate groups on 19,566 public stations — each row in §1 is one coordinate pair your registry team can grep today.
 
 ### Hivemapper
-- 48.11% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
+- 48.13% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
 
 ### DIMO
-- Of 158,453 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,437 (19.8%) connect via software/synthetic devices, and 86,394 (54.5%) show no connected device on the public registry.
+- Of 158,458 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,436 (19.8%) connect via software/synthetic devices, and 86,400 (54.5%) show no connected device on the public registry.
 
 ### Helium IoT
-- 4,860 single-coordinate stacks of ≥10 hotspots on 1,008,163 located units — the largest stack holds 502 hotspots on one coordinate (§1 lists keys your registry team can grep today).
+- 4,860 single-coordinate stacks of ≥10 hotspots on 1,008,165 located units — the largest stack holds 502 hotspots on one coordinate (§1 lists keys your registry team can grep today).
 
 ### Helium Mobile
-- 526 single-coordinate stacks of ≥10 hotspots on 54,907 located units — the largest stack holds 540 hotspots on one coordinate (§1 lists keys your registry team can grep today).
+- 526 single-coordinate stacks of ≥10 hotspots on 54,909 located units — the largest stack holds 540 hotspots on one coordinate (§1 lists keys your registry team can grep today).
 
 ## What We Don't Know
 
@@ -70,6 +68,6 @@ _Latest reading: 2026-08-08_
 
 ## Methodology
 
-- 8 daily signal record(s) in 2026-08.
+- 9 daily signal record(s) in 2026-08.
 - Themed sections appear only when observations exist in audit snapshots / daily signals.
 - Full audit reports: [getkinetik.app/audits](https://getkinetik.app/audits.html)
