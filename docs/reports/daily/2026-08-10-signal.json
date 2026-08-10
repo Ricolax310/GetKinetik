@@ -10,7 +10,7 @@
       "label": "headline finding",
       "current": null,
       "previous": null,
-      "deltaText": "4 exact (lat,lng) duplicate groups on 19,564 public stations — each row in §1 is one coordinate pair your registry team can grep today.",
+      "deltaText": "5 exact (lat,lng) duplicate groups on 19,565 public stations — each row in §1 is one coordinate pair your registry team can grep today.",
       "report": "docs/reports/geodnet-sybil-report.md",
       "publicSource": "https://rtk.geodnet.com/api/v2/coverage_stations",
       "asOf": "2026-08-10"
@@ -23,9 +23,9 @@
       "kind": "metric",
       "label": "exact (lat,lng) duplicate groups",
       "metricKey": "exactDupGroups",
-      "current": 4,
-      "previous": 5,
-      "deltaText": "-1 (-20.0%)",
+      "current": 5,
+      "previous": 4,
+      "deltaText": "+1 (+25.0%)",
       "report": "docs/reports/geodnet-sybil-report.md",
       "publicSource": "https://rtk.geodnet.com/api/v2/coverage_stations",
       "asOf": "2026-08-10"
@@ -39,7 +39,22 @@
       "label": "headline finding",
       "current": null,
       "previous": null,
-      "deltaText": "289 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.",
+      "deltaText": "287 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.",
+      "report": "docs/reports/weatherxm-sybil-report.md",
+      "publicSource": "WeatherXM public cells API",
+      "asOf": "2026-08-10"
+    },
+    {
+      "network": "WeatherXM",
+      "networkId": "weatherxm",
+      "anomalyType": "capacity_violation",
+      "narrative": "capacity pressure",
+      "kind": "metric",
+      "label": "cells over designed capacity",
+      "metricKey": "overCapacityCells",
+      "current": 287,
+      "previous": 289,
+      "deltaText": "-2 (-0.7%)",
       "report": "docs/reports/weatherxm-sybil-report.md",
       "publicSource": "WeatherXM public cells API",
       "asOf": "2026-08-10"
@@ -53,7 +68,22 @@
       "label": "headline finding",
       "current": null,
       "previous": null,
-      "deltaText": "48.14% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.",
+      "deltaText": "47.79% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.",
+      "report": "docs/reports/hivemapper-sybil-report.md",
+      "publicSource": "Solana mainnet HONEY SPL mint (public RPC)",
+      "asOf": "2026-08-10"
+    },
+    {
+      "network": "Hivemapper",
+      "networkId": "hivemapper",
+      "anomalyType": "economic_concentration",
+      "narrative": "reward concentration",
+      "kind": "metric",
+      "label": "top-20 SPL share of UI supply",
+      "metricKey": "top20ShareOfSupply",
+      "current": 0.4779474601181149,
+      "previous": 0.48142362951116563,
+      "deltaText": "-0.35 pp (-0.7%)",
       "report": "docs/reports/hivemapper-sybil-report.md",
       "publicSource": "Solana mainnet HONEY SPL mint (public RPC)",
       "asOf": "2026-08-10"
@@ -67,7 +97,7 @@
       "label": "headline finding",
       "current": null,
       "previous": null,
-      "deltaText": "Of 158,461 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,436 (19.8%) connect via software/synthetic devices, and 86,403 (54.5%) show no connected device on the public registry.",
+      "deltaText": "Of 158,466 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,437 (19.8%) connect via software/synthetic devices, and 86,407 (54.5%) show no connected device on the public registry.",
       "report": "docs/reports/dimo-sybil-report.md",
       "publicSource": "https://identity-api.dimo.zone/query",
       "asOf": "2026-08-10"
@@ -109,5 +139,5 @@
     "Does the public read for Helium IoT match what your team sees internally, or is the public feed expected to look this way?",
     "Does the public read for Helium Mobile match what your team sees internally, or is the public feed expected to look this way?"
   ],
-  "threadSeed": "Public read on Geodnet: 5 exact (lat,lng) duplicate groups on 19,566 public stations — each row in §1 is one coordinate pair your registry team can grep today. — does that match your internal view, or is the public feed expected to behave this way?"
+  "threadSeed": "Public read on Geodnet: 5 exact (lat,lng) duplicate groups on 19,565 public stations — each row in §1 is one coordinate pair your registry team can grep today. — does that match your internal view, or is the public feed expected to behave this way?"
 }
