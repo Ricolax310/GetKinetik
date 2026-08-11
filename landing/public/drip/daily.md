@@ -1,11 +1,11 @@
-# DePIN Signal Brief — 2026-08-10
+# DePIN Signal Brief — 2026-08-11
 
-> 2026-08-10 · machine-driven signal publication · evidence first
+> 2026-08-11 · machine-driven signal publication · evidence first
 
 ## Today's Read
 
-• WeatherXM over-capacity cells declined from 289 to 287.
-• Geodnet duplicate-coordinate groups rose from 4 to 5.
+• WeatherXM over-capacity cells rose from 288 to 289.
+• Geodnet duplicate-coordinate groups unchanged at 6.
 • Hivemapper visible HONEY concentration remains near 48% of visible supply.
 
 ## Why It Matters
@@ -18,26 +18,30 @@ Observations span 5 networks — no single network dominates the index.
 
 ### What Changed Today
 
-- **Geodnet** — exact (lat,lng) duplicate groups: 5 (+1 (+25.0%))
-- **WeatherXM** — cells over designed capacity: 287 (-2 (-0.7%))
-- **Hivemapper** — top-20 SPL share of UI supply: 47.79% (-0.35 pp (-0.7%))
+- **WeatherXM** — cells over designed capacity: 289 (+1 (+0.3%))
+- **Helium IoT** — largest single-coordinate stack: 501 (-1 (-0.2%))
+- **Geodnet** — 6 exact (lat,lng) duplicate groups on 19,566 public stations — each row in §1 is one coordinate pair your registry team can review today.
+- **Hivemapper** — 47.77% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
 
 ### Signal Type
 
-- **Geodnet** — Registry duplication (`duplication_cluster`)
 - **WeatherXM** — Capacity pressure (`capacity_violation`)
+- **Helium IoT** — Registry duplication (`duplication_cluster`)
+- **Geodnet** — Registry duplication (`duplication_cluster`)
 - **Hivemapper** — Economic concentration (`economic_concentration`)
 
 ### Signal Context
 
-- Geodnet: duplicate or inconsistent registry entries are review-able from public data alone.
 - WeatherXM: public cell capacity counts are a reproducible registry-pressure signal.
+- Helium IoT: duplicate or inconsistent registry entries are review-able from public data alone.
+- Geodnet: duplicate or inconsistent registry entries are review-able from public data alone.
 - Hivemapper: visible on-chain concentration is economic shape only — useful for custody reconciliation, not device claims.
 
 ### What We Don't Know
 
-- **Geodnet** — Whether shared coordinates are legitimate co-located installs, shared-mount sites, or registry artifacts — public data can't tell without operator confirmation.
 - **WeatherXM** — Whether over-capacity cells reflect real device density, registry double-counting, or expected reward-zone behavior — only the operator's internal registry settles it.
+- **Helium IoT** — Whether shared coordinates are legitimate co-located installs, shared-mount sites, or registry artifacts — public data can't tell without operator confirmation.
+- **Geodnet** — Whether shared coordinates are legitimate co-located installs, shared-mount sites, or registry artifacts — public data can't tell without operator confirmation.
 - **Hivemapper** — Whether the largest visible accounts are treasury, market-maker, exchange custody, or operators — on-chain shape doesn't label holder intent.
 
 ### Questions Worth Asking
@@ -50,12 +54,13 @@ Observations span 5 networks — no single network dominates the index.
 
 ### Thread Seed
 
-Public read on Geodnet: 5 exact (lat,lng) duplicate groups on 19,565 public stations — each row in §1 is one coordinate pair your registry team can review today. — does that match your internal view, or is the public feed expected to behave this way?
+Public read on Geodnet: 6 exact (lat,lng) duplicate groups on 19,566 public stations — each row in §1 is one coordinate pair your registry team can review today. — does that match your internal view, or is the public feed expected to behave this way?
 
 ### Sources & Methodology
 
 - Public signal views: [getkinetik.app/signals](https://getkinetik.app/signals/)
 - Reproduce scans: `node scripts/duplication-scan-<network>.mjs` (see each report header)
-- **Geodnet:** `docs/reports/geodnet-duplication-report.md` · https://rtk.geodnet.com/api/v2/coverage_stations
 - **WeatherXM:** `docs/reports/weatherxm-duplication-report.md` · WeatherXM public cells API
+- **Helium IoT:** `docs/reports/helium-iot-duplication-report.md` · https://entities.nft.helium.io/v2/hotspots?subnetwork=iot
+- **Geodnet:** `docs/reports/geodnet-duplication-report.md` · https://rtk.geodnet.com/api/v2/coverage_stations
 - **Hivemapper:** `docs/reports/hivemapper-duplication-report.md` · Solana mainnet HONEY SPL mint (public RPC)
