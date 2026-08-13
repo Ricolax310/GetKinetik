@@ -1,7 +1,16 @@
 {
-  "generatedAt": "2026-08-12T14:51:46.868Z",
+  "generatedAt": "2026-08-13T14:51:52.762Z",
   "source": "https://entities.nft.helium.io/v2/hotspots?subnetwork=iot",
   "stats": {
+    "generatedAt": "2026-08-13T14:51:52.762Z",
+    "observed": 1008171,
+    "unasserted": 27409,
+    "stackedSpots": 4860,
+    "largestStack": 501,
+    "flaggedCount": 69703,
+    "flaggedPct": 0.06913807280709323
+  },
+  "prevStats": {
     "generatedAt": "2026-08-12T14:51:46.868Z",
     "observed": 1008169,
     "unasserted": 27409,
@@ -10,16 +19,7 @@
     "flaggedCount": 69705,
     "flaggedPct": 0.06914019375719746
   },
-  "prevStats": {
-    "generatedAt": "2026-08-12T09:55:53.112Z",
-    "observed": 1008168,
-    "unasserted": 27409,
-    "stackedSpots": 4860,
-    "largestStack": 501,
-    "flaggedCount": 69705,
-    "flaggedPct": 0.06914026233722952
-  },
-  "hotspotsTotal": 1035578,
+  "hotspotsTotal": 1035580,
   "topStacks": [
     {
       "coord": "-0.001809,-0.00271",
@@ -407,17 +407,6 @@
       ]
     },
     {
-      "coord": "34.039883,-118.265056",
-      "count": 47,
-      "sampleKeys": [
-        "112riu35C2WwbVcwnfWKeKtrCRnYxQXU7if8P5mRGpnmZ6ScmhBk",
-        "1125YKmrJDaGnadvM9XCzEghXvq41EVnxFXXfNsPWmbiGT9FuU4W",
-        "112HgK7BhYcj8YCXeBMr4kZUwuASq5SNwiVQj3UKH8fEtWPEuz35",
-        "11XG7VYM3U4ePJDP6GeEzACztthzzvnaJ9b24KSrPZwKkL5dS6M",
-        "11LZrkwgsTjWa8Z6YGJzzEVCc7BeyBYfDMt1sSZurHXCFkQuNFU"
-      ]
-    },
-    {
       "coord": "25.765028,-80.186122",
       "count": 47,
       "sampleKeys": [
@@ -459,6 +448,17 @@
         "11BNAFHZz9nkW9cxY4opGYepLsz931Cn55hyPrFKfHWe3yqLDar",
         "1125axuVp9LmMN8SusDELqXHvK3tKZeKaDoo4uaFmE6vds1Cmsy2",
         "112MUHx1yhtbm1ViRCoUw6sAVcXK6yJBBRA7FxQNZBE8Pm6EQBEW"
+      ]
+    },
+    {
+      "coord": "34.039883,-118.265056",
+      "count": 46,
+      "sampleKeys": [
+        "112riu35C2WwbVcwnfWKeKtrCRnYxQXU7if8P5mRGpnmZ6ScmhBk",
+        "1125YKmrJDaGnadvM9XCzEghXvq41EVnxFXXfNsPWmbiGT9FuU4W",
+        "112HgK7BhYcj8YCXeBMr4kZUwuASq5SNwiVQj3UKH8fEtWPEuz35",
+        "11XG7VYM3U4ePJDP6GeEzACztthzzvnaJ9b24KSrPZwKkL5dS6M",
+        "11LZrkwgsTjWa8Z6YGJzzEVCc7BeyBYfDMt1sSZurHXCFkQuNFU"
       ]
     },
     {
