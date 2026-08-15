@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-08-14T17:50:38.620Z",
+  "generatedAt": "2026-08-15T17:18:13.627Z",
   "schema": "getkinetik.drip/v2",
-  "date": "2026-08-14",
+  "date": "2026-08-15",
   "minConfidence": 0.6,
   "daily": [
     "Geodnet: 5 duplicate coordinate clusters (−1)",
     "Helium IoT: 4,860 stacked spots (unchanged)",
     "Helium Mobile: 526 stacked spots (unchanged)",
     "Hivemapper: 47.7% top-holder concentration (unchanged)",
-    "WeatherXM: 291 capacity exceedances (unchanged)"
+    "WeatherXM: 290 capacity exceedances (unchanged)"
   ],
   "weekly": [
     "Helium IoT: repeated stackedSpots observation. Observed Helium IoT stackedSpots on 7 of 7 recorded days.",
@@ -168,25 +168,25 @@
       "metric": "exactDupGroups",
       "value": 5,
       "delta": -1,
-      "timestamp": "2026-08-14",
+      "timestamp": "2026-08-15",
       "severity": "medium",
       "feedConfidence": 0.7
     },
     {
       "network": "WeatherXM",
       "metric": "overCapacityCells",
-      "value": 291,
+      "value": 290,
       "delta": 0,
-      "timestamp": "2026-08-14",
+      "timestamp": "2026-08-15",
       "severity": "medium",
       "feedConfidence": 0.7
     },
     {
       "network": "Hivemapper",
       "metric": "top20ShareOfSupply",
-      "value": 0.4769562868125123,
-      "delta": -0.00004254217265053928,
-      "timestamp": "2026-08-14",
+      "value": 0.4773665070867363,
+      "delta": -0.0000032299699443960606,
+      "timestamp": "2026-08-15",
       "severity": "medium",
       "feedConfidence": 0.7
     },
@@ -195,7 +195,7 @@
       "metric": "stackedSpots",
       "value": 4860,
       "delta": 0,
-      "timestamp": "2026-08-14",
+      "timestamp": "2026-08-15",
       "severity": "medium",
       "feedConfidence": 0.7
     },
@@ -204,7 +204,7 @@
       "metric": "stackedSpots",
       "value": 526,
       "delta": 0,
-      "timestamp": "2026-08-14",
+      "timestamp": "2026-08-15",
       "severity": "medium",
       "feedConfidence": 0.7
     }
@@ -238,16 +238,23 @@
       {
         "network": "Helium IoT",
         "metric": "stackedSpots",
-        "confidence": 0.62,
+        "confidence": 0.672,
         "flags": []
       },
       {
         "network": "Helium Mobile",
         "metric": "stackedSpots",
-        "confidence": 0.62,
+        "confidence": 0.672,
         "flags": []
       }
     ],
-    "heldBack": []
+    "heldBack": [
+      {
+        "network": "Geodnet",
+        "metric": "observed",
+        "confidence": 0.595,
+        "flags": []
+      }
+    ]
   }
 }
