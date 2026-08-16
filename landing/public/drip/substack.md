@@ -1,10 +1,10 @@
-# DePIN Signal Intelligence — Week 32
+# DePIN Signal Intelligence — Week 33
 
-> Week 32 · machine-driven signal publication · evidence first
+> Week 33 · machine-driven signal publication · evidence first
 
 ## Executive Summary
 
-• Week 32: cross-network signal index updated from public infrastructure reads.
+• Week 33: cross-network signal index updated from public infrastructure reads.
 • 0 publishable signal(s) across 0 network(s) met the weekly confidence gate.
 • 5 cross-network pattern(s) tagged: IDENTITY, CAPACITY, ECONOMICS, INFRASTRUCTURE, INFRASTRUCTURE.
 • 5 systemic-scope pattern(s) recorded with multi-network support.
@@ -24,7 +24,7 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 - **Classification:** repetition
 - **Networks:** Geodnet
 
-Observed Geodnet exactDupGroups on 6 of 6 recorded days.
+Observed Geodnet exactDupGroups on 7 of 7 recorded days.
 
 ### WeatherXM: repeated overCapacityCells observation
 
@@ -33,7 +33,7 @@ Observed Geodnet exactDupGroups on 6 of 6 recorded days.
 - **Classification:** repetition
 - **Networks:** WeatherXM
 
-Observed WeatherXM overCapacityCells on 6 of 6 recorded days.
+Observed WeatherXM overCapacityCells on 7 of 7 recorded days.
 
 ### Hivemapper: repeated top20ShareOfSupply observation
 
@@ -42,7 +42,7 @@ Observed WeatherXM overCapacityCells on 6 of 6 recorded days.
 - **Classification:** repetition
 - **Networks:** Hivemapper
 
-Observed Hivemapper top20ShareOfSupply on 6 of 6 recorded days.
+Observed Hivemapper top20ShareOfSupply on 7 of 7 recorded days.
 
 ### Helium IoT: repeated stackedSpots observation
 
@@ -51,7 +51,7 @@ Observed Hivemapper top20ShareOfSupply on 6 of 6 recorded days.
 - **Classification:** repetition
 - **Networks:** Helium IoT
 
-Observed Helium IoT stackedSpots on 6 of 6 recorded days.
+Observed Helium IoT stackedSpots on 7 of 7 recorded days.
 
 ### Helium Mobile: repeated stackedSpots observation
 
@@ -60,26 +60,26 @@ Observed Helium IoT stackedSpots on 6 of 6 recorded days.
 - **Classification:** repetition
 - **Networks:** Helium Mobile
 
-Observed Helium Mobile stackedSpots on 6 of 6 recorded days.
+Observed Helium Mobile stackedSpots on 7 of 7 recorded days.
 
 
 
 ## Systemic Observations
 
-- Geodnet: repeated exactDupGroups observation: Observed Geodnet exactDupGroups on 6 of 6 recorded days.
-- WeatherXM: repeated overCapacityCells observation: Observed WeatherXM overCapacityCells on 6 of 6 recorded days.
-- Hivemapper: repeated top20ShareOfSupply observation: Observed Hivemapper top20ShareOfSupply on 6 of 6 recorded days.
-- Helium IoT: repeated stackedSpots observation: Observed Helium IoT stackedSpots on 6 of 6 recorded days.
-- Helium Mobile: repeated stackedSpots observation: Observed Helium Mobile stackedSpots on 6 of 6 recorded days.
+- Geodnet: repeated exactDupGroups observation: Observed Geodnet exactDupGroups on 7 of 7 recorded days.
+- WeatherXM: repeated overCapacityCells observation: Observed WeatherXM overCapacityCells on 7 of 7 recorded days.
+- Hivemapper: repeated top20ShareOfSupply observation: Observed Hivemapper top20ShareOfSupply on 7 of 7 recorded days.
+- Helium IoT: repeated stackedSpots observation: Observed Helium IoT stackedSpots on 7 of 7 recorded days.
+- Helium Mobile: repeated stackedSpots observation: Observed Helium Mobile stackedSpots on 7 of 7 recorded days.
 
 
 ## Data Appendix
 
 ### What Changed Today
 
-_Latest reading: 2026-08-09_
+_Latest reading: 2026-08-16_
 
-- **Geodnet** — exact (lat,lng) duplicate groups: 5 (+1 (+25.0%))
+- **WeatherXM** — cells over designed capacity: 291 (-2 (-0.7%))
 
 ### Signals To Watch
 
