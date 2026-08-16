@@ -2,7 +2,7 @@
 
 > Public endpoints only. Not a verdict.
 
-**As of:** 2026-08-15  
+**As of:** 2026-08-16  
 **Public source:** https://api.weatherxm.com/api/v1/cells  
 **Full report:** [docs/reports/weatherxm-sybil-report.md](https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/weatherxm-sybil-report.md)  
 **Live terminal:** https://getkinetik.app/audits.html  
@@ -12,9 +12,9 @@
 
 ## Executive summary
 
-1. 290 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.
-2. 107 devices in the hottest cells carry WeatherXM's own `NO_LOCATION_DATA` flag — compare to your internal pol pipeline, not ours.
-3. 117 drilled devices sit below qod 30 while still counted toward cell saturation.
+1. 291 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.
+2. 147 devices in the hottest cells carry WeatherXM's own `NO_LOCATION_DATA` flag — compare to your internal pol pipeline, not ours.
+3. 157 drilled devices sit below qod 30 while still counted toward cell saturation.
 
 ---
 
@@ -22,11 +22,11 @@
 
 | Metric | This run | vs last run |
 |---|---:|---|
-| Cells on public map | 8,509 | +2 (+0.0%) |
-| Cells ≥1.5× capacity | 290 | unchanged vs last run |
-| Share of map over capacity | 3.41% | -0.00 pp (-0.0%) |
-| `NO_LOCATION_DATA` in drilled set | 107 | +9 (+9.2%) |
-| Devices with qod < 30 (drilled) | 117 | +12 (+11.4%) |
+| Cells on public map | 8,505 | +1 (+0.0%) |
+| Cells ≥1.5× capacity | 291 | -2 (-0.7%) |
+| Share of map over capacity | 3.42% | -0.02 pp (-0.7%) |
+| `NO_LOCATION_DATA` in drilled set | 147 | +53 (+56.4%) |
+| Devices with qod < 30 (drilled) | 157 | +58 (+58.6%) |
 
 ---
 
