@@ -4,44 +4,41 @@
 
 ## Today's Read
 
-• WeatherXM over-capacity cells rose from 289 to 290.
-• DIMO entities on public map rose from 158,525 to 158,541.
-• Geodnet: 7 exact (lat,lng) duplicate groups on 19,496 public stations — each row in §1 is one coordinate pair your registry team can grep today.
+• Geodnet duplicate-coordinate groups declined from 7 to 6.
+• Geodnet entities on public map declined from 19,496 to 19,490.
+• WeatherXM: 290 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.
 
 ## Why It Matters
 
 Today's signals show modest movement in infrastructure metrics. Telemetry and concentration readings are largely unchanged.
 The observed changes are incremental rather than structural and remain reproducible from public data sources.
-Observations span 4 networks — no single network dominates the index.
+Observations span 3 networks — no single network dominates the index.
 
 ## Full Evidence
 
 ### What Changed Today
 
-- **WeatherXM** — cells over designed capacity: 290 (+1 (+0.3%))
-- **DIMO** — entities on public map: 158,541 (+16 (+0.0%))
-- **Geodnet** — 7 exact (lat,lng) duplicate groups on 19,496 public stations — each row in §1 is one coordinate pair your registry team can grep today.
-- **Hivemapper** — 47.73% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
+- **Geodnet** — exact (lat,lng) duplicate groups: 6 (-1 (-14.3%))
+- **Geodnet** — entities on public map: 19,490 (-6 (-0.0%))
+- **WeatherXM** — 290 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.
+- **Hivemapper** — 47.77% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
 
 ### Signal Type
 
-- **WeatherXM** — Capacity pressure (`capacity_violation`)
-- **DIMO** — Uncategorized public observation (`device_backing_gap`)
 - **Geodnet** — Registry duplication (`duplication_cluster`)
+- **WeatherXM** — Capacity pressure (`capacity_violation`)
 - **Hivemapper** — Economic concentration (`economic_concentration`)
 
 ### Signal Context
 
-- WeatherXM: public cell capacity counts are a reproducible registry-pressure signal.
-- DIMO: measurable public-data delta worth cross-checking with internal ops.
 - Geodnet: duplicate or inconsistent registry entries are grep-able from public data alone.
+- WeatherXM: public cell capacity counts are a reproducible registry-pressure signal.
 - Hivemapper: visible on-chain concentration is economic shape only — useful for custody reconciliation, not device claims.
 
 ### What We Don't Know
 
-- **WeatherXM** — Whether over-capacity cells reflect real device density, registry double-counting, or expected reward-zone behavior — only the operator's internal registry settles it.
-- **DIMO** — What the public feed cannot disambiguate without operator confirmation.
 - **Geodnet** — Whether shared coordinates are legitimate co-located installs, shared-mount sites, or registry artifacts — public data can't tell without operator confirmation.
+- **WeatherXM** — Whether over-capacity cells reflect real device density, registry double-counting, or expected reward-zone behavior — only the operator's internal registry settles it.
 - **Hivemapper** — Whether the largest visible accounts are treasury, market-maker, exchange custody, or operators — on-chain shape doesn't label holder intent.
 
 ### Questions Worth Asking
@@ -54,13 +51,12 @@ Observations span 4 networks — no single network dominates the index.
 
 ### Thread Seed
 
-Public read on Geodnet: 7 exact (lat,lng) duplicate groups on 19,497 public stations — each row in §1 is one coordinate pair your registry team can grep today. — does that match your internal view, or is the public feed expected to behave this way?
+Public read on Geodnet: 6 exact (lat,lng) duplicate groups on 19,490 public stations — each row in §1 is one coordinate pair your registry team can grep today. — does that match your internal view, or is the public feed expected to behave this way?
 
 ### Sources & Methodology
 
 - Public signal views: [getkinetik.app/signals](https://getkinetik.app/signals/)
 - Reproduce scans: `node scripts/sybil-scan-<network>.mjs` (see each report header)
-- **WeatherXM:** `docs/reports/weatherxm-sybil-report.md` · WeatherXM public cells API
-- **DIMO:** `docs/reports/dimo-sybil-report.md` · https://identity-api.dimo.zone/query
 - **Geodnet:** `docs/reports/geodnet-sybil-report.md` · https://rtk.geodnet.com/api/v2/coverage_stations
+- **WeatherXM:** `docs/reports/weatherxm-sybil-report.md` · WeatherXM public cells API
 - **Hivemapper:** `docs/reports/hivemapper-sybil-report.md` · Solana mainnet HONEY SPL mint (public RPC)
