@@ -1,6 +1,18 @@
 {
-  "generatedAt": "2026-08-18T17:24:01.738Z",
+  "generatedAt": "2026-08-19T17:24:28.965Z",
   "patterns": [
+    {
+      "scope": "systemic",
+      "classification": "repetition",
+      "headline": "Geodnet: repeated observed observation",
+      "pattern": "REPEATED_INFRASTRUCTURE",
+      "networks": [
+        "Geodnet"
+      ],
+      "category": "INFRASTRUCTURE",
+      "description": "Observed Geodnet observed on 4 of 7 recorded days.",
+      "patternType": "cross-network"
+    },
     {
       "scope": "systemic",
       "classification": "repetition",
@@ -23,18 +35,6 @@
       ],
       "category": "INFRASTRUCTURE",
       "description": "Observed Helium Mobile stackedSpots on 7 of 7 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Geodnet: repeated observed observation",
-      "pattern": "REPEATED_INFRASTRUCTURE",
-      "networks": [
-        "Geodnet"
-      ],
-      "category": "INFRASTRUCTURE",
-      "description": "Observed Geodnet observed on 4 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -101,7 +101,7 @@
     },
     {
       "scope": "localized",
-      "classification": "stability",
+      "classification": "drift",
       "headline": "WeatherXM: capacity pressure signal detected",
       "pattern": "LOCAL_CAPACITY",
       "networks": [
