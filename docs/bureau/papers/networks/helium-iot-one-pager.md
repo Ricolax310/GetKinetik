@@ -2,7 +2,7 @@
 
 > Public endpoints only. Not a verdict.
 
-**As of:** 2026-08-19  
+**As of:** 2026-08-20  
 **Public source:** https://entities.nft.helium.io/v2/hotspots?subnetwork=iot  
 **Full report:** [docs/reports/helium-iot-sybil-report.md](https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/helium-iot-sybil-report.md)  
 **Live terminal:** https://getkinetik.app/audits.html  
@@ -22,10 +22,10 @@
 
 | Metric | This run | vs last run |
 |---|---:|---|
-| Hotspots with asserted coordinates | 1,008,187 | +2 (+0.0%) |
+| Hotspots with asserted coordinates | 1,008,187 | unchanged vs last run |
 | Single-coordinate stacks (≥10 hotspots) | 4,860 | unchanged vs last run |
 | Largest single-coordinate stack | 501 | unchanged vs last run |
-| Fleet share flagged (any heuristic) | 6.91% | +0.00 pp (+0.0%) |
+| Fleet share flagged (any heuristic) | 6.91% | unchanged vs last run |
 
 ---
 
