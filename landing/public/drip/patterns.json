@@ -1,18 +1,6 @@
 {
-  "generatedAt": "2026-08-19T17:24:28.965Z",
+  "generatedAt": "2026-08-20T17:26:18.368Z",
   "patterns": [
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Geodnet: repeated observed observation",
-      "pattern": "REPEATED_INFRASTRUCTURE",
-      "networks": [
-        "Geodnet"
-      ],
-      "category": "INFRASTRUCTURE",
-      "description": "Observed Geodnet observed on 4 of 7 recorded days.",
-      "patternType": "cross-network"
-    },
     {
       "scope": "systemic",
       "classification": "repetition",
@@ -101,7 +89,7 @@
     },
     {
       "scope": "localized",
-      "classification": "drift",
+      "classification": "stability",
       "headline": "WeatherXM: capacity pressure signal detected",
       "pattern": "LOCAL_CAPACITY",
       "networks": [
