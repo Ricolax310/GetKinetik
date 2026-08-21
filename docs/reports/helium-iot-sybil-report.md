@@ -2,16 +2,16 @@
 
 > Independent public read by the GETKINETIK Bureau using only Helium's free Entity API. **No internal Helium data was used.** Asserted locations snap to H3 hexes, so shared exact coordinates are expected in dense buildings — the heuristics below only flag *large* stacks (≥10 hotspots on one coordinate), the classic stacking pattern worth a registry look.
 
-- **As of:** 2026-08-20
+- **As of:** 2026-08-21
 - **Public source:** `https://entities.nft.helium.io/v2/hotspots?subnetwork=iot`
 - **Hotspots observed (with coordinates):** 1,008,187
-- **Hotspots without asserted location:** 27,407
+- **Hotspots without asserted location:** 27,408
 - **Hotspots flagged (any heuristic):** 69,715 (6.91%)
 
 ## Executive summary
 
 1. **4,860 single-coordinate stacks of ≥10 hotspots** on 1,008,187 located units — the largest stack holds **501 hotspots on one coordinate** (§1 lists keys your registry team can grep today).
-2. **27,407 hotspots exist on-chain with no asserted location** — on the registry but not on the map.
+2. **27,408 hotspots exist on-chain with no asserted location** — on the registry but not on the map.
 3. Stacks are *expected* at small sizes (H3 snapping, dense buildings) — only review-worthy at this threshold; every number reproduces from the free public endpoint with no API key.
 
 ---
@@ -38,7 +38,7 @@
 ## Headline findings
 
 1. **4,860 coordinates host ≥10 hotspots each.** H3 snapping makes small shared-coordinate groups normal; stacks this size are the documented hotspot-stacking pattern and justify a registry cross-check.
-2. **27,407 hotspots have no asserted location** — they exist on-chain but not on the map.
+2. **27,408 hotspots have no asserted location** — they exist on-chain but not on the map.
 
 ---
 
