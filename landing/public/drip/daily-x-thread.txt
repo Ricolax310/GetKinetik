@@ -1,7 +1,7 @@
 1/1
-DePIN index · Aug 21
+DePIN index · Aug 22
 
-• Hivemapper: 47.9% top-holder concentration (+0.1 pp)
+• Hivemapper: 47.8% top-holder concentration (−0 pp)
 • Geodnet: 6 duplicate coordinate clusters (unchanged)
 • WeatherXM: 289 capacity exceedances (unchanged)
 

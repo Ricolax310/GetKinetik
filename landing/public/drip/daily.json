@@ -1,27 +1,79 @@
 {
-  "generatedAt": "2026-08-21T17:26:00.750Z",
+  "generatedAt": "2026-08-22T17:17:58.165Z",
   "schema": "getkinetik.drip/v2",
-  "date": "2026-08-21",
+  "date": "2026-08-22",
   "minConfidence": 0.6,
   "daily": [
     "Geodnet: 6 duplicate coordinate clusters (unchanged)",
     "Helium IoT: 4,860 stacked spots (unchanged)",
-    "Hivemapper: 47.9% top-holder concentration (+0.1 pp)",
+    "Helium Mobile: 527 stacked spots (unchanged)",
+    "Hivemapper: 47.8% top-holder concentration (−0 pp)",
     "WeatherXM: 289 capacity exceedances (unchanged)"
   ],
   "weekly": [
+    "Helium IoT: repeated stackedSpots observation. Observed Helium IoT stackedSpots on 7 of 7 recorded days.",
+    "Helium Mobile: repeated stackedSpots observation. Observed Helium Mobile stackedSpots on 7 of 7 recorded days.",
+    "Cross-network infrastructure coverage stress observed across multiple networks. Cross-network infrastructure coverage stress observed across multiple networks (Helium IoT, Helium Mobile).",
+    "Stability: INFRASTRUCTURE metrics unchanged across networks. No delta movement recorded for INFRASTRUCTURE metrics this window.",
     "Geodnet: repeated exactDupGroups observation. Observed Geodnet exactDupGroups on 7 of 7 recorded days.",
     "WeatherXM: repeated overCapacityCells observation. Observed WeatherXM overCapacityCells on 7 of 7 recorded days.",
     "Hivemapper: repeated top20ShareOfSupply observation. Observed Hivemapper top20ShareOfSupply on 7 of 7 recorded days.",
-    "Helium IoT: repeated stackedSpots observation. Observed Helium IoT stackedSpots on 7 of 7 recorded days.",
-    "Helium Mobile: repeated stackedSpots observation. Observed Helium Mobile stackedSpots on 7 of 7 recorded days.",
     "WeatherXM: capacity pressure signal detected. Observed capacity signal on WeatherXM (overCapacityCells).",
     "Geodnet: identity registry stress signal detected. Observed identity signal on Geodnet (exactDupGroups).",
     "Hivemapper: economic distribution shape signal detected. Observed economics signal on Hivemapper (top20ShareOfSupply).",
-    "Economic concentration shape on public ledgers. Observed holder/supply concentration metrics from public on-chain reads.",
-    "Helium IoT: infrastructure coverage stress signal detected. Observed infrastructure signal on Helium IoT (stackedSpots)."
+    "Economic concentration shape on public ledgers. Observed holder/supply concentration metrics from public on-chain reads."
   ],
   "patterns": [
+    {
+      "scope": "systemic",
+      "classification": "repetition",
+      "headline": "Helium IoT: repeated stackedSpots observation",
+      "pattern": "REPEATED_INFRASTRUCTURE",
+      "networks": [
+        "Helium IoT"
+      ],
+      "category": "INFRASTRUCTURE",
+      "description": "Observed Helium IoT stackedSpots on 7 of 7 recorded days.",
+      "patternType": "cross-network"
+    },
+    {
+      "scope": "systemic",
+      "classification": "repetition",
+      "headline": "Helium Mobile: repeated stackedSpots observation",
+      "pattern": "REPEATED_INFRASTRUCTURE",
+      "networks": [
+        "Helium Mobile"
+      ],
+      "category": "INFRASTRUCTURE",
+      "description": "Observed Helium Mobile stackedSpots on 7 of 7 recorded days.",
+      "patternType": "cross-network"
+    },
+    {
+      "scope": "cross-network",
+      "classification": "convergence",
+      "headline": "Cross-network infrastructure coverage stress observed across multiple networks",
+      "pattern": "CROSS_NETWORK_INFRASTRUCTURE",
+      "networks": [
+        "Helium IoT",
+        "Helium Mobile"
+      ],
+      "category": "INFRASTRUCTURE",
+      "description": "Cross-network infrastructure coverage stress observed across multiple networks (Helium IoT, Helium Mobile).",
+      "patternType": "cross-network"
+    },
+    {
+      "scope": "cross-network",
+      "classification": "stability",
+      "headline": "Stability: INFRASTRUCTURE metrics unchanged across networks",
+      "pattern": "STABILITY_INFRASTRUCTURE",
+      "networks": [
+        "Helium IoT",
+        "Helium Mobile"
+      ],
+      "category": "INFRASTRUCTURE",
+      "description": "No delta movement recorded for INFRASTRUCTURE metrics this window.",
+      "patternType": "cross-network"
+    },
     {
       "scope": "systemic",
       "classification": "repetition",
@@ -56,30 +108,6 @@
       ],
       "category": "ECONOMICS",
       "description": "Observed Hivemapper top20ShareOfSupply on 7 of 7 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Helium IoT: repeated stackedSpots observation",
-      "pattern": "REPEATED_INFRASTRUCTURE",
-      "networks": [
-        "Helium IoT"
-      ],
-      "category": "INFRASTRUCTURE",
-      "description": "Observed Helium IoT stackedSpots on 7 of 7 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Helium Mobile: repeated stackedSpots observation",
-      "pattern": "REPEATED_INFRASTRUCTURE",
-      "networks": [
-        "Helium Mobile"
-      ],
-      "category": "INFRASTRUCTURE",
-      "description": "Observed Helium Mobile stackedSpots on 7 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -129,22 +157,10 @@
       "category": "ECONOMICS",
       "description": "Observed holder/supply concentration metrics from public on-chain reads.",
       "patternType": "single-network"
-    },
-    {
-      "scope": "localized",
-      "classification": "stability",
-      "headline": "Helium IoT: infrastructure coverage stress signal detected",
-      "pattern": "LOCAL_INFRASTRUCTURE",
-      "networks": [
-        "Helium IoT"
-      ],
-      "category": "INFRASTRUCTURE",
-      "description": "Observed infrastructure signal on Helium IoT (stackedSpots).",
-      "patternType": "single-network"
     }
   ],
   "implication": [
-    "Signal divergence between reported and operational metrics is increasing across multiple DePIN sensor networks (identity, capacity, economics, infrastructure categories observed concurrently)."
+    "Signal divergence between reported and operational metrics is increasing across multiple DePIN sensor networks (infrastructure, identity, capacity, economics categories observed concurrently)."
   ],
   "signals": [
     {
@@ -152,7 +168,7 @@
       "metric": "exactDupGroups",
       "value": 6,
       "delta": 0,
-      "timestamp": "2026-08-21",
+      "timestamp": "2026-08-22",
       "severity": "medium",
       "feedConfidence": 0.7
     },
@@ -161,16 +177,16 @@
       "metric": "overCapacityCells",
       "value": 289,
       "delta": 0,
-      "timestamp": "2026-08-21",
+      "timestamp": "2026-08-22",
       "severity": "medium",
       "feedConfidence": 0.7
     },
     {
       "network": "Hivemapper",
       "metric": "top20ShareOfSupply",
-      "value": 0.47874010434890285,
-      "delta": 0.0014639635636596315,
-      "timestamp": "2026-08-21",
+      "value": 0.4783186616777427,
+      "delta": -0.00012787571532157926,
+      "timestamp": "2026-08-22",
       "severity": "medium",
       "feedConfidence": 0.7
     },
@@ -179,7 +195,16 @@
       "metric": "stackedSpots",
       "value": 4860,
       "delta": 0,
-      "timestamp": "2026-08-21",
+      "timestamp": "2026-08-22",
+      "severity": "medium",
+      "feedConfidence": 0.7
+    },
+    {
+      "network": "Helium Mobile",
+      "metric": "stackedSpots",
+      "value": 527,
+      "delta": 0,
+      "timestamp": "2026-08-22",
       "severity": "medium",
       "feedConfidence": 0.7
     }
@@ -205,7 +230,7 @@
       {
         "network": "Hivemapper",
         "metric": "top20ShareOfSupply",
-        "confidence": 0.682,
+        "confidence": 0.73,
         "flags": [
           "isolated"
         ]
@@ -213,27 +238,16 @@
       {
         "network": "Helium IoT",
         "metric": "stackedSpots",
-        "confidence": 0.722,
+        "confidence": 0.62,
         "flags": []
-      }
-    ],
-    "heldBack": [
-      {
-        "network": "Helium Mobile",
-        "metric": "stackedSpots",
-        "confidence": 0.544,
-        "flags": [
-          "volatile"
-        ]
       },
       {
         "network": "Helium Mobile",
-        "metric": "observed",
-        "confidence": 0.519,
-        "flags": [
-          "unverified"
-        ]
+        "metric": "stackedSpots",
+        "confidence": 0.62,
+        "flags": []
       }
-    ]
+    ],
+    "heldBack": []
   }
 }
