@@ -1,11 +1,11 @@
-# DePIN Signal Brief — 2026-08-22
+# DePIN Signal Brief — 2026-08-23
 
-> 2026-08-22 · machine-driven signal publication · evidence first
+> 2026-08-23 · machine-driven signal publication · evidence first
 
 ## Today's Read
 
-• Geodnet duplicate-coordinate groups unchanged at 6.
-• WeatherXM over-capacity cells unchanged at 289.
+• WeatherXM over-capacity cells rose from 291 to 292.
+• Geodnet duplicate-coordinate groups unchanged at 7.
 • Hivemapper visible HONEY concentration remains near 48% of visible supply.
 
 ## Why It Matters
@@ -18,9 +18,9 @@ Observations span 5 networks — no single network dominates the index.
 
 ### What Changed Today
 
-- **WeatherXM** — 289 cells exceed designed capacity — §1 lists H3 indices + map centers for your review queue.
-- **Geodnet** — 6 exact (lat,lng) duplicate groups on 19,499 public stations — each row in §1 is one coordinate pair your registry team can review today.
-- **Hivemapper** — 47.83% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
+- **WeatherXM** — cells over designed capacity: 292 (+1 (+0.3%))
+- **Geodnet** — 7 exact (lat,lng) duplicate groups on 19,514 public stations — each row in §1 is one coordinate pair your registry team can review today.
+- **Hivemapper** — 47.85% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
 
 ### Signal Type
 
@@ -50,7 +50,7 @@ Observations span 5 networks — no single network dominates the index.
 
 ### Thread Seed
 
-Public read on Geodnet: 6 exact (lat,lng) duplicate groups on 19,499 public stations — each row in §1 is one coordinate pair your registry team can review today. — does that match your internal view, or is the public feed expected to behave this way?
+Public read on Geodnet: 7 exact (lat,lng) duplicate groups on 19,514 public stations — each row in §1 is one coordinate pair your registry team can review today. — does that match your internal view, or is the public feed expected to behave this way?
 
 ### Sources & Methodology
 

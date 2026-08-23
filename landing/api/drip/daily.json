@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-08-22T17:17:58.165Z",
+  "generatedAt": "2026-08-23T17:18:11.730Z",
   "schema": "getkinetik.drip/v2",
-  "date": "2026-08-22",
+  "date": "2026-08-23",
   "minConfidence": 0.6,
   "daily": [
-    "Geodnet: 6 duplicate coordinate clusters (unchanged)",
+    "Geodnet: 7 duplicate coordinate clusters (unchanged)",
     "Helium IoT: 4,860 stacked spots (unchanged)",
     "Helium Mobile: 527 stacked spots (unchanged)",
-    "Hivemapper: 47.8% top-holder concentration (−0 pp)",
-    "WeatherXM: 289 capacity exceedances (unchanged)"
+    "Hivemapper: 47.8% top-holder concentration (unchanged)",
+    "WeatherXM: 292 capacity exceedances (+1)"
   ],
   "weekly": [
     "Helium IoT: repeated stackedSpots observation. Observed Helium IoT stackedSpots on 7 of 7 recorded days.",
@@ -112,7 +112,7 @@
     },
     {
       "scope": "localized",
-      "classification": "stability",
+      "classification": "drift",
       "headline": "WeatherXM: capacity pressure signal detected",
       "pattern": "LOCAL_CAPACITY",
       "networks": [
@@ -166,27 +166,27 @@
     {
       "network": "Geodnet",
       "metric": "exactDupGroups",
-      "value": 6,
+      "value": 7,
       "delta": 0,
-      "timestamp": "2026-08-22",
+      "timestamp": "2026-08-23",
       "severity": "medium",
       "feedConfidence": 0.7
     },
     {
       "network": "WeatherXM",
       "metric": "overCapacityCells",
-      "value": 289,
-      "delta": 0,
-      "timestamp": "2026-08-22",
+      "value": 292,
+      "delta": 1,
+      "timestamp": "2026-08-23",
       "severity": "medium",
       "feedConfidence": 0.7
     },
     {
       "network": "Hivemapper",
       "metric": "top20ShareOfSupply",
-      "value": 0.4783186616777427,
-      "delta": -0.00012787571532157926,
-      "timestamp": "2026-08-22",
+      "value": 0.4784655245755069,
+      "delta": 0.000002450664513264922,
+      "timestamp": "2026-08-23",
       "severity": "medium",
       "feedConfidence": 0.7
     },
@@ -195,7 +195,7 @@
       "metric": "stackedSpots",
       "value": 4860,
       "delta": 0,
-      "timestamp": "2026-08-22",
+      "timestamp": "2026-08-23",
       "severity": "medium",
       "feedConfidence": 0.7
     },
@@ -204,7 +204,7 @@
       "metric": "stackedSpots",
       "value": 527,
       "delta": 0,
-      "timestamp": "2026-08-22",
+      "timestamp": "2026-08-23",
       "severity": "medium",
       "feedConfidence": 0.7
     }
