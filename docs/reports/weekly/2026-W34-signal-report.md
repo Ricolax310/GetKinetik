@@ -1,11 +1,11 @@
 # Weekly DePIN Signal Report
 
-> Week 2026-W34 · 2026-08-17 → 2026-08-22 · patterns first, then networks.
+> Week 2026-W34 · 2026-08-17 → 2026-08-23 · patterns first, then networks.
 
 ## Executive Summary
 
 - Week 2026-W34: cross-network signal index updated from public infrastructure reads.
-- 6 publishable signal(s) across 6 network(s) met the weekly confidence gate.
+- 1 publishable signal(s) across 6 network(s) met the weekly confidence gate.
 - 1 cross-network pattern(s) tagged: IDENTITY.
 - 1 systemic-scope pattern(s) recorded with multi-network support.
 
@@ -18,11 +18,11 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 **Observed in:**
 - WeatherXM
 
-**Signal:** Over-capacity H3 cells observed at 289.
+**Signal:** Over-capacity H3 cells rose from 291 to 292.
 
 **Scope:** localized
 
-**Classification:** stability
+**Classification:** escalation
 
 **Unknown:** Public data cannot determine whether pressure reflects density, registry effects, or expected reward behavior.
 
@@ -33,7 +33,7 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 - Helium IoT
 - Helium Mobile
 
-**Signal:** Exact coordinate-duplicate groups observed at 6 on Geodnet.
+**Signal:** Exact coordinate-duplicate groups observed at 7 on Geodnet.
 
 **Scope:** systemic
 
@@ -46,7 +46,7 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 **Observed in:**
 - Hivemapper
 
-**Signal:** Top-20 account share of supply observed near 47.83%.
+**Signal:** Top-20 account share of supply observed near 47.85%.
 
 **Scope:** localized
 
@@ -59,7 +59,7 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 ### WeatherXM
 
 **What changed**
-- 289 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.
+- cells over designed capacity: 292 (+1 (+0.3%))
 
 **Signal type**
 - Capacity pressure (`capacity_violation`)
@@ -76,7 +76,7 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 ### Geodnet
 
 **What changed**
-- 6 exact (lat,lng) duplicate groups on 19,499 public stations — each row in §1 is one coordinate pair your registry team can grep today.
+- 7 exact (lat,lng) duplicate groups on 19,514 public stations — each row in §1 is one coordinate pair your registry team can grep today.
 
 **Signal type**
 - Registry duplication (`duplication_cluster`)
@@ -97,7 +97,7 @@ _No public signal this week — scan not run or no headline finding._
 ### Hivemapper
 
 **What changed**
-- 47.83% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
+- 47.85% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
 
 **Signal type**
 - Economic concentration (`economic_concentration`)
@@ -114,7 +114,7 @@ _No public signal this week — scan not run or no headline finding._
 ### DIMO
 
 **What changed**
-- Of 158,563 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,449 (19.8%) connect via software/synthetic devices, and 86,492 (54.5%) show no connected device on the public registry.
+- Of 158,569 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,449 (19.8%) connect via software/synthetic devices, and 86,498 (54.5%) show no connected device on the public registry.
 
 **Signal type**
 - Uncategorized public observation (`device_backing_gap`)
@@ -131,7 +131,7 @@ _No public signal this week — scan not run or no headline finding._
 ### Helium IoT
 
 **What changed**
-- 4,860 single-coordinate stacks of ≥10 hotspots on 1,008,188 located units — the largest stack holds 501 hotspots on one coordinate (§1 lists keys your registry team can grep today).
+- 4,860 single-coordinate stacks of ≥10 hotspots on 1,008,190 located units — the largest stack holds 501 hotspots on one coordinate (§1 lists keys your registry team can grep today).
 
 **Signal type**
 - Registry duplication (`duplication_cluster`)
@@ -166,7 +166,9 @@ _No public signal this week — scan not run or no headline finding._
 
 ### What Changed Today
 
-_Latest reading 2026-08-22: no measurable deltas — headline observations only._
+_Latest reading: 2026-08-23_
+
+- **WeatherXM** — cells over designed capacity: 292 (+1 (+0.3%))
 
 ### Signals To Watch
 
