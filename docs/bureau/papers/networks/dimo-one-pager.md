@@ -2,7 +2,7 @@
 
 > Public endpoints only. Not a verdict.
 
-**As of:** 2026-08-23  
+**As of:** 2026-08-24  
 **Public source:** https://identity-api.dimo.zone/query  
 **Full report:** [docs/reports/dimo-sybil-report.md](https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/dimo-sybil-report.md)  
 **Live terminal:** https://getkinetik.app/audits.html  
@@ -12,8 +12,8 @@
 
 ## Executive summary
 
-1. Of 158,569 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,449 (19.8%) connect via software/synthetic devices, and 86,498 (54.5%) show no connected device on the public registry.
-2. Only 45.5% of vehicle identities have any connected device (hardware or software) on the public registry — the rest are minted identities without an active device link.
+1. Of 158,574 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,449 (19.8%) connect via software/synthetic devices, and 86,503 (54.6%) show no connected device on the public registry.
+2. Only 45.4% of vehicle identities have any connected device (hardware or software) on the public registry — the rest are minted identities without an active device link.
 3. This is *composition*, not fraud: synthetic (software) connections and recently-minted vehicles awaiting setup are expected. The neutral question is how many reward-eligible identities map to real, active devices — answerable from public data alone.
 
 ---
@@ -22,11 +22,11 @@
 
 | Metric | This run | vs last run |
 |---|---:|---|
-| Vehicle identities minted | 158,569 | +1 (+0.0%) |
+| Vehicle identities minted | 158,574 | unchanged vs last run |
 | Physical hardware devices | 40,622 | unchanged vs last run |
-| Software/synthetic devices | 31,449 | unchanged vs last run |
-| Share backed by hardware | 25.62% | -0.00 pp (-0.0%) |
-| Share with no connected device | 54.55% | +0.00 pp (+0.0%) |
+| Software/synthetic devices | 31,449 | +1 (+0.0%) |
+| Share backed by hardware | 25.62% | unchanged vs last run |
+| Share with no connected device | 54.55% | -0.00 pp (-0.0%) |
 
 ---
 
