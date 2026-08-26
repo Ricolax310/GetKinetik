@@ -1,11 +1,11 @@
 # Weekly DePIN Signal Report
 
-> Week 2026-W35 · 2026-08-24 → 2026-08-25 · patterns first, then networks.
+> Week 2026-W35 · 2026-08-24 → 2026-08-26 · patterns first, then networks.
 
 ## Executive Summary
 
 - Week 2026-W35: cross-network signal index updated from public infrastructure reads.
-- 6 publishable signal(s) across 6 network(s) met the weekly confidence gate.
+- 1 publishable signal(s) across 6 network(s) met the weekly confidence gate.
 - 1 cross-network pattern(s) tagged: IDENTITY.
 - 1 systemic-scope pattern(s) recorded with multi-network support.
 
@@ -33,11 +33,11 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 - Helium IoT
 - Helium Mobile
 
-**Signal:** Exact coordinate-duplicate groups observed at 8 on Geodnet.
+**Signal:** Exact coordinate-duplicate groups rose from 1007 to 1009 on Geodnet.
 
 **Scope:** systemic
 
-**Classification:** stability
+**Classification:** escalation
 
 **Unknown:** Public data cannot confirm whether shared coordinates are distinct devices or one identity reused.
 
@@ -46,7 +46,7 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 **Observed in:**
 - Hivemapper
 
-**Signal:** Top-20 account share of supply observed near 47.79%.
+**Signal:** Top-20 account share of supply observed near 50.85%.
 
 **Scope:** localized
 
@@ -76,13 +76,13 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 ### Geodnet
 
 **What changed**
-- 8 exact (lat,lng) duplicate groups on 19,507 public stations — each row in §1 is one coordinate pair your registry team can grep today.
+- exact (lat,lng) duplicate groups: 1,009 (+2 (+0.2%))
 
 **Signal type**
 - Registry duplication (`duplication_cluster`)
 
 **Trend**
-- insufficient history
+- single delta observed
 
 **Open question**
 - For stations sharing an exact coordinate pair on the public registry, is that expected registration behavior or a dedupe gap worth reconciling?
@@ -97,7 +97,7 @@ _No public signal this week — scan not run or no headline finding._
 ### Hivemapper
 
 **What changed**
-- 47.79% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
+- 50.85% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
 
 **Signal type**
 - Economic concentration (`economic_concentration`)
@@ -114,7 +114,7 @@ _No public signal this week — scan not run or no headline finding._
 ### DIMO
 
 **What changed**
-- Of 158,587 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,449 (19.8%) connect via software/synthetic devices, and 86,516 (54.6%) show no connected device on the public registry.
+- Of 158,603 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,450 (19.8%) connect via software/synthetic devices, and 86,531 (54.6%) show no connected device on the public registry.
 
 **Signal type**
 - Uncategorized public observation (`device_backing_gap`)
@@ -148,7 +148,7 @@ _No public signal this week — scan not run or no headline finding._
 ### Helium Mobile
 
 **What changed**
-- 529 single-coordinate stacks of ≥10 hotspots on 55,541 located units — the largest stack holds 540 hotspots on one coordinate (§1 lists keys your registry team can grep today).
+- 529 single-coordinate stacks of ≥10 hotspots on 55,549 located units — the largest stack holds 540 hotspots on one coordinate (§1 lists keys your registry team can grep today).
 
 **Signal type**
 - Registry duplication (`duplication_cluster`)
@@ -166,7 +166,9 @@ _No public signal this week — scan not run or no headline finding._
 
 ### What Changed Today
 
-_Latest reading 2026-08-25: no measurable deltas — headline observations only._
+_Latest reading: 2026-08-26_
+
+- **Geodnet** — exact (lat,lng) duplicate groups: 1,009 (+2 (+0.2%))
 
 ### Signals To Watch
 

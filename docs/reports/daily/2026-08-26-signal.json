@@ -10,7 +10,7 @@
       "label": "headline finding",
       "current": null,
       "previous": null,
-      "deltaText": "1007 exact (lat,lng) duplicate groups on 19,508 public stations — each row in §1 is one coordinate pair your registry team can grep today.",
+      "deltaText": "1009 exact (lat,lng) duplicate groups on 19,503 public stations — each row in §1 is one coordinate pair your registry team can grep today.",
       "report": "docs/reports/geodnet-sybil-report.md",
       "publicSource": "https://rtk.geodnet.com/api/v2/coverage_stations",
       "asOf": "2026-08-26"
@@ -23,24 +23,9 @@
       "kind": "metric",
       "label": "exact (lat,lng) duplicate groups",
       "metricKey": "exactDupGroups",
-      "current": 1007,
-      "previous": 8,
-      "deltaText": "+999 (+12487.5%)",
-      "report": "docs/reports/geodnet-sybil-report.md",
-      "publicSource": "https://rtk.geodnet.com/api/v2/coverage_stations",
-      "asOf": "2026-08-26"
-    },
-    {
-      "network": "Geodnet",
-      "networkId": "geodnet",
-      "anomalyType": "duplication_cluster",
-      "narrative": "registry quality",
-      "kind": "metric",
-      "label": "fleet share flagged (any heuristic)",
-      "metricKey": "flaggedPct",
-      "current": 0.2736825917572278,
-      "previous": 0.0920695135079715,
-      "deltaText": "+18.16 pp (+197.3%)",
+      "current": 1009,
+      "previous": 1007,
+      "deltaText": "+2 (+0.2%)",
       "report": "docs/reports/geodnet-sybil-report.md",
       "publicSource": "https://rtk.geodnet.com/api/v2/coverage_stations",
       "asOf": "2026-08-26"
@@ -60,21 +45,6 @@
       "asOf": "2026-08-26"
     },
     {
-      "network": "WeatherXM",
-      "networkId": "weatherxm",
-      "anomalyType": "capacity_violation",
-      "narrative": "geographic expansion",
-      "kind": "metric",
-      "label": "entities on public map",
-      "metricKey": "observed",
-      "current": 8513,
-      "previous": 8505,
-      "deltaText": "+8 (+0.1%)",
-      "report": "docs/reports/weatherxm-sybil-report.md",
-      "publicSource": "WeatherXM public cells API",
-      "asOf": "2026-08-26"
-    },
-    {
       "network": "Hivemapper",
       "networkId": "hivemapper",
       "anomalyType": "economic_concentration",
@@ -83,22 +53,7 @@
       "label": "headline finding",
       "current": null,
       "previous": null,
-      "deltaText": "50.67% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.",
-      "report": "docs/reports/hivemapper-sybil-report.md",
-      "publicSource": "Solana mainnet HONEY SPL mint (public RPC)",
-      "asOf": "2026-08-26"
-    },
-    {
-      "network": "Hivemapper",
-      "networkId": "hivemapper",
-      "anomalyType": "economic_concentration",
-      "narrative": "reward concentration",
-      "kind": "metric",
-      "label": "top-20 SPL share of UI supply",
-      "metricKey": "top20ShareOfSupply",
-      "current": 0.5067396342349813,
-      "previous": 0.4779245764366832,
-      "deltaText": "+2.88 pp (+6.0%)",
+      "deltaText": "50.85% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.",
       "report": "docs/reports/hivemapper-sybil-report.md",
       "publicSource": "Solana mainnet HONEY SPL mint (public RPC)",
       "asOf": "2026-08-26"
@@ -112,22 +67,7 @@
       "label": "headline finding",
       "current": null,
       "previous": null,
-      "deltaText": "Of 158,600 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,449 (19.8%) connect via software/synthetic devices, and 86,529 (54.6%) show no connected device on the public registry.",
-      "report": "docs/reports/dimo-sybil-report.md",
-      "publicSource": "https://identity-api.dimo.zone/query",
-      "asOf": "2026-08-26"
-    },
-    {
-      "network": "DIMO",
-      "networkId": "dimo",
-      "anomalyType": "device_backing_gap",
-      "narrative": "geographic expansion",
-      "kind": "metric",
-      "label": "entities on public map",
-      "metricKey": "observed",
-      "current": 158600,
-      "previous": 158587,
-      "deltaText": "+13 (+0.0%)",
+      "deltaText": "Of 158,603 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,450 (19.8%) connect via software/synthetic devices, and 86,531 (54.6%) show no connected device on the public registry.",
       "report": "docs/reports/dimo-sybil-report.md",
       "publicSource": "https://identity-api.dimo.zone/query",
       "asOf": "2026-08-26"
@@ -159,21 +99,6 @@
       "report": "docs/reports/helium-mobile-sybil-report.md",
       "publicSource": "https://entities.nft.helium.io/v2/hotspots?subnetwork=mobile",
       "asOf": "2026-08-26"
-    },
-    {
-      "network": "Helium Mobile",
-      "networkId": "helium-mobile",
-      "anomalyType": "duplication_cluster",
-      "narrative": "geographic expansion",
-      "kind": "metric",
-      "label": "entities on public map",
-      "metricKey": "observed",
-      "current": 55549,
-      "previous": 55541,
-      "deltaText": "+8 (+0.0%)",
-      "report": "docs/reports/helium-mobile-sybil-report.md",
-      "publicSource": "https://entities.nft.helium.io/v2/hotspots?subnetwork=mobile",
-      "asOf": "2026-08-26"
     }
   ],
   "questions": [
@@ -184,5 +109,5 @@
     "Does the public read for Helium IoT match what your team sees internally, or is the public feed expected to look this way?",
     "Does the public read for Helium Mobile match what your team sees internally, or is the public feed expected to look this way?"
   ],
-  "threadSeed": "Public read on Geodnet: 8 exact (lat,lng) duplicate groups on 19,507 public stations — each row in §1 is one coordinate pair your registry team can grep today. — does that match your internal view, or is the public feed expected to behave this way?"
+  "threadSeed": "Public read on Geodnet: 1009 exact (lat,lng) duplicate groups on 19,503 public stations — each row in §1 is one coordinate pair your registry team can grep today. — does that match your internal view, or is the public feed expected to behave this way?"
 }
