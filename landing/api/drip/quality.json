@@ -13,9 +13,10 @@
       {
         "network": "Geodnet",
         "metric": "exactDupGroups",
-        "confidence": 0.73,
+        "confidence": 0.64,
         "flags": [
-          "isolated"
+          "isolated",
+          "volatile"
         ]
       },
       {
@@ -29,7 +30,7 @@
       {
         "network": "Hivemapper",
         "metric": "top20ShareOfSupply",
-        "confidence": 0.73,
+        "confidence": 0.682,
         "flags": [
           "isolated"
         ]
