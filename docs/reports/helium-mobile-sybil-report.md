@@ -2,15 +2,15 @@
 
 > Independent public read by the GETKINETIK Bureau using only Helium's free Entity API. **No internal Helium data was used.** Asserted locations snap to H3 hexes, so shared exact coordinates are expected in dense buildings — the heuristics below only flag *large* stacks (≥10 hotspots on one coordinate), the classic stacking pattern worth a registry look.
 
-- **As of:** 2026-08-26
+- **As of:** 2026-08-27
 - **Public source:** `https://entities.nft.helium.io/v2/hotspots?subnetwork=mobile`
-- **Hotspots observed (with coordinates):** 55,549
+- **Hotspots observed (with coordinates):** 55,550
 - **Hotspots without asserted location:** 1,903
 - **Hotspots flagged (any heuristic):** 11,318 (20.37%)
 
 ## Executive summary
 
-1. **529 single-coordinate stacks of ≥10 hotspots** on 55,549 located units — the largest stack holds **540 hotspots on one coordinate** (§1 lists keys your registry team can grep today).
+1. **529 single-coordinate stacks of ≥10 hotspots** on 55,550 located units — the largest stack holds **540 hotspots on one coordinate** (§1 lists keys your registry team can grep today).
 2. **1,903 hotspots exist on-chain with no asserted location** — on the registry but not on the map.
 3. Stacks are *expected* at small sizes (H3 snapping, dense buildings) — only review-worthy at this threshold; every number reproduces from the free public endpoint with no API key.
 
@@ -20,10 +20,10 @@
 
 | Metric | This run | vs last run |
 |---|---:|---|
-| Hotspots with asserted coordinates | 55,549 | unchanged vs last run |
+| Hotspots with asserted coordinates | 55,550 | +1 (+0.0%) |
 | Single-coordinate stacks (≥10 hotspots) | 529 | unchanged vs last run |
 | Largest single-coordinate stack | 540 | unchanged vs last run |
-| Fleet share flagged (any heuristic) | 20.37% | unchanged vs last run |
+| Fleet share flagged (any heuristic) | 20.37% | -0.00 pp (-0.0%) |
 
 ## What to cross-check this week
 

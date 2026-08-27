@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-08-26T14:36:21.830Z",
+  "generatedAt": "2026-08-27T23:23:51.582Z",
   "honeyMint": "4vMsoUT2BWatFweudnQM1xedRLfJgJ7hswhcpz4xgBTy",
   "rpcUrl": "https://mainnet.helius-rpc.com/?api-key=[REDACTED]",
   "onChainError": null,
-  "supplyUiAmount": 6577195634.688674,
-  "supplyRawAmount": "6577195634688673526",
+  "supplyUiAmount": 6577195634.665753,
+  "supplyRawAmount": "6577195634665752986",
   "largestTokenAccounts": [
     {
       "tokenAccount": "2bMhpUUCFxjZ736Aswujn78cdrBMVyAVzDzq6wKLShjn",
@@ -77,6 +77,11 @@
       "uiAmount": 116386511.9315
     },
     {
+      "tokenAccount": "HXLRfE7oKRyktLyVojzbckKpqWcGmdukrrrLXmXWrvrZ",
+      "ownerWallet": "6LY1JzAFVZsP2a2xKrtU6znQMQ5h4i7tocWdgrkZzkzF",
+      "uiAmount": 115220598.15090196
+    },
+    {
       "tokenAccount": "DPWm9aFNP9QT7rFCBqr5TFMMHewdQGeBiz3j6bcCFH3Y",
       "ownerWallet": "9DVfhyUroSMVAUR2XmuScYAVk6xRJ3MZwgaDSsJYkwAi",
       "uiAmount": 113214993.3
@@ -100,29 +105,24 @@
       "tokenAccount": "FkX25QnoCuZGBKjsTJGX7hDJj42FviEgTMkjfiWmU5ZE",
       "ownerWallet": "4MHP4mLwSQrMY7mzWxcRLEH6UVzvdh7Q3uEgTxGKfrwi",
       "uiAmount": 107624680.94152938
-    },
-    {
-      "tokenAccount": "AGCUniNW7k7xu5Qy1ni5YBZcPAX7MjD9wPzidPJgh8Cb",
-      "ownerWallet": "Ek8iviu3mo4Wm7xM7N1ebD1dd7GpRf6A5UjUEn1YdNV7",
-      "uiAmount": 102452722.4
     }
   ],
-  "top20SumUi": 3344690385.803654,
-  "top20ShareOfSupply": 0.5085283411920242,
+  "top20SumUi": 3357458261.554556,
+  "top20ShareOfSupply": 0.5104695751877507,
   "optionalNodesFile": null,
   "stats": {
-    "generatedAt": "2026-08-26T14:36:21.830Z",
-    "supplyUiAmount": 6577195634.688674,
-    "top20SumUi": 3344690385.803654,
-    "top20ShareOfSupply": 0.5085283411920242,
+    "generatedAt": "2026-08-27T23:23:51.582Z",
+    "supplyUiAmount": 6577195634.665753,
+    "top20SumUi": 3357458261.554556,
+    "top20ShareOfSupply": 0.5104695751877507,
     "largestAccountsReturned": 20,
     "partASkipped": false
   },
   "prevStats": {
-    "generatedAt": "2026-08-26T09:30:51.920Z",
+    "generatedAt": "2026-08-26T14:36:21.830Z",
     "supplyUiAmount": 6577195634.688674,
-    "top20SumUi": 3332925710.214054,
-    "top20ShareOfSupply": 0.5067396342349813,
+    "top20SumUi": 3344690385.803654,
+    "top20ShareOfSupply": 0.5085283411920242,
     "largestAccountsReturned": 20,
     "partASkipped": false
   }
