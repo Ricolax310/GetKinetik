@@ -2,7 +2,7 @@
 
 > Independent public read by the GETKINETIK Bureau using only DIMO's public Identity GraphQL API. **No internal DIMO data was used.** A DIMO *vehicle* is an on-chain identity; it only produces real telemetry when connected to a device — either an *aftermarket device* (physical hardware) or a *synthetic device* (software/API connection). This read reports composition, not allegations: software connections and freshly-minted vehicles are legitimate, but the gap between identities and connected hardware is a fair question to ask from public data.
 
-- **As of:** 2026-08-27
+- **As of:** 2026-08-28
 - **Public source:** `https://identity-api.dimo.zone/query` (GraphQL, no auth)
 - **Vehicle identities:** 158,615
 - **Physical hardware devices (aftermarket):** 40,622 (25.6%)
@@ -23,11 +23,11 @@
 
 | Metric | This run | vs last run |
 |---|---:|---|
-| Vehicle identities minted | 158,615 | +12 (+0.0%) |
+| Vehicle identities minted | 158,615 | unchanged vs last run |
 | Physical hardware devices | 40,622 | unchanged vs last run |
 | Software/synthetic devices | 31,450 | unchanged vs last run |
-| Share backed by hardware | 25.61% | -0.00 pp (-0.0%) |
-| Share with no connected device | 54.56% | +0.00 pp (+0.0%) |
+| Share backed by hardware | 25.61% | unchanged vs last run |
+| Share with no connected device | 54.56% | unchanged vs last run |
 
 
 ## 1. Device-backing composition

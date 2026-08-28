@@ -2,7 +2,7 @@
 
 > Public endpoints only. Not a verdict.
 
-**As of:** 2026-08-27  
+**As of:** 2026-08-28  
 **Public source:** https://identity-api.dimo.zone/query  
 **Full report:** [docs/reports/dimo-sybil-report.md](https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/dimo-sybil-report.md)  
 **Live terminal:** https://getkinetik.app/audits.html  
@@ -22,11 +22,11 @@
 
 | Metric | This run | vs last run |
 |---|---:|---|
-| Vehicle identities minted | 158,615 | +12 (+0.0%) |
+| Vehicle identities minted | 158,615 | unchanged vs last run |
 | Physical hardware devices | 40,622 | unchanged vs last run |
 | Software/synthetic devices | 31,450 | unchanged vs last run |
-| Share backed by hardware | 25.61% | -0.00 pp (-0.0%) |
-| Share with no connected device | 54.56% | +0.00 pp (+0.0%) |
+| Share backed by hardware | 25.61% | unchanged vs last run |
+| Share with no connected device | 54.56% | unchanged vs last run |
 
 ---
 

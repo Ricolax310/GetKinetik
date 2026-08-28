@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-28T20:30:05.140Z",
+  "generatedAt": "2026-08-28T23:20:45.359Z",
   "honeyMint": "4vMsoUT2BWatFweudnQM1xedRLfJgJ7hswhcpz4xgBTy",
   "rpcUrl": "https://mainnet.helius-rpc.com/?api-key=[REDACTED]",
   "onChainError": null,
@@ -77,11 +77,6 @@
       "uiAmount": 116386511.9315
     },
     {
-      "tokenAccount": "HXLRfE7oKRyktLyVojzbckKpqWcGmdukrrrLXmXWrvrZ",
-      "ownerWallet": "6LY1JzAFVZsP2a2xKrtU6znQMQ5h4i7tocWdgrkZzkzF",
-      "uiAmount": 115270479.75712533
-    },
-    {
       "tokenAccount": "DPWm9aFNP9QT7rFCBqr5TFMMHewdQGeBiz3j6bcCFH3Y",
       "ownerWallet": "9DVfhyUroSMVAUR2XmuScYAVk6xRJ3MZwgaDSsJYkwAi",
       "uiAmount": 113214993.3
@@ -105,24 +100,29 @@
       "tokenAccount": "FkX25QnoCuZGBKjsTJGX7hDJj42FviEgTMkjfiWmU5ZE",
       "ownerWallet": "4MHP4mLwSQrMY7mzWxcRLEH6UVzvdh7Q3uEgTxGKfrwi",
       "uiAmount": 107624680.94152938
+    },
+    {
+      "tokenAccount": "AGCUniNW7k7xu5Qy1ni5YBZcPAX7MjD9wPzidPJgh8Cb",
+      "ownerWallet": "Ek8iviu3mo4Wm7xM7N1ebD1dd7GpRf6A5UjUEn1YdNV7",
+      "uiAmount": 102452722.4
     }
   ],
-  "top20SumUi": 3357508143.1607795,
-  "top20ShareOfSupply": 0.5102815727526265,
+  "top20SumUi": 3344690385.803654,
+  "top20ShareOfSupply": 0.5083335014138634,
   "optionalNodesFile": null,
   "stats": {
-    "generatedAt": "2026-08-28T20:30:05.140Z",
+    "generatedAt": "2026-08-28T23:20:45.359Z",
     "supplyUiAmount": 6579716616.160127,
-    "top20SumUi": 3357508143.1607795,
-    "top20ShareOfSupply": 0.5102815727526265,
+    "top20SumUi": 3344690385.803654,
+    "top20ShareOfSupply": 0.5083335014138634,
     "largestAccountsReturned": 20,
     "partASkipped": false
   },
   "prevStats": {
-    "generatedAt": "2026-08-27T23:23:51.582Z",
-    "supplyUiAmount": 6577195634.665753,
-    "top20SumUi": 3357458261.554556,
-    "top20ShareOfSupply": 0.5104695751877507,
+    "generatedAt": "2026-08-28T20:30:05.140Z",
+    "supplyUiAmount": 6579716616.160127,
+    "top20SumUi": 3357508143.1607795,
+    "top20ShareOfSupply": 0.5102815727526265,
     "largestAccountsReturned": 20,
     "partASkipped": false
   }
