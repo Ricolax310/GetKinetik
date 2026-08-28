@@ -4,46 +4,43 @@
 
 ## Today's Read
 
-• Geodnet duplicate-coordinate groups declined from 1,009 to 1,006.
-• WeatherXM over-capacity cells declined from 292 to 289.
-• DIMO entities on public map rose from 158,603 to 158,615.
-• WeatherXM entities on public map rose from 8,512 to 8,520.
+• Geodnet duplicate-coordinate groups declined from 1,006 to 1,004.
+• WeatherXM over-capacity cells rose from 289 to 292.
+• Geodnet entities on public map declined from 19,499 to 19,489.
+• WeatherXM entities on public map declined from 8,520 to 8,510.
 
 ## Why It Matters
 
 Today's signals show modest movement in infrastructure metrics. Telemetry and concentration readings are largely unchanged.
 The observed changes are incremental rather than structural and remain reproducible from public data sources.
-Observations span 4 networks — no single network dominates the index.
+Observations span 3 networks — no single network dominates the index.
 
 ## Full Evidence
 
 ### What Changed Today
 
-- **Geodnet** — exact (lat,lng) duplicate groups: 1,006 (-3 (-0.3%))
-- **WeatherXM** — entities on public map: 8,520 (+8 (+0.1%))
-- **WeatherXM** — cells over designed capacity: 289 (-3 (-1.0%))
-- **DIMO** — entities on public map: 158,615 (+12 (+0.0%))
-- **Hivemapper** — 51.05% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
+- **Geodnet** — exact (lat,lng) duplicate groups: 1,004 (-2 (-0.2%))
+- **Geodnet** — entities on public map: 19,489 (-10 (-0.1%))
+- **WeatherXM** — entities on public map: 8,510 (-10 (-0.1%))
+- **WeatherXM** — cells over designed capacity: 292 (+3 (+1.0%))
+- **Hivemapper** — 51.03% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
 
 ### Signal Type
 
 - **Geodnet** — Registry duplication (`duplication_cluster`)
 - **WeatherXM** — Capacity pressure (`capacity_violation`)
-- **DIMO** — Uncategorized public observation (`device_backing_gap`)
 - **Hivemapper** — Economic concentration (`economic_concentration`)
 
 ### Signal Context
 
 - Geodnet: duplicate or inconsistent registry entries are grep-able from public data alone.
 - WeatherXM: public cell capacity counts are a reproducible registry-pressure signal.
-- DIMO: measurable public-data delta worth cross-checking with internal ops.
 - Hivemapper: visible on-chain concentration is economic shape only — useful for custody reconciliation, not device claims.
 
 ### What We Don't Know
 
 - **Geodnet** — Whether shared coordinates are legitimate co-located installs, shared-mount sites, or registry artifacts — public data can't tell without operator confirmation.
 - **WeatherXM** — Whether over-capacity cells reflect real device density, registry double-counting, or expected reward-zone behavior — only the operator's internal registry settles it.
-- **DIMO** — What the public feed cannot disambiguate without operator confirmation.
 - **Hivemapper** — Whether the largest visible accounts are treasury, market-maker, exchange custody, or operators — on-chain shape doesn't label holder intent.
 
 ### Questions Worth Asking
@@ -64,5 +61,4 @@ Public read on Geodnet: 1006 exact (lat,lng) duplicate groups on 19,499 public s
 - Reproduce scans: `node scripts/sybil-scan-<network>.mjs` (see each report header)
 - **Geodnet:** `docs/reports/geodnet-sybil-report.md` · https://rtk.geodnet.com/api/v2/coverage_stations
 - **WeatherXM:** `docs/reports/weatherxm-sybil-report.md` · WeatherXM public cells API
-- **DIMO:** `docs/reports/dimo-sybil-report.md` · https://identity-api.dimo.zone/query
 - **Hivemapper:** `docs/reports/hivemapper-sybil-report.md` · Solana mainnet HONEY SPL mint (public RPC)
