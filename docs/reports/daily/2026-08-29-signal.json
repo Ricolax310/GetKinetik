@@ -10,22 +10,7 @@
       "label": "headline finding",
       "current": null,
       "previous": null,
-      "deltaText": "1007 exact (lat,lng) duplicate groups on 19,482 public stations — each row in §1 is one coordinate pair your registry team can grep today.",
-      "report": "docs/reports/geodnet-sybil-report.md",
-      "publicSource": "https://rtk.geodnet.com/api/v2/coverage_stations",
-      "asOf": "2026-08-29"
-    },
-    {
-      "network": "Geodnet",
-      "networkId": "geodnet",
-      "anomalyType": "duplication_cluster",
-      "narrative": "registry quality",
-      "kind": "metric",
-      "label": "exact (lat,lng) duplicate groups",
-      "metricKey": "exactDupGroups",
-      "current": 1007,
-      "previous": 1004,
-      "deltaText": "+3 (+0.3%)",
+      "deltaText": "1007 exact (lat,lng) duplicate groups on 19,477 public stations — each row in §1 is one coordinate pair your registry team can grep today.",
       "report": "docs/reports/geodnet-sybil-report.md",
       "publicSource": "https://rtk.geodnet.com/api/v2/coverage_stations",
       "asOf": "2026-08-29"
@@ -40,21 +25,6 @@
       "current": null,
       "previous": null,
       "deltaText": "292 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.",
-      "report": "docs/reports/weatherxm-sybil-report.md",
-      "publicSource": "WeatherXM public cells API",
-      "asOf": "2026-08-29"
-    },
-    {
-      "network": "WeatherXM",
-      "networkId": "weatherxm",
-      "anomalyType": "capacity_violation",
-      "narrative": "capacity pressure",
-      "kind": "metric",
-      "label": "cells over designed capacity",
-      "metricKey": "overCapacityCells",
-      "current": 292,
-      "previous": 291,
-      "deltaText": "+1 (+0.3%)",
       "report": "docs/reports/weatherxm-sybil-report.md",
       "publicSource": "WeatherXM public cells API",
       "asOf": "2026-08-29"
@@ -114,21 +84,6 @@
       "report": "docs/reports/helium-mobile-sybil-report.md",
       "publicSource": "https://entities.nft.helium.io/v2/hotspots?subnetwork=mobile",
       "asOf": "2026-08-29"
-    },
-    {
-      "network": "Helium Mobile",
-      "networkId": "helium-mobile",
-      "anomalyType": "duplication_cluster",
-      "narrative": "geographic expansion",
-      "kind": "metric",
-      "label": "entities on public map",
-      "metricKey": "observed",
-      "current": 55589,
-      "previous": 55552,
-      "deltaText": "+37 (+0.1%)",
-      "report": "docs/reports/helium-mobile-sybil-report.md",
-      "publicSource": "https://entities.nft.helium.io/v2/hotspots?subnetwork=mobile",
-      "asOf": "2026-08-29"
     }
   ],
   "questions": [
@@ -139,5 +94,5 @@
     "Does the public read for Helium IoT match what your team sees internally, or is the public feed expected to look this way?",
     "Does the public read for Helium Mobile match what your team sees internally, or is the public feed expected to look this way?"
   ],
-  "threadSeed": "Public read on Geodnet: 1004 exact (lat,lng) duplicate groups on 19,483 public stations — each row in §1 is one coordinate pair your registry team can grep today. — does that match your internal view, or is the public feed expected to behave this way?"
+  "threadSeed": "Public read on Geodnet: 1007 exact (lat,lng) duplicate groups on 19,477 public stations — each row in §1 is one coordinate pair your registry team can grep today. — does that match your internal view, or is the public feed expected to behave this way?"
 }

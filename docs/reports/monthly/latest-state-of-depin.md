@@ -6,29 +6,24 @@ _Rule: signals create reports; reports create narratives. Observations below pre
 
 ## What Changed Today
 
-_Latest reading: 2026-08-29_
-
-- **Geodnet** — entities on public map: 19,483 (-6 (-0.0%))
-- **WeatherXM** — cells over designed capacity: 291 (-1 (-0.3%))
+_Latest reading 2026-08-29: no measurable deltas — headline observations only._
 
 ## Capacity pressure
 
 **Supporting observations**
-- WeatherXM: 291 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.
-- WeatherXM: cells over designed capacity 291 (-1 (-0.3%))
+- WeatherXM: 292 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.
 
 ## Registry quality
 
 **Supporting observations**
-- Geodnet: 1004 exact (lat,lng) duplicate groups on 19,483 public stations — each row in §1 is one coordinate pair your registry team can grep today.
-- Geodnet: entities on public map 19,483 (-6 (-0.0%))
+- Geodnet: 1007 exact (lat,lng) duplicate groups on 19,477 public stations — each row in §1 is one coordinate pair your registry team can grep today.
 - Helium IoT: 4,860 single-coordinate stacks of ≥10 hotspots on 1,008,193 located units — the largest stack holds 501 hotspots on one coordinate (§1 lists keys your registry team can grep today).
-- Helium Mobile: 529 single-coordinate stacks of ≥10 hotspots on 55,552 located units — the largest stack holds 540 hotspots on one coordinate (§1 lists keys your registry team can grep today).
+- Helium Mobile: 529 single-coordinate stacks of ≥10 hotspots on 55,589 located units — the largest stack holds 540 hotspots on one coordinate (§1 lists keys your registry team can grep today).
 
 ## Reward concentration
 
 **Supporting observations**
-- Hivemapper: 50.83% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
+- Hivemapper: 50.92% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
 
 ## Signal Type
 
@@ -42,22 +37,22 @@ _Latest reading: 2026-08-29_
 ## Network snapshot (public reads)
 
 ### WeatherXM
-- 291 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.
+- 292 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.
 
 ### Geodnet
-- 1004 exact (lat,lng) duplicate groups on 19,483 public stations — each row in §1 is one coordinate pair your registry team can grep today.
+- 1007 exact (lat,lng) duplicate groups on 19,477 public stations — each row in §1 is one coordinate pair your registry team can grep today.
 
 ### Hivemapper
-- 50.83% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
+- 50.92% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
 
 ### DIMO
-- Of 158,615 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,450 (19.8%) connect via software/synthetic devices, and 86,543 (54.6%) show no connected device on the public registry.
+- Of 158,614 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,450 (19.8%) connect via software/synthetic devices, and 86,542 (54.6%) show no connected device on the public registry.
 
 ### Helium IoT
 - 4,860 single-coordinate stacks of ≥10 hotspots on 1,008,193 located units — the largest stack holds 501 hotspots on one coordinate (§1 lists keys your registry team can grep today).
 
 ### Helium Mobile
-- 529 single-coordinate stacks of ≥10 hotspots on 55,552 located units — the largest stack holds 540 hotspots on one coordinate (§1 lists keys your registry team can grep today).
+- 529 single-coordinate stacks of ≥10 hotspots on 55,589 located units — the largest stack holds 540 hotspots on one coordinate (§1 lists keys your registry team can grep today).
 
 ## What We Don't Know
 
