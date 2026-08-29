@@ -29,7 +29,7 @@
       {
         "network": "Hivemapper",
         "metric": "top20ShareOfSupply",
-        "confidence": 0.682,
+        "confidence": 0.73,
         "flags": [
           "isolated"
         ]
@@ -37,26 +37,17 @@
       {
         "network": "Helium IoT",
         "metric": "stackedSpots",
-        "confidence": 0.672,
+        "confidence": 0.62,
         "flags": []
       },
       {
         "network": "Helium Mobile",
         "metric": "stackedSpots",
-        "confidence": 0.672,
+        "confidence": 0.62,
         "flags": []
       }
     ],
-    "heldBack": [
-      {
-        "network": "Geodnet",
-        "metric": "observed",
-        "confidence": 0.519,
-        "flags": [
-          "unverified"
-        ]
-      }
-    ]
+    "heldBack": []
   },
   "weekly": {
     "minConfidence": 0.8,
