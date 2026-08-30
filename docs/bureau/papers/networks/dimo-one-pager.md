@@ -2,7 +2,7 @@
 
 > Public endpoints only. Not a verdict.
 
-**As of:** 2026-08-29  
+**As of:** 2026-08-30  
 **Public source:** https://identity-api.dimo.zone/query  
 **Full report:** [docs/reports/dimo-sybil-report.md](https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/dimo-sybil-report.md)  
 **Live terminal:** https://getkinetik.app/audits.html  
@@ -12,7 +12,7 @@
 
 ## Executive summary
 
-1. Of 158,614 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,450 (19.8%) connect via software/synthetic devices, and 86,542 (54.6%) show no connected device on the public registry.
+1. Of 158,617 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,451 (19.8%) connect via software/synthetic devices, and 86,544 (54.6%) show no connected device on the public registry.
 2. Only 45.4% of vehicle identities have any connected device (hardware or software) on the public registry — the rest are minted identities without an active device link.
 3. This is *composition*, not fraud: synthetic (software) connections and recently-minted vehicles awaiting setup are expected. The neutral question is how many reward-eligible identities map to real, active devices — answerable from public data alone.
 
@@ -22,11 +22,11 @@
 
 | Metric | This run | vs last run |
 |---|---:|---|
-| Vehicle identities minted | 158,614 | unchanged vs last run |
+| Vehicle identities minted | 158,617 | -1 (-0.0%) |
 | Physical hardware devices | 40,622 | unchanged vs last run |
-| Software/synthetic devices | 31,450 | unchanged vs last run |
-| Share backed by hardware | 25.61% | unchanged vs last run |
-| Share with no connected device | 54.56% | unchanged vs last run |
+| Software/synthetic devices | 31,451 | unchanged vs last run |
+| Share backed by hardware | 25.61% | +0.00 pp (+0.0%) |
+| Share with no connected device | 54.56% | -0.00 pp (-0.0%) |
 
 ---
 

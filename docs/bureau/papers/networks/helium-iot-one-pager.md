@@ -2,7 +2,7 @@
 
 > Public endpoints only. Not a verdict.
 
-**As of:** 2026-08-29  
+**As of:** 2026-08-30  
 **Public source:** https://entities.nft.helium.io/v2/hotspots?subnetwork=iot  
 **Full report:** [docs/reports/helium-iot-sybil-report.md](https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/helium-iot-sybil-report.md)  
 **Live terminal:** https://getkinetik.app/audits.html  
@@ -12,8 +12,8 @@
 
 ## Executive summary
 
-1. 4,860 single-coordinate stacks of ≥10 hotspots on 1,008,193 located units — the largest stack holds 501 hotspots on one coordinate (§1 lists keys your registry team can grep today).
-2. 27,410 hotspots exist on-chain with no asserted location — on the registry but not on the map.
+1. 4,861 single-coordinate stacks of ≥10 hotspots on 1,008,194 located units — the largest stack holds 501 hotspots on one coordinate (§1 lists keys your registry team can grep today).
+2. 27,411 hotspots exist on-chain with no asserted location — on the registry but not on the map.
 3. Stacks are *expected* at small sizes (H3 snapping, dense buildings) — only review-worthy at this threshold; every number reproduces from the free public endpoint with no API key.
 
 ---
@@ -22,10 +22,10 @@
 
 | Metric | This run | vs last run |
 |---|---:|---|
-| Hotspots with asserted coordinates | 1,008,193 | unchanged vs last run |
-| Single-coordinate stacks (≥10 hotspots) | 4,860 | unchanged vs last run |
+| Hotspots with asserted coordinates | 1,008,194 | unchanged vs last run |
+| Single-coordinate stacks (≥10 hotspots) | 4,861 | +1 (+0.0%) |
 | Largest single-coordinate stack | 501 | unchanged vs last run |
-| Fleet share flagged (any heuristic) | 6.92% | unchanged vs last run |
+| Fleet share flagged (any heuristic) | 6.92% | +0.00 pp (+0.0%) |
 
 ---
 
