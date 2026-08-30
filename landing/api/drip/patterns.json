@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-30T19:38:33.839Z",
+  "generatedAt": "2026-08-30T20:49:42.657Z",
   "patterns": [
     {
       "scope": "systemic",
@@ -60,66 +60,6 @@
       "category": "INFRASTRUCTURE",
       "description": "Observed Helium Mobile stackedSpots on 6 of 6 recorded days.",
       "patternType": "cross-network"
-    },
-    {
-      "scope": "localized",
-      "classification": "drift",
-      "headline": "WeatherXM: capacity pressure signal detected",
-      "pattern": "LOCAL_CAPACITY",
-      "networks": [
-        "WeatherXM"
-      ],
-      "category": "CAPACITY",
-      "description": "Observed capacity signal on WeatherXM (overCapacityCells).",
-      "patternType": "single-network"
-    },
-    {
-      "scope": "localized",
-      "classification": "stability",
-      "headline": "Geodnet: identity registry stress signal detected",
-      "pattern": "LOCAL_IDENTITY",
-      "networks": [
-        "Geodnet"
-      ],
-      "category": "IDENTITY",
-      "description": "Observed identity signal on Geodnet (exactDupGroups).",
-      "patternType": "single-network"
-    },
-    {
-      "scope": "localized",
-      "classification": "drift",
-      "headline": "Hivemapper: economic distribution shape signal detected",
-      "pattern": "LOCAL_ECONOMICS",
-      "networks": [
-        "Hivemapper"
-      ],
-      "category": "ECONOMICS",
-      "description": "Observed economics signal on Hivemapper (top20ShareOfSupply).",
-      "patternType": "single-network"
-    },
-    {
-      "scope": "localized",
-      "classification": "concentration",
-      "headline": "Economic concentration shape on public ledgers",
-      "pattern": "ECONOMICS_CONCENTRATION",
-      "networks": [
-        "Hivemapper"
-      ],
-      "category": "ECONOMICS",
-      "description": "Observed holder/supply concentration metrics from public on-chain reads.",
-      "patternType": "single-network"
-    },
-    {
-      "scope": "localized",
-      "classification": "stability",
-      "headline": "Helium Mobile: infrastructure coverage stress signal detected",
-      "pattern": "LOCAL_INFRASTRUCTURE",
-      "networks": [
-        "Helium Mobile"
-      ],
-      "category": "INFRASTRUCTURE",
-      "description": "Observed infrastructure signal on Helium Mobile (stackedSpots).",
-      "patternType": "single-network"
     }
   ]
 }

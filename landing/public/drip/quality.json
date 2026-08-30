@@ -83,13 +83,15 @@
       {
         "network": "Helium IoT",
         "metric": "stackedSpots",
-        "confidence": 0.62,
-        "flags": []
+        "confidence": 0.544,
+        "flags": [
+          "volatile"
+        ]
       },
       {
         "network": "Helium Mobile",
         "metric": "stackedSpots",
-        "confidence": 0.62,
+        "confidence": 0.672,
         "flags": []
       }
     ]
