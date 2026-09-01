@@ -2,18 +2,18 @@
 
 > Independent public read by the GETKINETIK Bureau using only the WeatherXM Network's public API. No internal WeatherXM data was used. Findings below are *shape*, not allegations; the underlying signals (capacity, `pol_reason`, `qod_score`) come from the network's own model.
 
-- **As of:** 2026-08-31
+- **As of:** 2026-09-01
 - **Public source:** `https://api.weatherxm.com/api/v1/cells`
-- **Cells observed:** 8,511
-- **Cells over designed capacity (≥1.5× capacity):** 292 (3.4%)
+- **Cells observed:** 8,567
+- **Cells over designed capacity (≥1.5× capacity):** 297 (3.5%)
 - **Cells drilled in this report:** 60 (top by capacity ratio)
-- **Devices observed inside drilled cells:** 297
+- **Devices observed inside drilled cells:** 216
 
 ## Executive summary
 
-1. **292 cells** exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.
-2. **157 devices** in the hottest cells carry WeatherXM's own `NO_LOCATION_DATA` flag — compare to your internal pol pipeline, not ours.
-3. **153** drilled devices sit below qod 30 while still counted toward cell saturation.
+1. **297 cells** exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.
+2. **129 devices** in the hottest cells carry WeatherXM's own `NO_LOCATION_DATA` flag — compare to your internal pol pipeline, not ours.
+3. **130** drilled devices sit below qod 30 while still counted toward cell saturation.
 
 ---
 
@@ -21,11 +21,11 @@
 
 | Metric | This run | vs last run |
 |---|---:|---|
-| Cells on public map | 8,511 | -4 (-0.0%) |
-| Cells ≥1.5× capacity | 292 | +1 (+0.3%) |
-| Share of map over capacity | 3.43% | +0.01 pp (+0.4%) |
-| `NO_LOCATION_DATA` in drilled set | 157 | +23 (+17.2%) |
-| Devices with qod < 30 (drilled) | 153 | +23 (+17.7%) |
+| Cells on public map | 8,567 | +1 (+0.0%) |
+| Cells ≥1.5× capacity | 297 | +1 (+0.3%) |
+| Share of map over capacity | 3.47% | +0.01 pp (+0.3%) |
+| `NO_LOCATION_DATA` in drilled set | 129 | +2 (+1.6%) |
+| Devices with qod < 30 (drilled) | 130 | +6 (+4.8%) |
 
 ## What to cross-check this week
 
@@ -40,9 +40,9 @@
 
 ## Headline findings
 
-1. **292 cells** report more devices than the cell's designed capacity. Capacity is a WeatherXM-defined limit (the network's own model of how many devices a hex should sensibly hold).
-2. Of the 297 devices inside the most over-capacity cells, **157** are flagged with `pol_reason: NO_LOCATION_DATA` and **2** with another `pol_reason` value — all set by WeatherXM's own pipeline.
-3. **144** of those devices are inactive yet still counted in the cell, and **153** have `qod_score < 30`.
+1. **297 cells** report more devices than the cell's designed capacity. Capacity is a WeatherXM-defined limit (the network's own model of how many devices a hex should sensibly hold).
+2. Of the 216 devices inside the most over-capacity cells, **129** are flagged with `pol_reason: NO_LOCATION_DATA` and **1** with another `pol_reason` value — all set by WeatherXM's own pipeline.
+3. **121** of those devices are inactive yet still counted in the cell, and **130** have `qod_score < 30`.
 
 ---
 
@@ -52,31 +52,31 @@ Cells ordered by `device_count / capacity`. The first column is the H3 index; cl
 
 | H3 cell | Devices | Capacity | Ratio | Active | Avg QoD | Center (lat, lon) |
 |---|---:|---:|---:|---:|---:|---|
+| `871eda743ffffff` | 34 | 3 | 11.3× | 9 | 88 | 37.9810, 23.7195 |
 | `874449b31ffffff` | 10 | 1 | 10.0× | 0 | null | 33.9274, -94.7707 |
 | `8726cdb66ffffff` | 10 | 1 | 10.0× | 0 | null | 33.8746, -94.8049 |
-| `871eda743ffffff` | 28 | 3 | 9.3× | 7 | 87 | 37.9810, 23.7195 |
 | `872b0e115ffffff` | 9 | 1 | 9.0× | 0 | null | 44.5481, -64.3423 |
 | `872aaa945ffffff` | 9 | 1 | 9.0× | 7 | 89 | 39.1691, -77.3527 |
-| `872aae2cdffffff` | 7 | 1 | 7.0× | 7 | 85 | 39.2480, -77.2449 |
-| `871edcd23ffffff` | 7 | 1 | 7.0× | 5 | 99 | 40.5993, 22.9849 |
+| `871edcd23ffffff` | 8 | 1 | 8.0× | 6 | 92 | 40.5993, 22.9849 |
+| `872aae2cdffffff` | 7 | 1 | 7.0× | 7 | 88 | 39.2480, -77.2449 |
 | `8726cdb68ffffff` | 7 | 1 | 7.0× | 0 | null | 33.8068, -94.7452 |
 | `874995819ffffff` | 6 | 1 | 6.0× | 0 | null | 19.2644, -99.0158 |
+| `873933759ffffff` | 6 | 1 | 6.0× | 1 | 94 | 38.7867, -9.1042 |
 | `871e15312ffffff` | 5 | 1 | 5.0× | 5 | 91 | 47.7470, 16.2250 |
-| `874450316ffffff` | 5 | 1 | 5.0× | 5 | 67 | 30.8796, -88.3141 |
-| `871faa694ffffff` | 5 | 1 | 5.0× | 5 | 99 | 48.5924, 9.1617 |
-| `8726c351affffff` | 5 | 1 | 5.0× | 3 | 83 | 34.8788, -99.4895 |
-| `877a6ac76ffffff` | 9 | 2 | 4.5× | 9 | 58 | -0.6674, 36.3085 |
-| `871e556e1ffffff` | 8 | 2 | 4.0× | 7 | 86 | 47.1792, 27.5966 |
+| `874450316ffffff` | 5 | 1 | 5.0× | 5 | 59 | 30.8796, -88.3141 |
+| `871faa694ffffff` | 5 | 1 | 5.0× | 5 | 100 | 48.5924, 9.1617 |
+| `8726c35a9ffffff` | 5 | 1 | 5.0× | 3 | 95 | 34.8702, -99.5157 |
+| `877a6ac76ffffff` | 9 | 2 | 4.5× | 9 | 55 | -0.6674, 36.3085 |
+| `871e556e1ffffff` | 8 | 2 | 4.0× | 7 | 83 | 47.1792, 27.5966 |
 | `87274d6b4ffffff` | 4 | 1 | 4.0× | 0 | null | 42.6764, -84.5014 |
-| `874995854ffffff` | 4 | 1 | 4.0× | 1 | 1 | 19.2735, -99.1014 |
+| `874995854ffffff` | 4 | 1 | 4.0× | 0 | 1 | 19.2735, -99.1014 |
 | `8775a221bffffff` | 4 | 1 | 4.0× | 0 | null | 7.2367, -9.1619 |
 | `872aac992ffffff` | 4 | 1 | 4.0× | 4 | 96 | 40.2933, -75.7373 |
+| `8766dc932ffffff` | 4 | 1 | 4.0× | 0 | null | 0.4562, -76.5334 |
 | `871969046ffffff` | 4 | 1 | 4.0× | 0 | null | 52.0471, 5.5072 |
-| `871ee58a4ffffff` | 4 | 1 | 4.0× | 3 | 86 | 46.3285, 23.7291 |
+| `871ee58a4ffffff` | 4 | 1 | 4.0× | 3 | 85 | 46.3285, 23.7291 |
+| `8726c351affffff` | 4 | 1 | 4.0× | 2 | 81 | 34.8788, -99.4895 |
 | `877a4c068ffffff` | 4 | 1 | 4.0× | 2 | 80 | 0.4685, 35.2356 |
-| `874995809ffffff` | 4 | 1 | 4.0× | 1 | 15 | 19.2595, -99.0815 |
-| `871eda742ffffff` | 7 | 2 | 3.5× | 5 | 72 | 37.9821, 23.6894 |
-| `871ec902cffffff` | 7 | 2 | 3.5× | 2 | 76 | 40.9919, 29.0488 |
 
 _…and 35 more drilled cells in the snapshot file._
 
@@ -84,8 +84,8 @@ _…and 35 more drilled cells in the snapshot file._
 
 | pol_reason | Device count |
 |---|---:|
-| `NO_LOCATION_DATA` | 157 |
-| `LOCATION_NOT_VERIFIED` | 2 |
+| `NO_LOCATION_DATA` | 129 |
+| `LOCATION_NOT_VERIFIED` | 1 |
 
 These flags are produced by WeatherXM's own pipeline. The bureau did not invent them; the report only counts them and reads them back.
 
@@ -95,15 +95,34 @@ Bundles are reported by the device (`ws_model` / `gw_model`). High counts of a s
 
 | ws_model / gw_model | Device count |
 |---|---:|
-| WS1001 / WG1200 | 114 |
-| WS2000 / WS2000 | 96 |
-| WS1000 / WG1000 | 48 |
-| WS2001 / WS2001 | 22 |
-| WS1001 / WG3000 | 17 |
+| WS1001 / WG1200 | 84 |
+| WS2000 / WS2000 | 65 |
+| WS1000 / WG1000 | 37 |
+| WS2001 / WS2001 | 19 |
+| WS1001 / WG3000 | 11 |
 
 ## 4. Device-level detail — top 5 most over-capacity cells
 
-### 1. Cell `874449b31ffffff` — 10 devices in capacity 1 (10.0×)
+### 1. Cell `871eda743ffffff` — 34 devices in capacity 3 (11.3×)
+
+| Device ID | Active | QoD | pol_reason | Bundle | Last activity |
+|---|:-:|---:|---|---|---|
+| `126eadf0-7115-11ef-a8d1-1fe2597b4789` | N | 0 | NO_LOCATION_DATA | WS2001/WS2001 | 2025-06-25T11:36:28+03:00 |
+| `fc192be0-88bc-11ec-900c-abdec1c57354` | N | 0 | NO_LOCATION_DATA | WS1000/WG1000 | 2025-02-21T13:18:35+02:00 |
+| `e0108150-a554-11f1-9fa2-d9b3427c596a` | Y | 0 | NO_LOCATION_DATA | WS1001/WG3000 | 2026-09-01T20:30:11+03:00 |
+| `7699b010-1df5-11ed-960b-b351f0b0cc44` | N | 0 | NO_LOCATION_DATA | WS1000/WG1000 | 2026-01-29T10:50:00+02:00 |
+| `5d9a6360-0bc4-11f0-9d44-115d444d739a` | Y | 0 | NO_LOCATION_DATA | WS1001/WG1200 | 2038-01-19T05:14:07+02:00 |
+| `c7587780-5344-11ef-a2e4-6df465256924` | N | 0 | NO_LOCATION_DATA | WS2001/WS2001 | 2025-01-31T15:08:10+02:00 |
+| `04f1e520-cca3-11ec-8cb5-a7f2455167cf` | N | 0 | NO_LOCATION_DATA | WS1000/WG1000 | 2025-11-07T13:05:00+02:00 |
+| `81493f60-bf55-11ed-9972-4f669f2d96bd` | N | 0 | NO_LOCATION_DATA | WS2000/WS2000 | 2024-08-13T18:15:26+03:00 |
+| `fe601050-963e-11ec-900c-abdec1c57354` | N | 0 | NO_LOCATION_DATA | WS1000/WG1000 | 2026-07-08T15:28:00+03:00 |
+| `d3debb80-862b-11ef-bb6a-31ace5ea88be` | Y | 99 | — | WS1001/WG1200 | 2026-09-01T20:28:42+03:00 |
+| `571e4820-0bd4-11f0-b641-13ebff23371f` | N | 0 | NO_LOCATION_DATA | WS1001/WG1200 | 2026-05-14T09:57:00+03:00 |
+| `df04b930-bd65-11ef-9198-cde0089ff1ff` | N | 0 | NO_LOCATION_DATA | WS1000/WG1000 | 2025-02-21T12:41:21+02:00 |
+
+_…and 22 more devices in this cell._
+
+### 2. Cell `874449b31ffffff` — 10 devices in capacity 1 (10.0×)
 
 | Device ID | Active | QoD | pol_reason | Bundle | Last activity |
 |---|:-:|---:|---|---|---|
@@ -118,7 +137,7 @@ Bundles are reported by the device (`ws_model` / `gw_model`). High counts of a s
 | `334b7e50-438d-11ef-8e8d-b55568dc8e66` | N | 0 | NO_LOCATION_DATA | WS1001/WG1200 | 2025-08-16T16:36:26-05:00 |
 | `3376ad00-438d-11ef-8e8d-b55568dc8e66` | N | 0 | NO_LOCATION_DATA | WS1001/WG1200 | 2025-08-25T02:22:05-05:00 |
 
-### 2. Cell `8726cdb66ffffff` — 10 devices in capacity 1 (10.0×)
+### 3. Cell `8726cdb66ffffff` — 10 devices in capacity 1 (10.0×)
 
 | Device ID | Active | QoD | pol_reason | Bundle | Last activity |
 |---|:-:|---:|---|---|---|
@@ -132,25 +151,6 @@ Bundles are reported by the device (`ws_model` / `gw_model`). High counts of a s
 | `2e198990-438d-11ef-8e8d-b55568dc8e66` | N | 0 | NO_LOCATION_DATA | WS1001/WG1200 | 2026-06-26T03:50:00-05:00 |
 | `3359af20-438d-11ef-8e8d-b55568dc8e66` | N | 0 | NO_LOCATION_DATA | WS1001/WG1200 | 2026-08-21T01:46:00-05:00 |
 | `25eb6bd0-438d-11ef-8e8d-b55568dc8e66` | N | 0 | NO_LOCATION_DATA | WS1001/WG1200 | 2026-08-28T11:18:00-05:00 |
-
-### 3. Cell `871eda743ffffff` — 28 devices in capacity 3 (9.3×)
-
-| Device ID | Active | QoD | pol_reason | Bundle | Last activity |
-|---|:-:|---:|---|---|---|
-| `126eadf0-7115-11ef-a8d1-1fe2597b4789` | N | 0 | NO_LOCATION_DATA | WS2001/WS2001 | 2025-06-25T11:36:28+03:00 |
-| `fc192be0-88bc-11ec-900c-abdec1c57354` | N | — | — | WS1000/WG1000 | 2025-02-21T13:18:35+02:00 |
-| `7699b010-1df5-11ed-960b-b351f0b0cc44` | N | 0 | NO_LOCATION_DATA | WS1000/WG1000 | 2026-01-29T10:50:00+02:00 |
-| `5d9a6360-0bc4-11f0-9d44-115d444d739a` | Y | 0 | NO_LOCATION_DATA | WS1001/WG1200 | 2038-01-19T05:14:07+02:00 |
-| `c7587780-5344-11ef-a2e4-6df465256924` | N | 0 | NO_LOCATION_DATA | WS2001/WS2001 | 2025-01-31T15:08:10+02:00 |
-| `04f1e520-cca3-11ec-8cb5-a7f2455167cf` | N | 0 | NO_LOCATION_DATA | WS1000/WG1000 | 2025-11-07T13:05:00+02:00 |
-| `81493f60-bf55-11ed-9972-4f669f2d96bd` | N | 0 | NO_LOCATION_DATA | WS2000/WS2000 | 2024-08-13T18:15:26+03:00 |
-| `fe601050-963e-11ec-900c-abdec1c57354` | N | 0 | NO_LOCATION_DATA | WS1000/WG1000 | 2026-07-08T15:28:00+03:00 |
-| `d3debb80-862b-11ef-bb6a-31ace5ea88be` | Y | 99 | — | WS1001/WG1200 | 2026-08-31T22:43:13+03:00 |
-| `571e4820-0bd4-11f0-b641-13ebff23371f` | N | 0 | NO_LOCATION_DATA | WS1001/WG1200 | 2026-05-14T09:57:00+03:00 |
-| `a866f0a0-ab98-11ec-966b-a173bf0cd052` | N | 0 | NO_LOCATION_DATA | WS1000/WG1000 | 2026-07-08T15:28:00+03:00 |
-| `db6200f0-784e-11ef-a8d1-1fe2597b4789` | Y | 100 | — | WS1001/WG3000 | 2026-08-31T22:18:14+03:00 |
-
-_…and 16 more devices in this cell._
 
 ### 4. Cell `872b0e115ffffff` — 9 devices in capacity 1 (9.0×)
 
@@ -170,15 +170,15 @@ _…and 16 more devices in this cell._
 
 | Device ID | Active | QoD | pol_reason | Bundle | Last activity |
 |---|:-:|---:|---|---|---|
-| `cc45d4c0-bf54-11ed-95eb-b351f0b0cc44` | Y | 85 | NO_LOCATION_DATA | WS2000/WS2000 | 2026-08-31T15:43:38-04:00 |
-| `f07b5a00-bf53-11ed-8a70-d7d4cf200cc9` | Y | 62 | — | WS2000/WS2000 | 2026-08-31T15:43:23-04:00 |
-| `354db7f0-bf53-11ed-9972-4f669f2d96bd` | Y | 85 | — | WS2000/WS2000 | 2026-08-31T15:43:53-04:00 |
-| `ec8520f0-bf50-11ed-95eb-b351f0b0cc44` | Y | 100 | — | WS2000/WS2000 | 2026-08-31T15:42:43-04:00 |
-| `36e5f940-bf55-11ed-8a70-d7d4cf200cc9` | Y | 91 | — | WS2000/WS2000 | 2026-08-31T15:44:22-04:00 |
+| `cc45d4c0-bf54-11ed-95eb-b351f0b0cc44` | Y | 85 | — | WS2000/WS2000 | 2026-09-01T13:29:44-04:00 |
+| `f07b5a00-bf53-11ed-8a70-d7d4cf200cc9` | Y | 64 | — | WS2000/WS2000 | 2026-09-01T13:28:17-04:00 |
+| `354db7f0-bf53-11ed-9972-4f669f2d96bd` | Y | 85 | — | WS2000/WS2000 | 2026-09-01T13:27:56-04:00 |
+| `ec8520f0-bf50-11ed-95eb-b351f0b0cc44` | Y | 100 | — | WS2000/WS2000 | 2026-09-01T13:30:07-04:00 |
+| `36e5f940-bf55-11ed-8a70-d7d4cf200cc9` | Y | 92 | — | WS2000/WS2000 | 2026-09-01T13:28:44-04:00 |
 | `2c2d9810-438d-11ef-8e8d-b55568dc8e66` | N | 0 | NO_LOCATION_DATA | WS1001/WG1200 | 2026-07-31T11:08:00-04:00 |
-| `74ad1920-bf55-11ed-9972-4f669f2d96bd` | Y | 100 | — | WS2000/WS2000 | 2026-08-31T15:44:58-04:00 |
+| `74ad1920-bf55-11ed-9972-4f669f2d96bd` | Y | 100 | — | WS2000/WS2000 | 2026-09-01T13:26:20-04:00 |
 | `7f0c20a0-bf55-11ed-8a70-d7d4cf200cc9` | N | 0 | NO_LOCATION_DATA | WS2000/WS2000 | 2026-03-11T18:57:20-04:00 |
-| `f83c3700-bf53-11ed-8a70-d7d4cf200cc9` | Y | 100 | — | WS2000/WS2000 | 2026-08-31T15:43:28-04:00 |
+| `f83c3700-bf53-11ed-8a70-d7d4cf200cc9` | Y | 99 | — | WS2000/WS2000 | 2026-09-01T13:27:51-04:00 |
 
 ---
 

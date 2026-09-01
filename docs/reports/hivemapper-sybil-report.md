@@ -2,16 +2,16 @@
 
 > Independent public read by the GETKINETIK Bureau. **Part A** (when Solana RPC succeeds) reads on-chain state for the public HONEY SPL mint. **Part B** (optional) runs the same four geometry heuristics as `sybil-report.mjs` on a node list *you* supply. Hivemapper does not publish an unauthenticated global contributor JSON like WeatherXM's cells API or Geodnet's station list — use your own `SOLANA_RPC_URL` for reliable Part A, or attach `--nodes=` for the Geodnet-style pass.
 
-- **As of:** 2026-08-31
+- **As of:** 2026-09-01
 - **Solana RPC used:** `https://mainnet.helius-rpc.com/?api-key=[REDACTED]`
 - **HONEY mint:** `4vMsoUT2BWatFweudnQM1xedRLfJgJ7hswhcpz4xgBTy`
-- **Reported circulating / UI supply:** 6,579,715,394.195 HONEY
-- **Sum of top 20 largest SPL token accounts:** 3,372,873,055.84 HONEY (51.26% of UI supply)
+- **Reported circulating / UI supply:** 6,579,715,393.195 HONEY
+- **Sum of top 20 largest SPL token accounts:** 3,376,444,205.029 HONEY (51.32% of UI supply)
 - **No `--nodes=` file was supplied. For GPS / co-location style heuristics (same family as Geodnet / WeatherXM scans), obtain a public or partner-shared contributor snapshot with `lat` / `lng` and re-run with `--nodes=…` (schema: `scripts/sample-nodes.json`).**
 
 ## Executive summary
 
-1. **51.26% of UI-reported HONEY** sits in the **top 20 visible SPL accounts** (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
+1. **51.32% of UI-reported HONEY** sits in the **top 20 visible SPL accounts** (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
 2. **Top 5 accounts alone: 23.38%** of supply — see § Part A table for owner wallets to reconcile with custody labels.
 3. For GPS-style reads, re-run with `--nodes=` when you can export lat/lng (schema: `scripts/sample-nodes.json`).
 
@@ -21,9 +21,9 @@
 
 | Metric | This run | vs last run |
 |---|---:|---|
-| Top-20 visible SPL accounts (% of UI supply) | 51.26% | -0.00 pp (-0.0%) |
-| Sum of top-20 balances (HONEY) | 3,372,873,055.84 | -235,221.29 (-0.0%) |
-| UI-reported supply (HONEY) | 6,579,715,394.195 | unchanged vs last run |
+| Top-20 visible SPL accounts (% of UI supply) | 51.32% | -0.04 pp (-0.1%) |
+| Sum of top-20 balances (HONEY) | 3,376,444,205.029 | -2,559,629.337 (-0.1%) |
+| UI-reported supply (HONEY) | 6,579,715,393.195 | unchanged vs last run |
 
 ## What to cross-check this week
 
@@ -38,7 +38,7 @@
 
 ## Headline findings
 
-1. **Top 20 visible SPL accounts hold 51.26% of UI-reported supply** (3,372,873,055.84 HONEY).
+1. **Top 20 visible SPL accounts hold 51.32% of UI-reported supply** (3,376,444,205.029 HONEY).
 2. **Top 5 accounts: 23.38%** — worth matching to known custody before inferring contributor risk.
 3. **Methodology cap:** Solana returns at most 20 largest token accounts per mint; tail concentration is a lower bound.
 
@@ -57,7 +57,7 @@ The Solana RPC `getTokenLargestAccounts` returns at most **20** token accounts p
 | 5 | `HyW7x3gFHWLFA67a2DZVGeCcLNzuNTSG3yUyq2bSsuvA` | `4R4A1FhFuK6k9JqTnxcofhGv62QynMVfGbzTX69sqcEg` | 184,357,814.71 | 2.80% |
 | 6 | `6QGuxKCi9NC8cbdgHVWv3EcBnGJdW8FUMeAw62b8rBdd` | `ERs88VgAyUq6jhwH2nU8sFhMvggaYBySdxvgb7hujDCn` | 152,680,458.2 | 2.32% |
 | 7 | `D99E2pr78DSVmBcjuDWETY8Nfm9X9ro3Grgc67mzfutA` | `5YdDSjuyGruE3DtHanLgJzUnY6rCUpHLNoH8uQw7C76n` | 144,565,038.56 | 2.20% |
-| 8 | `u6PJ8DtQuPFnfmwHbGFULQ4u4EgjDiyYKjVEsynXq2w` | `5ZMDuKhBPzGitMoS8TK9auEcgpULz1eDqcWWXASXhXN5` | 130,635,392.44 | 1.99% |
+| 8 | `u6PJ8DtQuPFnfmwHbGFULQ4u4EgjDiyYKjVEsynXq2w` | `5ZMDuKhBPzGitMoS8TK9auEcgpULz1eDqcWWXASXhXN5` | 134,206,541.63 | 2.04% |
 | 9 | `Fe3XYFYaXEo2LEy4ff1fdvp5TT5pJN5nbusNoSwBcmor` | `GiTt4njw786sWSMfrPgqjwWtDKqaVXDtouZKbE7j4H6q` | 129,877,731.15 | 1.97% |
 | 10 | `Fqq49kW2eTtmhGtQuah9qsiwBsp4wdvnbFnACyhaTW8g` | `BMTrovbf7nreXq9tFhCyFKkPHPQiokxQKFxZUJwzBmK4` | 126,115,569.92 | 1.92% |
 | 11 | `34zJz5hsgnQyyX9togBNtGBNvzASKPXn1qJ7oiMEaXXD` | `FC6XEMBmxNfcTnQqkT1jQJmKBgaU5NZtPjYt9uu3YNyB` | 125,902,272.47 | 1.91% |
@@ -82,19 +82,19 @@ The Solana RPC `getTokenLargestAccounts` returns at most **20** token accounts p
 | 5 | 1,538,609,398.75 | 23.38% |
 | 6 | 1,691,289,856.95 | 25.70% |
 | 7 | 1,835,854,895.51 | 27.90% |
-| 8 | 1,966,490,287.95 | 29.89% |
-| 9 | 2,096,368,019.1 | 31.86% |
-| 10 | 2,222,483,589.02 | 33.78% |
-| 11 | 2,348,385,861.49 | 35.69% |
-| 12 | 2,470,574,352.92 | 37.55% |
-| 13 | 2,589,552,232.17 | 39.36% |
-| 14 | 2,706,178,635.57 | 41.13% |
-| 15 | 2,822,565,147.5 | 42.90% |
-| 16 | 2,935,780,140.8 | 44.62% |
-| 17 | 3,047,982,026.9 | 46.32% |
-| 18 | 3,156,874,839.79 | 47.98% |
-| 19 | 3,265,248,374.9 | 49.63% |
-| 20 | 3,372,873,055.84 | 51.26% |
+| 8 | 1,970,061,437.14 | 29.94% |
+| 9 | 2,099,939,168.29 | 31.92% |
+| 10 | 2,226,054,738.21 | 33.83% |
+| 11 | 2,351,957,010.68 | 35.75% |
+| 12 | 2,474,145,502.11 | 37.60% |
+| 13 | 2,593,123,381.36 | 39.41% |
+| 14 | 2,709,749,784.76 | 41.18% |
+| 15 | 2,826,136,296.69 | 42.95% |
+| 16 | 2,939,351,289.99 | 44.67% |
+| 17 | 3,051,553,176.09 | 46.38% |
+| 18 | 3,160,445,988.98 | 48.03% |
+| 19 | 3,268,819,524.09 | 49.68% |
+| 20 | 3,376,444,205.03 | 51.32% |
 
 **Interpretation:** extreme concentration can correlate with treasury, MM, or exchange custody — *not* automatically Sybil. Treat as economic *shape* worth cross-checking against internal contributor analytics, not as fraud findings.
 
