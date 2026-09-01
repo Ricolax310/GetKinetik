@@ -1,6 +1,6 @@
 # Weekly DePIN Signal Report
 
-> Week 2026-W36 · 2026-08-31 → 2026-08-31 · patterns first, then networks.
+> Week 2026-W36 · 2026-08-31 → 2026-09-01 · patterns first, then networks.
 
 ## Executive Summary
 
@@ -18,7 +18,7 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 **Observed in:**
 - WeatherXM
 
-**Signal:** Over-capacity H3 cells rose from 291 to 292.
+**Signal:** Over-capacity H3 cells rose from 296 to 297.
 
 **Scope:** localized
 
@@ -33,11 +33,11 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 - Helium IoT
 - Helium Mobile
 
-**Signal:** Exact coordinate-duplicate groups declined from 1002 to 1001 on Geodnet.
+**Signal:** Exact coordinate-duplicate groups rose from 1002 to 1004 on Geodnet.
 
 **Scope:** systemic
 
-**Classification:** stability
+**Classification:** escalation
 
 **Unknown:** Public data cannot confirm whether shared coordinates are distinct devices or one identity reused.
 
@@ -46,7 +46,7 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 **Observed in:**
 - Hivemapper
 
-**Signal:** Top-20 account share of supply observed near 51.26%.
+**Signal:** Top-20 account share of supply observed near 51.32%.
 
 **Scope:** localized
 
@@ -59,13 +59,13 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 ### WeatherXM
 
 **What changed**
-- cells over designed capacity: 292 (+1 (+0.3%))
+- cells over designed capacity: 297 (+1 (+0.3%))
 
 **Signal type**
 - Capacity pressure (`capacity_violation`)
 
 **Trend**
-- single delta observed
+- multiple deltas observed
 
 **Open question**
 - On the public cells view, do over-capacity H3 counts match your internal registry and rewards model?
@@ -76,13 +76,13 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 ### Geodnet
 
 **What changed**
-- exact (lat,lng) duplicate groups: 1,001 (-1 (-0.1%))
+- exact (lat,lng) duplicate groups: 1,004 (+2 (+0.2%))
 
 **Signal type**
 - Registry duplication (`duplication_cluster`)
 
 **Trend**
-- single delta observed
+- multiple deltas observed
 
 **Open question**
 - For stations sharing an exact coordinate pair on the public registry, is that expected registration behavior or a dedupe gap worth reconciling?
@@ -97,7 +97,7 @@ _No public signal this week — scan not run or no headline finding._
 ### Hivemapper
 
 **What changed**
-- 51.26% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
+- 51.32% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
 
 **Signal type**
 - Economic concentration (`economic_concentration`)
@@ -114,7 +114,7 @@ _No public signal this week — scan not run or no headline finding._
 ### DIMO
 
 **What changed**
-- Of 158,616 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,451 (19.8%) connect via software/synthetic devices, and 86,543 (54.6%) show no connected device on the public registry.
+- Of 158,625 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,450 (19.8%) connect via software/synthetic devices, and 86,553 (54.6%) show no connected device on the public registry.
 
 **Signal type**
 - Uncategorized public observation (`device_backing_gap`)
@@ -131,7 +131,7 @@ _No public signal this week — scan not run or no headline finding._
 ### Helium IoT
 
 **What changed**
-- 4,861 single-coordinate stacks of ≥10 hotspots on 1,008,197 located units — the largest stack holds 501 hotspots on one coordinate (§1 lists keys your registry team can grep today).
+- 4,861 single-coordinate stacks of ≥10 hotspots on 1,008,206 located units — the largest stack holds 501 hotspots on one coordinate (§1 lists keys your registry team can grep today).
 
 **Signal type**
 - Registry duplication (`duplication_cluster`)
@@ -166,10 +166,10 @@ _No public signal this week — scan not run or no headline finding._
 
 ### What Changed Today
 
-_Latest reading: 2026-08-31_
+_Latest reading: 2026-09-01_
 
-- **Geodnet** — exact (lat,lng) duplicate groups: 1,001 (-1 (-0.1%))
-- **WeatherXM** — cells over designed capacity: 292 (+1 (+0.3%))
+- **Geodnet** — exact (lat,lng) duplicate groups: 1,004 (+2 (+0.2%))
+- **WeatherXM** — cells over designed capacity: 297 (+1 (+0.3%))
 
 ### Signals To Watch
 
