@@ -4,8 +4,8 @@
 
 ## Today's Read
 
-• Geodnet duplicate-coordinate groups unchanged at 1,004.
-• WeatherXM over-capacity cells unchanged at 297.
+• Geodnet duplicate-coordinate groups rose from 1,004 to 1,006.
+• WeatherXM over-capacity cells declined from 297 to 296.
 • Hivemapper visible HONEY concentration remains near 51% of visible supply.
 
 ## Why It Matters
@@ -20,30 +20,32 @@ Observations span 6 networks — no single network dominates the index.
 
 | Sector | Signals | Networks | Top severity |
 |---|---:|---|---|
-| Registry & identity integrity | 3 | Geodnet, Helium IoT, Helium Mobile | medium |
-| Network health & capacity | 2 | DIMO, WeatherXM | medium |
+| Registry & identity integrity | 4 | Geodnet, Helium IoT, Helium Mobile | medium |
+| Network health & capacity | 3 | DIMO, WeatherXM | medium |
 | Token economics | 1 | Hivemapper | medium |
 
-_Totals: 6 signal(s) across 6/7 networks._
+_Totals: 8 signal(s) across 6/7 networks._
 
 ### What Changed Today
 
 **Registry & identity integrity**
-- **Geodnet** — 1004 exact (lat,lng) duplicate groups on 19,473 public stations — each row in §1 is one coordinate pair your registry team can grep today. _(medium · conf 0.70)_
-- **Helium IoT** — 4,861 single-coordinate stacks of ≥10 hotspots on 1,008,211 located units — the largest stack holds 501 hotspots on one coordinate (§1 lists keys your registry team can grep today). _(medium · conf 0.70)_
+- **Geodnet** — 1006 exact (lat,lng) duplicate groups on 19,478 public stations — each row in §1 is one coordinate pair your registry team can grep today. _(medium · conf 0.70)_
+- **Geodnet** — exact (lat,lng) duplicate groups: 1,006 (+2 (+0.2%)) _(low · conf 0.85)_
+- **Helium IoT** — 4,861 single-coordinate stacks of ≥10 hotspots on 1,008,213 located units — the largest stack holds 501 hotspots on one coordinate (§1 lists keys your registry team can grep today). _(medium · conf 0.70)_
 - **Helium Mobile** — 529 single-coordinate stacks of ≥10 hotspots on 55,590 located units — the largest stack holds 540 hotspots on one coordinate (§1 lists keys your registry team can grep today). _(medium · conf 0.70)_
 
 **Network health & capacity**
-- **WeatherXM** — 297 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue. _(medium · conf 0.70)_
-- **DIMO** — Of 158,627 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,448 (19.8%) connect via software/synthetic devices, and 86,557 (54.6%) show no connected device on the public registry. _(medium · conf 0.70)_
+- **WeatherXM** — 296 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue. _(medium · conf 0.70)_
+- **WeatherXM** — cells over designed capacity: 296 (-1 (-0.3%)) _(low · conf 0.85)_
+- **DIMO** — Of 158,626 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,448 (19.8%) connect via software/synthetic devices, and 86,556 (54.6%) show no connected device on the public registry. _(medium · conf 0.70)_
 
 **Token economics**
-- **Hivemapper** — 51.18% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read. _(medium · conf 0.70)_
+- **Hivemapper** — 51.10% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read. _(medium · conf 0.70)_
 
 ### Signal Type
 
-- **Registry & identity integrity** (`integrity`) — 3 signal(s) across 3 network(s): Geodnet, Helium IoT, Helium Mobile
-- **Network health & capacity** (`health`) — 2 signal(s) across 2 network(s): DIMO, WeatherXM
+- **Registry & identity integrity** (`integrity`) — 4 signal(s) across 3 network(s): Geodnet, Helium IoT, Helium Mobile
+- **Network health & capacity** (`health`) — 3 signal(s) across 2 network(s): DIMO, WeatherXM
 - **Token economics** (`economics`) — 1 signal(s) across 1 network(s): Hivemapper
 
 ### Signal Context
@@ -62,25 +64,27 @@ _Operational context for observed metrics — not verdicts._
 ### Network Breakdown
 
 ### Geodnet
-- [integrity] 1004 exact (lat,lng) duplicate groups on 19,473 public stations — each row in §1 is one coordinate pair your registry team can grep today. _(medium · conf 0.70)_
+- [integrity] 1006 exact (lat,lng) duplicate groups on 19,478 public stations — each row in §1 is one coordinate pair your registry team can grep today. _(medium · conf 0.70)_
+- [integrity] exact (lat,lng) duplicate groups: 1,006 (+2 (+0.2%)) _(low · conf 0.85)_
 
 ### WeatherXM
-- [health] 297 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue. _(medium · conf 0.70)_
+- [health] 296 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue. _(medium · conf 0.70)_
+- [health] cells over designed capacity: 296 (-1 (-0.3%)) _(low · conf 0.85)_
 
 ### Hivemapper
-- [economics] 51.18% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read. _(medium · conf 0.70)_
+- [economics] 51.10% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read. _(medium · conf 0.70)_
 
 ### NATIX
 - _No qualifying public finding in latest snapshot._
 
 ### Helium IoT
-- [integrity] 4,861 single-coordinate stacks of ≥10 hotspots on 1,008,211 located units — the largest stack holds 501 hotspots on one coordinate (§1 lists keys your registry team can grep today). _(medium · conf 0.70)_
+- [integrity] 4,861 single-coordinate stacks of ≥10 hotspots on 1,008,213 located units — the largest stack holds 501 hotspots on one coordinate (§1 lists keys your registry team can grep today). _(medium · conf 0.70)_
 
 ### Helium Mobile
 - [integrity] 529 single-coordinate stacks of ≥10 hotspots on 55,590 located units — the largest stack holds 540 hotspots on one coordinate (§1 lists keys your registry team can grep today). _(medium · conf 0.70)_
 
 ### DIMO
-- [health] Of 158,627 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,448 (19.8%) connect via software/synthetic devices, and 86,557 (54.6%) show no connected device on the public registry. _(medium · conf 0.70)_
+- [health] Of 158,626 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,448 (19.8%) connect via software/synthetic devices, and 86,556 (54.6%) show no connected device on the public registry. _(medium · conf 0.70)_
 
 ## Methodology
 
