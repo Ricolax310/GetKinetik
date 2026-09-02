@@ -1,7 +1,17 @@
 {
-  "generatedAt": "2026-09-01T17:30:43.756Z",
+  "generatedAt": "2026-09-02T13:04:11.764Z",
   "source": "https://rtk.geodnet.com/api/v2/coverage_stations",
   "stats": {
+    "generatedAt": "2026-09-02T13:04:11.764Z",
+    "observed": 19473,
+    "exactDupGroups": 1004,
+    "nearDupClusters": 1004,
+    "tightClusters": 6,
+    "lowPrecision": 3722,
+    "flaggedCount": 5336,
+    "flaggedPct": 0.27402043855594926
+  },
+  "prevStats": {
     "generatedAt": "2026-09-01T17:30:43.756Z",
     "observed": 19476,
     "exactDupGroups": 1004,
@@ -11,89 +21,8 @@
     "flaggedCount": 5334,
     "flaggedPct": 0.273875539125077
   },
-  "prevStats": {
-    "generatedAt": "2026-09-01T13:47:30.333Z",
-    "observed": 19478,
-    "exactDupGroups": 1002,
-    "nearDupClusters": 1002,
-    "tightClusters": 6,
-    "lowPrecision": 3717,
-    "flaggedCount": 5331,
-    "flaggedPct": 0.2736933976794332
-  },
-  "stationsTotal": 19476,
+  "stationsTotal": 19473,
   "duplicates": [
-    [
-      {
-        "name": "****414B8",
-        "status": "OFFLINE",
-        "stationId": 3598,
-        "lat": 55.817,
-        "lng": 26.473
-      },
-      {
-        "name": "****E5B0D",
-        "status": "ACTIVE",
-        "stationId": 723,
-        "lat": 55.817,
-        "lng": 26.473
-      }
-    ],
-    [
-      {
-        "name": "****E9D04",
-        "status": "OFFLINE",
-        "stationId": 522,
-        "lat": 37.399,
-        "lng": -121.979
-      },
-      {
-        "name": "****80631",
-        "status": "OFFLINE",
-        "stationId": 1577,
-        "lat": 37.399,
-        "lng": -121.979
-      }
-    ],
-    [
-      {
-        "name": "****20C14",
-        "status": "OFFLINE",
-        "stationId": 3296,
-        "lat": 36.259,
-        "lng": -115.176
-      },
-      {
-        "name": "****6A1AA",
-        "status": "ACTIVE",
-        "stationId": 377,
-        "lat": 36.259,
-        "lng": -115.176
-      },
-      {
-        "name": "****C8749",
-        "status": "ACTIVE",
-        "stationId": 3138,
-        "lat": 36.259,
-        "lng": -115.176
-      }
-    ],
-    [
-      {
-        "name": "****2B848",
-        "status": "OFFLINE",
-        "stationId": 3009,
-        "lat": 38.657,
-        "lng": 26.498
-      },
-      {
-        "name": "****82EA5",
-        "status": "OFFLINE",
-        "stationId": 2765,
-        "lat": 38.657,
-        "lng": 26.498
-      }
-    ],
     [
       {
         "name": "****C1D48",
@@ -465,70 +394,6 @@
     ],
     [
       {
-        "name": "****C4D72",
-        "status": "OFFLINE",
-        "stationId": 714,
-        "lat": 47.397,
-        "lng": 8.453
-      },
-      {
-        "name": "****DB79D",
-        "status": "ACTIVE",
-        "stationId": 1553,
-        "lat": 47.397,
-        "lng": 8.453
-      }
-    ],
-    [
-      {
-        "name": "****EBA05",
-        "status": "OFFLINE",
-        "stationId": 526,
-        "lat": 11.393,
-        "lng": 79.706
-      },
-      {
-        "name": "****B7DC0",
-        "status": "ONLINE",
-        "stationId": 2297,
-        "lat": 11.393,
-        "lng": 79.706
-      }
-    ],
-    [
-      {
-        "name": "****1CEB9",
-        "status": "OFFLINE",
-        "stationId": 2762,
-        "lat": 50.635,
-        "lng": 6.37
-      },
-      {
-        "name": "****D2F28",
-        "status": "ONLINE",
-        "stationId": 2299,
-        "lat": 50.635,
-        "lng": 6.37
-      }
-    ],
-    [
-      {
-        "name": "G067",
-        "status": "OFFLINE",
-        "stationId": 28,
-        "lat": -12.029,
-        "lng": -76.943
-      },
-      {
-        "name": "****B6E62",
-        "status": "ACTIVE",
-        "stationId": 816,
-        "lat": -12.029,
-        "lng": -76.943
-      }
-    ],
-    [
-      {
         "name": "****A56A1",
         "status": "OFFLINE",
         "stationId": 2086,
@@ -577,38 +442,6 @@
     ],
     [
       {
-        "name": "****DBEF9",
-        "status": "OFFLINE",
-        "stationId": 3836,
-        "lat": 38.7,
-        "lng": -93.197
-      },
-      {
-        "name": "****BFCB8",
-        "status": "ACTIVE",
-        "stationId": 2330,
-        "lat": 38.7,
-        "lng": -93.197
-      }
-    ],
-    [
-      {
-        "name": "****7C07D",
-        "status": "OFFLINE",
-        "stationId": 1038,
-        "lat": 39.082,
-        "lng": -77.062
-      },
-      {
-        "name": "****200D0",
-        "status": "OFFLINE",
-        "stationId": 3814,
-        "lat": 39.082,
-        "lng": -77.062
-      }
-    ],
-    [
-      {
         "name": "****F7865",
         "status": "OFFLINE",
         "stationId": 573,
@@ -625,50 +458,233 @@
     ],
     [
       {
-        "name": "****09A0A",
+        "name": "****10DFD",
         "status": "OFFLINE",
-        "stationId": 2515,
-        "lat": 19.387,
-        "lng": 74.64
+        "stationId": 1379,
+        "lat": 27.934,
+        "lng": -81.872
       },
       {
-        "name": "****C5405",
+        "name": "****69E18",
         "status": "ACTIVE",
-        "stationId": 1955,
-        "lat": 19.387,
-        "lng": 74.64
+        "stationId": 590,
+        "lat": 27.934,
+        "lng": -81.872
       }
     ],
     [
       {
-        "name": "****1CC35",
+        "name": "****2F569",
         "status": "OFFLINE",
-        "stationId": 2761,
-        "lat": 51.596,
-        "lng": -0.282
+        "stationId": 2762,
+        "lat": 35.209,
+        "lng": -82.246
       },
       {
-        "name": "****3274A",
-        "status": "OFFLINE",
-        "stationId": 4009,
-        "lat": 51.596,
-        "lng": -0.282
+        "name": "****6E64A",
+        "status": "ONLINE",
+        "stationId": 897,
+        "lat": 35.209,
+        "lng": -82.246
+      },
+      {
+        "name": "****6E64A",
+        "status": "ONLINE",
+        "stationId": 2713,
+        "lat": 35.209,
+        "lng": -82.246
       }
     ],
     [
       {
-        "name": "****FFBBD",
+        "name": "****D0EC4",
         "status": "OFFLINE",
-        "stationId": 1126,
-        "lat": 40.561,
-        "lng": 21.696
+        "stationId": 277,
+        "lat": 34.495,
+        "lng": -117.221
       },
       {
-        "name": "****3279E",
+        "name": "****1C455",
         "status": "ACTIVE",
-        "stationId": 703,
-        "lat": 40.561,
-        "lng": 21.696
+        "stationId": 2719,
+        "lat": 34.495,
+        "lng": -117.221
+      }
+    ],
+    [
+      {
+        "name": "****75DD5",
+        "status": "OFFLINE",
+        "stationId": 601,
+        "lat": 36.533,
+        "lng": -77.882
+      },
+      {
+        "name": "****75DD5",
+        "status": "OFFLINE",
+        "stationId": 794,
+        "lat": 36.533,
+        "lng": -77.882
+      }
+    ],
+    [
+      {
+        "name": "****20885",
+        "status": "OFFLINE",
+        "stationId": 676,
+        "lat": 39.604,
+        "lng": -119.235
+      },
+      {
+        "name": "****6E642",
+        "status": "OFFLINE",
+        "stationId": 2050,
+        "lat": 39.604,
+        "lng": -119.235
+      }
+    ],
+    [
+      {
+        "name": "****DBEF9",
+        "status": "OFFLINE",
+        "stationId": 3836,
+        "lat": 38.7,
+        "lng": -93.197
+      },
+      {
+        "name": "****BFCB8",
+        "status": "ACTIVE",
+        "stationId": 2330,
+        "lat": 38.7,
+        "lng": -93.197
+      }
+    ],
+    [
+      {
+        "name": "****C4D72",
+        "status": "OFFLINE",
+        "stationId": 714,
+        "lat": 47.397,
+        "lng": 8.453
+      },
+      {
+        "name": "****DB79D",
+        "status": "ACTIVE",
+        "stationId": 1553,
+        "lat": 47.397,
+        "lng": 8.453
+      }
+    ],
+    [
+      {
+        "name": "****33A99",
+        "status": "OFFLINE",
+        "stationId": 2873,
+        "lat": 44.028,
+        "lng": 25.768
+      },
+      {
+        "name": "****3270C",
+        "status": "OFFLINE",
+        "stationId": 2398,
+        "lat": 44.028,
+        "lng": 25.768
+      }
+    ],
+    [
+      {
+        "name": "****08A0C",
+        "status": "OFFLINE",
+        "stationId": 942,
+        "lat": -33.848,
+        "lng": 18.67
+      },
+      {
+        "name": "****A23A1",
+        "status": "ACTIVE",
+        "stationId": 220,
+        "lat": -33.848,
+        "lng": 18.67
+      }
+    ],
+    [
+      {
+        "name": "****D7569",
+        "status": "OFFLINE",
+        "stationId": 2390,
+        "lat": 39.184,
+        "lng": 27.851
+      },
+      {
+        "name": "****D365D",
+        "status": "ACTIVE",
+        "stationId": 3249,
+        "lat": 39.184,
+        "lng": 27.851
+      }
+    ],
+    [
+      {
+        "name": "****F09B1",
+        "status": "OFFLINE",
+        "stationId": 3650,
+        "lat": 10.315,
+        "lng": 123.881
+      },
+      {
+        "name": "****6A8A4",
+        "status": "OFFLINE",
+        "stationId": 1296,
+        "lat": 10.315,
+        "lng": 123.881
+      }
+    ],
+    [
+      {
+        "name": "****CCE45",
+        "status": "OFFLINE",
+        "stationId": 3579,
+        "lat": 39.89,
+        "lng": -0.255
+      },
+      {
+        "name": "****6A812",
+        "status": "ACTIVE",
+        "stationId": 2953,
+        "lat": 39.89,
+        "lng": -0.255
+      }
+    ],
+    [
+      {
+        "name": "****C0091",
+        "status": "OFFLINE",
+        "stationId": 3617,
+        "lat": 28.534,
+        "lng": 77.056
+      },
+      {
+        "name": "****6A464",
+        "status": "ACTIVE",
+        "stationId": 3424,
+        "lat": 28.534,
+        "lng": 77.056
+      }
+    ],
+    [
+      {
+        "name": "****DCE89",
+        "status": "OFFLINE",
+        "stationId": 1070,
+        "lat": 15.871,
+        "lng": 74.622
+      },
+      {
+        "name": "****09A12",
+        "status": "OFFLINE",
+        "stationId": 2327,
+        "lat": 15.871,
+        "lng": 74.622
       }
     ],
     [
@@ -689,98 +705,82 @@
     ],
     [
       {
-        "name": "****C2D54",
+        "name": "****6E7F2",
         "status": "OFFLINE",
-        "stationId": 1040,
-        "lat": 11.266,
-        "lng": -74.185
+        "stationId": 2369,
+        "lat": 50.982,
+        "lng": 5.148
       },
       {
-        "name": "****727D1",
+        "name": "****64B91",
         "status": "OFFLINE",
-        "stationId": 313,
-        "lat": 11.266,
-        "lng": -74.185
+        "stationId": 4086,
+        "lat": 50.982,
+        "lng": 5.148
       }
     ],
     [
       {
-        "name": "****B4EE1",
-        "status": "OFFLINE",
-        "stationId": 2698,
-        "lat": 41.917,
-        "lng": -70.695
+        "name": "****2E80A",
+        "status": "ACTIVE",
+        "stationId": 1659,
+        "lat": 40.898,
+        "lng": 38.325
       },
       {
-        "name": "****C0C7C",
-        "status": "OFFLINE",
-        "stationId": 2021,
-        "lat": 41.917,
-        "lng": -70.695
+        "name": "****1CFC1",
+        "status": "ACTIVE",
+        "stationId": 1351,
+        "lat": 40.898,
+        "lng": 38.325
       }
     ],
     [
       {
-        "name": "****3B1C8",
+        "name": "****A0F01",
         "status": "ACTIVE",
-        "stationId": 3417,
-        "lat": 38.496,
-        "lng": 27.109
+        "stationId": 1555,
+        "lat": 22.509,
+        "lng": 73.472
       },
       {
-        "name": "****DB88D",
+        "name": "****69E9A",
         "status": "ACTIVE",
-        "stationId": 758,
-        "lat": 38.496,
-        "lng": 27.109
+        "stationId": 3261,
+        "lat": 22.509,
+        "lng": 73.472
       }
     ],
     [
       {
-        "name": "****C0091",
+        "name": "****1FC58",
         "status": "ACTIVE",
-        "stationId": 3617,
-        "lat": 28.534,
-        "lng": 77.056
+        "stationId": 2987,
+        "lat": 42.524,
+        "lng": -96.385
       },
       {
-        "name": "****6A464",
+        "name": "****E39F1",
         "status": "ACTIVE",
-        "stationId": 3424,
-        "lat": 28.534,
-        "lng": 77.056
+        "stationId": 3245,
+        "lat": 42.524,
+        "lng": -96.385
       }
     ],
     [
       {
-        "name": "****29DBD",
+        "name": "****69AA8",
         "status": "ONLINE",
-        "stationId": 1029,
-        "lat": -32.74,
-        "lng": 27.661
+        "stationId": 2663,
+        "lat": 12.725,
+        "lng": 79.672
       },
       {
-        "name": "****C4D12",
-        "status": "ONLINE",
-        "stationId": 1916,
-        "lat": -32.74,
-        "lng": 27.661
-      }
-    ],
-    [
-      {
-        "name": "****22182",
+        "name": "****EB9ED",
         "status": "ACTIVE",
-        "stationId": 1386,
-        "lat": 40.358,
-        "lng": -0.066
-      },
-      {
-        "name": "****8B06D",
-        "status": "ONLINE",
-        "stationId": 3211,
-        "lat": 40.358,
-        "lng": -0.066
+        "stationId": 525,
+        "lat": 12.725,
+        "lng": 79.672
       }
     ],
     [
@@ -1425,22 +1425,6 @@
     ],
     [
       {
-        "name": "****EB9ED",
-        "status": "ACTIVE",
-        "stationId": 525,
-        "lat": 12.725,
-        "lng": 79.672
-      },
-      {
-        "name": "****69AA8",
-        "status": "ONLINE",
-        "stationId": 2663,
-        "lat": 12.725,
-        "lng": 79.672
-      }
-    ],
-    [
-      {
         "name": "****45EAD",
         "status": "ACTIVE",
         "stationId": 78,
@@ -1673,7 +1657,7 @@
       },
       {
         "name": "****09A2C",
-        "status": "ACTIVE",
+        "status": "ONLINE",
         "stationId": 1957,
         "lat": 11.315,
         "lng": 79.51
@@ -2233,7 +2217,7 @@
       },
       {
         "name": "****099AA",
-        "status": "ONLINE",
+        "status": "ACTIVE",
         "stationId": 2594,
         "lat": 38.117,
         "lng": -7.442
@@ -2385,6 +2369,22 @@
     ],
     [
       {
+        "name": "****DB88D",
+        "status": "ACTIVE",
+        "stationId": 758,
+        "lat": 38.496,
+        "lng": 27.109
+      },
+      {
+        "name": "****3B1C8",
+        "status": "ACTIVE",
+        "stationId": 3417,
+        "lat": 38.496,
+        "lng": 27.109
+      }
+    ],
+    [
+      {
         "name": "****37945",
         "status": "ACTIVE",
         "stationId": 758,
@@ -2401,24 +2401,8 @@
     ],
     [
       {
-        "name": "****75DD5",
-        "status": "ONLINE",
-        "stationId": 601,
-        "lat": 36.533,
-        "lng": -77.882
-      },
-      {
-        "name": "****75DD5",
-        "status": "ONLINE",
-        "stationId": 794,
-        "lat": 36.533,
-        "lng": -77.882
-      }
-    ],
-    [
-      {
         "name": "****0FDCD",
-        "status": "ONLINE",
+        "status": "ACTIVE",
         "stationId": 784,
         "lat": 28.507,
         "lng": 77.037
@@ -2745,7 +2729,7 @@
       },
       {
         "name": "****2E83E",
-        "status": "ONLINE",
+        "status": "ACTIVE",
         "stationId": 1606,
         "lat": 40.167,
         "lng": 31.92
@@ -2961,38 +2945,6 @@
     ],
     [
       {
-        "name": "****A0F01",
-        "status": "ACTIVE",
-        "stationId": 1555,
-        "lat": 22.509,
-        "lng": 73.472
-      },
-      {
-        "name": "****69E9A",
-        "status": "ACTIVE",
-        "stationId": 3261,
-        "lat": 22.509,
-        "lng": 73.472
-      }
-    ],
-    [
-      {
-        "name": "****1CFC1",
-        "status": "ACTIVE",
-        "stationId": 1351,
-        "lat": 40.898,
-        "lng": 38.325
-      },
-      {
-        "name": "****2E80A",
-        "status": "ACTIVE",
-        "stationId": 1659,
-        "lat": 40.898,
-        "lng": 38.325
-      }
-    ],
-    [
-      {
         "name": "****1CE0D",
         "status": "ACTIVE",
         "stationId": 928,
@@ -3101,6 +3053,22 @@
         "stationId": 3517,
         "lat": 6.495,
         "lng": 3.306
+      }
+    ],
+    [
+      {
+        "name": "****7C07D",
+        "status": "ACTIVE",
+        "stationId": 1038,
+        "lat": 39.082,
+        "lng": -77.062
+      },
+      {
+        "name": "****200D0",
+        "status": "ACTIVE",
+        "stationId": 3814,
+        "lat": 39.082,
+        "lng": -77.062
       }
     ],
     [
@@ -3439,6 +3407,22 @@
     ],
     [
       {
+        "name": "****10DC9",
+        "status": "ONLINE",
+        "stationId": 2182,
+        "lat": 40.827,
+        "lng": 31.208
+      },
+      {
+        "name": "****33660",
+        "status": "ONLINE",
+        "stationId": 3129,
+        "lat": 40.827,
+        "lng": 31.208
+      }
+    ],
+    [
+      {
         "name": "****11105",
         "status": "ACTIVE",
         "stationId": 2199,
@@ -3536,7 +3520,7 @@
     [
       {
         "name": "****20879",
-        "status": "ONLINE",
+        "status": "ACTIVE",
         "stationId": 2702,
         "lat": 41.344,
         "lng": 69.338
@@ -3703,7 +3687,7 @@
       },
       {
         "name": "****3B268",
-        "status": "ONLINE",
+        "status": "ACTIVE",
         "stationId": 1573,
         "lat": -30.825,
         "lng": 30.393
@@ -3887,6 +3871,22 @@
     ],
     [
       {
+        "name": "****29DBD",
+        "status": "ONLINE",
+        "stationId": 1029,
+        "lat": -32.74,
+        "lng": 27.661
+      },
+      {
+        "name": "****C4D12",
+        "status": "ONLINE",
+        "stationId": 1916,
+        "lat": -32.74,
+        "lng": 27.661
+      }
+    ],
+    [
+      {
         "name": "****2A859",
         "status": "ACTIVE",
         "stationId": 3840,
@@ -3899,6 +3899,22 @@
         "stationId": 884,
         "lat": 45.597,
         "lng": 14.087
+      }
+    ],
+    [
+      {
+        "name": "****B4EE1",
+        "status": "ONLINE",
+        "stationId": 2698,
+        "lat": 41.917,
+        "lng": -70.695
+      },
+      {
+        "name": "****C0C7C",
+        "status": "ONLINE",
+        "stationId": 2021,
+        "lat": 41.917,
+        "lng": -70.695
       }
     ],
     [
@@ -4059,6 +4075,22 @@
         "stationId": 2267,
         "lat": 36.013,
         "lng": -84.221
+      }
+    ],
+    [
+      {
+        "name": "****1CC35",
+        "status": "ACTIVE",
+        "stationId": 2761,
+        "lat": 51.596,
+        "lng": -0.282
+      },
+      {
+        "name": "****3274A",
+        "status": "ACTIVE",
+        "stationId": 4009,
+        "lat": 51.596,
+        "lng": -0.282
       }
     ],
     [
@@ -4487,7 +4519,7 @@
       },
       {
         "name": "****2A876",
-        "status": "ONLINE",
+        "status": "ACTIVE",
         "stationId": 3285,
         "lat": 47.818,
         "lng": 11.892
@@ -4704,7 +4736,7 @@
     [
       {
         "name": "****2AA51",
-        "status": "ONLINE",
+        "status": "ACTIVE",
         "stationId": 1225,
         "lat": -7.274,
         "lng": 112.783
@@ -4859,22 +4891,6 @@
         "stationId": 1725,
         "lat": 39.707,
         "lng": 43.011
-      }
-    ],
-    [
-      {
-        "name": "****E39F1",
-        "status": "ACTIVE",
-        "stationId": 3245,
-        "lat": 42.524,
-        "lng": -96.385
-      },
-      {
-        "name": "****1FC58",
-        "status": "ACTIVE",
-        "stationId": 2987,
-        "lat": 42.524,
-        "lng": -96.385
       }
     ],
     [
@@ -5231,22 +5247,6 @@
     ],
     [
       {
-        "name": "****DCE89",
-        "status": "ACTIVE",
-        "stationId": 1070,
-        "lat": 15.871,
-        "lng": 74.622
-      },
-      {
-        "name": "****09A12",
-        "status": "ACTIVE",
-        "stationId": 2327,
-        "lat": 15.871,
-        "lng": 74.622
-      }
-    ],
-    [
-      {
         "name": "****D2081",
         "status": "ACTIVE",
         "stationId": 360,
@@ -5431,7 +5431,7 @@
       },
       {
         "name": "****C0CD8",
-        "status": "ONLINE",
+        "status": "ACTIVE",
         "stationId": 4040,
         "lat": 40.805,
         "lng": 32.895
@@ -5451,22 +5451,6 @@
         "stationId": 132,
         "lat": 45.77,
         "lng": 13.805
-      }
-    ],
-    [
-      {
-        "name": "****CCE45",
-        "status": "ACTIVE",
-        "stationId": 3579,
-        "lat": 39.89,
-        "lng": -0.255
-      },
-      {
-        "name": "****6A812",
-        "status": "ACTIVE",
-        "stationId": 2953,
-        "lat": 39.89,
-        "lng": -0.255
       }
     ],
     [
@@ -5552,14 +5536,14 @@
     [
       {
         "name": "****E0E49",
-        "status": "ACTIVE",
+        "status": "ONLINE",
         "stationId": 778,
         "lat": 4.193,
         "lng": 103.436
       },
       {
         "name": "****B24BA",
-        "status": "ACTIVE",
+        "status": "ONLINE",
         "stationId": 76,
         "lat": 4.193,
         "lng": 103.436
@@ -6048,7 +6032,7 @@
     [
       {
         "name": "****3A748",
-        "status": "ONLINE",
+        "status": "ACTIVE",
         "stationId": 368,
         "lat": 43.582,
         "lng": 1.523
@@ -6320,7 +6304,7 @@
     [
       {
         "name": "****326FA",
-        "status": "ACTIVE",
+        "status": "ONLINE",
         "stationId": 30,
         "lat": 49.255,
         "lng": 8.899
@@ -6864,7 +6848,7 @@
     [
       {
         "name": "****3B23C",
-        "status": "ACTIVE",
+        "status": "ONLINE",
         "stationId": 1642,
         "lat": 47.804,
         "lng": 18.737
@@ -7216,14 +7200,14 @@
     [
       {
         "name": "****D0195",
-        "status": "ACTIVE",
+        "status": "ONLINE",
         "stationId": 2737,
         "lat": 25.007,
         "lng": 88.127
       },
       {
         "name": "****C2D7C",
-        "status": "ACTIVE",
+        "status": "ONLINE",
         "stationId": 2416,
         "lat": 25.007,
         "lng": 88.127
@@ -7391,6 +7375,22 @@
     ],
     [
       {
+        "name": "****3279E",
+        "status": "ACTIVE",
+        "stationId": 703,
+        "lat": 40.561,
+        "lng": 21.696
+      },
+      {
+        "name": "****FFBBD",
+        "status": "ACTIVE",
+        "stationId": 1126,
+        "lat": 40.561,
+        "lng": 21.696
+      }
+    ],
+    [
+      {
         "name": "****17FF9",
         "status": "ACTIVE",
         "stationId": 2487,
@@ -7399,7 +7399,7 @@
       },
       {
         "name": "****E30C4",
-        "status": "ACTIVE",
+        "status": "ONLINE",
         "stationId": 2679,
         "lat": 49.812,
         "lng": 7.417
@@ -7791,22 +7791,6 @@
     ],
     [
       {
-        "name": "****3270C",
-        "status": "ACTIVE",
-        "stationId": 2398,
-        "lat": 44.028,
-        "lng": 25.768
-      },
-      {
-        "name": "****33A99",
-        "status": "ACTIVE",
-        "stationId": 2873,
-        "lat": 44.028,
-        "lng": 25.768
-      }
-    ],
-    [
-      {
         "name": "****2E880",
         "status": "ACTIVE",
         "stationId": 25,
@@ -7952,7 +7936,7 @@
     [
       {
         "name": "****3A7C8",
-        "status": "ONLINE",
+        "status": "ACTIVE",
         "stationId": 1849,
         "lat": 39.847,
         "lng": -3
@@ -8635,22 +8619,6 @@
         "stationId": 2981,
         "lat": 32.155,
         "lng": -110.957
-      }
-    ],
-    [
-      {
-        "name": "****D0EC4",
-        "status": "ACTIVE",
-        "stationId": 277,
-        "lat": 34.495,
-        "lng": -117.221
-      },
-      {
-        "name": "****1C455",
-        "status": "ACTIVE",
-        "stationId": 2719,
-        "lat": 34.495,
-        "lng": -117.221
       }
     ],
     [
@@ -9348,6 +9316,22 @@
     ],
     [
       {
+        "name": "****D2F28",
+        "status": "ACTIVE",
+        "stationId": 2299,
+        "lat": 50.635,
+        "lng": 6.37
+      },
+      {
+        "name": "****1CEB9",
+        "status": "ACTIVE",
+        "stationId": 2762,
+        "lat": 50.635,
+        "lng": 6.37
+      }
+    ],
+    [
+      {
         "name": "****374DC",
         "status": "ACTIVE",
         "stationId": 1894,
@@ -9552,6 +9536,22 @@
         "stationId": 353,
         "lat": 49.831,
         "lng": -100.301
+      }
+    ],
+    [
+      {
+        "name": "****727D1",
+        "status": "ACTIVE",
+        "stationId": 313,
+        "lat": 11.266,
+        "lng": -74.185
+      },
+      {
+        "name": "****C2D54",
+        "status": "ACTIVE",
+        "stationId": 1040,
+        "lat": 11.266,
+        "lng": -74.185
       }
     ],
     [
@@ -9861,14 +9861,14 @@
     [
       {
         "name": "****679B1",
-        "status": "ONLINE",
+        "status": "ACTIVE",
         "stationId": 279,
         "lat": -38.987,
         "lng": -61.308
       },
       {
         "name": "****1AC4A",
-        "status": "ONLINE",
+        "status": "ACTIVE",
         "stationId": 460,
         "lat": -38.987,
         "lng": -61.308
@@ -10588,7 +10588,7 @@
       },
       {
         "name": "****BFCCE",
-        "status": "ACTIVE",
+        "status": "ONLINE",
         "stationId": 3170,
         "lat": 51.868,
         "lng": 6.165
@@ -10805,7 +10805,7 @@
     [
       {
         "name": "****CAD92",
-        "status": "ONLINE",
+        "status": "ACTIVE",
         "stationId": 2521,
         "lat": 39.43,
         "lng": 3.015
@@ -10853,7 +10853,7 @@
     [
       {
         "name": "****CCE1E",
-        "status": "ONLINE",
+        "status": "ACTIVE",
         "stationId": 208,
         "lat": 42.159,
         "lng": 27.831
@@ -11093,7 +11093,7 @@
     [
       {
         "name": "****C1D0A",
-        "status": "ONLINE",
+        "status": "ACTIVE",
         "stationId": 1956,
         "lat": 40.426,
         "lng": -0.256
@@ -11120,6 +11120,22 @@
         "stationId": 3685,
         "lat": 40.396,
         "lng": 0.133
+      }
+    ],
+    [
+      {
+        "name": "****22182",
+        "status": "OFFLINE",
+        "stationId": 1386,
+        "lat": 40.358,
+        "lng": -0.066
+      },
+      {
+        "name": "****8B06D",
+        "status": "ACTIVE",
+        "stationId": 3211,
+        "lat": 40.358,
+        "lng": -0.066
       }
     ],
     [
@@ -11604,22 +11620,6 @@
     ],
     [
       {
-        "name": "****D7569",
-        "status": "ACTIVE",
-        "stationId": 2390,
-        "lat": 39.184,
-        "lng": 27.851
-      },
-      {
-        "name": "****D365D",
-        "status": "ACTIVE",
-        "stationId": 3249,
-        "lat": 39.184,
-        "lng": 27.851
-      }
-    ],
-    [
-      {
         "name": "****1CD06",
         "status": "ACTIVE",
         "stationId": 1560,
@@ -11765,7 +11765,7 @@
     [
       {
         "name": "****20BCA",
-        "status": "ONLINE",
+        "status": "ACTIVE",
         "stationId": 213,
         "lat": 43.842,
         "lng": -91.107
@@ -11836,7 +11836,7 @@
       },
       {
         "name": "****C82AD",
-        "status": "ONLINE",
+        "status": "ACTIVE",
         "stationId": 567,
         "lat": 43.599,
         "lng": 28.536
@@ -11936,6 +11936,22 @@
         "stationId": 1879,
         "lat": 41.025,
         "lng": -8.589
+      }
+    ],
+    [
+      {
+        "name": "****C5405",
+        "status": "ACTIVE",
+        "stationId": 1955,
+        "lat": 19.387,
+        "lng": 74.64
+      },
+      {
+        "name": "****09A0A",
+        "status": "ACTIVE",
+        "stationId": 2515,
+        "lat": 19.387,
+        "lng": 74.64
       }
     ],
     [
@@ -12172,7 +12188,7 @@
       },
       {
         "name": "****7F801",
-        "status": "ACTIVE",
+        "status": "ONLINE",
         "stationId": 350,
         "lat": 39.89,
         "lng": -74.176
@@ -12277,7 +12293,7 @@
     [
       {
         "name": "****099BA",
-        "status": "ONLINE",
+        "status": "ACTIVE",
         "stationId": 3744,
         "lat": 44.689,
         "lng": -116.092
@@ -12341,7 +12357,7 @@
     [
       {
         "name": "****20D4E",
-        "status": "ONLINE",
+        "status": "ACTIVE",
         "stationId": 2813,
         "lat": 41.54,
         "lng": 1.895
@@ -12492,7 +12508,7 @@
       },
       {
         "name": "****10AD1",
-        "status": "ONLINE",
+        "status": "ACTIVE",
         "stationId": 3085,
         "lat": 38.768,
         "lng": -8.889
@@ -12613,7 +12629,7 @@
     [
       {
         "name": "****C2CCA",
-        "status": "ACTIVE",
+        "status": "ONLINE",
         "stationId": 3628,
         "lat": 38.964,
         "lng": -112.334
@@ -12629,7 +12645,7 @@
     [
       {
         "name": "****0DBD4",
-        "status": "ACTIVE",
+        "status": "ONLINE",
         "stationId": 3967,
         "lat": 39.021,
         "lng": -76.725
@@ -12716,7 +12732,7 @@
       },
       {
         "name": "****6E81C",
-        "status": "ACTIVE",
+        "status": "ONLINE",
         "stationId": 1967,
         "lat": -31.882,
         "lng": 115.921
@@ -12817,7 +12833,7 @@
       },
       {
         "name": "****CEE76",
-        "status": "ACTIVE",
+        "status": "ONLINE",
         "stationId": 2429,
         "lat": 19.198,
         "lng": 73.199
@@ -12985,24 +13001,8 @@
     ],
     [
       {
-        "name": "****6A8A4",
-        "status": "ACTIVE",
-        "stationId": 1296,
-        "lat": 10.315,
-        "lng": 123.881
-      },
-      {
-        "name": "****F09B1",
-        "status": "ACTIVE",
-        "stationId": 3650,
-        "lat": 10.315,
-        "lng": 123.881
-      }
-    ],
-    [
-      {
         "name": "****6AB54",
-        "status": "ACTIVE",
+        "status": "ONLINE",
         "stationId": 769,
         "lat": 48.251,
         "lng": 11.659
@@ -13401,22 +13401,6 @@
     ],
     [
       {
-        "name": "****6E642",
-        "status": "ONLINE",
-        "stationId": 2050,
-        "lat": 39.604,
-        "lng": -119.235
-      },
-      {
-        "name": "****20885",
-        "status": "ACTIVE",
-        "stationId": 676,
-        "lat": 39.604,
-        "lng": -119.235
-      }
-    ],
-    [
-      {
         "name": "****CEE96",
         "status": "ACTIVE",
         "stationId": 628,
@@ -13493,6 +13477,22 @@
         "stationId": 1962,
         "lat": 48.346,
         "lng": 12.073
+      }
+    ],
+    [
+      {
+        "name": "****6A1AA",
+        "status": "ACTIVE",
+        "stationId": 377,
+        "lat": 36.259,
+        "lng": -115.176
+      },
+      {
+        "name": "****C8749",
+        "status": "ACTIVE",
+        "stationId": 3138,
+        "lat": 36.259,
+        "lng": -115.176
       }
     ],
     [
@@ -13993,22 +13993,6 @@
     ],
     [
       {
-        "name": "****6E7F2",
-        "status": "ACTIVE",
-        "stationId": 2369,
-        "lat": 50.982,
-        "lng": 5.148
-      },
-      {
-        "name": "****64B91",
-        "status": "ACTIVE",
-        "stationId": 4086,
-        "lat": 50.982,
-        "lng": 5.148
-      }
-    ],
-    [
-      {
         "name": "****BCD01",
         "status": "ACTIVE",
         "stationId": 2128,
@@ -14137,6 +14121,22 @@
     ],
     [
       {
+        "name": "****B7DC0",
+        "status": "ONLINE",
+        "stationId": 2297,
+        "lat": 11.393,
+        "lng": 79.706
+      },
+      {
+        "name": "****EBA05",
+        "status": "ACTIVE",
+        "stationId": 526,
+        "lat": 11.393,
+        "lng": 79.706
+      }
+    ],
+    [
+      {
         "name": "****22C58",
         "status": "ACTIVE",
         "stationId": 3163,
@@ -14186,7 +14186,7 @@
     [
       {
         "name": "****6A416",
-        "status": "ONLINE",
+        "status": "ACTIVE",
         "stationId": 1680,
         "lat": 37.623,
         "lng": -112.099
@@ -14617,6 +14617,22 @@
     ],
     [
       {
+        "name": "****B6E62",
+        "status": "ACTIVE",
+        "stationId": 816,
+        "lat": -12.029,
+        "lng": -76.943
+      },
+      {
+        "name": "G067",
+        "status": "ACTIVE",
+        "stationId": 28,
+        "lat": -12.029,
+        "lng": -76.943
+      }
+    ],
+    [
+      {
         "name": "****CDE04",
         "status": "ONLINE",
         "stationId": 1284,
@@ -14725,22 +14741,6 @@
         "stationId": 3337,
         "lat": 34.705,
         "lng": 135.503
-      }
-    ],
-    [
-      {
-        "name": "****69E18",
-        "status": "ACTIVE",
-        "stationId": 590,
-        "lat": 27.934,
-        "lng": -81.872
-      },
-      {
-        "name": "****10DFD",
-        "status": "ACTIVE",
-        "stationId": 1379,
-        "lat": 27.934,
-        "lng": -81.872
       }
     ],
     [
@@ -15116,29 +15116,6 @@
         "stationId": 696,
         "lat": 37.778,
         "lng": -3.792
-      }
-    ],
-    [
-      {
-        "name": "****6E64A",
-        "status": "ACTIVE",
-        "stationId": 897,
-        "lat": 35.209,
-        "lng": -82.246
-      },
-      {
-        "name": "****2F569",
-        "status": "ACTIVE",
-        "stationId": 2762,
-        "lat": 35.209,
-        "lng": -82.246
-      },
-      {
-        "name": "****6E64A",
-        "status": "ACTIVE",
-        "stationId": 2713,
-        "lat": 35.209,
-        "lng": -82.246
       }
     ],
     [
@@ -15519,7 +15496,7 @@
       },
       {
         "name": "****C8A69",
-        "status": "ACTIVE",
+        "status": "ONLINE",
         "stationId": 1393,
         "lat": 35.794,
         "lng": -78.779
@@ -15587,6 +15564,22 @@
         "stationId": 85,
         "lat": 23.873,
         "lng": 74.037
+      }
+    ],
+    [
+      {
+        "name": "****B1516",
+        "status": "ONLINE",
+        "stationId": 3648,
+        "lat": 25.509,
+        "lng": 78.289
+      },
+      {
+        "name": "****C3041",
+        "status": "ONLINE",
+        "stationId": 3623,
+        "lat": 25.509,
+        "lng": 78.289
       }
     ],
     [
@@ -16198,14 +16191,14 @@
     [
       {
         "name": "****3E91D",
-        "status": "ACTIVE",
+        "status": "ONLINE",
         "stationId": 1920,
         "lat": 33.167,
         "lng": -101.806
       },
       {
         "name": "****3E91D",
-        "status": "ACTIVE",
+        "status": "ONLINE",
         "stationId": 658,
         "lat": 33.167,
         "lng": -101.806
@@ -16427,77 +16420,6 @@
   "exactDups": [
     [
       {
-        "name": "****414B8",
-        "status": "OFFLINE",
-        "stationId": 3598,
-        "lat": 55.817,
-        "lng": 26.473
-      },
-      {
-        "name": "****E5B0D",
-        "status": "ACTIVE",
-        "stationId": 723,
-        "lat": 55.817,
-        "lng": 26.473
-      }
-    ],
-    [
-      {
-        "name": "****E9D04",
-        "status": "OFFLINE",
-        "stationId": 522,
-        "lat": 37.399,
-        "lng": -121.979
-      },
-      {
-        "name": "****80631",
-        "status": "OFFLINE",
-        "stationId": 1577,
-        "lat": 37.399,
-        "lng": -121.979
-      }
-    ],
-    [
-      {
-        "name": "****20C14",
-        "status": "OFFLINE",
-        "stationId": 3296,
-        "lat": 36.259,
-        "lng": -115.176
-      },
-      {
-        "name": "****6A1AA",
-        "status": "ACTIVE",
-        "stationId": 377,
-        "lat": 36.259,
-        "lng": -115.176
-      },
-      {
-        "name": "****C8749",
-        "status": "ACTIVE",
-        "stationId": 3138,
-        "lat": 36.259,
-        "lng": -115.176
-      }
-    ],
-    [
-      {
-        "name": "****2B848",
-        "status": "OFFLINE",
-        "stationId": 3009,
-        "lat": 38.657,
-        "lng": 26.498
-      },
-      {
-        "name": "****82EA5",
-        "status": "OFFLINE",
-        "stationId": 2765,
-        "lat": 38.657,
-        "lng": 26.498
-      }
-    ],
-    [
-      {
         "name": "****C1D48",
         "status": "OFFLINE",
         "stationId": 4026,
@@ -16867,70 +16789,6 @@
     ],
     [
       {
-        "name": "****C4D72",
-        "status": "OFFLINE",
-        "stationId": 714,
-        "lat": 47.397,
-        "lng": 8.453
-      },
-      {
-        "name": "****DB79D",
-        "status": "ACTIVE",
-        "stationId": 1553,
-        "lat": 47.397,
-        "lng": 8.453
-      }
-    ],
-    [
-      {
-        "name": "****EBA05",
-        "status": "OFFLINE",
-        "stationId": 526,
-        "lat": 11.393,
-        "lng": 79.706
-      },
-      {
-        "name": "****B7DC0",
-        "status": "ONLINE",
-        "stationId": 2297,
-        "lat": 11.393,
-        "lng": 79.706
-      }
-    ],
-    [
-      {
-        "name": "****1CEB9",
-        "status": "OFFLINE",
-        "stationId": 2762,
-        "lat": 50.635,
-        "lng": 6.37
-      },
-      {
-        "name": "****D2F28",
-        "status": "ONLINE",
-        "stationId": 2299,
-        "lat": 50.635,
-        "lng": 6.37
-      }
-    ],
-    [
-      {
-        "name": "G067",
-        "status": "OFFLINE",
-        "stationId": 28,
-        "lat": -12.029,
-        "lng": -76.943
-      },
-      {
-        "name": "****B6E62",
-        "status": "ACTIVE",
-        "stationId": 816,
-        "lat": -12.029,
-        "lng": -76.943
-      }
-    ],
-    [
-      {
         "name": "****A56A1",
         "status": "OFFLINE",
         "stationId": 2086,
@@ -16979,38 +16837,6 @@
     ],
     [
       {
-        "name": "****DBEF9",
-        "status": "OFFLINE",
-        "stationId": 3836,
-        "lat": 38.7,
-        "lng": -93.197
-      },
-      {
-        "name": "****BFCB8",
-        "status": "ACTIVE",
-        "stationId": 2330,
-        "lat": 38.7,
-        "lng": -93.197
-      }
-    ],
-    [
-      {
-        "name": "****7C07D",
-        "status": "OFFLINE",
-        "stationId": 1038,
-        "lat": 39.082,
-        "lng": -77.062
-      },
-      {
-        "name": "****200D0",
-        "status": "OFFLINE",
-        "stationId": 3814,
-        "lat": 39.082,
-        "lng": -77.062
-      }
-    ],
-    [
-      {
         "name": "****F7865",
         "status": "OFFLINE",
         "stationId": 573,
@@ -17027,50 +16853,233 @@
     ],
     [
       {
-        "name": "****09A0A",
+        "name": "****10DFD",
         "status": "OFFLINE",
-        "stationId": 2515,
-        "lat": 19.387,
-        "lng": 74.64
+        "stationId": 1379,
+        "lat": 27.934,
+        "lng": -81.872
       },
       {
-        "name": "****C5405",
+        "name": "****69E18",
         "status": "ACTIVE",
-        "stationId": 1955,
-        "lat": 19.387,
-        "lng": 74.64
+        "stationId": 590,
+        "lat": 27.934,
+        "lng": -81.872
       }
     ],
     [
       {
-        "name": "****1CC35",
+        "name": "****2F569",
         "status": "OFFLINE",
-        "stationId": 2761,
-        "lat": 51.596,
-        "lng": -0.282
+        "stationId": 2762,
+        "lat": 35.209,
+        "lng": -82.246
       },
       {
-        "name": "****3274A",
-        "status": "OFFLINE",
-        "stationId": 4009,
-        "lat": 51.596,
-        "lng": -0.282
+        "name": "****6E64A",
+        "status": "ONLINE",
+        "stationId": 897,
+        "lat": 35.209,
+        "lng": -82.246
+      },
+      {
+        "name": "****6E64A",
+        "status": "ONLINE",
+        "stationId": 2713,
+        "lat": 35.209,
+        "lng": -82.246
       }
     ],
     [
       {
-        "name": "****FFBBD",
+        "name": "****D0EC4",
         "status": "OFFLINE",
-        "stationId": 1126,
-        "lat": 40.561,
-        "lng": 21.696
+        "stationId": 277,
+        "lat": 34.495,
+        "lng": -117.221
       },
       {
-        "name": "****3279E",
+        "name": "****1C455",
         "status": "ACTIVE",
-        "stationId": 703,
-        "lat": 40.561,
-        "lng": 21.696
+        "stationId": 2719,
+        "lat": 34.495,
+        "lng": -117.221
+      }
+    ],
+    [
+      {
+        "name": "****75DD5",
+        "status": "OFFLINE",
+        "stationId": 601,
+        "lat": 36.533,
+        "lng": -77.882
+      },
+      {
+        "name": "****75DD5",
+        "status": "OFFLINE",
+        "stationId": 794,
+        "lat": 36.533,
+        "lng": -77.882
+      }
+    ],
+    [
+      {
+        "name": "****20885",
+        "status": "OFFLINE",
+        "stationId": 676,
+        "lat": 39.604,
+        "lng": -119.235
+      },
+      {
+        "name": "****6E642",
+        "status": "OFFLINE",
+        "stationId": 2050,
+        "lat": 39.604,
+        "lng": -119.235
+      }
+    ],
+    [
+      {
+        "name": "****DBEF9",
+        "status": "OFFLINE",
+        "stationId": 3836,
+        "lat": 38.7,
+        "lng": -93.197
+      },
+      {
+        "name": "****BFCB8",
+        "status": "ACTIVE",
+        "stationId": 2330,
+        "lat": 38.7,
+        "lng": -93.197
+      }
+    ],
+    [
+      {
+        "name": "****C4D72",
+        "status": "OFFLINE",
+        "stationId": 714,
+        "lat": 47.397,
+        "lng": 8.453
+      },
+      {
+        "name": "****DB79D",
+        "status": "ACTIVE",
+        "stationId": 1553,
+        "lat": 47.397,
+        "lng": 8.453
+      }
+    ],
+    [
+      {
+        "name": "****33A99",
+        "status": "OFFLINE",
+        "stationId": 2873,
+        "lat": 44.028,
+        "lng": 25.768
+      },
+      {
+        "name": "****3270C",
+        "status": "OFFLINE",
+        "stationId": 2398,
+        "lat": 44.028,
+        "lng": 25.768
+      }
+    ],
+    [
+      {
+        "name": "****08A0C",
+        "status": "OFFLINE",
+        "stationId": 942,
+        "lat": -33.848,
+        "lng": 18.67
+      },
+      {
+        "name": "****A23A1",
+        "status": "ACTIVE",
+        "stationId": 220,
+        "lat": -33.848,
+        "lng": 18.67
+      }
+    ],
+    [
+      {
+        "name": "****D7569",
+        "status": "OFFLINE",
+        "stationId": 2390,
+        "lat": 39.184,
+        "lng": 27.851
+      },
+      {
+        "name": "****D365D",
+        "status": "ACTIVE",
+        "stationId": 3249,
+        "lat": 39.184,
+        "lng": 27.851
+      }
+    ],
+    [
+      {
+        "name": "****F09B1",
+        "status": "OFFLINE",
+        "stationId": 3650,
+        "lat": 10.315,
+        "lng": 123.881
+      },
+      {
+        "name": "****6A8A4",
+        "status": "OFFLINE",
+        "stationId": 1296,
+        "lat": 10.315,
+        "lng": 123.881
+      }
+    ],
+    [
+      {
+        "name": "****CCE45",
+        "status": "OFFLINE",
+        "stationId": 3579,
+        "lat": 39.89,
+        "lng": -0.255
+      },
+      {
+        "name": "****6A812",
+        "status": "ACTIVE",
+        "stationId": 2953,
+        "lat": 39.89,
+        "lng": -0.255
+      }
+    ],
+    [
+      {
+        "name": "****C0091",
+        "status": "OFFLINE",
+        "stationId": 3617,
+        "lat": 28.534,
+        "lng": 77.056
+      },
+      {
+        "name": "****6A464",
+        "status": "ACTIVE",
+        "stationId": 3424,
+        "lat": 28.534,
+        "lng": 77.056
+      }
+    ],
+    [
+      {
+        "name": "****DCE89",
+        "status": "OFFLINE",
+        "stationId": 1070,
+        "lat": 15.871,
+        "lng": 74.622
+      },
+      {
+        "name": "****09A12",
+        "status": "OFFLINE",
+        "stationId": 2327,
+        "lat": 15.871,
+        "lng": 74.622
       }
     ],
     [
@@ -17091,98 +17100,82 @@
     ],
     [
       {
-        "name": "****C2D54",
+        "name": "****6E7F2",
         "status": "OFFLINE",
-        "stationId": 1040,
-        "lat": 11.266,
-        "lng": -74.185
+        "stationId": 2369,
+        "lat": 50.982,
+        "lng": 5.148
       },
       {
-        "name": "****727D1",
+        "name": "****64B91",
         "status": "OFFLINE",
-        "stationId": 313,
-        "lat": 11.266,
-        "lng": -74.185
+        "stationId": 4086,
+        "lat": 50.982,
+        "lng": 5.148
       }
     ],
     [
       {
-        "name": "****B4EE1",
-        "status": "OFFLINE",
-        "stationId": 2698,
-        "lat": 41.917,
-        "lng": -70.695
+        "name": "****2E80A",
+        "status": "ACTIVE",
+        "stationId": 1659,
+        "lat": 40.898,
+        "lng": 38.325
       },
       {
-        "name": "****C0C7C",
-        "status": "OFFLINE",
-        "stationId": 2021,
-        "lat": 41.917,
-        "lng": -70.695
+        "name": "****1CFC1",
+        "status": "ACTIVE",
+        "stationId": 1351,
+        "lat": 40.898,
+        "lng": 38.325
       }
     ],
     [
       {
-        "name": "****3B1C8",
+        "name": "****A0F01",
         "status": "ACTIVE",
-        "stationId": 3417,
-        "lat": 38.496,
-        "lng": 27.109
+        "stationId": 1555,
+        "lat": 22.509,
+        "lng": 73.472
       },
       {
-        "name": "****DB88D",
+        "name": "****69E9A",
         "status": "ACTIVE",
-        "stationId": 758,
-        "lat": 38.496,
-        "lng": 27.109
+        "stationId": 3261,
+        "lat": 22.509,
+        "lng": 73.472
       }
     ],
     [
       {
-        "name": "****C0091",
+        "name": "****1FC58",
         "status": "ACTIVE",
-        "stationId": 3617,
-        "lat": 28.534,
-        "lng": 77.056
+        "stationId": 2987,
+        "lat": 42.524,
+        "lng": -96.385
       },
       {
-        "name": "****6A464",
+        "name": "****E39F1",
         "status": "ACTIVE",
-        "stationId": 3424,
-        "lat": 28.534,
-        "lng": 77.056
+        "stationId": 3245,
+        "lat": 42.524,
+        "lng": -96.385
       }
     ],
     [
       {
-        "name": "****29DBD",
+        "name": "****69AA8",
         "status": "ONLINE",
-        "stationId": 1029,
-        "lat": -32.74,
-        "lng": 27.661
+        "stationId": 2663,
+        "lat": 12.725,
+        "lng": 79.672
       },
       {
-        "name": "****C4D12",
-        "status": "ONLINE",
-        "stationId": 1916,
-        "lat": -32.74,
-        "lng": 27.661
-      }
-    ],
-    [
-      {
-        "name": "****22182",
+        "name": "****EB9ED",
         "status": "ACTIVE",
-        "stationId": 1386,
-        "lat": 40.358,
-        "lng": -0.066
-      },
-      {
-        "name": "****8B06D",
-        "status": "ONLINE",
-        "stationId": 3211,
-        "lat": 40.358,
-        "lng": -0.066
+        "stationId": 525,
+        "lat": 12.725,
+        "lng": 79.672
       }
     ],
     [
@@ -17827,22 +17820,6 @@
     ],
     [
       {
-        "name": "****EB9ED",
-        "status": "ACTIVE",
-        "stationId": 525,
-        "lat": 12.725,
-        "lng": 79.672
-      },
-      {
-        "name": "****69AA8",
-        "status": "ONLINE",
-        "stationId": 2663,
-        "lat": 12.725,
-        "lng": 79.672
-      }
-    ],
-    [
-      {
         "name": "****45EAD",
         "status": "ACTIVE",
         "stationId": 78,
@@ -18075,7 +18052,7 @@
       },
       {
         "name": "****09A2C",
-        "status": "ACTIVE",
+        "status": "ONLINE",
         "stationId": 1957,
         "lat": 11.315,
         "lng": 79.51
@@ -18635,7 +18612,7 @@
       },
       {
         "name": "****099AA",
-        "status": "ONLINE",
+        "status": "ACTIVE",
         "stationId": 2594,
         "lat": 38.117,
         "lng": -7.442
@@ -18787,6 +18764,22 @@
     ],
     [
       {
+        "name": "****DB88D",
+        "status": "ACTIVE",
+        "stationId": 758,
+        "lat": 38.496,
+        "lng": 27.109
+      },
+      {
+        "name": "****3B1C8",
+        "status": "ACTIVE",
+        "stationId": 3417,
+        "lat": 38.496,
+        "lng": 27.109
+      }
+    ],
+    [
+      {
         "name": "****37945",
         "status": "ACTIVE",
         "stationId": 758,
@@ -18803,24 +18796,8 @@
     ],
     [
       {
-        "name": "****75DD5",
-        "status": "ONLINE",
-        "stationId": 601,
-        "lat": 36.533,
-        "lng": -77.882
-      },
-      {
-        "name": "****75DD5",
-        "status": "ONLINE",
-        "stationId": 794,
-        "lat": 36.533,
-        "lng": -77.882
-      }
-    ],
-    [
-      {
         "name": "****0FDCD",
-        "status": "ONLINE",
+        "status": "ACTIVE",
         "stationId": 784,
         "lat": 28.507,
         "lng": 77.037
@@ -19147,7 +19124,7 @@
       },
       {
         "name": "****2E83E",
-        "status": "ONLINE",
+        "status": "ACTIVE",
         "stationId": 1606,
         "lat": 40.167,
         "lng": 31.92
@@ -19363,38 +19340,6 @@
     ],
     [
       {
-        "name": "****A0F01",
-        "status": "ACTIVE",
-        "stationId": 1555,
-        "lat": 22.509,
-        "lng": 73.472
-      },
-      {
-        "name": "****69E9A",
-        "status": "ACTIVE",
-        "stationId": 3261,
-        "lat": 22.509,
-        "lng": 73.472
-      }
-    ],
-    [
-      {
-        "name": "****1CFC1",
-        "status": "ACTIVE",
-        "stationId": 1351,
-        "lat": 40.898,
-        "lng": 38.325
-      },
-      {
-        "name": "****2E80A",
-        "status": "ACTIVE",
-        "stationId": 1659,
-        "lat": 40.898,
-        "lng": 38.325
-      }
-    ],
-    [
-      {
         "name": "****1CE0D",
         "status": "ACTIVE",
         "stationId": 928,
@@ -19503,6 +19448,22 @@
         "stationId": 3517,
         "lat": 6.495,
         "lng": 3.306
+      }
+    ],
+    [
+      {
+        "name": "****7C07D",
+        "status": "ACTIVE",
+        "stationId": 1038,
+        "lat": 39.082,
+        "lng": -77.062
+      },
+      {
+        "name": "****200D0",
+        "status": "ACTIVE",
+        "stationId": 3814,
+        "lat": 39.082,
+        "lng": -77.062
       }
     ],
     [
@@ -19841,6 +19802,22 @@
     ],
     [
       {
+        "name": "****10DC9",
+        "status": "ONLINE",
+        "stationId": 2182,
+        "lat": 40.827,
+        "lng": 31.208
+      },
+      {
+        "name": "****33660",
+        "status": "ONLINE",
+        "stationId": 3129,
+        "lat": 40.827,
+        "lng": 31.208
+      }
+    ],
+    [
+      {
         "name": "****11105",
         "status": "ACTIVE",
         "stationId": 2199,
@@ -19938,7 +19915,7 @@
     [
       {
         "name": "****20879",
-        "status": "ONLINE",
+        "status": "ACTIVE",
         "stationId": 2702,
         "lat": 41.344,
         "lng": 69.338
@@ -20105,7 +20082,7 @@
       },
       {
         "name": "****3B268",
-        "status": "ONLINE",
+        "status": "ACTIVE",
         "stationId": 1573,
         "lat": -30.825,
         "lng": 30.393
@@ -20289,6 +20266,22 @@
     ],
     [
       {
+        "name": "****29DBD",
+        "status": "ONLINE",
+        "stationId": 1029,
+        "lat": -32.74,
+        "lng": 27.661
+      },
+      {
+        "name": "****C4D12",
+        "status": "ONLINE",
+        "stationId": 1916,
+        "lat": -32.74,
+        "lng": 27.661
+      }
+    ],
+    [
+      {
         "name": "****2A859",
         "status": "ACTIVE",
         "stationId": 3840,
@@ -20301,6 +20294,22 @@
         "stationId": 884,
         "lat": 45.597,
         "lng": 14.087
+      }
+    ],
+    [
+      {
+        "name": "****B4EE1",
+        "status": "ONLINE",
+        "stationId": 2698,
+        "lat": 41.917,
+        "lng": -70.695
+      },
+      {
+        "name": "****C0C7C",
+        "status": "ONLINE",
+        "stationId": 2021,
+        "lat": 41.917,
+        "lng": -70.695
       }
     ],
     [
@@ -20461,6 +20470,22 @@
         "stationId": 2267,
         "lat": 36.013,
         "lng": -84.221
+      }
+    ],
+    [
+      {
+        "name": "****1CC35",
+        "status": "ACTIVE",
+        "stationId": 2761,
+        "lat": 51.596,
+        "lng": -0.282
+      },
+      {
+        "name": "****3274A",
+        "status": "ACTIVE",
+        "stationId": 4009,
+        "lat": 51.596,
+        "lng": -0.282
       }
     ],
     [
@@ -20889,7 +20914,7 @@
       },
       {
         "name": "****2A876",
-        "status": "ONLINE",
+        "status": "ACTIVE",
         "stationId": 3285,
         "lat": 47.818,
         "lng": 11.892
@@ -21106,7 +21131,7 @@
     [
       {
         "name": "****2AA51",
-        "status": "ONLINE",
+        "status": "ACTIVE",
         "stationId": 1225,
         "lat": -7.274,
         "lng": 112.783
@@ -21261,22 +21286,6 @@
         "stationId": 1725,
         "lat": 39.707,
         "lng": 43.011
-      }
-    ],
-    [
-      {
-        "name": "****E39F1",
-        "status": "ACTIVE",
-        "stationId": 3245,
-        "lat": 42.524,
-        "lng": -96.385
-      },
-      {
-        "name": "****1FC58",
-        "status": "ACTIVE",
-        "stationId": 2987,
-        "lat": 42.524,
-        "lng": -96.385
       }
     ],
     [
@@ -21633,22 +21642,6 @@
     ],
     [
       {
-        "name": "****DCE89",
-        "status": "ACTIVE",
-        "stationId": 1070,
-        "lat": 15.871,
-        "lng": 74.622
-      },
-      {
-        "name": "****09A12",
-        "status": "ACTIVE",
-        "stationId": 2327,
-        "lat": 15.871,
-        "lng": 74.622
-      }
-    ],
-    [
-      {
         "name": "****D2081",
         "status": "ACTIVE",
         "stationId": 360,
@@ -21833,7 +21826,7 @@
       },
       {
         "name": "****C0CD8",
-        "status": "ONLINE",
+        "status": "ACTIVE",
         "stationId": 4040,
         "lat": 40.805,
         "lng": 32.895
@@ -21853,22 +21846,6 @@
         "stationId": 132,
         "lat": 45.77,
         "lng": 13.805
-      }
-    ],
-    [
-      {
-        "name": "****CCE45",
-        "status": "ACTIVE",
-        "stationId": 3579,
-        "lat": 39.89,
-        "lng": -0.255
-      },
-      {
-        "name": "****6A812",
-        "status": "ACTIVE",
-        "stationId": 2953,
-        "lat": 39.89,
-        "lng": -0.255
       }
     ],
     [
@@ -21954,14 +21931,14 @@
     [
       {
         "name": "****E0E49",
-        "status": "ACTIVE",
+        "status": "ONLINE",
         "stationId": 778,
         "lat": 4.193,
         "lng": 103.436
       },
       {
         "name": "****B24BA",
-        "status": "ACTIVE",
+        "status": "ONLINE",
         "stationId": 76,
         "lat": 4.193,
         "lng": 103.436
@@ -22450,7 +22427,7 @@
     [
       {
         "name": "****3A748",
-        "status": "ONLINE",
+        "status": "ACTIVE",
         "stationId": 368,
         "lat": 43.582,
         "lng": 1.523
@@ -22722,7 +22699,7 @@
     [
       {
         "name": "****326FA",
-        "status": "ACTIVE",
+        "status": "ONLINE",
         "stationId": 30,
         "lat": 49.255,
         "lng": 8.899
@@ -23266,7 +23243,7 @@
     [
       {
         "name": "****3B23C",
-        "status": "ACTIVE",
+        "status": "ONLINE",
         "stationId": 1642,
         "lat": 47.804,
         "lng": 18.737
@@ -23618,14 +23595,14 @@
     [
       {
         "name": "****D0195",
-        "status": "ACTIVE",
+        "status": "ONLINE",
         "stationId": 2737,
         "lat": 25.007,
         "lng": 88.127
       },
       {
         "name": "****C2D7C",
-        "status": "ACTIVE",
+        "status": "ONLINE",
         "stationId": 2416,
         "lat": 25.007,
         "lng": 88.127
@@ -23793,6 +23770,22 @@
     ],
     [
       {
+        "name": "****3279E",
+        "status": "ACTIVE",
+        "stationId": 703,
+        "lat": 40.561,
+        "lng": 21.696
+      },
+      {
+        "name": "****FFBBD",
+        "status": "ACTIVE",
+        "stationId": 1126,
+        "lat": 40.561,
+        "lng": 21.696
+      }
+    ],
+    [
+      {
         "name": "****17FF9",
         "status": "ACTIVE",
         "stationId": 2487,
@@ -23801,7 +23794,7 @@
       },
       {
         "name": "****E30C4",
-        "status": "ACTIVE",
+        "status": "ONLINE",
         "stationId": 2679,
         "lat": 49.812,
         "lng": 7.417
@@ -24193,22 +24186,6 @@
     ],
     [
       {
-        "name": "****3270C",
-        "status": "ACTIVE",
-        "stationId": 2398,
-        "lat": 44.028,
-        "lng": 25.768
-      },
-      {
-        "name": "****33A99",
-        "status": "ACTIVE",
-        "stationId": 2873,
-        "lat": 44.028,
-        "lng": 25.768
-      }
-    ],
-    [
-      {
         "name": "****2E880",
         "status": "ACTIVE",
         "stationId": 25,
@@ -24354,7 +24331,7 @@
     [
       {
         "name": "****3A7C8",
-        "status": "ONLINE",
+        "status": "ACTIVE",
         "stationId": 1849,
         "lat": 39.847,
         "lng": -3
@@ -25037,22 +25014,6 @@
         "stationId": 2981,
         "lat": 32.155,
         "lng": -110.957
-      }
-    ],
-    [
-      {
-        "name": "****D0EC4",
-        "status": "ACTIVE",
-        "stationId": 277,
-        "lat": 34.495,
-        "lng": -117.221
-      },
-      {
-        "name": "****1C455",
-        "status": "ACTIVE",
-        "stationId": 2719,
-        "lat": 34.495,
-        "lng": -117.221
       }
     ],
     [
@@ -25750,6 +25711,22 @@
     ],
     [
       {
+        "name": "****D2F28",
+        "status": "ACTIVE",
+        "stationId": 2299,
+        "lat": 50.635,
+        "lng": 6.37
+      },
+      {
+        "name": "****1CEB9",
+        "status": "ACTIVE",
+        "stationId": 2762,
+        "lat": 50.635,
+        "lng": 6.37
+      }
+    ],
+    [
+      {
         "name": "****374DC",
         "status": "ACTIVE",
         "stationId": 1894,
@@ -25954,6 +25931,22 @@
         "stationId": 353,
         "lat": 49.831,
         "lng": -100.301
+      }
+    ],
+    [
+      {
+        "name": "****727D1",
+        "status": "ACTIVE",
+        "stationId": 313,
+        "lat": 11.266,
+        "lng": -74.185
+      },
+      {
+        "name": "****C2D54",
+        "status": "ACTIVE",
+        "stationId": 1040,
+        "lat": 11.266,
+        "lng": -74.185
       }
     ],
     [
@@ -26263,14 +26256,14 @@
     [
       {
         "name": "****679B1",
-        "status": "ONLINE",
+        "status": "ACTIVE",
         "stationId": 279,
         "lat": -38.987,
         "lng": -61.308
       },
       {
         "name": "****1AC4A",
-        "status": "ONLINE",
+        "status": "ACTIVE",
         "stationId": 460,
         "lat": -38.987,
         "lng": -61.308
@@ -26990,7 +26983,7 @@
       },
       {
         "name": "****BFCCE",
-        "status": "ACTIVE",
+        "status": "ONLINE",
         "stationId": 3170,
         "lat": 51.868,
         "lng": 6.165
@@ -27207,7 +27200,7 @@
     [
       {
         "name": "****CAD92",
-        "status": "ONLINE",
+        "status": "ACTIVE",
         "stationId": 2521,
         "lat": 39.43,
         "lng": 3.015
@@ -27255,7 +27248,7 @@
     [
       {
         "name": "****CCE1E",
-        "status": "ONLINE",
+        "status": "ACTIVE",
         "stationId": 208,
         "lat": 42.159,
         "lng": 27.831
@@ -27495,7 +27488,7 @@
     [
       {
         "name": "****C1D0A",
-        "status": "ONLINE",
+        "status": "ACTIVE",
         "stationId": 1956,
         "lat": 40.426,
         "lng": -0.256
@@ -27522,6 +27515,22 @@
         "stationId": 3685,
         "lat": 40.396,
         "lng": 0.133
+      }
+    ],
+    [
+      {
+        "name": "****22182",
+        "status": "OFFLINE",
+        "stationId": 1386,
+        "lat": 40.358,
+        "lng": -0.066
+      },
+      {
+        "name": "****8B06D",
+        "status": "ACTIVE",
+        "stationId": 3211,
+        "lat": 40.358,
+        "lng": -0.066
       }
     ],
     [
@@ -28006,22 +28015,6 @@
     ],
     [
       {
-        "name": "****D7569",
-        "status": "ACTIVE",
-        "stationId": 2390,
-        "lat": 39.184,
-        "lng": 27.851
-      },
-      {
-        "name": "****D365D",
-        "status": "ACTIVE",
-        "stationId": 3249,
-        "lat": 39.184,
-        "lng": 27.851
-      }
-    ],
-    [
-      {
         "name": "****1CD06",
         "status": "ACTIVE",
         "stationId": 1560,
@@ -28167,7 +28160,7 @@
     [
       {
         "name": "****20BCA",
-        "status": "ONLINE",
+        "status": "ACTIVE",
         "stationId": 213,
         "lat": 43.842,
         "lng": -91.107
@@ -28238,7 +28231,7 @@
       },
       {
         "name": "****C82AD",
-        "status": "ONLINE",
+        "status": "ACTIVE",
         "stationId": 567,
         "lat": 43.599,
         "lng": 28.536
@@ -28338,6 +28331,22 @@
         "stationId": 1879,
         "lat": 41.025,
         "lng": -8.589
+      }
+    ],
+    [
+      {
+        "name": "****C5405",
+        "status": "ACTIVE",
+        "stationId": 1955,
+        "lat": 19.387,
+        "lng": 74.64
+      },
+      {
+        "name": "****09A0A",
+        "status": "ACTIVE",
+        "stationId": 2515,
+        "lat": 19.387,
+        "lng": 74.64
       }
     ],
     [
@@ -28574,7 +28583,7 @@
       },
       {
         "name": "****7F801",
-        "status": "ACTIVE",
+        "status": "ONLINE",
         "stationId": 350,
         "lat": 39.89,
         "lng": -74.176
@@ -28679,7 +28688,7 @@
     [
       {
         "name": "****099BA",
-        "status": "ONLINE",
+        "status": "ACTIVE",
         "stationId": 3744,
         "lat": 44.689,
         "lng": -116.092
@@ -28743,7 +28752,7 @@
     [
       {
         "name": "****20D4E",
-        "status": "ONLINE",
+        "status": "ACTIVE",
         "stationId": 2813,
         "lat": 41.54,
         "lng": 1.895
@@ -28894,7 +28903,7 @@
       },
       {
         "name": "****10AD1",
-        "status": "ONLINE",
+        "status": "ACTIVE",
         "stationId": 3085,
         "lat": 38.768,
         "lng": -8.889
@@ -29015,7 +29024,7 @@
     [
       {
         "name": "****C2CCA",
-        "status": "ACTIVE",
+        "status": "ONLINE",
         "stationId": 3628,
         "lat": 38.964,
         "lng": -112.334
@@ -29031,7 +29040,7 @@
     [
       {
         "name": "****0DBD4",
-        "status": "ACTIVE",
+        "status": "ONLINE",
         "stationId": 3967,
         "lat": 39.021,
         "lng": -76.725
@@ -29118,7 +29127,7 @@
       },
       {
         "name": "****6E81C",
-        "status": "ACTIVE",
+        "status": "ONLINE",
         "stationId": 1967,
         "lat": -31.882,
         "lng": 115.921
@@ -29219,7 +29228,7 @@
       },
       {
         "name": "****CEE76",
-        "status": "ACTIVE",
+        "status": "ONLINE",
         "stationId": 2429,
         "lat": 19.198,
         "lng": 73.199
@@ -29387,24 +29396,8 @@
     ],
     [
       {
-        "name": "****6A8A4",
-        "status": "ACTIVE",
-        "stationId": 1296,
-        "lat": 10.315,
-        "lng": 123.881
-      },
-      {
-        "name": "****F09B1",
-        "status": "ACTIVE",
-        "stationId": 3650,
-        "lat": 10.315,
-        "lng": 123.881
-      }
-    ],
-    [
-      {
         "name": "****6AB54",
-        "status": "ACTIVE",
+        "status": "ONLINE",
         "stationId": 769,
         "lat": 48.251,
         "lng": 11.659
@@ -29803,22 +29796,6 @@
     ],
     [
       {
-        "name": "****6E642",
-        "status": "ONLINE",
-        "stationId": 2050,
-        "lat": 39.604,
-        "lng": -119.235
-      },
-      {
-        "name": "****20885",
-        "status": "ACTIVE",
-        "stationId": 676,
-        "lat": 39.604,
-        "lng": -119.235
-      }
-    ],
-    [
-      {
         "name": "****CEE96",
         "status": "ACTIVE",
         "stationId": 628,
@@ -29895,6 +29872,22 @@
         "stationId": 1962,
         "lat": 48.346,
         "lng": 12.073
+      }
+    ],
+    [
+      {
+        "name": "****6A1AA",
+        "status": "ACTIVE",
+        "stationId": 377,
+        "lat": 36.259,
+        "lng": -115.176
+      },
+      {
+        "name": "****C8749",
+        "status": "ACTIVE",
+        "stationId": 3138,
+        "lat": 36.259,
+        "lng": -115.176
       }
     ],
     [
@@ -30395,22 +30388,6 @@
     ],
     [
       {
-        "name": "****6E7F2",
-        "status": "ACTIVE",
-        "stationId": 2369,
-        "lat": 50.982,
-        "lng": 5.148
-      },
-      {
-        "name": "****64B91",
-        "status": "ACTIVE",
-        "stationId": 4086,
-        "lat": 50.982,
-        "lng": 5.148
-      }
-    ],
-    [
-      {
         "name": "****BCD01",
         "status": "ACTIVE",
         "stationId": 2128,
@@ -30539,6 +30516,22 @@
     ],
     [
       {
+        "name": "****B7DC0",
+        "status": "ONLINE",
+        "stationId": 2297,
+        "lat": 11.393,
+        "lng": 79.706
+      },
+      {
+        "name": "****EBA05",
+        "status": "ACTIVE",
+        "stationId": 526,
+        "lat": 11.393,
+        "lng": 79.706
+      }
+    ],
+    [
+      {
         "name": "****22C58",
         "status": "ACTIVE",
         "stationId": 3163,
@@ -30588,7 +30581,7 @@
     [
       {
         "name": "****6A416",
-        "status": "ONLINE",
+        "status": "ACTIVE",
         "stationId": 1680,
         "lat": 37.623,
         "lng": -112.099
@@ -31019,6 +31012,22 @@
     ],
     [
       {
+        "name": "****B6E62",
+        "status": "ACTIVE",
+        "stationId": 816,
+        "lat": -12.029,
+        "lng": -76.943
+      },
+      {
+        "name": "G067",
+        "status": "ACTIVE",
+        "stationId": 28,
+        "lat": -12.029,
+        "lng": -76.943
+      }
+    ],
+    [
+      {
         "name": "****CDE04",
         "status": "ONLINE",
         "stationId": 1284,
@@ -31127,22 +31136,6 @@
         "stationId": 3337,
         "lat": 34.705,
         "lng": 135.503
-      }
-    ],
-    [
-      {
-        "name": "****69E18",
-        "status": "ACTIVE",
-        "stationId": 590,
-        "lat": 27.934,
-        "lng": -81.872
-      },
-      {
-        "name": "****10DFD",
-        "status": "ACTIVE",
-        "stationId": 1379,
-        "lat": 27.934,
-        "lng": -81.872
       }
     ],
     [
@@ -31518,29 +31511,6 @@
         "stationId": 696,
         "lat": 37.778,
         "lng": -3.792
-      }
-    ],
-    [
-      {
-        "name": "****6E64A",
-        "status": "ACTIVE",
-        "stationId": 897,
-        "lat": 35.209,
-        "lng": -82.246
-      },
-      {
-        "name": "****2F569",
-        "status": "ACTIVE",
-        "stationId": 2762,
-        "lat": 35.209,
-        "lng": -82.246
-      },
-      {
-        "name": "****6E64A",
-        "status": "ACTIVE",
-        "stationId": 2713,
-        "lat": 35.209,
-        "lng": -82.246
       }
     ],
     [
@@ -31921,7 +31891,7 @@
       },
       {
         "name": "****C8A69",
-        "status": "ACTIVE",
+        "status": "ONLINE",
         "stationId": 1393,
         "lat": 35.794,
         "lng": -78.779
@@ -31989,6 +31959,22 @@
         "stationId": 85,
         "lat": 23.873,
         "lng": 74.037
+      }
+    ],
+    [
+      {
+        "name": "****B1516",
+        "status": "ONLINE",
+        "stationId": 3648,
+        "lat": 25.509,
+        "lng": 78.289
+      },
+      {
+        "name": "****C3041",
+        "status": "ONLINE",
+        "stationId": 3623,
+        "lat": 25.509,
+        "lng": 78.289
       }
     ],
     [
@@ -32600,14 +32586,14 @@
     [
       {
         "name": "****3E91D",
-        "status": "ACTIVE",
+        "status": "ONLINE",
         "stationId": 1920,
         "lat": 33.167,
         "lng": -101.806
       },
       {
         "name": "****3E91D",
-        "status": "ACTIVE",
+        "status": "ONLINE",
         "stationId": 658,
         "lat": 33.167,
         "lng": -101.806
@@ -32631,34 +32617,6 @@
     ]
   ],
   "lowPrecision": [
-    {
-      "name": "****EE689",
-      "status": "OFFLINE",
-      "stationId": 2747,
-      "lat": 21.19,
-      "lng": -101.711
-    },
-    {
-      "name": "****C8315",
-      "status": "OFFLINE",
-      "stationId": 1687,
-      "lat": 11.317,
-      "lng": 106.14
-    },
-    {
-      "name": "****DDB65",
-      "status": "OFFLINE",
-      "stationId": 1791,
-      "lat": 39.83,
-      "lng": 41.976
-    },
-    {
-      "name": "****727C5",
-      "status": "OFFLINE",
-      "stationId": 3007,
-      "lat": 25.323,
-      "lng": 55.38
-    },
     {
       "name": "****69E0E",
       "status": "OFFLINE",
@@ -32686,13 +32644,6 @@
       "stationId": 1542,
       "lat": 35.03,
       "lng": -100.291
-    },
-    {
-      "name": "****1C16D",
-      "status": "OFFLINE",
-      "stationId": 3518,
-      "lat": 38.411,
-      "lng": -78.99
     },
     {
       "name": "****67BD5",
@@ -32786,13 +32737,6 @@
       "lng": -122
     },
     {
-      "name": "****D42DD",
-      "status": "OFFLINE",
-      "stationId": 3082,
-      "lat": 2.93,
-      "lng": 101.336
-    },
-    {
       "name": "****7A555",
       "status": "OFFLINE",
       "stationId": 3326,
@@ -32805,13 +32749,6 @@
       "stationId": 1201,
       "lat": 49.89,
       "lng": 15.795
-    },
-    {
-      "name": "****E9B69",
-      "status": "OFFLINE",
-      "stationId": 3270,
-      "lat": 41.487,
-      "lng": -8.26
     },
     {
       "name": "****3D65A",
@@ -32847,13 +32784,6 @@
       "stationId": 584,
       "lat": 49.83,
       "lng": 11.902
-    },
-    {
-      "name": "****22158",
-      "status": "OFFLINE",
-      "stationId": 1969,
-      "lat": -29.43,
-      "lng": 24.008
     },
     {
       "name": "****755FD",
@@ -32919,13 +32849,6 @@
       "lng": -105.21
     },
     {
-      "name": "****AC361",
-      "status": "OFFLINE",
-      "stationId": 117,
-      "lat": -27.676,
-      "lng": 153.18
-    },
-    {
       "name": "****CB939",
       "status": "OFFLINE",
       "stationId": 638,
@@ -32989,13 +32912,6 @@
       "lng": 106.54
     },
     {
-      "name": "****06D95",
-      "status": "OFFLINE",
-      "stationId": 689,
-      "lat": 51.326,
-      "lng": 7.06
-    },
-    {
       "name": "****20285",
       "status": "OFFLINE",
       "stationId": 950,
@@ -33045,20 +32961,6 @@
       "lng": -51
     },
     {
-      "name": "****5E5B5",
-      "status": "OFFLINE",
-      "stationId": 3154,
-      "lat": 44.338,
-      "lng": 20.6
-    },
-    {
-      "name": "****E2FDD",
-      "status": "OFFLINE",
-      "stationId": 692,
-      "lat": 2.583,
-      "lng": 102.6
-    },
-    {
       "name": "****10FD1",
       "status": "OFFLINE",
       "stationId": 2226,
@@ -33073,13 +32975,6 @@
       "lng": 27.18
     },
     {
-      "name": "****64FE5",
-      "status": "OFFLINE",
-      "stationId": 2771,
-      "lat": 39.65,
-      "lng": -84.236
-    },
-    {
       "name": "****90F4D",
       "status": "OFFLINE",
       "stationId": 3155,
@@ -33087,32 +32982,11 @@
       "lng": -78.217
     },
     {
-      "name": "****1CEB9",
-      "status": "OFFLINE",
-      "stationId": 2762,
-      "lat": 50.635,
-      "lng": 6.37
-    },
-    {
       "name": "****F44C5",
       "status": "OFFLINE",
       "stationId": 3707,
       "lat": 35.816,
       "lng": -77.76
-    },
-    {
-      "name": "****D2F28",
-      "status": "ONLINE",
-      "stationId": 2299,
-      "lat": 50.635,
-      "lng": 6.37
-    },
-    {
-      "name": "****0EC92",
-      "status": "OFFLINE",
-      "stationId": 1923,
-      "lat": 29.6,
-      "lng": -95.517
     },
     {
       "name": "****EAA15",
@@ -33150,13 +33024,6 @@
       "lng": 27.47
     },
     {
-      "name": "****1B3D1",
-      "status": "OFFLINE",
-      "stationId": 1182,
-      "lat": 4.7,
-      "lng": -74.127
-    },
-    {
       "name": "****ED371",
       "status": "OFFLINE",
       "stationId": 469,
@@ -33164,39 +33031,11 @@
       "lng": -1.724
     },
     {
-      "name": "****727B5",
-      "status": "OFFLINE",
-      "stationId": 656,
-      "lat": 46.259,
-      "lng": 21.38
-    },
-    {
       "name": "****D7AA1",
       "status": "OFFLINE",
       "stationId": 3153,
       "lat": 50.437,
       "lng": 2.2
-    },
-    {
-      "name": "****BE5C9",
-      "status": "OFFLINE",
-      "stationId": 1985,
-      "lat": 36.71,
-      "lng": 29.492
-    },
-    {
-      "name": "****37F8D",
-      "status": "OFFLINE",
-      "stationId": 622,
-      "lat": 18.4,
-      "lng": -66.231
-    },
-    {
-      "name": "****2A880",
-      "status": "OFFLINE",
-      "stationId": 495,
-      "lat": 39.476,
-      "lng": -8.54
     },
     {
       "name": "****74395",
@@ -33227,13 +33066,6 @@
       "lng": 35.129
     },
     {
-      "name": "****07115",
-      "status": "OFFLINE",
-      "stationId": 584,
-      "lat": 8.32,
-      "lng": 77.579
-    },
-    {
       "name": "****C0D0D",
       "status": "OFFLINE",
       "stationId": 1471,
@@ -33248,46 +33080,11 @@
       "lng": 7.98
     },
     {
-      "name": "****70C11",
-      "status": "OFFLINE",
-      "stationId": 1238,
-      "lat": 6.733,
-      "lng": 81.1
-    },
-    {
       "name": "****C8319",
       "status": "OFFLINE",
       "stationId": 994,
       "lat": 36.79,
       "lng": 32.444
-    },
-    {
-      "name": "****B897D",
-      "status": "OFFLINE",
-      "stationId": 257,
-      "lat": -24.55,
-      "lng": -48.683
-    },
-    {
-      "name": "****CEC9D",
-      "status": "OFFLINE",
-      "stationId": 1395,
-      "lat": -32.472,
-      "lng": 26.93
-    },
-    {
-      "name": "****DA25D",
-      "status": "OFFLINE",
-      "stationId": 1639,
-      "lat": 17.71,
-      "lng": 74.37
-    },
-    {
-      "name": "****1CEAD",
-      "status": "OFFLINE",
-      "stationId": 3490,
-      "lat": 44.629,
-      "lng": 10.94
     },
     {
       "name": "****DF381",
@@ -33297,46 +33094,11 @@
       "lng": 23.22
     },
     {
-      "name": "****675E1",
-      "status": "OFFLINE",
-      "stationId": 2088,
-      "lat": 32.99,
-      "lng": -96.567
-    },
-    {
-      "name": "****DBEF9",
-      "status": "OFFLINE",
-      "stationId": 3836,
-      "lat": 38.7,
-      "lng": -93.197
-    },
-    {
       "name": "****2E6A9",
       "status": "OFFLINE",
       "stationId": 3485,
       "lat": 10.366,
       "lng": 77.98
-    },
-    {
-      "name": "****DF4ED",
-      "status": "OFFLINE",
-      "stationId": 3749,
-      "lat": 7.723,
-      "lng": -80.55
-    },
-    {
-      "name": "****F85A5",
-      "status": "OFFLINE",
-      "stationId": 706,
-      "lat": 48.069,
-      "lng": 9.95
-    },
-    {
-      "name": "****42281",
-      "status": "OFFLINE",
-      "stationId": 2229,
-      "lat": 6.24,
-      "lng": 7.108
     },
     {
       "name": "****E4AF9",
@@ -33353,46 +33115,11 @@
       "lng": 32.393
     },
     {
-      "name": "****09A0A",
-      "status": "OFFLINE",
-      "stationId": 2515,
-      "lat": 19.387,
-      "lng": 74.64
-    },
-    {
-      "name": "****11295",
-      "status": "OFFLINE",
-      "stationId": 1772,
-      "lat": 32.01,
-      "lng": -102.101
-    },
-    {
-      "name": "****CB3B9",
-      "status": "OFFLINE",
-      "stationId": 3650,
-      "lat": 39.02,
-      "lng": 26.212
-    },
-    {
-      "name": "****EB81D",
-      "status": "OFFLINE",
-      "stationId": 2266,
-      "lat": 42.85,
-      "lng": -73.757
-    },
-    {
       "name": "****3A784",
       "status": "OFFLINE",
       "stationId": 3899,
       "lat": 37.237,
       "lng": 39.76
-    },
-    {
-      "name": "****09DE1",
-      "status": "OFFLINE",
-      "stationId": 3403,
-      "lat": 8.773,
-      "lng": -75.85
     },
     {
       "name": "****E4EF5",
@@ -33402,81 +33129,11 @@
       "lng": 18.36
     },
     {
-      "name": "****FF031",
-      "status": "OFFLINE",
-      "stationId": 3882,
-      "lat": 8.92,
-      "lng": 99.61
-    },
-    {
       "name": "****112A5",
       "status": "OFFLINE",
       "stationId": 3498,
       "lat": 45.728,
       "lng": 24.58
-    },
-    {
-      "name": "****B6DF0",
-      "status": "OFFLINE",
-      "stationId": 866,
-      "lat": -23.58,
-      "lng": -47.062
-    },
-    {
-      "name": "****C00F5",
-      "status": "OFFLINE",
-      "stationId": 3774,
-      "lat": 48.227,
-      "lng": 8.62
-    },
-    {
-      "name": "****679C9",
-      "status": "OFFLINE",
-      "stationId": 1423,
-      "lat": 43.33,
-      "lng": -92.506
-    },
-    {
-      "name": "****4A5ED",
-      "status": "OFFLINE",
-      "stationId": 2602,
-      "lat": 22.295,
-      "lng": 91.91
-    },
-    {
-      "name": "****E3C59",
-      "status": "OFFLINE",
-      "stationId": 3231,
-      "lat": 40.707,
-      "lng": -75.21
-    },
-    {
-      "name": "****F368D",
-      "status": "OFFLINE",
-      "stationId": 1070,
-      "lat": 0.353,
-      "lng": 73.54
-    },
-    {
-      "name": "****CBC69",
-      "status": "OFFLINE",
-      "stationId": 2020,
-      "lat": 20.139,
-      "lng": 74.14
-    },
-    {
-      "name": "****A0ECD",
-      "status": "ACTIVE",
-      "stationId": 1858,
-      "lat": 19.03,
-      "lng": 74.639
-    },
-    {
-      "name": "****4E2C5",
-      "status": "OFFLINE",
-      "stationId": 3266,
-      "lat": 19,
-      "lng": 74.588
     },
     {
       "name": "****1CC09",
@@ -33486,11 +33143,270 @@
       "lng": -83.165
     },
     {
-      "name": "****4BDFD",
+      "name": "****705A5",
       "status": "OFFLINE",
-      "stationId": 346,
-      "lat": -6.79,
-      "lng": -43.57
+      "stationId": 2700,
+      "lat": 24.06,
+      "lng": 85.587
+    },
+    {
+      "name": "****1FD12",
+      "status": "OFFLINE",
+      "stationId": 2696,
+      "lat": 44.96,
+      "lng": -89.639
+    },
+    {
+      "name": "****1BB76",
+      "status": "OFFLINE",
+      "stationId": 2774,
+      "lat": 45.766,
+      "lng": -111.17
+    },
+    {
+      "name": "****6063D",
+      "status": "OFFLINE",
+      "stationId": 573,
+      "lat": 45.494,
+      "lng": -122.61
+    },
+    {
+      "name": "****1C16D",
+      "status": "OFFLINE",
+      "stationId": 3518,
+      "lat": 38.411,
+      "lng": -78.99
+    },
+    {
+      "name": "****6E442",
+      "status": "OFFLINE",
+      "stationId": 193,
+      "lat": 39.7,
+      "lng": 20.812
+    },
+    {
+      "name": "****F3DF9",
+      "status": "OFFLINE",
+      "stationId": 116,
+      "lat": -12.571,
+      "lng": -55.71
+    },
+    {
+      "name": "****6F6B5",
+      "status": "OFFLINE",
+      "stationId": 1805,
+      "lat": 54.499,
+      "lng": 18.21
+    },
+    {
+      "name": "****42281",
+      "status": "OFFLINE",
+      "stationId": 2229,
+      "lat": 6.24,
+      "lng": 7.108
+    },
+    {
+      "name": "****5E5B5",
+      "status": "OFFLINE",
+      "stationId": 3154,
+      "lat": 44.338,
+      "lng": 20.6
+    },
+    {
+      "name": "****2109A",
+      "status": "OFFLINE",
+      "stationId": 3119,
+      "lat": 32.75,
+      "lng": -98.123
+    },
+    {
+      "name": "****CB941",
+      "status": "ACTIVE",
+      "stationId": 188,
+      "lat": 39.696,
+      "lng": -76.88
+    },
+    {
+      "name": "****29B91",
+      "status": "OFFLINE",
+      "stationId": 2900,
+      "lat": 39.79,
+      "lng": -75.173
+    },
+    {
+      "name": "****EF3D5",
+      "status": "OFFLINE",
+      "stationId": 328,
+      "lat": 34.178,
+      "lng": -118.87
+    },
+    {
+      "name": "****F8659",
+      "status": "OFFLINE",
+      "stationId": 2796,
+      "lat": 23.896,
+      "lng": 89.12
+    },
+    {
+      "name": "****18C6D",
+      "status": "OFFLINE",
+      "stationId": 1678,
+      "lat": -30.47,
+      "lng": 30.642
+    },
+    {
+      "name": "****89601",
+      "status": "OFFLINE",
+      "stationId": 3101,
+      "lat": 34.24,
+      "lng": -86.821
+    },
+    {
+      "name": "****18D31",
+      "status": "OFFLINE",
+      "stationId": 1605,
+      "lat": 12.21,
+      "lng": 75.902
+    },
+    {
+      "name": "****F550D",
+      "status": "OFFLINE",
+      "stationId": 2885,
+      "lat": 45.548,
+      "lng": 21.81
+    },
+    {
+      "name": "****07115",
+      "status": "OFFLINE",
+      "stationId": 584,
+      "lat": 8.32,
+      "lng": 77.579
+    },
+    {
+      "name": "****5CDE1",
+      "status": "OFFLINE",
+      "stationId": 1908,
+      "lat": -40.595,
+      "lng": 175.28
+    },
+    {
+      "name": "****29AC9",
+      "status": "OFFLINE",
+      "stationId": 3953,
+      "lat": 43.73,
+      "lng": 26.929
+    },
+    {
+      "name": "****BE5C9",
+      "status": "OFFLINE",
+      "stationId": 1985,
+      "lat": 36.71,
+      "lng": 29.492
+    },
+    {
+      "name": "****BEA09",
+      "status": "OFFLINE",
+      "stationId": 1883,
+      "lat": -26.24,
+      "lng": 27.69
+    },
+    {
+      "name": "****BC671",
+      "status": "OFFLINE",
+      "stationId": 993,
+      "lat": 37.59,
+      "lng": -3.103
+    },
+    {
+      "name": "****20725",
+      "status": "OFFLINE",
+      "stationId": 2808,
+      "lat": 43,
+      "lng": 19.492
+    },
+    {
+      "name": "****2A880",
+      "status": "OFFLINE",
+      "stationId": 495,
+      "lat": 39.476,
+      "lng": -8.54
+    },
+    {
+      "name": "****EC439",
+      "status": "OFFLINE",
+      "stationId": 3093,
+      "lat": 46.978,
+      "lng": 23.5
+    },
+    {
+      "name": "****37F8D",
+      "status": "OFFLINE",
+      "stationId": 622,
+      "lat": 18.4,
+      "lng": -66.231
+    },
+    {
+      "name": "****B5335",
+      "status": "OFFLINE",
+      "stationId": 523,
+      "lat": 61.595,
+      "lng": -6.95
+    },
+    {
+      "name": "****CB3B9",
+      "status": "OFFLINE",
+      "stationId": 3650,
+      "lat": 39.02,
+      "lng": 26.212
+    },
+    {
+      "name": "****22158",
+      "status": "OFFLINE",
+      "stationId": 1969,
+      "lat": -29.43,
+      "lng": 24.008
+    },
+    {
+      "name": "****C2FA5",
+      "status": "OFFLINE",
+      "stationId": 2076,
+      "lat": 52.851,
+      "lng": 10.67
+    },
+    {
+      "name": "****D6441",
+      "status": "OFFLINE",
+      "stationId": 1057,
+      "lat": 38.69,
+      "lng": 27.89
+    },
+    {
+      "name": "****11B35",
+      "status": "OFFLINE",
+      "stationId": 982,
+      "lat": 7.97,
+      "lng": -75.177
+    },
+    {
+      "name": "****DBEF9",
+      "status": "OFFLINE",
+      "stationId": 3836,
+      "lat": 38.7,
+      "lng": -93.197
+    },
+    {
+      "name": "****EB81D",
+      "status": "OFFLINE",
+      "stationId": 2266,
+      "lat": 42.85,
+      "lng": -73.757
+    },
+    {
+      "name": "****002BD",
+      "status": "OFFLINE",
+      "stationId": 1159,
+      "lat": 19.97,
+      "lng": 73.801
     },
     {
       "name": "****FDF41",
@@ -33500,18 +33416,95 @@
       "lng": -88.112
     },
     {
-      "name": "****1BB35",
+      "name": "****65E15",
       "status": "OFFLINE",
-      "stationId": 2410,
-      "lat": 50.44,
-      "lng": 7.483
+      "stationId": 1059,
+      "lat": 42.11,
+      "lng": -80.127
     },
     {
-      "name": "****29DBD",
-      "status": "ONLINE",
-      "stationId": 1029,
-      "lat": -32.74,
-      "lng": 27.661
+      "name": "****DB355",
+      "status": "OFFLINE",
+      "stationId": 3479,
+      "lat": 10.162,
+      "lng": 77.75
+    },
+    {
+      "name": "****64FE5",
+      "status": "OFFLINE",
+      "stationId": 2771,
+      "lat": 39.65,
+      "lng": -84.236
+    },
+    {
+      "name": "****08A0C",
+      "status": "OFFLINE",
+      "stationId": 942,
+      "lat": -33.848,
+      "lng": 18.67
+    },
+    {
+      "name": "****32231",
+      "status": "OFFLINE",
+      "stationId": 648,
+      "lat": 21.54,
+      "lng": 39.184
+    },
+    {
+      "name": "****1CEF1",
+      "status": "OFFLINE",
+      "stationId": 2829,
+      "lat": 55.459,
+      "lng": 24.71
+    },
+    {
+      "name": "****935B9",
+      "status": "OFFLINE",
+      "stationId": 2957,
+      "lat": 40.62,
+      "lng": 14.378
+    },
+    {
+      "name": "****18A8D",
+      "status": "OFFLINE",
+      "stationId": 3593,
+      "lat": 56.35,
+      "lng": 23.353
+    },
+    {
+      "name": "****98061",
+      "status": "OFFLINE",
+      "stationId": 221,
+      "lat": 30.386,
+      "lng": -94.32
+    },
+    {
+      "name": "****7A151",
+      "status": "OFFLINE",
+      "stationId": 1194,
+      "lat": 48.58,
+      "lng": 11.08
+    },
+    {
+      "name": "****1CFBD",
+      "status": "OFFLINE",
+      "stationId": 1139,
+      "lat": 18.734,
+      "lng": 84.4
+    },
+    {
+      "name": "****CCE45",
+      "status": "OFFLINE",
+      "stationId": 3579,
+      "lat": 39.89,
+      "lng": -0.255
+    },
+    {
+      "name": "****F85A5",
+      "status": "OFFLINE",
+      "stationId": 706,
+      "lat": 48.069,
+      "lng": 9.95
     },
     {
       "name": "****E60B9",
@@ -33521,11 +33514,116 @@
       "lng": 13.17
     },
     {
-      "name": "****D1959",
+      "name": "****6A822",
       "status": "OFFLINE",
-      "stationId": 163,
-      "lat": 35.412,
-      "lng": -82.37
+      "stationId": 3448,
+      "lat": 39.2,
+      "lng": -94.66
+    },
+    {
+      "name": "****6E836",
+      "status": "OFFLINE",
+      "stationId": 3321,
+      "lat": 40.871,
+      "lng": -79.93
+    },
+    {
+      "name": "****D6161",
+      "status": "OFFLINE",
+      "stationId": 2776,
+      "lat": 53.042,
+      "lng": 21.99
+    },
+    {
+      "name": "****1BA1D",
+      "status": "OFFLINE",
+      "stationId": 1208,
+      "lat": 40.74,
+      "lng": -3.575
+    },
+    {
+      "name": "****0B665",
+      "status": "OFFLINE",
+      "stationId": 701,
+      "lat": 41.472,
+      "lng": 23.23
+    },
+    {
+      "name": "****6A4CA",
+      "status": "OFFLINE",
+      "stationId": 188,
+      "lat": 40.792,
+      "lng": -96.77
+    },
+    {
+      "name": "****196E5",
+      "status": "OFFLINE",
+      "stationId": 1153,
+      "lat": 38.701,
+      "lng": -9.35
+    },
+    {
+      "name": "****497AD",
+      "status": "OFFLINE",
+      "stationId": 1334,
+      "lat": 39.921,
+      "lng": 33.23
+    },
+    {
+      "name": "****4BDFD",
+      "status": "OFFLINE",
+      "stationId": 346,
+      "lat": -6.79,
+      "lng": -43.57
+    },
+    {
+      "name": "****D8D49",
+      "status": "OFFLINE",
+      "stationId": 3789,
+      "lat": 40.648,
+      "lng": 29.29
+    },
+    {
+      "name": "****1C3F1",
+      "status": "OFFLINE",
+      "stationId": 1788,
+      "lat": 50.862,
+      "lng": 5.78
+    },
+    {
+      "name": "****DF271",
+      "status": "OFFLINE",
+      "stationId": 256,
+      "lat": 14.03,
+      "lng": 78.516
+    },
+    {
+      "name": "****2012E",
+      "status": "ACTIVE",
+      "stationId": 3208,
+      "lat": 42.132,
+      "lng": 25.5
+    },
+    {
+      "name": "****22D19",
+      "status": "ACTIVE",
+      "stationId": 947,
+      "lat": 55.39,
+      "lng": 24.762
+    },
+    {
+      "name": "****C8E3E",
+      "status": "ACTIVE",
+      "stationId": 3705,
+      "lat": 41.54,
+      "lng": -8.401
+    },
+    {
+      "name": "****7CE81",
+      "status": "OFFLINE",
+      "stationId": 1944,
+      "lat": 34.18,
+      "lng": -98.522
     },
     {
       "name": "****0C771",
@@ -33717,6 +33815,13 @@
       "lng": 17.66
     },
     {
+      "name": "****675E1",
+      "status": "ACTIVE",
+      "stationId": 2088,
+      "lat": 32.99,
+      "lng": -96.567
+    },
+    {
       "name": "****83239",
       "status": "ACTIVE",
       "stationId": 2985,
@@ -33871,13 +33976,6 @@
       "lng": -1.18
     },
     {
-      "name": "****CB941",
-      "status": "ACTIVE",
-      "stationId": 188,
-      "lat": 39.696,
-      "lng": -76.88
-    },
-    {
       "name": "****60555",
       "status": "ACTIVE",
       "stationId": 174,
@@ -33997,6 +34095,13 @@
       "lng": -4.497
     },
     {
+      "name": "KOUG",
+      "status": "OFFLINE",
+      "stationId": 1967,
+      "lat": 5.098,
+      "lng": -52.64
+    },
+    {
       "name": "****79FC9",
       "status": "ACTIVE",
       "stationId": 109,
@@ -34005,7 +34110,7 @@
     },
     {
       "name": "****60541",
-      "status": "ONLINE",
+      "status": "ACTIVE",
       "stationId": 7,
       "lat": 38.56,
       "lng": 29.614
@@ -34641,13 +34746,6 @@
       "lng": 17.96
     },
     {
-      "name": "****E286D",
-      "status": "ONLINE",
-      "stationId": 122,
-      "lat": -8.827,
-      "lng": 115.16
-    },
-    {
       "name": "****46B01",
       "status": "ACTIVE",
       "stationId": 696,
@@ -34814,13 +34912,6 @@
       "stationId": 751,
       "lat": 41.006,
       "lng": 28.83
-    },
-    {
-      "name": "****DB355",
-      "status": "ACTIVE",
-      "stationId": 3479,
-      "lat": 10.162,
-      "lng": 77.75
     },
     {
       "name": "****169D5",
@@ -35145,25 +35236,11 @@
       "lng": 28.064
     },
     {
-      "name": "****1663D",
-      "status": "ACTIVE",
-      "stationId": 1071,
-      "lat": 47.93,
-      "lng": 16.843
-    },
-    {
       "name": "****FF18D",
       "status": "ACTIVE",
       "stationId": 3240,
       "lat": 41.033,
       "lng": 40.51
-    },
-    {
-      "name": "****1CFBD",
-      "status": "ACTIVE",
-      "stationId": 1139,
-      "lat": 18.734,
-      "lng": 84.4
     },
     {
       "name": "****77AD5",
@@ -35192,13 +35269,6 @@
       "stationId": 1185,
       "lat": 51.46,
       "lng": 0.497
-    },
-    {
-      "name": "****002BD",
-      "status": "ACTIVE",
-      "stationId": 1159,
-      "lat": 19.97,
-      "lng": 73.801
     },
     {
       "name": "****1CADD",
@@ -35530,13 +35600,6 @@
       "lng": -82.741
     },
     {
-      "name": "****1C3F1",
-      "status": "ACTIVE",
-      "stationId": 1788,
-      "lat": 50.862,
-      "lng": 5.78
-    },
-    {
       "name": "****1CF41",
       "status": "ACTIVE",
       "stationId": 1807,
@@ -35600,11 +35663,11 @@
       "lng": 26.65
     },
     {
-      "name": "****196E5",
-      "status": "OFFLINE",
-      "stationId": 1153,
-      "lat": 38.701,
-      "lng": -9.35
+      "name": "****1B3D1",
+      "status": "ACTIVE",
+      "stationId": 1182,
+      "lat": 4.7,
+      "lng": -74.127
     },
     {
       "name": "****D4AC9",
@@ -35766,6 +35829,13 @@
       "stationId": 1305,
       "lat": 43.17,
       "lng": -70.9
+    },
+    {
+      "name": "****1BB35",
+      "status": "ACTIVE",
+      "stationId": 2410,
+      "lat": 50.44,
+      "lng": 7.483
     },
     {
       "name": "****2193D",
@@ -36020,13 +36090,6 @@
       "lng": -1.15
     },
     {
-      "name": "****1CEF1",
-      "status": "ACTIVE",
-      "stationId": 2829,
-      "lat": 55.459,
-      "lng": 24.71
-    },
-    {
       "name": "****1CB51",
       "status": "ACTIVE",
       "stationId": 3374,
@@ -36060,6 +36123,13 @@
       "stationId": 2756,
       "lat": 38.335,
       "lng": 26.64
+    },
+    {
+      "name": "****64BC5",
+      "status": "ONLINE",
+      "stationId": 3985,
+      "lat": 18.97,
+      "lng": 72.825
     },
     {
       "name": "****65FC5",
@@ -36384,6 +36454,13 @@
       "lng": -97.65
     },
     {
+      "name": "****29DBD",
+      "status": "ONLINE",
+      "stationId": 1029,
+      "lat": -32.74,
+      "lng": 27.661
+    },
+    {
       "name": "****19001",
       "status": "ACTIVE",
       "stationId": 3842,
@@ -36501,13 +36578,6 @@
       "stationId": 2503,
       "lat": 34.51,
       "lng": 135.513
-    },
-    {
-      "name": "****29AC9",
-      "status": "ACTIVE",
-      "stationId": 3953,
-      "lat": 43.73,
-      "lng": 26.929
     },
     {
       "name": "****2A92D",
@@ -36839,13 +36909,6 @@
       "lng": -89.56
     },
     {
-      "name": "****29B91",
-      "status": "ACTIVE",
-      "stationId": 2900,
-      "lat": 39.79,
-      "lng": -75.173
-    },
-    {
       "name": "****E2365",
       "status": "ACTIVE",
       "stationId": 2915,
@@ -37015,7 +37078,7 @@
     },
     {
       "name": "****DB30D",
-      "status": "ACTIVE",
+      "status": "OFFLINE",
       "stationId": 905,
       "lat": 40.212,
       "lng": -6.47
@@ -37421,7 +37484,7 @@
     },
     {
       "name": "****E2CC5",
-      "status": "ONLINE",
+      "status": "ACTIVE",
       "stationId": 804,
       "lat": 48.537,
       "lng": 9.29
@@ -37467,13 +37530,6 @@
       "stationId": 3782,
       "lat": 51.921,
       "lng": 7.85
-    },
-    {
-      "name": "****18D31",
-      "status": "ONLINE",
-      "stationId": 1605,
-      "lat": 12.21,
-      "lng": 75.902
     },
     {
       "name": "****18D95",
@@ -37700,6 +37756,13 @@
       "lng": 13.633
     },
     {
+      "name": "****E3C59",
+      "status": "ACTIVE",
+      "stationId": 3231,
+      "lat": 40.707,
+      "lng": -75.21
+    },
+    {
       "name": "****E27A9",
       "status": "ACTIVE",
       "stationId": 1290,
@@ -37733,13 +37796,6 @@
       "stationId": 1361,
       "lat": 57.503,
       "lng": 22.35
-    },
-    {
-      "name": "****18A8D",
-      "status": "ACTIVE",
-      "stationId": 3593,
-      "lat": 56.35,
-      "lng": 23.353
     },
     {
       "name": "****CC5B9",
@@ -38022,6 +38078,13 @@
       "lng": 102.053
     },
     {
+      "name": "****E2FDD",
+      "status": "ONLINE",
+      "stationId": 692,
+      "lat": 2.583,
+      "lng": 102.6
+    },
+    {
       "name": "****DE715",
       "status": "ACTIVE",
       "stationId": 2682,
@@ -38065,7 +38128,7 @@
     },
     {
       "name": "****DE5E1",
-      "status": "ONLINE",
+      "status": "ACTIVE",
       "stationId": 3422,
       "lat": 42.62,
       "lng": 24.899
@@ -38076,13 +38139,6 @@
       "stationId": 99,
       "lat": 55.656,
       "lng": 21.42
-    },
-    {
-      "name": "****DF271",
-      "status": "OFFLINE",
-      "stationId": 256,
-      "lat": 14.03,
-      "lng": 78.516
     },
     {
       "name": "****CDB8D",
@@ -38666,6 +38722,13 @@
       "lng": 120.92
     },
     {
+      "name": "****F368D",
+      "status": "ACTIVE",
+      "stationId": 1070,
+      "lat": 0.353,
+      "lng": 73.54
+    },
+    {
       "name": "****019ED",
       "status": "ACTIVE",
       "stationId": 2864,
@@ -38702,7 +38765,7 @@
     },
     {
       "name": "****E3385",
-      "status": "ACTIVE",
+      "status": "ONLINE",
       "stationId": 1669,
       "lat": 54.845,
       "lng": 23.35
@@ -38783,13 +38846,6 @@
       "stationId": 1542,
       "lat": 45.77,
       "lng": 13.805
-    },
-    {
-      "name": "****CCE45",
-      "status": "ACTIVE",
-      "stationId": 3579,
-      "lat": 39.89,
-      "lng": -0.255
     },
     {
       "name": "****EDBE5",
@@ -38874,13 +38930,6 @@
       "stationId": 1682,
       "lat": 43.158,
       "lng": 25.3
-    },
-    {
-      "name": "****D6441",
-      "status": "ACTIVE",
-      "stationId": 1057,
-      "lat": 38.69,
-      "lng": 27.89
     },
     {
       "name": "****CCF6D",
@@ -39128,13 +39177,6 @@
       "lng": 86.255
     },
     {
-      "name": "****F3DF9",
-      "status": "ACTIVE",
-      "stationId": 116,
-      "lat": -12.571,
-      "lng": -55.71
-    },
-    {
       "name": "****DC065",
       "status": "ACTIVE",
       "stationId": 2137,
@@ -39150,7 +39192,7 @@
     },
     {
       "name": "****DB735",
-      "status": "ONLINE",
+      "status": "ACTIVE",
       "stationId": 1377,
       "lat": -7.655,
       "lng": 107.75
@@ -39178,7 +39220,7 @@
     },
     {
       "name": "****FCC29",
-      "status": "ONLINE",
+      "status": "ACTIVE",
       "stationId": 1384,
       "lat": -7.46,
       "lng": 107.597
@@ -39226,6 +39268,13 @@
       "lng": 107.161
     },
     {
+      "name": "****CEC9D",
+      "status": "ACTIVE",
+      "stationId": 1395,
+      "lat": -32.472,
+      "lng": 26.93
+    },
+    {
       "name": "****FDA49",
       "status": "ACTIVE",
       "stationId": 422,
@@ -39247,6 +39296,13 @@
       "lng": -83.581
     },
     {
+      "name": "****FF031",
+      "status": "ACTIVE",
+      "stationId": 3882,
+      "lat": 8.92,
+      "lng": 99.61
+    },
+    {
       "name": "****652A9",
       "status": "ACTIVE",
       "stationId": 870,
@@ -39259,6 +39315,13 @@
       "stationId": 2671,
       "lat": 29.842,
       "lng": 76.93
+    },
+    {
+      "name": "****D42DD",
+      "status": "ACTIVE",
+      "stationId": 3082,
+      "lat": 2.93,
+      "lng": 101.336
     },
     {
       "name": "****64B69",
@@ -39322,6 +39385,13 @@
       "stationId": 3743,
       "lat": 45.39,
       "lng": -72.057
+    },
+    {
+      "name": "****DF4ED",
+      "status": "ACTIVE",
+      "stationId": 3749,
+      "lat": 7.723,
+      "lng": -80.55
     },
     {
       "name": "****203E9",
@@ -39598,7 +39668,7 @@
     },
     {
       "name": "****E4D01",
-      "status": "ONLINE",
+      "status": "ACTIVE",
       "stationId": 789,
       "lat": -1.264,
       "lng": 36.84
@@ -39714,6 +39784,13 @@
       "stationId": 3659,
       "lat": 41.515,
       "lng": 34.76
+    },
+    {
+      "name": "****CBC69",
+      "status": "ACTIVE",
+      "stationId": 2020,
+      "lat": 20.139,
+      "lng": 74.14
     },
     {
       "name": "****5AD79",
@@ -39959,13 +40036,6 @@
       "stationId": 2484,
       "lat": 39.66,
       "lng": 33.622
-    },
-    {
-      "name": "****EC439",
-      "status": "ACTIVE",
-      "stationId": 3093,
-      "lat": 46.978,
-      "lng": 23.5
     },
     {
       "name": "****5E72D",
@@ -40235,7 +40305,7 @@
     },
     {
       "name": "****3A842",
-      "status": "OFFLINE",
+      "status": "ACTIVE",
       "stationId": 2474,
       "lat": 52.47,
       "lng": -1.474
@@ -40309,13 +40379,6 @@
       "stationId": 1463,
       "lat": 55.31,
       "lng": 25.231
-    },
-    {
-      "name": "****20725",
-      "status": "ACTIVE",
-      "stationId": 2808,
-      "lat": 43,
-      "lng": 19.492
     },
     {
       "name": "****CA3B1",
@@ -40627,7 +40690,7 @@
     },
     {
       "name": "****CA265",
-      "status": "ONLINE",
+      "status": "ACTIVE",
       "stationId": 2078,
       "lat": 39.338,
       "lng": 21.84
@@ -40766,6 +40829,20 @@
       "lng": 74.13
     },
     {
+      "name": "****727AD",
+      "status": "ACTIVE",
+      "stationId": 1886,
+      "lat": -24.988,
+      "lng": 28.11
+    },
+    {
+      "name": "****DA25D",
+      "status": "ACTIVE",
+      "stationId": 1639,
+      "lat": 17.71,
+      "lng": 74.37
+    },
+    {
       "name": "****73BF9",
       "status": "ACTIVE",
       "stationId": 592,
@@ -40795,7 +40872,7 @@
     },
     {
       "name": "****CA429",
-      "status": "ACTIVE",
+      "status": "ONLINE",
       "stationId": 1682,
       "lat": 45.55,
       "lng": 22.148
@@ -40813,13 +40890,6 @@
       "stationId": 648,
       "lat": 44.37,
       "lng": 28.458
-    },
-    {
-      "name": "****2109A",
-      "status": "ACTIVE",
-      "stationId": 3119,
-      "lat": 32.75,
-      "lng": -98.123
     },
     {
       "name": "****3271A",
@@ -40904,13 +40974,6 @@
       "stationId": 63,
       "lat": 40.156,
       "lng": 26.41
-    },
-    {
-      "name": "****F550D",
-      "status": "ACTIVE",
-      "stationId": 2885,
-      "lat": 45.548,
-      "lng": 21.81
     },
     {
       "name": "****E8F09",
@@ -41002,13 +41065,6 @@
       "stationId": 3817,
       "lat": 42.249,
       "lng": 25.68
-    },
-    {
-      "name": "****705A5",
-      "status": "OFFLINE",
-      "stationId": 2700,
-      "lat": 24.06,
-      "lng": 85.587
     },
     {
       "name": "****216C1",
@@ -41460,7 +41516,7 @@
     },
     {
       "name": "****13C09",
-      "status": "ACTIVE",
+      "status": "ONLINE",
       "stationId": 85,
       "lat": 54.216,
       "lng": 24.42
@@ -41471,13 +41527,6 @@
       "stationId": 1614,
       "lat": -7.68,
       "lng": 113.986
-    },
-    {
-      "name": "****414CC",
-      "status": "OFFLINE",
-      "stationId": 1616,
-      "lat": -34.586,
-      "lng": 19.35
     },
     {
       "name": "****9165D",
@@ -41541,13 +41590,6 @@
       "stationId": 2690,
       "lat": 53.155,
       "lng": 6.79
-    },
-    {
-      "name": "****2012E",
-      "status": "ACTIVE",
-      "stationId": 3208,
-      "lat": 42.132,
-      "lng": 25.5
     },
     {
       "name": "****197A1",
@@ -41649,7 +41691,7 @@
     },
     {
       "name": "****3A7C8",
-      "status": "ONLINE",
+      "status": "ACTIVE",
       "stationId": 1849,
       "lat": 39.847,
       "lng": -3
@@ -41684,7 +41726,7 @@
     },
     {
       "name": "****2E83E",
-      "status": "ONLINE",
+      "status": "ACTIVE",
       "stationId": 1606,
       "lat": 40.167,
       "lng": 31.92
@@ -41712,7 +41754,7 @@
     },
     {
       "name": "****CA515",
-      "status": "ONLINE",
+      "status": "ACTIVE",
       "stationId": 3619,
       "lat": 44.343,
       "lng": -89.06
@@ -41726,7 +41768,7 @@
     },
     {
       "name": "****16145",
-      "status": "ONLINE",
+      "status": "ACTIVE",
       "stationId": 1658,
       "lat": -8.23,
       "lng": 116.415
@@ -41968,13 +42010,6 @@
       "stationId": 3045,
       "lat": 33.15,
       "lng": -111.444
-    },
-    {
-      "name": "****22D19",
-      "status": "ACTIVE",
-      "stationId": 947,
-      "lat": 55.39,
-      "lng": 24.762
     },
     {
       "name": "****8FC41",
@@ -42460,6 +42495,13 @@
       "lng": -94.98
     },
     {
+      "name": "****D2F28",
+      "status": "ACTIVE",
+      "stationId": 2299,
+      "lat": 50.635,
+      "lng": 6.37
+    },
+    {
       "name": "****C2CD6",
       "status": "ACTIVE",
       "stationId": 73,
@@ -42486,13 +42528,6 @@
       "stationId": 3103,
       "lat": 17.3,
       "lng": 74.338
-    },
-    {
-      "name": "****497AD",
-      "status": "ACTIVE",
-      "stationId": 1334,
-      "lat": 39.921,
-      "lng": 33.23
     },
     {
       "name": "****13E49",
@@ -42556,6 +42591,13 @@
       "stationId": 2923,
       "lat": 9.981,
       "lng": -73.89
+    },
+    {
+      "name": "****09DE1",
+      "status": "ACTIVE",
+      "stationId": 3403,
+      "lat": 8.773,
+      "lng": -75.85
     },
     {
       "name": "****10681",
@@ -42719,6 +42761,13 @@
       "lng": -75.529
     },
     {
+      "name": "****70C11",
+      "status": "ACTIVE",
+      "stationId": 1238,
+      "lat": 6.733,
+      "lng": 81.1
+    },
+    {
       "name": "****1E071",
       "status": "ACTIVE",
       "stationId": 569,
@@ -42768,6 +42817,13 @@
       "lng": -94.25
     },
     {
+      "name": "****EA1C9",
+      "status": "ACTIVE",
+      "stationId": 1823,
+      "lat": 10.018,
+      "lng": -84.34
+    },
+    {
       "name": "****C4D34",
       "status": "ACTIVE",
       "stationId": 1392,
@@ -42794,6 +42850,13 @@
       "stationId": 1522,
       "lat": 46.015,
       "lng": 16.54
+    },
+    {
+      "name": "****A0ECD",
+      "status": "ACTIVE",
+      "stationId": 1858,
+      "lat": 19.03,
+      "lng": 74.639
     },
     {
       "name": "****2A8B8",
@@ -42983,13 +43046,6 @@
       "stationId": 3080,
       "lat": 40.925,
       "lng": 38.92
-    },
-    {
-      "name": "****6F6B5",
-      "status": "ACTIVE",
-      "stationId": 1805,
-      "lat": 54.499,
-      "lng": 18.21
     },
     {
       "name": "****D3F79",
@@ -43209,6 +43265,13 @@
       "lng": 14.107
     },
     {
+      "name": "****B897D",
+      "status": "ACTIVE",
+      "stationId": 257,
+      "lat": -24.55,
+      "lng": -48.683
+    },
+    {
       "name": "****29F80",
       "status": "ACTIVE",
       "stationId": 2684,
@@ -43252,7 +43315,7 @@
     },
     {
       "name": "****3C99C",
-      "status": "ONLINE",
+      "status": "ACTIVE",
       "stationId": 672,
       "lat": 59.171,
       "lng": 24.81
@@ -43426,6 +43489,13 @@
       "lng": -75.667
     },
     {
+      "name": "****4E2C5",
+      "status": "ACTIVE",
+      "stationId": 3266,
+      "lat": 19,
+      "lng": 74.588
+    },
+    {
       "name": "****FAEE9",
       "status": "ACTIVE",
       "stationId": 3071,
@@ -43475,6 +43545,13 @@
       "lng": -93.803
     },
     {
+      "name": "****24196",
+      "status": "ONLINE",
+      "stationId": 1257,
+      "lat": 38,
+      "lng": -121
+    },
+    {
       "name": "****CFF18",
       "status": "ACTIVE",
       "stationId": 1596,
@@ -43494,6 +43571,13 @@
       "stationId": 2635,
       "lat": 45.312,
       "lng": 14.56
+    },
+    {
+      "name": "****D1959",
+      "status": "ONLINE",
+      "stationId": 163,
+      "lat": 35.412,
+      "lng": -82.37
     },
     {
       "name": "****CA0D1",
@@ -43574,7 +43658,7 @@
     },
     {
       "name": "****A08A1",
-      "status": "ONLINE",
+      "status": "ACTIVE",
       "stationId": 355,
       "lat": 28.079,
       "lng": 75.39
@@ -43769,15 +43853,8 @@
       "lng": 27.41
     },
     {
-      "name": "****D8D49",
-      "status": "ACTIVE",
-      "stationId": 3789,
-      "lat": 40.648,
-      "lng": 29.29
-    },
-    {
       "name": "****CAD92",
-      "status": "ONLINE",
+      "status": "ACTIVE",
       "stationId": 2521,
       "lat": 39.43,
       "lng": 3.015
@@ -43921,6 +43998,13 @@
       "stationId": 1809,
       "lat": -3.93,
       "lng": 104.993
+    },
+    {
+      "name": "****4A5ED",
+      "status": "ACTIVE",
+      "stationId": 2602,
+      "lat": 22.295,
+      "lng": 91.91
     },
     {
       "name": "****66689",
@@ -44519,7 +44603,7 @@
     },
     {
       "name": "****C6DC0",
-      "status": "ONLINE",
+      "status": "ACTIVE",
       "stationId": 1894,
       "lat": 47.023,
       "lng": 8.66
@@ -44665,6 +44749,13 @@
       "lng": -95.48
     },
     {
+      "name": "****0EC92",
+      "status": "ACTIVE",
+      "stationId": 1923,
+      "lat": 29.6,
+      "lng": -95.517
+    },
+    {
       "name": "****C0A4D",
       "status": "ACTIVE",
       "stationId": 3856,
@@ -44698,13 +44789,6 @@
       "stationId": 3133,
       "lat": 42.446,
       "lng": -83.14
-    },
-    {
-      "name": "****1BB76",
-      "status": "ONLINE",
-      "stationId": 2774,
-      "lat": 45.766,
-      "lng": -111.17
     },
     {
       "name": "****0AF19",
@@ -44959,13 +45043,6 @@
       "lng": 6.522
     },
     {
-      "name": "****C2FA5",
-      "status": "ACTIVE",
-      "stationId": 2076,
-      "lat": 52.851,
-      "lng": 10.67
-    },
-    {
       "name": "****21B6E",
       "status": "ONLINE",
       "stationId": 415,
@@ -44995,7 +45072,7 @@
     },
     {
       "name": "****0DC68",
-      "status": "ONLINE",
+      "status": "ACTIVE",
       "stationId": 2515,
       "lat": 8.185,
       "lng": 123.86
@@ -45062,13 +45139,6 @@
       "stationId": 69,
       "lat": 50.39,
       "lng": 14.673
-    },
-    {
-      "name": "****BEA09",
-      "status": "ACTIVE",
-      "stationId": 1883,
-      "lat": -26.24,
-      "lng": 27.69
     },
     {
       "name": "****29D1D",
@@ -45303,7 +45373,7 @@
     },
     {
       "name": "****30714",
-      "status": "ACTIVE",
+      "status": "ONLINE",
       "stationId": 105,
       "lat": 51.15,
       "lng": 6.461
@@ -45512,13 +45582,6 @@
       "lng": 34.85
     },
     {
-      "name": "****5CDE1",
-      "status": "ACTIVE",
-      "stationId": 1908,
-      "lat": -40.595,
-      "lng": 175.28
-    },
-    {
       "name": "****0BA02",
       "status": "ACTIVE",
       "stationId": 1942,
@@ -45660,7 +45723,7 @@
     },
     {
       "name": "****0CB06",
-      "status": "ONLINE",
+      "status": "ACTIVE",
       "stationId": 2780,
       "lat": 40.96,
       "lng": -8.634
@@ -45708,13 +45771,6 @@
       "lng": -97.77
     },
     {
-      "name": "****C8E3E",
-      "status": "ONLINE",
-      "stationId": 3705,
-      "lat": 41.54,
-      "lng": -8.401
-    },
-    {
       "name": "****CEEEA",
       "status": "ACTIVE",
       "stationId": 3814,
@@ -45744,7 +45800,7 @@
     },
     {
       "name": "****0FAEE",
-      "status": "ACTIVE",
+      "status": "ONLINE",
       "stationId": 945,
       "lat": 43.208,
       "lng": -73.73
@@ -45765,7 +45821,7 @@
     },
     {
       "name": "****20D4E",
-      "status": "ONLINE",
+      "status": "ACTIVE",
       "stationId": 2813,
       "lat": 41.54,
       "lng": 1.895
@@ -45954,7 +46010,7 @@
     },
     {
       "name": "****C0255",
-      "status": "ONLINE",
+      "status": "ACTIVE",
       "stationId": 302,
       "lat": 38.141,
       "lng": 41.01
@@ -46003,7 +46059,7 @@
     },
     {
       "name": "****C7E25",
-      "status": "ONLINE",
+      "status": "ACTIVE",
       "stationId": 2568,
       "lat": 37.54,
       "lng": 36.532
@@ -46149,6 +46205,13 @@
       "lng": -88.04
     },
     {
+      "name": "****09A0A",
+      "status": "ACTIVE",
+      "stationId": 2515,
+      "lat": 19.387,
+      "lng": 74.64
+    },
+    {
       "name": "****6E7FE",
       "status": "ACTIVE",
       "stationId": 512,
@@ -46261,13 +46324,6 @@
       "lng": 30.55
     },
     {
-      "name": "****6A822",
-      "status": "ACTIVE",
-      "stationId": 3448,
-      "lat": 39.2,
-      "lng": -94.66
-    },
-    {
       "name": "****CDE28",
       "status": "ONLINE",
       "stationId": 2183,
@@ -46283,7 +46339,7 @@
     },
     {
       "name": "****40EE9",
-      "status": "ONLINE",
+      "status": "ACTIVE",
       "stationId": 205,
       "lat": 6.61,
       "lng": -75.005
@@ -46696,7 +46752,7 @@
     },
     {
       "name": "****6E8A4",
-      "status": "ACTIVE",
+      "status": "OFFLINE",
       "stationId": 595,
       "lat": -22.846,
       "lng": -47.69
@@ -46731,7 +46787,7 @@
     },
     {
       "name": "****C24A5",
-      "status": "ACTIVE",
+      "status": "OFFLINE",
       "stationId": 1872,
       "lat": 41.32,
       "lng": -87.475
@@ -46828,25 +46884,11 @@
       "lng": -66.62
     },
     {
-      "name": "****F8659",
-      "status": "ACTIVE",
-      "stationId": 2796,
-      "lat": 23.896,
-      "lng": 89.12
-    },
-    {
       "name": "****6E742",
       "status": "ACTIVE",
       "stationId": 2271,
       "lat": 33.642,
       "lng": -84.39
-    },
-    {
-      "name": "****1FD12",
-      "status": "ACTIVE",
-      "stationId": 2696,
-      "lat": 44.96,
-      "lng": -89.639
     },
     {
       "name": "****722CD",
@@ -46948,7 +46990,7 @@
     },
     {
       "name": "****166D9",
-      "status": "ONLINE",
+      "status": "ACTIVE",
       "stationId": 1952,
       "lat": -29.752,
       "lng": 31.06
@@ -46980,13 +47022,6 @@
       "stationId": 648,
       "lat": -26.938,
       "lng": -48.94
-    },
-    {
-      "name": "****6A4CA",
-      "status": "ACTIVE",
-      "stationId": 188,
-      "lat": 40.792,
-      "lng": -96.77
     },
     {
       "name": "****CABDD",
@@ -47116,7 +47151,7 @@
     },
     {
       "name": "****09A2C",
-      "status": "ACTIVE",
+      "status": "ONLINE",
       "stationId": 1957,
       "lat": 11.315,
       "lng": 79.51
@@ -47225,6 +47260,13 @@
       "stationId": 470,
       "lat": 45.941,
       "lng": -71.99
+    },
+    {
+      "name": "****C00F5",
+      "status": "ACTIVE",
+      "stationId": 3774,
+      "lat": 48.227,
+      "lng": 8.62
     },
     {
       "name": "****6E706",
@@ -47563,6 +47605,13 @@
       "lng": 137.82
     },
     {
+      "name": "****69A64",
+      "status": "ONLINE",
+      "stationId": 757,
+      "lat": -22.376,
+      "lng": -41.79
+    },
+    {
       "name": "****699C4",
       "status": "ACTIVE",
       "stationId": 1251,
@@ -47603,6 +47652,13 @@
       "stationId": 138,
       "lat": 44.659,
       "lng": -90.18
+    },
+    {
+      "name": "****CA8E9",
+      "status": "OFFLINE",
+      "stationId": 3188,
+      "lat": 32.75,
+      "lng": -114.331
     },
     {
       "name": "****6A8A6",
@@ -48033,7 +48089,7 @@
     },
     {
       "name": "****6E7E4",
-      "status": "ACTIVE",
+      "status": "ONLINE",
       "stationId": 3244,
       "lat": 31.902,
       "lng": 35.2
@@ -48096,7 +48152,7 @@
     },
     {
       "name": "****6E462",
-      "status": "ONLINE",
+      "status": "ACTIVE",
       "stationId": 960,
       "lat": 39.132,
       "lng": -77.79
@@ -48149,13 +48205,6 @@
       "stationId": 847,
       "lat": -22.225,
       "lng": -45.92
-    },
-    {
-      "name": "****6E836",
-      "status": "ACTIVE",
-      "stationId": 3321,
-      "lat": 40.871,
-      "lng": -79.93
     },
     {
       "name": "****B7D6E",
@@ -48845,7 +48894,7 @@
     },
     {
       "name": "****6A108",
-      "status": "ONLINE",
+      "status": "ACTIVE",
       "stationId": 1674,
       "lat": 43.94,
       "lng": -77.187
@@ -48912,13 +48961,6 @@
       "stationId": 1377,
       "lat": 44.45,
       "lng": -73.058
-    },
-    {
-      "name": "****7CE81",
-      "status": "OFFLINE",
-      "stationId": 1944,
-      "lat": 34.18,
-      "lng": -98.522
     },
     {
       "name": "****69A24",
@@ -49110,6 +49152,13 @@
       "lng": -79.819
     },
     {
+      "name": "****727B5",
+      "status": "ACTIVE",
+      "stationId": 656,
+      "lat": 46.259,
+      "lng": 21.38
+    },
+    {
       "name": "****67579",
       "status": "ACTIVE",
       "stationId": 572,
@@ -49241,13 +49290,6 @@
       "stationId": 646,
       "lat": 41.203,
       "lng": 1.36
-    },
-    {
-      "name": "****935B9",
-      "status": "ONLINE",
-      "stationId": 2957,
-      "lat": 40.62,
-      "lng": 14.378
     },
     {
       "name": "****C79DD",
@@ -50671,13 +50713,6 @@
       "lng": -123.487
     },
     {
-      "name": "KOUG",
-      "status": "ACTIVE",
-      "stationId": 1967,
-      "lat": 5.098,
-      "lng": -52.64
-    },
-    {
       "name": "TMUT",
       "status": "ACTIVE",
       "stationId": 598,
@@ -50769,13 +50804,6 @@
       "lng": -121.986
     },
     {
-      "name": "****6063D",
-      "status": "ACTIVE",
-      "stationId": 573,
-      "lat": 45.494,
-      "lng": -122.61
-    },
-    {
       "name": "G041",
       "status": "ONLINE",
       "stationId": 106,
@@ -50853,13 +50881,6 @@
       "lng": -121.391
     },
     {
-      "name": "****32231",
-      "status": "ACTIVE",
-      "stationId": 648,
-      "lat": 21.54,
-      "lng": 39.184
-    },
-    {
       "name": "****0C6BD",
       "status": "ACTIVE",
       "stationId": 343,
@@ -50902,13 +50923,6 @@
       "lng": 13.39
     },
     {
-      "name": "****EF3D5",
-      "status": "ACTIVE",
-      "stationId": 328,
-      "lat": 34.178,
-      "lng": -118.87
-    },
-    {
       "name": "****C6729",
       "status": "ACTIVE",
       "stationId": 669,
@@ -50921,6 +50935,13 @@
       "stationId": 63,
       "lat": 47.827,
       "lng": 13.06
+    },
+    {
+      "name": "****AC361",
+      "status": "ACTIVE",
+      "stationId": 117,
+      "lat": -27.676,
+      "lng": 153.18
     },
     {
       "name": "G002",
@@ -51064,7 +51085,7 @@
     },
     {
       "name": "****7F801",
-      "status": "ACTIVE",
+      "status": "ONLINE",
       "stationId": 350,
       "lat": 39.89,
       "lng": -74.176
@@ -51736,10 +51757,17 @@
     },
     {
       "name": "****5CF75",
-      "status": "ONLINE",
+      "status": "ACTIVE",
       "stationId": 729,
       "lat": 43.56,
       "lng": 27.846
+    },
+    {
+      "name": "****06D95",
+      "status": "ACTIVE",
+      "stationId": 689,
+      "lat": 51.326,
+      "lng": 7.06
     },
     {
       "name": "****B0B19",
@@ -51754,6 +51782,13 @@
       "stationId": 543,
       "lat": 29.44,
       "lng": -81.138
+    },
+    {
+      "name": "****E286D",
+      "status": "ONLINE",
+      "stationId": 122,
+      "lat": -8.827,
+      "lng": 115.16
     },
     {
       "name": "****5A6FD",
@@ -51957,13 +51992,6 @@
       "stationId": 564,
       "lat": 33.934,
       "lng": -116.9
-    },
-    {
-      "name": "****0B665",
-      "status": "ACTIVE",
-      "stationId": 701,
-      "lat": 41.472,
-      "lng": 23.23
     },
     {
       "name": "****F7809",
@@ -52261,7 +52289,7 @@
     },
     {
       "name": "****DB3B9",
-      "status": "ONLINE",
+      "status": "ACTIVE",
       "stationId": 3143,
       "lat": 44.481,
       "lng": 25.88
@@ -52296,7 +52324,7 @@
     },
     {
       "name": "****ADE99",
-      "status": "OFFLINE",
+      "status": "ACTIVE",
       "stationId": 1161,
       "lat": 48.84,
       "lng": 16.161
@@ -52401,7 +52429,7 @@
     },
     {
       "name": "****00851",
-      "status": "ONLINE",
+      "status": "ACTIVE",
       "stationId": 867,
       "lat": 38.088,
       "lng": 37.88
@@ -52624,6 +52652,13 @@
       "lng": -3.9
     },
     {
+      "name": "****1663D",
+      "status": "ACTIVE",
+      "stationId": 1071,
+      "lat": 47.93,
+      "lng": 16.843
+    },
+    {
       "name": "****AEDFD",
       "status": "ACTIVE",
       "stationId": 768,
@@ -52804,13 +52839,6 @@
       "stationId": 1189,
       "lat": 38.01,
       "lng": 24.009
-    },
-    {
-      "name": "****7A151",
-      "status": "ACTIVE",
-      "stationId": 1194,
-      "lat": 48.58,
-      "lng": 11.08
     },
     {
       "name": "****77D65",
@@ -53513,13 +53541,6 @@
       "lng": -104.858
     },
     {
-      "name": "****65E15",
-      "status": "ACTIVE",
-      "stationId": 1059,
-      "lat": 42.11,
-      "lng": -80.127
-    },
-    {
       "name": "****64E01",
       "status": "ACTIVE",
       "stationId": 1555,
@@ -53770,13 +53791,6 @@
       "stationId": 1195,
       "lat": 37.29,
       "lng": -5.491
-    },
-    {
-      "name": "****1BA1D",
-      "status": "ACTIVE",
-      "stationId": 1208,
-      "lat": 40.74,
-      "lng": -3.575
     },
     {
       "name": "****19B61",
@@ -54123,7 +54137,7 @@
     },
     {
       "name": "****1B509",
-      "status": "ACTIVE",
+      "status": "ONLINE",
       "stationId": 1309,
       "lat": 42.54,
       "lng": -83.311
@@ -54885,6 +54899,13 @@
       "lng": 10.72
     },
     {
+      "name": "****11295",
+      "status": "ACTIVE",
+      "stationId": 1772,
+      "lat": 32.01,
+      "lng": -102.101
+    },
+    {
       "name": "****20621",
       "status": "ACTIVE",
       "stationId": 2611,
@@ -55123,6 +55144,13 @@
       "lng": 27.443
     },
     {
+      "name": "****1CEB9",
+      "status": "ACTIVE",
+      "stationId": 2762,
+      "lat": 50.635,
+      "lng": 6.37
+    },
+    {
       "name": "****659F5",
       "status": "ACTIVE",
       "stationId": 828,
@@ -55334,7 +55362,7 @@
     },
     {
       "name": "****665AD",
-      "status": "ACTIVE",
+      "status": "ONLINE",
       "stationId": 888,
       "lat": -6.64,
       "lng": 107.387
@@ -55408,6 +55436,13 @@
       "stationId": 3484,
       "lat": 47.128,
       "lng": 23.13
+    },
+    {
+      "name": "****1CEAD",
+      "status": "ACTIVE",
+      "stationId": 3490,
+      "lat": 44.629,
+      "lng": 10.94
     },
     {
       "name": "G070",
@@ -55726,7 +55761,7 @@
     },
     {
       "name": "****E4461",
-      "status": "ACTIVE",
+      "status": "ONLINE",
       "stationId": 1004,
       "lat": -7.695,
       "lng": 108.66
@@ -56272,7 +56307,7 @@
     },
     {
       "name": "****2A2B9",
-      "status": "ONLINE",
+      "status": "ACTIVE",
       "stationId": 1173,
       "lat": -8.02,
       "lng": 112.572
@@ -56465,6 +56500,13 @@
       "stationId": 3276,
       "lat": 40.83,
       "lng": -7.912
+    },
+    {
+      "name": "****E9B69",
+      "status": "ACTIVE",
+      "stationId": 3270,
+      "lat": 41.487,
+      "lng": -8.26
     },
     {
       "name": "****D91DD",
@@ -56818,7 +56860,7 @@
     },
     {
       "name": "****0AZCR",
-      "status": "ACTIVE",
+      "status": "ONLINE",
       "stationId": 1746,
       "lat": 33.851,
       "lng": -111.83
@@ -56832,7 +56874,7 @@
     },
     {
       "name": "****0AZCS",
-      "status": "ACTIVE",
+      "status": "ONLINE",
       "stationId": 3163,
       "lat": 33.66,
       "lng": -111.894
@@ -56971,6 +57013,13 @@
       "lng": -5.445
     },
     {
+      "name": "****414CC",
+      "status": "ACTIVE",
+      "stationId": 1616,
+      "lat": -34.586,
+      "lng": 19.35
+    },
+    {
       "name": "****CA3CD",
       "status": "ACTIVE",
       "stationId": 1624,
@@ -56990,13 +57039,6 @@
       "stationId": 431,
       "lat": 46.362,
       "lng": 17.67
-    },
-    {
-      "name": "****18C6D",
-      "status": "ACTIVE",
-      "stationId": 1678,
-      "lat": -30.47,
-      "lng": 30.642
     },
     {
       "name": "****16815",
@@ -57158,13 +57200,6 @@
       "stationId": 2883,
       "lat": 45.518,
       "lng": 16.77
-    },
-    {
-      "name": "****11B35",
-      "status": "ACTIVE",
-      "stationId": 982,
-      "lat": 7.97,
-      "lng": -75.177
     },
     {
       "name": "****C1C8A",
@@ -57588,7 +57623,7 @@
     },
     {
       "name": "****CAB29",
-      "status": "ONLINE",
+      "status": "ACTIVE",
       "stationId": 4066,
       "lat": 38.326,
       "lng": 23.75
@@ -57720,6 +57755,13 @@
       "lng": -101.566
     },
     {
+      "name": "****C6E15",
+      "status": "ONLINE",
+      "stationId": 2110,
+      "lat": 45.83,
+      "lng": 22.006
+    },
+    {
       "name": "****7F515",
       "status": "ACTIVE",
       "stationId": 3295,
@@ -57837,13 +57879,6 @@
       "stationId": 3094,
       "lat": 48.36,
       "lng": -102.753
-    },
-    {
-      "name": "****CA8E9",
-      "status": "ACTIVE",
-      "stationId": 3188,
-      "lat": 32.75,
-      "lng": -114.331
     },
     {
       "name": "****C4BB1",
@@ -58070,6 +58105,13 @@
       "lng": 77.11
     },
     {
+      "name": "****B6DF0",
+      "status": "ACTIVE",
+      "stationId": 866,
+      "lat": -23.58,
+      "lng": -47.062
+    },
+    {
       "name": "****C316D",
       "status": "ACTIVE",
       "stationId": 867,
@@ -58127,7 +58169,7 @@
     },
     {
       "name": "****B7DB8",
-      "status": "ONLINE",
+      "status": "ACTIVE",
       "stationId": 774,
       "lat": 39.701,
       "lng": -79.84
@@ -58138,6 +58180,13 @@
       "stationId": 585,
       "lat": 43.457,
       "lng": 1.48
+    },
+    {
+      "name": "****679C9",
+      "status": "ACTIVE",
+      "stationId": 1423,
+      "lat": 43.33,
+      "lng": -92.506
     },
     {
       "name": "****C2945",
@@ -58364,13 +58413,6 @@
       "lng": -101.37
     },
     {
-      "name": "****BC671",
-      "status": "ONLINE",
-      "stationId": 993,
-      "lat": 37.59,
-      "lng": -3.103
-    },
-    {
       "name": "****C9B91",
       "status": "ACTIVE",
       "stationId": 210,
@@ -58448,13 +58490,6 @@
       "lng": -112.97
     },
     {
-      "name": "****D6161",
-      "status": "ACTIVE",
-      "stationId": 2776,
-      "lat": 53.042,
-      "lng": 21.99
-    },
-    {
       "name": "****C7C19",
       "status": "ACTIVE",
       "stationId": 2173,
@@ -58511,13 +58546,6 @@
       "lng": -76.41
     },
     {
-      "name": "****89601",
-      "status": "ONLINE",
-      "stationId": 3101,
-      "lat": 34.24,
-      "lng": -86.821
-    },
-    {
       "name": "****70296",
       "status": "ACTIVE",
       "stationId": 402,
@@ -58544,13 +58572,6 @@
       "stationId": 203,
       "lat": 47.94,
       "lng": -0.921
-    },
-    {
-      "name": "****98061",
-      "status": "ACTIVE",
-      "stationId": 221,
-      "lat": 30.386,
-      "lng": -94.32
     },
     {
       "name": "****459D9",
@@ -58610,7 +58631,7 @@
     },
     {
       "name": "****E0C9D",
-      "status": "ONLINE",
+      "status": "ACTIVE",
       "stationId": 3401,
       "lat": 51.953,
       "lng": 10.4
@@ -58638,14 +58659,14 @@
     },
     {
       "name": "****83B31",
-      "status": "ONLINE",
+      "status": "ACTIVE",
       "stationId": 1194,
       "lat": 41.551,
       "lng": -74.13
     },
     {
       "name": "****D599D",
-      "status": "ONLINE",
+      "status": "ACTIVE",
       "stationId": 2326,
       "lat": 45.806,
       "lng": -120.82
