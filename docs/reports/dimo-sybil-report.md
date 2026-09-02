@@ -2,18 +2,18 @@
 
 > Independent public read by the GETKINETIK Bureau using only DIMO's public Identity GraphQL API. **No internal DIMO data was used.** A DIMO *vehicle* is an on-chain identity; it only produces real telemetry when connected to a device — either an *aftermarket device* (physical hardware) or a *synthetic device* (software/API connection). This read reports composition, not allegations: software connections and freshly-minted vehicles are legitimate, but the gap between identities and connected hardware is a fair question to ask from public data.
 
-- **As of:** 2026-09-01
+- **As of:** 2026-09-02
 - **Public source:** `https://identity-api.dimo.zone/query` (GraphQL, no auth)
-- **Vehicle identities:** 158,625
+- **Vehicle identities:** 158,626
 - **Physical hardware devices (aftermarket):** 40,622 (25.6%)
-- **Software/synthetic devices:** 31,450 (19.8%)
-- **Vehicle identities with no connected device:** 86,553 (54.6%)
+- **Software/synthetic devices:** 31,448 (19.8%)
+- **Vehicle identities with no connected device:** 86,556 (54.6%)
 
 ---
 
 ## Executive summary
 
-1. **Of 158,625 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware**; 31,450 (19.8%) connect via software/synthetic devices, and 86,553 (54.6%) show no connected device on the public registry.
+1. **Of 158,626 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware**; 31,448 (19.8%) connect via software/synthetic devices, and 86,556 (54.6%) show no connected device on the public registry.
 2. **Only 45.4% of vehicle identities have any connected device** (hardware or software) on the public registry — the rest are minted identities without an active device link.
 3. This is *composition*, not fraud: synthetic (software) connections and recently-minted vehicles awaiting setup are expected. The neutral question is how many reward-eligible identities map to real, active devices — answerable from public data alone.
 
@@ -23,22 +23,22 @@
 
 | Metric | This run | vs last run |
 |---|---:|---|
-| Vehicle identities minted | 158,625 | +2 (+0.0%) |
+| Vehicle identities minted | 158,626 | -1 (-0.0%) |
 | Physical hardware devices | 40,622 | unchanged vs last run |
-| Software/synthetic devices | 31,450 | unchanged vs last run |
-| Share backed by hardware | 25.61% | -0.00 pp (-0.0%) |
-| Share with no connected device | 54.56% | +0.00 pp (+0.0%) |
+| Software/synthetic devices | 31,448 | unchanged vs last run |
+| Share backed by hardware | 25.61% | +0.00 pp (+0.0%) |
+| Share with no connected device | 54.57% | -0.00 pp (-0.0%) |
 
 
 ## 1. Device-backing composition
 
 | Layer | Count | Share of vehicle identities |
 |---|---:|---:|
-| Vehicle identities (on-chain) | 158,625 | 100% |
+| Vehicle identities (on-chain) | 158,626 | 100% |
 | Physical hardware (aftermarket devices) | 40,622 | 25.6% |
-| Software / synthetic devices | 31,450 | 19.8% |
-| Any connected device | 72,072 | 45.4% |
-| No connected device on registry | 86,553 | 54.6% |
+| Software / synthetic devices | 31,448 | 19.8% |
+| Any connected device | 72,070 | 45.4% |
+| No connected device on registry | 86,556 | 54.6% |
 
 ## Methodology
 
