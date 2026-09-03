@@ -1,6 +1,20 @@
 {
-  "generatedAt": "2026-09-02T19:37:46.099Z",
+  "generatedAt": "2026-09-03T19:39:30.253Z",
   "patterns": [
+    {
+      "scope": "systemic",
+      "classification": "convergence",
+      "headline": "Cross-network infrastructure coverage stress observed across multiple networks",
+      "pattern": "CROSS_NETWORK_INFRASTRUCTURE",
+      "networks": [
+        "DIMO",
+        "Helium IoT",
+        "Helium Mobile"
+      ],
+      "category": "INFRASTRUCTURE",
+      "description": "Cross-network infrastructure coverage stress observed across multiple networks (DIMO, Helium IoT, Helium Mobile).",
+      "patternType": "cross-network"
+    },
     {
       "scope": "systemic",
       "classification": "repetition",
@@ -10,7 +24,7 @@
         "Helium IoT"
       ],
       "category": "INFRASTRUCTURE",
-      "description": "Observed Helium IoT stackedSpots on 6 of 6 recorded days.",
+      "description": "Observed Helium IoT stackedSpots on 7 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -22,33 +36,7 @@
         "Helium Mobile"
       ],
       "category": "INFRASTRUCTURE",
-      "description": "Observed Helium Mobile stackedSpots on 6 of 6 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "cross-network",
-      "classification": "convergence",
-      "headline": "Cross-network infrastructure coverage stress observed across multiple networks",
-      "pattern": "CROSS_NETWORK_INFRASTRUCTURE",
-      "networks": [
-        "Helium IoT",
-        "Helium Mobile"
-      ],
-      "category": "INFRASTRUCTURE",
-      "description": "Cross-network infrastructure coverage stress observed across multiple networks (Helium IoT, Helium Mobile).",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "cross-network",
-      "classification": "stability",
-      "headline": "Stability: INFRASTRUCTURE metrics unchanged across networks",
-      "pattern": "STABILITY_INFRASTRUCTURE",
-      "networks": [
-        "Helium IoT",
-        "Helium Mobile"
-      ],
-      "category": "INFRASTRUCTURE",
-      "description": "No delta movement recorded for INFRASTRUCTURE metrics this window.",
+      "description": "Observed Helium Mobile stackedSpots on 7 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -60,7 +48,7 @@
         "Geodnet"
       ],
       "category": "IDENTITY",
-      "description": "Observed Geodnet exactDupGroups on 6 of 6 recorded days.",
+      "description": "Observed Geodnet exactDupGroups on 7 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -72,7 +60,7 @@
         "WeatherXM"
       ],
       "category": "CAPACITY",
-      "description": "Observed WeatherXM overCapacityCells on 6 of 6 recorded days.",
+      "description": "Observed WeatherXM overCapacityCells on 7 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -84,7 +72,7 @@
         "Hivemapper"
       ],
       "category": "ECONOMICS",
-      "description": "Observed Hivemapper top20ShareOfSupply on 6 of 6 recorded days.",
+      "description": "Observed Hivemapper top20ShareOfSupply on 7 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -101,7 +89,7 @@
     },
     {
       "scope": "localized",
-      "classification": "drift",
+      "classification": "stability",
       "headline": "Geodnet: identity registry stress signal detected",
       "pattern": "LOCAL_IDENTITY",
       "networks": [
