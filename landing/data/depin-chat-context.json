@@ -1,26 +1,26 @@
 {
   "version": 2,
   "updatedAt": "2026-09-03",
-  "generatedAt": "2026-09-03T12:45:24.842Z",
+  "generatedAt": "2026-09-03T13:13:10.709Z",
   "auditIndexUpdated": "2026-09-03",
   "networks": [
     {
       "id": "geodnet",
       "name": "Geodnet",
-      "generatedAt": "2026-09-02",
-      "topFinding": "1006 exact (lat,lng) duplicate groups on 19,478 public stations — each row in §1 is one coordinate pair your registry team can grep today."
+      "generatedAt": "2026-09-03",
+      "topFinding": "1006 exact (lat,lng) duplicate groups on 19,486 public stations — each row in §1 is one coordinate pair your registry team can grep today."
     },
     {
       "id": "weatherxm",
       "name": "WeatherXM",
-      "generatedAt": "2026-09-02",
-      "topFinding": "296 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue."
+      "generatedAt": "2026-09-03",
+      "topFinding": "294 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue."
     },
     {
       "id": "hivemapper",
       "name": "Hivemapper",
-      "generatedAt": "2026-09-02",
-      "topFinding": "51.10% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read."
+      "generatedAt": "2026-09-03",
+      "topFinding": "50.89% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read."
     },
     {
       "id": "natix",
@@ -31,37 +31,96 @@
     {
       "id": "dimo",
       "name": "DIMO",
-      "generatedAt": "2026-09-02",
-      "topFinding": "Of 158,626 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,448 (19.8%) connect via software/synthetic devices, and 86,556 (54.6%) show no connected device on the public registry."
+      "generatedAt": "2026-09-03",
+      "topFinding": "Of 158,632 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,448 (19.8%) connect via software/synthetic devices, and 86,562 (54.6%) show no connected device on the public registry."
     },
     {
       "id": "helium-iot",
       "name": "Helium IoT",
-      "generatedAt": "2026-09-02",
-      "topFinding": "4,861 single-coordinate stacks of ≥10 hotspots on 1,008,213 located units — the largest stack holds 501 hotspots on one coordinate (§1 lists keys your registry team can grep today)."
+      "generatedAt": "2026-09-03",
+      "topFinding": "4,861 single-coordinate stacks of ≥10 hotspots on 1,008,218 located units — the largest stack holds 501 hotspots on one coordinate (§1 lists keys your registry team can grep today)."
     },
     {
       "id": "helium-mobile",
       "name": "Helium Mobile",
-      "generatedAt": "2026-09-02",
+      "generatedAt": "2026-09-03",
       "topFinding": "529 single-coordinate stacks of ≥10 hotspots on 55,590 located units — the largest stack holds 540 hotspots on one coordinate (§1 lists keys your registry team can grep today)."
     }
   ],
   "news": {
-    "topPick": null,
-    "headlines": [],
+    "topPick": {
+      "title": "Hivemapper Price Today in India | HONEY to INR Live Price & Chart - Binance",
+      "source": null,
+      "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1zeXZ2WlRwMGtKQVlwTUZBbFZQS0ttNWZqc21GZEtiZVlpTll5dmM5VWFqdkpZcFQwd2UwRS1IY09JZ1B1RWowX0I5SlNLRi1mN0EtVUtTRVRiQQ?oc=5"
+    },
+    "headlines": [
+      {
+        "score": 48,
+        "title": "Hivemapper Price Today in India \\| HONEY to INR Live Price & Chart - Binance"
+      },
+      {
+        "score": 48,
+        "title": "Ride-hailing platform Lyft partners with Bee Maps, powered by Solana-based DePIN"
+      },
+      {
+        "score": 48,
+        "title": "Did the Solana DePIN sector's monthly revenue reach a new high for the year? A r"
+      },
+      {
+        "score": 45,
+        "title": "DroneDeploy and GEODNET Foundation Announce Partnership to Provide Enterprise RT"
+      },
+      {
+        "score": 36,
+        "title": "Hivemapper Raises $18M From Multicoin Capital to Create the World’s First Decent"
+      },
+      {
+        "score": 36,
+        "title": "New initiative allows inDrive drivers to earn while mapping roads in PH - Newsby"
+      },
+      {
+        "score": 35,
+        "title": "How Decentralized Physical Infrastructure Networks (DePINs) Are Shaping Blockcha"
+      },
+      {
+        "score": 35,
+        "title": "PeaqOS and World ID Bring ZK Proofs to Autonomous Robots - Bitcoin News"
+      },
+      {
+        "score": 33,
+        "title": "ROVR Network Raises $2.6M Seed Round Co-Led by Borderless Capital and GEODNET -"
+      },
+      {
+        "score": 33,
+        "title": "Animoca Brands partners with GEODNET to advance DePIN and precise location techn"
+      },
+      {
+        "score": 33,
+        "title": "Lightspeed Faction leads $7.7 million Series A round for DePIN weather startup W"
+      },
+      {
+        "score": 33,
+        "title": "IoTeX and Borderless GEODNET investment shows growing interest in DePINs - Inter"
+      }
+    ],
     "liveHeadlines": [
       {
         "score": 48,
-        "title": "Animoca Brands partners with GEODNET to advance DePIN and precise location technology for Animoca Brands’ ecosystem and the Moca Network - A",
-        "source": "Google News: decentralized physical infrastructure network",
-        "url": "https://news.google.com/rss/articles/CBMiigJBVV95cUxNYXl3WHRfZkkxZEU2aWpCcEJla0JsU2JSYmdZQTluU2tVSTNpOTZIaWttd21RTm1JT1E2cHlsclMycG5NQlVNRGdwMHphSl9tSnZQSUowMlhINzJLbFpXV2JGcVVyem43MEFEQXRwTFlibjRKek1RQjc3YlFJQkhlWUNZdzNLdGNudnhwSFgzODBCcUg3WGw2RTFoTC1JLURLRlh4NVRuUzdpWW4wUkJmd2RFSzlIaXhqVWxDUW8tUzFyNUZXQkJ2c193bXU1N0dGZk5XYW1Ebl9ROVZEdEM2MUpBeXFXRG1KcXkzRk1wQlZvUWhjbVFRdEE1OTNkUkhEellFMndJcV9PUQ"
+        "title": "Hivemapper Price Today in India | HONEY to INR Live Price & Chart - Binance",
+        "source": "Google News: Hivemapper HONEY Solana",
+        "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1zeXZ2WlRwMGtKQVlwTUZBbFZQS0ttNWZqc21GZEtiZVlpTll5dmM5VWFqdkpZcFQwd2UwRS1IY09JZ1B1RWowX0I5SlNLRi1mN0EtVUtTRVRiQQ"
       },
       {
-        "score": 47,
-        "title": "Helium, GEODNET lead Solana’s DePIN sector with high fee generation - Crypto Briefing",
-        "source": "Google News: Helium DePIN network",
-        "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPSnVmWDNkT3BtX1BWeEhRazZpM1V4MkUxbzh4d0hNNmxucDZFR0hTQ2VERWV4THJhTnJya0Z6dG9wSTRUb2hxQk9wY2l5amRBTl9XLUhzUzRuUkpzeXJfLXA4dktZU0tJWlp5ZFdOaldDM0xqY2tqS050VG1lRlQ5cVY1eG5iNXp6Y09sdjl1MU5kVUV0b25kQQ"
+        "score": 48,
+        "title": "Ride-hailing platform Lyft partners with Bee Maps, powered by Solana-based DePIN Hivemapper, to access decentralized data - The Block",
+        "source": "Google News: Hivemapper HONEY Solana",
+        "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPWnFLS0dUcVRpRXJHWERkVC1NWkVON2JjOV9YTjVBbVpGOFhNTl9JNEpKMlhjQmxySll2T2JzeTdWQ0ZWb1BEVVdLMGMxOC1CS1QtdzNHZjNnT1ZVVmRCRC0tSEEwOWktMTZwa19QemFyMnpoRGVsY21MZkk4MGs0TzVfSVZGTU9SakJnT0xNNnlIcWw4cmsxSQ"
+      },
+      {
+        "score": 48,
+        "title": "Did the Solana DePIN sector's monthly revenue reach a new high for the year? A review of the main projects' performance in April. - Binance",
+        "source": "Google News: Hivemapper HONEY Solana",
+        "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE5vcXl2UUVaRHZuT0tpbnNubHEyR0lLaEh0Yl96cFI0LWZocFdTU0JLTV9GSU5KeHNJOEQxOWhOV2dWZk5wU0d4OTdLU21tdTNMVmFrVmJPbTh0b01QV1NzODE4aw"
       },
       {
         "score": 45,
@@ -70,28 +129,22 @@
         "url": "https://news.google.com/rss/articles/CBMiiwJBVV95cUxQMktjd3J2Q3loVlFSQXlKNUZZMGowU1hhNzZZV3VYSTR0d3BHbUlSSmdxMjhSQ204NFh3LUpMTGtfY2x5TUhueEl2U0dhUXEzMlRxWWxUX19ETk4xWjl1dV9OM0JOdkhLNlEtZFphQUFjMU0wdmlMcDZ3X1llNjlBY3dkMU9LcGI2RWJtYlRpbld6REpNVWVmTEFoUkRLdHRESU0yd0c0bmRPSDhIRmhGa1pnMVc1TUFkV3hxaVB2TUpYMjV1YTZEUUltUmxORFd6LWVfWjdRaEVYZl9IYzZSUmVHQy14Yi1ENTdBZ3hIYkwxeHIxRjE3RlF0WjFsUUR4bHJLdE10eXVsemc"
       },
       {
-        "score": 45,
-        "title": "IoTeX and Borderless GEODNET investment shows growing interest in DePINs - ibtimes.com",
+        "score": 36,
+        "title": "Hivemapper Raises $18M From Multicoin Capital to Create the World’s First Decentralized Mapping Network - Business Wire",
+        "source": "Google News: Hivemapper HONEY Solana",
+        "url": "https://news.google.com/rss/articles/CBMi8wFBVV95cUxQc3ZGVXg5dDBJVU1lN0RXUEtKMlN4YW5WSzVvVDZ6SmxFYTA3NEVCak5zODlkMlZPQ0ZjSmZOcHpXblc1cTNweC02N3RocExGTjFFLWFPdEs4eXYzMlQ4T1RvbTRsRXdyd2xnYmZXeEVmeGtVdTY0R3hjQ1V2RlF3NW56RjBXYWUyOV9zc0s4aUxQRVVYRkFqWkJ4b2oxeF8waC1Ia2xDR0QzVE12V0VMZzBURmtFRXZ6T25MY2taVEttT1UyRUN0SlA0UmUwQmczeXhqYkZaMUxqSmNYUV8tOUhaSlFFZWZqUWdOc0hlMndWWWM"
+      },
+      {
+        "score": 36,
+        "title": "New initiative allows inDrive drivers to earn while mapping roads in PH - Newsbytes.PH",
+        "source": "Google News: Hivemapper HONEY Solana",
+        "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxOV2RJMFk3eDlaZjVaMV9nLWlYVVpPM1MtZmVHYzUwbzliNHpJUDhQdUZjT1lqeF8yNjU3UVp0dGRzWDRoR21WbWZMcEhCYUdvWE1qRGFhaWJBTVZOOFBVNzI0UkVtQ2pBTDBOWnBMVGRTQ0pVMXJ6c1F3azZzR3RQRmpHaWZ1SlhfMGJaSlhzaWp6RHlwcWwzMXBlMWhUZ2psVlZleTkwbw"
+      },
+      {
+        "score": 35,
+        "title": "How Decentralized Physical Infrastructure Networks (DePINs) Are Shaping Blockchain Protocols - CCN.com",
         "source": "Google News: DePIN proof of location",
-        "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxNRi1HN1Q0QjFXSUtfNFB3WDBlTEF3MUU2NXpwblUya1dUM2FBR0plQWxFeXFRakpSSHczMlpSWVZsdGk4QWNZcHNheGV3dG1xazJTSU9LZ1c3U2tBdTQ5VG4zc05WWnJXaWhvZ2VtQUQ2R19UR2VaTUZ6aVg1eUZaMDFfSFJNZjZEVkVIWlQ5bElVbW9MVHhFU29fYU90Zw"
-      },
-      {
-        "score": 39,
-        "title": "Helium token HNT soars as fastest-growing US city adopts DePIN wireless solution - Crypto Briefing",
-        "source": "Google News: Helium DePIN network",
-        "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTFBzMEx5VWxDYW5HbXVGaGZnV3A2Z2VWWDRNWDZEb2lURm1NYURHcVBxWGxtZGU4RWxtQ3BydDJtSzdxM2VuVUVSLUcwcGNULXJ2XzdHZmx5eS04YzlEcDhuQnVLaWozSjV3Unhkb3BkZTA"
-      },
-      {
-        "score": 38,
-        "title": "Ride-hailing platform Lyft partners with Bee Maps, powered by Solana-based DePIN Hivemapper, to access decentralized data - The Block",
-        "source": "Google News: DePIN partnership announcement",
-        "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPWnFLS0dUcVRpRXJHWERkVC1NWkVON2JjOV9YTjVBbVpGOFhNTl9JNEpKMlhjQmxySll2T2JzeTdWQ0ZWb1BEVVdLMGMxOC1CS1QtdzNHZjNnT1ZVVmRCRC0tSEEwOWktMTZwa19QemFyMnpoRGVsY21MZkk4MGs0TzVfSVZGTU9SakJnT0xNNnlIcWw4cmsxSQ"
-      },
-      {
-        "score": 37,
-        "title": "Helium Plus Lets Businesses Join Solana DePIN Project With Just Wi-Fi - CoinDesk",
-        "source": "Google News: decentralized physical infrastructure network",
-        "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxQVkpNelEtbEZWLWZYQ3d4QVhHZk9oVUlXaHd1VURISXpEN2FwcTVuRm5POHlfakZSbUthRzNhN2RiT0pkdEd4a0UwZHpKTlAtaXotdWg0V19QS0hwOUt1RThCaC01b1hSZ2s5Zk5yRkhDT3N0U1hMcUh4VS1mOGVDOTlNRG1aMUhWQzVPTlVmd2Z3NnBpdWFJVG5QbXRjZER3NkdkejJsQ2VkWVZmY0NF"
+        "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQWHFCX2tLbGtJM09DSTlaemhkSXg1QTY5NzRXS2duSHJ5TDVzaC1sYTFmRFRicUhtR0x6TGlncGNfdXRyMHhyWXpRc3F4RnRRa0lVX1hDU2ZIaG83NFlfV2tpT1kzRkNGZ2Z1eWtxYTBnQTZWcDFSc3NqTmxudUptV0NNR0VvX080ZFUyc3FpMks4RmtYMnZWRU94NmZhcy0ySjg1XzF3ZldHWjhVYXN0bTF5VQ"
       },
       {
         "score": 35,
@@ -101,9 +154,27 @@
       },
       {
         "score": 33,
-        "title": "Borderless Capital Leads $1.5M Investment into the GEODNET Foundation to Support a Precise and Trusted Decentralized Location Service - Busi",
-        "source": "Google News: DePIN physical infrastructure trust",
-        "url": "https://news.google.com/rss/articles/CBMinAJBVV95cUxPNTVrY0ZjZTA4djl5WEtvVTU4M19VRDAtSGVzS25ycmtaX1FINzJNMzRVOUt0WTE4QmFsaGNoa2FFX2JmaFVmbVdEVHg2QWJ4eGRBdC04VFgwYTI0azVUM1VBVkQ5eTVLaUduMHdzRWtwdzVRZGdnR1JuZmk4S2U2RmlEWVRoOXlTUUdESnEwVmI0NXpnNURWM3M0a3ZyUFZEZ1Z3eWZsMzh5SUhqSlVsY1I1TW0wZ0xFLTJlLVZFQXhsTk5uNFpNdElSMDFQZVpyaThnaHE2cDNBNFlXZEcxUlNTWVNBSmV2YkRDX1YzYl9VN2E0UEtPbE83MnhvZzVEQjNSY3BsbV9HbmpzWkZsLWszQXNJbEJkdTZWMA"
+        "title": "ROVR Network Raises $2.6M Seed Round Co-Led by Borderless Capital and GEODNET - Inside Unmanned Systems",
+        "source": "Google News: DePIN funding round",
+        "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxPdWwtVWRDTUlqS3ZyTl9obHFYWlJsUm5kR0xWRUdtUEdHbWQ2Nkh4eXlVOWZJVjhwR1JDc3VEMFJYSmo1VjE0Qm43WEhUanBJZ05pem56QnN4cjNMTGhsakR6TElkTlNXZ3pUeUFONmgxS3VyVFNITVp1QmhUUlY2dDc5MEVCUU8yNXo3dXNwcmxwSGFjbUFUYzZIS0pBMV90ZlptRkg3Q2F0U0JPNUNKUg"
+      },
+      {
+        "score": 33,
+        "title": "Animoca Brands partners with GEODNET to advance DePIN and precise location technology for Animoca Brands’ ecosystem and the Moca Network - A",
+        "source": "Google News: DePIN funding round",
+        "url": "https://news.google.com/rss/articles/CBMiigJBVV95cUxNYXl3WHRfZkkxZEU2aWpCcEJla0JsU2JSYmdZQTluU2tVSTNpOTZIaWttd21RTm1JT1E2cHlsclMycG5NQlVNRGdwMHphSl9tSnZQSUowMlhINzJLbFpXV2JGcVVyem43MEFEQXRwTFlibjRKek1RQjc3YlFJQkhlWUNZdzNLdGNudnhwSFgzODBCcUg3WGw2RTFoTC1JLURLRlh4NVRuUzdpWW4wUkJmd2RFSzlIaXhqVWxDUW8tUzFyNUZXQkJ2c193bXU1N0dGZk5XYW1Ebl9ROVZEdEM2MUpBeXFXRG1KcXkzRk1wQlZvUWhjbVFRdEE1OTNkUkhEellFMndJcV9PUQ"
+      },
+      {
+        "score": 33,
+        "title": "Lightspeed Faction leads $7.7 million Series A round for DePIN weather startup WeatherXM - The Block",
+        "source": "Google News: DePIN funding round",
+        "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxNeFRJLUZrRFhOSzVGSllZYXNWOVF0QzZHZmNwQ0VWQXVZQWl0bUxReTFzTE9xMmVlYks0ZHJjUFo2ZVRwTXJXY1JZN2czVmJfeG1yYVRNdzBHLUhOeWdEYkNGTDI1WU9MYmltQmhkOWZ5TndqcUh0dWFIWUo0cjdsQk1xbDhfM0ZQdlY1S0ROLWVjRUpEdUFHc1ZoZmd4VS1SQ3FYYzFQSUp6UEVfTkY3UW11STZJQVhVcllaQm05OFB1aUFUV0trdEJmbDNxcU9hSkl4MGVoNA"
+      },
+      {
+        "score": 33,
+        "title": "IoTeX and Borderless GEODNET investment shows growing interest in DePINs - International Business Times",
+        "source": "Google News: DePIN funding round",
+        "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxNRi1HN1Q0QjFXSUtfNFB3WDBlTEF3MUU2NXpwblUya1dUM2FBR0plQWxFeXFRakpSSHczMlpSWVZsdGk4QWNZcHNheGV3dG1xazJTSU9LZ1c3U2tBdTQ5VG4zc05WWnJXaWhvZ2VtQUQ2R19UR2VaTUZ6aVg1eUZaMDFfSFJNZjZEVkVIWlQ5bElVbW9MVHhFU29fYU90Zw"
       },
       {
         "score": 33,
@@ -112,48 +183,36 @@
         "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxNLUpyX3IyanpMRzQtQmZSOUVpUm1uZ0xqY3Fkc3ctRkNzNmE0dEhmUm5tWjl5YmF0YWZaSGV5V1BoWk5KMk1GRjg1Rzh2cThPZWhpTEtsV2RGZzZVbzZQa0hXUkdZTVpwV0ZuV253Ml9MTmYzMXQxWDNRTGN3RXRPU2xiNHRHS0VNRzd5Q3J0Y3Voc2Ixc3IyblZBS2x5Nl9EeV9pc00wRXN5VE1LY2tJb1JKTHFVZXRFT0NZWXhuV0FWR1Q0b3dIUmRub1I5c2VnaUh4dnN1S2FXM2RmZVRMN0JtVG1FOUJoWGlMdW1xVnY"
       },
       {
-        "score": 31,
-        "title": "DePIN Wars Heat Up: Solana and Base Lead Charge in $1T Market Opportunity - Yellow.com",
-        "source": "Google News: decentralized physical infrastructure network",
-        "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQb1BnT1lLOUdDaGZyblNKZDA5RHpXX09wOGQwMUVkaE8xOEJNZzJ2NWloOWI3R1htR1puVUEyQUpUYzZhdE5MSkY5RWJvRklwTHI4STJ3OWhFZTNtNDJIazExbHhyRnFHUzI5VFdrcVFoc3NmQ0lEWThiNjhkV1RxckRRTDE1c1l3WnFyUUZMVEFyTmV1cU9PeG1ST0xURzVQZFZ1aFNHM1hpd0t5Q1FXdTk4MFg0VDg"
+        "score": 30,
+        "title": "Hivemapper (HONEY) Price Today, News & Live Chart - Forbes",
+        "source": "Google News: Hivemapper HONEY Solana",
+        "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBKRHdjQXVRMURfdVNPeXJNT2dTMzQzZ0p3aENfZ1gyM08yeHNnXzItdUR6MG1XMWdTcDYwMjZvLWtNS0JQZTN3NmxUUTFTaW9yRlNvczBiQW14SERBWU83Mk8zd2d5YTdoSEZraEJYUQ"
       },
       {
-        "score": 31,
-        "title": "Solana DePIN Fee Generation Leads DePIN Market Resilience - The Cryptonomist",
-        "source": "Google News: decentralized physical infrastructure network",
-        "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTFBGRThxbHktX3E4bXp2ZGtWcFdjYi1VRzRPTWIxWFA4R0hOTkl0aXVDbFBPSXdaSzVjMFhORmFUZGFERThMMzFPeEU3bXZkLUFqRjVHWFpHdkRIWjNkYmhxaUl3LXZYU2d3RkU1ZXFTRnB4VGNn"
+        "score": 30,
+        "title": "Here’s why Solana-based Hivemapper thinks it can beat Google Maps - dlnews.com",
+        "source": "Google News: Hivemapper HONEY Solana",
+        "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNWUk0ZW5fQUZwbS1wMUtDYTdwbmNUUF9od0RMbWNITEE2VVJvZ216RmNTR2xONWxNNGpHVFRNRnd4UGhjVXo0NkJvYUdFUXM0ekg3TzZrUWVsdjdxeUV4ZWp3bjRTWGJtclk1TndmMWRmTWhTd0xQUm1ad0gtQ0lJMjk3ejlBZzAyMFJmbkpSdXlISE5VX2pBaWRR"
       },
       {
-        "score": 31,
-        "title": "Fuse Energy Ignites $70M Funding: Solana’s DePIN Project Powers a $5B Valuation - CryptoRank",
-        "source": "Google News: decentralized physical infrastructure network",
-        "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE45SUxuZFZIdFBwMk83dkNobWFmdWd2YWo0YkJyNmVnZlJGeWUzYlhrTDlfS19yQXF0RDlXQUo2YVozT05xaWx1eV9meXlnVnlWX2FCNThIQkNzYy1zcWVVSWVPSWt6TTduUmlkYjRWSjJ5VDJQWTdoNjh4dy1HQU0"
+        "score": 30,
+        "title": "Volkswagen ADMT chooses Solana-based Hivemapper to power Robotaxi test fleet - CryptoSlate",
+        "source": "Google News: Hivemapper HONEY Solana",
+        "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPelFKeE5XLS14MEZkdE5VTjBOSTNhaWZ6Uk9DTFVYYl9XX3B2eEhoR1hrVmJibGgwNkFnUVpYYkZfRzVEdHJRa2tIb0V4STVFNFdPUTVMWk0yaWRDZzNHWGNJTlY0dWd5aFBqLVZDTVRPT0YwY3BQMVhQWXp6X250M21RbkNwT2RpSHlQYUQwWEREUjZNX0FvM001ZjVpdWJFMjEw"
       },
       {
-        "score": 29,
-        "title": "Helium Expands into Brazil: A Bold Move for DePIN and Crypto Rewards - CryptoRank",
-        "source": "Google News: decentralized physical infrastructure network",
-        "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTFBvcG03b08wSEhlQ2o2UURxbDNPMl9UbnVUQ0hSc0h2VmhCaDdrcy1aOENvaUQ2VTRRX3dsWXVmYk9OMDBscEppRnRLT0ctUS1KTm1nN0ZTYVU4R0lJdDVWVW8tS3ROcDJjbTdFT0RGOEUxQ3ZVYTFJYXFYdw"
+        "score": 30,
+        "title": "KuCoin Launches Hivemapper (HONEY) Learn and Earn Campaign - KuCoin",
+        "source": "Google News: Hivemapper HONEY Solana",
+        "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxPaWl1Znppel9PM2lGWnVtWHY1eDBYLTZVaWduWjdGS3NzczRobXJuTFF3ZEpwN2h0a3Q1Q1FyQ0JIQUM5WkNMWFZBRTBfYlZ5eTZSUXRfSnQ1SjRtMy1HNXItbjM3SERxbFNjenVpZGo5T0tyNTQyeHdwZFQzeEtYaHg2TW5KZw"
       },
       {
-        "score": 29,
-        "title": "DePIN Projects Exploding: Helium, Render & Akash Leading the Future - Binance",
-        "source": "Google News: decentralized physical infrastructure network",
-        "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE03aVVyQUdMOHZDLUsyMVBBZks0eUVjdGRsTEZWVlNHS1kyREF3Nm1FZjl6ZmRtdlR6NXQzLWpDSm5pRE1sWDl2a1VVYkZuV1QwY1ZlNUJNNV9EUEFIUU5mZXpZZw"
-      },
-      {
-        "score": 29,
-        "title": "Helium's Frank Mong: Building Out DePIN's First Big Success Story - CoinDesk",
-        "source": "Google News: decentralized physical infrastructure network",
-        "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxPVUpwZGRSZ1Q3bmZ0ZE9XczdwM0xoU011a0tZd3hEelRobXBpNUJMUmctZ0MyeThobDRRUUFlS0gxdzJwY20xcjF2akd0M09VVHQ2ZVFtU05lLXUxTklsbk5nUTNjYlVXZkkxTTFiODl2SzE4elBNQl9EazQ4OENFUFlDYjMyMEtZa1pfUEN0d3NTYmo0WEtmdmYwcm1VZXV5d2dBbXlERQ"
-      },
-      {
-        "score": 29,
-        "title": "A Deep Dive Into DePin (Decentralized Physical Infrastructure) - CoinMarketCap",
-        "source": "Google News: Helium DePIN network",
-        "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNMnd2OTQ5ZS1jMGlHRDl2WFdCODNEWFEyeTh6Y2RzZHBmOFc2QW9iMHBpSWFVVkowVUF5Ni1UMl9OU3AzaGlrWVVhNHlSZzZsUjJBaWZOZDdCRlZIZ0dXUVNINkRhOFBrT1YwU0Q0TXBvQ042eUFUNVlkNDFGRUFrS0MyVll6N0tuUGdyQXQ0eWJZdmQxQU5idU9uLVFKVW5IT1lkUg"
+        "score": 30,
+        "title": "Honey price today, HNY to USD live price, marketcap and chart - CoinMarketCap",
+        "source": "Google News: Hivemapper HONEY Solana",
+        "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE9FdmxuWi1vUERfMl9mdlh5LXBlcDlCYnFTdThTTG9EQ21kN0JkZjI4TkhJS1c4a19xazRiSkRrZm12ejBiaTNmcHNwMDBXakdQbTFFR0N4T2kybDlNVEJyaVF0VVJJcHd1N05FRw"
       }
     ]
   },
-  "context": "GETKINETIK is the neutral DePIN bureau at getkinetik.app — reproducible public reads, optional hardware-signed device evidence (Proof of Origin, verify-device API). Not a token, not custody, not an earnings aggregator.\nContext generated: 2026-09-03 12:45 UTC\nPublic audit index updated: 2026-09-03\nTopics you help with: DePIN trust, registry hygiene, economic concentration on-chain, RTK/mapping/weather network integrity patterns, why neutral third-party reads matter, Genesis Score as optional reference (not priced, not financial advice). You may discuss recent DePIN news headlines below in general terms.\nNever: accuse fraud as proved, shill tokens, price predictions, tell users to trust GETKINETIK servers blindly — point to public methodology and reproducible sources.\n## Neutrality charter (excerpt)\n# NEUTRALITY CHARTER\n\n> **GETKINETIK is the independent trust layer for the decentralized\n> physical economy. This document is the immutable contract that makes\n> our grading worth trusting. Drift from these rules ends the\n> company's reason to exist.**\n\n**Publisher:** OutFromNothing LLC (California).\n\n**Who we are:** The **neutral bureau** — a friendly helper for DePIN trust,\nnot a network, not a token issuer, not a replacement for any network's\nown verifier. We help operators prove devices, help networks get a\nsecond read, and help outsiders reproduce what we observed. Partners\nadopt, fork, or ignore our reference policy; they never have to adopt us\nto stay credible.\n\n---\n\n## Why this document exists\n\nCredit bureaus, rating agencies, financial data utilities, and reputation\ninfrastructure providers — Carfax, Equifax, S&P, Moody's, Bloomberg,\nStripe Radar, Plaid, Etherscan — share one structural property: they\nhave nothing to gain from any specific outcome in the markets they\ngrade. The moment they do, the grade becomes worthless.\n\nDePIN currently has no such neutral entity. Every network grades\nitself. Every foundation publishes its own KPIs. No one independently\nattests to whether a node is real, an operator is honest, or earnings\nare accurate.\n\nGETKINETIK fills that slot — but only if it remains structurally\nincapable of corruption. This document defines those structural rules.\nFuture operators of the company are bound by them.\n\n---\n\n## The Five Rules (immutable)\n\nThese are the rules that protect the bureau. They are not subject to\nquarterly business pressure, partner requests, capital incentives, or\nstrategic exceptions.\n\n### 1. **No GETKINETIK token. Ever.**\n\nWe will not issue a token, coin, point, NFT, security, or any other\nfungible or non-fungible instrument that is sold, traded, swapped,\nlisted on an exchange, redeemable for currency, or capable of\nappreciating in market value.\n\nThis includes \"utility tokens,\" \"governance tokens,\" \"loyalty tokens,\"\n\"reward tokens,\" \"soulbound tokens,\" wrapped representations of\ninternal scores, or any future financial wrapper that has the\neconomic shape of a token regardless of the legal label applied to it.\n\n**Genesis Score is a public reputation grade about a node, not a\ncurrency.** It is non-transferable, non-priced, never redeemable, and\ncannot be bought, sold, traded, or held by anyone other than the node\nit grades.\n\n### 2. **No equity in graded networks.**\n\nGETKINETIK and OutFromNothing LLC will not hold equity, tokens, vested\nallocations, advisor shares, or any economic interest in any DePIN\nnetwork whose nodes the bureau grades.\n\nWe will not accept payment in the native token of a graded network\n(NODL, $DIMO, HONEY, WXM, GEOD, etc.). All revenue flows in fiat\n(USD) or chain-neutral stablecoin (USDC/USDT). If a partner cannot pay\nin those denominations, they cannot pay.\n\n### 3. **No exclusive partnerships.**\n\nEvery DePIN network is graded by the same published methodology. We\ndo not soften the grade for any partner, regardless of how much they\npay or how strategic they are. We do not offer \"preferred network\"\nstatus, \"promoted listings,\" or any commercial product that distorts\nthe underlying grading.\n\nPartners pay for **API access**, **integration support**, and **SLA\ntiers** — never for favorable treatment of their network in the data.\n\n### 4. **All revenue in fiat or stablecoin.**\n\nThe complete revenue model:\n\n| Tier | Pays | Receives |\n|------|--------|------------|\n| **Free** | Anyone | Public verifier, basic ledger, own data export |\n| **Consumer Pro** | Individual users (USD subscription) | Advanced reports, hardware-ROI calculators, exportable history |\n| **Partner API** | DePIN networks, lenders, insurers, exchanges (USD/USDC, monthly billed) | `verify-device` calls, batch attestation, fraud signals, compliance reports |\n| **Enterprise** | Foundations, auditors, governments, large platforms (USD, contracted) | Full read API access, methodology disclosure, custom attestation classes, SOC 2 reports |\n\nMoney in: fiat or stablecoin only. Money out: company operating\nexpenses. No token treasury. No vested founder coins. No \"ecosystem\nfund\" we control. The P&L statement fits on one page.\n\n### 5. **Methodology is public.**\n\nThe Genesis Score formula, the verify-device validation rules, the\nattestation index methodology, and any future grading systems are\n**publicly documented and versioned** — like FICO publishes its score\ncomponents, not the proprietary weights but\n…[truncated]\n## Current public sample reads\n- Geodnet (read 2026-09-02): 1006 exact (lat,lng) duplicate groups on 19,478 public stations — each row in §1 is one coordinate pair your registry team can grep today.\n- WeatherXM (read 2026-09-02): 296 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.\n- Hivemapper (read 2026-09-02): 51.10% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.\n- Natix Network (read 2026-06-02): public sample read on open data\n- DIMO (read 2026-09-02): Of 158,626 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,448 (19.8%) connect via software/synthetic devices, and 86,556 (54.6%) show no connected device on the public reg\n- Helium IoT (read 2026-09-02): 4,861 single-coordinate stacks of ≥10 hotspots on 1,008,213 located units — the largest stack holds 501 hotspots on one coordinate (§1 lists keys your registry team can grep today).\n- Helium Mobile (read 2026-09-02): 529 single-coordinate stacks of ≥10 hotspots on 55,590 located units — the largest stack holds 540 hotspots on one coordinate (§1 lists keys your registry team can grep today).\n## Latest bureau brief (public summary)\nGeodnet: report 0h ago, 1006 exact (lat,lng) duplicate groups on 19,478 p…\nWeatherXM: report 0h ago, 296 cells exceed designed capacity — §1 lists H3 …\nHivemapper: report 0h ago, 51.10% of UI-reported HONEY sits in the top 20 vi…\nDIMO: report 0h ago, Of 158,626 DIMO vehicle identities, 40,622 (25.6%…\nHelium IoT: report 0h ago, 4,861 single-coordinate stacks of ≥10 hotspots on…\nHelium Mobile: report 0h ago, 529 single-coordinate stacks of ≥10 hotspots on 5…\n## Recent DePIN / infrastructure news (headlines only)\n- [48] Animoca Brands partners with GEODNET to advance DePIN and precise location technology for Animoca Brands’ ecosystem and the Moca Network - A — Google News: decentralized physical infrastructure network\n- [47] Helium, GEODNET lead Solana’s DePIN sector with high fee generation - Crypto Briefing — Google News: Helium DePIN network\n- [45] DroneDeploy and GEODNET Foundation Announce Partnership to Provide Enterprise RTK Services for Drone-based Reality Capture - Business Wire — Google News: DePIN partnership announcement\n- [45] IoTeX and Borderless GEODNET investment shows growing interest in DePINs - ibtimes.com — Google News: DePIN proof of location\n- [39] Helium token HNT soars as fastest-growing US city adopts DePIN wireless solution - Crypto Briefing — Google News: Helium DePIN network\n- [38] Ride-hailing platform Lyft partners with Bee Maps, powered by Solana-based DePIN Hivemapper, to access decentralized data - The Block — Google News: DePIN partnership announcement\n- [37] Helium Plus Lets Businesses Join Solana DePIN Project With Just Wi-Fi - CoinDesk — Google News: decentralized physical infrastructure network\n- [35] PeaqOS and World ID Bring ZK Proofs to Autonomous Robots - Bitcoin News — Google News: DePIN proof of location\n- [33] Borderless Capital Leads $1.5M Investment into the GEODNET Foundation to Support a Precise and Trusted Decentralized Location Service - Busi — Google News: DePIN physical infrastructure trust\n- [33] Wingbits and GEODNET Enter Partnership to Revolutionize Global Aviation Flight-Tracking Infrastructure - Business Wire — Google News: DePIN partnership announcement\n- [31] DePIN Wars Heat Up: Solana and Base Lead Charge in $1T Market Opportunity - Yellow.com — Google News: decentralized physical infrastructure network\n- [31] Solana DePIN Fee Generation Leads DePIN Market Resilience - The Cryptonomist — Google News: decentralized physical infrastructure network\n- [31] Fuse Energy Ignites $70M Funding: Solana’s DePIN Project Powers a $5B Valuation - CryptoRank — Google News: decentralized physical infrastructure network\n- [29] Helium Expands into Brazil: A Bold Move for DePIN and Crypto Rewards - CryptoRank — Google News: decentralized physical infrastructure network\n- [29] DePIN Projects Exploding: Helium, Render & Akash Leading the Future - Binance — Google News: decentralized physical infrastructure network\n- [29] Helium's Frank Mong: Building Out DePIN's First Big Success Story - CoinDesk — Google News: decentralized physical infrastructure network\n- [29] A Deep Dive Into DePin (Decentralized Physical Infrastructure) - CoinMarketCap — Google News: Helium DePIN network\n\nVisitors may ask how a headline relates to DePIN trust, registry hygiene, or neutral second reads. Do not quote paywalled articles; discuss themes and link to getkinetik.app/audits when relevant.\nLinks: https://getkinetik.app/bureau/ | https://getkinetik.app/audits.html | https://getkinetik.app/bureau/ask/ | https://getkinetik.app/api/docs/"
+  "context": "GETKINETIK is the neutral DePIN bureau at getkinetik.app — reproducible public reads, optional hardware-signed device evidence (Proof of Origin, verify-device API). Not a token, not custody, not an earnings aggregator.\nContext generated: 2026-09-03 13:13 UTC\nPublic audit index updated: 2026-09-03\nTopics you help with: DePIN trust, registry hygiene, economic concentration on-chain, RTK/mapping/weather network integrity patterns, why neutral third-party reads matter, Genesis Score as optional reference (not priced, not financial advice). You may discuss recent DePIN news headlines below in general terms.\nNever: accuse fraud as proved, shill tokens, price predictions, tell users to trust GETKINETIK servers blindly — point to public methodology and reproducible sources.\n## Neutrality charter (excerpt)\n# NEUTRALITY CHARTER\n\n> **GETKINETIK is the independent trust layer for the decentralized\n> physical economy. This document is the immutable contract that makes\n> our grading worth trusting. Drift from these rules ends the\n> company's reason to exist.**\n\n**Publisher:** OutFromNothing LLC (California).\n\n**Who we are:** The **neutral bureau** — a friendly helper for DePIN trust,\nnot a network, not a token issuer, not a replacement for any network's\nown verifier. We help operators prove devices, help networks get a\nsecond read, and help outsiders reproduce what we observed. Partners\nadopt, fork, or ignore our reference policy; they never have to adopt us\nto stay credible.\n\n---\n\n## Why this document exists\n\nCredit bureaus, rating agencies, financial data utilities, and reputation\ninfrastructure providers — Carfax, Equifax, S&P, Moody's, Bloomberg,\nStripe Radar, Plaid, Etherscan — share one structural property: they\nhave nothing to gain from any specific outcome in the markets they\ngrade. The moment they do, the grade becomes worthless.\n\nDePIN currently has no such neutral entity. Every network grades\nitself. Every foundation publishes its own KPIs. No one independently\nattests to whether a node is real, an operator is honest, or earnings\nare accurate.\n\nGETKINETIK fills that slot — but only if it remains structurally\nincapable of corruption. This document defines those structural rules.\nFuture operators of the company are bound by them.\n\n---\n\n## The Five Rules (immutable)\n\nThese are the rules that protect the bureau. They are not subject to\nquarterly business pressure, partner requests, capital incentives, or\nstrategic exceptions.\n\n### 1. **No GETKINETIK token. Ever.**\n\nWe will not issue a token, coin, point, NFT, security, or any other\nfungible or non-fungible instrument that is sold, traded, swapped,\nlisted on an exchange, redeemable for currency, or capable of\nappreciating in market value.\n\nThis includes \"utility tokens,\" \"governance tokens,\" \"loyalty tokens,\"\n\"reward tokens,\" \"soulbound tokens,\" wrapped representations of\ninternal scores, or any future financial wrapper that has the\neconomic shape of a token regardless of the legal label applied to it.\n\n**Genesis Score is a public reputation grade about a node, not a\ncurrency.** It is non-transferable, non-priced, never redeemable, and\ncannot be bought, sold, traded, or held by anyone other than the node\nit grades.\n\n### 2. **No equity in graded networks.**\n\nGETKINETIK and OutFromNothing LLC will not hold equity, tokens, vested\nallocations, advisor shares, or any economic interest in any DePIN\nnetwork whose nodes the bureau grades.\n\nWe will not accept payment in the native token of a graded network\n(NODL, $DIMO, HONEY, WXM, GEOD, etc.). All revenue flows in fiat\n(USD) or chain-neutral stablecoin (USDC/USDT). If a partner cannot pay\nin those denominations, they cannot pay.\n\n### 3. **No exclusive partnerships.**\n\nEvery DePIN network is graded by the same published methodology. We\ndo not soften the grade for any partner, regardless of how much they\npay or how strategic they are. We do not offer \"preferred network\"\nstatus, \"promoted listings,\" or any commercial product that distorts\nthe underlying grading.\n\nPartners pay for **API access**, **integration support**, and **SLA\ntiers** — never for favorable treatment of their network in the data.\n\n### 4. **All revenue in fiat or stablecoin.**\n\nThe complete revenue model:\n\n| Tier | Pays | Receives |\n|------|--------|------------|\n| **Free** | Anyone | Public verifier, basic ledger, own data export |\n| **Consumer Pro** | Individual users (USD subscription) | Advanced reports, hardware-ROI calculators, exportable history |\n| **Partner API** | DePIN networks, lenders, insurers, exchanges (USD/USDC, monthly billed) | `verify-device` calls, batch attestation, fraud signals, compliance reports |\n| **Enterprise** | Foundations, auditors, governments, large platforms (USD, contracted) | Full read API access, methodology disclosure, custom attestation classes, SOC 2 reports |\n\nMoney in: fiat or stablecoin only. Money out: company operating\nexpenses. No token treasury. No vested founder coins. No \"ecosystem\nfund\" we control. The P&L statement fits on one page.\n\n### 5. **Methodology is public.**\n\nThe Genesis Score formula, the verify-device validation rules, the\nattestation index methodology, and any future grading systems are\n**publicly documented and versioned** — like FICO publishes its score\ncomponents, not the proprietary weights but\n…[truncated]\n## Current public sample reads\n- Geodnet (read 2026-09-03): 1006 exact (lat,lng) duplicate groups on 19,486 public stations — each row in §1 is one coordinate pair your registry team can grep today.\n- WeatherXM (read 2026-09-03): 294 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.\n- Hivemapper (read 2026-09-03): 50.89% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.\n- Natix Network (read 2026-06-02): public sample read on open data\n- DIMO (read 2026-09-03): Of 158,632 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,448 (19.8%) connect via software/synthetic devices, and 86,562 (54.6%) show no connected device on the public reg\n- Helium IoT (read 2026-09-03): 4,861 single-coordinate stacks of ≥10 hotspots on 1,008,218 located units — the largest stack holds 501 hotspots on one coordinate (§1 lists keys your registry team can grep today).\n- Helium Mobile (read 2026-09-03): 529 single-coordinate stacks of ≥10 hotspots on 55,590 located units — the largest stack holds 540 hotspots on one coordinate (§1 lists keys your registry team can grep today).\n## Recent DePIN / infrastructure news (headlines only)\n**Bureau news pick today:** Hivemapper Price Today in India | HONEY to INR Live Price & Chart - Binance\n- [48] Hivemapper Price Today in India \\| HONEY to INR Live Price & Chart - Binance — news\n- [48] Ride-hailing platform Lyft partners with Bee Maps, powered by Solana-based DePIN — news\n- [48] Did the Solana DePIN sector's monthly revenue reach a new high for the year? A r — news\n- [45] DroneDeploy and GEODNET Foundation Announce Partnership to Provide Enterprise RT — news\n- [36] Hivemapper Raises $18M From Multicoin Capital to Create the World’s First Decent — news\n- [36] New initiative allows inDrive drivers to earn while mapping roads in PH - Newsby — news\n- [35] How Decentralized Physical Infrastructure Networks (DePINs) Are Shaping Blockcha — news\n- [35] PeaqOS and World ID Bring ZK Proofs to Autonomous Robots - Bitcoin News — news\n- [33] ROVR Network Raises $2.6M Seed Round Co-Led by Borderless Capital and GEODNET - — news\n- [33] Animoca Brands partners with GEODNET to advance DePIN and precise location techn — news\n- [33] Lightspeed Faction leads $7.7 million Series A round for DePIN weather startup W — news\n- [33] IoTeX and Borderless GEODNET investment shows growing interest in DePINs - Inter — news\n- [48] Ride-hailing platform Lyft partners with Bee Maps, powered by Solana-based DePIN Hivemapper, to access decentralized data - The Block — Google News: Hivemapper HONEY Solana\n- [48] Did the Solana DePIN sector's monthly revenue reach a new high for the year? A review of the main projects' performance in April. - Binance — Google News: Hivemapper HONEY Solana\n- [45] DroneDeploy and GEODNET Foundation Announce Partnership to Provide Enterprise RTK Services for Drone-based Reality Capture - Business Wire — Google News: DePIN partnership announcement\n- [36] Hivemapper Raises $18M From Multicoin Capital to Create the World’s First Decentralized Mapping Network - Business Wire — Google News: Hivemapper HONEY Solana\n- [36] New initiative allows inDrive drivers to earn while mapping roads in PH - Newsbytes.PH — Google News: Hivemapper HONEY Solana\n- [35] How Decentralized Physical Infrastructure Networks (DePINs) Are Shaping Blockchain Protocols - CCN.com — Google News: DePIN proof of location\n- [33] ROVR Network Raises $2.6M Seed Round Co-Led by Borderless Capital and GEODNET - Inside Unmanned Systems — Google News: DePIN funding round\n- [33] Animoca Brands partners with GEODNET to advance DePIN and precise location technology for Animoca Brands’ ecosystem and the Moca Network - A — Google News: DePIN funding round\n\nVisitors may ask how a headline relates to DePIN trust, registry hygiene, or neutral second reads. Do not quote paywalled articles; discuss themes and link to getkinetik.app/audits when relevant.\nLinks: https://getkinetik.app/bureau/ | https://getkinetik.app/audits.html | https://getkinetik.app/bureau/ask/ | https://getkinetik.app/api/docs/"
 }
