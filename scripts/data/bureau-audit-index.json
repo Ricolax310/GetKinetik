@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-03",
+  "updatedAt": "2026-09-04",
   "networks": [
     {
       "id": "geodnet",
@@ -17,7 +17,7 @@
         "flaggedCount": 5346,
         "flaggedPct": 0.2743508159704403
       },
-      "topFinding": "**1006 exact (lat,lng) duplicate groups** on 19,486 public stations — each row in §1 is one coordinate pair your registry team can grep today.",
+      "topFinding": "**1006 exact (lat,lng) duplicate groups** on 19,478 public stations — each row in §1 is one coordinate pair your registry team can grep today.",
       "anomalyType": "duplication_cluster",
       "assetClass": "spatial_distribution",
       "verificationEligible": true,
@@ -44,7 +44,7 @@
         "inactiveInDrilled": 154,
         "lowQodInDrilled": 154
       },
-      "topFinding": "**294 cells** exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.",
+      "topFinding": "**296 cells** exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.",
       "anomalyType": "capacity_violation",
       "assetClass": "device_identity",
       "verificationEligible": true,
@@ -67,7 +67,7 @@
         "largestAccountsReturned": 20,
         "partASkipped": false
       },
-      "topFinding": "**50.89% of UI-reported HONEY** sits in the **top 20 visible SPL accounts** (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.",
+      "topFinding": "**51.10% of UI-reported HONEY** sits in the **top 20 visible SPL accounts** (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.",
       "anomalyType": "economic_concentration",
       "assetClass": "economic_layer",
       "verificationEligible": false,
@@ -123,7 +123,7 @@
         "backedPct": 0.4543219526955469,
         "unbackedPct": 0.5456780473044531
       },
-      "topFinding": "**Of 158,632 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware**; 31,448 (19.8%) connect via software/synthetic devices, and 86,562 (54.6%) show no connected device on the public registry.",
+      "topFinding": "**Of 158,626 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware**; 31,448 (19.8%) connect via software/synthetic devices, and 86,556 (54.6%) show no connected device on the public registry.",
       "anomalyType": "device_backing_gap",
       "assetClass": "device_identity",
       "verificationEligible": false,
@@ -147,7 +147,7 @@
         "flaggedCount": 69730,
         "flaggedPct": 0.0691616297269043
       },
-      "topFinding": "**4,861 single-coordinate stacks of ≥10 hotspots** on 1,008,218 located units — the largest stack holds **501 hotspots on one coordinate** (§1 lists keys your registry team can grep today).",
+      "topFinding": "**4,861 single-coordinate stacks of ≥10 hotspots** on 1,008,213 located units — the largest stack holds **501 hotspots on one coordinate** (§1 lists keys your registry team can grep today).",
       "anomalyType": "duplication_cluster",
       "assetClass": "spatial_distribution",
       "verificationEligible": true,
