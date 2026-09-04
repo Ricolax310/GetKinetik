@@ -4,9 +4,9 @@
 
 ## Today's Read
 
-• Geodnet duplicate-coordinate groups rose from 1,006 to 1,008.
+• Geodnet duplicate-coordinate groups declined from 1,008 to 1,007.
+• WeatherXM over-capacity cells rose from 294 to 295.
 • Hivemapper visible HONEY concentration remains near 51% of visible supply.
-• WeatherXM over-capacity cells unchanged at 294.
 
 ## Why It Matters
 
@@ -21,32 +21,32 @@ Observations span 6 networks — no single network dominates the index.
 | Sector | Signals | Networks | Top severity |
 |---|---:|---|---|
 | Registry & identity integrity | 4 | Geodnet, Helium IoT, Helium Mobile | medium |
-| Network health & capacity | 2 | DIMO, WeatherXM | medium |
-| Token economics | 2 | Hivemapper | medium |
+| Network health & capacity | 3 | DIMO, WeatherXM | medium |
+| Token economics | 1 | Hivemapper | medium |
 
 _Totals: 8 signal(s) across 6/7 networks._
 
 ### What Changed Today
 
 **Registry & identity integrity**
-- **Geodnet** — 1008 exact (lat,lng) duplicate groups on 19,489 public stations — each row in §1 is one coordinate pair your registry team can grep today. _(medium · conf 0.70)_
-- **Geodnet** — exact (lat,lng) duplicate groups: 1,008 (+2 (+0.2%)) _(low · conf 0.85)_
+- **Geodnet** — 1007 exact (lat,lng) duplicate groups on 19,487 public stations — each row in §1 is one coordinate pair your registry team can grep today. _(medium · conf 0.70)_
+- **Geodnet** — exact (lat,lng) duplicate groups: 1,007 (-1 (-0.1%)) _(low · conf 0.85)_
 - **Helium IoT** — 4,861 single-coordinate stacks of ≥10 hotspots on 1,008,223 located units — the largest stack holds 501 hotspots on one coordinate (§1 lists keys your registry team can grep today). _(medium · conf 0.70)_
 - **Helium Mobile** — 529 single-coordinate stacks of ≥10 hotspots on 55,591 located units — the largest stack holds 540 hotspots on one coordinate (§1 lists keys your registry team can grep today). _(medium · conf 0.70)_
 
 **Network health & capacity**
-- **WeatherXM** — 294 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue. _(medium · conf 0.70)_
-- **DIMO** — Of 158,631 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,448 (19.8%) connect via software/synthetic devices, and 86,561 (54.6%) show no connected device on the public registry. _(medium · conf 0.70)_
+- **WeatherXM** — 295 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue. _(medium · conf 0.70)_
+- **WeatherXM** — cells over designed capacity: 295 (+1 (+0.3%)) _(low · conf 0.85)_
+- **DIMO** — Of 158,633 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,448 (19.8%) connect via software/synthetic devices, and 86,563 (54.6%) show no connected device on the public registry. _(medium · conf 0.70)_
 
 **Token economics**
-- **Hivemapper** — 51.21% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read. _(medium · conf 0.70)_
-- **Hivemapper** — top-20 SPL share of UI supply: 51.21% (+0.32 pp (+0.6%)) _(low · conf 0.85)_
+- **Hivemapper** — 51.24% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read. _(medium · conf 0.70)_
 
 ### Signal Type
 
 - **Registry & identity integrity** (`integrity`) — 4 signal(s) across 3 network(s): Geodnet, Helium IoT, Helium Mobile
-- **Network health & capacity** (`health`) — 2 signal(s) across 2 network(s): DIMO, WeatherXM
-- **Token economics** (`economics`) — 2 signal(s) across 1 network(s): Hivemapper
+- **Network health & capacity** (`health`) — 3 signal(s) across 2 network(s): DIMO, WeatherXM
+- **Token economics** (`economics`) — 1 signal(s) across 1 network(s): Hivemapper
 
 ### Signal Context
 
@@ -64,15 +64,15 @@ _Operational context for observed metrics — not verdicts._
 ### Network Breakdown
 
 ### Geodnet
-- [integrity] 1008 exact (lat,lng) duplicate groups on 19,489 public stations — each row in §1 is one coordinate pair your registry team can grep today. _(medium · conf 0.70)_
-- [integrity] exact (lat,lng) duplicate groups: 1,008 (+2 (+0.2%)) _(low · conf 0.85)_
+- [integrity] 1007 exact (lat,lng) duplicate groups on 19,487 public stations — each row in §1 is one coordinate pair your registry team can grep today. _(medium · conf 0.70)_
+- [integrity] exact (lat,lng) duplicate groups: 1,007 (-1 (-0.1%)) _(low · conf 0.85)_
 
 ### WeatherXM
-- [health] 294 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue. _(medium · conf 0.70)_
+- [health] 295 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue. _(medium · conf 0.70)_
+- [health] cells over designed capacity: 295 (+1 (+0.3%)) _(low · conf 0.85)_
 
 ### Hivemapper
-- [economics] 51.21% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read. _(medium · conf 0.70)_
-- [economics] top-20 SPL share of UI supply: 51.21% (+0.32 pp (+0.6%)) _(low · conf 0.85)_
+- [economics] 51.24% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read. _(medium · conf 0.70)_
 
 ### NATIX
 - _No qualifying public finding in latest snapshot._
@@ -84,7 +84,7 @@ _Operational context for observed metrics — not verdicts._
 - [integrity] 529 single-coordinate stacks of ≥10 hotspots on 55,591 located units — the largest stack holds 540 hotspots on one coordinate (§1 lists keys your registry team can grep today). _(medium · conf 0.70)_
 
 ### DIMO
-- [health] Of 158,631 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,448 (19.8%) connect via software/synthetic devices, and 86,561 (54.6%) show no connected device on the public registry. _(medium · conf 0.70)_
+- [health] Of 158,633 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,448 (19.8%) connect via software/synthetic devices, and 86,563 (54.6%) show no connected device on the public registry. _(medium · conf 0.70)_
 
 ## Methodology
 

@@ -1,10 +1,10 @@
 1/1
-DePIN index · Sep 3
+DePIN index · Sep 4
 
-• WeatherXM: 294 capacity exceedances (−2)
-• Hivemapper: 50.9% top-holder concentration (−0.2 pp)
-• DIMO: 158,632 entities on public map (+6)
+• Geodnet: 1,007 duplicate coordinate clusters (−1)
+• WeatherXM: 295 capacity exceedances (+1)
+• Hivemapper: 51.2% top-holder concentration (+0 pp)
 
 https://getkinetik.app/site/
 
-#DePIN #WeatherXM #DIMO #Crypto
+#DePIN #Geodnet #WeatherXM #Crypto
