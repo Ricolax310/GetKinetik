@@ -1,6 +1,6 @@
 # Weekly DePIN Signal Report
 
-> Week 2026-W36 · 2026-08-31 → 2026-09-05 · patterns first, then networks.
+> Week 2026-W36 · 2026-08-31 → 2026-09-06 · patterns first, then networks.
 
 ## Executive Summary
 
@@ -33,11 +33,11 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 - Helium IoT
 - Helium Mobile
 
-**Signal:** Exact coordinate-duplicate groups rose from 1005 to 1008 on Geodnet.
+**Signal:** Exact coordinate-duplicate groups declined from 1023 to 1011 on Geodnet.
 
 **Scope:** systemic
 
-**Classification:** escalation
+**Classification:** stability
 
 **Unknown:** Public data cannot confirm whether shared coordinates are distinct devices or one identity reused.
 
@@ -46,7 +46,7 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 **Observed in:**
 - Hivemapper
 
-**Signal:** Top-20 account share of supply observed near 51.39%.
+**Signal:** Top-20 account share of supply observed near 51.56%.
 
 **Scope:** localized
 
@@ -76,8 +76,8 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 ### Geodnet
 
 **What changed**
-- exact (lat,lng) duplicate groups: 1,008 (+3 (+0.3%))
-- entities on public map: 19,479 (+9 (+0.0%))
+- exact (lat,lng) duplicate groups: 1,011 (-12 (-1.2%))
+- entities on public map: 19,491 (-7 (-0.0%))
 
 **Signal type**
 - Registry duplication (`duplication_cluster`)
@@ -98,7 +98,7 @@ _No public signal this week — scan not run or no headline finding._
 ### Hivemapper
 
 **What changed**
-- 51.39% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
+- 51.56% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
 
 **Signal type**
 - Economic concentration (`economic_concentration`)
@@ -115,7 +115,7 @@ _No public signal this week — scan not run or no headline finding._
 ### DIMO
 
 **What changed**
-- Of 158,634 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,447 (19.8%) connect via software/synthetic devices, and 86,565 (54.6%) show no connected device on the public registry.
+- Of 158,640 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,447 (19.8%) connect via software/synthetic devices, and 86,571 (54.6%) show no connected device on the public registry.
 
 **Signal type**
 - Uncategorized public observation (`device_backing_gap`)
@@ -167,10 +167,10 @@ _No public signal this week — scan not run or no headline finding._
 
 ### What Changed Today
 
-_Latest reading: 2026-09-05_
+_Latest reading: 2026-09-06_
 
-- **Geodnet** — exact (lat,lng) duplicate groups: 1,008 (+3 (+0.3%))
-- **Geodnet** — entities on public map: 19,479 (+9 (+0.0%))
+- **Geodnet** — exact (lat,lng) duplicate groups: 1,011 (-12 (-1.2%))
+- **Geodnet** — entities on public map: 19,491 (-7 (-0.0%))
 
 ### Signals To Watch
 
