@@ -64,10 +64,17 @@
       {
         "network": "Geodnet",
         "metric": "exactDupGroups",
-        "confidence": 0.73,
+        "confidence": 0.64,
         "flags": [
-          "isolated"
+          "isolated",
+          "volatile"
         ]
+      },
+      {
+        "network": "Geodnet",
+        "metric": "observed",
+        "confidence": 0.595,
+        "flags": []
       },
       {
         "network": "WeatherXM",
@@ -88,10 +95,8 @@
       {
         "network": "Helium IoT",
         "metric": "stackedSpots",
-        "confidence": 0.544,
-        "flags": [
-          "volatile"
-        ]
+        "confidence": 0.672,
+        "flags": []
       },
       {
         "network": "Helium Mobile",

@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-08-30T20:49:42.658Z",
+  "generatedAt": "2026-09-06T20:13:43.378Z",
   "schema": "getkinetik.drip/v2",
-  "date": "2026-08-30",
-  "week": 35,
+  "date": "2026-09-06",
+  "week": 36,
   "minConfidence": 0.8,
   "daily": [],
   "weekly": [
-    "Geodnet: repeated exactDupGroups observation. Observed Geodnet exactDupGroups on 6 of 6 recorded days.",
-    "WeatherXM: repeated overCapacityCells observation. Observed WeatherXM overCapacityCells on 6 of 6 recorded days.",
-    "Hivemapper: repeated top20ShareOfSupply observation. Observed Hivemapper top20ShareOfSupply on 6 of 6 recorded days.",
-    "Helium IoT: repeated stackedSpots observation. Observed Helium IoT stackedSpots on 6 of 6 recorded days.",
-    "Helium Mobile: repeated stackedSpots observation. Observed Helium Mobile stackedSpots on 6 of 6 recorded days."
+    "Geodnet: repeated exactDupGroups observation. Observed Geodnet exactDupGroups on 7 of 7 recorded days.",
+    "WeatherXM: repeated overCapacityCells observation. Observed WeatherXM overCapacityCells on 7 of 7 recorded days.",
+    "Hivemapper: repeated top20ShareOfSupply observation. Observed Hivemapper top20ShareOfSupply on 7 of 7 recorded days.",
+    "Helium IoT: repeated stackedSpots observation. Observed Helium IoT stackedSpots on 7 of 7 recorded days.",
+    "Helium Mobile: repeated stackedSpots observation. Observed Helium Mobile stackedSpots on 7 of 7 recorded days."
   ],
   "patterns": [
     {
@@ -22,7 +22,7 @@
         "Geodnet"
       ],
       "category": "IDENTITY",
-      "description": "Observed Geodnet exactDupGroups on 6 of 6 recorded days.",
+      "description": "Observed Geodnet exactDupGroups on 7 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -34,7 +34,7 @@
         "WeatherXM"
       ],
       "category": "CAPACITY",
-      "description": "Observed WeatherXM overCapacityCells on 6 of 6 recorded days.",
+      "description": "Observed WeatherXM overCapacityCells on 7 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -46,7 +46,7 @@
         "Hivemapper"
       ],
       "category": "ECONOMICS",
-      "description": "Observed Hivemapper top20ShareOfSupply on 6 of 6 recorded days.",
+      "description": "Observed Hivemapper top20ShareOfSupply on 7 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -58,7 +58,7 @@
         "Helium IoT"
       ],
       "category": "INFRASTRUCTURE",
-      "description": "Observed Helium IoT stackedSpots on 6 of 6 recorded days.",
+      "description": "Observed Helium IoT stackedSpots on 7 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -70,7 +70,7 @@
         "Helium Mobile"
       ],
       "category": "INFRASTRUCTURE",
-      "description": "Observed Helium Mobile stackedSpots on 6 of 6 recorded days.",
+      "description": "Observed Helium Mobile stackedSpots on 7 of 7 recorded days.",
       "patternType": "cross-network"
     }
   ],
@@ -84,10 +84,17 @@
       {
         "network": "Geodnet",
         "metric": "exactDupGroups",
-        "confidence": 0.73,
+        "confidence": 0.64,
         "flags": [
-          "isolated"
+          "isolated",
+          "volatile"
         ]
+      },
+      {
+        "network": "Geodnet",
+        "metric": "observed",
+        "confidence": 0.595,
+        "flags": []
       },
       {
         "network": "WeatherXM",
@@ -108,10 +115,8 @@
       {
         "network": "Helium IoT",
         "metric": "stackedSpots",
-        "confidence": 0.544,
-        "flags": [
-          "volatile"
-        ]
+        "confidence": 0.672,
+        "flags": []
       },
       {
         "network": "Helium Mobile",
