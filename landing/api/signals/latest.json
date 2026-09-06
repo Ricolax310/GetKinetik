@@ -2,7 +2,7 @@
   "schema": "getkinetik.signal-feed/v1",
   "cadence": "daily",
   "mode": "cross-network-first",
-  "generatedAt": "2026-09-05T18:46:36.160Z",
+  "generatedAt": "2026-09-06T12:29:02.475Z",
   "sectorSummary": [
     {
       "type": "integrity",
@@ -59,8 +59,8 @@
       "economics": 1
     },
     "bySeverity": {
-      "medium": 6,
-      "low": 2
+      "medium": 7,
+      "low": 1
     }
   },
   "networks": [
@@ -73,49 +73,49 @@
           "network": "Geodnet",
           "type": "integrity",
           "metric": "exactDupGroups",
-          "value": 1008,
-          "previous": 1005,
-          "delta": 3,
-          "message": "1008 exact (lat,lng) duplicate groups on 19,479 public stations — each row in §1 is one coordinate pair your registry team can grep today.",
+          "value": 1023,
+          "previous": 1008,
+          "delta": 15,
+          "message": "1023 exact (lat,lng) duplicate groups on 19,498 public stations — each row in §1 is one coordinate pair your registry team can grep today.",
           "severity": "medium",
           "confidence": 0.7,
           "anomalyType": "duplication_cluster",
           "kind": "headline",
           "metricKey": null,
-          "timestamp": "2026-09-05",
-          "asOf": "2026-09-05"
+          "timestamp": "2026-09-06",
+          "asOf": "2026-09-06"
         },
         {
           "network": "Geodnet",
           "type": "integrity",
           "metric": "exactDupGroups",
-          "value": 1008,
-          "previous": 1005,
-          "delta": 3,
-          "message": "exact (lat,lng) duplicate groups: 1,008 (+3 (+0.3%))",
-          "severity": "low",
+          "value": 1023,
+          "previous": 1008,
+          "delta": 15,
+          "message": "exact (lat,lng) duplicate groups: 1,023 (+15 (+1.5%))",
+          "severity": "medium",
           "confidence": 0.85,
           "anomalyType": "duplication_cluster",
           "kind": "metric",
           "metricKey": "exactDupGroups",
-          "timestamp": "2026-09-05",
-          "asOf": "2026-09-05"
+          "timestamp": "2026-09-06",
+          "asOf": "2026-09-06"
         },
         {
           "network": "Geodnet",
           "type": "growth",
           "metric": "observed",
-          "value": 19479,
-          "previous": 19470,
-          "delta": 9,
-          "message": "entities on public map: 19,479 (+9 (+0.0%))",
+          "value": 19498,
+          "previous": 19479,
+          "delta": 19,
+          "message": "entities on public map: 19,498 (+19 (+0.1%))",
           "severity": "low",
           "confidence": 0.85,
           "anomalyType": "duplication_cluster",
           "kind": "metric",
           "metricKey": "observed",
-          "timestamp": "2026-09-05",
-          "asOf": "2026-09-05"
+          "timestamp": "2026-09-06",
+          "asOf": "2026-09-06"
         }
       ]
     },
@@ -137,8 +137,8 @@
           "anomalyType": "capacity_violation",
           "kind": "headline",
           "metricKey": null,
-          "timestamp": "2026-09-05",
-          "asOf": "2026-09-05"
+          "timestamp": "2026-09-06",
+          "asOf": "2026-09-06"
         }
       ]
     },
@@ -151,17 +151,17 @@
           "network": "Hivemapper",
           "type": "economics",
           "metric": "top20ShareOfSupply",
-          "value": 0.5138907752391209,
-          "previous": 0.5136005795510349,
-          "delta": 0.0002901956880859702,
-          "message": "51.39% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.",
+          "value": 0.5153500827186935,
+          "previous": 0.5138907752391209,
+          "delta": 0.0014593074795726801,
+          "message": "51.54% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.",
           "severity": "medium",
           "confidence": 0.7,
           "anomalyType": "economic_concentration",
           "kind": "headline",
           "metricKey": null,
-          "timestamp": "2026-09-05",
-          "asOf": "2026-09-05"
+          "timestamp": "2026-09-06",
+          "asOf": "2026-09-06"
         }
       ]
     },
@@ -190,8 +190,8 @@
           "anomalyType": "duplication_cluster",
           "kind": "headline",
           "metricKey": null,
-          "timestamp": "2026-09-05",
-          "asOf": "2026-09-05"
+          "timestamp": "2026-09-06",
+          "asOf": "2026-09-06"
         }
       ]
     },
@@ -213,8 +213,8 @@
           "anomalyType": "duplication_cluster",
           "kind": "headline",
           "metricKey": null,
-          "timestamp": "2026-09-05",
-          "asOf": "2026-09-05"
+          "timestamp": "2026-09-06",
+          "asOf": "2026-09-06"
         }
       ]
     },
@@ -230,42 +230,42 @@
           "value": null,
           "previous": null,
           "delta": 0,
-          "message": "Of 158,634 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,447 (19.8%) connect via software/synthetic devices, and 86,565 (54.6%) show no connected device on the public registry.",
+          "message": "Of 158,637 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,447 (19.8%) connect via software/synthetic devices, and 86,568 (54.6%) show no connected device on the public registry.",
           "severity": "medium",
           "confidence": 0.7,
           "anomalyType": "device_backing_gap",
           "kind": "headline",
           "metricKey": null,
-          "timestamp": "2026-09-05",
-          "asOf": "2026-09-05"
+          "timestamp": "2026-09-06",
+          "asOf": "2026-09-06"
         }
       ]
     }
   ],
-  "date": "2026-09-05",
+  "date": "2026-09-06",
   "ingest": [
     {
       "id": "geodnet",
       "name": "Geodnet",
-      "status": "snapshot",
-      "scanned": false,
-      "reason": "snapshot reuse (offline mode)",
+      "status": "scanned",
+      "scanned": true,
+      "reason": null,
       "snapshotAgeDays": 0
     },
     {
       "id": "weatherxm",
       "name": "WeatherXM",
-      "status": "snapshot",
-      "scanned": false,
-      "reason": "snapshot reuse (offline mode)",
+      "status": "scanned",
+      "scanned": true,
+      "reason": null,
       "snapshotAgeDays": 0
     },
     {
       "id": "hivemapper",
       "name": "Hivemapper",
-      "status": "snapshot",
-      "scanned": false,
-      "reason": "snapshot reuse (offline mode)",
+      "status": "scanned",
+      "scanned": true,
+      "reason": null,
       "snapshotAgeDays": 0
     },
     {
@@ -273,31 +273,31 @@
       "name": "Natix Network",
       "status": "snapshot",
       "scanned": false,
-      "reason": "snapshot reuse (offline mode)",
+      "reason": "scan script missing: sybil-scan-natix.mjs",
       "snapshotAgeDays": 0
     },
     {
       "id": "helium-iot",
       "name": "Helium IoT",
-      "status": "snapshot",
-      "scanned": false,
-      "reason": "snapshot reuse (offline mode)",
+      "status": "scanned",
+      "scanned": true,
+      "reason": null,
       "snapshotAgeDays": 0
     },
     {
       "id": "helium-mobile",
       "name": "Helium Mobile",
-      "status": "snapshot",
-      "scanned": false,
-      "reason": "snapshot reuse (offline mode)",
+      "status": "scanned",
+      "scanned": true,
+      "reason": null,
       "snapshotAgeDays": 0
     },
     {
       "id": "dimo",
       "name": "DIMO",
-      "status": "snapshot",
-      "scanned": false,
-      "reason": "snapshot reuse (offline mode)",
+      "status": "scanned",
+      "scanned": true,
+      "reason": null,
       "snapshotAgeDays": 0
     }
   ]
