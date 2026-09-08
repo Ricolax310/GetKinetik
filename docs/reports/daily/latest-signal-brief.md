@@ -4,9 +4,9 @@
 
 ## Today's Read
 
-• Geodnet duplicate-coordinate groups declined from 1,008 to 1,007.
-• WeatherXM over-capacity cells rose from 298 to 299.
-• Hivemapper: 51.93% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a con…
+• Geodnet duplicate-coordinate groups rose from 1,007 to 1,146.
+• Geodnet entities on public map rose from 19,480 to 19,629.
+• Geodnet flagged fleet share rose from 27% to 28%.
 
 ## Why It Matters
 
@@ -18,9 +18,11 @@ Observations span 3 networks — no single network dominates the index.
 
 ### What Changed Today
 
-- **Geodnet** — exact (lat,lng) duplicate groups: 1,007 (-1 (-0.1%))
-- **WeatherXM** — cells over designed capacity: 299 (+1 (+0.3%))
-- **Hivemapper** — 51.93% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
+- **Geodnet** — exact (lat,lng) duplicate groups: 1,146 (+139 (+13.8%))
+- **Geodnet** — entities on public map: 19,629 (+149 (+0.8%))
+- **Geodnet** — fleet share flagged (any heuristic): 27.74% (+0.34 pp (+1.2%))
+- **WeatherXM** — 299 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.
+- **Hivemapper** — 51.95% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
 
 ### Signal Type
 
@@ -50,7 +52,7 @@ Observations span 3 networks — no single network dominates the index.
 
 ### Thread Seed
 
-Public read on Geodnet: 1008 exact (lat,lng) duplicate groups on 19,482 public stations — each row in §1 is one coordinate pair your registry team can grep today. — does that match your internal view, or is the public feed expected to behave this way?
+Public read on Geodnet: 1146 exact (lat,lng) duplicate groups on 19,629 public stations — each row in §1 is one coordinate pair your registry team can grep today. — does that match your internal view, or is the public feed expected to behave this way?
 
 ### Sources & Methodology
 
