@@ -1,26 +1,27 @@
 {
-  "generatedAt": "2026-09-07T20:21:14.591Z",
+  "generatedAt": "2026-09-08T19:43:49.593Z",
   "schema": "getkinetik.drip/v2",
-  "date": "2026-09-07",
+  "date": "2026-09-08",
   "minConfidence": 0.6,
   "daily": [
-    "Geodnet: 1,008 duplicate coordinate clusters (+1)",
-    "Geodnet: 19,482 entities on public map (+9)",
+    "Geodnet: 1,146 duplicate coordinate clusters (+139)",
+    "Geodnet: 27.7% flagged pct (+0.3 pp)",
+    "Geodnet: 19,629 entities on public map (+149)",
     "Helium IoT: 4,861 stacked spots (unchanged)",
     "Helium Mobile: 529 stacked spots (unchanged)",
-    "Hivemapper: 51.7% top-holder concentration (unchanged)",
-    "WeatherXM: 298 capacity exceedances (unchanged)"
+    "Hivemapper: 51.9% top-holder concentration (+0 pp)",
+    "WeatherXM: 299 capacity exceedances (unchanged)"
   ],
   "weekly": [
     "Cross-network infrastructure coverage stress observed across multiple networks. Cross-network infrastructure coverage stress observed across multiple networks (Geodnet, Helium IoT, Helium Mobile).",
     "Helium IoT: repeated stackedSpots observation. Observed Helium IoT stackedSpots on 7 of 7 recorded days.",
     "Helium Mobile: repeated stackedSpots observation. Observed Helium Mobile stackedSpots on 7 of 7 recorded days.",
-    "Geodnet: repeated observed observation. Observed Geodnet observed on 4 of 7 recorded days.",
+    "Geodnet: repeated observed observation. Observed Geodnet observed on 5 of 7 recorded days.",
     "Geodnet: repeated exactDupGroups observation. Observed Geodnet exactDupGroups on 7 of 7 recorded days.",
     "WeatherXM: repeated overCapacityCells observation. Observed WeatherXM overCapacityCells on 7 of 7 recorded days.",
     "Hivemapper: repeated top20ShareOfSupply observation. Observed Hivemapper top20ShareOfSupply on 7 of 7 recorded days.",
-    "WeatherXM: capacity pressure signal detected. Observed capacity signal on WeatherXM (overCapacityCells).",
     "Geodnet: identity registry stress signal detected. Observed identity signal on Geodnet (exactDupGroups).",
+    "WeatherXM: capacity pressure signal detected. Observed capacity signal on WeatherXM (overCapacityCells).",
     "Hivemapper: economic distribution shape signal detected. Observed economics signal on Hivemapper (top20ShareOfSupply).",
     "Economic concentration shape on public ledgers. Observed holder/supply concentration metrics from public on-chain reads."
   ],
@@ -72,7 +73,7 @@
         "Geodnet"
       ],
       "category": "INFRASTRUCTURE",
-      "description": "Observed Geodnet observed on 4 of 7 recorded days.",
+      "description": "Observed Geodnet observed on 5 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -113,18 +114,6 @@
     },
     {
       "scope": "localized",
-      "classification": "stability",
-      "headline": "WeatherXM: capacity pressure signal detected",
-      "pattern": "LOCAL_CAPACITY",
-      "networks": [
-        "WeatherXM"
-      ],
-      "category": "CAPACITY",
-      "description": "Observed capacity signal on WeatherXM (overCapacityCells).",
-      "patternType": "single-network"
-    },
-    {
-      "scope": "localized",
       "classification": "drift",
       "headline": "Geodnet: identity registry stress signal detected",
       "pattern": "LOCAL_IDENTITY",
@@ -133,6 +122,18 @@
       ],
       "category": "IDENTITY",
       "description": "Observed identity signal on Geodnet (exactDupGroups).",
+      "patternType": "single-network"
+    },
+    {
+      "scope": "localized",
+      "classification": "stability",
+      "headline": "WeatherXM: capacity pressure signal detected",
+      "pattern": "LOCAL_CAPACITY",
+      "networks": [
+        "WeatherXM"
+      ],
+      "category": "CAPACITY",
+      "description": "Observed capacity signal on WeatherXM (overCapacityCells).",
       "patternType": "single-network"
     },
     {
@@ -167,36 +168,45 @@
     {
       "network": "Geodnet",
       "metric": "exactDupGroups",
-      "value": 1008,
-      "delta": 1,
-      "timestamp": "2026-09-07",
+      "value": 1146,
+      "delta": 139,
+      "timestamp": "2026-09-08",
       "severity": "medium",
       "feedConfidence": 0.7
     },
     {
       "network": "Geodnet",
       "metric": "observed",
-      "value": 19482,
-      "delta": 9,
-      "timestamp": "2026-09-07",
+      "value": 19629,
+      "delta": 149,
+      "timestamp": "2026-09-08",
       "severity": "low",
+      "feedConfidence": 0.85
+    },
+    {
+      "network": "Geodnet",
+      "metric": "flaggedPct",
+      "value": 0.27744663508074785,
+      "delta": 0.0034219944236636435,
+      "timestamp": "2026-09-08",
+      "severity": "medium",
       "feedConfidence": 0.85
     },
     {
       "network": "WeatherXM",
       "metric": "overCapacityCells",
-      "value": 298,
+      "value": 299,
       "delta": 0,
-      "timestamp": "2026-09-07",
+      "timestamp": "2026-09-08",
       "severity": "medium",
       "feedConfidence": 0.7
     },
     {
       "network": "Hivemapper",
       "metric": "top20ShareOfSupply",
-      "value": 0.5174089995768183,
-      "delta": 7.902623000433096e-11,
-      "timestamp": "2026-09-07",
+      "value": 0.5194930932625069,
+      "delta": 0.00016090868204032827,
+      "timestamp": "2026-09-08",
       "severity": "medium",
       "feedConfidence": 0.7
     },
@@ -205,7 +215,7 @@
       "metric": "stackedSpots",
       "value": 4861,
       "delta": 0,
-      "timestamp": "2026-09-07",
+      "timestamp": "2026-09-08",
       "severity": "medium",
       "feedConfidence": 0.7
     },
@@ -214,7 +224,7 @@
       "metric": "stackedSpots",
       "value": 529,
       "delta": 0,
-      "timestamp": "2026-09-07",
+      "timestamp": "2026-09-08",
       "severity": "medium",
       "feedConfidence": 0.7
     }
@@ -224,16 +234,26 @@
       {
         "network": "Geodnet",
         "metric": "exactDupGroups",
-        "confidence": 0.73,
+        "confidence": 0.64,
         "flags": [
-          "isolated"
+          "isolated",
+          "volatile"
         ]
       },
       {
         "network": "Geodnet",
         "metric": "observed",
-        "confidence": 0.636,
+        "confidence": 0.631,
         "flags": []
+      },
+      {
+        "network": "Geodnet",
+        "metric": "flaggedPct",
+        "confidence": 0.61,
+        "flags": [
+          "isolated",
+          "unverified"
+        ]
       },
       {
         "network": "WeatherXM",

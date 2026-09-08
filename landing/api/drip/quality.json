@@ -13,16 +13,26 @@
       {
         "network": "Geodnet",
         "metric": "exactDupGroups",
-        "confidence": 0.73,
+        "confidence": 0.64,
         "flags": [
-          "isolated"
+          "isolated",
+          "volatile"
         ]
       },
       {
         "network": "Geodnet",
         "metric": "observed",
-        "confidence": 0.636,
+        "confidence": 0.631,
         "flags": []
+      },
+      {
+        "network": "Geodnet",
+        "metric": "flaggedPct",
+        "confidence": 0.61,
+        "flags": [
+          "isolated",
+          "unverified"
+        ]
       },
       {
         "network": "WeatherXM",

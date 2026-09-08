@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-07T20:21:14.590Z",
+  "generatedAt": "2026-09-08T19:43:49.593Z",
   "patterns": [
     {
       "scope": "systemic",
@@ -48,7 +48,7 @@
         "Geodnet"
       ],
       "category": "INFRASTRUCTURE",
-      "description": "Observed Geodnet observed on 4 of 7 recorded days.",
+      "description": "Observed Geodnet observed on 5 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -89,18 +89,6 @@
     },
     {
       "scope": "localized",
-      "classification": "stability",
-      "headline": "WeatherXM: capacity pressure signal detected",
-      "pattern": "LOCAL_CAPACITY",
-      "networks": [
-        "WeatherXM"
-      ],
-      "category": "CAPACITY",
-      "description": "Observed capacity signal on WeatherXM (overCapacityCells).",
-      "patternType": "single-network"
-    },
-    {
-      "scope": "localized",
       "classification": "drift",
       "headline": "Geodnet: identity registry stress signal detected",
       "pattern": "LOCAL_IDENTITY",
@@ -109,6 +97,18 @@
       ],
       "category": "IDENTITY",
       "description": "Observed identity signal on Geodnet (exactDupGroups).",
+      "patternType": "single-network"
+    },
+    {
+      "scope": "localized",
+      "classification": "stability",
+      "headline": "WeatherXM: capacity pressure signal detected",
+      "pattern": "LOCAL_CAPACITY",
+      "networks": [
+        "WeatherXM"
+      ],
+      "category": "CAPACITY",
+      "description": "Observed capacity signal on WeatherXM (overCapacityCells).",
       "patternType": "single-network"
     },
     {
