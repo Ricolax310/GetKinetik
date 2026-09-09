@@ -1,11 +1,11 @@
 # Weekly DePIN Signal Report
 
-> Week 2026-W37 · 2026-09-07 → 2026-09-08 · patterns first, then networks.
+> Week 2026-W37 · 2026-09-07 → 2026-09-09 · patterns first, then networks.
 
 ## Executive Summary
 
 - Week 2026-W37: cross-network signal index updated from public infrastructure reads.
-- 3 publishable signal(s) across 6 network(s) met the weekly confidence gate.
+- 2 publishable signal(s) across 6 network(s) met the weekly confidence gate.
 - 1 cross-network pattern(s) tagged: IDENTITY.
 - 1 systemic-scope pattern(s) recorded with multi-network support.
 
@@ -33,11 +33,11 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 - Helium IoT
 - Helium Mobile
 
-**Signal:** Exact coordinate-duplicate groups rose from 1007 to 1146 on Geodnet.
+**Signal:** Exact coordinate-duplicate groups declined from 1010 to 1009 on Geodnet.
 
 **Scope:** systemic
 
-**Classification:** escalation
+**Classification:** stability
 
 **Unknown:** Public data cannot confirm whether shared coordinates are distinct devices or one identity reused.
 
@@ -46,7 +46,7 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 **Observed in:**
 - Hivemapper
 
-**Signal:** Top-20 account share of supply observed near 51.95%.
+**Signal:** Top-20 account share of supply observed near 52.18%.
 
 **Scope:** localized
 
@@ -76,9 +76,8 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 ### Geodnet
 
 **What changed**
-- exact (lat,lng) duplicate groups: 1,146 (+139 (+13.8%))
-- entities on public map: 19,629 (+149 (+0.8%))
-- fleet share flagged (any heuristic): 27.74% (+0.34 pp (+1.2%))
+- exact (lat,lng) duplicate groups: 1,009 (-1 (-0.1%))
+- entities on public map: 19,482 (-6 (-0.0%))
 
 **Signal type**
 - Registry duplication (`duplication_cluster`)
@@ -99,7 +98,7 @@ _No public signal this week — scan not run or no headline finding._
 ### Hivemapper
 
 **What changed**
-- 51.95% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
+- 52.18% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
 
 **Signal type**
 - Economic concentration (`economic_concentration`)
@@ -116,7 +115,7 @@ _No public signal this week — scan not run or no headline finding._
 ### DIMO
 
 **What changed**
-- Of 158,640 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,442 (19.8%) connect via software/synthetic devices, and 86,576 (54.6%) show no connected device on the public registry.
+- Of 158,643 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,441 (19.8%) connect via software/synthetic devices, and 86,580 (54.6%) show no connected device on the public registry.
 
 **Signal type**
 - Uncategorized public observation (`device_backing_gap`)
@@ -133,7 +132,7 @@ _No public signal this week — scan not run or no headline finding._
 ### Helium IoT
 
 **What changed**
-- 4,861 single-coordinate stacks of ≥10 hotspots on 1,008,225 located units — the largest stack holds 501 hotspots on one coordinate (§1 lists keys your registry team can grep today).
+- 4,861 single-coordinate stacks of ≥10 hotspots on 1,008,231 located units — the largest stack holds 501 hotspots on one coordinate (§1 lists keys your registry team can grep today).
 
 **Signal type**
 - Registry duplication (`duplication_cluster`)
@@ -150,7 +149,7 @@ _No public signal this week — scan not run or no headline finding._
 ### Helium Mobile
 
 **What changed**
-- 529 single-coordinate stacks of ≥10 hotspots on 55,595 located units — the largest stack holds 540 hotspots on one coordinate (§1 lists keys your registry team can grep today).
+- 530 single-coordinate stacks of ≥10 hotspots on 55,595 located units — the largest stack holds 540 hotspots on one coordinate (§1 lists keys your registry team can grep today).
 
 **Signal type**
 - Registry duplication (`duplication_cluster`)
@@ -168,11 +167,10 @@ _No public signal this week — scan not run or no headline finding._
 
 ### What Changed Today
 
-_Latest reading: 2026-09-08_
+_Latest reading: 2026-09-09_
 
-- **Geodnet** — exact (lat,lng) duplicate groups: 1,146 (+139 (+13.8%))
-- **Geodnet** — entities on public map: 19,629 (+149 (+0.8%))
-- **Geodnet** — fleet share flagged (any heuristic): 27.74% (+0.34 pp (+1.2%))
+- **Geodnet** — exact (lat,lng) duplicate groups: 1,009 (-1 (-0.1%))
+- **Geodnet** — entities on public map: 19,482 (-6 (-0.0%))
 
 ### Signals To Watch
 
