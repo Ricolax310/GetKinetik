@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T19:43:49.593Z",
+  "generatedAt": "2026-09-09T19:35:51.704Z",
   "patterns": [
     {
       "scope": "systemic",
@@ -13,6 +13,18 @@
       ],
       "category": "INFRASTRUCTURE",
       "description": "Cross-network infrastructure coverage stress observed across multiple networks (Geodnet, Helium IoT, Helium Mobile).",
+      "patternType": "cross-network"
+    },
+    {
+      "scope": "systemic",
+      "classification": "repetition",
+      "headline": "Geodnet: repeated observed observation",
+      "pattern": "REPEATED_INFRASTRUCTURE",
+      "networks": [
+        "Geodnet"
+      ],
+      "category": "INFRASTRUCTURE",
+      "description": "Observed Geodnet observed on 6 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -37,18 +49,6 @@
       ],
       "category": "INFRASTRUCTURE",
       "description": "Observed Helium Mobile stackedSpots on 7 of 7 recorded days.",
-      "patternType": "cross-network"
-    },
-    {
-      "scope": "systemic",
-      "classification": "repetition",
-      "headline": "Geodnet: repeated observed observation",
-      "pattern": "REPEATED_INFRASTRUCTURE",
-      "networks": [
-        "Geodnet"
-      ],
-      "category": "INFRASTRUCTURE",
-      "description": "Observed Geodnet observed on 5 of 7 recorded days.",
       "patternType": "cross-network"
     },
     {
@@ -89,18 +89,6 @@
     },
     {
       "scope": "localized",
-      "classification": "drift",
-      "headline": "Geodnet: identity registry stress signal detected",
-      "pattern": "LOCAL_IDENTITY",
-      "networks": [
-        "Geodnet"
-      ],
-      "category": "IDENTITY",
-      "description": "Observed identity signal on Geodnet (exactDupGroups).",
-      "patternType": "single-network"
-    },
-    {
-      "scope": "localized",
       "classification": "stability",
       "headline": "WeatherXM: capacity pressure signal detected",
       "pattern": "LOCAL_CAPACITY",
@@ -109,6 +97,18 @@
       ],
       "category": "CAPACITY",
       "description": "Observed capacity signal on WeatherXM (overCapacityCells).",
+      "patternType": "single-network"
+    },
+    {
+      "scope": "localized",
+      "classification": "drift",
+      "headline": "Geodnet: identity registry stress signal detected",
+      "pattern": "LOCAL_IDENTITY",
+      "networks": [
+        "Geodnet"
+      ],
+      "category": "IDENTITY",
+      "description": "Observed identity signal on Geodnet (exactDupGroups).",
       "patternType": "single-network"
     },
     {
