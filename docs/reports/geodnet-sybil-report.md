@@ -2,15 +2,15 @@
 
 > Independent public read by the GETKINETIK Bureau using only Geodnet's public station endpoint. **No internal Geodnet data was used.** Geodnet RTK stations are surveyed GNSS reference units — each one is supposed to be a unique, physically installed antenna at a fixed coordinate. The heuristics below treat that as the structural rule and flag exceptions.
 
-- **As of:** 2026-09-09
+- **As of:** 2026-09-10
 - **Public source:** `https://rtk.geodnet.com/api/v2/coverage_stations`
-- **Stations observed:** 19,482
-- **Stations flagged (any heuristic):** 5,337 (27.39%)
+- **Stations observed:** 19,487
+- **Stations flagged (any heuristic):** 5,339 (27.40%)
 
 ## Executive summary
 
-1. **1009 exact (lat,lng) duplicate groups** on 19,482 public stations — each row in §1 is one coordinate pair your registry team can grep today.
-2. **1,009 ≤10 m proximity clusters** — tighter than two physical RTK antennas; start with the largest counts in §2 (names + anchors included).
+1. **1011 exact (lat,lng) duplicate groups** on 19,487 public stations — each row in §1 is one coordinate pair your registry team can grep today.
+2. **1,011 ≤10 m proximity clusters** — tighter than two physical RTK antennas; start with the largest counts in §2 (names + anchors included).
 3. **27.4%** of the public fleet touches at least one heuristic — useful as a sampling denominator, not a verdict.
 
 ---
@@ -19,12 +19,12 @@
 
 | Metric | This run | vs last run |
 |---|---:|---|
-| Stations with coordinates | 19,482 | -6 (-0.0%) |
-| Exact (lat,lng) duplicate groups | 1,009 | -1 (-0.1%) |
-| Clusters within 10 m | 1,009 | -1 (-0.1%) |
+| Stations with coordinates | 19,487 | +5 (+0.0%) |
+| Exact (lat,lng) duplicate groups | 1,011 | unchanged vs last run |
+| Clusters within 10 m | 1,011 | unchanged vs last run |
 | Clusters ≥4 within 100 m | 5 | unchanged vs last run |
-| Low-precision coordinates (≤2 decimals) | 3,722 | -3 (-0.1%) |
-| Fleet share flagged (any heuristic) | 27.39% | -0.01 pp (-0.0%) |
+| Low-precision coordinates (≤2 decimals) | 3,720 | +2 (+0.1%) |
+| Fleet share flagged (any heuristic) | 27.40% | +0.00 pp (+0.0%) |
 
 ## What to cross-check this week
 
@@ -39,14 +39,14 @@
 
 ## Headline findings
 
-1. **1,009 groups of stations share an exact (lat, lng) pair.** For a CORS / RTK reference network, two stations at identical coordinates is structurally undefined — there is no second-antenna position to triangulate from.
-2. **1,009 clusters of stations sit within 10 m of each other.** That's tighter than the physical separation of two real RTK installs.
+1. **1,011 groups of stations share an exact (lat, lng) pair.** For a CORS / RTK reference network, two stations at identical coordinates is structurally undefined — there is no second-antenna position to triangulate from.
+2. **1,011 clusters of stations sit within 10 m of each other.** That's tighter than the physical separation of two real RTK installs.
 3. **5 clusters have ≥4 stations within 100 m.** Plausible for an industrial campus or surveying yard, but the names + counts are worth reviewing.
-4. **3,722 stations publish coordinates with ≤ 2 decimal places** (≥ 1 km uncertainty). For RTK that's structurally wrong; coordinates should be 5+ decimals.
+4. **3,720 stations publish coordinates with ≤ 2 decimal places** (≥ 1 km uncertainty). For RTK that's structurally wrong; coordinates should be 5+ decimals.
 
 ---
 
-## 1. Exact-coordinate duplicates — 1,009 groups
+## 1. Exact-coordinate duplicates — 1,011 groups
 
 | Coordinates | Station count | Names |
 |---|---:|---|
@@ -54,16 +54,16 @@
 | `49.439, 6.853` | 5 | `****DF559`, `****60159`, `****BCEA9`, `****64E45`, `****79375` |
 | `40.369, -111.93` | 5 | `****31838`, `****6A19E`, `****0C6BD`, `****20126`, `****C8D82` |
 | `38.004, -122.309` | 4 | `****7027A`, `****D4739`, `****C0A6E`, `****97A05` |
-| `43.016, -82.342` | 4 | `****19CF5`, `****DFEE1`, `****DC6F5`, `****CAF4D` |
+| `43.016, -82.342` | 4 | `****19CF5`, `****DFEE1`, `****CAF4D`, `****DC6F5` |
 | `38.442, 27.206` | 3 | `****184F9`, `****3A7DA`, `****DB0B1` |
 | `40.673, -80.165` | 3 | `****CB43D`, `****C4AE5`, `****C31CD` |
 | `35.617, -117.692` | 3 | `****699C2`, `****1F341`, `****1FCBA` |
-| `-35.316, 149.01` | 3 | `STR1`, `STR2`, `STR3` |
+| `-35.316, 149.01` | 3 | `STR2`, `STR1`, `STR3` |
 | `-27.548, 153.084` | 3 | `****EE73D`, `****FBE61`, `****60459` |
 
-_…and 999 more in the snapshot file._
+_…and 1001 more in the snapshot file._
 
-## 2. Near-duplicate stations within 10 m — 1,009 clusters
+## 2. Near-duplicate stations within 10 m — 1,011 clusters
 
 | Anchor (lat, lng) | Station count | Names (truncated) |
 |---|---:|---|
@@ -71,14 +71,14 @@ _…and 999 more in the snapshot file._
 | 49.43900, 6.85300 | 5 | `****DF559`, `****60159`, `****BCEA9`, `****64E45`, `****79375` |
 | 40.36900, -111.93000 | 5 | `****31838`, `****6A19E`, `****0C6BD`, `****20126`, `****C8D82` |
 | 38.00400, -122.30900 | 4 | `****7027A`, `****D4739`, `****C0A6E`, `****97A05` |
-| 43.01600, -82.34200 | 4 | `****19CF5`, `****DFEE1`, `****DC6F5`, `****CAF4D` |
+| 43.01600, -82.34200 | 4 | `****19CF5`, `****DFEE1`, `****CAF4D`, `****DC6F5` |
 | 38.44200, 27.20600 | 3 | `****184F9`, `****3A7DA`, `****DB0B1` |
 | 40.67300, -80.16500 | 3 | `****CB43D`, `****C4AE5`, `****C31CD` |
 | 35.61700, -117.69200 | 3 | `****699C2`, `****1F341`, `****1FCBA` |
-| -35.31600, 149.01000 | 3 | `STR1`, `STR2`, `STR3` |
+| -35.31600, 149.01000 | 3 | `STR2`, `STR1`, `STR3` |
 | -27.54800, 153.08400 | 3 | `****EE73D`, `****FBE61`, `****60459` |
 
-_…and 999 more in the snapshot file._
+_…and 1001 more in the snapshot file._
 
 ## 3. Tight clusters (≥4 within 100 m) — 5 clusters
 
@@ -90,22 +90,22 @@ _…and 999 more in the snapshot file._
 | 38.00400, -122.30900 | 4 |
 | 43.01600, -82.34200 | 4 |
 
-## 4. Stations with ≤ 2 decimal places of coordinate precision — 3,722
+## 4. Stations with ≤ 2 decimal places of coordinate precision — 3,720
 
 | Name | Lat | Lng |
 |---|---:|---:|
-| `****2A5CD` | 47.36 | 8.528 |
-| `****DB235` | 40.18 | -74.967 |
-| `****C63CD` | 45.47 | 16.407 |
-| `****D0F20` | 39.32 | -86.276 |
-| `****23441` | 23.68 | 90.777 |
-| `****E5A91` | 36.686 | 35.29 |
-| `****CB92D` | -35.312 | 138.45 |
-| `****BF9C5` | 23.67 | 86.028 |
-| `****23365` | -8.21 | 113.936 |
 | `****1C16D` | 38.411 | -78.99 |
+| `****3271A` | 25.961 | -80.21 |
+| `****1C46D` | 47.2 | 26.43 |
+| `****5D6F9` | 45.48 | -68.139 |
+| `HWSP` | -12.51 | 131.082 |
+| `****5E5B5` | 44.338 | 20.6 |
+| `****11B35` | 7.97 | -75.177 |
+| `****D479D` | -0.37 | 35.947 |
+| `****48EBA` | 52.413 | 16.9 |
+| `****69D0A` | 52.33 | 8.422 |
 
-_…and 3712 more in the snapshot file._
+_…and 3710 more in the snapshot file._
 
 ---
 
