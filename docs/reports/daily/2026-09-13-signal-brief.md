@@ -4,9 +4,9 @@
 
 ## Today's Read
 
-• Geodnet duplicate-coordinate groups rose from 1,012 to 1,014.
-• WeatherXM: 297 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.
-• Hivemapper: 52.65% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a con…
+• Geodnet duplicate-coordinate groups declined from 1,014 to 1,012.
+• WeatherXM over-capacity cells rose from 297 to 298.
+• Hivemapper: 52.63% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a con…
 
 ## Why It Matters
 
@@ -18,9 +18,9 @@ Observations span 3 networks — no single network dominates the index.
 
 ### What Changed Today
 
-- **Geodnet** — exact (lat,lng) duplicate groups: 1,014 (+2 (+0.2%))
-- **WeatherXM** — 297 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.
-- **Hivemapper** — 52.65% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
+- **Geodnet** — exact (lat,lng) duplicate groups: 1,012 (-2 (-0.2%))
+- **WeatherXM** — cells over designed capacity: 298 (+1 (+0.3%))
+- **Hivemapper** — 52.63% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
 
 ### Signal Type
 
@@ -50,7 +50,7 @@ Observations span 3 networks — no single network dominates the index.
 
 ### Thread Seed
 
-Public read on Geodnet: 1012 exact (lat,lng) duplicate groups on 19,489 public stations — each row in §1 is one coordinate pair your registry team can grep today. — does that match your internal view, or is the public feed expected to behave this way?
+Public read on Geodnet: 1012 exact (lat,lng) duplicate groups on 19,481 public stations — each row in §1 is one coordinate pair your registry team can grep today. — does that match your internal view, or is the public feed expected to behave this way?
 
 ### Sources & Methodology
 
