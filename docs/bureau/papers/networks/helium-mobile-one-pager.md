@@ -2,7 +2,7 @@
 
 > Public endpoints only. Not a verdict.
 
-**As of:** 2026-09-12  
+**As of:** 2026-09-13  
 **Public source:** https://entities.nft.helium.io/v2/hotspots?subnetwork=mobile  
 **Full report:** [docs/reports/helium-mobile-sybil-report.md](https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/helium-mobile-sybil-report.md)  
 **Live terminal:** https://getkinetik.app/audits.html  
@@ -22,10 +22,10 @@
 
 | Metric | This run | vs last run |
 |---|---:|---|
-| Hotspots with asserted coordinates | 56,001 | +357 (+0.6%) |
-| Single-coordinate stacks (≥10 hotspots) | 531 | +1 (+0.2%) |
+| Hotspots with asserted coordinates | 56,001 | unchanged vs last run |
+| Single-coordinate stacks (≥10 hotspots) | 531 | unchanged vs last run |
 | Largest single-coordinate stack | 540 | unchanged vs last run |
-| Fleet share flagged (any heuristic) | 20.25% | -0.11 pp (-0.5%) |
+| Fleet share flagged (any heuristic) | 20.25% | unchanged vs last run |
 
 ---
 
