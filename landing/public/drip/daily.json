@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-09-14T20:44:13.362Z",
+  "generatedAt": "2026-09-15T19:59:23.204Z",
   "schema": "getkinetik.drip/v2",
-  "date": "2026-09-14",
+  "date": "2026-09-15",
   "minConfidence": 0.6,
   "daily": [
-    "Geodnet: 1,017 duplicate coordinate clusters (+3)",
+    "Geodnet: 1,019 duplicate coordinate clusters (unchanged)",
     "Helium IoT: 4,861 stacked spots (unchanged)",
     "Helium Mobile: 531 stacked spots (unchanged)",
-    "Hivemapper: 52.6% top-holder concentration (unchanged)",
-    "WeatherXM: 298 capacity exceedances (−1)"
+    "Hivemapper: 52.3% top-holder concentration (unchanged)",
+    "WeatherXM: 298 capacity exceedances (unchanged)"
   ],
   "weekly": [
     "Helium IoT: repeated stackedSpots observation. Observed Helium IoT stackedSpots on 7 of 7 recorded days.",
@@ -112,7 +112,7 @@
     },
     {
       "scope": "localized",
-      "classification": "drift",
+      "classification": "stability",
       "headline": "WeatherXM: capacity pressure signal detected",
       "pattern": "LOCAL_CAPACITY",
       "networks": [
@@ -124,7 +124,7 @@
     },
     {
       "scope": "localized",
-      "classification": "drift",
+      "classification": "stability",
       "headline": "Geodnet: identity registry stress signal detected",
       "pattern": "LOCAL_IDENTITY",
       "networks": [
@@ -136,7 +136,7 @@
     },
     {
       "scope": "localized",
-      "classification": "drift",
+      "classification": "stability",
       "headline": "Hivemapper: economic distribution shape signal detected",
       "pattern": "LOCAL_ECONOMICS",
       "networks": [
@@ -166,9 +166,9 @@
     {
       "network": "Geodnet",
       "metric": "exactDupGroups",
-      "value": 1017,
-      "delta": 3,
-      "timestamp": "2026-09-14",
+      "value": 1019,
+      "delta": 0,
+      "timestamp": "2026-09-15",
       "severity": "medium",
       "feedConfidence": 0.7
     },
@@ -176,17 +176,17 @@
       "network": "WeatherXM",
       "metric": "overCapacityCells",
       "value": 298,
-      "delta": -1,
-      "timestamp": "2026-09-14",
+      "delta": 0,
+      "timestamp": "2026-09-15",
       "severity": "medium",
       "feedConfidence": 0.7
     },
     {
       "network": "Hivemapper",
       "metric": "top20ShareOfSupply",
-      "value": 0.5263283821043222,
-      "delta": 5.917955014922427e-11,
-      "timestamp": "2026-09-14",
+      "value": 0.5226468447920718,
+      "delta": 0,
+      "timestamp": "2026-09-15",
       "severity": "medium",
       "feedConfidence": 0.7
     },
@@ -195,7 +195,7 @@
       "metric": "stackedSpots",
       "value": 4861,
       "delta": 0,
-      "timestamp": "2026-09-14",
+      "timestamp": "2026-09-15",
       "severity": "medium",
       "feedConfidence": 0.7
     },
@@ -204,7 +204,7 @@
       "metric": "stackedSpots",
       "value": 531,
       "delta": 0,
-      "timestamp": "2026-09-14",
+      "timestamp": "2026-09-15",
       "severity": "medium",
       "feedConfidence": 0.7
     }
