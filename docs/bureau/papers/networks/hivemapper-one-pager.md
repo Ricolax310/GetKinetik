@@ -2,7 +2,7 @@
 
 > Public endpoints only. Not a verdict.
 
-**As of:** 2026-09-14  
+**As of:** 2026-09-15  
 **Public source:** https://mainnet.helius-rpc.com/?api-key=[REDACTED]  
 **Full report:** [docs/reports/hivemapper-sybil-report.md](https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/hivemapper-sybil-report.md)  
 **Live terminal:** https://getkinetik.app/audits.html  
@@ -12,8 +12,8 @@
 
 ## Executive summary
 
-1. 52.63% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
-2. Top 5 accounts alone: 23.72% of supply — see § Part A table for owner wallets to reconcile with custody labels.
+1. 52.26% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
+2. Top 5 accounts alone: 23.49% of supply — see § Part A table for owner wallets to reconcile with custody labels.
 3. For GPS-style reads, re-run with `--nodes=` when you can export lat/lng (schema: `scripts/sample-nodes.json`).
 
 ---
@@ -22,9 +22,9 @@
 
 | Metric | This run | vs last run |
 |---|---:|---|
-| Top-20 visible SPL accounts (% of UI supply) | 52.63% | +0.00 pp (+0.0%) |
-| Sum of top-20 balances (HONEY) | 3,447,214,970.696 | unchanged vs last run |
-| UI-reported supply (HONEY) | 6,549,551,739.759 | -0.736 (-0.0%) |
+| Top-20 visible SPL accounts (% of UI supply) | 52.26% | unchanged vs last run |
+| Sum of top-20 balances (HONEY) | 3,423,102,548.914 | unchanged vs last run |
+| UI-reported supply (HONEY) | 6,549,551,734.643 | unchanged vs last run |
 
 ---
 
