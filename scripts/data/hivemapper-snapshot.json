@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-09-17T17:52:50.159Z",
+  "generatedAt": "2026-09-18T13:15:18.955Z",
   "honeyMint": "4vMsoUT2BWatFweudnQM1xedRLfJgJ7hswhcpz4xgBTy",
   "rpcUrl": "https://mainnet.helius-rpc.com/?api-key=[REDACTED]",
   "onChainError": null,
-  "supplyUiAmount": 6551738831.0669365,
-  "supplyRawAmount": "6551738831066936258",
+  "supplyUiAmount": 6551738828.474123,
+  "supplyRawAmount": "6551738828474123376",
   "largestTokenAccounts": [
     {
       "tokenAccount": "2bMhpUUCFxjZ736Aswujn78cdrBMVyAVzDzq6wKLShjn",
       "ownerWallet": "EyBXvV7NfMSTaekeaNiq6hMoXSQQ6rDSXziUH5C6dkQ3",
-      "uiAmount": 688212546.7790773
+      "uiAmount": 693510027.9705418
     },
     {
       "tokenAccount": "CYbBmhZnQZUNVPfVC5diwQmzqSNNJ9ZmmPgMrnsQ86fv",
@@ -29,7 +29,7 @@
     {
       "tokenAccount": "6aesBmAAX4QaPy7hiv3PkGUwkhUFLxmiSKeM9qPa76g8",
       "ownerWallet": "AVPKzX2QZ8E23SWR728yhMTnnqr9UjAZdgemfaE3qHg5",
-      "uiAmount": 184975473
+      "uiAmount": 186164262
     },
     {
       "tokenAccount": "4R4A1FhFuK6k9JqTnxcofhGv62QynMVfGbzTX69sqcEg",
@@ -40,11 +40,6 @@
       "tokenAccount": "ERs88VgAyUq6jhwH2nU8sFhMvggaYBySdxvgb7hujDCn",
       "ownerWallet": "6QGuxKCi9NC8cbdgHVWv3EcBnGJdW8FUMeAw62b8rBdd",
       "uiAmount": 152680458.2
-    },
-    {
-      "tokenAccount": "5YdDSjuyGruE3DtHanLgJzUnY6rCUpHLNoH8uQw7C76n",
-      "ownerWallet": "D99E2pr78DSVmBcjuDWETY8Nfm9X9ro3Grgc67mzfutA",
-      "uiAmount": 144565038.56373802
     },
     {
       "tokenAccount": "GiTt4njw786sWSMfrPgqjwWtDKqaVXDtouZKbE7j4H6q",
@@ -60,6 +55,11 @@
       "tokenAccount": "FC6XEMBmxNfcTnQqkT1jQJmKBgaU5NZtPjYt9uu3YNyB",
       "ownerWallet": "34zJz5hsgnQyyX9togBNtGBNvzASKPXn1qJ7oiMEaXXD",
       "uiAmount": 125902272.4670385
+    },
+    {
+      "tokenAccount": "5YdDSjuyGruE3DtHanLgJzUnY6rCUpHLNoH8uQw7C76n",
+      "ownerWallet": "D99E2pr78DSVmBcjuDWETY8Nfm9X9ro3Grgc67mzfutA",
+      "uiAmount": 124908388.6482787
     },
     {
       "tokenAccount": "5kfUY2E2nfxCDvFJwcEZheBGPxJBnx4ri7tjygP3LWHs",
@@ -94,7 +94,7 @@
     {
       "tokenAccount": "HXLRfE7oKRyktLyVojzbckKpqWcGmdukrrrLXmXWrvrZ",
       "ownerWallet": "6LY1JzAFVZsP2a2xKrtU6znQMQ5h4i7tocWdgrkZzkzF",
-      "uiAmount": 111693369.95052354
+      "uiAmount": 111487123.60538726
     },
     {
       "tokenAccount": "B79hfHh3MQRwbrD46DXkDZ6MuLSaPwaLgneGTi8TYRnf",
@@ -107,22 +107,22 @@
       "uiAmount": 108373535.11
     }
   ],
-  "top20SumUi": 3426608255.2132487,
-  "top20ShareOfSupply": 0.5230074555116588,
+  "top20SumUi": 3413231629.1441174,
+  "top20ShareOfSupply": 0.5209657647386788,
   "optionalNodesFile": null,
   "stats": {
-    "generatedAt": "2026-09-17T17:52:50.159Z",
-    "supplyUiAmount": 6551738831.0669365,
-    "top20SumUi": 3426608255.2132487,
-    "top20ShareOfSupply": 0.5230074555116588,
+    "generatedAt": "2026-09-18T13:15:18.955Z",
+    "supplyUiAmount": 6551738828.474123,
+    "top20SumUi": 3413231629.1441174,
+    "top20ShareOfSupply": 0.5209657647386788,
     "largestAccountsReturned": 20,
     "partASkipped": false
   },
   "prevStats": {
-    "generatedAt": "2026-09-17T13:56:23.851Z",
-    "supplyUiAmount": 6551738831.368679,
-    "top20SumUi": 3427326575.5230722,
-    "top20ShareOfSupply": 0.5231170936047664,
+    "generatedAt": "2026-09-17T17:52:50.159Z",
+    "supplyUiAmount": 6551738831.0669365,
+    "top20SumUi": 3426608255.2132487,
+    "top20ShareOfSupply": 0.5230074555116588,
     "largestAccountsReturned": 20,
     "partASkipped": false
   }
