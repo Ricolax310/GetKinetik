@@ -4,10 +4,9 @@
 
 ## Today's Read
 
-• Geodnet duplicate-coordinate groups declined from 1,017 to 1,016.
-• WeatherXM over-capacity cells declined from 298 to 297.
-• Hivemapper visible HONEY concentration remains near 52% of visible supply.
-• Helium Mobile entities on public map rose from 56,009 to 56,107.
+• Geodnet duplicate-coordinate groups rose from 1,016 to 1,030.
+• WeatherXM over-capacity cells rose from 297 to 300.
+• Geodnet entities on public map rose from 19,491 to 19,511.
 
 ## Why It Matters
 
@@ -23,44 +22,43 @@ Observations span 6 networks — no single network dominates the index.
 |---|---:|---|---|
 | Registry & identity integrity | 4 | Geodnet, Helium IoT, Helium Mobile | medium |
 | Network health & capacity | 3 | DIMO, WeatherXM | medium |
-| Coverage growth | 1 | Helium Mobile | low |
-| Token economics | 2 | Hivemapper | medium |
+| Coverage growth | 1 | Geodnet | low |
+| Token economics | 1 | Hivemapper | medium |
 
-_Totals: 10 signal(s) across 6/7 networks._
+_Totals: 9 signal(s) across 6/7 networks._
 
 ### What Changed Today
 
 **Registry & identity integrity**
-- **Geodnet** — 1016 exact (lat,lng) duplicate groups on 19,491 public stations — each row in §1 is one coordinate pair your registry team can grep today. _(medium · conf 0.70)_
-- **Geodnet** — exact (lat,lng) duplicate groups: 1,016 (-1 (-0.1%)) _(low · conf 0.85)_
+- **Geodnet** — 1030 exact (lat,lng) duplicate groups on 19,511 public stations — each row in §1 is one coordinate pair your registry team can grep today. _(medium · conf 0.70)_
+- **Geodnet** — exact (lat,lng) duplicate groups: 1,030 (+14 (+1.4%)) _(medium · conf 0.85)_
 - **Helium IoT** — 4,861 single-coordinate stacks of ≥10 hotspots on 1,008,254 located units — the largest stack holds 501 hotspots on one coordinate (§1 lists keys your registry team can grep today). _(medium · conf 0.70)_
 - **Helium Mobile** — 531 single-coordinate stacks of ≥10 hotspots on 56,107 located units — the largest stack holds 540 hotspots on one coordinate (§1 lists keys your registry team can grep today). _(medium · conf 0.70)_
 
 **Network health & capacity**
-- **WeatherXM** — 297 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue. _(medium · conf 0.70)_
-- **WeatherXM** — cells over designed capacity: 297 (-1 (-0.3%)) _(low · conf 0.85)_
-- **DIMO** — Of 158,648 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,424 (19.8%) connect via software/synthetic devices, and 86,602 (54.6%) show no connected device on the public registry. _(medium · conf 0.70)_
+- **WeatherXM** — 300 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue. _(medium · conf 0.70)_
+- **WeatherXM** — cells over designed capacity: 300 (+3 (+1.0%)) _(medium · conf 0.85)_
+- **DIMO** — Of 158,647 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,424 (19.8%) connect via software/synthetic devices, and 86,601 (54.6%) show no connected device on the public registry. _(medium · conf 0.70)_
 
 **Coverage growth**
-- **Helium Mobile** — entities on public map: 56,107 (+98 (+0.2%)) _(low · conf 0.85)_
+- **Geodnet** — entities on public map: 19,511 (+20 (+0.1%)) _(low · conf 0.85)_
 
 **Token economics**
-- **Hivemapper** — 52.10% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read. _(medium · conf 0.70)_
-- **Hivemapper** — top-20 SPL share of UI supply: 52.10% (-0.20 pp (-0.4%)) _(low · conf 0.85)_
+- **Hivemapper** — 52.27% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read. _(medium · conf 0.70)_
 
 ### Signal Type
 
 - **Registry & identity integrity** (`integrity`) — 4 signal(s) across 3 network(s): Geodnet, Helium IoT, Helium Mobile
 - **Network health & capacity** (`health`) — 3 signal(s) across 2 network(s): DIMO, WeatherXM
-- **Coverage growth** (`growth`) — 1 signal(s) across 1 network(s): Helium Mobile
-- **Token economics** (`economics`) — 2 signal(s) across 1 network(s): Hivemapper
+- **Coverage growth** (`growth`) — 1 signal(s) across 1 network(s): Geodnet
+- **Token economics** (`economics`) — 1 signal(s) across 1 network(s): Hivemapper
 
 ### Signal Context
 
 _Operational context for observed metrics — not verdicts._
 - **Registry & identity integrity** — public integrity signals across Geodnet, Helium IoT, Helium Mobile.
 - **Network health & capacity** — public health signals across DIMO, WeatherXM.
-- **Coverage growth** — public growth signals across Helium Mobile.
+- **Coverage growth** — public growth signals across Geodnet.
 - **Token economics** — public economics signals across Hivemapper.
 
 ### What We Don't Know
@@ -73,16 +71,16 @@ _Operational context for observed metrics — not verdicts._
 ### Network Breakdown
 
 ### Geodnet
-- [integrity] 1016 exact (lat,lng) duplicate groups on 19,491 public stations — each row in §1 is one coordinate pair your registry team can grep today. _(medium · conf 0.70)_
-- [integrity] exact (lat,lng) duplicate groups: 1,016 (-1 (-0.1%)) _(low · conf 0.85)_
+- [integrity] 1030 exact (lat,lng) duplicate groups on 19,511 public stations — each row in §1 is one coordinate pair your registry team can grep today. _(medium · conf 0.70)_
+- [integrity] exact (lat,lng) duplicate groups: 1,030 (+14 (+1.4%)) _(medium · conf 0.85)_
+- [growth] entities on public map: 19,511 (+20 (+0.1%)) _(low · conf 0.85)_
 
 ### WeatherXM
-- [health] 297 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue. _(medium · conf 0.70)_
-- [health] cells over designed capacity: 297 (-1 (-0.3%)) _(low · conf 0.85)_
+- [health] 300 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue. _(medium · conf 0.70)_
+- [health] cells over designed capacity: 300 (+3 (+1.0%)) _(medium · conf 0.85)_
 
 ### Hivemapper
-- [economics] 52.10% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read. _(medium · conf 0.70)_
-- [economics] top-20 SPL share of UI supply: 52.10% (-0.20 pp (-0.4%)) _(low · conf 0.85)_
+- [economics] 52.27% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read. _(medium · conf 0.70)_
 
 ### NATIX
 - _No qualifying public finding in latest snapshot._
@@ -92,10 +90,9 @@ _Operational context for observed metrics — not verdicts._
 
 ### Helium Mobile
 - [integrity] 531 single-coordinate stacks of ≥10 hotspots on 56,107 located units — the largest stack holds 540 hotspots on one coordinate (§1 lists keys your registry team can grep today). _(medium · conf 0.70)_
-- [growth] entities on public map: 56,107 (+98 (+0.2%)) _(low · conf 0.85)_
 
 ### DIMO
-- [health] Of 158,648 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,424 (19.8%) connect via software/synthetic devices, and 86,602 (54.6%) show no connected device on the public registry. _(medium · conf 0.70)_
+- [health] Of 158,647 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,424 (19.8%) connect via software/synthetic devices, and 86,601 (54.6%) show no connected device on the public registry. _(medium · conf 0.70)_
 
 ## Methodology
 
