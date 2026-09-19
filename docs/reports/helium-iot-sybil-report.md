@@ -2,11 +2,11 @@
 
 > Independent public read by the GETKINETIK Bureau using only Helium's free Entity API. **No internal Helium data was used.** Asserted locations snap to H3 hexes, so shared exact coordinates are expected in dense buildings — the heuristics below only flag *large* stacks (≥10 hotspots on one coordinate), the classic stacking pattern worth a registry look.
 
-- **As of:** 2026-09-18
+- **As of:** 2026-09-19
 - **Public source:** `https://entities.nft.helium.io/v2/hotspots?subnetwork=iot`
 - **Hotspots observed (with coordinates):** 1,008,254
 - **Hotspots without asserted location:** 27,414
-- **Hotspots flagged (any heuristic):** 69,735 (6.92%)
+- **Hotspots flagged (any heuristic):** 69,736 (6.92%)
 
 ## Executive summary
 
