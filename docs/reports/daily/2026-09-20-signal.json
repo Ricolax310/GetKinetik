@@ -10,7 +10,7 @@
       "label": "headline finding",
       "current": null,
       "previous": null,
-      "deltaText": "1005 exact (lat,lng) duplicate groups on 19,494 public stations — each row in §1 is one coordinate pair your registry team can grep today.",
+      "deltaText": "1006 exact (lat,lng) duplicate groups on 19,499 public stations — each row in §1 is one coordinate pair your registry team can grep today.",
       "report": "docs/reports/geodnet-sybil-report.md",
       "publicSource": "https://rtk.geodnet.com/api/v2/coverage_stations",
       "asOf": "2026-09-20"
@@ -23,9 +23,9 @@
       "kind": "metric",
       "label": "exact (lat,lng) duplicate groups",
       "metricKey": "exactDupGroups",
-      "current": 1005,
-      "previous": 1009,
-      "deltaText": "-4 (-0.4%)",
+      "current": 1006,
+      "previous": 1005,
+      "deltaText": "+1 (+0.1%)",
       "report": "docs/reports/geodnet-sybil-report.md",
       "publicSource": "https://rtk.geodnet.com/api/v2/coverage_stations",
       "asOf": "2026-09-20"
@@ -39,7 +39,22 @@
       "label": "headline finding",
       "current": null,
       "previous": null,
-      "deltaText": "300 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.",
+      "deltaText": "299 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.",
+      "report": "docs/reports/weatherxm-sybil-report.md",
+      "publicSource": "WeatherXM public cells API",
+      "asOf": "2026-09-20"
+    },
+    {
+      "network": "WeatherXM",
+      "networkId": "weatherxm",
+      "anomalyType": "capacity_violation",
+      "narrative": "capacity pressure",
+      "kind": "metric",
+      "label": "cells over designed capacity",
+      "metricKey": "overCapacityCells",
+      "current": 299,
+      "previous": 300,
+      "deltaText": "-1 (-0.3%)",
       "report": "docs/reports/weatherxm-sybil-report.md",
       "publicSource": "WeatherXM public cells API",
       "asOf": "2026-09-20"
@@ -53,7 +68,7 @@
       "label": "headline finding",
       "current": null,
       "previous": null,
-      "deltaText": "52.54% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.",
+      "deltaText": "52.55% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.",
       "report": "docs/reports/hivemapper-sybil-report.md",
       "publicSource": "Solana mainnet HONEY SPL mint (public RPC)",
       "asOf": "2026-09-20"
@@ -67,7 +82,7 @@
       "label": "headline finding",
       "current": null,
       "previous": null,
-      "deltaText": "Of 158,658 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,421 (19.8%) connect via software/synthetic devices, and 86,615 (54.6%) show no connected device on the public registry.",
+      "deltaText": "Of 158,657 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,421 (19.8%) connect via software/synthetic devices, and 86,614 (54.6%) show no connected device on the public registry.",
       "report": "docs/reports/dimo-sybil-report.md",
       "publicSource": "https://identity-api.dimo.zone/query",
       "asOf": "2026-09-20"
@@ -109,5 +124,5 @@
     "Does the public read for Helium IoT match what your team sees internally, or is the public feed expected to look this way?",
     "Does the public read for Helium Mobile match what your team sees internally, or is the public feed expected to look this way?"
   ],
-  "threadSeed": "Public read on Geodnet: 1009 exact (lat,lng) duplicate groups on 19,496 public stations — each row in §1 is one coordinate pair your registry team can grep today. — does that match your internal view, or is the public feed expected to behave this way?"
+  "threadSeed": "Public read on Geodnet: 1006 exact (lat,lng) duplicate groups on 19,499 public stations — each row in §1 is one coordinate pair your registry team can grep today. — does that match your internal view, or is the public feed expected to behave this way?"
 }
