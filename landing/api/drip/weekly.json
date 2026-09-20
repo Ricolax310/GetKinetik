@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-13T20:33:39.879Z",
+  "generatedAt": "2026-09-20T20:34:27.767Z",
   "schema": "getkinetik.drip/v2",
-  "date": "2026-09-13",
-  "week": 37,
+  "date": "2026-09-20",
+  "week": 38,
   "minConfidence": 0.8,
   "daily": [],
   "weekly": [
@@ -92,7 +92,7 @@
       {
         "network": "WeatherXM",
         "metric": "overCapacityCells",
-        "confidence": 0.682,
+        "confidence": 0.73,
         "flags": [
           "isolated"
         ]
@@ -100,7 +100,7 @@
       {
         "network": "Hivemapper",
         "metric": "top20ShareOfSupply",
-        "confidence": 0.682,
+        "confidence": 0.73,
         "flags": [
           "isolated"
         ]
