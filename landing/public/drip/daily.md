@@ -1,12 +1,12 @@
-# DePIN Signal Brief — 2026-09-19
+# DePIN Signal Brief — 2026-09-20
 
-> 2026-09-19 · machine-driven signal publication · evidence first
+> 2026-09-20 · machine-driven signal publication · evidence first
 
 ## Today's Read
 
-• Geodnet duplicate-coordinate groups rose from 1,008 to 1,009.
-• WeatherXM over-capacity cells unchanged at 300.
-• Hivemapper visible HONEY concentration remains near 52% of visible supply.
+• Geodnet duplicate-coordinate groups rose from 1,005 to 1,006.
+• WeatherXM over-capacity cells declined from 300 to 299.
+• Hivemapper visible HONEY concentration remains near 53% of visible supply.
 
 ## Why It Matters
 
@@ -18,9 +18,9 @@ Observations span 5 networks — no single network dominates the index.
 
 ### What Changed Today
 
-- **Geodnet** — exact (lat,lng) duplicate groups: 1,009 (+1 (+0.1%))
-- **WeatherXM** — 300 cells exceed designed capacity — §1 lists H3 indices + map centers for your review queue.
-- **Hivemapper** — 52.35% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
+- **Geodnet** — exact (lat,lng) duplicate groups: 1,006 (+1 (+0.1%))
+- **WeatherXM** — cells over designed capacity: 299 (-1 (-0.3%))
+- **Hivemapper** — 52.55% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
 
 ### Signal Type
 
@@ -50,7 +50,7 @@ Observations span 5 networks — no single network dominates the index.
 
 ### Thread Seed
 
-Public read on Geodnet: 1009 exact (lat,lng) duplicate groups on 19,496 public stations — each row in §1 is one coordinate pair your registry team can review today. — does that match your internal view, or is the public feed expected to behave this way?
+Public read on Geodnet: 1006 exact (lat,lng) duplicate groups on 19,499 public stations — each row in §1 is one coordinate pair your registry team can review today. — does that match your internal view, or is the public feed expected to behave this way?
 
 ### Sources & Methodology
 
