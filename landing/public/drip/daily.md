@@ -1,12 +1,12 @@
-# DePIN Signal Brief — 2026-09-20
+# DePIN Signal Brief — 2026-09-21
 
-> 2026-09-20 · machine-driven signal publication · evidence first
+> 2026-09-21 · machine-driven signal publication · evidence first
 
 ## Today's Read
 
-• Geodnet duplicate-coordinate groups rose from 1,005 to 1,006.
-• WeatherXM over-capacity cells declined from 300 to 299.
-• Hivemapper visible HONEY concentration remains near 53% of visible supply.
+• WeatherXM over-capacity cells rose from 299 to 301.
+• Geodnet duplicate-coordinate groups unchanged at 1,006.
+• Hivemapper visible HONEY concentration remains near 52% of visible supply.
 
 ## Why It Matters
 
@@ -18,26 +18,30 @@ Observations span 5 networks — no single network dominates the index.
 
 ### What Changed Today
 
-- **Geodnet** — exact (lat,lng) duplicate groups: 1,006 (+1 (+0.1%))
-- **WeatherXM** — cells over designed capacity: 299 (-1 (-0.3%))
+- **WeatherXM** — cells over designed capacity: 301 (+2 (+0.7%))
+- **DIMO** — entities on public map: 158,664 (+7 (+0.0%))
+- **Geodnet** — 1006 exact (lat,lng) duplicate groups on 19,499 public stations — each row in §1 is one coordinate pair your registry team can review today.
 - **Hivemapper** — 52.55% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
 
 ### Signal Type
 
-- **Geodnet** — Registry duplication (`duplication_cluster`)
 - **WeatherXM** — Capacity pressure (`capacity_violation`)
+- **DIMO** — Uncategorized public observation (`device_backing_gap`)
+- **Geodnet** — Registry duplication (`duplication_cluster`)
 - **Hivemapper** — Economic concentration (`economic_concentration`)
 
 ### Signal Context
 
-- Geodnet: duplicate or inconsistent registry entries are review-able from public data alone.
 - WeatherXM: public cell capacity counts are a reproducible registry-pressure signal.
+- DIMO: measurable public-data delta worth cross-checking with internal ops.
+- Geodnet: duplicate or inconsistent registry entries are review-able from public data alone.
 - Hivemapper: visible on-chain concentration is economic shape only — useful for custody reconciliation, not device claims.
 
 ### What We Don't Know
 
-- **Geodnet** — Whether shared coordinates are legitimate co-located installs, shared-mount sites, or registry artifacts — public data can't tell without operator confirmation.
 - **WeatherXM** — Whether over-capacity cells reflect real device density, registry double-counting, or expected reward-zone behavior — only the operator's internal registry settles it.
+- **DIMO** — What the public feed cannot disambiguate without operator confirmation.
+- **Geodnet** — Whether shared coordinates are legitimate co-located installs, shared-mount sites, or registry artifacts — public data can't tell without operator confirmation.
 - **Hivemapper** — Whether the largest visible accounts are treasury, market-maker, exchange custody, or operators — on-chain shape doesn't label holder intent.
 
 ### Questions Worth Asking
@@ -50,12 +54,13 @@ Observations span 5 networks — no single network dominates the index.
 
 ### Thread Seed
 
-Public read on Geodnet: 1006 exact (lat,lng) duplicate groups on 19,499 public stations — each row in §1 is one coordinate pair your registry team can review today. — does that match your internal view, or is the public feed expected to behave this way?
+Public read on Geodnet: 1006 exact (lat,lng) duplicate groups on 19,504 public stations — each row in §1 is one coordinate pair your registry team can review today. — does that match your internal view, or is the public feed expected to behave this way?
 
 ### Sources & Methodology
 
 - Public signal views: [getkinetik.app/signals](https://getkinetik.app/signals/)
 - Reproduce scans: `node scripts/duplication-scan-<network>.mjs` (see each report header)
-- **Geodnet:** `docs/reports/geodnet-duplication-report.md` · https://rtk.geodnet.com/api/v2/coverage_stations
 - **WeatherXM:** `docs/reports/weatherxm-duplication-report.md` · WeatherXM public cells API
+- **DIMO:** `docs/reports/dimo-duplication-report.md` · https://identity-api.dimo.zone/query
+- **Geodnet:** `docs/reports/geodnet-duplication-report.md` · https://rtk.geodnet.com/api/v2/coverage_stations
 - **Hivemapper:** `docs/reports/hivemapper-duplication-report.md` · Solana mainnet HONEY SPL mint (public RPC)

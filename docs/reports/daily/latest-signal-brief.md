@@ -6,7 +6,7 @@
 
 • WeatherXM over-capacity cells rose from 299 to 301.
 • DIMO entities on public map rose from 158,657 to 158,664.
-• Geodnet: 1006 exact (lat,lng) duplicate groups on 19,504 public stations — each row in §1 is one coordinate pair your registry team can grep today.
+• Geodnet: 1006 exact (lat,lng) duplicate groups on 19,499 public stations — each row in §1 is one coordinate pair your registry team can grep today.
 
 ## Why It Matters
 
@@ -20,8 +20,8 @@ Observations span 4 networks — no single network dominates the index.
 
 - **WeatherXM** — cells over designed capacity: 301 (+2 (+0.7%))
 - **DIMO** — entities on public map: 158,664 (+7 (+0.0%))
-- **Geodnet** — 1006 exact (lat,lng) duplicate groups on 19,504 public stations — each row in §1 is one coordinate pair your registry team can grep today.
-- **Hivemapper** — 52.49% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
+- **Geodnet** — 1006 exact (lat,lng) duplicate groups on 19,499 public stations — each row in §1 is one coordinate pair your registry team can grep today.
+- **Hivemapper** — 52.55% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
 
 ### Signal Type
 
