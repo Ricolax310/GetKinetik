@@ -2,15 +2,15 @@
 
 > Independent public read by the GETKINETIK Bureau using only Helium's free Entity API. **No internal Helium data was used.** Asserted locations snap to H3 hexes, so shared exact coordinates are expected in dense buildings — the heuristics below only flag *large* stacks (≥10 hotspots on one coordinate), the classic stacking pattern worth a registry look.
 
-- **As of:** 2026-09-22
+- **As of:** 2026-09-23
 - **Public source:** `https://entities.nft.helium.io/v2/hotspots?subnetwork=mobile`
 - **Hotspots observed (with coordinates):** 56,118
 - **Hotspots without asserted location:** 1,903
-- **Hotspots flagged (any heuristic):** 11,342 (20.21%)
+- **Hotspots flagged (any heuristic):** 11,367 (20.26%)
 
 ## Executive summary
 
-1. **531 single-coordinate stacks of ≥10 hotspots** on 56,118 located units — the largest stack holds **540 hotspots on one coordinate** (§1 lists keys your registry team can grep today).
+1. **531 single-coordinate stacks of ≥10 hotspots** on 56,118 located units — the largest stack holds **565 hotspots on one coordinate** (§1 lists keys your registry team can grep today).
 2. **1,903 hotspots exist on-chain with no asserted location** — on the registry but not on the map.
 3. Stacks are *expected* at small sizes (H3 snapping, dense buildings) — only review-worthy at this threshold; every number reproduces from the free public endpoint with no API key.
 
@@ -20,10 +20,10 @@
 
 | Metric | This run | vs last run |
 |---|---:|---|
-| Hotspots with asserted coordinates | 56,118 | +9 (+0.0%) |
+| Hotspots with asserted coordinates | 56,118 | unchanged vs last run |
 | Single-coordinate stacks (≥10 hotspots) | 531 | unchanged vs last run |
-| Largest single-coordinate stack | 540 | unchanged vs last run |
-| Fleet share flagged (any heuristic) | 20.21% | -0.00 pp (-0.0%) |
+| Largest single-coordinate stack | 565 | +25 (+4.6%) |
+| Fleet share flagged (any heuristic) | 20.26% | +0.04 pp (+0.2%) |
 
 ## What to cross-check this week
 
@@ -46,7 +46,7 @@
 
 | Coordinates | Hotspot count | Sample entity keys |
 |---|---:|---|
-| `-0.001809,-0.00271` | 540 | `112JR1FkYLCSm8WgSpVccMaY…`, `11Drn9i7RMUdVKGk6FFRc5S6…`, `11PaTbFDJmuMjYvMspVNxvbX…` |
+| `-0.001809,-0.00271` | 565 | `112JR1FkYLCSm8WgSpVccMaY…`, `11Drn9i7RMUdVKGk6FFRc5S6…`, `11PaTbFDJmuMjYvMspVNxvbX…` |
 | `32.848477,-116.987742` | 423 | `1trSuseaFNPwu9iTYRdDfhjh…`, `13bCDAwErzzkgEQJjpGGHDJx…`, `13TY3ux7eb821HQSQeLtTPTd…` |
 | `17.061372,-96.728188` | 114 | `1trSuseyjzRN4gA3C5noLNjR…`, `1trSusemBcxBAtFxPLDtC4TS…`, `1trSusedShTqrkW7HUxv9Qtr…` |
 | `25.789824,-80.134283` | 112 | `119bs2yyXP1CMH2dy4qVnbEi…`, `11FArsyyh9AXzhUa5Ju4JgJC…`, `1trSuserhjKerD3csLdXKkpi…` |
