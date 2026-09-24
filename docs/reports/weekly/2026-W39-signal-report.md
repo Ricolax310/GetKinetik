@@ -1,6 +1,6 @@
 # Weekly DePIN Signal Report
 
-> Week 2026-W39 · 2026-09-21 → 2026-09-23 · patterns first, then networks.
+> Week 2026-W39 · 2026-09-21 → 2026-09-24 · patterns first, then networks.
 
 ## Executive Summary
 
@@ -33,7 +33,7 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 - Helium IoT
 - Helium Mobile
 
-**Signal:** Exact coordinate-duplicate groups rose from 1000 to 1001 on Geodnet.
+**Signal:** Exact coordinate-duplicate groups rose from 1001 to 1005 on Geodnet.
 
 **Scope:** systemic
 
@@ -46,7 +46,7 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 **Observed in:**
 - Hivemapper
 
-**Signal:** Top-20 account share of supply observed near 52.14%.
+**Signal:** Top-20 account share of supply observed near 52.41%.
 
 **Scope:** localized
 
@@ -76,7 +76,7 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 ### Geodnet
 
 **What changed**
-- exact (lat,lng) duplicate groups: 1,001 (+1 (+0.1%))
+- exact (lat,lng) duplicate groups: 1,005 (+4 (+0.4%))
 
 **Signal type**
 - Registry duplication (`duplication_cluster`)
@@ -97,13 +97,13 @@ _No public signal this week — scan not run or no headline finding._
 ### Hivemapper
 
 **What changed**
-- 52.14% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
+- top-20 SPL share of UI supply: 52.41% (+0.27 pp (+0.5%))
 
 **Signal type**
 - Economic concentration (`economic_concentration`)
 
 **Trend**
-- insufficient history
+- single delta observed
 
 **Open question**
 - Do the largest visible SPL accounts map to known treasury or market-maker custody labels on your side?
@@ -114,7 +114,7 @@ _No public signal this week — scan not run or no headline finding._
 ### DIMO
 
 **What changed**
-- Of 158,679 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,413 (19.8%) connect via software/synthetic devices, and 86,644 (54.6%) show no connected device on the public registry.
+- Of 158,684 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,412 (19.8%) connect via software/synthetic devices, and 86,650 (54.6%) show no connected device on the public registry.
 
 **Signal type**
 - Uncategorized public observation (`device_backing_gap`)
@@ -131,7 +131,7 @@ _No public signal this week — scan not run or no headline finding._
 ### Helium IoT
 
 **What changed**
-- 4,861 single-coordinate stacks of ≥10 hotspots on 1,008,263 located units — the largest stack holds 501 hotspots on one coordinate (§1 lists keys your registry team can grep today).
+- 4,861 single-coordinate stacks of ≥10 hotspots on 1,008,266 located units — the largest stack holds 501 hotspots on one coordinate (§1 lists keys your registry team can grep today).
 
 **Signal type**
 - Registry duplication (`duplication_cluster`)
@@ -148,7 +148,7 @@ _No public signal this week — scan not run or no headline finding._
 ### Helium Mobile
 
 **What changed**
-- largest single-coordinate stack: 565 (+25 (+4.6%))
+- 531 single-coordinate stacks of ≥10 hotspots on 56,118 located units — the largest stack holds 565 hotspots on one coordinate (§1 lists keys your registry team can grep today).
 
 **Signal type**
 - Registry duplication (`duplication_cluster`)
@@ -166,10 +166,10 @@ _No public signal this week — scan not run or no headline finding._
 
 ### What Changed Today
 
-_Latest reading: 2026-09-23_
+_Latest reading: 2026-09-24_
 
-- **Geodnet** — exact (lat,lng) duplicate groups: 1,001 (+1 (+0.1%))
-- **Helium Mobile** — largest single-coordinate stack: 565 (+25 (+4.6%))
+- **Geodnet** — exact (lat,lng) duplicate groups: 1,005 (+4 (+0.4%))
+- **Hivemapper** — top-20 SPL share of UI supply: 52.41% (+0.27 pp (+0.5%))
 
 ### Signals To Watch
 
