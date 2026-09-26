@@ -1,48 +1,47 @@
-# DePIN Signal Brief — 2026-09-25
+# DePIN Signal Brief — 2026-09-26
 
-> 2026-09-25 · machine-driven signal publication · evidence first
+> 2026-09-26 · machine-driven signal publication · evidence first
 
 ## Today's Read
 
-• Geodnet duplicate-coordinate groups declined from 1,003 to 1,002.
-• WeatherXM over-capacity cells unchanged at 300.
+• Geodnet duplicate-coordinate groups declined from 1,004 to 1,001.
+• WeatherXM over-capacity cells declined from 299 to 298.
 • Hivemapper visible HONEY concentration remains near 52% of visible supply.
 
 ## Why It Matters
 
 Today's signals show modest movement in registry, capacity, and concentration metrics. Telemetry and concentration readings are largely unchanged.
 The observed changes are incremental rather than structural and remain reproducible from public data sources.
-Observations span 4 networks — no single network dominates the index.
+Observations span 5 networks — no single network dominates the index.
 
 ## Full Evidence
 
 ### What Changed Today
 
-- **Geodnet** — exact (lat,lng) duplicate groups: 1,002 (-1 (-0.1%))
-- **Helium Mobile** — single-coordinate stacks (≥10 hotspots): 530 (-1 (-0.2%))
-- **Helium Mobile** — largest single-coordinate stack: 631 (+66 (+11.7%))
-- **WeatherXM** — 300 cells exceed designed capacity — §1 lists H3 indices + map centers for your review queue.
-- **Hivemapper** — 52.46% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
+- **Geodnet** — exact (lat,lng) duplicate groups: 1,001 (-3 (-0.3%))
+- **WeatherXM** — cells over designed capacity: 298 (-1 (-0.3%))
+- **Helium Mobile** — entities on public map: 56,132 (+13 (+0.0%))
+- **Hivemapper** — 52.40% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
 
 ### Signal Type
 
 - **Geodnet** — Registry duplication (`duplication_cluster`)
-- **Helium Mobile** — Registry duplication (`duplication_cluster`)
 - **WeatherXM** — Capacity pressure (`capacity_violation`)
+- **Helium Mobile** — Registry duplication (`duplication_cluster`)
 - **Hivemapper** — Economic concentration (`economic_concentration`)
 
 ### Signal Context
 
 - Geodnet: duplicate or inconsistent registry entries are review-able from public data alone.
-- Helium Mobile: duplicate or inconsistent registry entries are review-able from public data alone.
 - WeatherXM: public cell capacity counts are a reproducible registry-pressure signal.
+- Helium Mobile: duplicate or inconsistent registry entries are review-able from public data alone.
 - Hivemapper: visible on-chain concentration is economic shape only — useful for custody reconciliation, not device claims.
 
 ### What We Don't Know
 
 - **Geodnet** — Whether shared coordinates are legitimate co-located installs, shared-mount sites, or registry artifacts — public data can't tell without operator confirmation.
-- **Helium Mobile** — Whether shared coordinates are legitimate co-located installs, shared-mount sites, or registry artifacts — public data can't tell without operator confirmation.
 - **WeatherXM** — Whether over-capacity cells reflect real device density, registry double-counting, or expected reward-zone behavior — only the operator's internal registry settles it.
+- **Helium Mobile** — Whether shared coordinates are legitimate co-located installs, shared-mount sites, or registry artifacts — public data can't tell without operator confirmation.
 - **Hivemapper** — Whether the largest visible accounts are treasury, market-maker, exchange custody, or operators — on-chain shape doesn't label holder intent.
 
 ### Questions Worth Asking
@@ -55,13 +54,13 @@ Observations span 4 networks — no single network dominates the index.
 
 ### Thread Seed
 
-Public read on Geodnet: 1002 exact (lat,lng) duplicate groups on 19,490 public stations — each row in §1 is one coordinate pair your registry team can review today. — does that match your internal view, or is the public feed expected to behave this way?
+Public read on Geodnet: 1001 exact (lat,lng) duplicate groups on 19,490 public stations — each row in §1 is one coordinate pair your registry team can review today. — does that match your internal view, or is the public feed expected to behave this way?
 
 ### Sources & Methodology
 
 - Public signal views: [getkinetik.app/signals](https://getkinetik.app/signals/)
 - Reproduce scans: `node scripts/duplication-scan-<network>.mjs` (see each report header)
 - **Geodnet:** `docs/reports/geodnet-duplication-report.md` · https://rtk.geodnet.com/api/v2/coverage_stations
-- **Helium Mobile:** `docs/reports/helium-mobile-duplication-report.md` · https://entities.nft.helium.io/v2/hotspots?subnetwork=mobile
 - **WeatherXM:** `docs/reports/weatherxm-duplication-report.md` · WeatherXM public cells API
+- **Helium Mobile:** `docs/reports/helium-mobile-duplication-report.md` · https://entities.nft.helium.io/v2/hotspots?subnetwork=mobile
 - **Hivemapper:** `docs/reports/hivemapper-duplication-report.md` · Solana mainnet HONEY SPL mint (public RPC)
