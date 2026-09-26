@@ -1,6 +1,6 @@
 # Weekly DePIN Signal Report
 
-> Week 2026-W39 · 2026-09-21 → 2026-09-25 · patterns first, then networks.
+> Week 2026-W39 · 2026-09-21 → 2026-09-26 · patterns first, then networks.
 
 ## Executive Summary
 
@@ -18,7 +18,7 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 **Observed in:**
 - WeatherXM
 
-**Signal:** Over-capacity H3 cells observed at 300.
+**Signal:** Over-capacity H3 cells declined from 299 to 298.
 
 **Scope:** localized
 
@@ -33,7 +33,7 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 - Helium IoT
 - Helium Mobile
 
-**Signal:** Exact coordinate-duplicate groups declined from 1003 to 1002 on Geodnet.
+**Signal:** Exact coordinate-duplicate groups declined from 1004 to 1001 on Geodnet.
 
 **Scope:** systemic
 
@@ -46,7 +46,7 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 **Observed in:**
 - Hivemapper
 
-**Signal:** Top-20 account share of supply observed near 52.46%.
+**Signal:** Top-20 account share of supply observed near 52.40%.
 
 **Scope:** localized
 
@@ -59,7 +59,7 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 ### WeatherXM
 
 **What changed**
-- 300 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.
+- cells over designed capacity: 298 (-1 (-0.3%))
 
 **Signal type**
 - Capacity pressure (`capacity_violation`)
@@ -76,7 +76,7 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 ### Geodnet
 
 **What changed**
-- exact (lat,lng) duplicate groups: 1,002 (-1 (-0.1%))
+- exact (lat,lng) duplicate groups: 1,001 (-3 (-0.3%))
 
 **Signal type**
 - Registry duplication (`duplication_cluster`)
@@ -97,7 +97,7 @@ _No public signal this week — scan not run or no headline finding._
 ### Hivemapper
 
 **What changed**
-- 52.46% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
+- 52.40% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
 
 **Signal type**
 - Economic concentration (`economic_concentration`)
@@ -114,7 +114,7 @@ _No public signal this week — scan not run or no headline finding._
 ### DIMO
 
 **What changed**
-- Of 158,688 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,406 (19.8%) connect via software/synthetic devices, and 86,660 (54.6%) show no connected device on the public registry.
+- Of 158,696 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,409 (19.8%) connect via software/synthetic devices, and 86,665 (54.6%) show no connected device on the public registry.
 
 **Signal type**
 - Uncategorized public observation (`device_backing_gap`)
@@ -131,7 +131,7 @@ _No public signal this week — scan not run or no headline finding._
 ### Helium IoT
 
 **What changed**
-- 4,861 single-coordinate stacks of ≥10 hotspots on 1,008,267 located units — the largest stack holds 501 hotspots on one coordinate (§1 lists keys your registry team can grep today).
+- 4,861 single-coordinate stacks of ≥10 hotspots on 1,008,269 located units — the largest stack holds 501 hotspots on one coordinate (§1 lists keys your registry team can grep today).
 
 **Signal type**
 - Registry duplication (`duplication_cluster`)
@@ -148,8 +148,7 @@ _No public signal this week — scan not run or no headline finding._
 ### Helium Mobile
 
 **What changed**
-- single-coordinate stacks (≥10 hotspots): 530 (-1 (-0.2%))
-- largest single-coordinate stack: 631 (+66 (+11.7%))
+- entities on public map: 56,132 (+13 (+0.0%))
 
 **Signal type**
 - Registry duplication (`duplication_cluster`)
@@ -167,11 +166,11 @@ _No public signal this week — scan not run or no headline finding._
 
 ### What Changed Today
 
-_Latest reading: 2026-09-25_
+_Latest reading: 2026-09-26_
 
-- **Geodnet** — exact (lat,lng) duplicate groups: 1,002 (-1 (-0.1%))
-- **Helium Mobile** — single-coordinate stacks (≥10 hotspots): 530 (-1 (-0.2%))
-- **Helium Mobile** — largest single-coordinate stack: 631 (+66 (+11.7%))
+- **Geodnet** — exact (lat,lng) duplicate groups: 1,001 (-3 (-0.3%))
+- **WeatherXM** — cells over designed capacity: 298 (-1 (-0.3%))
+- **Helium Mobile** — entities on public map: 56,132 (+13 (+0.0%))
 
 ### Signals To Watch
 
