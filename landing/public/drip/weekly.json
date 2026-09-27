@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-20T20:34:27.767Z",
+  "generatedAt": "2026-09-27T21:09:16.501Z",
   "schema": "getkinetik.drip/v2",
-  "date": "2026-09-20",
-  "week": 38,
+  "date": "2026-09-27",
+  "week": 39,
   "minConfidence": 0.8,
   "daily": [],
   "weekly": [
@@ -90,6 +90,12 @@
         ]
       },
       {
+        "network": "Geodnet",
+        "metric": "observed",
+        "confidence": 0.646,
+        "flags": []
+      },
+      {
         "network": "WeatherXM",
         "metric": "overCapacityCells",
         "confidence": 0.73,
@@ -108,13 +114,15 @@
       {
         "network": "Helium IoT",
         "metric": "stackedSpots",
-        "confidence": 0.62,
-        "flags": []
+        "confidence": 0.595,
+        "flags": [
+          "volatile"
+        ]
       },
       {
         "network": "Helium Mobile",
         "metric": "stackedSpots",
-        "confidence": 0.62,
+        "confidence": 0.722,
         "flags": []
       }
     ]

@@ -1,10 +1,10 @@
-# DePIN Signal Intelligence — Week 38
+# DePIN Signal Intelligence — Week 39
 
-> Week 38 · machine-driven signal publication · evidence first
+> Week 39 · machine-driven signal publication · evidence first
 
 ## Executive Summary
 
-• Week 38: cross-network signal index updated from public infrastructure reads.
+• Week 39: cross-network signal index updated from public infrastructure reads.
 • 0 publishable signal(s) across 0 network(s) met the weekly confidence gate.
 • 5 cross-network pattern(s) tagged: IDENTITY, CAPACITY, ECONOMICS, INFRASTRUCTURE, INFRASTRUCTURE.
 • 5 systemic-scope pattern(s) recorded with multi-network support.
@@ -77,10 +77,12 @@ Observed Helium Mobile stackedSpots on 7 of 7 recorded days.
 
 ### What Changed Today
 
-_Latest reading: 2026-09-20_
+_Latest reading: 2026-09-27_
 
-- **Geodnet** — exact (lat,lng) duplicate groups: 1,006 (+1 (+0.1%))
-- **WeatherXM** — cells over designed capacity: 299 (-1 (-0.3%))
+- **Geodnet** — exact (lat,lng) duplicate groups: 1,003 (+1 (+0.1%))
+- **Geodnet** — entities on public map: 19,502 (+6 (+0.0%))
+- **WeatherXM** — cells over designed capacity: 299 (+1 (+0.3%))
+- **Helium IoT** — single-coordinate stacks (≥10 hotspots): 4,862 (+1 (+0.0%))
 
 ### Signals To Watch
 
