@@ -1,7 +1,16 @@
 {
-  "generatedAt": "2026-09-27T14:25:16.102Z",
+  "generatedAt": "2026-09-27T18:02:52.059Z",
   "source": "https://entities.nft.helium.io/v2/hotspots?subnetwork=iot",
   "stats": {
+    "generatedAt": "2026-09-27T18:02:52.059Z",
+    "observed": 1008273,
+    "unasserted": 27421,
+    "stackedSpots": 4862,
+    "largestStack": 501,
+    "flaggedCount": 69747,
+    "flaggedPct": 0.06917471756161278
+  },
+  "prevStats": {
     "generatedAt": "2026-09-27T14:25:16.102Z",
     "observed": 1008273,
     "unasserted": 27421,
@@ -9,15 +18,6 @@
     "largestStack": 501,
     "flaggedCount": 69739,
     "flaggedPct": 0.06916678320256518
-  },
-  "prevStats": {
-    "generatedAt": "2026-09-26T17:33:02.252Z",
-    "observed": 1008269,
-    "unasserted": 27416,
-    "stackedSpots": 4861,
-    "largestStack": 501,
-    "flaggedCount": 69739,
-    "flaggedPct": 0.06916705760069981
   },
   "hotspotsTotal": 1035694,
   "topStacks": [
@@ -385,6 +385,17 @@
       ]
     },
     {
+      "coord": "34.039883,-118.265056",
+      "count": 48,
+      "sampleKeys": [
+        "112riu35C2WwbVcwnfWKeKtrCRnYxQXU7if8P5mRGpnmZ6ScmhBk",
+        "1125YKmrJDaGnadvM9XCzEghXvq41EVnxFXXfNsPWmbiGT9FuU4W",
+        "112HgK7BhYcj8YCXeBMr4kZUwuASq5SNwiVQj3UKH8fEtWPEuz35",
+        "11XG7VYM3U4ePJDP6GeEzACztthzzvnaJ9b24KSrPZwKkL5dS6M",
+        "11LZrkwgsTjWa8Z6YGJzzEVCc7BeyBYfDMt1sSZurHXCFkQuNFU"
+      ]
+    },
+    {
       "coord": "34.050292,-118.251383",
       "count": 48,
       "sampleKeys": [
@@ -415,17 +426,6 @@
         "11bQnu1xE632JSk9ihgwQochD7oM72awRjfvqQaAzbnPMQBkuU1",
         "11o2oBLsqET932nECXPTqP57Qyh4XDrwhVycmQo3qy1ZYheuTCT",
         "11VWbUfDPrVvuvzWavGfyzN79HNNWGZG6e1na4aT1EKwrQHbERH"
-      ]
-    },
-    {
-      "coord": "34.039883,-118.265056",
-      "count": 47,
-      "sampleKeys": [
-        "112riu35C2WwbVcwnfWKeKtrCRnYxQXU7if8P5mRGpnmZ6ScmhBk",
-        "1125YKmrJDaGnadvM9XCzEghXvq41EVnxFXXfNsPWmbiGT9FuU4W",
-        "112HgK7BhYcj8YCXeBMr4kZUwuASq5SNwiVQj3UKH8fEtWPEuz35",
-        "11XG7VYM3U4ePJDP6GeEzACztthzzvnaJ9b24KSrPZwKkL5dS6M",
-        "11LZrkwgsTjWa8Z6YGJzzEVCc7BeyBYfDMt1sSZurHXCFkQuNFU"
       ]
     },
     {

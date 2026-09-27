@@ -2,16 +2,16 @@
 
 > Independent public read by the GETKINETIK Bureau using only Helium's free Entity API. **No internal Helium data was used.** Asserted locations snap to H3 hexes, so shared exact coordinates are expected in dense buildings — the heuristics below only flag *large* stacks (≥10 hotspots on one coordinate), the classic stacking pattern worth a registry look.
 
-- **As of:** 2026-09-26
+- **As of:** 2026-09-27
 - **Public source:** `https://entities.nft.helium.io/v2/hotspots?subnetwork=iot`
-- **Hotspots observed (with coordinates):** 1,008,269
-- **Hotspots without asserted location:** 27,416
-- **Hotspots flagged (any heuristic):** 69,739 (6.92%)
+- **Hotspots observed (with coordinates):** 1,008,273
+- **Hotspots without asserted location:** 27,421
+- **Hotspots flagged (any heuristic):** 69,747 (6.92%)
 
 ## Executive summary
 
-1. **4,861 single-coordinate stacks of ≥10 hotspots** on 1,008,269 located units — the largest stack holds **501 hotspots on one coordinate** (§1 lists keys your registry team can grep today).
-2. **27,416 hotspots exist on-chain with no asserted location** — on the registry but not on the map.
+1. **4,862 single-coordinate stacks of ≥10 hotspots** on 1,008,273 located units — the largest stack holds **501 hotspots on one coordinate** (§1 lists keys your registry team can grep today).
+2. **27,421 hotspots exist on-chain with no asserted location** — on the registry but not on the map.
 3. Stacks are *expected* at small sizes (H3 snapping, dense buildings) — only review-worthy at this threshold; every number reproduces from the free public endpoint with no API key.
 
 ---
@@ -20,8 +20,8 @@
 
 | Metric | This run | vs last run |
 |---|---:|---|
-| Hotspots with asserted coordinates | 1,008,269 | +2 (+0.0%) |
-| Single-coordinate stacks (≥10 hotspots) | 4,861 | unchanged vs last run |
+| Hotspots with asserted coordinates | 1,008,273 | unchanged vs last run |
+| Single-coordinate stacks (≥10 hotspots) | 4,862 | +1 (+0.0%) |
 | Largest single-coordinate stack | 501 | unchanged vs last run |
 | Fleet share flagged (any heuristic) | 6.92% | +0.00 pp (+0.0%) |
 
@@ -37,12 +37,12 @@
 
 ## Headline findings
 
-1. **4,861 coordinates host ≥10 hotspots each.** H3 snapping makes small shared-coordinate groups normal; stacks this size are the documented hotspot-stacking pattern and justify a registry cross-check.
-2. **27,416 hotspots have no asserted location** — they exist on-chain but not on the map.
+1. **4,862 coordinates host ≥10 hotspots each.** H3 snapping makes small shared-coordinate groups normal; stacks this size are the documented hotspot-stacking pattern and justify a registry cross-check.
+2. **27,421 hotspots have no asserted location** — they exist on-chain but not on the map.
 
 ---
 
-## 1. Largest single-coordinate stacks — 4,861 total
+## 1. Largest single-coordinate stacks — 4,862 total
 
 | Coordinates | Hotspot count | Sample entity keys |
 |---|---:|---|
@@ -57,7 +57,7 @@
 | `40.757674,-73.992453` | 72 | `112sv66DwbXJfDxe3VW1M3mD…`, `11nm3ZrRsyeC7N5UsF9pjVNM…`, `11BWzVR5ReJCMF7x3kym1ynx…` |
 | `37.786539,-122.394451` | 65 | `11M5G1yyc93FvLkLV43WtGqc…`, `112SX2ukHgYX9yqBs3YLaEzN…`, `11X4E1JL5VAJti9WUL9KhQRE…` |
 
-_…and 4,851 more in the snapshot file._
+_…and 4,852 more in the snapshot file._
 
 ---
 
