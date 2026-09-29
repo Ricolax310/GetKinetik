@@ -24,7 +24,7 @@ Observations span 5 networks — no single network dominates the index.
 - **DIMO** — entities on public map: 158,711 (+6 (+0.0%))
 - **Helium Mobile** — entities on public map: 56,138 (+6 (+0.0%))
 - **WeatherXM** — 299 cells exceed designed capacity — §1 lists H3 indices + map centers for your ops queue.
-- **Hivemapper** — 52.28% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
+- **Hivemapper** — 52.30% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
 
 ### Signal Type
 
