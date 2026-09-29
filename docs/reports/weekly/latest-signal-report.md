@@ -1,11 +1,11 @@
 # Weekly DePIN Signal Report
 
-> Week 2026-W40 · 2026-09-28 → 2026-09-28 · patterns first, then networks.
+> Week 2026-W40 · 2026-09-28 → 2026-09-29 · patterns first, then networks.
 
 ## Executive Summary
 
 - Week 2026-W40: cross-network signal index updated from public infrastructure reads.
-- 1 publishable signal(s) across 6 network(s) met the weekly confidence gate.
+- 4 publishable signal(s) across 6 network(s) met the weekly confidence gate.
 - 1 cross-network pattern(s) tagged: IDENTITY.
 - 1 systemic-scope pattern(s) recorded with multi-network support.
 
@@ -33,11 +33,11 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 - Helium IoT
 - Helium Mobile
 
-**Signal:** Exact coordinate-duplicate groups declined from 1001 to 1000 on Geodnet.
+**Signal:** Exact coordinate-duplicate groups rose from 1000 to 1004 on Geodnet.
 
 **Scope:** systemic
 
-**Classification:** stability
+**Classification:** escalation
 
 **Unknown:** Public data cannot confirm whether shared coordinates are distinct devices or one identity reused.
 
@@ -46,7 +46,7 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 **Observed in:**
 - Hivemapper
 
-**Signal:** Top-20 account share of supply observed near 52.30%.
+**Signal:** Top-20 account share of supply observed near 52.28%.
 
 **Scope:** localized
 
@@ -76,13 +76,14 @@ Taxonomy v2: CAPACITY · IDENTITY · CONSISTENCY · ECONOMICS · BEHAVIORAL · I
 ### Geodnet
 
 **What changed**
-- exact (lat,lng) duplicate groups: 1,000 (-1 (-0.1%))
+- exact (lat,lng) duplicate groups: 1,004 (+4 (+0.4%))
+- entities on public map: 19,508 (+16 (+0.1%))
 
 **Signal type**
 - Registry duplication (`duplication_cluster`)
 
 **Trend**
-- single delta observed
+- multiple deltas observed
 
 **Open question**
 - For stations sharing an exact coordinate pair on the public registry, is that expected registration behavior or a dedupe gap worth reconciling?
@@ -97,7 +98,7 @@ _No public signal this week — scan not run or no headline finding._
 ### Hivemapper
 
 **What changed**
-- 52.30% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
+- 52.28% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
 
 **Signal type**
 - Economic concentration (`economic_concentration`)
@@ -114,13 +115,13 @@ _No public signal this week — scan not run or no headline finding._
 ### DIMO
 
 **What changed**
-- Of 158,705 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware; 31,408 (19.8%) connect via software/synthetic devices, and 86,675 (54.6%) show no connected device on the public registry.
+- entities on public map: 158,711 (+6 (+0.0%))
 
 **Signal type**
 - Uncategorized public observation (`device_backing_gap`)
 
 **Trend**
-- insufficient history
+- single delta observed
 
 **Open question**
 - Does the public read for DIMO match what your team sees internally, or is the public feed expected to look this way?
@@ -131,7 +132,7 @@ _No public signal this week — scan not run or no headline finding._
 ### Helium IoT
 
 **What changed**
-- 4,862 single-coordinate stacks of ≥10 hotspots on 1,008,274 located units — the largest stack holds 501 hotspots on one coordinate (§1 lists keys your registry team can grep today).
+- 4,862 single-coordinate stacks of ≥10 hotspots on 1,008,276 located units — the largest stack holds 501 hotspots on one coordinate (§1 lists keys your registry team can grep today).
 
 **Signal type**
 - Registry duplication (`duplication_cluster`)
@@ -148,13 +149,13 @@ _No public signal this week — scan not run or no headline finding._
 ### Helium Mobile
 
 **What changed**
-- 530 single-coordinate stacks of ≥10 hotspots on 56,132 located units — the largest stack holds 631 hotspots on one coordinate (§1 lists keys your registry team can grep today).
+- entities on public map: 56,138 (+6 (+0.0%))
 
 **Signal type**
 - Registry duplication (`duplication_cluster`)
 
 **Trend**
-- insufficient history
+- single delta observed
 
 **Open question**
 - Does the public read for Helium Mobile match what your team sees internally, or is the public feed expected to look this way?
@@ -166,9 +167,12 @@ _No public signal this week — scan not run or no headline finding._
 
 ### What Changed Today
 
-_Latest reading: 2026-09-28_
+_Latest reading: 2026-09-29_
 
-- **Geodnet** — exact (lat,lng) duplicate groups: 1,000 (-1 (-0.1%))
+- **Geodnet** — exact (lat,lng) duplicate groups: 1,004 (+4 (+0.4%))
+- **Geodnet** — entities on public map: 19,508 (+16 (+0.1%))
+- **DIMO** — entities on public map: 158,711 (+6 (+0.0%))
+- **Helium Mobile** — entities on public map: 56,138 (+6 (+0.0%))
 
 ### Signals To Watch
 
