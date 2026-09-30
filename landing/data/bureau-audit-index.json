@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-29",
+  "updatedAt": "2026-09-30",
   "networks": [
     {
       "id": "geodnet",
@@ -17,7 +17,7 @@
         "flaggedCount": 5333,
         "flaggedPct": 0.2733750256305106
       },
-      "topFinding": "**1004 exact (lat,lng) duplicate groups** on 19,508 public stations — each row in §1 is one coordinate pair your registry team can grep today.",
+      "topFinding": "**1000 exact (lat,lng) duplicate groups** on 19,492 public stations — each row in §1 is one coordinate pair your registry team can grep today.",
       "anomalyType": "duplication_cluster",
       "assetClass": "spatial_distribution",
       "verificationEligible": true,
@@ -67,7 +67,7 @@
         "largestAccountsReturned": 20,
         "partASkipped": false
       },
-      "topFinding": "**52.28% of UI-reported HONEY** sits in the **top 20 visible SPL accounts** (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.",
+      "topFinding": "**52.30% of UI-reported HONEY** sits in the **top 20 visible SPL accounts** (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.",
       "anomalyType": "economic_concentration",
       "assetClass": "economic_layer",
       "verificationEligible": false,
@@ -123,7 +123,7 @@
         "backedPct": 0.45384377894411854,
         "unbackedPct": 0.5461562210558815
       },
-      "topFinding": "**Of 158,711 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware**; 31,408 (19.8%) connect via software/synthetic devices, and 86,681 (54.6%) show no connected device on the public registry.",
+      "topFinding": "**Of 158,705 DIMO vehicle identities, 40,622 (25.6%) are backed by physical hardware**; 31,408 (19.8%) connect via software/synthetic devices, and 86,675 (54.6%) show no connected device on the public registry.",
       "anomalyType": "device_backing_gap",
       "assetClass": "device_identity",
       "verificationEligible": false,
@@ -147,7 +147,7 @@
         "flaggedCount": 69747,
         "flaggedPct": 0.06917451174083286
       },
-      "topFinding": "**4,862 single-coordinate stacks of ≥10 hotspots** on 1,008,276 located units — the largest stack holds **501 hotspots on one coordinate** (§1 lists keys your registry team can grep today).",
+      "topFinding": "**4,862 single-coordinate stacks of ≥10 hotspots** on 1,008,274 located units — the largest stack holds **501 hotspots on one coordinate** (§1 lists keys your registry team can grep today).",
       "anomalyType": "duplication_cluster",
       "assetClass": "spatial_distribution",
       "verificationEligible": true,
@@ -171,7 +171,7 @@
         "flaggedCount": 11418,
         "flaggedPct": 0.2033916420250098
       },
-      "topFinding": "**530 single-coordinate stacks of ≥10 hotspots** on 56,138 located units — the largest stack holds **631 hotspots on one coordinate** (§1 lists keys your registry team can grep today).",
+      "topFinding": "**530 single-coordinate stacks of ≥10 hotspots** on 56,132 located units — the largest stack holds **631 hotspots on one coordinate** (§1 lists keys your registry team can grep today).",
       "anomalyType": "duplication_cluster",
       "assetClass": "spatial_distribution",
       "verificationEligible": true,
