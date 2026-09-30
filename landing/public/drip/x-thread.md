@@ -1,10 +1,10 @@
 1/1
-DePIN index · Sep 29
+DePIN index · Sep 30
 
-• Geodnet: 1,004 duplicate coordinate clusters (+4)
-• Hivemapper: 52.3% top-holder concentration (−0 pp)
-• Helium Mobile: 56,138 entities on public map (+6)
+• Geodnet: 1,003 duplicate coordinate clusters (−1)
+• WeatherXM: 298 capacity exceedances (+1)
+• Hivemapper: 52.5% top-holder concentration (unchanged)
 
 https://getkinetik.app/site/
 
-#DePIN #Geodnet #HeliumMobile #Crypto
+#DePIN #Geodnet #WeatherXM #Crypto
