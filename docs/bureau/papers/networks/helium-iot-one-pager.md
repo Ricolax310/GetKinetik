@@ -2,7 +2,7 @@
 
 > Public endpoints only. Not a verdict.
 
-**As of:** 2026-09-30  
+**As of:** 2026-10-01  
 **Public source:** https://entities.nft.helium.io/v2/hotspots?subnetwork=iot  
 **Full report:** [docs/reports/helium-iot-sybil-report.md](https://github.com/Ricolax310/GetKinetik/blob/main/docs/reports/helium-iot-sybil-report.md)  
 **Live terminal:** https://getkinetik.app/audits.html  
