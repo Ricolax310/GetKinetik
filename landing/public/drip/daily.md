@@ -1,12 +1,12 @@
-# DePIN Signal Brief — 2026-09-30
+# DePIN Signal Brief — 2026-10-01
 
-> 2026-09-30 · machine-driven signal publication · evidence first
+> 2026-10-01 · machine-driven signal publication · evidence first
 
 ## Today's Read
 
-• Geodnet duplicate-coordinate groups declined from 1,004 to 1,003.
-• WeatherXM over-capacity cells rose from 297 to 298.
-• Hivemapper visible HONEY concentration remains near 52% of visible supply.
+• Geodnet duplicate-coordinate groups declined from 1,001 to 999.
+• WeatherXM over-capacity cells declined from 297 to 295.
+• Hivemapper visible HONEY concentration remains near 53% of visible supply.
 
 ## Why It Matters
 
@@ -18,9 +18,9 @@ Observations span 5 networks — no single network dominates the index.
 
 ### What Changed Today
 
-- **Geodnet** — exact (lat,lng) duplicate groups: 1,003 (-1 (-0.1%))
-- **WeatherXM** — cells over designed capacity: 298 (+1 (+0.3%))
-- **Hivemapper** — 52.50% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
+- **Geodnet** — exact (lat,lng) duplicate groups: 999 (-2 (-0.2%))
+- **WeatherXM** — cells over designed capacity: 295 (-2 (-0.7%))
+- **Hivemapper** — 52.89% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
 
 ### Signal Type
 
@@ -50,7 +50,7 @@ Observations span 5 networks — no single network dominates the index.
 
 ### Thread Seed
 
-Public read on Geodnet: 1003 exact (lat,lng) duplicate groups on 19,523 public stations — each row in §1 is one coordinate pair your registry team can review today. — does that match your internal view, or is the public feed expected to behave this way?
+Public read on Geodnet: 999 exact (lat,lng) duplicate groups on 19,528 public stations — each row in §1 is one coordinate pair your registry team can review today. — does that match your internal view, or is the public feed expected to behave this way?
 
 ### Sources & Methodology
 
