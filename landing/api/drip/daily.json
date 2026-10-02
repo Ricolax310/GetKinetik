@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-10-01T21:33:31.762Z",
+  "generatedAt": "2026-10-02T21:09:11.087Z",
   "schema": "getkinetik.drip/v2",
-  "date": "2026-10-01",
+  "date": "2026-10-02",
   "minConfidence": 0.6,
   "daily": [
-    "Geodnet: 999 duplicate coordinate clusters (−2)",
+    "Geodnet: 997 duplicate coordinate clusters (−1)",
     "Helium IoT: 4,862 stacked spots (unchanged)",
     "Helium Mobile: 529 stacked spots (unchanged)",
-    "Hivemapper: 52.9% top-holder concentration (−0 pp)",
-    "WeatherXM: 295 capacity exceedances (−2)"
+    "Hivemapper: 52.6% top-holder concentration (−0 pp)",
+    "WeatherXM: 295 capacity exceedances (+2)"
   ],
   "weekly": [
     "Helium IoT: repeated stackedSpots observation. Observed Helium IoT stackedSpots on 7 of 7 recorded days.",
@@ -166,9 +166,9 @@
     {
       "network": "Geodnet",
       "metric": "exactDupGroups",
-      "value": 999,
-      "delta": -2,
-      "timestamp": "2026-10-01",
+      "value": 997,
+      "delta": -1,
+      "timestamp": "2026-10-02",
       "severity": "medium",
       "feedConfidence": 0.7
     },
@@ -176,17 +176,17 @@
       "network": "WeatherXM",
       "metric": "overCapacityCells",
       "value": 295,
-      "delta": -2,
-      "timestamp": "2026-10-01",
+      "delta": 2,
+      "timestamp": "2026-10-02",
       "severity": "medium",
       "feedConfidence": 0.7
     },
     {
       "network": "Hivemapper",
       "metric": "top20ShareOfSupply",
-      "value": 0.5289127858393703,
-      "delta": -0.00010215140622182872,
-      "timestamp": "2026-10-01",
+      "value": 0.5264236190989571,
+      "delta": -0.0001402080120447291,
+      "timestamp": "2026-10-02",
       "severity": "medium",
       "feedConfidence": 0.7
     },
@@ -195,7 +195,7 @@
       "metric": "stackedSpots",
       "value": 4862,
       "delta": 0,
-      "timestamp": "2026-10-01",
+      "timestamp": "2026-10-02",
       "severity": "medium",
       "feedConfidence": 0.7
     },
@@ -204,7 +204,7 @@
       "metric": "stackedSpots",
       "value": 529,
       "delta": 0,
-      "timestamp": "2026-10-01",
+      "timestamp": "2026-10-02",
       "severity": "medium",
       "feedConfidence": 0.7
     }
