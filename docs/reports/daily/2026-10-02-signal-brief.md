@@ -4,48 +4,41 @@
 
 ## Today's Read
 
-• Geodnet duplicate-coordinate groups declined from 999 to 998.
-• WeatherXM over-capacity cells declined from 295 to 293.
-• Hivemapper visible HONEY concentration remains near 53% of visible supply.
-• DIMO entities on public map rose from 158,728 to 158,737.
-• Geodnet entities on public map declined from 19,528 to 19,514.
+• Geodnet duplicate-coordinate groups declined from 998 to 997.
+• WeatherXM over-capacity cells rose from 293 to 295.
+• Hivemapper: 52.64% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a con…
 
 ## Why It Matters
 
 Today's signals show modest movement in infrastructure metrics. Telemetry and concentration readings are largely unchanged.
 The observed changes are incremental rather than structural and remain reproducible from public data sources.
-Observations span 4 networks — no single network dominates the index.
+Observations span 3 networks — no single network dominates the index.
 
 ## Full Evidence
 
 ### What Changed Today
 
-- **Geodnet** — exact (lat,lng) duplicate groups: 998 (-1 (-0.1%))
-- **Geodnet** — entities on public map: 19,514 (-14 (-0.1%))
-- **WeatherXM** — cells over designed capacity: 293 (-2 (-0.7%))
-- **Hivemapper** — top-20 SPL share of UI supply: 52.66% (-0.23 pp (-0.4%))
-- **DIMO** — entities on public map: 158,737 (+9 (+0.0%))
+- **Geodnet** — exact (lat,lng) duplicate groups: 997 (-1 (-0.1%))
+- **WeatherXM** — cells over designed capacity: 295 (+2 (+0.7%))
+- **Hivemapper** — 52.64% of UI-reported HONEY sits in the top 20 visible SPL accounts (Solana RPC cap) — economic *shape* for treasury/MM review, not a contributor GPS read.
 
 ### Signal Type
 
 - **Geodnet** — Registry duplication (`duplication_cluster`)
 - **WeatherXM** — Capacity pressure (`capacity_violation`)
 - **Hivemapper** — Economic concentration (`economic_concentration`)
-- **DIMO** — Uncategorized public observation (`device_backing_gap`)
 
 ### Signal Context
 
 - Geodnet: duplicate or inconsistent registry entries are grep-able from public data alone.
 - WeatherXM: public cell capacity counts are a reproducible registry-pressure signal.
 - Hivemapper: visible on-chain concentration is economic shape only — useful for custody reconciliation, not device claims.
-- DIMO: measurable public-data delta worth cross-checking with internal ops.
 
 ### What We Don't Know
 
 - **Geodnet** — Whether shared coordinates are legitimate co-located installs, shared-mount sites, or registry artifacts — public data can't tell without operator confirmation.
 - **WeatherXM** — Whether over-capacity cells reflect real device density, registry double-counting, or expected reward-zone behavior — only the operator's internal registry settles it.
 - **Hivemapper** — Whether the largest visible accounts are treasury, market-maker, exchange custody, or operators — on-chain shape doesn't label holder intent.
-- **DIMO** — What the public feed cannot disambiguate without operator confirmation.
 
 ### Questions Worth Asking
 
@@ -57,7 +50,7 @@ Observations span 4 networks — no single network dominates the index.
 
 ### Thread Seed
 
-Public read on Geodnet: 999 exact (lat,lng) duplicate groups on 19,528 public stations — each row in §1 is one coordinate pair your registry team can grep today. — does that match your internal view, or is the public feed expected to behave this way?
+Public read on Geodnet: 997 exact (lat,lng) duplicate groups on 19,514 public stations — each row in §1 is one coordinate pair your registry team can grep today. — does that match your internal view, or is the public feed expected to behave this way?
 
 ### Sources & Methodology
 
@@ -66,4 +59,3 @@ Public read on Geodnet: 999 exact (lat,lng) duplicate groups on 19,528 public st
 - **Geodnet:** `docs/reports/geodnet-sybil-report.md` · https://rtk.geodnet.com/api/v2/coverage_stations
 - **WeatherXM:** `docs/reports/weatherxm-sybil-report.md` · WeatherXM public cells API
 - **Hivemapper:** `docs/reports/hivemapper-sybil-report.md` · Solana mainnet HONEY SPL mint (public RPC)
-- **DIMO:** `docs/reports/dimo-sybil-report.md` · https://identity-api.dimo.zone/query
